@@ -1,4 +1,4 @@
-Version 1.8 31/03/2013
+Version 2.0 20/04/2013
 
 The idea with this document is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
@@ -7,11 +7,11 @@ The files that make up this document are available in a subversion
 repository and as a tar file. To get the latest subversion
 entries given the command:
 
-svn co https://svn.physik.uni-bonn.de/basic/pithesis/trunk
+svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
 
-If you want a particular release (valid for release 1.3 onwards) use the command:
+If you want a particular release use the command:
 
-svn co https://svn.physik.uni-bonn.de/basic/pithesis/tags/pithesis-N.M
+svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M
 
 The tar file also includes the guide as a PDF file: thesis_guide.pdf.
 It can be obtained from:
@@ -46,7 +46,7 @@ to 2011 in mythesis.tex. You should then use the command
 `make thesis11' instead of `make thesis'.
 
 If you just want to make the cover pages, use the file cover_only.tex.
-Be sure to adapt the font selected in pibonn-thesis.sty to the font
+Be sure to adapt the font selected in ubonn-thesis.sty to the font
 you actually used in your thesis. Be aware that not all font sizes are
 available in all font collections. If you used the default LaTeX font
 in your thesis, then choose lmodern in the style file.
@@ -67,5 +67,3 @@ If you have TeX Live 2011 or later, you should set
 \texlive to 2011
 in thesis_guide.tex. In this case you need to compile the guide
 with the command `make guide11' instead of `make guide'
-
-

@@ -51,7 +51,7 @@ captions in this document follow the standard \KOMAScript{}
 convention: if they are one line long they are centred; if they are
 longer they are left-adjusted. If you want them all to be
 left-adjusted set the \Option{KOMAoptions} \Option{caption=nooneline}
-in \texttt{pibonn-thesis.sty}. Some examples of the possibilities are
+in \texttt{ubonn-thesis.sty}. Some examples of the possibilities are
 included in the style file.
 
 Another thing to consider is whether the text should be indented or
@@ -79,7 +79,7 @@ corner of the file that you have included (assuming that the
 \Macro{put} command comes just after the \Macro{includegraphics}).
 The units for the \Macro{put} command are set with the
 \Macro{setlength}\texttt{\{\textbackslash unitlength\}} command, which is by default
-set to \SI{1}{\mm} in \texttt{pibonn-thesis.sty}. The same units
+set to \SI{1}{\mm} in \texttt{ubonn-thesis.sty}. The same units
 are also used for Feynman graphs made with the \Package{feynmf} and/or \Package{feynmp}
 package -- see Section~\ref{sec:fig:feynman:feynmf}.
 
@@ -211,7 +211,7 @@ straightforward to use.
 In order to use \Package{feynmf} or \Package{feynmp}, you have to put
 the commands to draw the graph in a \LaTeX{} file and then process
 this file with \LaTeX{} and either Metafont or
-Metapost.\footnote{\texttt{pibonn-thesis.sty} includes \Package{feynmf}
+Metapost.\footnote{\texttt{ubonn-thesis.sty} includes \Package{feynmf}
   by default. If you want to use \Package{feynmp} instead just change
   the name.}
 You can either make a separate \LaTeX{} file containing

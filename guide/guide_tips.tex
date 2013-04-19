@@ -12,7 +12,7 @@ actually read them!  In this chapter I will first tell you how to get
 and use the style file and then give some tips.
 
 %------------------------------------------------------------------------------
-\section{How to use the \Package{pibonn-thesis} style}
+\section{How to use the \Package{ubonn-thesis} style}
 \label{sec:tips:howto}
 %------------------------------------------------------------------------------
 
@@ -22,28 +22,27 @@ I will therefore usually not give the \LaTeX{} commands in the printed
 document, but assume that you will have a look at the \LaTeX{} source.
 To help you with this, each chapter contains a link to the relevant
 file at the top. This link should work if you have compiled the guide
-yourself and are in the \texttt{pithesis} directory.
+yourself and are in the \texttt{ubonn-thesis} directory.
 The files that make up this document are available in a subversion
 repository and as a \texttt{tar} file. To get the latest subversion
 entries give the command:
 
 \begin{verbatim}
-svn co https://svn.physik.uni-bonn.de/basic/pithesis/trunk
+svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
 \end{verbatim}
 \noindent
-If you want to checkout a particular release you can give the command
-(valid for release 1.3 onwards):
+If you want to checkout a particular release you can give the command:
 \begin{verbatim}
-svn co https://svn.physik.uni-bonn.de/basic/pithesis/tags/pithesis-N.M
+svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M
 \end{verbatim}
-\noindent
-If you have checked out a version of the guide before 20 August 2012
-and want to update things, you need to change the location:
-\begin{verbatim}
-cd ~/pithesis/trunk
-svn switch --relocate svn://svn.physik.uni-bonn.de/pithesis \
- https://svn.physik.uni-bonn.de/basic/pithesis
-\end{verbatim}
+% \noindent
+% If you have checked out a version of the guide before 20 August 2012
+% and want to update things, you need to change the location:
+% \begin{verbatim}
+% cd ~/ubonn-thesis/trunk
+% svn switch --relocate svn://svn.physik.uni-bonn.de/ubonn-thesis \
+%  https://svn.physik.uni-bonn.de/basic/ubonn-thesis
+% \end{verbatim}
 \noindent
 The tar file (and the release tree (as of release 1.5)) also includes
 the guide as a PDF file: \texttt{thesis\_guide.pdf}.  It can be
@@ -107,7 +106,7 @@ Section~\ref{sec:tips:submit} for some more details.
 If you are not a member of the
 \foreignquote{ngerman}{Physikalisches Institut} you should
 also change \Macro{InstituteName}, \Macro{inInstitute} and
-\Macro{InstituteAddress}. The style file \texttt{pibonn-thesis.sty}
+\Macro{InstituteAddress}. The style file \texttt{ubonn-thesis.sty}
 already contains the appropriate definitions for PI, HISKP, IAP and
 AIFA.
 
@@ -117,7 +116,7 @@ administrator to do so.
 
 If you just want to make the cover pages, use the file
 \texttt{cover\_only.tex}.  Be sure to adapt the font selected in
-\texttt{pibonn-thesis.sty} to the font you actually used in your
+\texttt{ubonn-thesis.sty} to the font you actually used in your
 thesis. Be aware that not all font sizes are available in all font
 collections. If you used the default \LaTeX{} font in your thesis,
 then choose \Package{lmodern}\index{font!lmodern} in the style file.
@@ -182,7 +181,7 @@ set \Macro{texlive} in \texttt{thesis\_guide.tex}.\footnote{You should
   The \si{\GeV} in the first expression is in sans-serif. This is
   because the
   \Macro{sisetup}\texttt{\{obeyall\}}\footnote{\Option{detect-family=true}
-    in \TeXLive 2011.} option is set in \texttt{pibonn-thesis.sty}
+    in \TeXLive 2011.} option is set in \texttt{ubonn-thesis.sty}
   (see Section~\ref{sec:tips:siunitx}).  I used the option
   \Option{obeyfamily=false}\footnote{\Option{detect-family=false} in \TeXLive
     2011} for the \Macro{SI} command in the 2nd expression.
@@ -243,7 +242,7 @@ set \Macro{texlive} in \texttt{thesis\_guide.tex}.\footnote{You should
     uses `British quoted text' for outer quotation marks,
     while American (US) English\index{American English}\index{US English}
     uses \foreignquote{USenglish}{American quoted text}. In this guide
-    (and in \texttt{pibonn-thesis.sty})
+    (and in \texttt{ubonn-thesis.sty})
     \foreignquote{USenglish}{American (US) quotes} are used even if you
     write in British (UK) English.})  you are writing your thesis in. You
   can also see in the Chapter~\ref{sec:intro} how this works, even

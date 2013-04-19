@@ -52,7 +52,7 @@ The default setting of \KOMAScript{} is:
 \begin{verbatim}
   \deffootnote[1em]{1.5em}{1em}{\textsuperscript{\thefootnotemark}}
 \end{verbatim}
-In this guide and in \texttt{pibonn-thesis.sty} I have changed this to:
+In this guide and in \texttt{ubonn-thesis.sty} I have changed this to:
 \begin{verbatim}
   \deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark}\ }
 \end{verbatim}
@@ -136,7 +136,7 @@ example. Another recent package (\TeXLive 2011) is
 languages. The languages to be used in a document can either be given
 as options to \Macro{documentclass} or to \Package{babel}. I choose to
 use \Macro{documentclass} here so that the style file
-\texttt{pibonn-thesis.sty} is independent of the thesis language. If
+\texttt{ubonn-thesis.sty} is independent of the thesis language. If
 you give more than one language make sure that the default language
 comes last.
 
@@ -151,7 +151,7 @@ there is a small space after the comma, e.g. $91,1234$.
 
 If you use the \Package{siunitx} package, you can simply specify the
 locale: \Macro{sisetup}\texttt{\{locale = DE\}}. This is already done
-for you in \texttt{pibonn-thesis.sty} in such a way that if you
+for you in \texttt{ubonn-thesis.sty} in such a way that if you
 select \Option{ngerman} as the language of your document
 \Macro{num}\texttt{\{2.3\}} will be printed as \num[locale=DE]{2.3}. I find this
 by far the best way to handle such things.
@@ -162,7 +162,7 @@ single table for example by using constructions such as
 change full stops into commas -- see Chapter~\ref{sec:table}.
 
 Another way to avoid this problem by using the \Package{ziffer} package. It is
-usually commented out in \texttt{pibonn-thesis.sty}. An alternative
+usually commented out in \texttt{ubonn-thesis.sty}. An alternative
 is to remove the comments on the \TeX{} code snippet at the top
 of the file \texttt{thesis\_defs.sty}:
 \begin{verbatim}
@@ -215,7 +215,7 @@ for example.
 
 Fonts to use for the various parts of a
 document can usually be set using the \Macro{setkomafont} command. I
-have set a few such fonts in \texttt{pibonn-thesis.sty}. In particular
+have set a few such fonts in \texttt{ubonn-thesis.sty}. In particular
 I set the fonts for the title page so that it conforms more closely to
 the requirements for theses and also have a few more commented out
 examples there.
@@ -277,7 +277,7 @@ opening and closing quotes, so I warmly recommend it.
 
 In the default version of the thesis, links in the table of contents
 are coloured blue, citations are coloured dark magenta and URLs are
-coloured dark green. These settings are in \texttt{pibonn-thesis.sty}.
+coloured dark green. These settings are in \texttt{ubonn-thesis.sty}.
 
 For the printed version you probably do not want these things to be
 coloured. You can change the \Package{hyperref} options using the
@@ -298,7 +298,7 @@ changes. I tried out \Package{fncychap}, \Package{quotchap} and
 \Package{titlesec}. A variant of \Package{titlesec} is used for this
 guide and by default for the thesis. If you want to get back to the
 usual style, just comment out the appropriate lines in
-\texttt{pibonn-thesis.sty}. See the documentation on
+\texttt{ubonn-thesis.sty}. See the documentation on
 \Package{titlesec} on how to make further adjustments.
 
 %%% Local Variables:

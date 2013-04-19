@@ -11,7 +11,7 @@ FEYNFILES = ./feynmf/$(file).tex
 endif
 
 
-.PHONY: all thesis thesis11 guide guide11 feynmf new \
+.PHONY: all thesis thesis09 thesis11 guide guide09 guide11 feynmf new \
 	cleanthesis cleanguide cleancover cleanfeynmf cleanblx cleanbbl \
 	cleanglo \
 	help test
@@ -26,7 +26,9 @@ new:
 	cp thesis_skel/thesis_cv.tex $(THESIS)/
 	cp thesis_skel.tex $(THESIS).tex
 
-thesis:
+thesis: thesis11
+
+thesis09:
 	pdflatex  $(THESIS)
 	bibtex    $(THESIS)
 	# makeglossaries $(THESIS)
@@ -40,7 +42,9 @@ thesis11:
 	pdflatex  $(THESIS)
 	pdflatex  $(THESIS)
 
-guide:
+guide: guide11
+
+guide09:
 	pdflatex  $(GUIDE)
 	bibtex    $(GUIDE)
 	pdflatex  $(GUIDE)
@@ -126,9 +130,11 @@ cleanglo:
 help:
 	@echo "Possible commands:"
 	@echo "new [THESIS=dirname]: Set up a new thesis"
-	@echo "thesis: Compile complete thesis"
+	@echo "thesis: Compile complete thesis (thesis11)"
+	@echo "thesis09: Compile complete thesis - texlive 2009 + bibtex"
 	@echo "thesis11: Compile complete thesis - texlive >=2011 + biber"
-	@echo "guide: Compile thesis guide"
+	@echo "guide: Compile thesis guide (guide11)"
+	@echo "guide09: Compile thesis guide - texlive 2009 + bibtex"
 	@echo "guide11: Compile thesis guide - texlive >=2011 + biber"
 	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIRNAME)"
 	@echo "cleanthesis: Clean up thesis LaTeX output files"

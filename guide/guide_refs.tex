@@ -109,22 +109,22 @@ need something like:
 %
 % Use biblatex for the bibliography
 %
-\usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
-  style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
-% \usepackage[backend=biber,
+% \usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
 %   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
+\usepackage[backend=biber,
+  style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
 %
 % Adjustments to output are in this style file:
-\usepackage{./biblatex/biblatex-num-v2009}
-% \usepackage{./biblatex/biblatex-num-v2011}
-\bibliography{./mythesis/thesis_refs.bib,%
-  ./refs/standard_refs-bibtex.bib}
-% \addbibresource{./mythesis/thesis_refs.bib}
-% \addbibresource{./refs/standard_refs-biber.bib}
+% \usepackage{./biblatex/biblatex-num-v2009}
+\usepackage{./biblatex/biblatex-num-v2011}
+% \bibliography{./mythesis/thesis_refs.bib,%
+%   ./refs/standard_refs-bibtex.bib}
+\addbibresource{./mythesis/thesis_refs.bib}
+\addbibresource{./refs/standard_refs-biber.bib}
 \end{verbatim}
 in the document preamble and \Macro{printbibliography} where they
-should be printed. The commented out lines are for \TeXLive 2011 with
-the \Option{biber} backend.
+should be printed. The commented out lines are for \TeXLive 2009 with
+the \Option{bibtex8} backend.
 \par\noindent
 If you use \BibTeX{} you need something like:
 \begin{verbatim}
@@ -296,7 +296,7 @@ hand.
 An example of a typical ATLAS paper as it comes from
 Spires~\cite{Aad:2010ey-inspire} needs a bit of work.  With \TeXLive
 2011 the link to DOI and arXiv both work well~\cite{Aad:2010ey-final}.
-With \TeXLive 2009, it works on my laptop, but does not work properly
+With \TeXLive 2009, it worked on my laptop, but did not work properly
 on ATLAS machines (Ubuntu 10.04) that have version 0.8e of \Package{biblatex}.
 It may be that one can get it to work with a bit of help, but I have
 not tried all possible options.
@@ -386,7 +386,7 @@ paragraph. It is not clear to me if you also need
 \verb+\AtEveryCitekey{\clearfield{url}}+.
 
 A fairly nice-looking style is \Option{ieee}. This is only be
-available in very recent releases (2011) of \TeXLive. After playing
+available in recent releases (2011) of \TeXLive. After playing
 around a bit with the \Option{ieee} style, I decided it is too new and
 has too many settings that depend on have a new version of \Package{biblatex}
 for now.

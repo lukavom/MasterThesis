@@ -93,7 +93,7 @@ in Table~\ref{tab:viscosity}. In fact I show the table twice, once
 with the language set to default and once with it set to German. The
 \Env{tabular} contents are identical, the second tabular is inside a
 \Macro{foreignlanguage}. Note the use of
-\Option{tabformat}\footnote{\Option{table-format} in \TeXLive 2011} to
+\Option{table-format}\footnote{\Option{tabformat} in \TeXLive 2009} to
 centre the temperatures as the heading is wider than the numbers.
 
 \begin{table}[htbp]
@@ -181,8 +181,8 @@ Table~\ref{tab:xsect0} shows a more complicated table set using the
 tools. You can either enclose all numbers in \Macro{num} or use the
 \Option{S} column descriptor. If you use \Option{S}, note that it
 usually centres the contents of the column. You can use the
-\Option{tabnumalign}\footnote{\Option{table-number-alignment} in
-  \TeXLive 2011} option to change this. \Option{S} and \Macro{num}
+\Option{table-number-alignment}\footnote{\Option{tabnumalign} in
+  \TeXLive 2009} option to change this. \Option{S} and \Macro{num}
 cannot generally be mixed in a single column though.
 If you want to use \Macro{num} in an
 \Option{S} column you have to enclose it in braces. You also need to
@@ -266,8 +266,8 @@ never quote an error to 5 significant digits. You can go ahead and
 edit all the numbers by hand, but what do you do if you rerun your
 analysis and all the numbers change. Reformatting by hand is then an
 error prone and lengthy process. As discussed above, you can either
-use options such as \Option{dp}\footnote{\Option{round-precision} in
-  \TeXLive 2011} in the \Option{S} command or use the macro
+use options such as \Option{round-precision}\footnote{\Option{dp} in
+  \TeXLive 2009} in the \Option{S} command or use the macro
 \Macro{num} and \Option{dp}/\Option{round-precision} to do the
 rounding\index{rounding} for you.
 
@@ -283,8 +283,8 @@ rather trivial. However, then the alignment on the decimal point is no
 longer perfect. While this is probably OK for internal notes etc.,
 theses or papers (should) have tougher requirements. Another way of
 achieving the same thing and avoiding the use of
-\Option{dp}\footnote{\Option{round-mode} and \Option{round-precision}
-  in \TeXLive 2011. The \Option{round-mode} should be set in the
+\Option{round-mode} and \Option{round-precision}\footnote{\Option{dp}
+  in \TeXLive 2009. The \Option{round-mode} should be set in the
   preamble of the table and not for every number.} is shown in the
 right half. Note the use of options for the \Option{S} command and the
 use of \Macro{num} enclosed in braces to format the row that requires

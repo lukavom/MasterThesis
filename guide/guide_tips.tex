@@ -68,12 +68,13 @@ make thesis [THESIS=dirname]
 My original idea was that the style file should work for all recent
 \TeX\ installations.  However, some of the packages I recommend have
 been changing quite a lot over the past few years. By default things
-should work with \TeXLive 2009.\index{TeXLive@\TeXLive!2009} If you
-have a newer version, you should set the value of \Macro{texlive} in
-the thesis main file to 2011\index{TeXLive@\TeXLive!2011} rather than
-2009 and then use the command \enquote{\texttt{make thesis11}} rather
-than \enquote{\texttt{make thesis}}. Note that you should not mix
-these two commands. If you switch from one to the other do a
+should work with \TeXLive 2011 and later.\index{TeXLive@\TeXLive!2011}
+If you have an older version, you should set the value of
+\Macro{texlive} in the thesis main file to
+2009\index{TeXLive@\TeXLive!2009} rather than 2011 and then use the
+command \enquote{\texttt{make thesis09}} rather than
+\enquote{\texttt{make thesis}}. Note that you should not mix these two
+commands. If you switch from one to the other do a
 \enquote{\texttt{make clean cleanbbl cleanblx}} in between.
 
 \noindent
@@ -124,11 +125,11 @@ then choose \Package{lmodern}\index{font!lmodern} in the style file.
 The main file for this guide is \texttt{thesis\_guide.tex} and it
 includes the \LaTeX{} files in the directory \texttt{./guide} and the
 Feynman graphs in the directory \texttt{./feynmf}. Again this guide
-should compile without changes for \TeXLive 2009. For later versions
-set \Macro{texlive} in \texttt{thesis\_guide.tex}.\footnote{You should
-  set \Macro{texlive} to 2011 also if you have \TeXLive
-  2012,\index{TeXLive@\TeXLive!2012} which is the default version for
-  Ubuntu 12.10.\index{ubuntu!12.10}}
+should compile without changes for \TeXLive 2011. For earlier versions
+set \Macro{texlive} in \texttt{thesis\_guide.tex} to
+2009.\footnote{You should set \Macro{texlive} to 2011 also if you have
+  \TeXLive 2012,\index{TeXLive@\TeXLive!2012} which is the default
+  version for Ubuntu 12.10.\index{ubuntu!12.10}}
 
 
 %------------------------------------------------------------------------------
@@ -180,11 +181,11 @@ set \Macro{texlive} in \texttt{thesis\_guide.tex}.\footnote{You should
     }}
   The \si{\GeV} in the first expression is in sans-serif. This is
   because the
-  \Macro{sisetup}\texttt{\{obeyall\}}\footnote{\Option{detect-family=true}
-    in \TeXLive 2011.} option is set in \texttt{ubonn-thesis.sty}
+  \Macro{sisetup}\texttt{\{detect-family=true\}}\footnote{\Option{obeyall}
+    in \TeXLive 2009.} option is set in \texttt{ubonn-thesis.sty}
   (see Section~\ref{sec:tips:siunitx}).  I used the option
-  \Option{obeyfamily=false}\footnote{\Option{detect-family=false} in \TeXLive
-    2011} for the \Macro{SI} command in the 2nd expression.
+  \Option{detect-family=false}\footnote{\Option{obeyfamily=false} in \TeXLive
+    2009} for the \Macro{SI} command in the 2nd expression.
   In the first expression I use \Macro{text} for \enquote{jet}, while
   I use \Macro{mathrm} in the second expression.
 \item Use \Macro{xspace} and
@@ -387,33 +388,31 @@ examples I include here have somewhat different syntaxes depending on
 which version of \TeXLive is being used to compile this guide. If you
 use \TeXLive 2011, but want to use units which were available in
 \TeXLive 2009 or the older syntax you can include the option
-\Option{version-1-compatibility}. As \TeXLive 2009 was the default
-version for Ubuntu releases up to and including
-12.04,\index{ubuntu!12.04} I will give the \Package{siunitx} version 1
-options in the text and the version 2 options as footnotes.
+\Option{version-1-compatibility}. Note that \TeXLive 2009 was the
+default version for Ubuntu releases up to and including
+12.04,\index{ubuntu!12.04}. I will give the \Package{siunitx} version
+2 options in the text and the version 1 options as footnotes.
 
-One very attractive feature is
-that it allows you to format computer-generated numbers such as
-\verb+1.4E4+ automatically, e.g. \verb+\num{1.4E4}+ produces
-\num{1.4E4}. Depending on the language or using the option
-\Option{expproduct}\footnote{\Option{exponent-product} in \TeXLive
-  2011.} you can also get
+One very attractive feature is that it allows you to format
+computer-generated numbers such as \verb+1.4E4+ automatically,
+e.g. \verb+\num{1.4E4}+ produces \num{1.4E4}. Depending on the
+language or using the option
+\Option{exponent-product}\footnote{\Option{expproduct} in \TeXLive
+  2009.} you can also get
 \ifthenelse {\texlive = 2009} {%
-  \num[expproduct=cdot]{-3.4E-6}.
-}{%
+  \num[expproduct=cdot]{-3.4E-6}.  }{%
   \num[exponent-product=\cdot]{-3.4E-6}.
 }
-It is even possible to set the number of decimal places, cf.\
-\SI{2.99467E8}{\metre\per\second} and
+It is even possible to set
+the number of decimal places, cf.\ \SI{2.99467E8}{\metre\per\second}
+and
 \ifthenelse {\texlive = 2009} {%
-  \SI[dp=1]{2.99467E8}{\metre\per\second},
-}{%
+  \SI[dp=1]{2.99467E8}{\metre\per\second}, }{%
   \SI[round-mode=places,round-precision=1]{2.99467E8}{\metre\per\second},
 }
-which only differ by the use of the
-\Option{dp}\footnote{\Option{round-mode} and
-  \Option{round-precision} in \TeXLive 2011} option, and even rounds
-correctly!
+which only differ by the use of the \Option{round-mode} and
+\Option{round-precision}\footnote{\Option{dp} in \TeXLive 2009}
+options, and even rounds correctly!
 
 Another extremely nice feature of the package is that you can typeset
 numbers in a single way and then a full stop or a comma will be used
@@ -428,8 +427,8 @@ text is in German (\Option{ngerman} to be exact).
 
 In keeping with \LaTeX{} philosophy, you can specify a number and its
 error using \verb+\num{2.88(32)}+ to produce \num{2.88(32)} with the
-\Option{seperr}\footnote{\texttt{separate-uncertainty}
-  in \TeXLive 2011.} option (which I specify) or $2.88(32)$ with the
+\Option{separate-uncertainty}\footnote{\Option{seperr}
+  in \TeXLive 2009.} option (which I specify) or $2.88(32)$ with the
 default option. You also give as an option how units with negative
 powers of units should be shown, e.g.\ per second. This can be changed
 for a single command.
@@ -443,9 +442,8 @@ Some examples are given below:
 }{%
   \SI[per-mode=fraction,fraction-function=\sfrac]{3E8}{\metre\per\second}
 }
-  -- using \Option{per=fraction,fraction=nice}\footnote{%
-    \Option{per-mode=fraction,fraction-function=\Macro{sfrac}} in
-      \TeXLive 2011}
+  -- using \Option{per-mode=fraction,fraction-function=\Macro{sfrac}}\footnote{%
+    \Option{per=fraction,fraction=nice} in \TeXLive 2009}
 \item written in \Env{displaymath} or preferably \Env{equation*}:
 \ifthenelse {\texlive = 2009} {%
   \begin{equation*}
@@ -456,8 +454,8 @@ Some examples are given below:
     c = \SI[per-mode=symbol]{2.99E8}{\metre\per\second}
   \end{equation*}
 }
-with \Option{per=slash}\footnote{%
-  \Option{per-mode=symbol} in \TeXLive 2011};
+with \Option{per-mode=symbol}\footnote{%
+  \Option{per=slash} in \TeXLive 2009};
 \item $\hbar$ is \SI{1.054E-34}{\joule.\second}.
 \end{itemize}
 You use \enquote{.} or \enquote{,} to make a space between the units,
@@ -469,8 +467,8 @@ If you also want to use \Package{siunitx} in slides, where one usually
 uses a sans serif font, you may at first be disappointed that
 \Package{siunitx} uses a serif font for the units! DO not despair!
 You can use the command
-\Macro{sisetup}\texttt{\{obeyall\}}\footnote{\texttt{detect-family=true}
-  in \TeXLive 2011.} to ensure that the package uses the current font
+\Macro{sisetup}\texttt{\{detect-family=true\}}\footnote{\Option{obeyall}
+  in \TeXLive 2009.} to ensure that the package uses the current font
 (in all its aspects) rather than its default.
 
 Have a look at the manual, \texttt{texdoc siunitx}, for many more

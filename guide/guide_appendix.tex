@@ -13,7 +13,8 @@ information.
   \toprule
   Date & Comment\\
   \midrule
-  20 Apr 2013 & Rename pibonn-thesis to ubonn-thesis.\\
+  20 Apr 2013 & Rename pibonn-thesis to ubonn-thesis. Make \TeXLive
+  2011 the default.\\
   31 Mar 2013 & Add instructions on how to use \LaTeX\ backport under
   Ubuntu variants.\\
   28 Mar 2013 & Updated and hopefully complete and correct
@@ -233,7 +234,7 @@ biblatex
 
 \noindent
 Using these packages I was able to issue to following commands to
-produce the guide (assuming that you have \TeXLive 2009):
+produce the guide (assuming that you have \TeXLive 2011 or later):
 \begin{verbatim}
 mkdir ubonn-thesis; cd ubonn-thesis
 svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
@@ -254,17 +255,16 @@ This default version of the guide uses \Option{bibtex8} for the
   guide} to compile, which uses \texttt{bibtex} rather than
 \texttt{biber} to process the \texttt{.bib} files.
 
-For a new version of \TeXLive (2011 or later) you change
-\Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2011}. Then
+For a old version of \TeXLive (2009) you change
+\Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}. Then
 the following works:
 \begin{verbatim}
 make feynmf
-make guide11
+make guide09
 \end{verbatim}
 
 The default version of the guide also compiles on ATLAS Bonn desktop
-computers ((K)Ubuntu 12.04), with the same change to the
-\Macro{texlive} version and using \texttt{make guide11}.
+computers ((K)Ubuntu 12.04 with \TeXLive 2012).
 
 If you want to switch from \texttt{bibtex} to \texttt{biber} or vice
 versa, give the commands \texttt{make cleanguide cleanbbl cleanblx}
@@ -628,8 +628,8 @@ and may not be available in older \TeX\ installations. In order to
 process the glossary, you need to run the command
 \texttt{makeglossaries filename}. This is included in the
 \texttt{Makefile} for the commands \texttt{make guide} and
-\texttt{make guide11} and should be added to \texttt{make thesis}
-and/or \texttt{make thesis11} if you want to make a glossary for your
+\texttt{make guide09} and should be added to \texttt{make thesis}
+and/or \texttt{make thesis09} if you want to make a glossary for your
 thesis.
 
 I illustrate the use with the standard description of the ZEUS

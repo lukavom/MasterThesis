@@ -1,0 +1,85 @@
+%
+% Title page layout for printed version
+%
+\extratitle{\rmfamily\setlength{\parindent}{0pt}
+  \begin{center}
+    {\fontsize{44}{50}\selectfont
+      Universität Bonn}
+
+    \vspace*{20pt}
+
+    \begin{singlespace}
+      \fontsize{30}{40}\selectfont
+      \InstituteName
+    \end{singlespace}
+
+    \vspace*{40pt}
+
+    \begin{onehalfspace}
+      \bfseries\huge
+      \thesistitle
+    \end{onehalfspace}
+
+    \vspace*{20pt}
+
+    {\LARGE
+      \thesisauthor
+    }
+  \end{center}
+
+  \vspace*{\fill}
+
+  \thesisabstract
+
+  \vspace*{\fill}
+
+  {\normalfont\normalsize
+    \parbox{0.3\textwidth}{\InstituteAddress}
+    \parbox{0.4\textwidth}{%
+      \centering
+      \includegraphics[width=5cm]{instituts_siegel}
+    }
+    \parbox{0.3\textwidth}{%
+      \thesisnumber\\
+      \thesismonth{} \thesisyear
+    }
+  }
+}
+\titlehead{%
+  \centering
+  {\fontsize{44}{50}\selectfont
+    Universität Bonn}
+
+  \vspace*{20pt}
+
+  \begin{singlespace}
+    \fontsize{30}{40}\selectfont
+    \InstituteName
+  \end{singlespace}
+}
+\title{\thesistitle}
+\author{\LARGE
+  \thesisauthor
+}
+\date{}
+\publishers{\vspace*{\fill}
+  \raggedright
+  {\normalsize
+    \begin{otherlanguage}{ngerman}
+      Dieser Forschungsbericht wurde als Diplomarbeit von der
+      Mathematisch-Naturwissenschaftlichen Fakultät der Universität Bonn
+      angenommen.
+    \end{otherlanguage}
+
+    \vspace*{10ex minus 4ex}
+
+    \noindent
+    \begin{tabular}{@{}ll}
+      Angenommen am:         & \thesissubmit\\
+      \thesisrefereeonetext: & \thesisrefereeone\\
+      \thesisrefereetwotext: & \thesisrefereetwo
+    \end{tabular}
+  }
+}
+
+\maketitle

@@ -1,0 +1,80 @@
+\documentclass[a4paper,twoside,ngerman,UKenglish]{scrbook}
+%------------------------------------------------------------------------------
+% Wrapper for producing cover pages for theses in the
+% Physikalisches Institut, Uni Bonn
+
+%------------------------------------------------------------------------------
+\usepackage{pibonn-thesis}
+
+%------------------------------------------------------------------------------
+\newcommand{\thesistitle}{Titel der Arbeit}
+\newcommand{\thesisauthor}{Vorname Name}
+\newcommand{\thesistown}{Geburtsort}
+% This is the month and year when the printed version of the thesis
+% was released
+\newcommand{\thesisyear}{Jahr}
+\newcommand{\thesismonth}{Monat}
+\newcommand{\thesisnumber}{BONN-IR-2012-XX}
+% Adjust ...refereetext depending on male/female referee
+\newcommand*{\thesisrefereeonetext}{1.\ Gutachter}
+\newcommand*{\thesisrefereeone}{Prof.\ Dr.\ John Smith}
+\newcommand*{\thesisrefereetwotext}{2.\ Gutachterin}
+\newcommand*{\thesisrefereetwo}{Prof.\ Dr.\ Anne Jones}
+% Date when thesis was accepted
+\newcommand{\thesisaccept}{XX.YY.2012}
+% Date of thesis examination
+\newcommand{\thesispromotion}{XX.YY.2012}
+
+%------------------------------------------------------------------------------
+% The abstract is only needed for the printed version and should be in
+% English regardless of the language of the thesis
+\newcommand{\thesisabstract}{%
+  This thesis is the result of many years of research into how to format
+  a document using \LaTeX. It contains examples and recommendations on
+  what packages to use and how to use them. It makes no attempt to be
+  an introduction to \LaTeX. Indeed some basic \LaTeX{} knowledge is
+  assumed. It is very much geared to (particle) physics theses, but
+  may be useful for others.
+  This thesis is the result of many years of research into how to format
+  a document using \LaTeX. It contains examples and recommendations on
+  what packages to use and how to use them. It makes no attempt to be
+  an introduction to \LaTeX. Indeed some basic \LaTeX{} knowledge is
+  assumed. It is very much geared to (particle) physics theses, but
+  may be useful for others.
+}
+
+%------------------------------------------------------------------------------
+% Give a list of directories where figures can be found. Do not leave
+% any spaces in the list and end the directory name with a /
+\graphicspath{{./figs/cover/}}
+
+%------------------------------------------------------------------------------
+\begin{document}
+%
+% Cover page of thesis - this is only needed for the printed final version
+% \input{cover/PhD_Cover}
+% \input{cover/Master_Cover}
+% \input{cover/Diplom_Cover}
+%
+% Start counting pages from the title page
+%
+\frontmatter
+%
+% Dedication has to come before \maketitle
+% \dedication{For my friends and supporters}
+
+%------------------------------------------------------------------------------
+% Use this version when you submit your thesis
+\input{cover/PhD_Submit_Title}
+% \input{cover/Diplom_Submit_Title}
+% \input{cover/Master_Submit_Title}
+% \input{cover/Bachelor_Submit_Title}
+
+%------------------------------------------------------------------------------
+% Use this command for the print version
+% \input{cover/PhD_Final_Title}
+% \input{cover/Diplom_Final_Title}
+% \input{cover/Master_Final_Title}
+% \input{cover/Bachelor_Final_Title}
+
+\end{document}

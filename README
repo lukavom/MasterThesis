@@ -1,0 +1,71 @@
+Version 1.8 31/03/2013
+
+The idea with this document is that you also look at the LaTeX that
+is used to create it, in order to find out how things are done.
+
+The files that make up this document are available in a subversion
+repository and as a tar file. To get the latest subversion
+entries given the command:
+
+svn co https://svn.physik.uni-bonn.de/basic/pithesis/trunk
+
+If you want a particular release (valid for release 1.3 onwards) use the command:
+
+svn co https://svn.physik.uni-bonn.de/basic/pithesis/tags/pithesis-N.M
+
+The tar file also includes the guide as a PDF file: thesis_guide.pdf.
+It can be obtained from:
+
+http://www-biblio.physik.uni-bonn.de/info/index.shtml#info:titelvorl
+
+You can then give the command:
+
+make new [THESIS=dirname]
+
+to create a new directory with a couple of files to help you get
+started. By default the directory name will be mythesis.
+If you choose a different name, you have to adjust the \include
+commands inside ./dirname.tex.
+To compile your thesis try:
+
+make thesis [THESIS=dirname]
+
+All packages that are needed should be part of your TeX
+installation. If not you may have to install them or ask your system
+administrator to do so.
+
+My original idea was that the style file should work for all recent
+TeX installations.  However, some of the packages I recommend have
+been changing quite a lot over the past few years, particularly
+biblatex and siunitx.  It may therefore be necessary to make a few
+changes in order to get the thesis to compile on your machine.  The
+default version assumes that you have TeX Live 2009, which implies
+that you have siunitx version 1 and that you use bibtex8 with
+biblatex. If you have TeX Live 2011 or later, you should set \texlive
+to 2011 in mythesis.tex. You should then use the command
+`make thesis11' instead of `make thesis'.
+
+If you just want to make the cover pages, use the file cover_only.tex.
+Be sure to adapt the font selected in pibonn-thesis.sty to the font
+you actually used in your thesis. Be aware that not all font sizes are
+available in all font collections. If you used the default LaTeX font
+in your thesis, then choose lmodern in the style file.
+
+The main file for this guide is thesis_guide.tex and it
+includes the LaTeX files in the directory ./guide and the
+Feynman graphs in the directory ./feynmf.
+
+You can create your own copy of the guide using the commands:
+
+make feynmf
+make guide
+
+The guide also includes a description of how to use the package under
+Windows.
+
+If you have TeX Live 2011 or later, you should set
+\texlive to 2011
+in thesis_guide.tex. In this case you need to compile the guide
+with the command `make guide11' instead of `make guide'
+
+

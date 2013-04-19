@@ -1,0 +1,345 @@
+%==============================================================================
+\chapter{Figures}
+\label{sec:fig}
+%==============================================================================
+
+\LaTeX{} file: \url{./guide/guide_figs.tex}\\[1ex]
+\noindent
+This chapter discusses what you need to know to include graphics in
+your thesis. The basic command to use is \Macro{includegraphics}.
+
+I recently found a pretty complete guide (in German) called \texttt{l2piqfaq}
+which can be obtained from
+\url{http://www.ctan.org/tex-archive/info/l2picfaq/german}. It contains
+a lot of detailed information and tricks.
+
+%------------------------------------------------------------------------------
+\section{Simple figures}
+\label{sec:fig:simple}
+%------------------------------------------------------------------------------
+
+A simple figure and its associated caption is straightforward to
+include. For example, the layout of the LHC and its experiments is
+shown in Fig.~\ref{fig:LHC}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\figwidth]{CERN_all-experiments}
+  \caption[Sketch of the LHC ring, the position of the experiments and
+  the surrounding countryside.]{Sketch of the LHC ring, the position
+    of the experiments and the surrounding countryside. The four big
+    LHC experiments are indicated. The location of the injection lines
+    and the SPS are also shown.}
+  \label{fig:LHC}
+\end{figure}
+
+Note the use of \Macro{centering} rather than the environment
+\BegEnv{center} \ldots \EndEnv{center} to centre the figure. This
+avoid adding extra vertical space. It is also important that the
+\Macro{label} be either inside the caption or after it. If your
+caption is more than 1 (or 2) lines, you should also give a short form
+that will appear in the ``List of Figures''.
+
+One tricky question is how to best format the caption. This document
+uses a smaller font and no extra indentation. Often italics are
+used. I dislike this, as symbols are then formatted in different ways
+in the main text and in the caption. One can also reduce the width of
+the caption. The font for the caption can be specified using the
+\Macro{setkomafont}\texttt{\{caption\}} command. You can specify how
+to label the figure by changing the \Macro{figureformat} command. The
+captions in this document follow the standard \KOMAScript{}
+convention: if they are one line long they are centred; if they are
+longer they are left-adjusted. If you want them all to be
+left-adjusted set the \Option{KOMAoptions} \Option{caption=nooneline}
+in \texttt{pibonn-thesis.sty}. Some examples of the possibilities are
+included in the style file.
+
+Another thing to consider is whether the text should be indented or
+not. For short captions, indentation is OK. I do not think it looks
+good for long captions. Hence the style file sets
+\Macro{setcapindent}\texttt{\{0pt\}}.
+
+%------------------------------------------------------------------------------
+\section{Fancier figures}
+\label{sec:fig:fancy}
+%------------------------------------------------------------------------------
+
+Life gets more complicated if you want to include several plots in
+one figure, if you want the caption next to the figure, or if you want
+the text to \enquote{flow} around the figure. For the first case I like to
+use the \Env{tabular} environment to place the plots, although
+there are other ways of doing it.
+
+Another very nice way to add (a), (b) etc. to the figure is to use the
+\Macro{put} command. This has the big advantage that you can display the
+letters in the figure without actually having to add them to the
+EPS/PDF file. Figure~\ref{fig:letters1} shows how this is done. Note
+that the origin of the coordinate system is the bottom right-hand
+corner of the file that you have included (assuming that the
+\Macro{put} command comes just after the \Macro{includegraphics}).
+The units for the \Macro{put} command are set with the
+\Macro{setlength}\texttt{\{\textbackslash unitlength\}} command, which is by default
+set to \SI{1}{\mm} in \texttt{pibonn-thesis.sty}. The same units
+are also used for Feynman graphs made with the \Package{feynmf} and/or \Package{feynmp}
+package -- see Section~\ref{sec:fig:feynman:feynmf}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\figwidth]{gg_tt}
+  \put(-130,14){(a)}
+  \put(-80,14){(b)}
+  \put(-35,14){(c)}
+  \caption{Adding letters to figures with \Macro{put}.}
+  \label{fig:letters1}
+\end{figure}
+
+Another way of achieving the same thing, but this time with the letter
+outside the figure is to use \Env{tabular}. An example of this is
+shown in Fig.~\ref{fig:letters2}.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tabular}{@{\hspace*{0.15\figwidth}}p{0.33\figwidth}p{0.33\figwidth}l}
+    \multicolumn{3}{c}{\includegraphics[width=\figwidth]{gg_tt}}\\
+    (a) & (b) & (c)
+  \end{tabular}
+  \caption{Adding letters to figures with \Env{tabular}.}
+  \label{fig:letters2}
+\end{figure}
+
+If you want to save space it is sometimes nice to put the caption next
+to the figure. While packages exist to do this, \KOMAScript{} has its
+own built-in \Env{captionbeside} environment. The placement option comes
+after the caption itself and can be one of:
+\begin{description}\setlength{\parskip}{0pt}
+\item[l] Left of figure
+\item[r] Right of figure
+\item[i] Inner margin in two-sided layout
+\item[o] Outer margin in two-sided layout
+\end{description}
+Note that this is an environment rather than a macro and that the
+figure itself is inside the environment. Also the placement does not
+seem to work exactly how it is advertised in the manual. I set the
+width equal to \Macro{figwidth} and then the offset to \texttt{-\Macro*{figwidth}}.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{captionbeside}{A small figure with a simple caption beside it.}[i][\figwidth][-\figwidth]
+    \includegraphics[width=0.3\textwidth]{qq_tt}
+  \end{captionbeside}
+  \label{fig:qqtt}
+\end{figure}
+
+If you want different (partial) captions for a figure then the
+\Package{subfig} package is probably the way to go. You can see how to
+reference the different parts of the figure in
+Section~\ref{sec:fig:feynman}. If you want the captions of the
+sub-figures to also appear in the \enquote{List of Figures} you should
+include the package with the option \Option{lofdepth}. For tables use
+the option \Option{lotdepth}.
+
+\begin{figure}[htbp]
+  \centering
+  \subfloat[NC scattering][NC]{\label{fig:nccc-nc}\includegraphics[width=0.5\figwidth]{ep_nc}}
+  \qquad
+  \subfloat[CC scattering][CC]{\label{fig:nccc-cc}\includegraphics[width=0.5\figwidth]{ep_cc}}
+  \caption{Processes in $ep$ scattering.}
+  \label{fig:nccc}
+\end{figure}
+
+If you run out of space (applies more often to proceedings than to
+theses) you can use the \Package{wrapfig} package.
+
+%------------------------------------------------------------------------------
+\section{Figure Formats}
+\label{sec:fig:formats}
+%------------------------------------------------------------------------------
+
+If you use plain \LaTeX, you are pretty much stuck with encapsulated
+postscript (EPS) as your figure format. If you use PDF\LaTeX, then you
+have much more freedom, with the notable exception that you cannot
+include EPS files!\footnote{%
+This restriction have finally been lifted with \TeXLive 2011. It
+simply converts the EPS files to PDF inline.}
+I would still recommend that you always try to use
+a vector graphic format. What usually works well is to either create
+PDF directly or to create EPS and then convert from EPS to PDF.
+
+The tool I use for conversion is \texttt{epstopdf}. Occasionally this
+fails; in that case \texttt{eps2eps} can help. It is important that
+the bounding box is set correctly in the EPS file before you run
+\texttt{epstopdf}.
+
+If these fail, you can try the \texttt{convert} command which is part
+of \texttt{ImageMagick}. A more powerful tool is \texttt{inkscape}
+which is a successor to \texttt{xfig}. Professionals use Adobe Illustrator!
+
+%------------------------------------------------------------------------------
+\section{Feynman graphs}
+\label{sec:fig:feynman}
+%------------------------------------------------------------------------------
+
+You have lots of Feynman graphs you want to include, but how do you
+generate them? This is another area where most people (including me)
+have found one way to do it and never change! I use \texttt{Mn\_Fit},
+mainly because I wrote it and therefore know inside out how it
+works. Examples can be found on my web page:
+\url{http://pi.physik.uni-bonn.de/~brock/feynman}.
+
+Alternatives include \Package{axodraw} and the \Package{feynmf} or
+\Package{feynmp} packages.  The NC and CC graphs shown in
+Fig.~\ref{fig:nccc}, or more accurately in Fig.~\ref{fig:nccc-nc} and
+Fig.~\ref{fig:nccc-cc} were made with \Package{feynmp}. Another way of
+saying the same thing is that typical Feynman graphs for $ep$
+scattering are shown in Fig.~\ref{fig:nccc}, where
+\subref{fig:nccc-nc} shows a neutral current and \subref{fig:nccc-cc}
+show a charged current process. This paragraph illustrates how to
+reference different parts of a figure that uses \Package{subfig}.
+
+I explain in more detail how to use \Package{feynmf} and \Package{feynmp}
+below. Instructions on how to use \Package{axodraw} may come at a later
+date -- contributions would be welcome! Several people have claimed
+that \texttt{jaxodraw} is the way to go. This is a Java package which
+you can download from \url{http://jaxodraw.sourceforge.net/}. It has
+a Graphical User Interface (GUI) to \Package{axodraw} and so is simple and
+straightforward to use.
+
+%------------------------------------------------------------------------------
+\subsection{FeynMF and FeynMP}
+\label{sec:fig:feynman:feynmf}
+
+In order to use \Package{feynmf} or \Package{feynmp}, you have to put
+the commands to draw the graph in a \LaTeX{} file and then process
+this file with \LaTeX{} and either Metafont or
+Metapost.\footnote{\texttt{pibonn-thesis.sty} includes \Package{feynmf}
+  by default. If you want to use \Package{feynmp} instead just change
+  the name.}
+You can either make a separate \LaTeX{} file containing
+the Feynman graph or include the commands inside your normal \LaTeX{}
+file.  The tricky bit is running Metafont. On Unix systems the
+\texttt{feynmf} perl script exists that runs both \LaTeX{} and
+Metafont for you. This will produce a \texttt{dvi} file that you then
+then look at or use to make a Postscript/PDF file.  It looks as if it
+is a bit easier to use Metapost. You should be able to just run
+\texttt{mpost} after \texttt{(pdf)latex} and then run
+\texttt{pdflatex} again twice.
+
+I think a better way to proceed is the following:
+\begin{itemize}
+\item make a separate \LaTeX{} file for each of the Feynman graphs;
+\item input this file in your figure;
+\item use the \texttt{Makefile} described below to automatically run
+  over one or all \Package{feynmf}/\Package{feynmp} \LaTeX{} files by giving the
+  command \texttt{make feynmf} or \texttt{make feynmp}. Check
+  \texttt{./feynmf/feynmf\_all.dvi} or
+  \texttt{./feynmf/feynmf\_all.pdf} to see if the graphs are OK;
+\item run \LaTeX{} or PDF\LaTeX;
+\item run \BibTeX{} or \texttt{biber};
+\item run \LaTeX{} or PDF\LaTeX{} again, at least twice.
+\end{itemize}
+The last three steps are done with the command \texttt{make thesis} or
+\texttt{make thesis11}.
+The big advantage of this procedure is that the graphs are included
+\enquote{properly} in the thesis, their fonts should automatically
+match the fonts used in the thesis and you don't have to worry about
+converting and clipping. I have written a small script that is
+executed by the \texttt{Makefile} to do all of this.
+The script is \texttt{run\_mf} for \Package{feynmf} and
+\texttt{run\_mp} for \Package{feynmp}. These are
+included in the directory with this file.
+The scripts assume that all Feynman
+graphs are in the \texttt{./feynmf} subdirectory. This can clearly be
+adjusted as necessary.
+
+The \texttt{run\_mf} script assumes that all files of type
+\texttt{tex} (except those that start with \texttt{feynmf\_}) are
+Feynman graphs to process with \texttt{feynmf}. Note that it may be
+necessary to give the command \texttt{make cleanfeynmf} to get rid of
+temporary files before \texttt{make feynmf} if you change the sizes of
+things.
+
+The \texttt{run\_mp} script works a bit differently at the moment. If
+assumes that you want to make a PDF file of each graph and include
+this PDF file in your thesis. It creates a temporary directory
+\texttt{mpost\_tmp} in which it processes the figures (\texttt{tex}
+files) in the \texttt{feynmf} directory. The resulting PDF files are
+copied back to the \texttt{feynmf} directory.
+
+Figure~\ref{fig:nccc-feynmf} shows the same neutral current and
+charged current graphs, but this time inputting the appropriate
+\Package{feynmf} commands directly. The graphs are enclosed in
+\Macro{fbox} for illustration purposes only.
+
+\begin{figure}[htbp]
+  \centering
+  \fbox{\input{./feynmf/ep_nc.tex}}
+  \qquad
+  \fbox{\input{./feynmf/ep_cc.tex}}
+  \caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
+    code directly.}
+  \label{fig:nccc-feynmf}
+\end{figure}
+
+You probably want to first draw the graphs outside of your thesis to
+get them into the form that you need. If you give the command
+\texttt{make feynmf}, it will run \texttt{feynmf} on all \texttt{tex}
+files in the directory \texttt{./feynmf}. If you give the command
+\texttt{make feynmf file=ep\_nc} it will run over
+\texttt{./feynmf/ep\_nc.tex} etc. As indicated above, the graphs can
+then be looked at in \texttt{./feynmf/feynmf\_all.dvi} or\\
+\texttt{./feynmf/feynmf\_all.pdf}.
+
+%------------------------------------------------------------------------------
+\section{Placement}
+\label{sec:fig:placement}
+%------------------------------------------------------------------------------
+
+Even after many years of including figures into \LaTeX{} files, I
+still think there is a fair amount of black magic involved in getting
+them into the place that you want them to be.
+
+In general, you are advised to give \LaTeX{} as much freedom as
+possible in the placing, so it is usual to use the options
+\Option{[htbp]} for the placement. In particular, be very careful with
+using just \Option{[h]} or \Option{[H]} as the placement option. It very
+easily leads to \LaTeX{} putting single lines of text either above or
+below a figure.
+
+I used to think it was better to attach the figure to a paragraph:
+\begin{verbatim}
+The distribution is shown in Fig.~\ref{fig:funny1}.
+%
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\figwidth]{file}
+  \caption{An odd plot that I don't understand.}
+  \label{fig:funny1}
+\end{figure}
+%
+The distribution shows something that I do not understand.
+
+Given that this is not understood we went to the pub for a beer to
+think about it a bit more.
+\end{verbatim}
+
+More recently it appears to me to be better to separate the figure
+from the paragraph:
+\begin{verbatim}
+The distribution is shown in Fig.~\ref{fig:funny2}.
+The distribution shows something that I do not understand.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\figwidth]{file}
+  \caption{An odd plot that I don't understand.}
+  \label{fig:funny2}
+\end{figure}
+
+Given that this is not understood we went to the pub for a beer to
+think about it a bit more.
+\end{verbatim}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../thesis_guide"
+%%% End:

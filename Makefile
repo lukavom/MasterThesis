@@ -12,7 +12,8 @@ endif
 
 
 .PHONY: all thesis thesis09 thesis11 guide guide09 guide11 feynmf new \
-	cleanthesis cleanguide cleancover cleanfeynmf cleanblx cleanbbl \
+	cleanthesis cleanguide cleancover cleanfeynmf cleanphd \
+	cleanblx cleanbbl \
 	cleanglo \
 	help test
 
@@ -84,7 +85,7 @@ thesis_feynmf:
 
 cleanall: clean cleanbbl
 
-clean: cleanthesis cleanguide cleancover cleanfeynmf cleanblx cleanglo
+clean: cleanthesis cleanguide cleancover cleanfeynmf cleanphd cleanblx cleanglo
 
 cleanthesis:
 	-rm $(THESIS).log $(THESIS).aux $(THESIS).toc
@@ -109,6 +110,10 @@ cleancover:
 	-rm cover_test.log cover_test.aux cover_test.toc
 	-rm cover_test.lof cover_test.lot cover_test.out
 	-rm cover_test.blg cover_test.bbl cover_test.pdf
+
+cleanphd:
+	-rm PhD_submit.log PhD_submit.aux PhD_submit.out
+	-rm PhD_submit.pdf
 
 cleanfeynmf:
 	-rm *.mf *.tfm *.t1 *.600gf *.600pk *.log

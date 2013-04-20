@@ -118,21 +118,22 @@
 }
 
 %------------------------------------------------------------------------------
-% Choose which chapters you want to process
-% Note that \includeonly can be quite picky! Do not forget to put a
+% \includeonly can be used to select which chapters you want to process
+% A simple \include command just inserts a \clearpage before and after the fi% Note that \includeonly can be quite picky! Do not forget to put a
 % comma after the filename, otherwise it will simply be ignored!
-\includeonly{%
-  guide/guide_acknowledge1,
-  guide/guide_intro,
-  guide/guide_package,
-  guide/guide_tips,
-  guide/guide_figs,
-  guide/guide_tables,
-  guide/guide_refs,
-  guide/guide_layout,
-  guide/guide_appendix,
-  guide/guide_acknowledge2
-}
+% \includeonly{%
+%   guide/guide_acknowledge1,
+%   guide/guide_intro,
+%   guide/guide_tips,
+%   guide/guide_submit,
+%   guide/guide_package,
+%   guide/guide_figs,
+%   guide/guide_tables,
+%   guide/guide_refs,
+%   guide/guide_layout,
+%   guide/guide_appendix,
+%   guide/guide_acknowledge2
+% }
 
 %------------------------------------------------------------------------------
 % Give a list of directories where figures can be found. Do not leave
@@ -172,6 +173,8 @@
 \include{guide/guide_intro}
 
 \include{guide/guide_tips}
+
+\include{guide/guide_submit}
 
 \include{guide/guide_package}
 

@@ -105,14 +105,15 @@
 }
 
 %------------------------------------------------------------------------------
-% Choose which chapters you want to process
+% \includeonly can be used to select which chapters you want to process
+% A simple \include command just inserts a \clearpage before and after the file
 % Note that \includeonly can be quite picky! Do not forget to put a
 % comma after the filename, otherwise it will simply be ignored!
-\includeonly{%
-  mythesis/thesis_intro,
-  mythesis/thesis_appendix,
-  mythesis/thesis_acknowledge
-}
+% \includeonly{%
+%   mythesis/thesis_intro,
+%   mythesis/thesis_appendix,
+%   mythesis/thesis_acknowledge
+% }
 
 %------------------------------------------------------------------------------
 % Give a list of directories where figures can be found. Do not leave

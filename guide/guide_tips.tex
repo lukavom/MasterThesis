@@ -427,11 +427,12 @@ text is in German (\Option{ngerman} to be exact).
 
 In keeping with \LaTeX{} philosophy, you can specify a number and its
 error using \verb+\num{2.88(32)}+ to produce \num{2.88(32)} with the
-\Option{separate-uncertainty}\footnote{\Option{seperr}
-  in \TeXLive 2009.} option (which I specify) or $2.88(32)$ with the
-default option. You also give as an option how units with negative
-powers of units should be shown, e.g.\ per second. This can be changed
-for a single command.
+\Option{separate-uncertainty}\footnote{\Option{seperr} in \TeXLive
+  2009.} option (which I specify) or $2.88(32)$ with the default
+option. Errors and powers can also be combined, e.g.\
+\verb+\num{2.88(32)E-3}+ produces \num{2.88(32)E-3}. You also give as
+an option how units with negative powers of units should be shown,
+e.g.\ per second. This can be changed for a single command.
 
 Some examples are given below:
 \begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
@@ -602,11 +603,12 @@ have to decide from the very beginning whether numbers should
 disadvantages of using a font for which the math mode is different
 from the text mode. ATLAS uses either the \Package{txfonts} or the
 \Package{mathptmx} packages, which do not have this problem. This is
-why I use \Package{txfonts} in this guide. If the numbers
-$1234.56$ and 1234.56 look the same then you do not have to
-worry! There are ways to get around the problem with Palatino. You can
-try either the \Package{pxfonts} or the \Package{mathpazo} packages --
-for my taste the sans serif font used in \Package{pxfonts} looks a bit better.
+why I use \Package{txfonts} in this guide. If you compile the guide
+with a different font and the numbers $1234.56$ and 1234.56 look the
+same then you do not have to worry! There are ways to get around the
+problem with Palatino. You can try either the \Package{pxfonts} or the
+\Package{mathpazo} packages -- for my taste the sans serif font used
+in \Package{pxfonts} looks a bit better.
 
 
 %------------------------------------------------------------------------------

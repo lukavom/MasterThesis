@@ -13,8 +13,10 @@ information.
   \toprule
   Date & Comment\\
   \midrule
-  20 Apr 2013 & Rename pibonn-thesis to ubonn-thesis. Make \TeXLive
-  2011 the default.\\
+  23 Apr 2013 & Rename pibonn-thesis to ubonn-thesis. Make thesis
+  submission a separate chapter (so that PhD submission can also be a
+  separe document). Make \TeXLive
+  2011 the default. Make Inspire rather than Spires default.\\
   31 Mar 2013 & Add instructions on how to use \LaTeX\ backport under
   Ubuntu variants.\\
   28 Mar 2013 & Updated and hopefully complete and correct
@@ -248,14 +250,14 @@ make guide
 so all packages are there as well as at least the default font which I
 selected: \Package{txfonts}.
 
-This default version of the guide uses \Option{bibtex8} for the
+This default version of the guide uses \Option{biber} for the
 \Package{biblatex} package and includes\\
-\texttt{./refs/example\_refs-latin1} rather than
-\texttt{./refs/example\_refs-utf8}. You give the command \texttt{make
-  guide} to compile, which uses \texttt{bibtex} rather than
-\texttt{biber} to process the \texttt{.bib} files.
+\texttt{./refs/example\_refs-utf8} rather than
+\texttt{./refs/example\_refs-latin1}. You give the command \texttt{make
+  guide} to compile, which uses \texttt{biber}\index{biber} rather than
+\texttt{bibtex}\index{bibtex} to process the \texttt{.bib} files.
 
-For a old version of \TeXLive (2009) you change
+For a older version of \TeXLive (2009) you change
 \Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}. Then
 the following works:
 \begin{verbatim}
@@ -266,11 +268,12 @@ make guide09
 The default version of the guide also compiles on ATLAS Bonn desktop
 computers ((K)Ubuntu 12.04 with \TeXLive 2012).
 
-If you want to switch from \texttt{bibtex} to \texttt{biber} or vice
-versa, give the commands \texttt{make cleanguide cleanbbl cleanblx}
-before you try to compile the guide (or your thesis).
+If you want to switch from \texttt{biber}\index{biber} to
+\texttt{bibtex}\index{bibtex} or vice versa, give the commands
+\texttt{make cleanguide cleanbbl cleanblx} before you try to compile
+the guide (or your thesis).
 
-In order to edit \LaTeX{} you need an editor such as \texttt{emacs} or
+In order to edit \LaTeX\ you need an editor such as \texttt{emacs} or
 use a package such as \texttt{kile} and the associated
 \texttt{kile-doc}. See below for a bit more information on using \texttt{kile}.
 
@@ -587,7 +590,7 @@ What is the difference between a glossary and a list of acronyms? They
 are in fact very similar. A list of acronyms is probably most
 appropriate for defining the abbreviations used for detector names,
 e.g.\ the electromagnetic calorimeter (EMC). A glossary is used for
-defining terms, e.g.\ \enquote{\textbf{transition radiation} Transition
+defining terms, e.g.\ \enquote{\textbf{transition radiation}: transition
 radiation can be emitted when a particle crosses the boundary between
 two media with different dielectric constants}. A list of acronyms is
 probably a good idea to include in any thesis; a glossary may be
@@ -693,10 +696,10 @@ there, while the \gls{MVD} was also installed later.
 \label{app:printer}
 %==============================================================================
 
-For a PhD thesis, as mentioned in Section~\ref{sec:submit:phd},
-you have to print and bind the five copies that are needed by the
-university library externally. Some print shops in Bonn that can supply
-the required quality at a reasonable price are:
+For a PhD thesis, as mentioned in Section~\ref{sec:submit:phd}, you
+have to print and bind the five copies that are needed by the
+university library externally. Some print shops in the Bonn region
+that can supply the required quality at a reasonable price are:
 
 \begin{itemize}
 \item

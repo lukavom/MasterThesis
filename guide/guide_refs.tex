@@ -177,8 +177,8 @@ references.
 That's it? Well almost! First, you will have to make sure that the
 entry type that you use corresponds to the type of document that you
 are citing. Second, you will probably get some or all of your
-references from standard sources such as Spires, Inspire\footnote{I
-  will refer to both as Spires in this chapter} or CDS you will have
+references from standard sources such as Spires\footnote{I
+  will refer to both as Inspire in this chapter}, Inspire or CDS you will have
 to change the entries a bit so that they get formatted the way you want.
 
 
@@ -187,7 +187,7 @@ to change the entries a bit so that they get formatted the way you want.
 \label{sec:ref:bib}
 
 In this section I discuss how to format your \BibTeX\ databases,
-i.e. the \texttt{.bib} files. In the following section I talk about
+i.e.\ the \texttt{.bib} files. In the following section I talk about
 how you make your references look the way you want them to be in your
 thesis.
 
@@ -195,10 +195,9 @@ thesis.
 \subsection{Entry types}
 \label{sec:ref:entry}
 
-One question is what entry type you should use for what? I will
-give here recommendations what to use for
-\Package{biblatex}. Some of the entry types that \Package{biblatex}
-has are not part of \BibTeX.
+One question is what entry type you should use for what? I give here
+recommendations on what to use for \Package{biblatex}. Some of the entry
+types that \Package{biblatex} has are not part of \BibTeX.
 
 \begin{description}
 \item[@article] This is easy -- use it for articles\index{article} published in
@@ -229,7 +228,7 @@ has are not part of \BibTeX.
 \Package{biblatex} also knows about multivolume proceedings etc. See
 the manual for more details.
 
-Note that Spires will always give you a \BibTeX{} entry of type
+Note that Inspire will always give you a \BibTeX{} entry of type
 \Option{@article}, so you should adjust it by hand according to what
 the document you refer to really is. CDS tries a bit harder, but you
 probably still have to set the entry type by hand.
@@ -238,27 +237,27 @@ As indicated above, \Package{biblatex} knows about preprint archives,
 online references with a url etc.\ and can format the references so
 that you can click on a DOI or arXiv number. Details of how these are
 handled are well documented in the manual.  In order to make use of
-these abilities you have to modify the Spires format of the references
+these abilities you have to modify the Inspire format of the references
 a bit so that it is fully compatible with what \Package{biblatex}
 expects for preprints etc. More details on this are given below.
 
 What else do you have to be careful about? The first thing to know is
-that \BibTeX{} will try to format your author names and titles. Thus,
-if you want the title to remain in exactly the form you have typed it
-in include it in \enquote{"\{Title\}"}, i.e.\ both double quotes and
-braces. If not, collaborations and accelerators tend to be converted
-to lowercase, e.g.\ \enquote{lhc} instead of \enquote{LHC}. If you use
-an author such as ``ATLAS Collaboration'' it get printed as
-\enquote{A.\ Collaboration}.
+that \Package{biblatex} and \BibTeX{} will try to format your author
+names and titles. Thus, if you want the title to remain in exactly the
+form you have typed it in include it in \enquote{"\{Title\}"}, i.e.\
+both double quotes and braces. If not, collaborations and accelerators
+tend to be converted to lowercase, e.g.\ \enquote{lhc} instead of
+\enquote{LHC}. If you use an author such as ``ATLAS Collaboration'' it
+gets printed as \enquote{A.\ Collaboration}.
 
 
 %------------------------------------------------------------------------------
-\subsection{Entries from Spires and CDS}
-\index{spires}\index{CDS}
+\subsection{Entries from Inspire and CDS}
+\index{spires}\index{inspire}\index{CDS}
 \label{sec:ref:cds}
 
 Things like the LHC Design Report\index{design report} are by default
-called \Option{@article} in Spires~\cite{Bruning:2004ej-inspire} or
+called \Option{@article} in Inspire~\cite{Bruning:2004ej-inspire} or
 \Option{@book} in CDS~\cite{Bruening:782076-CDS}. They are in fact
 best declared as \Option{@collection} with the \Option{author} field
 replaced by \texttt{editor} and a field indicating the
@@ -280,7 +279,7 @@ the \Option{@report} entry type.
 Books\index{book} need to be changed from \Option{@article} to
 \Option{@book} and it is better to give the ISBN in the \texttt{isbn}
 field~\cite{Halzen:1984mc-final} rather than the \texttt{reportNumber}
-field as given in Spires~\cite{Halzen:1984mc-inspire}.
+field as given in Inspire~\cite{Halzen:1984mc-inspire}.
 
 Theses\index{thesis} should used the \Option{@thesis} entry type and
 then add a \texttt{type} field. Alternatively you can use
@@ -290,14 +289,14 @@ In all cases you probably have to edit the titles a bit to get
 things like $\sqrt{s} = \SI{7}{\TeV}$ printed properly. An open
 question is whether you should assume the use of a units package in
 the formatting of the title. If you want to make your \texttt{.bib}
-files usable by others, it is probably best to do the formatted by
+files usable by others, it is probably best to do the formatting by
 hand.
 
 An example of a typical ATLAS paper as it comes from
-Spires~\cite{Aad:2010ey-inspire} needs a bit of work.  With \TeXLive
+Inspire~\cite{Aad:2010ey-inspire} needs a bit of work.  With \TeXLive
 2011 the link to DOI and arXiv both work well~\cite{Aad:2010ey-final}.
 With \TeXLive 2009, it worked on my laptop, but did not work properly
-on ATLAS machines (Ubuntu 10.04) that have version 0.8e of \Package{biblatex}.
+on ATLAS machines (Ubuntu 10.04) that had version 0.8e of \Package{biblatex}.
 It may be that one can get it to work with a bit of help, but I have
 not tried all possible options.
 
@@ -314,7 +313,7 @@ The best way to format author names so that they appear correctly
 whatever \BibTeX{} style you use is \texttt{Surname, Name}. Any other
 syntax is likely to get mangled.
 
-What about collaboration names? If you use Spires as the source of
+What about collaboration names? If you use Inspire as the source of
 your \BibTeX{} entries, you will see that it has a field for the
 collaboration. This is often, but not always, formatted
 correctly. However, very few \BibTeX{} styles pay any attention to
@@ -422,14 +421,14 @@ run again.
 \subsection{\BibTeX{} styles}
 \label{sec:ref:bst}
 
-If you use references directly from Spires, then it is probably best to
-use one of the style files that is compatible with their format. A
-list can be found on
+If you use references directly from Spires or Inspire, then it is
+probably best to use one of the style files that is compatible with
+their format. A list can be found on
 \url{http://www.slac.stanford.edu/spires/hep/refs/bibstyles.shtml}. I
-have used \Option{utphys} a few times and it works OK. I see that there
-are also style files available there for common HEP journals, which
-could save quite a bit of work. The big advantage of \Option{utphys}
-is that it also knows about the arXiv and preprints.
+have used \Option{utphys} a few times and it works OK. I see that
+there are also style files available there for common HEP journals,
+which could save quite a bit of work. The big advantage of
+\Option{utphys} is that it also knows about the arXiv and preprints.
 
 The equivalent of \Package{biblatex}'s \Option{ieee} style in \BibTeX\ is
 \Option{ieeetr}. It also knows about arXiv and preprints. However, it
@@ -447,17 +446,17 @@ also keeps such a list and I assume that other collaborations keep
 similar lists.
 
 Within experimental high energy physics the standard way to get a
-reference is to use Spires
-(\url{http://www.slac.stanford.edu/spires/}). This is currently being
-replaced by Inspire, which by now has become the standard.
+reference is to use Inspire
+(\url{http://inspirehep.net}).\footnote{This has now replaced Spires
+(\url{http://www.slac.stanford.edu/spires/}).
 One problem with Spires was that it was very slow and regularly
-timed out when you perform searches. You can get the appropriate
-Spires entry by using the Spires search engine. Alternatively if you
-know the arXiv preprint number you can go from its entry to Spires
-directly. A link to Inspire is now there instead.
+timed out when you perform searches.} You can get the appropriate
+Inspire entry by using the Inspire search engine. Alternatively if you
+know the arXiv preprint number you can go from its entry to Inspire
+directly.
 
 To get the ZEUS references I used above I first tried the following
-command in Spires:
+command in Inspire:
 \begin{verbatim}
 find exp zeus and date 2009
 \end{verbatim}

@@ -12,6 +12,7 @@ endif
 
 
 .PHONY: all thesis thesis09 thesis11 guide guide09 guide11 feynmf new \
+	phdsubmit \
 	cleanthesis cleanguide cleancover cleanfeynmf cleanphd \
 	cleanblx cleanbbl \
 	cleanglo \
@@ -82,6 +83,10 @@ feynmp: $(FEYNFILES)
 
 thesis_feynmf:
 	feynmf $(THESIS)
+
+phdsubmit:
+	pdflatex  PhD_submit
+	pdflatex  PhD_submit
 
 cleanall: clean cleanbbl
 

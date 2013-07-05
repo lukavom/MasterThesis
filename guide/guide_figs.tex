@@ -189,11 +189,12 @@ which is a successor to \texttt{xfig}. Professionals use Adobe Illustrator!
 \label{sec:fig:tikz}\index{TikZ@\TikZ}
 %------------------------------------------------------------------------------
 
-\Package{pgf} and \Package{tikz} are packages to help with creating
-graphics \enquote{inline}.  PGF is the backend, while \TikZ is what
-the user interacts with directly. The manual contains all the
-information you should need, but is 726 pages long at the last count,
-so it may not to be too easy to find what you want!
+\Package{pgfplots} and \Package{tikz} are packages to help with
+creating graphics \enquote{inline}. For 3D figures you also need
+\Package{tikz-3dplot}. PGF is the backend, while \TikZ is what the
+user interacts with directly. The manual contains all the information
+you should need, but is 726 pages long at the last count, so it may
+not to be too easy to find what you want!
 
 I do not have much experience with using these packages so far, so
 this section will certainly not cover all possibilities. There may
@@ -207,6 +208,10 @@ subdirectory. Note that some of the examples only work with \TeXLive
 to compile the guide without errors when including \Package{tikz} with
 \TeXLive 2009, so some of the figures may be missing if you compile
 your own version of the guide with \TeXLive 2009.
+
+\TikZ is not included by default in a new skeleton thesis. See
+\texttt{thesis\_guide.tex} for the packages and \TikZ libraries that
+you should include if you want to use it.
 
 You often want to include a figure of your experiment's coordinate
 system in your thesis. One way to do this is illustrated in

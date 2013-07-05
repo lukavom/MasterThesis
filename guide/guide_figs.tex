@@ -203,7 +203,10 @@ questions and answers found on
 \url{http://tex.stackexchange.com/}. The examples included in this
 guide and a few more are collected in the \texttt{tikz}
 subdirectory. Note that some of the examples only work with \TeXLive
-2011 and later. This is indicated in the file.
+2011 and later. This is indicated in the file. I also did not manage
+to compile the guide without errors when including \Package{tikz} with
+\TeXLive 2009, so some of the figures may be missing if you compile
+your own version of the guide with \TeXLive 2009.
 
 You often want to include a figure of your experiment's coordinate
 system in your thesis. One way to do this is illustrated in
@@ -213,7 +216,7 @@ Fig.~\ref{fig:tikz:coord}.
   \centering
   \ifthenelse {\texlive = 2009} {%
     Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
-    earlier
+    earlier. See the file \texttt{./tikz/zeus_coords.tex}.
   }{%
     \input{./tikz/zeus_coords.tex}
   }
@@ -229,6 +232,7 @@ illustrated in Fig.~\ref{fig:tikz:flow}.
   \ifthenelse {\texlive = 2009} {%
     Error messages appear when trying to compile the guide with
     \Package{tikz} and \TeXLive 2009, so the figure is not included.
+    See the file \texttt{./tikz/zeus\_reconstruction.tex}.
   }{%
     \input{./tikz/zeus_reconstruction.tex}
   }
@@ -436,7 +440,9 @@ identical.
   \subfloat[\TikZ][\TikZ]{\label{fig:feyn:tikz}
     \ifthenelse {\texlive = 2009} {%
       Error messages appear when trying to compile the guide with
-      \Package{tikz} and \TeXLive 2009, so the figure cannot be included.
+      \Package{tikz} and \TeXLive 2009, so the figure cannot be
+      included.
+      See the file \texttt{./tikz/moeller.tex}.
     }{%
       \input{./tikz/moeller.tex}
     }

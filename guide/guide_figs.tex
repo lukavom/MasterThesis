@@ -221,8 +221,9 @@ Fig.~\ref{fig:tikz:coord}.
 \begin{figure}[htbp]
   \centering
   \ifthenelse {\texlive = 2009} {%
+    \fbox{
     Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
-    earlier. See the file \texttt{./tikz/zeus\_coords.tex}.
+    earlier. See the file \texttt{./tikz/zeus\_coords.tex}.}
   }{%
     \input{./tikz/zeus_coords.tex}
   }
@@ -236,9 +237,9 @@ illustrated in Fig.~\ref{fig:tikz:flow}.
 \begin{figure}[htbp]
   \centering
   \ifthenelse {\texlive = 2009} {%
-    Error messages appear when trying to compile the guide with
+    \fbox{Error messages appear when trying to compile the guide with
     \Package{tikz} and \TeXLive 2009, so the figure is not included.
-    See the file \texttt{./tikz/zeus\_reconstruction.tex}.
+    See the file \texttt{./tikz/zeus\_reconstruction.tex}.}
   }{%
     \input{./tikz/zeus_reconstruction.tex}
   }
@@ -445,10 +446,10 @@ identical.
   \qquad
   \subfloat[\TikZ][\TikZ]{\label{fig:feyn:tikz}
     \ifthenelse {\texlive = 2009} {%
-      Error messages appear when trying to compile the guide with
-      \Package{tikz} and \TeXLive 2009, so the figure cannot be
-      included.
-      See the file \texttt{./tikz/moeller.tex}.
+      \framebox[0.4\textwidth]{Error messages appear when trying to
+        compile the guide with \Package{tikz} and \TeXLive 2009,
+        so the figure cannot be included.
+      See the file \texttt{./tikz/moeller.tex}.}
     }{%
       \input{./tikz/moeller.tex}
     }

@@ -829,9 +829,10 @@ this guide is compiled with \TeXLive 2011 or later.
 \begin{figure}[htbp]
   \centering
   \ifthenelse {\texlive = 2009} {%
-    Sorry, \Package{tikz} is too old in \TeXLive 2009 and
-    earlier to make this plot.
-    See the file \texttt{./tikz/zeus\_Ds\_systematics.tex}.
+    \fbox{\parbox[c][0.8\textwith][c]{%
+        Sorry, \Package{tikz} is too old in \TeXLive 2009 and
+        earlier to make this plot.
+        See the file \texttt{./tikz/zeus\_Ds\_systematics.tex}.}}
   }{%
     \input{./tikz/zeus_Ds_systematics.tex}
   }

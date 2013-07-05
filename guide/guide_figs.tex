@@ -1,6 +1,6 @@
 %==============================================================================
 \chapter{Figures}
-\label{sec:fig}
+\label{sec:fig}\index{figures}
 %==============================================================================
 
 \LaTeX{} file: \url{./guide/guide_figs.tex}\\[1ex]
@@ -12,6 +12,9 @@ I recently found a pretty complete guide (in German) called \texttt{l2piqfaq}
 which can be obtained from
 \url{http://www.ctan.org/tex-archive/info/l2picfaq/german}. It contains
 a lot of detailed information and tricks.
+
+The chapter also contains some suggestions as to how to create Feynman
+graphs with a number of different packages.
 
 %------------------------------------------------------------------------------
 \section{Simple figures}
@@ -61,7 +64,7 @@ good for long captions. Hence the style file sets
 
 %------------------------------------------------------------------------------
 \section{Fancier figures}
-\label{sec:fig:fancy}
+\label{sec:fig:fancy}\index{figures!multiple}
 %------------------------------------------------------------------------------
 
 Life gets more complicated if you want to include several plots in
@@ -131,12 +134,17 @@ width equal to \Macro{figwidth} and then the offset to \texttt{-\Macro*{figwidth
 \end{figure}
 
 If you want different (partial) captions for a figure then the
-\Package{subfig} package is probably the way to go. You can see how to
+\Package{subfig} package used to be the way to go. You can see how to
 reference the different parts of the figure in
 Section~\ref{sec:fig:feynman}. If you want the captions of the
 sub-figures to also appear in the \enquote{List of Figures} you should
 include the package with the option \Option{lofdepth}. For tables use
 the option \Option{lotdepth}.
+
+An alternative, and successor, to \Package{subfig} is
+\Package{subcaption}. It works in much the same way as
+\Package{subfig}. A nice tutorial on its use can be found in
+\url{http://www.peteryu.ca/tutorials/publishing/latex_captions}
 
 \begin{figure}[htbp]
   \centering
@@ -152,14 +160,14 @@ theses) you can use the \Package{wrapfig} package.
 
 %------------------------------------------------------------------------------
 \section{Figure Formats}
-\label{sec:fig:formats}
+\label{sec:fig:formats}\index{figures~formats}
 %------------------------------------------------------------------------------
 
 If you use plain \LaTeX, you are pretty much stuck with encapsulated
 postscript (EPS) as your figure format. If you use PDF\LaTeX, then you
 have much more freedom, with the notable exception that you cannot
 include EPS files!\footnote{%
-This restriction have finally been lifted with \TeXLive 2011. It
+This restriction has finally been lifted with \TeXLive 2011. It
 simply converts the EPS files to PDF inline.}
 I would still recommend that you always try to use
 a vector graphic format. What usually works well is to either create
@@ -174,9 +182,57 @@ If these fail, you can try the \texttt{convert} command which is part
 of \texttt{ImageMagick}. A more powerful tool is \texttt{inkscape}
 which is a successor to \texttt{xfig}. Professionals use Adobe Illustrator!
 
+
+%------------------------------------------------------------------------------
+\section{\TikZ and PGF}
+\label{sec:fig:tikz}\index{TikZ@\TikZ}
+%------------------------------------------------------------------------------
+
+\Package{pgf} and \Package{tikz} are packages to help with creating
+graphics \enquote{inline}.  PGF is the backend, while \TikZ is what
+the user interacts with directly. The manual contains all the
+information you should need, but is 726 pages long at the last count,
+so it may not to be too easy to find what you want!
+
+I do not have much experience with using these packages so far, so
+this section will certainly not cover all possibilities. There may
+also be better ways of doing things than I illustrate here. The
+examples I give come from Andrii Verbytskyi or are adapted from
+questions and answers found on
+\url{http://tex.stackexchange.com/}. The examples included in this
+guide and a few more are collected in the \texttt{tikz} subdirectory.
+
+You often want to include a figure of your experiment's coordinate
+system in your thesis. One way to do this is illustrated in
+Fig.~\ref{fig:tikz:coord}.
+
+\begin{figure}[htbp]
+  \centering
+  \input{./tikz/zeus_coords.tex}
+  \caption{The ZEUS coordinate system.}
+  \label{fig:tikz:coord}
+\end{figure}
+
+It is also possible to make flow charts with \TikZ. This is
+illustrated in Fig.~\ref{fig:tikz:flow}.
+
+\begin{figure}[htbp]
+  \centering
+  \input{./tikz/zeus_reconstruction.tex}
+  \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}
+  \label{fig:tikz:flow}
+\end{figure}
+
+There are many more possibilities,
+including plots which you would otherwise make with \texttt{root} or
+some other graphics program. An example plot showing the effect of
+systematic variations can be found in App.~\ref{sec:app:tikz}. Making
+Feynman graphs with \TikZ is covered in
+Section~\ref{sec:fig:feynman:tikz}.
+
 %------------------------------------------------------------------------------
 \section{Feynman graphs}
-\label{sec:fig:feynman}
+\label{sec:fig:feynman}\index{figures!Feynman graphs}\index{Feynman graphs}
 %------------------------------------------------------------------------------
 
 You have lots of Feynman graphs you want to include, but how do you
@@ -187,50 +243,64 @@ works. Examples can be found on my web page:
 \url{http://pi.physik.uni-bonn.de/~brock/feynman}.
 
 Alternatives include \Package{axodraw} and the \Package{feynmf} or
-\Package{feynmp} packages.  The NC and CC graphs shown in
-Fig.~\ref{fig:nccc}, or more accurately in Fig.~\ref{fig:nccc-nc} and
-Fig.~\ref{fig:nccc-cc} were made with \Package{feynmp}. Another way of
-saying the same thing is that typical Feynman graphs for $ep$
-scattering are shown in Fig.~\ref{fig:nccc}, where
-\subref{fig:nccc-nc} shows a neutral current and \subref{fig:nccc-cc}
-show a charged current process. This paragraph illustrates how to
-reference different parts of a figure that uses \Package{subfig}.
+\Package{feynmp} packages.  It is also possible to use
+\Package{tikz}. The use of \Package{feynmf} and \Package{feynmp} is
+described in Section~\ref{sec:fig:feynman:feynmf}, while a few
+examples of usage of \Package{tikz} are given in
+Section~\ref{sec:fig:feynman:tikz}. Examples of Feynman graphs made
+with \Package{feynmf} and \Package{feynmp} can be found in the
+\texttt{feynmf} directrory, while those made with \Package{tikz} can
+be found in the \texttt{tikz} subdirectory.
 
-I explain in more detail how to use \Package{feynmf} and \Package{feynmp}
-below. Instructions on how to use \Package{axodraw} may come at a later
+Instructions on how to use \Package{axodraw} may come at a later
 date -- contributions would be welcome! Several people have claimed
 that \texttt{jaxodraw} is the way to go. This is a Java package which
 you can download from \url{http://jaxodraw.sourceforge.net/}. It has
 a Graphical User Interface (GUI) to \Package{axodraw} and so is simple and
 straightforward to use.
 
+This paragraph illustrates how to reference different parts of a
+figure that uses \Package{subfig}. The NC and CC graphs shown in
+Fig.~\ref{fig:nccc}, or more accurately in Fig.~\ref{fig:nccc-nc} and
+Fig.~\ref{fig:nccc-cc} were made with \Package{feynmp}. Another way of
+saying the same thing is that typical Feynman graphs for $ep$
+scattering are shown in Fig.~\ref{fig:nccc}, where
+\subref{fig:nccc-nc} shows a neutral current and \subref{fig:nccc-cc}
+show a charged current process.
+
+
 %------------------------------------------------------------------------------
 \subsection{FeynMF and FeynMP}
-\label{sec:fig:feynman:feynmf}
+\label{sec:fig:feynman:feynmf}\index{feynmf}\index{feynmp}
 
 In order to use \Package{feynmf} or \Package{feynmp}, you have to put
 the commands to draw the graph in a \LaTeX{} file and then process
 this file with \LaTeX{} and either Metafont or
-Metapost.\footnote{\texttt{ubonn-thesis.sty} includes \Package{feynmf}
-  by default. If you want to use \Package{feynmp} instead just change
-  the name.}
-You can either make a separate \LaTeX{} file containing
-the Feynman graph or include the commands inside your normal \LaTeX{}
-file.  The tricky bit is running Metafont. On Unix systems the
+Metapost.\footnote{\texttt{ubonn-thesis.sty} includes \Package{feynmp}
+  by default. If you want to use \Package{feynmf} instead just change
+  the name.}  You can either make a separate \LaTeX{} file containing
+the Feynman graph or include the commands inside your normal \LaTeX
+file.
+Metapost\index{metafont} is a bit
+easier to use than Metafont.
+You should be able to just run
+\texttt{mpost} after \texttt{(pdf)latex} and then run
+\texttt{pdflatex} again twice. Note that you have to run
+\texttt{mpost} on all the files whose names are defined at the beginning
+of the \Env{fmffile} environment.
+
+Metafont\index{metafont} is a bit trickier. On Unix systems the
 \texttt{feynmf} perl script exists that runs both \LaTeX{} and
 Metafont for you. This will produce a \texttt{dvi} file that you then
-then look at or use to make a Postscript/PDF file.  It looks as if it
-is a bit easier to use Metapost. You should be able to just run
-\texttt{mpost} after \texttt{(pdf)latex} and then run
-\texttt{pdflatex} again twice.
+then look at or use to make a Postscript/PDF file.
 
 I think a better way to proceed is the following:
 \begin{itemize}
 \item make a separate \LaTeX{} file for each of the Feynman graphs;
 \item input this file in your figure;
 \item use the \texttt{Makefile} described below to automatically run
-  over one or all \Package{feynmf}/\Package{feynmp} \LaTeX{} files by giving the
-  command \texttt{make feynmf} or \texttt{make feynmp}. Check
+  over one or all \Package{feynmp}/\Package{feynmf} \LaTeX{} files by giving the
+  command \texttt{make feynmp} or \texttt{make feynmf}. Check
   \texttt{./feynmf/feynmf\_all.dvi} or
   \texttt{./feynmf/feynmf\_all.pdf} to see if the graphs are OK;
 \item run \LaTeX{} or PDF\LaTeX;
@@ -258,12 +328,12 @@ necessary to give the command \texttt{make cleanfeynmf} to get rid of
 temporary files before \texttt{make feynmf} if you change the sizes of
 things.
 
-The \texttt{run\_mp} script works a bit differently at the moment. If
+The \texttt{run\_mp} script works a bit differently at the moment. It
 assumes that you want to make a PDF file of each graph and include
 this PDF file in your thesis. It creates a temporary directory
 \texttt{mpost\_tmp} in which it processes the figures (\texttt{tex}
-files) in the \texttt{feynmf} directory. The resulting PDF files are
-copied back to the \texttt{feynmf} directory.
+files) in the \texttt{feynmf} subdirectory. The resulting PDF files are
+copied back to the \texttt{feynmf} subdirectory.
 
 Figure~\ref{fig:nccc-feynmf} shows the same neutral current and
 charged current graphs, but this time inputting the appropriate
@@ -273,21 +343,79 @@ charged current graphs, but this time inputting the appropriate
 \begin{figure}[htbp]
   \centering
   \fbox{\input{./feynmf/ep_nc.tex}}
+  \write18{mpost ep_nc}
   \qquad
   \fbox{\input{./feynmf/ep_cc.tex}}
-  \caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
+  \write18{mpost ep_cc}
+\caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
     code directly.}
   \label{fig:nccc-feynmf}
 \end{figure}
 
+If you are using \Package{feynmp}, another way to do things is
+illustrated in Fig.~\ref{fig:nccc-feynmf}. Here an appropriate
+\Macro{write18} statement is included in the \LaTeX\ source code,
+e.g.\ \verb+\write18 mpost gluon+, after the figure, where the figure
+starts with \verb+\begin{fmffile}{gluon}+.
+
+With the \TeXLive setups I use to test this guide, this is all you
+need. If \texttt{mpost} does not run automatically, you must execute
+the command \texttt{pdflatex --shell-escape mythesis} when you
+compile your thesis. This can be achieved by including the
+\texttt{EXTRACMD} definition that is commented out in the
+\texttt{Makefile}. In this guide I put the Feynman graph in its own
+file and the \Macro{write18} statement in the main file so that I
+can test \Package{feynmf} and \Package{feynmp} with the same \LaTeX\
+code. In your thesis, you should probably put the \Macro{write18}
+statement in the file with the Feynman graph.
+
 You probably want to first draw the graphs outside of your thesis to
 get them into the form that you need. If you give the command
 \texttt{make feynmf}, it will run \texttt{feynmf} on all \texttt{tex}
-files in the directory \texttt{./feynmf}. If you give the command
+files in the subdirectory \texttt{feynmf}. If you give the command
 \texttt{make feynmf file=ep\_nc} it will run over
 \texttt{./feynmf/ep\_nc.tex} etc. As indicated above, the graphs can
 then be looked at in \texttt{./feynmf/feynmf\_all.dvi} or\\
 \texttt{./feynmf/feynmf\_all.pdf}.
+
+
+%------------------------------------------------------------------------------
+\subsection{Feynman graphs with \TikZ}
+\label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}
+
+In order to draw Feynman graphs with \TikZ, you need to include some
+extra \TikZ packages. In addition it makes sense to define things like
+gluons, photon and incoming and outgoing particles once, as these are
+objects that are often needed.
+
+Given the multitude of possibilities that exist to draw things with
+\TikZ, it is not surprising that there are several ways of achieving the
+same end. It is also debatable whether \Package{feymp} or \Package{tikz}
+is better. If you use \TikZ for drawing other things, then it is
+probably easier to use it also for Feynman graphs. However, if you
+want things like gluons on an arc, this may well only be available, if
+at all, with very recent versions of \Package{tikz}.
+
+As a start we can directly compare a scattering graph made with
+\Package{feynmp} and \Package{tikz}. This is shown in
+Fig.~\ref{fig:feyn:cf}. As you can see the quality of the graphs is
+very similar. Further tweaking can probably make them almost
+identical.
+
+\begin{figure}[htbp]
+  \centering
+  \subfloat[Feynmp][Feynmp]{\label{fig:feyn:feynmp}
+    \input{./feynmf/moeller.tex}
+    \write18{mpost moeller}
+  }
+  \qquad
+  \subfloat[\TikZ][\TikZ]{\label{fig:feyn:tikz}
+    \input{./tikz/moeller.tex}
+  }
+  \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}
+  \label{fig:feyn:cf}
+\end{figure}
+
 
 %------------------------------------------------------------------------------
 \section{Placement}

@@ -13,9 +13,15 @@ information.
   \toprule
   Date & Comment\\
   \midrule
+  04 Jul 2013 & Add a few examples of using the \Package{tikz}
+  package. Switch to using \Package{feynmp} rather than
+  \Package{feynmf} by default. Add \Macro{write18} statements for
+  Feynman graphs with \Package{feynmp} and adapt \texttt{Makefile}.\\
+  18 May 2013 & Add some information on the \Package{refcheck} package
+  and back-referencing with \Package{biblatex}.\\
   23 Apr 2013 & Rename pibonn-thesis to ubonn-thesis. Make thesis
   submission a separate chapter (so that PhD submission can also be a
-  separe document). Make \TeXLive
+  separate document). Make \TeXLive
   2011 the default. Make Inspire rather than Spires default.\\
   31 Mar 2013 & Add instructions on how to use \LaTeX\ backport under
   Ubuntu variants.\\
@@ -202,6 +208,63 @@ year. You can also download the installation you need from the \TeX\
 Users (TUG) group web page: \url{http://www.tug.org/texcollection}.
 
 %------------------------------------------------------------------------------
+\section{Integrated environments}
+\label{sec:app:complile}
+%------------------------------------------------------------------------------
+
+As already mentioned in Section~\ref{sec:tips:do}, I highly recommend
+that you use an integrated environment for editing and compiling your
+thesis. All such tools allow you to define projects, which then know
+about which files should be included when compiling.
+
+Kile\index{kile} is quite popular, especially if you use the KDE
+desktop environment. \TeXstudio\index{TeXstudio} and
+\TeXmaker\index{TeXmaker} can be installed under Windows, MacOSX or
+Linux. I have tried \TeXstudio under Windows and it works nicely. It
+can be downloaded from \url{http://texstudio.sourceforge.net/}. Others
+report good experience with \TeXmaker (under Ubuntu). As mentioned
+above it is available as an Ubuntu package or from
+\url{http://www.xm1math.net/texmaker}.
+\TeXmaker and \TeXstudio (\TeX makerX) split in 2009, so both packages
+contain a lot of similarities.
+
+I continue to use is \texttt{emacs}\index{emacs} and AUCTeX, as I can
+then use the same editor for everything. Note that the
+RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
+tools for finding and inserting cross-references and the names of
+citations easily.
+
+
+%------------------------------------------------------------------------------
+\subsection{Kile}
+\label{sec:app:kubuntu:kile}\index{kile}
+
+Many people use Kile as their environment for editing and compiling
+\LaTeX. If you use \texttt{bibtex} for your references then the default
+setup does not have to be changed. If you want to use the
+\Option{biber}\index{biber} backend then you should integrate the
+command into Kile.
+
+To do this you need to do the following:
+In Kile: \Option{Settings $\to$ Configure Kile $\to$ Tools $\to$ Build} and
+then insert a new tool (Biber) on the left-hand side. It is probably
+best to define the class of the tool as \BibTeX. Then on the
+right-hand side in the \Option{General} tab the command should be
+\texttt{biber} and the option \texttt{\%S}. In the \Option{Advanced}
+tab you should set the \Option{Source extension} to \texttt{aux} and
+the \Option{Target extension} to \texttt{bbl}.
+
+I would then recommend adding a new configuration to the
+\Option{QuickBuild} called \Option{PDFLaTeX+Biber+ViewPDF} that
+executes the commands: \texttt{PDFLaTeX, Biber, PDFLaTeX, PDFLaTeX,
+  ViewPDF}. This is also the series of commands that the
+\texttt{Makefile} executes.
+
+I have not yet investigated how to also make the glossary from within
+Kile (or any other integrated environment).
+
+
+%------------------------------------------------------------------------------
 \section{(Ku|Xu|U)buntu}
 \label{sec:app:kubuntu}\index{Linux}\index{Ubuntu}\index{Kubuntu}\index{Xubuntu}
 %------------------------------------------------------------------------------
@@ -233,6 +296,8 @@ texlive-lang-german
 feynmf
 biblatex
 \end{verbatim}
+For Kubuntu 13.04 I also had to install \texttt{texlive-metapost} in
+order to compile the guide.
 
 \noindent
 Using these packages I was able to issue to following commands to
@@ -244,7 +309,6 @@ cd ubonn-thesis/trunk
 \end{verbatim}
 Then the following worked:
 \begin{verbatim}
-make feynmf
 make guide
 \end{verbatim}
 so all packages are there as well as at least the default font which I
@@ -261,12 +325,14 @@ For a older version of \TeXLive (2009) you change
 \Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}. Then
 the following works:
 \begin{verbatim}
-make feynmf
 make guide09
 \end{verbatim}
 
 The default version of the guide also compiles on ATLAS Bonn desktop
-computers ((K)Ubuntu 12.04 with \TeXLive 2012).
+computers ((K)Ubuntu 12.04 with \TeXLive 2012). If you want to use
+\Package{feynmf} instead of \Package{feynmp} to compile the guide, you
+have to change \texttt{ubonn-thesis.sty} appropriately and give the
+command \texttt{make feynmf} before \texttt{make guide}.
 
 If you want to switch from \texttt{biber}\index{biber} to
 \texttt{bibtex}\index{bibtex} or vice versa, give the commands
@@ -274,8 +340,9 @@ If you want to switch from \texttt{biber}\index{biber} to
 the guide (or your thesis).
 
 In order to edit \LaTeX\ you need an editor such as \texttt{emacs} or
-use a package such as \texttt{kile} and the associated
-\texttt{kile-doc}. See below for a bit more information on using \texttt{kile}.
+use a package such as \texttt{kile} (and the associated
+\texttt{kile-doc}), \TeXstudio or \TeXmaker. These were discussed
+breifly in the previous section.
 
 If your \LaTeX\ installation is old, you may want to bring it
 up-to-date.  For Ubuntu variants there is a simple solution. Just add
@@ -291,7 +358,9 @@ A recent \TeX nische Komödie (3/2011) contained detailed instructions on
 how to install a newer version of \TeXLive in parallel to the
 default version in Kubuntu (Ubuntu works in almost exactly the
 same way). I am now doing this as standard practice on my laptop
-and it works very well.
+and it works very well. Another useful source of information on how to
+install \TeXLive can be found under
+\url{http://tug.org/texlive/quickinstall.html}.
 
 A brief summary of how to do the installation by hand: you must have
 \texttt{perl-tk} installed.  Go to a directory where you want the
@@ -300,12 +369,16 @@ install script to be and then execute the following chain of commands:
 wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar zxvf install-tl-unx.tar.gz
 cd install-tl-...
-sudo ./install-tl -gui
+sudo ./install-tl -gui perltk
   Turn off some of the languages
   Make sure installation is in /usr/local/texlive
   Install
 \end{verbatim}
-When the installation is complete (can easily take \numrange{1}{2} hours):
+I installed the scheme \Option{scheme-tetex} and added the
+collections: \Option{Extra BibTeX styles}, \Option{Extra generic
+  packages}, \Option{LaTeX supplementary packages} and
+\Option{Typesetting for natural and computer sciences}.  When the
+installation is complete (can easily take \numrange{1}{2} hours):
 \begin{verbatim}
 cd ..
 echo 'export PATH=/opt/texbin:${PATH}' > texlive.sh
@@ -317,6 +390,11 @@ If you have a 64-bit installation replace \texttt{i386-linux} with
 that \texttt{/opt/texbin} is at the beginning of your \texttt{PATH}
 and that \LaTeX\ is then taken from there rather than the usual
 \texttt{/usr/bin}.
+
+With Kubuntu 13.04, I had to install \texttt{texdoc} in addition in
+order to be able to use it to access the documentation with
+it.\footnote{This was not necessary for earlier (K)Ubuntu versions. I
+  found it a bit strange, but it seems to be needed.}
 
 For updating, additions of packages etc., it is useful to define an
 alias in your \texttt{.bashrc} or \texttt{.bash\_aliases}:
@@ -342,33 +420,6 @@ If you are using Ubuntu 11.10, you may well get an error:
 link from \texttt{/usr/local/bin/gnome-open} to
 \texttt{/usr/bin/xdg-open}.
 
-%------------------------------------------------------------------------------
-\subsection{Kile}
-\label{sec:app:kubuntu:kile}\index{kile}
-
-Many people use Kile as their environment for editing and compiling
-\LaTeX. If you use \texttt{bibtex} for you references then the default
-setup does not have to be changed. If you want to use the
-\Option{biber}\index{biber} backend then you should integrate the
-command into Kile.
-
-To do this you need to do the following:
-In Kile: \Option{Settings $\to$ Configure Kile $\to$ Tools $\to$ Build} and
-then insert a new tool (Biber) on the left-hand side. It is probably
-best to define the class of the tool as \BibTeX. Then on the
-right-hand side in the \Option{General} tab the command should be
-\texttt{biber} and the option \texttt{\%S}. In the \Option{Advanced}
-tab you should set the \Option{Source extension} to \texttt{aux} and
-the \Option{Target extension} to \texttt{bbl}.
-
-I would then recommend adding a new configuration to the
-\Option{QuickBuild} called \Option{PDFLaTeX+Biber+ViewPDF} that
-executes the commands: \texttt{PDFLaTeX, Biber, PDFLaTeX, PDFLaTeX,
-  ViewPDF}. This is also the series of commands that the
-\texttt{Makefile} executes.
-
-I have not yet investigated how to also make the glossary from within
-Kile (or any other integrated environment).
 
 
 %------------------------------------------------------------------------------
@@ -441,12 +492,9 @@ packages are being installed.
 
 Note that the Dante \TeX\ Collection 2011 DVD has dropped
 \TeXnicCenter within pro\TeX t and is using the \TeX makerX front-end
-instead. \TeX makerX has recently been superseded by \TeXstudio, which I
-will comment on below. My comments on \TeXnicCenter have been
-relegated to a subsection. There is also the package
-\TeXmaker. \TeXmaker and \TeXstudio (\TeX makerX) split in 2009, so
-both packages contain a lot of similarities. \TeXmaker is available as
-an Ubuntu package and there are also versions for MacOSX and Windows.
+instead. \TeX makerX has recently been superseded by \TeXstudio, My
+comments on \TeXnicCenter have been relegated to a subsection. There
+is also the package \TeXmaker.
 
 %------------------------------------------------------------------------------
 \subsection{\TeXLive}
@@ -477,13 +525,6 @@ load the default repository.
 
 You can either use \TeXworks as the front end or you can install
 \TeXstudio or \TeXmaker.
-
-\TeXstudio and \TeXmaker seem to be more up-to-date replacements for
-\TeXnicCenter and can be installed under Windows, MacOSX or Linux. I
-have tried \TeXstudio under Windows. It can be downloaded from
-\url{http://texstudio.sourceforge.net/}. Others report good experience
-with \TeXmaker (under Ubuntu). As mentioned above it is available as
-an Ubuntu package or from \url{http://www.xm1math.net/texmaker}.
 
 
 %------------------------------------------------------------------------------
@@ -771,6 +812,65 @@ also work OK.
 
 
 %==============================================================================
+\chapter{Plots with \Package{tikz}}
+\label{sec:app:tikz}
+%==============================================================================
+
+Figure~\ref{fig:tikz:syst} shows how you can produce a plot showing
+the contributions of many different systematic uncertainties to a result.
+
+\newcommand{\fcsone}{\ensuremath{f(c \rightarrow D_{s 1}^+)}}
+\newcommand{\BranStrangeLOW}{\ensuremath{\mathcal{B}_{D_{s1}^{+} \rightarrow D^{*+} K^0_S}/\mathcal{B}_{D_{s1}^{+} \rightarrow D^{*0} K^+}}\xspace}
+
+\begin{figure}[htbp]
+  \sisetup{retain-explicit-plus}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[width=0.98\textwidth,height=0.38\textwidth,
+      major grid style={color=red},
+      xmin=-0.4,xmax=57.4,
+      xticklabels={},xtick=data,name=pic1,ylabel=$\BranStrangeLOW$,  ylabel shift ={-1cm,0 },
+      ,extra x ticks={0.5,40.5,44.5,49.5,53.5}
+      ,extra x tick style={grid=major,
+        tick label style={
+          rotate=-90,anchor=east}}
+      ,extra x tick labels={}
+      ,clip=false]
+      \addplot+[only marks,mark size=1.5pt,error bars/.cd,y dir=both,y explicit]
+      table[x=x,y=y,x error= errorx,y error=errory
+      ]{guide/BRANCHINGSTRANGE0.dat}  ;%node [pos=0] {$R=2$};
+      \node at (axis cs:22,  2.795)    {{\Large $\delta_1$}};
+      \node at (axis cs:42.5,  2.795)   {{\Large $\delta_2$}};
+      \node at (axis cs:47.5,2.795) {{\Large $\delta_3$}};
+      \node at (axis cs:51,  2.795)   {{\Large $\delta_4$}};
+      \node at (axis cs:55,  2.795)   {{\Large $\delta_5$}};
+      \addplot [const plot,draw=blue] coordinates {(0,1.60) (57.4,1.60)};
+    \end{axis}
+    \begin{axis}[width=0.98\textwidth,height=0.38\textwidth,
+      major grid style={color=red},
+      xmin=-0.4,xmax=57.4,
+      xticklabels from table={guide/BRANCHINGSTRANGE_titles.dat}{label},
+      x tick label style={rotate=90,anchor=east,font=\tiny},xtick=data,
+      name=pic3,at={($(pic1.south)-(pic1.north)$)},ylabel=$f(c \rightarrow D_{s 1}^+)$
+      ,extra x ticks={0.5,40.5,44.5,49.5,53.5},
+      extra x tick style={grid=major,
+        tick label style={
+          rotate=-90,anchor=east}}
+      ,extra x tick labels={}]
+      \addplot+[only marks,mark size=1.5pt,error bars/.cd,y dir=both,y explicit]
+      table[x=x,y=y,x error= errorx,y error=errory]{guide/BRANCHINGSTRANGE1.dat};
+      \addplot [const plot,draw=blue] coordinates {(0,0.76) (100,0.76)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The results of strange excited charm meson
+    fragmentation fraction and branching ratio with systematic variations.
+    The individual systematic variations are put into groups $\delta_1-\delta_5$ (see text).
+  }
+  \label{fig:tikz:syst}
+\end{figure}
+
+
+%==============================================================================
 \chapter{More on \Package{feynmf}}
 \label{sec:app:feynmf}
 %==============================================================================
@@ -782,13 +882,17 @@ graphs in the thesis (or input the file containing them), you can try
 to make encapsulated Postscript (or PDF) files that contain a single
 Feynman graph and then include these as usual in your thesis.
 
-To do this you can start with the \texttt{feynmf} command on the
-\LaTeX{} file.\footnote{Note that the example files that are included
-  in this document tree are missing the \Macro{documentclass} and
-  \Macro{usepackage} commands.}
-The drawback is that this produces a
-\texttt{dvi} file that you then have to convert to Encapsulated
-Postscript and/or PDF. This is not totally trivial.
+If you use \Package{feynmp} you can just give the command \texttt{make
+feynmp} and it will produce PDF files of all the \texttt{tex} files in
+the \texttt{feynmf} subdirectory.
+
+If you want to use \Package{feynmf} you can start with the
+\texttt{feynmf} command on the \texttt{tex} file containing the
+graph.\footnote{Note that the example files that are included in this
+  document tree are missing the \Macro{documentclass} and
+  \Macro{usepackage} commands.}  This produces a \texttt{dvi} file
+that you then have to convert to Encapsulated Postscript and/or
+PDF. This is not totally trivial.
 
 The best way is to specify the options to the \Package{geometry}
 package so that the page size corresponds to the Feynman graph. For a

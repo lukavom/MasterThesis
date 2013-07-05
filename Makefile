@@ -4,6 +4,7 @@
 #
 THESIS = mythesis
 GUIDE = thesis_guide
+# EXTRACMD = --shell-escape
 FEYNDIRNAME = ./feynmf
 FEYNFILES = $(wildcard $(FEYNDIRNAME)/*.tex)
 ifdef file
@@ -13,8 +14,8 @@ endif
 
 .PHONY: all thesis thesis09 thesis11 guide guide09 guide11 feynmf new \
 	phdsubmit \
-	cleanthesis cleanguide cleancover cleanfeynmf cleanphd \
-	cleanblx cleanbbl \
+	cleanthesis cleanguide cleancover cleanfeynmf cleanfeynmp \
+	cleanphd cleanblx cleanbbl \
 	cleanglo \
 	help test
 
@@ -31,25 +32,25 @@ new:
 thesis: thesis11
 
 thesis09:
-	pdflatex  $(THESIS)
+	pdflatex  $(EXTRACMD) $(THESIS)
 	bibtex    $(THESIS)
 	# makeglossaries $(THESIS)
-	pdflatex  $(THESIS)
-	pdflatex  $(THESIS)
+	pdflatex  $(EXTRACMD) $(THESIS)
+	pdflatex  $(EXTRACMD) $(THESIS)
 
 thesis11:
-	pdflatex  $(THESIS)
+	pdflatex  $(EXTRACMD) $(THESIS)
 	biber     $(THESIS)
 	# makeglossaries $(THESIS)
-	pdflatex  $(THESIS)
-	pdflatex  $(THESIS)
+	pdflatex  $(EXTRACMD) $(THESIS)
+	pdflatex  $(EXTRACMD) $(THESIS)
 
 guide: guide11
 
 guide09:
-	pdflatex  $(GUIDE)
+	pdflatex  $(EXTRACMD) $(GUIDE)
 	bibtex    $(GUIDE)
-	pdflatex  $(GUIDE)
+	pdflatex  $(EXTRACMD) $(GUIDE)
 	bibtex    $(GUIDE)
 	makeindex $(GUIDE)
 	makeglossaries $(GUIDE)
@@ -57,11 +58,11 @@ guide09:
 	pdflatex  $(GUIDE)
 
 guide11:
-	pdflatex  $(GUIDE)
+	pdflatex  $(EXTRACMD) $(GUIDE)
 	biber     $(GUIDE)
 	makeindex $(GUIDE)
 	makeglossaries $(GUIDE)
-	pdflatex  $(GUIDE)
+	pdflatex  $(EXTRACMD) $(GUIDE)
 	pdflatex  $(GUIDE)
 
 feynmf: $(FEYNFILES)
@@ -90,7 +91,7 @@ phdsubmit:
 
 cleanall: clean cleanbbl
 
-clean: cleanthesis cleanguide cleancover cleanfeynmf cleanphd cleanblx cleanglo
+clean: cleanthesis cleanguide cleancover cleanfeynmf cleanfeynmp cleanphd cleanblx cleanglo
 
 cleanthesis:
 	-rm $(THESIS).log $(THESIS).aux $(THESIS).toc
@@ -124,6 +125,10 @@ cleanfeynmf:
 	-rm *.mf *.tfm *.t1 *.600gf *.600pk *.log
 	-rm feynmf_all.* feynmf_files.inp
 
+cleanfeynmp:
+	-rm *.1 *.log *.mp *.t1
+	-rm feynmf_all.* feynmf_files.inp
+
 cleanblx:
 	-rm *-blx.bib
 	-rm *.bcf
@@ -147,6 +152,7 @@ help:
 	@echo "guide09: Compile thesis guide - texlive 2009 + bibtex"
 	@echo "guide11: Compile thesis guide - texlive >=2011 + biber"
 	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIRNAME)"
+	@echo "feynmp: Run feynmp for all .tex files in $(FEYNDIRNAME)"
 	@echo "cleanthesis: Clean up thesis LaTeX output files"
 	@echo "cleanguide:  Clean up guide  LaTeX output files"
 	@echo "cleanfeynmf: Clean up feynmf output files"

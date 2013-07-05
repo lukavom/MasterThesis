@@ -13,14 +13,22 @@
 % Set to 2011 for biblatex and biber   (TeX Live 2011 or later)
 % This must be set before \usepackage{ubonn-thesis}
 \newcommand*{\texlive}{2011}
-\newcommand*{\guideversion}{2.0}
+\newcommand*{\guideversion}{2.1}
 %
 \usepackage{ubonn-thesis}
 %
+\usepackage{tikz,tikz-3dplot}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning,shapes,arrows}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
 \usepackage{makeidx}
 \usepackage[acronym,toc]{glossaries}
 \usepackage{./thesis_skel/thesis_defs}
 \usepackage{./guide/guide_defs}
+
+% In order to check if your labels are referenced try the refcheck package
+\usepackage{refcheck}
 
 %------------------------------------------------------------------------------
 % Instead of colouring  links, cites, table of contents etc.
@@ -34,11 +42,12 @@
 % Use biblatex alphabetic style without sorting and block
 % Use bibtex8 for TeX Live 2009
 % Use biber   for TeX Live 2011 or later
+% Use option backref to get back references
 \ifthenelse {\texlive = 2009} {%
   \usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
   style=alphabetic,block=ragged,firstinits=true]{biblatex}
 }{%
-  \usepackage[backend=biber,
+  \usepackage[backend=biber,backref=true,
   style=alphabetic,block=ragged,firstinits=true]{biblatex}
 }
 % Specify the bibliography files here and not at the end!

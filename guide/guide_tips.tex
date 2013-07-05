@@ -150,7 +150,10 @@ set \Macro{texlive} in \texttt{thesis\_guide.tex} to
   that line breaks are inserted.
 \item Make sure every table and figure is referenced in the text. I
   get very irritated when I suddenly find a figure that is not
-  described in the text.
+  described in the text. A useful package to check this is
+  \Package{refcheck}. You need to run \LaTeX\ one more time for it to
+  work. It indicates both in the log file and the resulting PDF which
+  figures, tables, equations and sections are referenced.
 \item Use a units package to format numbers and their units. Recent
   versions of \LaTeX\ include the \PackageG{siunitx} package, which
   is a superior replacement of \Package{SIunits}. I used to

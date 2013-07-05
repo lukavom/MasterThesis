@@ -1,4 +1,4 @@
-Version 2.0 23/04/2013
+Version 2.1 05/07/2013
 
 The idea with this document is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
@@ -53,11 +53,10 @@ in your thesis, then choose lmodern in the style file.
 
 The main file for this guide is thesis_guide.tex and it
 includes the LaTeX files in the directory ./guide and the
-Feynman graphs in the directory ./feynmf.
+Feynman graphs in the directories ./feynmf and ./tikz.
 
 You can create your own copy of the guide using the commands:
 
-make feynmf
 make guide
 
 The guide also includes a description of how to use the package under

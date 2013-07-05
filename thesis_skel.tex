@@ -37,11 +37,15 @@
 % \usepackage{background}
 % \backgroundsetup{contents=DRAFT, color=blue!30}
 
+% In order to check if your labels are referenced try the refcheck package
+% \usepackage{refcheck}
+
 %------------------------------------------------------------------------------
 % Use bibtex8 for TeX Live 2009
 %   If you do not have umlauts etc. in your refs, you can drop bibencoding=latin1
 % Use biber   for TeX Live 2011 or later
-%
+% Add option backref=true to also find out where citations are
+% referred to.
 \ifthenelse {\texlive = 2009} {%
   \usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
     style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}

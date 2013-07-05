@@ -40,8 +40,8 @@
   pages = {}
 }
 % If you get an error here use institution+location+year
-\renewbibmacro*{institution+location+year}{%
-% \renewbibmacro*{institution+location+date}{%
+% \renewbibmacro*{institution+location+year}{%
+\renewbibmacro*{institution+location+date}{%
   % \printlist{location}%
   \iflistundef{institution}
     {\setunit*{\addcomma\space}}

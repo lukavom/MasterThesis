@@ -74,17 +74,18 @@ use the \Env{tabular} environment to place the plots, although
 there are other ways of doing it.
 
 Another very nice way to add (a), (b) etc. to the figure is to use the
-\Macro{put} command. This has the big advantage that you can display the
-letters in the figure without actually having to add them to the
+\Macro{put} command. This has the big advantage that you can display
+the letters in the figure without actually having to add them to the
 EPS/PDF file. Figure~\ref{fig:letters1} shows how this is done. Note
 that the origin of the coordinate system is the bottom right-hand
 corner of the file that you have included (assuming that the
 \Macro{put} command comes just after the \Macro{includegraphics}).
 The units for the \Macro{put} command are set with the
-\Macro{setlength}\texttt{\{\textbackslash unitlength\}} command, which is by default
-set to \SI{1}{\mm} in \texttt{ubonn-thesis.sty}. The same units
-are also used for Feynman graphs made with the \Package{feynmf} and/or \Package{feynmp}
-package -- see Section~\ref{sec:fig:feynman:feynmf}.
+\Macro{setlength}\texttt{\{\textbackslash unitlength\}} command, which
+is by default set to \SI{1}{\mm} in \texttt{ubonn-thesis.sty}. The
+same units are also used for Feynman graphs made with the
+\Package{feynmf} and/or \Package{feynmp} package -- see
+Section~\ref{sec:fig:feynman:feynmf}.
 
 \begin{figure}[htbp]
   \centering
@@ -210,12 +211,12 @@ Fig.~\ref{fig:tikz:coord}.
 
 \begin{figure}[htbp]
   \centering
-\ifthenelse {\texlive = 2009} {%
-  Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
-  earlier
-}{%
-  \input{./tikz/zeus_coords.tex}
-}
+  \ifthenelse {\texlive = 2009} {%
+    Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
+    earlier
+  }{%
+    \input{./tikz/zeus_coords.tex}
+  }
   \caption{The ZEUS coordinate system.}
   \label{fig:tikz:coord}
 \end{figure}
@@ -225,7 +226,12 @@ illustrated in Fig.~\ref{fig:tikz:flow}.
 
 \begin{figure}[htbp]
   \centering
-  \input{./tikz/zeus_reconstruction.tex}
+  \ifthenelse {\texlive = 2009} {%
+    Error messages appear when trying to compile the guide with
+    \Package{tikz} and \TeXLive 2009, so the figure is not included.
+  }{%
+    \input{./tikz/zeus_reconstruction.tex}
+  }
   \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}
   \label{fig:tikz:flow}
 \end{figure}
@@ -294,7 +300,9 @@ You should be able to just run
 \texttt{mpost} after \texttt{(pdf)latex} and then run
 \texttt{pdflatex} again twice. Note that you have to run
 \texttt{mpost} on all the files whose names are defined at the beginning
-of the \Env{fmffile} environment.
+of the \Env{fmffile} environment. While Metapost works will with
+\TeXLive 2011, I did not get it to work properly with \TeXLive 2009
+for unknown reasons.
 
 Metafont\index{metafont} is a bit trickier. On Unix systems the
 \texttt{feynmf} perl script exists that runs both \LaTeX{} and
@@ -350,11 +358,17 @@ charged current graphs, but this time inputting the appropriate
 \begin{figure}[htbp]
   \centering
   \fbox{\input{./feynmf/ep_nc.tex}}
-  \write18{mpost ep_nc}
+  \ifthenelse {\texlive = 2009} {%
+  }{
+    \write18{mpost ep_nc}
+  }
   \qquad
   \fbox{\input{./feynmf/ep_cc.tex}}
-  \write18{mpost ep_cc}
-\caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
+  \ifthenelse {\texlive = 2009} {%
+  }{
+    \write18{mpost ep_cc}
+  }
+  \caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
     code directly.}
   \label{fig:nccc-feynmf}
 \end{figure}
@@ -365,16 +379,16 @@ illustrated in Fig.~\ref{fig:nccc-feynmf}. Here an appropriate
 e.g.\ \verb+\write18 mpost gluon+, after the figure, where the figure
 starts with \verb+\begin{fmffile}{gluon}+.
 
-With the \TeXLive setups I use to test this guide, this is all you
-need. If \texttt{mpost} does not run automatically, you must execute
-the command \texttt{pdflatex --shell-escape mythesis} when you
-compile your thesis. This can be achieved by including the
-\texttt{EXTRACMD} definition that is commented out in the
-\texttt{Makefile}. In this guide I put the Feynman graph in its own
-file and the \Macro{write18} statement in the main file so that I
-can test \Package{feynmf} and \Package{feynmp} with the same \LaTeX\
-code. In your thesis, you should probably put the \Macro{write18}
-statement in the file with the Feynman graph.
+With the \TeXLive 2011 and later setups I use to test this guide,
+this is all you need. If \texttt{mpost} does not run automatically,
+you must execute the command \texttt{pdflatex --shell-escape
+  mythesis} when you compile your thesis. This can be achieved by
+including the \texttt{EXTRACMD} definition that is commented out in
+the \texttt{Makefile}. In this guide I put the Feynman graph in its
+own file and the \Macro{write18} statement in the main file so that
+I can test \Package{feynmf} and \Package{feynmp} with the same
+\LaTeX\ code. In your thesis, you should probably put the
+\Macro{write18} statement in the file with the Feynman graph.
 
 You probably want to first draw the graphs outside of your thesis to
 get them into the form that you need. If you give the command
@@ -413,11 +427,19 @@ identical.
   \centering
   \subfloat[Feynmp][Feynmp]{\label{fig:feyn:feynmp}
     \input{./feynmf/moeller.tex}
-    \write18{mpost moeller}
+    \ifthenelse {\texlive = 2009} {%
+    }{
+      \write18{mpost moeller}
+    }
   }
   \qquad
   \subfloat[\TikZ][\TikZ]{\label{fig:feyn:tikz}
-    \input{./tikz/moeller.tex}
+    \ifthenelse {\texlive = 2009} {%
+      Error messages appear when trying to compile the guide with
+      \Package{tikz} and \TeXLive 2009, so the figure cannot be included.
+    }{%
+      \input{./tikz/moeller.tex}
+    }
   }
   \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}
   \label{fig:feyn:cf}

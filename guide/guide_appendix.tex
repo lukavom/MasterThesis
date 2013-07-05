@@ -325,6 +325,7 @@ For a older version of \TeXLive (2009) you change
 \Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}. Then
 the following works:
 \begin{verbatim}
+make feynmf
 make guide09
 \end{verbatim}
 
@@ -817,23 +818,27 @@ also work OK.
 %==============================================================================
 
 Figure~\ref{fig:tikz:syst} shows how you can produce a plot showing
-the contributions of many different systematic uncertainties to a result.
+the contributions of many different systematic uncertainties to a
+result. Note that this plot uses some modern features of
+\Package{tikz} and \Package{pgfplots}. Hence it is only included if
+this guide is compiled with \TeXLive 2011 or later.
 
 \newcommand{\fcsone}{\ensuremath{f(c \rightarrow D_{s 1}^+)}}
 \newcommand{\BranStrangeLOW}{\ensuremath{\mathcal{B}_{D_{s1}^{+} \rightarrow D^{*+} K^0_S}/\mathcal{B}_{D_{s1}^{+} \rightarrow D^{*0} K^+}}\xspace}
 
 \begin{figure}[htbp]
   \centering
-\ifthenelse {\texlive = 2009} {%
-  Sorry, \Package{tikz} is too old to make this plot with \TeXLive 2009 and
-  earlier.
-}{%
-  \input{./tikz/zeus_Ds_systematics.tex}
-}
-  \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The results of strange excited charm meson
-    fragmentation fraction and branching ratio with systematic variations.
-    The individual systematic variations are put into groups $\delta_1-\delta_5$ (see text).
+  \ifthenelse {\texlive = 2009} {%
+    Sorry, \Package{tikz} is too old to make this plot with \TeXLive 2009 and
+    earlier.
+  }{%
+    \input{./tikz/zeus_Ds_systematics.tex}
   }
+  \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The
+    results of strange excited charm meson fragmentation fraction and
+    branching ratio with systematic variations.  The individual
+    systematic variations are put into groups $\delta_1-\delta_5$ (see
+    text).  }
   \label{fig:tikz:syst}
 \end{figure}
 

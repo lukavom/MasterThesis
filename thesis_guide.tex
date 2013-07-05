@@ -17,7 +17,11 @@
 %
 \usepackage{ubonn-thesis}
 %
-\usepackage{tikz,tikz-3dplot}
+\usepackage{tikz}
+\ifthenelse {\texlive = 2009} {%
+}{%
+\usepackage{tikz-3dplot}
+}
 \usepackage{pgfplots}
 \usetikzlibrary{positioning,shapes,arrows}
 \usetikzlibrary{decorations.pathmorphing}

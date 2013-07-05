@@ -824,7 +824,12 @@ the contributions of many different systematic uncertainties to a result.
 
 \begin{figure}[htbp]
   \centering
+\ifthenelse {\texlive = 2009} {%
+  Sorry, \Package{tikz} is too old to make this plot with \TeXLive 2009 and
+  earlier.
+}{%
   \input{./tikz/zeus_Ds_systematics.tex}
+}
   \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The results of strange excited charm meson
     fragmentation fraction and branching ratio with systematic variations.
     The individual systematic variations are put into groups $\delta_1-\delta_5$ (see text).

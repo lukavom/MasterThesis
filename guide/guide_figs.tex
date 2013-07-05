@@ -200,7 +200,9 @@ also be better ways of doing things than I illustrate here. The
 examples I give come from Andrii Verbytskyi or are adapted from
 questions and answers found on
 \url{http://tex.stackexchange.com/}. The examples included in this
-guide and a few more are collected in the \texttt{tikz} subdirectory.
+guide and a few more are collected in the \texttt{tikz}
+subdirectory. Note that some of the examples only work with \TeXLive
+2011 and later. This is indicated in the file.
 
 You often want to include a figure of your experiment's coordinate
 system in your thesis. One way to do this is illustrated in
@@ -209,7 +211,8 @@ Fig.~\ref{fig:tikz:coord}.
 \begin{figure}[htbp]
   \centering
 \ifthenelse {\texlive = 2009} {%
-  \input{./tikz/zeus_coords.tex}
+  Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
+  earlier
 }{%
   \input{./tikz/zeus_coords.tex}
 }

@@ -208,7 +208,11 @@ Fig.~\ref{fig:tikz:coord}.
 
 \begin{figure}[htbp]
   \centering
+\ifthenelse {\texlive = 2009} {%
   \input{./tikz/zeus_coords.tex}
+}{%
+  \input{./tikz/zeus_coords.tex}
+}
   \caption{The ZEUS coordinate system.}
   \label{fig:tikz:coord}
 \end{figure}

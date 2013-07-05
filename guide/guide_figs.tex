@@ -209,7 +209,8 @@ to compile the guide without errors when including \Package{tikz} with
 \TeXLive 2009, so some of the figures may be missing if you compile
 your own version of the guide with \TeXLive 2009.
 
-\TikZ is not included by default in a new skeleton thesis. See
+\TikZ is not included by default in a new skeleton thesis. See the
+commented out packages in a new thesis skeleton or
 \texttt{thesis\_guide.tex} for the packages and \TikZ libraries that
 you should include if you want to use it.
 
@@ -221,7 +222,7 @@ Fig.~\ref{fig:tikz:coord}.
   \centering
   \ifthenelse {\texlive = 2009} {%
     Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
-    earlier. See the file \texttt{./tikz/zeus_coords.tex}.
+    earlier. See the file \texttt{./tikz/zeus\_coords.tex}.
   }{%
     \input{./tikz/zeus_coords.tex}
   }

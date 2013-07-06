@@ -38,6 +38,23 @@ guide11:
 	pdflatex  $(EXTRACMD) $(GUIDE)
 	pdflatex  $(GUIDE)
 
+feynmf: $(FEYNFILES)
+	@echo "Feynman graph files: $^"
+	-rm feynmf_files.inp
+	touch feynmf_files.inp
+	# $(foreach feynfile, $^, echo $(notdir $(feynfile)) >>feynmf_files.inp;)
+	$(foreach feynfile, $^, echo $(feynfile) >>feynmf_files.inp;)
+	cat feynmf_files.inp
+	cat feynmf_files.inp | awk -f awk_feynmf >feynmf_all.tex
+	# latex feynmf_all; feynmf feynmf_all; latex feynmf_all; latex feynmf_all
+	-pdflatex feynmf_all
+	$(foreach feynfile, $^, ../run_mf $(feynfile);)
+	pdflatex feynmf_all; pdflatex feynmf_all; pdflatex feynmf_all
+
+feynmp: $(FEYNFILES)
+	@echo "Feynman graph files: $^"
+	$(foreach feynfile, $^, ../run_mp $(feynfile);)
+
 cleanall: clean cleanbbl
 
 clean: cleanguide cleanfeynmf cleanfeynmp cleanblx cleanglo

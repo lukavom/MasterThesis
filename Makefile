@@ -3,8 +3,6 @@
 # Can also run feynmf on files in a directory
 #
 THESIS = mythesis
-GUIDE = thesis_guide
-GUIDEDIR = guide/
 # EXTRACMD = --shell-escape
 FEYNDIRNAME = ./feynmf
 FEYNFILES = $(wildcard $(FEYNDIRNAME)/*.tex)
@@ -13,9 +11,9 @@ FEYNFILES = ./feynmf/$(file).tex
 endif
 
 
-.PHONY: all thesis thesis09 thesis11 guide guide09 guide11 feynmf new \
+.PHONY: all thesis thesis09 thesis11 feynmf new \
 	phdsubmit \
-	cleanthesis cleanguide cleancover cleanfeynmf cleanfeynmp \
+	cleanthesis cleancover cleanfeynmf cleanfeynmp \
 	cleanphd cleanblx cleanbbl \
 	cleanglo \
 	help test
@@ -46,28 +44,6 @@ thesis11:
 	pdflatex  $(EXTRACMD) $(THESIS)
 	pdflatex  $(EXTRACMD) $(THESIS)
 
-guide: guide11
-
-guide09:
-	cd $(GUIDEDIR)
-	pdflatex  $(EXTRACMD) $(GUIDE)
-	bibtex    $(GUIDE)
-	pdflatex  $(EXTRACMD) $(GUIDE)
-	bibtex    $(GUIDE)
-	makeindex $(GUIDE)
-	makeglossaries $(GUIDE)
-	pdflatex  $(GUIDE)
-	pdflatex  $(GUIDE)
-
-guide11:
-	cd $(GUIDEDIR)
-	pdflatex  $(EXTRACMD) $(GUIDE)
-	biber     $(GUIDE)
-	makeindex $(GUIDE)
-	makeglossaries $(GUIDE)
-	pdflatex  $(EXTRACMD) $(GUIDE)
-	pdflatex  $(GUIDE)
-
 feynmf: $(FEYNFILES)
 	@echo "Feynman graph files: $^"
 	-rm feynmf_files.inp
@@ -94,24 +70,13 @@ phdsubmit:
 
 cleanall: clean cleanbbl
 
-clean: cleanthesis cleanguide cleancover cleanfeynmf cleanfeynmp cleanphd cleanblx cleanglo
+clean: cleanthesis cleancover cleanfeynmf cleanfeynmp cleanphd cleanblx cleanglo
 
 cleanthesis:
 	-rm $(THESIS).log $(THESIS).aux $(THESIS).toc
 	-rm $(THESIS).lof $(THESIS).lot $(THESIS).out
 	-rm $(THESIS).blg $(THESIS).bbl $(THESIS).pdf
 	-rm cover/*.aux $(THESIS)/*.aux
-
-cleanguide:
-	-rm $(GUIDEDIR)$(GUIDE).log $(GUIDEDIR)$(GUIDE).aux $(GUIDEDIR)$(GUIDE).toc
-	-rm $(GUIDEDIR)$(GUIDE).lof $(GUIDEDIR)$(GUIDE).lot $(GUIDEDIR)$(GUIDE).out
-	-rm $(GUIDEDIR)$(GUIDE).blg $(GUIDEDIR)$(GUIDE).bbl $(GUIDEDIR)$(GUIDE).pdf
-	-rm $(GUIDEDIR)$(GUIDE)-blx.bib $(GUIDEDIR)$(GUIDE).bcf $(GUIDEDIR)$(GUIDE).run.xml
-	-rm $(GUIDEDIR)$(GUIDE).ind $(GUIDEDIR)$(GUIDE).idx $(GUIDEDIR)$(GUIDE).ilg
-	-rm $(GUIDEDIR)$(GUIDE).acn $(GUIDEDIR)$(GUIDE).acr $(GUIDEDIR)$(GUIDE).alg
-	-rm $(GUIDEDIR)$(GUIDE).glg $(GUIDEDIR)$(GUIDE).glo $(GUIDEDIR)$(GUIDE).gls
-	-rm $(GUIDEDIR)$(GUIDE).ist
-	-rm guide/*.aux
 
 cleancover:
 	-rm cover_only.log cover_only.aux cover_only.out
@@ -151,13 +116,9 @@ help:
 	@echo "thesis: Compile complete thesis (thesis11)"
 	@echo "thesis09: Compile complete thesis - texlive 2009 + bibtex"
 	@echo "thesis11: Compile complete thesis - texlive >=2011 + biber"
-	@echo "guide: Compile thesis guide (guide11)"
-	@echo "guide09: Compile thesis guide - texlive 2009 + bibtex"
-	@echo "guide11: Compile thesis guide - texlive >=2011 + biber"
 	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIRNAME)"
 	@echo "feynmp: Run feynmp for all .tex files in $(FEYNDIRNAME)"
 	@echo "cleanthesis: Clean up thesis LaTeX output files"
-	@echo "cleanguide:  Clean up guide  LaTeX output files"
 	@echo "cleanfeynmf: Clean up feynmf output files"
 
 test:

@@ -15,21 +15,23 @@
 \newcommand*{\texlive}{2011}
 \newcommand*{\guideversion}{2.1}
 %
-\usepackage{ubonn-thesis}
+\usepackage{../ubonn-thesis}
 %
 \ifthenelse {\texlive = 2009} {%
 }{%
-\usepackage{tikz}
-\usepackage{tikz-3dplot}
-\usepackage{pgfplots}
-\usetikzlibrary{positioning,shapes,arrows}
-\usetikzlibrary{decorations.pathmorphing}
-\usetikzlibrary{decorations.markings}
+  \usepackage{import}
+  \usepackage{standalone}
+  \usepackage{tikz}
+  \usepackage{tikz-3dplot}
+  \usepackage{pgfplots}
+  \usetikzlibrary{positioning,shapes,arrows}
+  \usetikzlibrary{decorations.pathmorphing}
+  \usetikzlibrary{decorations.markings}
 }
 \usepackage{makeidx}
 \usepackage[acronym,toc]{glossaries}
-\usepackage{./thesis_skel/thesis_defs}
-\usepackage{./guide/guide_defs}
+\usepackage{../thesis_skel/thesis_defs}
+\usepackage{../guide/guide_defs}
 
 % In order to check if your labels are referenced try the refcheck package
 \usepackage{refcheck}
@@ -59,20 +61,20 @@
 % and example_refs-utf8   and standard_refs-biber  if you use biber
 \ifthenelse {\texlive = 2009} {%
   % Adjustments to output are in this style file:
-  \usepackage{./biblatex/biblatex-num-v2009}
-  \bibliography{./guide/guide_refs.bib,%
-    ./refs/standard_refs-bibtex.bib,%
-    ./refs/example_refs-latin1.bib,%
-    ./guide/refs/zeus_2009.bib,%
-    ./guide/refs/zeus_2010.bib}
+  \usepackage{../biblatex/biblatex-num-v2009}
+  \bibliography{../guide/guide_refs.bib,%
+    ../refs/standard_refs-bibtex.bib,%
+    ../refs/example_refs-latin1.bib,%
+    ../guide/refs/zeus_2009.bib,%
+    ../guide/refs/zeus_2010.bib}
 }{%
   % Adjustments to output are in this style file:
-  \usepackage{./biblatex/biblatex-num-v2011}
-  \addbibresource{./guide/guide_refs.bib}
-  \addbibresource{./refs/standard_refs-biber.bib}
-  \addbibresource{./refs/example_refs-utf8.bib}
-  \addbibresource{./guide/refs/zeus_2009.bib}
-  \addbibresource{./guide/refs/zeus_2010.bib}
+  \usepackage{../biblatex/biblatex-num-v2011}
+  \addbibresource{../guide/guide_refs.bib}
+  \addbibresource{../refs/standard_refs-biber.bib}
+  \addbibresource{../refs/example_refs-utf8.bib}
+  \addbibresource{../guide/refs/zeus_2009.bib}
+  \addbibresource{../guide/refs/zeus_2010.bib}
 }
 %
 % You can include the following lines if you want to shorten your
@@ -154,9 +156,9 @@
 % Give a list of directories where figures can be found. Do not leave
 % any spaces in the list and end the directory name with a /
 \graphicspath{%
-  {./figs/},%
-  {./figs/cover/},%
-  {./figs/graphics/}
+  {../figs/},%
+  {../figs/cover/},%
+  {../figs/graphics/}
 }
 
 %------------------------------------------------------------------------------
@@ -165,19 +167,19 @@
 \makeglossaries
 
 % Glossary entries
-\input{guide/guide_glossary}
+\input{../guide/guide_glossary}
 
 %------------------------------------------------------------------------------
 \begin{document}
 \frontmatter
 %------------------------------------------------------------------------------
 % Title page
-\input{./cover/Guide_Submit_Title}
+\input{../cover/Guide_Submit_Title}
 
 \pagestyle{scrplain}
 
 %------------------------------------------------------------------------------
-\include{guide/guide_acknowledge1}
+\include{guide_acknowledge1}
 
 \tableofcontents
 
@@ -185,28 +187,28 @@
 \pagestyle{scrheadings}
 
 %------------------------------------------------------------------------------
-\include{guide/guide_intro}
+\include{guide_intro}
 
-\include{guide/guide_tips}
+\include{guide_tips}
 
-\include{guide/guide_submit}
+\include{guide_submit}
 
-\include{guide/guide_package}
+\include{guide_package}
 
-\include{guide/guide_figs}
+\include{guide_figs}
 
-\include{guide/guide_tables}
+\include{guide_tables}
 
-\include{guide/guide_refs}
+\include{guide_refs}
 
-\include{guide/guide_layout}
+\include{guide_layout}
 
 %------------------------------------------------------------------------------
 % Appendices etc.
 \appendix
 
 % \part*{Appendix}
-\include{guide/guide_appendix}
+\include{guide_appendix}
 
 \backmatter
 %------------------------------------------------------------------------------
@@ -244,7 +246,7 @@
 
 %------------------------------------------------------------------------------
 % Acknowledgements
-\include{guide/guide_acknowledge2}
+\include{guide_acknowledge2}
 
 \end{document}
 

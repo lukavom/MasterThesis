@@ -225,7 +225,7 @@ Fig.~\ref{fig:tikz:coord}.
     Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
     earlier. See the file \texttt{./tikz/zeus\_coords.tex}.}}
   }{%
-    \input{./tikz/zeus_coords.tex}
+    \input{../tikz/zeus_coords.tex}
   }
   \caption{The ZEUS coordinate system.}
   \label{fig:tikz:coord}
@@ -240,9 +240,9 @@ illustrated in Fig.~\ref{fig:tikz:flow}.
     \fbox{\parbox[c]{0.8\textwidth}{%
         Error messages appear when trying to compile the guide with
         \Package{tikz} and \TeXLive 2009, so the figure is not included.
-        See the file \texttt{./tikz/zeus\_reconstruction.tex}.}}
+        See the file \texttt{../tikz/zeus\_reconstruction.tex}.}}
   }{%
-    \input{./tikz/zeus_reconstruction.tex}
+    \input{../tikz/zeus_reconstruction.tex}
   }
   \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}
   \label{fig:tikz:flow}
@@ -301,20 +301,18 @@ show a charged current process.
 In order to use \Package{feynmf} or \Package{feynmp}, you have to put
 the commands to draw the graph in a \LaTeX{} file and then process
 this file with \LaTeX{} and either Metafont or
-Metapost.\footnote{\texttt{ubonn-thesis.sty} includes \Package{feynmp}
-  by default. If you want to use \Package{feynmf} instead just change
-  the name.}  You can either make a separate \LaTeX{} file containing
-the Feynman graph or include the commands inside your normal \LaTeX
-file.
-Metapost\index{metafont} is a bit
-easier to use than Metafont.
-You should be able to just run
+Metapost.\footnote{\texttt{ubonn-thesis.sty} now includes \Package{feynmp}
+  by default for \TeXLive 2011 and later. If you want to use
+  \Package{feynmf} instead just change the name.}  You can either make
+a separate \LaTeX{} file containing the Feynman graph or include the
+commands inside your normal \LaTeX file.  Metapost\index{metafont} is
+a bit easier to use than Metafont.  You should be able to just run
 \texttt{mpost} after \texttt{(pdf)latex} and then run
 \texttt{pdflatex} again twice. Note that you have to run
-\texttt{mpost} on all the files whose names are defined at the beginning
-of the \Env{fmffile} environment. While Metapost works will with
-\TeXLive 2011, I did not get it to work properly with \TeXLive 2009
-for unknown reasons.
+\texttt{mpost} on all the files whose names are defined at the
+beginning of the \Env{fmffile} environment. While Metapost works will
+with \TeXLive 2011, I did not get it to work properly with \TeXLive
+2009 for unknown reasons.
 
 Metafont\index{metafont} is a bit trickier. On Unix systems the
 \texttt{feynmf} perl script exists that runs both \LaTeX{} and
@@ -369,13 +367,13 @@ charged current graphs, but this time inputting the appropriate
 
 \begin{figure}[htbp]
   \centering
-  \fbox{\input{./feynmf/ep_nc.tex}}
+  \fbox{\input{../feynmf/ep_nc.tex}}
   \ifthenelse {\texlive = 2009} {%
   }{
     \write18{mpost ep_nc}
   }
   \qquad
-  \fbox{\input{./feynmf/ep_cc.tex}}
+  \fbox{\input{../feynmf/ep_cc.tex}}
   \ifthenelse {\texlive = 2009} {%
   }{
     \write18{mpost ep_cc}
@@ -438,7 +436,7 @@ identical.
 \begin{figure}[htbp]
   \centering
   \subfloat[Feynmp][Feynmp]{\label{fig:feyn:feynmp}
-    \input{./feynmf/moeller.tex}
+    \input{../feynmf/moeller.tex}
     \ifthenelse {\texlive = 2009} {%
     }{
       \write18{mpost moeller}
@@ -447,13 +445,13 @@ identical.
   \qquad
   \subfloat[\TikZ][\TikZ]{\label{fig:feyn:tikz}
     \ifthenelse {\texlive = 2009} {%
-      \fbox{\parbox[c]{0.4\textwidth}{%
+      \fbox{\parbox[b]{0.4\textwidth}{%
           Error messages appear when trying to
           compile the guide with \Package{tikz} and \TeXLive 2009,
           so the figure cannot be included.
-          See the file \texttt{./tikz/moeller.tex}.}}
+          See the file \texttt{../tikz/moeller.tex}.}}
     }{%
-      \input{./tikz/moeller.tex}
+      \input{../tikz/moeller.tex}
     }
   }
   \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}

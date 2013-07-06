@@ -12,10 +12,10 @@ information.
 \begin{longtable}{lp{0.8\textwidth}}
   \toprule
   Date & Comment\\
-  \midrule
-  04 Jul 2013 & Add a few examples of using the \Package{tikz}
-  package. Switch to using \Package{feynmp} rather than
-  \Package{feynmf} by default. Add \Macro{write18} statements for
+  \midrule 04 Jul 2013 & Add a few examples of using the
+  \Package{tikz} package. Switch to using \Package{feynmp} rather than
+  \Package{feynmf} by default (for \TeXLive 2011). Add \Macro{write18}
+  statements for
   Feynman graphs with \Package{feynmp} and adapt \texttt{Makefile}.\\
   18 May 2013 & Add some information on the \Package{refcheck} package
   and back-referencing with \Package{biblatex}.\\
@@ -465,6 +465,13 @@ If you want to use \texttt{biber} instead of \BibTeX, then you should
 change the \BibTeX\ command from \texttt{bibtex} to \texttt{biber} in
 \TeXstudio or \TeXworks.
 
+If you run PDF\LaTeX\ with the option \texttt{-enable-write18} and
+include appropriate \texttt{mpost} commands in your \LaTeX\ file(s), as
+discussed in Section~\ref{sec:fig:feynman:feynmf}, Feynman graphs made
+using \Package{feynmp} work well. With \TeXstudio, you can simply
+include this option in the PDF\LaTeX\ command: \textsf{Options} $\to$
+\textsf{Configure TeXstudio} $\to$ \textsf{Commands}.
+
 I have not yet invested any effort in trying to get \texttt{feynmf}
 working under Windows. The output files are produced, but I have not
 tried to run Metafont on them.
@@ -823,8 +830,6 @@ result. Note that this plot uses some modern features of
 \Package{tikz} and \Package{pgfplots}. Hence it is only included if
 this guide is compiled with \TeXLive 2011 or later.
 
-\newcommand{\fcsone}{\ensuremath{f(c \rightarrow D_{s 1}^+)}}
-\newcommand{\BranStrangeLOW}{\ensuremath{\mathcal{B}_{D_{s1}^{+} \rightarrow D^{*+} K^0_S}/\mathcal{B}_{D_{s1}^{+} \rightarrow D^{*0} K^+}}\xspace}
 
 \begin{figure}[htbp]
   \centering
@@ -834,7 +839,7 @@ this guide is compiled with \TeXLive 2011 or later.
         earlier to make this plot.
         See the file \texttt{./tikz/zeus\_Ds\_systematics.tex}.}}
   }{%
-    \input{./tikz/zeus_Ds_systematics.tex}
+    \input{../tikz/zeus_Ds_systematics.tex}
   }
   \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The
     results of strange excited charm meson fragmentation fraction and

@@ -4,6 +4,7 @@
 #
 THESIS = mythesis
 GUIDE = thesis_guide
+GUIDEDIR = guide/
 # EXTRACMD = --shell-escape
 FEYNDIRNAME = ./feynmf
 FEYNFILES = $(wildcard $(FEYNDIRNAME)/*.tex)
@@ -48,6 +49,7 @@ thesis11:
 guide: guide11
 
 guide09:
+	cd $(GUIDEDIR)
 	pdflatex  $(EXTRACMD) $(GUIDE)
 	bibtex    $(GUIDE)
 	pdflatex  $(EXTRACMD) $(GUIDE)
@@ -58,6 +60,7 @@ guide09:
 	pdflatex  $(GUIDE)
 
 guide11:
+	cd $(GUIDEDIR)
 	pdflatex  $(EXTRACMD) $(GUIDE)
 	biber     $(GUIDE)
 	makeindex $(GUIDE)
@@ -100,14 +103,14 @@ cleanthesis:
 	-rm cover/*.aux $(THESIS)/*.aux
 
 cleanguide:
-	-rm $(GUIDE).log $(GUIDE).aux $(GUIDE).toc
-	-rm $(GUIDE).lof $(GUIDE).lot $(GUIDE).out
-	-rm $(GUIDE).blg $(GUIDE).bbl $(GUIDE).pdf
-	-rm $(GUIDE)-blx.bib $(GUIDE).bcf $(GUIDE).run.xml
-	-rm $(GUIDE).ind $(GUIDE).idx $(GUIDE).ilg
-	-rm $(GUIDE).acn $(GUIDE).acr $(GUIDE).alg
-	-rm $(GUIDE).glg $(GUIDE).glo $(GUIDE).gls
-	-rm $(GUIDE).ist
+	-rm $(GUIDEDIR)$(GUIDE).log $(GUIDEDIR)$(GUIDE).aux $(GUIDEDIR)$(GUIDE).toc
+	-rm $(GUIDEDIR)$(GUIDE).lof $(GUIDEDIR)$(GUIDE).lot $(GUIDEDIR)$(GUIDE).out
+	-rm $(GUIDEDIR)$(GUIDE).blg $(GUIDEDIR)$(GUIDE).bbl $(GUIDEDIR)$(GUIDE).pdf
+	-rm $(GUIDEDIR)$(GUIDE)-blx.bib $(GUIDEDIR)$(GUIDE).bcf $(GUIDEDIR)$(GUIDE).run.xml
+	-rm $(GUIDEDIR)$(GUIDE).ind $(GUIDEDIR)$(GUIDE).idx $(GUIDEDIR)$(GUIDE).ilg
+	-rm $(GUIDEDIR)$(GUIDE).acn $(GUIDEDIR)$(GUIDE).acr $(GUIDEDIR)$(GUIDE).alg
+	-rm $(GUIDEDIR)$(GUIDE).glg $(GUIDEDIR)$(GUIDE).glo $(GUIDEDIR)$(GUIDE).gls
+	-rm $(GUIDEDIR)$(GUIDE).ist
 	-rm guide/*.aux
 
 cleancover:

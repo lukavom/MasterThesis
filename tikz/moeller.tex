@@ -1,3 +1,13 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning,shapes,arrows}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+
+\begin{document}
 \tikzset{
   particle/.style={thick, draw=blue, postaction={decorate},
     decoration={markings, mark=at position 0.6 with {\arrow[blue]{triangle 45}}}},
@@ -21,3 +31,4 @@
   \draw[particle] (aux2) -- (e4);
   \draw[photon]   (aux1) -- node[label=right:$\gamma$] {} (aux2);
 \end{tikzpicture}
+\end{document}

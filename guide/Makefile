@@ -45,7 +45,7 @@ feynmf: $(FEYNFILES)
 	# $(foreach feynfile, $^, echo $(notdir $(feynfile)) >>feynmf_files.inp;)
 	$(foreach feynfile, $^, echo $(feynfile) >>feynmf_files.inp;)
 	cat feynmf_files.inp
-	cat feynmf_files.inp | awk -f awk_feynmf >feynmf_all.tex
+	cat feynmf_files.inp | awk -f ../awk_feynmf >feynmf_all.tex
 	# latex feynmf_all; feynmf feynmf_all; latex feynmf_all; latex feynmf_all
 	-pdflatex feynmf_all
 	$(foreach feynfile, $^, ../run_mf $(feynfile);)

@@ -10,10 +10,13 @@ FEYNFILES = $(wildcard $(FEYNDIRNAME)/*.tex)
 ifdef file
 FEYNFILES = ../feynmf/$(file).tex
 endif
+TIKZDIRNAME = ../tikz
+TIKZFILES = $(wildcard $(TIKZDIRNAME)/*.tex)
 
-.PHONY: all guide guide09 guide11 feynmf \
+.PHONY: all guide guide09 guide11 \
+	feynmf feynmp tikz \
 	cleanguide \
-	cleanfeynmf cleanfeynmp \
+	cleanfeynmf cleanfeynmp  cleantikz cleanpictpdf \
 	cleanblx cleanbbl \
 	cleanglo \
 	help test
@@ -39,7 +42,7 @@ guide11:
 	pdflatex  $(GUIDE)
 
 feynmf: $(FEYNFILES)
-	@echo "Feynman graph files: $^"
+	@echo "Feynmf Feynman graph files: $^"
 	-rm feynmf_files.inp
 	touch feynmf_files.inp
 	# $(foreach feynfile, $^, echo $(notdir $(feynfile)) >>feynmf_files.inp;)
@@ -52,12 +55,16 @@ feynmf: $(FEYNFILES)
 	pdflatex feynmf_all; pdflatex feynmf_all; pdflatex feynmf_all
 
 feynmp: $(FEYNFILES)
-	@echo "Feynman graph files: $^"
+	@echo "Feynmp Feynman graph files: $^"
 	$(foreach feynfile, $^, ../run_mp $(feynfile);)
 
-cleanall: clean cleanbbl
+tikz: $(TIKZFILES)
+	@echo "TikZ Feynman graph files: $^"
+	(cd ../tikz; $(foreach tikzfile, $^, pdflatex $(notdir $(tikzfile));))
 
-clean: cleanguide cleanfeynmf cleanfeynmp cleanblx cleanglo
+cleanall: clean cleanbbl cleanpictpdf
+
+clean: cleanguide cleanfeynmf cleanfeynmp cleantikz cleanblx cleanglo
 
 cleanguide:
 	-rm $(GUIDEDIR)$(GUIDE).log $(GUIDEDIR)$(GUIDE).aux $(GUIDEDIR)$(GUIDE).toc
@@ -77,6 +84,13 @@ cleanfeynmf:
 cleanfeynmp:
 	-rm *.1 *.log *.mp *.t1
 	-rm feynmf_all.* feynmf_files.inp
+
+cleantikz:
+	-rm ../tikz/*.log ../tikz/*.aux
+
+cleanpictpdf:
+	-rm ../feynmf/*.pdf
+	-rm ../tikz/*.pdf
 
 cleanblx:
 	-rm *-blx.bib

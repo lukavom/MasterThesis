@@ -134,6 +134,8 @@ Table~\ref{tab:package:other1}.
     \Package{axodraw} & Drawing Feynman graphs.\\
     \Package{tikz} & General drawing package that can also be used for
     Feynman graphs.\\
+    \Package{standalone} & Allows you to have a document that you can
+    directly compile for each figure and also input to another document.\\
     \Package{hyperref} & Adds \Macro{url} command as well as ability
     to click on entries on table of contents etc.\\
     \Package{subfiles} & Provides a nice alternative to
@@ -172,6 +174,15 @@ things that are not so nice with long and complicated multiline
 equations. \Package{IEEEtrantools}, in particular the
 \Env{IEEEeqnarray} environment, can help here. See Ref.~\cite{lshort}
 or the package documentation for more details.
+
+\Package{standalone} is both a package and a document class. It is
+available from \TeXLive 2012 onward. It allows you to have a
+standalone document for a \Package{tikz} or \Package{feynmf} figure
+and also input this file into another document. If you run PDF\LaTeX\
+on the file it also automatically crops the resulting picture. This is
+one of those packages where you think \enquote{Why didn't someone
+  create this years ago?}. The \Package{tikz} figures included in this
+guide make use of it.
 
 I do not recommend the \Package{subfiles} package by default as it is not
 included in \TeXLive by default. Have a look at

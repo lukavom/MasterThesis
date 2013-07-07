@@ -9,11 +9,14 @@ FEYNFILES = $(wildcard $(FEYNDIRNAME)/*.tex)
 ifdef file
 FEYNFILES = ./feynmf/$(file).tex
 endif
+TIKZDIRNAME = ./tikz
+TIKZFILES = $(wildcard $(TIKZDIRNAME)/*.tex)
 
-
-.PHONY: all thesis thesis09 thesis11 feynmf new \
+.PHONY: all new thesis thesis09 thesis11 \
+	feynmf feynmp tikz \
 	phdsubmit \
-	cleanthesis cleancover cleanfeynmf cleanfeynmp \
+	cleanthesis cleancover \
+	cleanfeynmf cleanfeynmp cleantikz cleanpictpdf \
 	cleanphd cleanblx cleanbbl \
 	cleanglo \
 	help test
@@ -45,7 +48,7 @@ thesis11:
 	pdflatex  $(EXTRACMD) $(THESIS)
 
 feynmf: $(FEYNFILES)
-	@echo "Feynman graph files: $^"
+	@echo "Feymf Feynman graph files: $^"
 	-rm feynmf_files.inp
 	touch feynmf_files.inp
 	# $(foreach feynfile, $^, echo $(notdir $(feynfile)) >>feynmf_files.inp;)
@@ -58,8 +61,12 @@ feynmf: $(FEYNFILES)
 	pdflatex feynmf_all; pdflatex feynmf_all; pdflatex feynmf_all
 
 feynmp: $(FEYNFILES)
-	@echo "Feynman graph files: $^"
+	@echo "Feynmp Feynman graph files: $^"
 	$(foreach feynfile, $^, ./run_mp $(feynfile);)
+
+tikz: $(TIKZFILES)
+	@echo "TikZ Feynman graph files: $^"
+	(cd tikz; $(foreach tikzfile, $^, pdflatex $(notdir $(tikzfile));))
 
 thesis_feynmf:
 	feynmf $(THESIS)
@@ -68,9 +75,9 @@ phdsubmit:
 	pdflatex  PhD_submit
 	pdflatex  PhD_submit
 
-cleanall: clean cleanbbl
+cleanall: clean cleanbbl cleanpictpdf
 
-clean: cleanthesis cleancover cleanfeynmf cleanfeynmp cleanphd cleanblx cleanglo
+clean: cleanthesis cleancover cleanfeynmf cleanfeynmp cleantikz cleanphd cleanblx cleanglo
 
 cleanthesis:
 	-rm $(THESIS).log $(THESIS).aux $(THESIS).toc
@@ -96,6 +103,13 @@ cleanfeynmf:
 cleanfeynmp:
 	-rm *.1 *.log *.mp *.t1
 	-rm feynmf_all.* feynmf_files.inp
+
+cleantikz:
+	-rm tikz/*.log tikz/*.aux
+
+cleanpictpdf:
+	-rm feynmf/*.pdf
+	-rm tikz/*.pdf
 
 cleanblx:
 	-rm *-blx.bib
@@ -123,4 +137,7 @@ help:
 
 test:
 	@echo "Thesis $(THESIS)"
-	@echo "Feynman graphs dir: $(FEYNDIRNAME)"
+	@echo "Feynmf Feynman graphs dir: $(FEYNDIRNAME)"
+	@echo "Feynmf Feynman graphs files: $(FEYNFILES)"
+	@echo "TikZ   Feynman graphs dir: $(TIKZDIRNAME)"
+	@echo "TikZ   Feynman graphs files: $(TIKZFILES)"

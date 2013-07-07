@@ -1,6 +1,17 @@
 % This figure only works with \TeXLive 2011 and later.
 % The ZEUS coordinate system
-\setstretch{1.0}
+\documentclass{standalone}
+
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning,shapes,arrows}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+
+\begin{document}
+% \setstretch{1.0}
 \tdplotsetmaincoords{60}{160}
 \begin{tikzpicture}[tdplot_main_coords]
   \draw[thick,->] (-1,0,0) -- (3,0,0) node[anchor=north east]{$z$};
@@ -17,3 +28,4 @@
   \draw[blue,thick,->] (6,0,0)  -- (4,0,0)  node[anchor=south east]{$e$};
   \draw[blue,thick,->] (-4,0,0) -- (-2,0,0) node[anchor=south west]{$p$};
 \end{tikzpicture}
+\end{document}

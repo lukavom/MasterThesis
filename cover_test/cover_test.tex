@@ -9,8 +9,8 @@
 % This must be set before \usepackage{ubonn-thesis}
 \newcommand*{\texlive}{2011}
 %
-\usepackage{ubonn-thesis}
-\usepackage{./thesis_skel/thesis_defs}
+\usepackage{../ubonn-thesis}
+\usepackage{../thesis_skel/thesis_defs}
 
 %------------------------------------------------------------------------------
 % Use bibtex8 for TeX Live 2009
@@ -29,39 +29,40 @@
 % and standard_refs-biber  if you use biber
 \ifthenelse {\texlive = 2009} {%
   % Adjustments to output are in this style file:
-  \usepackage{./biblatex/biblatex-num-v2009}
-  \bibliography{./mythesis/thesis_refs.bib,%
+  \usepackage{../biblatex/biblatex-num-v2009}
+  \bibliography{../thesis_skel/thesis_refs.bib,%
     ./refs/standard_refs-bibtex.bib}
 }{%
   % Adjustments to output are in this style file:
-  \usepackage{./biblatex/biblatex-num-v2011}
-  \addbibresource{./mythesis/thesis_refs.bib}
-  \addbibresource{./refs/standard_refs-biber.bib}
+  \usepackage{../biblatex/biblatex-num-v2011}
+  \addbibresource{../thesis_skel/thesis_refs.bib}
+  \addbibresource{../refs/standard_refs-biber.bib}
 }
 
 %------------------------------------------------------------------------------
 % The following definitions are used to produce the title pages
 % needed at various stages
-\newcommand{\thesistitle}{Titel der Arbeit}
-\newcommand{\thesisauthor}{Vorname Name}
-\newcommand{\thesistown}{Geburtsort}
+\newcommand{\thesistitle}{Title of the Thesis}
+\newcommand*{\thesisauthor}{Author's name}
+\newcommand*{\thesistown}{Place of birth}
 \renewcommand*{\InstituteName}{\PI}
 \renewcommand*{\inInstitute}{\inPI}
 \renewcommand*{\InstituteAddress}{\PIaddress}
-% This is the month and year when the printed version of the thesis
-% was released
-\newcommand{\thesismonth}{October}
-\newcommand{\thesisyear}{2012}
-\newcommand{\thesisnumber}{BONN-IR-2012-XX}
-% Adjust ...refereetext depending on male/female referee
+% Adjust \thesisreferee...text depending on male/female referee
 \newcommand*{\thesisrefereeonetext}{1.\ Gutachter}
 \newcommand*{\thesisrefereeone}{Prof.\ Dr.\ John Smith}
 \newcommand*{\thesisrefereetwotext}{2.\ Gutachterin}
 \newcommand*{\thesisrefereetwo}{Prof.\ Dr.\ Anne Jones}
-% Date when thesis was accepted
-\newcommand{\thesisaccept}{XX.YY.2012}
-% Date of thesis examination
-\newcommand{\thesispromotion}{XX.YY.2012}
+% Date when thesis was submitted (Master/Diplom)
+% Year or Month, Year when thesis was submitted (PhD)
+\newcommand*{\thesissubmit}{XX.YY.2013}
+% \newcommand*{\thesissubmit}{Month 2013}
+% Date of thesis examination (PhD)
+\newcommand*{\thesispromotion}{XX.YY.2013}
+% Month and year of the final printed version of the thesis
+\newcommand*{\thesismonth}{MMM}
+\newcommand*{\thesisyear}{2013}
+\newcommand*{\thesisnumber}{BONN-IR-2013-XXX}
 
 %------------------------------------------------------------------------------
 % The abstract is only needed for the printed version and should be in
@@ -109,14 +110,14 @@
 % Dedication has to come before \maketitle
 \dedication{For my friends and supporters}
 % Use this version when you submit your thesis
-% \input{cover/PhD_Submit_Title}
-% \input{cover/Master_Submit_Title}
-% \input{cover/Diplom_Submit_Title}
-\input{cover/Bachelor_Title}
+% \input{../cover/PhD_Submit_Title}
+\input{../cover/Master_Submit_Title}
+% \input{../cover/Diplom_Submit_Title}
+% \input{../cover/Bachelor_Title}
 % Use this command for the print version
-% \input{cover/PhD_Final_Title}
-% \input{cover/Master_Final_Title}
-% \input{cover/Diplom_Final_Title}
+% \input{../cover/PhD_Final_Title}
+% \input{../cover/Master_Final_Title}
+% \input{..cover/Diplom_Final_Title}
 
 \pagestyle{scrplain}
 
@@ -125,7 +126,7 @@
 \mainmatter
 \pagestyle{scrheadings}
 
-\input{thesis_skel/thesis_intro}
+\input{../thesis_skel/thesis_intro}
 
 \chapter{2nd Chapter}
 

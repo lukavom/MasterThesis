@@ -58,12 +58,22 @@ make new [THESIS=dirname]
 \end{verbatim}
 to create a new directory with a couple of files to help you get
 started. By default the directory name will be \texttt{mythesis}.
-If you choose a different name, you have to adjust the \Macro{include}
-commands inside \texttt{./dirname.tex}.
+% If you choose a different name, you have to adjust the \Macro{include}
+% commands inside \texttt{./dirname.tex}.
 To compile your thesis try:\index{compiling}
 \begin{verbatim}
-make thesis [THESIS=dirname]
+cd mythesis [or dirname]
+make thesis
 \end{verbatim}
+
+Note that as of release 2.1, the main file for the thesis
+(\texttt{mythesis.tex}), the \texttt{Makefile} and the style file
+(\texttt{ubonn-thesis.sty}) are copied into your \texttt{mythesis}
+subdirectory. This means that if you update the \Package{ubonn-thesis}
+you can look for differences between the new style file and the one
+you have. It also implies that if you want the update to have an
+effect on your thesis you should copy the \texttt{Makefile} and
+\texttt{ubonn-thesis.sty} into the directory with your thesis.
 
 My original idea was that the style file should work for all recent
 \TeX\ installations.  However, some of the packages I recommend have

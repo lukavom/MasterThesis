@@ -13,7 +13,8 @@
 % Set to 2011 for biblatex and biber   (TeX Live 2011 or later)
 % This must be set before \usepackage{ubonn-thesis}
 \newcommand*{\texlive}{2011}
-%
+
+%------------------------------------------------------------------------------
 \usepackage{ubonn-thesis}
 % Glossary package
 % \usepackage[acronym,toc]{glossaries}
@@ -24,7 +25,7 @@
 % \usetikzlibrary{positioning,shapes,arrows}
 % \usetikzlibrary{decorations.pathmorphing}
 % \usetikzlibrary{decorations.markings}
-\usepackage{mythesis/thesis_defs}
+\usepackage{thesis_defs}
 
 %------------------------------------------------------------------------------
 % Instead of colouring  links, cites, table of contents etc.
@@ -66,14 +67,14 @@
 % and standard_refs-biber  if you use biber
 \ifthenelse {\texlive = 2009} {%
   % Adjustments to output are in this style file:
-  \usepackage{./biblatex/biblatex-num-v2009}
-  \bibliography{./mythesis/thesis_refs.bib,%
-    ./refs/standard_refs-bibtex.bib}
+  \usepackage{../biblatex/biblatex-num-v2009}
+  \bibliography{thesis_refs.bib,%
+    ../refs/standard_refs-bibtex.bib}
 }{%
   % Adjustments to output are in this style file:
-  \usepackage{./biblatex/biblatex-num-v2011}
-  \addbibresource{./mythesis/thesis_refs.bib}
-  \addbibresource{./refs/standard_refs-biber.bib}
+  \usepackage{../biblatex/biblatex-num-v2011}
+  \addbibresource{thesis_refs.bib}
+  \addbibresource{../refs/standard_refs-biber.bib}
 }
 %
 % You can include the following lines if you want to shorten your
@@ -122,19 +123,19 @@
 % Note that \includeonly can be quite picky! Do not forget to put a
 % comma after the filename, otherwise it will simply be ignored!
 % \includeonly{%
-%   mythesis/thesis_intro,
-%   mythesis/thesis_appendix,
-%   mythesis/thesis_acknowledge
+%   thesis_intro,
+%   thesis_appendix,
+%   thesis_acknowledge
 % }
 
 %------------------------------------------------------------------------------
 % Give a list of directories where figures can be found. Do not leave
 % any spaces in the list and end the directory name with a /
 \graphicspath{%
-  {./figs/},%
-  {./figs/cover/},%
-  {./figs/graphics/},%
-  {./feynmf/}%
+  {../figs/},%
+  {../figs/cover/},%
+  {../figs/graphics/},%
+  {../feynmf/}%
 }
 
 %------------------------------------------------------------------------------
@@ -142,16 +143,16 @@
 % \makeglossaries
 
 % Glossary entries
-% \input{mythesis/thesis_glossary}
+% \input{thesis_glossary}
 
 %------------------------------------------------------------------------------
 \begin{document}
 
 % Cover page of thesis - this is only needed for the printed final
 % version to be submitted to the department library
-% \input{cover/PhD_Cover}
-% \input{cover/Master_Cover}
-% \input{cover/Diplom_Cover}
+% \input{../cover/PhD_Cover}
+% \input{../cover/Master_Cover}
+% \input{../cover/Diplom_Cover}
 
 % Start counting pages from the title page
 \frontmatter
@@ -161,34 +162,34 @@
 %------------------------------------------------------------------------------
 % PhD Title page
 % Use this command when you submit your thesis
-% \input{cover/PhD_Submit_Title}
+% \input{../cover/PhD_Submit_Title}
 % Use this command for the print version
-% \input{cover/PhD_Final_Title}
+% \input{../cover/PhD_Final_Title}
 
 %------------------------------------------------------------------------------
 % Diplom Title page
 % Use this command when you submit your thesis
-% \input{cover/Diplom_Submit_Title}
+% \input{../cover/Diplom_Submit_Title}
 % Use this command for the print version
-% \input{cover/Diplom_Final_Title}
+% \input{../cover/Diplom_Final_Title}
 
 %------------------------------------------------------------------------------
 % Master Title page
 % Use this command when you submit your thesis
-\input{cover/Master_Submit_Title}
+\input{../cover/Master_Submit_Title}
 % Use this command for the print version
-% \input{cover/Master_Final_Title}
+% \input{../cover/Master_Final_Title}
 
 %------------------------------------------------------------------------------
 % Bachelor Title page
-% \input{cover/Bachelor_Title}
+% \input{../cover/Bachelor_Title}
 
 \pagestyle{scrplain}
 
 %------------------------------------------------------------------------------
 % You can add your acknowledgements here - don't forget to also add
 % them to \includeonly above
-\include{mythesis/thesis_acknowledge}
+\include{thesis_acknowledge}
 
 \tableofcontents
 
@@ -201,7 +202,7 @@
 %------------------------------------------------------------------------------
 % Add your chapters here - don't forget to also add them
 % to \includeonly above
-\include{mythesis/thesis_intro}
+\include{thesis_intro}
 
 %------------------------------------------------------------------------------
 \appendix
@@ -209,7 +210,7 @@
 %
 % Add your appendices here - don't forget to also add them
 % to \includeonly above
-\include{mythesis/thesis_appendix}
+\include{thesis_appendix}
 
 \backmatter
 %------------------------------------------------------------------------------
@@ -224,7 +225,7 @@
 %
 % {\raggedright
 %   \bibliographystyle{unsrt}
-%   \bibliography{./mythesis/thesis_refs,./refs/standard_refs-bibtex}
+%   \bibliography{./thesis_refs,../refs/standard_refs-bibtex}
 % }
 
 %------------------------------------------------------------------------------
@@ -242,12 +243,12 @@
 %------------------------------------------------------------------------------
 % You could instead add your acknowledgements here - don't forget to
 % also add them to \includeonly above
-% \include{mythesis/thesis_acknowledge}
+% \include{thesis_acknowledge}
 
 %------------------------------------------------------------------------------
 % CV needed when you submit your PhD thesis
 %
-% \input{mythesis/thesis_cv}
+% \input{thesis_cv}
 
 \end{document}
 

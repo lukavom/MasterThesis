@@ -24,11 +24,10 @@ make new [THESIS=dirname]
 
 to create a new directory with a couple of files to help you get
 started. By default the directory name will be mythesis.
-If you choose a different name, you have to adjust the \include
-commands inside ./dirname.tex.
 To compile your thesis try:
 
-make thesis [THESIS=dirname]
+cd mythesis [or dirname]
+make thesis
 
 All packages that are needed should be part of your TeX
 installation. If not you may have to install them or ask your system
@@ -41,7 +40,7 @@ biblatex and siunitx.  It may therefore be necessary to make a few
 changes in order to get the thesis to compile on your machine. The
 default version assumes that you have TeX Live 2011 or later.  If you
 have TeX Live 2009, which implies that you have siunitx version 1 and
-that you use bibtex8 with biblatex., you should set \texlive to 2009
+that you use bibtex8 with biblatex, you should set \texlive to 2009
 in mythesis.tex. You should then use the command `make thesis09'
 instead of `make thesis'.
 

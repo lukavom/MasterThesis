@@ -3,7 +3,7 @@
 \label{sec:tips}\index{tips}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide/guide_tips.tex}\\[1ex]
+\LaTeX{} file: \url{./guide_tips.tex}\\[1ex]
 \noindent
 Over time I have collected quite a lengthy list of things you should
 \enquote{Do} and \enquote{Not Do} (at least in my head) that I think
@@ -706,7 +706,6 @@ without as the optional title for the table of contents.  An
 illustration of how this works is given in Appendix~\ref{sec:emc2}.
 
 
-
 %------------------------------------------------------------------------------
 \section{Line numbering}
 \label{sec:tips:lineno}\index{lineno}\index{line numbers}
@@ -755,7 +754,28 @@ number of reconstructed heavy-quark jets in data, which was determined
 
 Then the line numbering will be correct, see Fig.~\ref{fig:lineno}b.
 
+
+%------------------------------------------------------------------------------
+\section{Updating \Package{ubonn-thesis}}
+\label{sec:tips:update}\index{upadting}\index{ubonn-thesis!updating}
+%------------------------------------------------------------------------------
+
+What is the best way to update \Package{ubonn-thesis}? If you are
+using SVN, then you just need to do an \texttt{svn update}. If you use
+a tar file, then you should unpack it and copy over your
+\texttt{mythesis} directory tree and any other files you need to the new tree.
+
+Note that when you make a new thesis skeleton the files
+\texttt{thesis\_skel/Makefile} and \texttt{ubonn-thesis.sty} are copied
+to your \texttt{mythesis} directory. If you want to profit from
+updates to one of these files, you therefore need to copy the new
+version into \texttt{mythesis} again. The advantage of this scheme is
+that you can easily check what the differences are before you do the
+copy. More importantly, if you have made your own changes to the style
+file, it should be relatively easy to merge the two versions.
+
+
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../thesis_guide"
+%%% TeX-master: "./thesis_guide"
 %%% End:

@@ -1,4 +1,4 @@
-Version 2.1 06/07/2013
+Version 2.1 10/07/2013
 
 The idea with this document is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
@@ -13,7 +13,7 @@ If you want a particular release use the command:
 
 svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M
 
-The tar file also includes the guide as a PDF file: thesis_guide.pdf.
+The tar file also includes the guide as a PDF file: guide/thesis_guide.pdf.
 It can be obtained from:
 
 http://www-biblio.physik.uni-bonn.de/info/index.shtml#info:titelvorl
@@ -50,7 +50,7 @@ you actually used in your thesis. Be aware that not all font sizes are
 available in all font collections. If you used the default LaTeX font
 in your thesis, then choose lmodern in the style file.
 
-The main file for this guide is thesis_guide.tex and it
+The main file for this guide is guide/thesis_guide.tex and it
 includes the LaTeX files in the directory ./guide and the
 Feynman graphs in the directories ./feynmf and ./tikz.
 

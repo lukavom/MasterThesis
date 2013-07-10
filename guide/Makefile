@@ -76,6 +76,8 @@ cleanfeynmf:
 	make -f ../Makefile cleanfeynmf FEYNDIR=$(FEYNDIR)
 
 cleanfeynmp:
+	-rm *.1 *.mp
+
 	make -f ../Makefile cleanfeynmp FEYNDIR=$(FEYNDIR)
 
 cleantikz:

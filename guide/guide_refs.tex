@@ -85,13 +85,13 @@ The first step is to put your references in one or more \texttt{.bib}
 files. For this document they can be found in:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
-\item \url{./guide/guide_refs.bib};
-\item \url{./refs/standard_refs-bibtex.bib} or
-  \url{./refs/standard_refs-biber.bib};
-\item \url{./refs/example_refs-latin1.bib} or
-  \url{./refs/example_refs-utf8.bib};
-\item \url{./guide/refs/zeus_2009.bib} and
-  \url{./guide/refs/zeus_2010.bib}.
+\item \url{../guide/guide_refs.bib};
+\item \url{../refs/standard_refs-bibtex.bib} or
+  \url{../refs/standard_refs-biber.bib};
+\item \url{../refs/example_refs-latin1.bib} or
+  \url{../refs/example_refs-utf8.bib};
+\item \url{../guide/refs/zeus_2009.bib} and
+  \url{../guide/refs/zeus_2010.bib}.
 \end{itemize}
 For each article you specify things like its
 title, author, journal etc.
@@ -115,12 +115,12 @@ need something like:
   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
 %
 % Adjustments to output are in this style file:
-% \usepackage{./biblatex/biblatex-num-v2009}
-\usepackage{./biblatex/biblatex-num-v2011}
-% \bibliography{./mythesis/thesis_refs.bib,%
-%   ./refs/standard_refs-bibtex.bib}
-\addbibresource{./mythesis/thesis_refs.bib}
-\addbibresource{./refs/standard_refs-biber.bib}
+% \usepackage{../biblatex/biblatex-num-v2009}
+\usepackage{../biblatex/biblatex-num-v2011}
+% \bibliography{../mythesis/thesis_refs.bib,%
+%   ../refs/standard_refs-bibtex.bib}
+\addbibresource{../mythesis/thesis_refs.bib}
+\addbibresource{../refs/standard_refs-biber.bib}
 \end{verbatim}
 in the document preamble and \Macro{printbibliography} where they
 should be printed. The commented out lines are for \TeXLive 2009 with
@@ -132,8 +132,8 @@ If you use \BibTeX{} you need something like:
 % Use BibTeX for the bibliography
 %
 \bibliographystyle{unsrt}
-\bibliography{./mythesis/thesis_refs,%
-  ./refs/standard_refs-bibtex}
+\bibliography{../mythesis/thesis_refs,%
+  ../refs/standard_refs-bibtex}
 \end{verbatim}
 at the point where the references should be printed.
 Note that \LaTeX{} is sometimes picky about lists of directories that
@@ -324,7 +324,7 @@ syntax:
 @Article{Chekanov:2009qja,
      author    = "{ZEUS Collab.} and Chekanov, S. and others",
 \end{verbatim}
-which then usually gets formatted as \enquote{ZEUS Collab., Chekanov S. et
+which then usually gets formatted as \enquote{ZEUS Collab., S.\ Chekanov et
 al.,}.
 I went through and changed the references in \texttt{zeus\_2009.bib}
 accordingly.
@@ -385,10 +385,10 @@ paragraph. It is not clear to me if you also need
 \verb+\AtEveryCitekey{\clearfield{url}}+.
 
 A fairly nice-looking style is \Option{ieee}. This is only be
-available in recent releases (2011) of \TeXLive. After playing
-around a bit with the \Option{ieee} style, I decided it is too new and
-has too many settings that depend on have a new version of \Package{biblatex}
-for now.
+available in recent releases (2011) of \TeXLive. After playing around
+a bit with the \Option{ieee} style, I decided it is too new and has
+too many settings that depend on having a new version of
+\Package{biblatex} for now.
 
 There are slowly more and more \Package{biblatex} styles around, but
 not as many as \BibTeX. It is, however, much easier to change things
@@ -499,7 +499,7 @@ this is all you have to do.  If, however, you are using \TeXLive
 \texttt{crossref} field must contain the same key as the first one in
 \texttt{entryset}.
 
-One things you should always do is include all references in a single
+One thing you should always do is include all references in a single
 \Macro{cite}. e.g.\ there were quite a few ZEUS publications in
 2009~\cite{Chekanov:2009qja,Chekanov:2009zz,Chekanov:2009tu} is better
 than~\cite{Chekanov:2009qja}\cite{Chekanov:2009zz}\cite{Chekanov:2009tu}.

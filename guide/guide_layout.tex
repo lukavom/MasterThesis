@@ -16,13 +16,17 @@ on how you can change things.
 %------------------------------------------------------------------------------
 
 
-Page geometry can be changed using either the
-\Package{typearea} or the \Package{geometry}
-package. In this guide I use \Package{typearea} as it is closely tied
-into \KOMAScript. The basic command is to specify how many pieces to
-divide the page into. This guide uses \Option{DIV=14} by default with
-a binding correction of \Option{BCOR=8mm}.  You can then let
-\KOMAScript{} and \Package{typearea} sort out the rest.
+Page geometry can be changed using either the \Package{typearea} or
+the \Package{geometry} package. In this guide I use \Package{typearea}
+as it is closely tied into \KOMAScript. The basic command is to
+specify how many pieces to divide the page into. This guide uses
+\Option{DIV=14} by default with a binding correction of
+\Option{BCOR=8mm}.  You can then let \KOMAScript{} and
+\Package{typearea} sort out the rest. Note that \Package{typearea}
+will issue a warning that you have \enquote{Bad type area settings}
+when using \Option{DIV=14}. If you want to avoid this warning, you can
+set \Option{DIV} to 11 or smaller, but then the amount of text on each
+page is reduced by quite a bit and your thesis will cover more pages.
 
 The alternative is to use \Package{geometry}, where by default I say
 that the text should cover about 75\% of the page. In practice, I have

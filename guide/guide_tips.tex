@@ -17,15 +17,16 @@ and use the style file and then give some tips.
 %------------------------------------------------------------------------------
 
 The idea with this document is that you also look at the \LaTeX{} that
-is used to create it, in order to find out how things are done.
-I will therefore usually not give the \LaTeX{} commands in the printed
+is used to create it, in order to find out how things are done.  I
+will therefore usually not give the \LaTeX{} commands in the printed
 document, but assume that you will have a look at the \LaTeX{} source.
 To help you with this, each chapter contains a link to the relevant
 file at the top. This link should work if you have compiled the guide
-yourself and are in the \texttt{ubonn-thesis} directory.
-The files that make up this document are available in a subversion
-repository and as a \texttt{tar} file. To get the latest subversion
-entries give the command:
+yourself and are in the \texttt{guide} subdirectory of the
+\texttt{ubonn-thesis} directory tree.  The files that make up this
+document are available in a subversion repository and as a
+\texttt{tar} file. To get the latest subversion entries give the
+command:
 
 \begin{verbatim}
 svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
@@ -132,14 +133,15 @@ thesis. Be aware that not all font sizes are available in all font
 collections. If you used the default \LaTeX{} font in your thesis,
 then choose \Package{lmodern}\index{font!lmodern} in the style file.
 
-The main file for this guide is \texttt{thesis\_guide.tex} and it
-includes the \LaTeX{} files in the directory \texttt{./guide} and the
-Feynman graphs in the directory \texttt{./feynmf}. Again this guide
-should compile without changes for \TeXLive 2011. For earlier versions
-set \Macro{texlive} in \texttt{thesis\_guide.tex} to
-2009.\footnote{You should set \Macro{texlive} to 2011 also if you have
-  \TeXLive 2012,\index{TeXLive@\TeXLive!2012} which is the default
-  version for Ubuntu 12.10.\index{ubuntu!12.10}}
+The main file for this guide is \texttt{guide/thesis\_guide.tex} and
+it includes the \LaTeX{} files in the directory \texttt{./guide} and
+some of the Feynman graphs in the directories \texttt{./feynmf} and
+\texttt{./tikz}. Again this guide should compile without changes for
+\TeXLive 2011. For earlier versions set \Macro{texlive} in
+\texttt{thesis\_guide.tex} to 2009.\footnote{You should set
+  \Macro{texlive} to 2011 also if you have \TeXLive
+  2012,\index{TeXLive@\TeXLive!2012} which is the default version for
+  Ubuntu 12.10.\index{ubuntu!12.10}}
 
 
 %------------------------------------------------------------------------------
@@ -403,7 +405,7 @@ use \TeXLive 2011, but want to use units which were available in
 \TeXLive 2009 or the older syntax you can include the option
 \Option{version-1-compatibility}. Note that \TeXLive 2009 was the
 default version for Ubuntu releases up to and including
-12.04,\index{ubuntu!12.04}. I will give the \Package{siunitx} version
+12.04\index{ubuntu!12.04}. I will give the \Package{siunitx} version
 2 options in the text and the version 1 options as footnotes.
 
 One very attractive feature is that it allows you to format
@@ -732,7 +734,7 @@ but sometimes a block of lines is not numbered - see Fig.~\ref{fig:lineno}a.
 
 Such problems are associated with text that is close to math mode
 environments. Some of the problems can be solved by using a new
-version of the lineno package.
+version of the \Package{lineno} package.
 However, this only works for \enquote{standard} \LaTeX{}
 math environments: \Env{displaymath}, \Env{equation} and \Env{eqnarray}, while it does
 not work for recommended \Package{amsmath} environments such as \Env{equation*},
@@ -765,14 +767,23 @@ using SVN, then you just need to do an \texttt{svn update}. If you use
 a tar file, then you should unpack it and copy over your
 \texttt{mythesis} directory tree and any other files you need to the new tree.
 
-Note that when you make a new thesis skeleton the files
+Note that when you make a new thesis skeleton (as of release 2.1) the files
 \texttt{thesis\_skel/Makefile} and \texttt{ubonn-thesis.sty} are copied
 to your \texttt{mythesis} directory. If you want to profit from
 updates to one of these files, you therefore need to copy the new
 version into \texttt{mythesis} again. The advantage of this scheme is
 that you can easily check what the differences are before you do the
 copy. More importantly, if you have made your own changes to the style
-file, it should be relatively easy to merge the two versions.
+file, it should be relatively easy to merge the two versions. Having
+all files in the \texttt{mythesis} subdirectory also makes it much easier
+for you to use your own version manager for your thesis.
+
+As a side remark, I would also recommend that you put all Feynman
+graphs etc.\ in subdirectories of \texttt{mythesis}. You may have to
+change some variables that are set at the beginning of the
+\texttt{Makefile} so that this works if you use \Package{feynmf}. If
+you use \Package{feynmp} just add \Macro{write18} statements. See
+Section~\ref{sec:fig:feynman} for some more details.
 
 
 %%% Local Variables:

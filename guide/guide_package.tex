@@ -11,10 +11,11 @@ one of your friend's theses and use his/her packages and conventions,
 as there is a steady and regular improvement in the packages
 available.
 
-This chapter will list some useful packages -- maybe also some that
+This chapter lists some useful packages -- maybe also some that
 are not so commonly known. Here I only say what the package is used
 for. More detailed instructions on the usage can be found in the
-relevant chapters.
+relevant chapters. I first list the packages used in this guide
+and then give a bit of information on other packages that may be useful.
 
 From all that I have read, \KOMAScript\index{KOMAScript@\KOMAScript}
 seems to be the way to go for the overall classes. I have therefore
@@ -53,7 +54,8 @@ The packages are listed in Table~\ref{tab:package:layout}.
     \Package{geometry} & Provides simple options for page layout such
     as \Option{scale=0.75} to cover 75\% of the page.\\
     \Package{typearea} & Does much the same, but here you specify how
-    many elements to split the page into.\\
+    many elements to split the page into. You do not have to include
+    this package explicitly if you use \KOMAScript.\\
     \Package{setspace} & Useful options to change spacing.\\
     \Package{fontenc} & The encoding used for fonts. Recommended is
     \Option{T1}, which is given as an option.\\
@@ -99,7 +101,7 @@ figures are listed in Table~\ref{tab:package:appearance}.
     \Package{longtable} & Can produce tables that extend over more
     than one page.\\
     \Package{booktabs} & Help for producing nicer tables.\\
-    \Package{amsmath},\Package{amssym} & Extra math commands and symbols from
+    \Package{amsmath}, \Package{amssymb} & Extra math commands and symbols from
     AMS.\\
     \Package{mhchem} & Nice package for typesetting chemical elements
     correctly.\\
@@ -121,7 +123,8 @@ can specify header and footer text.
 \label{sec:package:other}
 %------------------------------------------------------------------------------
 
-Some other useful packages are listed in
+Some other useful packages, some of which are included in
+\texttt{ubonn-thesis.sty} are listed in
 Table~\ref{tab:package:other1}.
 
 \begin{table}[htbp]
@@ -129,9 +132,9 @@ Table~\ref{tab:package:other1}.
   \begin{tabular}{lp{0.8\textwidth}}
     \Package{ifthen} & Provides the \Macro{ifthenelse} command.\\
     \Package{IEEEtrantools} & Contains useful environments for multiline equations.\\
-    \Package{feynmf} & Drawing Feynman graphs with Metafont\\
-    \Package{feynmp} & Drawing Feynman graphs with Metapost.\\
-    \Package{axodraw} & Drawing Feynman graphs.\\
+    \Package{feynmf} & Draw Feynman graphs with Metafont\\
+    \Package{feynmp} & Draw Feynman graphs with Metapost.\\
+    \Package{axodraw} & Draw Feynman graphs.\\
     \Package{tikz} & General drawing package that can also be used for
     Feynman graphs.\\
     \Package{standalone} & Allows you to have a document that you can

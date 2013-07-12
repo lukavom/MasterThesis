@@ -24,7 +24,7 @@ tables look better.
 
 The \Macro{rule} command is very useful for adding more space between
 rows. Kopka has several examples of its usage. You can also use
-\Macro{arraystretch}, e.g. \verb+\renewcommand{\arraystretch}{1.5}+ to
+\Macro{arraystretch}, e.g.\ \verb+\renewcommand{\arraystretch}{1.5}+ to
 increase the spacing by \SI{50}{\percent}. This command is often useful if table
 cells contain subscripts and/or superscripts. \Macro{toprule}
 etc. mean that it is usually not needed in headers.
@@ -51,6 +51,7 @@ Although extra packages can help, a very useful command is
 of the argument. Compare the results in the following table with two
 numbers 0.76 and 83.1:
 
+\begin{center}
 \begin{tabular}{cc|rr}
   \multicolumn{2}{c|}{Centred} &
   \multicolumn{2}{c}{Right justified} \\
@@ -68,6 +69,7 @@ numbers 0.76 and 83.1:
   83.1 & 83.1\phantom{0} & 83.1 & 83.1\phantom{0}
 \end{tabular}
 }
+\end{center}
 \par\noindent
 The difference between the two tables is that the one on the right
 has the length \Macro{extrarowheight} set to 0.5ex.  The first two
@@ -276,20 +278,20 @@ Table~\ref{tab:rounding} shows and compares two different approaches
 on how this can be done, even for asymmetric errors. While the form
 may appear to be a bit clumsy at first, it is easy enough to get your
 program to write out the lines. In \Package{siunitx} version 1 you
-should \Option{dp} for the rounding. In version 2 you should use the
-options \Option{round-mode} and \Option{round-precision}. In the first
-line of the left-hand part of the table I show what to do if you need
-to change the precision of a single number.  As you can see this is
-rather trivial. However, then the alignment on the decimal point is no
-longer perfect. While this is probably OK for internal notes etc.,
-theses or papers (should) have tougher requirements. Another way of
-achieving the same thing and avoiding the use of
-\Option{round-mode} and \Option{round-precision}\footnote{\Option{dp}
-  in \TeXLive 2009. The \Option{round-mode} should be set in the
-  preamble of the table and not for every number.} is shown in the
-right half. Note the use of options for the \Option{S} command and the
-use of \Macro{num} enclosed in braces to format the row that requires
-a different precision.
+should use option \Option{dp} for the rounding. In version 2 you
+should use the options \Option{round-mode} and
+\Option{round-precision}. In the first line of the left-hand part of
+the table I show what to do if you need to change the precision of a
+single number.  As you can see this is rather trivial. However, then
+the alignment on the decimal point is no longer perfect. While this is
+probably OK for internal notes etc., theses or papers (should) have
+tougher requirements. Another way of achieving the same thing and
+avoiding the use of \Option{round-mode} and
+\Option{round-precision}\footnote{\Option{dp} in \TeXLive 2009. The
+  \Option{round-mode} should be set in the preamble of the table and
+  not for every number.} is shown in the right half. Note the use of
+options for the \Option{S} command and the use of \Macro{num} enclosed
+in braces to format the row that requires a different precision.
 
 It takes a while to learn what the different options mean and their
 consequences. I hope that these examples cover most problems and at
@@ -567,6 +569,7 @@ which also rotates the caption.
 
 \begin{sidewaystable}
   \centering
+  \renewcommand{\arraystretch}{1.2}
   \begin{math}
     \begin{array}{D{.}{.}{4.0}@{\,:}D{.}{.}{3.1}|D{.}{.}{2}@{\,}r@{}D{.}{.}{2}@{\,}l|D{.}{.}{2}@{\,}l|c}
       \toprule
@@ -618,7 +621,8 @@ which also rotates the caption.
 This version of the table also adds a few extra bells and whistles. It
 uses a \Macro{rule} of zero width to give a bit more space above and
 below the cross-sections. \texttt{p\{...\}} switches to paragraph
-mode, so \Macro{centering} is needed to get centred headers.
+mode, so \Macro{centering} is needed to get centred headers. It adds a
+bit more space between the rows using \Macro{arraystretch}.
 You have to play around a bit with the column widths. If you set one
 of them too small it gets expanded anyway, so the two parts of the
 table would not line up. Just for fun the bottom half of the table

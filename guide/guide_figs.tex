@@ -135,12 +135,12 @@ width equal to \Macro{figwidth} and then the offset to \texttt{-\Macro*{figwidth
 \end{figure}
 
 If you want different (partial) captions for a figure then the
-\Package{subfig} package used to be the way to go. You can see how to
-reference the different parts of the figure in
-Section~\ref{sec:fig:feynman}. If you want the captions of the
-sub-figures to also appear in the \enquote{List of Figures} you should
-include the package with the option \Option{lofdepth}. For tables use
-the option \Option{lotdepth}.
+\Package{subfig} package used to be the way to go. An example of its
+use can be seen in Fig.~\ref{fig:nccc}. You can see how to reference
+the different parts of the figure in Section~\ref{sec:fig:feynman}. If
+you want the captions of the sub-figures to also appear in the
+\enquote{List of Figures} you should include the package with the
+option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
 
 An alternative, and successor, to \Package{subfig} is
 \Package{subcaption}. It works in much the same way as
@@ -158,6 +158,7 @@ An alternative, and successor, to \Package{subfig} is
 
 If you run out of space (applies more often to proceedings than to
 theses) you can use the \Package{wrapfig} package.
+
 
 %------------------------------------------------------------------------------
 \section{Figure Formats}
@@ -255,6 +256,27 @@ systematic variations can be found in App.~\ref{sec:app:tikz}. Making
 Feynman graphs with \TikZ is covered in
 Section~\ref{sec:fig:feynman:tikz}.
 
+
+%------------------------------------------------------------------------------
+\subsection{\Package{standalone} package and class}
+\label{sec:fig:standalone}
+
+The \Package{standalone} package provides a great way of developing
+figures in small files and then inputting these files directly,
+without making any changes, into your thesis!
+
+It is in fact both a package and a document class. It is
+available from \TeXLive 2012 onward. It allows you to have a
+standalone document for a \Package{tikz} or \Package{feynmf} figure
+and also input this file into another document. If you run PDF\LaTeX\
+on the file it also automatically crops the resulting picture. This is
+one of those packages where you think \enquote{Why didn't someone
+  create this years ago?}. The \TikZ figures that I include in this
+guide (see subdirectory \texttt{tikz}) make use of this package. If
+you want to use it, make sure that you also include this package in
+your thesis.
+
+
 %------------------------------------------------------------------------------
 \section{Feynman graphs}
 \label{sec:fig:feynman}\index{figures!Feynman graphs}\index{Feynman graphs}
@@ -338,13 +360,13 @@ The big advantage of this procedure is that the graphs are included
 \enquote{properly} in the thesis, their fonts should automatically
 match the fonts used in the thesis and you don't have to worry about
 converting and clipping. I have written a small script that is
-executed by the \texttt{Makefile} to do all of this.
+executed by the \texttt{Makefile} to do the third step.
 The script is \texttt{run\_mf} for \Package{feynmf} and
 \texttt{run\_mp} for \Package{feynmp}. These are
 included in the directory with this file.
 The scripts assume that all Feynman
-graphs are in the \texttt{./feynmf} subdirectory. This can clearly be
-adjusted as necessary.
+graphs are in the \texttt{feynmf} subdirectory. This can clearly be
+adjusted in the \texttt{Makefile} as necessary.
 
 The \texttt{run\_mf} script assumes that all files of type
 \texttt{tex} (except those that start with \texttt{feynmf\_}) are
@@ -353,12 +375,23 @@ necessary to give the command \texttt{make cleanfeynmf} to get rid of
 temporary files before \texttt{make feynmf} if you change the sizes of
 things.
 
-The \texttt{run\_mp} script works a bit differently at the moment. It
-assumes that you want to make a PDF file of each graph and include
-this PDF file in your thesis. It creates a temporary directory
-\texttt{mpost\_tmp} in which it processes the figures (\texttt{tex}
-files) in the \texttt{feynmf} subdirectory. The resulting PDF files are
-copied back to the \texttt{feynmf} subdirectory.
+The \texttt{run\_mp} script works a bit differently. It creates a
+temporary directory \texttt{mpost\_tmp} in which it processes the
+figures (\texttt{tex} files) in the \texttt{feynmf} subdirectory. The
+resulting PDF files are copied back to the \texttt{feynmf}
+subdirectory.
+
+You can also use the package \Package{standalone} together with
+\Package{feynmp}. The files in the \texttt{feynmf} directory contain
+commented out code that shows how this can be done. I do not do this
+by default for the guide, as the package is very new and I also want
+to test making the Feynman graphs with \Package{feynmf}. Note that
+the name in the \Env{fmffile} environment (and the \Macro{write18}
+command) should be the same and different from the name of the \LaTeX\
+file. If you use this option, you should probably also adjust the
+\texttt{Makefile} target for \texttt{feynmp} to work in the same way
+as the target \texttt{tikz}. You have to run \texttt{pdflatex} twice
+on each file.
 
 Figure~\ref{fig:nccc-feynmf} shows the same neutral current and
 charged current graphs, but this time inputting the appropriate
@@ -400,14 +433,15 @@ I can test \Package{feynmf} and \Package{feynmp} with the same
 \LaTeX\ code. In your thesis, you should probably put the
 \Macro{write18} statement in the file with the Feynman graph.
 
-You probably want to first draw the graphs outside of your thesis to
-get them into the form that you need. If you give the command
-\texttt{make feynmf}, it will run \texttt{feynmf} on all \texttt{tex}
-files in the subdirectory \texttt{feynmf}. If you give the command
-\texttt{make feynmf file=ep\_nc} it will run over
+As mentioned above, you probably want to first draw the graphs outside
+of your thesis to get them into the form that you need. If you give
+the command \texttt{make feynmf}, it will run \texttt{feynmf} on all
+\texttt{tex} files in the subdirectory \texttt{feynmf}. If you give
+the command \texttt{make feynmf file=ep\_nc} it will run over
 \texttt{./feynmf/ep\_nc.tex} etc. As indicated above, the graphs can
-then be looked at in \texttt{./feynmf/feynmf\_all.dvi} or\\
-\texttt{./feynmf/feynmf\_all.pdf}.
+then be looked at in \texttt{feynmf\_all.dvi} or\\
+\texttt{feynmf\_all.pdf}. You can use the same syntax for
+\texttt{make feynmp} and \texttt{make tikz}.
 
 
 %------------------------------------------------------------------------------
@@ -415,9 +449,9 @@ then be looked at in \texttt{./feynmf/feynmf\_all.dvi} or\\
 \label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}
 
 In order to draw Feynman graphs with \TikZ, you need to include some
-extra \TikZ packages. In addition it makes sense to define things like
-gluons, photon and incoming and outgoing particles once, as these are
-objects that are often needed.
+extra \TikZ packages and libraries. In addition it makes sense to
+define things like gluons, photons and incoming and outgoing particles
+once, as these are objects that are often needed.
 
 Given the multitude of possibilities that exist to draw things with
 \TikZ, it is not surprising that there are several ways of achieving the
@@ -473,7 +507,8 @@ possible in the placing, so it is usual to use the options
 \Option{[htbp]} for the placement. In particular, be very careful with
 using just \Option{[h]} or \Option{[H]} as the placement option. It very
 easily leads to \LaTeX{} putting single lines of text either above or
-below a figure.
+below a figure. You can also add an \Option{!} at the end of the list
+of options, which suspends spacing and number restrictions.
 
 I used to think it was better to attach the figure to a paragraph:
 \begin{verbatim}

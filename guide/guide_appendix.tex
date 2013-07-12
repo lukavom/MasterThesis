@@ -13,11 +13,19 @@ information.
   \toprule
   Date & Comment\\
   \midrule
+  10 Jul 2013 & Move thesis main file to \texttt{mythesis}
+  subdirectory. Also put \texttt{Makefile} and copy
+  \texttt{ubonn-thesis.sty} into \texttt{mythesis} subdirectory. Split
+  main \texttt{Makefile} into several files, one for thesis, one for
+  the guide an done for
+  pictures and Feynman graphs.\\
   06 Jul 2013 & Use the \Package{standalone} package in the
-  \Package{tikz} figures. Move the guide main file to the
+  \Package{tikz} figures. Add commented out code to \Package{feynmp}
+  figures to show how to use \Package{standalone} for them as
+  well. Move the guide main file to the
   \texttt{guide} subdirectory so that this works properly.\\
-  04 Jul 2013 & Add a few examples of using the
-  \Package{tikz} package. Switch to using \Package{feynmp} rather than
+  04 Jul 2013 & Add a few examples of using the \Package{tikz}
+  package. Switch to using \Package{feynmp} rather than
   \Package{feynmf} by default (for \TeXLive 2011). Add \Macro{write18}
   statements for
   Feynman graphs with \Package{feynmp} and adapt \texttt{Makefile}.\\
@@ -104,7 +112,7 @@ this guide:
 \label{sec:app:tables}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide/guide_appendix.tex}\\[1ex]
+\LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
 \noindent
 Long and complicated tables, such as tables containing the breakdown
 of the systematic error for each data point are usually put into the
@@ -190,7 +198,7 @@ normal \Env{tabular}, but they do work in \Env{longtable}.
 \label{sec:app:tex}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide/guide_appendix.tex}\\[1ex]
+\LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
 \noindent
 If you have an older \LaTeX{} installation (with a \KOMAScript{}
 version less than 3.0) you will probably have to make a few changes to
@@ -213,7 +221,7 @@ Users (TUG) group web page: \url{http://www.tug.org/texcollection}.
 
 %------------------------------------------------------------------------------
 \section{Integrated environments}
-\label{sec:app:complile}
+\label{sec:app:compile}
 %------------------------------------------------------------------------------
 
 As already mentioned in Section~\ref{sec:tips:do}, I highly recommend
@@ -231,6 +239,13 @@ above it is available as an Ubuntu package or from
 \url{http://www.xm1math.net/texmaker}.
 \TeXmaker and \TeXstudio (\TeX makerX) split in 2009, so both packages
 contain a lot of similarities.
+
+You can also make a glossary from within \TeXstudio. In order to do
+this you have to define a user build command. You can find such commands
+under:  \textsf{Options} $\to$ \textsf{Configure TeXstudio} $\to$
+\textsf{Build}. I defined a new command which I called
+\enquote{BuildWithGlossary}. This executes \texttt{pdflatex, biber,
+  makeindex, makeglossary, pdflatex, pdflatex}.
 
 I continue to use is \texttt{emacs}\index{emacs} and AUCTeX, as I can
 then use the same editor for everything. Note that the
@@ -265,7 +280,8 @@ executes the commands: \texttt{PDFLaTeX, Biber, PDFLaTeX, PDFLaTeX,
 \texttt{Makefile} executes.
 
 I have not yet investigated how to also make the glossary from within
-Kile (or any other integrated environment).
+Kile, but it should be possible to do it in the same way as you add a
+\texttt{biber} command.
 
 
 %------------------------------------------------------------------------------
@@ -309,7 +325,7 @@ produce the guide (assuming that you have \TeXLive 2011 or later):
 \begin{verbatim}
 mkdir ubonn-thesis; cd ubonn-thesis
 svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
-cd ubonn-thesis/trunk
+cd trunk
 \end{verbatim}
 Then the following worked:
 \begin{verbatim}
@@ -319,14 +335,14 @@ make guide
 so all packages are there as well as at least the default font which I
 selected: \Package{txfonts}.
 
-This default version of the guide uses \Option{biber} for the
+The default version of the guide uses \Option{biber} for the
 \Package{biblatex} package and includes\\
 \texttt{./refs/example\_refs-utf8} rather than
 \texttt{./refs/example\_refs-latin1}. You give the command \texttt{make
   guide} to compile, which uses \texttt{biber}\index{biber} rather than
 \texttt{bibtex}\index{bibtex} to process the \texttt{.bib} files.
 
-For a older version of \TeXLive (2009) you change
+For a older version of \TeXLive (2009) you have to change
 \Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}. Then
 the following works:
 \begin{verbatim}
@@ -457,18 +473,24 @@ the mouse and enter\\
 as the URL.
 
 To set up your thesis, you have to do by hand what the
-\texttt{Makefile} does under Linux, i.e.\ copy \texttt{thesis\_skel.tex}
-to \texttt{mythesis.tex}, make a new directory \texttt{mythesis} and
-copy the files from\\
-\texttt{thesis\_skel} into \texttt{mythesis}.
+\texttt{Makefile} does under Linux, i.e.\ make a new directory
+\texttt{mythesis}, copy \texttt{thesis\_skel/thesis\_skel.tex} to
+\texttt{mythesis/mythesis.tex}, and copy the rest of the files from
+\texttt{thesis\_skel} into \texttt{mythesis}. in addition you should
+copy the style file \texttt{ubonn-thesis.sty} into the
+\texttt{mythesis} directory.
 
 To compile things, I ran the sequence PDF\LaTeX, \BibTeX, PDF\LaTeX,
-PDF\LaTeX{} to get the output file for both the skeleton thesis and
-the guide.
+PDF\LaTeX\ to get the output file for the skeleton thesis.
 
 If you want to use \texttt{biber} instead of \BibTeX, then you should
 change the \BibTeX\ command from \texttt{bibtex} to \texttt{biber} in
 \TeXstudio or \TeXworks.
+
+\TeXstudio knows about indexes and glossaries. You have to set up a
+user command to execute \texttt{makeindex} and \texttt{makeglossaries}
+as discussed in Section~\ref{sec:app:compile}. With the addition of
+these commands, you should also be able to compile this guide.
 
 If you run PDF\LaTeX\ with the option \texttt{-enable-write18} and
 include appropriate \texttt{mpost} commands in your \LaTeX\ file(s), as
@@ -506,8 +528,9 @@ packages are being installed.
 Note that the Dante \TeX\ Collection 2011 DVD has dropped
 \TeXnicCenter within pro\TeX t and is using the \TeX makerX front-end
 instead. \TeX makerX has recently been superseded by \TeXstudio, My
-comments on \TeXnicCenter have been relegated to a subsection. There
-is also the package \TeXmaker.
+comments on \TeXnicCenter have been relegated to
+Chapter~\ref{sec:app:old}. There is also the package \TeXmaker.
+
 
 %------------------------------------------------------------------------------
 \subsection{\TeXLive}
@@ -540,80 +563,6 @@ You can either use \TeXworks as the front end or you can install
 \TeXstudio or \TeXmaker.
 
 
-%------------------------------------------------------------------------------
-\subsection{Windows XP}
-
-As I know longer have access to a Windows XP machine, and Windows XP is
-slowly disappearing, my experience with installing \LaTeX\ there has
-been relegated to a subsection.
-
-I started the \TeX{} Collection 2010 DVD. I started it as an
-Administrator, it opened a \TeX\ Collection window and I then clicked
-on proTeXt Quick Install and installed MiK\TeX{} (minimal
-version),\index{MiKTeX}\index{TeXnic Center} \TeXnicCenter,
-Ghostscript and Ghostview for all users. Once the installation was
-finished, I also updated all the packages using the MiK\TeX{}
-Maintenance (Admin) $\to$ Update (Admin) program. Be patient -- these
-updates always take a while!
-
-You should then be able to double-click on \texttt{mythesis.tex} and
-try to compile it! My first attempt at this failed. I had set
-MiK\TeX{} to install missing packages, but it was supposed to ask me
-first. This seems to work well if you are logged in as the same user
-(with Administration rights) as the one who installed MiK\TeX. The
-package updating does not seem to work properly (it only asks you for
-the first missing package I think) if you are a normal user. After
-going through the exercise once as an Administrator to compile the
-skeleton thesis, I could also compile both the thesis and the guide as
-a normal user.
-
-The second attempt was a complete MiK\TeX{} installation. I told it to
-install missing packages without asking. This also failed at the first
-attempt as it was missing the package \Package{logreq} and somehow did
-not install it automatically. I had to use the MiK\TeX{} Maintenance
-(Admin) $\to$ Package Manager (Admin) to install \Package{logreq}.
-
-
-%------------------------------------------------------------------------------
-\subsection{\TeXnicCenter}
-\label{sec:app:texnic}\index{TeXnic Center}
-
-I tried out the \TeXnicCenter, which is also available. You first
-have to tell it where to find the \LaTeX\ executables. In my case
-this is \texttt{C:\textbackslash Program Files\textbackslash MiKTeX
-  2.8\textbackslash mktex\textbackslash bin}. You also have to tell
-the program where to find Acrobat (Reader) although it should find it
-automatically.
-
-In the \TeXnicCenter I opened one of the main files, i.e.\
-\texttt{mythesis.tex} or \texttt{thesis\_guide.tex} and then in the
-\texttt{Project} menu I declared this file to be the main file for a
-new project. You should declare the file format to be Unix. You can
-then compile the project and look at the output by hitting
-\texttt{Ctrl + F5}. It is also possible to set some options such that
-you do not have to close the file in Acrobat Reader before compiling.
-
-There is a small problem and irritation with \TeXnicCenter and
-Acrobat Reader X. Under \texttt{Build} $\to$ \texttt{Define Output
-  Profiles} $\to$ \texttt{Viewer} you have to change \texttt{acroview} to
-\texttt{acroviewR10} in the three places where it is given. If you
-then try to compile Adobe Reader opens but you get an error
-message. Just view the output again \texttt{F5} and the PDF file will
-be shown. Via Google, I found some tricks that are supposed to fix
-this problem, but they did not work for me. You can also just start
-Adobe Reader first and then \TeXnicCenter.
-
-In general, I thought I liked the \TeXnicCenter somewhat more than
-\TeXworks, which is the direct MiK\TeX{} interface. It allows you to
-set up projects and you then have the ability to navigate easily
-through all your files via the Navigator. However, it has a serious
-problem in that it does not handle UTF-8 files properly. Although
-support for UTF-8 has been advertised for almost two years I do not
-see much signs of progress.
-
-As \TeXnicCenter has been dropped on the Dante \TeX\ Collection 2011
-DVD I have relegated this information to a subsection.
-
 
 %------------------------------------------------------------------------------
 \section{Mac}
@@ -638,7 +587,7 @@ also try.
 \label{sec:app:glossary}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide/guide_appendix.tex}\\[1ex]
+\LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
 \noindent
 What is the difference between a glossary and a list of acronyms? They
 are in fact very similar. A list of acronyms is probably most
@@ -694,7 +643,7 @@ detector, which includes the abbreviations that are used in the rest
 of a ZEUS paper.  As a first step you define the terms for the
 glossary and the acronyms.  In this guide, the acronyms and the
 glossary entries are defined in the file
-\url{./guide/guide_glossary.tex}. These definitions must come before
+\url{guide_glossary.tex}. These definitions must come before
 they are used. You can decide whether it is best to have them in a
 single file, or define them just before they are used. When they are
 printed at the end, they will be sorted alphabetically.
@@ -795,7 +744,7 @@ price was reasonable and they delivered quickly and in good quality.
 \label{sec:emc2}\index{math!bold}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide/guide_appendix.tex}\\[1ex]
+\LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
 \noindent
 This chapter is included to illustrate how to get bold mathematics in
 a chapter/section title and how to avoid it in the table of contents.
@@ -855,20 +804,36 @@ this guide is compiled with \TeXLive 2011 or later.
 
 
 %==============================================================================
-\chapter{More on \Package{feynmf}}
-\label{sec:app:feynmf}
+\chapter{Old or obsolete information and instructions}
+\label{sec:app:old}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide/guide_appendix.tex}\\[1ex]
-\noindent
-If you do not want to include the \Package{feynmf} commands for Feynman
-graphs in the thesis (or input the file containing them), you can try
-to make encapsulated Postscript (or PDF) files that contain a single
-Feynman graph and then include these as usual in your thesis.
+With time things change! Some of the instruction or packages that I
+recommended at an earlier time are superseded. Operating systems and
+\TeX\ installations also change with time. In order to avoid
+cluttering up the main chapters of the guide with outdated or obsolete
+information, such things are collected in this appendix.
+
+%------------------------------------------------------------------------------
+\section{More on \Package{feynmf}}
+\label{sec:app:feynmf}
+%------------------------------------------------------------------------------
+
+I relegate this section to the chapter on obsolete instructions,
+because I think it is much easier to just use \Package{feynmp} than
+\Package{feynmf}. If you have \TeXLive 2012, you can combine
+\Package{feynmp} with \Package{standalone} for a very convenient way
+to develop and include Feynman graphs, as discussed in
+Section~\ref{sec:fig:feynman:feynmf}.
 
 If you use \Package{feynmp} you can just give the command \texttt{make
 feynmp} and it will produce PDF files of all the \texttt{tex} files in
 the \texttt{feynmf} subdirectory.
+
+If you do not want to include the \Package{feynmf} commands for Feynman
+graphs in the thesis (or input the file containing them), you can try
+to make encapsulated Postscript (or PDF) files that contain a single
+Feynman graph and then include these as usual in your thesis.
 
 If you want to use \Package{feynmf} you can start with the
 \texttt{feynmf} command on the \texttt{tex} file containing the
@@ -926,6 +891,85 @@ pdflatex ep_nc
 \end{verbatim}
 The trouble with this is that the Feynman graph is not clipped, unless
 you have specified the page size appropriately as discussed above.
+
+
+%------------------------------------------------------------------------------
+\section{Windows}
+\label{sec:app:old:windows}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\subsection{Windows XP}
+
+As I know longer have access to a Windows XP machine, and Windows XP is
+slowly disappearing, my experience with Windows XP stopped 2011.
+
+I started the \TeX{} Collection 2010 DVD. I started it as an
+Administrator, it opened a \TeX\ Collection window and I then clicked
+on proTeXt Quick Install and installed MiK\TeX{} (minimal
+version),\index{MiKTeX}\index{TeXnic Center} \TeXnicCenter,
+Ghostscript and Ghostview for all users. Once the installation was
+finished, I also updated all the packages using the MiK\TeX{}
+Maintenance (Admin) $\to$ Update (Admin) program. Be patient -- these
+updates always take a while!
+
+You should then be able to double-click on \texttt{mythesis.tex} and
+try to compile it! My first attempt at this failed. I had set
+MiK\TeX{} to install missing packages, but it was supposed to ask me
+first. This seems to work well if you are logged in as the same user
+(with Administration rights) as the one who installed MiK\TeX. The
+package updating does not seem to work properly (it only asks you for
+the first missing package I think) if you are a normal user. After
+going through the exercise once as an Administrator to compile the
+skeleton thesis, I could also compile both the thesis and the guide as
+a normal user.
+
+The second attempt was a complete MiK\TeX{} installation. I told it to
+install missing packages without asking. This also failed at the first
+attempt as it was missing the package \Package{logreq} and somehow did
+not install it automatically. I had to use the MiK\TeX{} Maintenance
+(Admin) $\to$ Package Manager (Admin) to install \Package{logreq}.
+
+
+%------------------------------------------------------------------------------
+\subsection{\TeXnicCenter}
+\label{sec:app:texnic}\index{TeXnic Center}
+
+I tried out the \TeXnicCenter, which is also available. You first
+have to tell it where to find the \LaTeX\ executables. In my case
+this is \texttt{C:\textbackslash Program Files\textbackslash MiKTeX
+  2.8\textbackslash mktex\textbackslash bin}. You also have to tell
+the program where to find Acrobat (Reader) although it should find it
+automatically.
+
+In the \TeXnicCenter I opened one of the main files, i.e.\
+\texttt{mythesis.tex} or \texttt{thesis\_guide.tex} and then in the
+\texttt{Project} menu I declared this file to be the main file for a
+new project. You should declare the file format to be Unix. You can
+then compile the project and look at the output by hitting
+\texttt{Ctrl + F5}. It is also possible to set some options such that
+you do not have to close the file in Acrobat Reader before compiling.
+
+There is a small problem and irritation with \TeXnicCenter and
+Acrobat Reader X. Under \texttt{Build} $\to$ \texttt{Define Output
+  Profiles} $\to$ \texttt{Viewer} you have to change \texttt{acroview} to
+\texttt{acroviewR10} in the three places where it is given. If you
+then try to compile Adobe Reader opens but you get an error
+message. Just view the output again \texttt{F5} and the PDF file will
+be shown. Via Google, I found some tricks that are supposed to fix
+this problem, but they did not work for me. You can also just start
+Adobe Reader first and then \TeXnicCenter.
+
+In general, I thought I liked the \TeXnicCenter somewhat more than
+\TeXworks, which is the direct MiK\TeX{} interface. It allows you to
+set up projects and you then have the ability to navigate easily
+through all your files via the Navigator. However, it has a serious
+problem in that it does not handle UTF-8 files properly. Although
+support for UTF-8 has been advertised for almost two years I do not
+see much signs of progress.
+
+As \TeXnicCenter has been dropped on the Dante \TeX\ Collection 2011
+DVD I have relegated this information to a subsection.
 
 
 %%% Local Variables:

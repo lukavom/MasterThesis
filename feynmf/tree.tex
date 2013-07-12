@@ -1,3 +1,17 @@
+%
+% Complicated Feynman graph
+%
+% Comment in the lines from \documentclass to \begin{document}
+% and from \write18 to \end{document}
+% to use the standalone package for testing the Feynman graphs
+% You should also change the fmffile name to tree-mp
+% \documentclass{standalone}
+
+% \usepackage{feynmp}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+
+% \unitlength=1mm
+% \begin{document}
 \begin{fmffile}{tree}
 \begin{fmfgraph*}(50,30)
   \fmfleftn{i}{2} \fmfrightn{o}{4}
@@ -15,4 +29,5 @@
 \end{fmfgraph*}
 \end{fmffile}
 % Include this command for Metapost
-% \write18{mpost feynexa}
+% \write18{mpost tree-mp}
+% \end{document}

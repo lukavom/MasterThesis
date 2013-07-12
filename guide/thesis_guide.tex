@@ -31,7 +31,7 @@
 \usepackage{makeidx}
 \usepackage[acronym,toc]{glossaries}
 \usepackage{../thesis_skel/thesis_defs}
-\usepackage{../guide/guide_defs}
+\usepackage{guide_defs}
 
 % In order to check if your labels are referenced try the refcheck package
 % \usepackage{refcheck}
@@ -62,7 +62,7 @@
 \ifthenelse {\texlive = 2009} {%
   % Adjustments to output are in this style file:
   \usepackage{../biblatex/biblatex-num-v2009}
-  \bibliography{../guide/guide_refs.bib,%
+  \bibliography{./guide_refs.bib,%
     ../refs/standard_refs-bibtex.bib,%
     ../refs/example_refs-latin1.bib,%
     ../guide/refs/zeus_2009.bib,%
@@ -70,7 +70,7 @@
 }{%
   % Adjustments to output are in this style file:
   \usepackage{../biblatex/biblatex-num-v2011}
-  \addbibresource{../guide/guide_refs.bib}
+  \addbibresource{./guide_refs.bib}
   \addbibresource{../refs/standard_refs-biber.bib}
   \addbibresource{../refs/example_refs-utf8.bib}
   \addbibresource{../guide/refs/zeus_2009.bib}
@@ -136,20 +136,22 @@
 
 %------------------------------------------------------------------------------
 % \includeonly can be used to select which chapters you want to process
-% A simple \include command just inserts a \clearpage before and after the fi% Note that \includeonly can be quite picky! Do not forget to put a
+% A simple \include command just inserts a \clearpage before and after
+% the file.
+% Note that \includeonly can be quite picky! Do not forget to put a
 % comma after the filename, otherwise it will simply be ignored!
 % \includeonly{%
-%   guide/guide_acknowledge1,
-%   guide/guide_intro,
-%   guide/guide_tips,
-%   guide/guide_submit,
-%   guide/guide_package,
-%   guide/guide_figs,
-%   guide/guide_tables,
-%   guide/guide_refs,
-%   guide/guide_layout,
-%   guide/guide_appendix,
-%   guide/guide_acknowledge2
+%   guide_acknowledge1,
+%   guide_intro,
+%   guide_tips,
+%   guide_submit,
+%   guide_package,
+%   guide_figs,
+%   guide_tables,
+%   guide_refs,
+%   guide_layout,
+%   guide_appendix,
+%   guide_acknowledge2
 % }
 
 %------------------------------------------------------------------------------
@@ -222,9 +224,9 @@
 %
 % {\raggedright
 %   \bibliographystyle{unsrt}
-%   \bibliography{./refs/standard_refs-bibtex,./refs/example_refs-latin1,%
-%     ./guide/refs/zeus_2009,%
-%     ./guide/refs/zeus_2010}
+%   \bibliography{./guide_refs.bib,../refs/standard_refs-bibtex,../refs/example_refs-latin1,%
+%     ../guide/refs/zeus_2009,%
+%     ../guide/refs/zeus_2010}
 %  }
 
 %------------------------------------------------------------------------------

@@ -1,3 +1,17 @@
+%
+% Moeller scattering
+%
+% Comment in the lines from \documentclass to \begin{document}
+% and from \write18 to \end{document}
+% to use the standalone package for testing the Feynman graphs
+% You should also change the fmffile name to moeller-mp
+% \documentclass{standalone}
+
+% \usepackage{feynmp}
+% \DeclareGraphicsRule{*}{mps}{*}{}
+
+% \unitlength=1mm
+% \begin{document}
 \begin{fmffile}{moeller}
   \begin{fmfgraph*}(40,30)
     \fmfleft{i1,i2}
@@ -13,4 +27,5 @@
   \end{fmfgraph*}
 \end{fmffile}
 % Include this command for Metapost
-% \write18{mpost feynexa}
+% \write18{mpost moeller-mp}
+% \end{document}

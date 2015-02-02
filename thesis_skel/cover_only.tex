@@ -4,13 +4,11 @@
 % a Physics or Astronomy Institute in the University of Bonn
 
 %------------------------------------------------------------------------------
-% Set to 2009 for biblatex and bibtex8 (TeX Live 2009)
-% Set to 2011 for biblatex and biber   (TeX Live 2011 or later)
-% This must be set before \usepackage{ubonn-thesis}
-\newcommand*{\texlive}{2011}
-
-%------------------------------------------------------------------------------
-\usepackage{ubonn-thesis}
+% Set to <2010 for biblatex and bibtex8 (TeX Live 2009)
+% Set to >2009 for biblatex and biber   (TeX Live 2011 or later)
+% Set before \usepackage{ubonn-thesis} or pass as an option to ubonn-thesis
+% \newcommand*{\texlive}{2014}
+\usepackage[texlive=2014]{ubonn-thesis}
 
 %------------------------------------------------------------------------------
 % The following definitions are used to produce the title pages

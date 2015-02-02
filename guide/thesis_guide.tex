@@ -1,23 +1,27 @@
 \documentclass[a4paper,twoside,ngerman,UKenglish]{scrbook}
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % This file contains the guide to writing theses for the
-% Physikalisches Institut, Universität Bonn
+% physics and astronomy institutes, Universität Bonn
 %
 % Specify the language(s) in the class and then use babel.
 % If you need more than one language, give the defalt language last,
 % e.g. ngerman,UKenglish for a thesis in British (UK) English where you want
 % to be able to set the language to German for some part of it
 
-%------------------------------------------------------------------------------
-% Set to 2009 for biblatex and bibtex8 (TeX Live 2009)
-% Set to 2011 for biblatex and biber   (TeX Live 2011 or later)
+%-------------------------------------------------------------------------------
+% Set to <2010 for biblatex and bibtex8 (TeX Live 2009)
+% Set to >2010 for biblatex and biber   (TeX Live 2011 or later)
 % This must be set before \usepackage{ubonn-thesis}
-\newcommand*{\texlive}{2011}
-\newcommand*{\guideversion}{2.1}
-%
-\usepackage{../ubonn-thesis}
-%
-\ifthenelse {\texlive = 2009} {%
+\newcommand*{\texlive}{2014}
+\newcommand*{\guideversion}{3.0}
+
+% Main thesis style file
+\usepackage[palatino,bibstyle=alphabetic,feynmp]{../ubonn-thesis}
+
+% Adjustments to biblatex output are in this style file:
+\usepackage{../ubonn-biblatex}
+
+\ifthenelse {\texlive < 2010} {%
 }{%
   \usepackage{import}
   \usepackage{standalone}
@@ -29,14 +33,14 @@
   \usetikzlibrary{decorations.markings}
 }
 \usepackage{makeidx}
-\usepackage[acronym,toc]{glossaries}
+\usepackage[acronym,toc,nosuper]{glossaries}
 \usepackage{../thesis_skel/thesis_defs}
 \usepackage{guide_defs}
 
 % In order to check if your labels are referenced try the refcheck package
 % \usepackage{refcheck}
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Instead of colouring  links, cites, table of contents etc.
 % put them in a coloured box for the screen version.
 % This is probably a good idea when you print your thesis.
@@ -44,51 +48,32 @@
 %   linkbordercolor=blue,citebordercolor=magenta,urlbordercolor=darkgreen
 % }
 
-%------------------------------------------------------------------------------
-% Use biblatex alphabetic style without sorting and block
-% Use bibtex8 for TeX Live 2009
-% Use biber   for TeX Live 2011 or later
-% Use option backref to get back references
-\ifthenelse {\texlive = 2009} {%
-  \usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
-  style=alphabetic,block=ragged,firstinits=true]{biblatex}
-}{%
-  \usepackage[backend=biber,backref=true,
-  style=alphabetic,block=ragged,firstinits=true]{biblatex}
-}
+%-------------------------------------------------------------------------------
+% biblatex is included by ubonn-thesis. Look there for the settings used.
+% See the options for settings that can be changed easily.
+% For further changes copy the \RequirePackage here and include
+% ubonn-thesis with the option biblatex=false.
 % Specify the bibliography files here and not at the end!
+\addbibresource{guide_refs.bib}
+\addbibresource{../guide/refs/zeus_2009.bib}
+\addbibresource{../guide/refs/zeus_2010.bib}
 % Use example_refs-latin1 and standard_refs-bibtex with bibtex8
 % and example_refs-utf8   and standard_refs-biber  if you use biber
 \ifthenelse {\texlive = 2009} {%
-  % Adjustments to output are in this style file:
-  \usepackage{../biblatex/biblatex-num-v2009}
-  \bibliography{./guide_refs.bib,%
-    ../refs/standard_refs-bibtex.bib,%
-    ../refs/example_refs-latin1.bib,%
-    ../guide/refs/zeus_2009.bib,%
-    ../guide/refs/zeus_2010.bib}
+  \addbibresource{../refs/standard_refs-bibtex.bib}
+  \addbibresource{../refs/example_refs-latin1.bib}
 }{%
   % Adjustments to output are in this style file:
-  \usepackage{../biblatex/biblatex-num-v2011}
-  \addbibresource{./guide_refs.bib}
   \addbibresource{../refs/standard_refs-biber.bib}
   \addbibresource{../refs/example_refs-utf8.bib}
-  \addbibresource{../guide/refs/zeus_2009.bib}
-  \addbibresource{../guide/refs/zeus_2010.bib}
 }
-%
-% You can include the following lines if you want to shorten your
-% bibliography by not including url fields
-% \AtEveryBibitem{\clearfield{url}}
-% \AtEveryCitekey{\clearfield{url}}
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % When writing your thesis it is often helpful to have the date and
 % time in the output file. Comment this out for the final version.
-%
-\ifoot[\today{} \thistime]{\today{} \thistime}
+%\ifoot[\today{} \thistime]{\today{} \thistime}
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % The following definitions are used to produce the title pages
 % needed at various stages
 \newcommand{\thesistitle}{Users Guide to Writing a Thesis
@@ -106,16 +91,16 @@
 \newcommand*{\thesisrefereetwo}{Prof.\ Dr.\ Anne Jones}
 % Date when thesis was submitted (Master/Diplom)
 % Year or Month, Year when thesis was submitted (PhD)
-\newcommand*{\thesissubmit}{XX.YY.2013}
-% \newcommand*{\thesissubmit}{Month 2013}
+\newcommand*{\thesissubmit}{XX.YY.2015}
+% \newcommand*{\thesissubmit}{Month 2015}
 % Date of thesis examination (PhD)
-\newcommand*{\thesispromotion}{XX.YY.2013}
+\newcommand*{\thesispromotion}{XX.YY.2015}
 % Month and year of the final printed version of the thesis
 \newcommand*{\thesismonth}{March}
-\newcommand*{\thesisyear}{2013}
-\newcommand*{\thesisnumber}{BONN-IR-2013-XXX}
+\newcommand*{\thesisyear}{2015}
+\newcommand*{\thesisnumber}{BONN-IR-2015-XXX}
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % The abstract is only needed for the printed version. and should be in
 % English regardless of the language of the thesis
 \newcommand{\thesisabstract}{%
@@ -134,7 +119,7 @@
   \end{otherlanguage}
 }
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % \includeonly can be used to select which chapters you want to process
 % A simple \include command just inserts a \clearpage before and after
 % the file.
@@ -154,7 +139,7 @@
 %   guide_acknowledge2
 % }
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Give a list of directories where figures can be found. Do not leave
 % any spaces in the list and end the directory name with a /
 \graphicspath{%
@@ -163,7 +148,7 @@
   {../figs/graphics/}
 }
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Make an index and a glossary
 \makeindex
 \makeglossaries
@@ -171,16 +156,16 @@
 % Glossary entries
 \input{../guide/guide_glossary}
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 \begin{document}
 \frontmatter
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Title page
 \input{../cover/Guide_Submit_Title}
 
 \pagestyle{scrplain}
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 \include{guide_acknowledge1}
 
 \tableofcontents
@@ -188,40 +173,47 @@
 \mainmatter
 \pagestyle{scrheadings}
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 \include{guide_intro}
+%\printbibliography[heading=subbibliography]
 
 \include{guide_tips}
+%\printbibliography[heading=subbibliography]
 
 \include{guide_submit}
+%\printbibliography[heading=subbibliography]
 
 \include{guide_package}
+%\printbibliography[heading=subbibliography]
 
 \include{guide_figs}
+%\printbibliography[heading=subbibliography]
 
 \include{guide_tables}
+%\printbibliography[heading=subbibliography]
 
-\include{guide_refs}
+\input{guide_refs}
+%\printbibliography[heading=subbibliography]
 
 \include{guide_layout}
+%\printbibliography[heading=subbibliography]
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Appendices etc.
 \appendix
 
 % \part*{Appendix}
 \include{guide_appendix}
+%\printbibliography[heading=subbibliography]
 
 \backmatter
-%------------------------------------------------------------------------------
-% Declare bibliography, lists of figures and tables and
-% acknowledgements as backmatter
+%-------------------------------------------------------------------------------
+% Declare bibliography, lists of figures and tables and acknowledgements as backmatter
 % Chapter/section numbers are turned off
 %
 % Include the following lines and comment out \printbibliography if
 % you use BiBTeX for the bibliography.
 % If you use biblatex package the files should de specified in the preamble.
-%
 % {\raggedright
 %   \bibliographystyle{unsrt}
 %   \bibliography{./guide_refs.bib,../refs/standard_refs-bibtex,../refs/example_refs-latin1,%
@@ -229,7 +221,7 @@
 %     ../guide/refs/zeus_2010}
 %  }
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Use biblatex for the bibliography
 % Add bibliography to Table Of Contents
 %
@@ -238,15 +230,15 @@
 \listoffigures
 \listoftables
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Print the glossary
 \printglossaries
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Print the index
 \printindex
 
-%------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 % Acknowledgements
 \include{guide_acknowledge2}
 

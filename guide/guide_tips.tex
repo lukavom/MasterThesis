@@ -28,14 +28,14 @@ document are available in a subversion repository and as a
 \texttt{tar} file. To get the latest subversion entries give the
 command:
 
-\begin{verbatim}
+{\small\begin{verbatim}
 svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
-\end{verbatim}
+\end{verbatim}}
 \noindent
-If you want to checkout a particular release you can give the command:
-\begin{verbatim}
+If you want to checkout a particular version you can give the command:
+{\small\begin{verbatim}
 svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M
-\end{verbatim}
+\end{verbatim}}
 % \noindent
 % If you have checked out a version of the guide before 20 August 2012
 % and want to update things, you need to change the location:
@@ -45,7 +45,7 @@ svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M
 %  https://svn.physik.uni-bonn.de/basic/ubonn-thesis
 % \end{verbatim}
 \noindent
-The tar file (and the release tree (as of release 1.5)) also includes
+The tar file (and the tag tree (as of version 1.5)) also includes
 the guide as a PDF file: \texttt{thesis\_guide.pdf}.  It can be
 obtained from:\\
 \url{http://www-biblio.physik.uni-bonn.de/info/index.shtml#info:titelvorl}
@@ -59,6 +59,9 @@ make new [THESIS=dirname]
 \end{verbatim}
 to create a new directory with a couple of files to help you get
 started. By default the directory name will be \texttt{mythesis}.
+If you want to write a thesis that uses the astronomy style of references
+(\Option{authoryear} style and a bibliography at the end of each chapter)
+give the command \enquote{\texttt{make astro [THESIS=dirname]}.
 % If you choose a different name, you have to adjust the \Macro{include}
 % commands inside \texttt{./dirname.tex}.
 To compile your thesis try:\index{compiling}
@@ -66,8 +69,9 @@ To compile your thesis try:\index{compiling}
 cd mythesis [or dirname]
 make thesis
 \end{verbatim}
+See Section~\ref{sec:tips:options} for a list of the options that can be passed to the package.
 
-Note that as of release 2.1, the main file for the thesis
+Note that as of version 2.1, the main file for the thesis
 (\texttt{mythesis.tex}), the \texttt{Makefile} and the style file
 (\texttt{ubonn-thesis.sty}) are copied into your \texttt{mythesis}
 subdirectory. This means that if you update the \Package{ubonn-thesis}
@@ -137,11 +141,57 @@ The main file for this guide is \texttt{guide/thesis\_guide.tex} and
 it includes the \LaTeX{} files in the directory \texttt{./guide} and
 some of the Feynman graphs in the directories \texttt{./feynmf} and
 \texttt{./tikz}. Again this guide should compile without changes for
-\TeXLive 2011. For earlier versions set \Macro{texlive} in
+\TeXLive 2011 or later. For earlier versions set \Macro{texlive} in
 \texttt{thesis\_guide.tex} to 2009.\footnote{You should set
   \Macro{texlive} to 2011 also if you have \TeXLive
-  2012,\index{TeXLive@\TeXLive!2012} which is the default version for
-  Ubuntu 12.10.\index{ubuntu!12.10}}
+  2012,\index{TeXLive@\TeXLive!2012} or later.}
+
+
+%------------------------------------------------------------------------------
+\section{Options that can be passed to \Option{ubonn-thesis}}
+\label{sec:tips:options}\index{options}
+%------------------------------------------------------------------------------
+
+From version~3.0 onwards it is possible to change things 
+in the style file by passing options to it.
+A few default packages also changed with this version.
+\Package{subfig} $\to$ \Package{subcaption} and
+\Package{longtable} $\to$ \Package{xtab}.
+The syntax \Option{siunitx} and \Option{siunitx=true} is equivalent.
+Use \Option{siunitx=false} to turn off an option.
+The following options exist:
+
+\begin{tabular}{llp{10.0cm}}
+  Option & Default & Description \\
+  \midrule
+  texlive & 2011 & Specify the \TeXLive version. Valid values are 2009 and 2011.
+  You can also use the older command \verb|\newcommand*{\texlive}{2011}|.\\
+  siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
+  mhchem & true & A nice package for chemical elements and processes.\\
+  dcolumn & true & A package for helping to align things in tables.\\
+  feynmf & false & Include the \Package{feynmf} package for Feynman graphs.\\
+  feynmp & false & Include the \Package{feynmp} package for Feynman graphs.\\
+  subcaption & true & A package for making sub-figures (and sub-tables) and captions for them.\\
+  subfig & false & A package for making sub-figures and captions for them.\\
+  subfigure & false & A package for making sub-figures and captions for them (deprecated).\\
+  xtab & true & A package for tables that are longer than one page.\\
+  longtable & false &  Another package for tables that are longer than one page.\\
+  supertabular & false &  Another package for tables that are longer than one page.\\
+  newtx & false & Use the \Package{newtx} font packages (newer version of \Package{txfonts}).\\
+  txfonts & true & Use a Times-Roman-like font.\\
+  palatino & false & Use a combination of Palatino, Courier and Helvetica fonts.\\
+  titlesec & false & Use the \Package{titlesec} package for formatting chapter titles.\\
+  floatopt & true & Adjust settings that control the number and placement of floats.\\
+  biblatex & true & Include \Package{biblatex}.\\
+  astrobib & false & Adjust \Package{biblatex} options to conform to the usual astronomy style.\\
+  backend & biber & Specify the backend to use.
+  Possibilities are \Option{biber}, \Option{bibtex} or \Option{bibtex8}.\\
+  backref & true & The bibliography lists where the reference is cited.
+  This option is very useful when writing your thesis,
+  but should probably be turned off for the final version.\\
+  bibstyle & numeric-comp & Specify the style to use for the references. 
+  Standard values are \Option{numeric-comp} or \Option{alphabetic}.\\
+\end{tabular}
 
 
 %------------------------------------------------------------------------------
@@ -302,13 +352,14 @@ some of the Feynman graphs in the directories \texttt{./feynmf} and
 
 Not really a strict \enquote{Do}: I highly recommend that you use an
 integrated environment for editing and compiling your thesis. If you
-are on a Mac or under Windows you probably use TEXshop or
-\TeXLive. Under Linux you can use Kile\index{kile} or the way I work
-is to use \texttt{emacs}\index{emacs} and AUCTeX. Note that the
+are on a Mac or under Windows you probably get TEXshop or
+\TeXLive by default. Under Linux you can use Kile\index{kile} or the way I used to work
+was to use \texttt{emacs}\index{emacs} and AUCTeX. Note that the
 RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
 tools for finding cross-references and the names of citations
 easily. \TeXstudio is based on \TeXmaker and is available for Linux,
-Windows and MacOSX. One advantage of such environments is that it is usually
+Windows and MacOSX. It is now my standard environment under all systems!
+One advantage of such environments is that it is usually
 possible to switch between a position output and the relevant place in
 the source code and vice versa. This makes it much quicker to fix
 things when you spot an error in your output PDF file. You can usually
@@ -398,14 +449,15 @@ This package is a more modern and complete package than either
 \Package{SIunits} or \Package{units}. As the package is rather new it
 is also still developing. There are quite a few changes from version 1
 (\TeXLive 2009)\index{TeXLive@\TeXLive!2009} to version 2 (\TeXLive
-2011)\index{TeXLive@\TeXLive!2011} which means that several of the
+2011 or later)\index{TeXLive@\TeXLive!2011} which means that several of the
 examples I include here have somewhat different syntaxes depending on
 which version of \TeXLive is being used to compile this guide. If you
-use \TeXLive 2011, but want to use units which were available in
+use \TeXLive 2011or later, but want to use units which were available in
 \TeXLive 2009 or the older syntax you can include the option
 \Option{version-1-compatibility}. Note that \TeXLive 2009 was the
 default version for Ubuntu releases up to and including
-12.04\index{ubuntu!12.04}. I will give the \Package{siunitx} version
+12.04\index{ubuntu!12.04}.
+I will give the \Package{siunitx} version
 2 options in the text and the version 1 options as footnotes.
 
 One very attractive feature is that it allows you to format
@@ -618,12 +670,16 @@ have to decide from the very beginning whether numbers should
 disadvantages of using a font for which the math mode is different
 from the text mode. ATLAS uses either the \Package{txfonts} or the
 \Package{mathptmx} packages, which do not have this problem. This is
-why I use \Package{txfonts} in this guide. If you compile the guide
+why I use \Package{txfonts} in this guide. 
+If you compile the guide
 with a different font and the numbers $1234.56$ and 1234.56 look the
-same then you do not have to worry! There are ways to get around the
-problem with Palatino. You can try either the \Package{pxfonts} or the
+same then you do not have to worry! 
+There are ways to get around the problem with Palatino. 
+You can try either the \Package{pxfonts} or the
 \Package{mathpazo} packages -- for my taste the sans serif font used
 in \Package{pxfonts} looks a bit better.
+Recent versions of this guide, contain a Palatino font combination that works in both
+text and math mode -- see the style file.
 
 
 %------------------------------------------------------------------------------
@@ -702,10 +758,14 @@ A perennial problem is bold math\index{math!bold} when it is needed in
 section headings etc. This is further complicated by the fact that the
 table of contents is usually not typeset using a bold font (except for
 chapter titles, or whatever the highest level(s) of sectioning are.
-The only reliable way to get this right in both cases is to give the
+One way to get this right in both cases is to give the
 heading twice, once with \Macro{boldmath} for the real title and once
-without as the optional title for the table of contents.  An
-illustration of how this works is given in Appendix~\ref{sec:emc2}.
+without as the optional title for the table of contents.
+An alternative solution is to add the command\\
+\verb|\def\bfseries{\fontseries\bfdefault\selectfont\boldmath}|.
+As of version 3.0 of \Package{ubonn-thesis} this command is included,
+so \Macro{boldmath} should no longer be needed.
+An illustration of how this works is given in Appendix~\ref{sec:emc2}.
 
 
 %------------------------------------------------------------------------------
@@ -746,14 +806,15 @@ The total visible cross section for inclusive heavy-quark jet
 production, $\sigma^{q}$, with $q\in\{b,c\}$ is given by
 \begin{linenomath}
 \begin{equation*}
-  \sigma^{q} = \frac{N_{q}^{\text{rec,Data}}}{\mathcal{A}_{q}\cdot\mathcal{L}_{\text{Data}}}.
+  \sigma^{q} = \frac{N_{q}^{\text{rec,Data}}}%
+    {\mathcal{A}_{q}\cdot\mathcal{L}_{\text{Data}}}.
 \end{equation*}
 end{linenomath}
 Here, $\mathcal{L}_{\text{Data}}$ denotes the integrated luminosity,
 $\mathcal{A}_{q}$ is the acceptance and $N_{q}^{\text{rec,Data}}$ the
 number of reconstructed heavy-quark jets in data, which was determined
 \end{verbatim}
-
+\noindent
 Then the line numbering will be correct, see Fig.~\ref{fig:lineno}b.
 
 
@@ -767,8 +828,9 @@ using SVN, then you just need to do an \texttt{svn update}. If you use
 a tar file, then you should unpack it and copy over your
 \texttt{mythesis} directory tree and any other files you need to the new tree.
 
-Note that when you make a new thesis skeleton (as of release 2.1) the files
-\texttt{thesis\_skel/Makefile} and \texttt{ubonn-thesis.sty} are copied
+Note that when you make a new thesis skeleton (as of version 2.1) the files
+\texttt{thesis\_skel/Makefile} and \texttt{ubonn-thesis.sty} 
+(and \texttt{ubonn-biblatex.sty}) are copied
 to your \texttt{mythesis} directory. If you want to profit from
 updates to one of these files, you therefore need to copy the new
 version into \texttt{mythesis} again. The advantage of this scheme is

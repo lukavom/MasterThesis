@@ -13,9 +13,9 @@
 % Use command pdflatex --version to find out which version you are running
 % Add option backref=false when your thesis is ready to turn off back-referencing
 % in your bibliography
-\usepackage[texlive=2014]{ubonn-thesis}
+\usepackage[texlive=2014,astrobib]{ubonn-thesis}
 % Adjustments to standard biblatex style
-\usepackage{ubonn-biblatex}
+% \usepackage{ubonn-biblatex}
 
 % Glossary package
 % \usepackage[acronym,toc,nosuper]{glossaries}
@@ -64,6 +64,11 @@
 }{%
   \addbibresource{../refs/standard_refs-biber.bib}
 }
+%
+% You can include the following lines if you want to shorten your
+% bibliography by not including url fields
+% \AtEveryBibitem{\clearfield{url}}
+% \AtEveryCitekey{\clearfield{url}}
 
 %------------------------------------------------------------------------------
 % The following definitions are used to produce the title pages
@@ -71,8 +76,8 @@
 \newcommand{\thesistitle}{Title of the Thesis}
 \newcommand*{\thesisauthor}{Author's name}
 \newcommand*{\thesistown}{Place of birth}
-\renewcommand*{\InstituteName}{\PI}
-\renewcommand*{\inInstitute}{\inPI}
+\renewcommand*{\InstituteName}{\AIFA}
+\renewcommand*{\inInstitute}{\inAIFA}
 \renewcommand*{\InstituteAddress}{\PIaddress}
 % Adjust \thesisreferee...text depending on male/female referee
 \newcommand*{\thesisrefereeonetext}{1.\ Gutachter}
@@ -219,7 +224,7 @@
 % Use biblatex for the bibliography
 % Add bibliography to Table of Contents
 % Comment out this command if your references are printed for each chapter.
-\printbibliography[heading=bibintoc]
+% \printbibliography[heading=bibintoc]
 
 \listoffigures
 \listoftables

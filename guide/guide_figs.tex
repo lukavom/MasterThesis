@@ -135,23 +135,30 @@ width equal to \Macro{figwidth} and then the offset to \texttt{-\Macro*{figwidth
 \end{figure}
 
 If you want different (partial) captions for a figure then the
-\Package{subfig} package used to be the way to go. An example of its
+\Package{subfig} package used to be the way to go. 
+An alternative, and successor, to \Package{subfig} is
+\Package{subcaption}. It works in much the same way as
+\Package{subfig}. A nice tutorial on its use can be found in
+\url{http://www.peteryu.ca/tutorials/publishing/latex_captions}
+An example of its
 use can be seen in Fig.~\ref{fig:nccc}. You can see how to reference
 the different parts of the figure in Section~\ref{sec:fig:feynman}. If
 you want the captions of the sub-figures to also appear in the
 \enquote{List of Figures} you should include the package with the
 option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
 
-An alternative, and successor, to \Package{subfig} is
-\Package{subcaption}. It works in much the same way as
-\Package{subfig}. A nice tutorial on its use can be found in
-\url{http://www.peteryu.ca/tutorials/publishing/latex_captions}
 
 \begin{figure}[htbp]
   \centering
-  \subfloat[NC scattering][NC]{\label{fig:nccc-nc}\includegraphics[width=0.5\figwidth]{ep_nc}}
+  \begin{subfigure}[b]{0.5\figwidth}
+    \includegraphics[width=0.5\figwidth]{ep_nc}
+    \caption{NC scattering}\label{fig:nccc-nc}
+  \end{subfigure}
   \qquad
-  \subfloat[CC scattering][CC]{\label{fig:nccc-cc}\includegraphics[width=0.5\figwidth]{ep_cc}}
+  \begin{subfigure}[b]{0.5\figwidth}
+    \includegraphics[width=0.5\figwidth]{ep_cc}
+    \caption{CC scattering}\label{fig:nccc-cc}
+  \end{subfigure}
   \caption{Processes in $ep$ scattering.}
   \label{fig:nccc}
 \end{figure}
@@ -307,7 +314,8 @@ a Graphical User Interface (GUI) to \Package{axodraw} and so is simple and
 straightforward to use.
 
 This paragraph illustrates how to reference different parts of a
-figure that uses \Package{subfig}. The NC and CC graphs shown in
+figure that uses the environment \Env{subfigure} from the package \Package{subcaption}.
+The NC and CC graphs shown in
 Fig.~\ref{fig:nccc}, or more accurately in Fig.~\ref{fig:nccc-nc} and
 Fig.~\ref{fig:nccc-cc} were made with \Package{feynmp}. Another way of
 saying the same thing is that typical Feynman graphs for $ep$
@@ -327,12 +335,12 @@ Metapost.\footnote{\texttt{ubonn-thesis.sty} now includes \Package{feynmp}
   by default for \TeXLive 2011 and later. If you want to use
   \Package{feynmf} instead just change the name.}  You can either make
 a separate \LaTeX{} file containing the Feynman graph or include the
-commands inside your normal \LaTeX file.  Metapost\index{metafont} is
+commands inside your normal \LaTeX\ file.  Metapost\index{metafont} is
 a bit easier to use than Metafont.  You should be able to just run
 \texttt{mpost} after \texttt{(pdf)latex} and then run
 \texttt{pdflatex} again twice. Note that you have to run
 \texttt{mpost} on all the files whose names are defined at the
-beginning of the \Env{fmffile} environment. While Metapost works will
+beginning of the \Env{fmffile} environment. While Metapost works well
 with \TeXLive 2011, I did not get it to work properly with \TeXLive
 2009 for unknown reasons.
 
@@ -347,7 +355,8 @@ I think a better way to proceed is the following:
 \item input this file in your figure;
 \item use the \texttt{Makefile} described below to automatically run
   over one or all \Package{feynmp}/\Package{feynmf} \LaTeX{} files by giving the
-  command \texttt{make feynmp} or \texttt{make feynmf}. Check
+  command \texttt{make feynmp} or \texttt{make feynmf}.\\
+  Check
   \texttt{./feynmf/feynmf\_all.dvi} or
   \texttt{./feynmf/feynmf\_all.pdf} to see if the graphs are OK;
 \item run \LaTeX{} or PDF\LaTeX;
@@ -420,7 +429,9 @@ If you are using \Package{feynmp}, another way to do things is
 illustrated in Fig.~\ref{fig:nccc-feynmf}. Here an appropriate
 \Macro{write18} statement is included in the \LaTeX\ source code,
 e.g.\ \verb+\write18 mpost gluon+, after the figure, where the figure
-starts with \verb+\begin{fmffile}{gluon}+.
+starts with \verb+\begin{fmffile}{gluon}+.%
+\footnote{If you use \TeXstudio you may have to give the full pathname for \texttt{mpost},
+  e.g.\ \texttt{/usr/texbin/mpost}, as \TeXstudio does not parse your \texttt{PATH} properly.}
 
 With the \TeXLive 2011 and later setups I use to test this guide,
 this is all you need. If \texttt{mpost} does not run automatically,
@@ -469,25 +480,29 @@ identical.
 
 \begin{figure}[htbp]
   \centering
-  \subfloat[Feynmp][Feynmp]{\label{fig:feyn:feynmp}
+  \begin{minipage}[b]{0.5\figwidth}
+    \centering
     \input{../feynmf/moeller.tex}
     \ifthenelse {\texlive = 2009} {%
     }{
       \write18{mpost moeller}
     }
-  }
+    \subcaption{Feynmp}\label{fig:feyn:feynmp}
+  \end{minipage}
   \qquad
-  \subfloat[\TikZ][\TikZ]{\label{fig:feyn:tikz}
+  \begin{minipage}[b]{0.5\figwidth}
+    \centering
     \ifthenelse {\texlive = 2009} {%
       \fbox{\parbox[b]{0.4\textwidth}{%
-          Error messages appear when trying to
-          compile the guide with \Package{tikz} and \TeXLive 2009,
-          so the figure cannot be included.
-          See the file \texttt{../tikz/moeller.tex}.}}
+        Error messages appear when trying to
+        compile the guide with \Package{tikz} and \TeXLive 2009,
+        so the figure cannot be included.
+        See the file \texttt{../tikz/moeller.tex}.}}
     }{%
       \input{../tikz/moeller.tex}
     }
-  }
+    \subcaption{\TikZ}\label{fig:feyn:tikz}
+  \end{minipage}
   \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}
   \label{fig:feyn:cf}
 \end{figure}
@@ -509,6 +524,15 @@ using just \Option{[h]} or \Option{[H]} as the placement option. It very
 easily leads to \LaTeX{} putting single lines of text either above or
 below a figure. You can also add an \Option{!} at the end of the list
 of options, which suspends spacing and number restrictions.
+
+The
+\href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=floats}{UK List of FAQ}
+recommends changing several default \LaTeX\ options so that there are fewer problems
+with figure and table placement.
+It is certainly worth reading that page for further advice.
+As it is very hard to really test how well these options work
+they can be turned on or off in \Package{ubonn-thesis} via the option \Option{floatopt=true|false}.
+The default value is set to \Option{true}.
 
 I used to think it was better to attach the figure to a paragraph:
 \begin{verbatim}

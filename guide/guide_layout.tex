@@ -123,10 +123,14 @@ forget to add a full stop at the end of it -- try not to!
 If you try to use footnotes in tables, you will probably have some
 problems. The \Package{ctable} package allows you to include footnotes
 that are part of the table. It also supports \Package{booktabs}, so it
-should be possible to keep the same format. If you use \Env{longtable}
-rather than \Env{table} and \Env{tabular}, you can also include
-footnotes easily -- see Appendix~\ref{sec:app:tables} for an
-example. Another recent package (\TeXLive 2011) is
+should be possible to keep the same format. If you use the package
+\Package{xtab} you can use the environment \Env{mpxtabular} 
+instead of \Env{xtabular} to get footnotes.
+-- see Appendix~\ref{sec:app:tables} for an example. 
+If you use the \Package{longtable} package, use \Env{longtable}
+rather than \Env{table} and \Env{tabular} in order to easily include
+footnotes.
+Another recent package (\TeXLive 2011) is
 \Package{tablefootnote} which provides the command
 \Macro{tablefootnote}. This is advertised to also work in sideways tables.
 

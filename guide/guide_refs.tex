@@ -109,18 +109,17 @@ need something like:
 %
 % Use biblatex for the bibliography
 %
-% \usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
-%   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
 \usepackage[backend=biber,
   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
-%
+% \usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
+%   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
+
 % Adjustments to output are in this style file:
-% \usepackage{../biblatex/biblatex-num-v2009}
-\usepackage{../biblatex/biblatex-num-v2011}
-% \bibliography{../mythesis/thesis_refs.bib,%
-%   ../refs/standard_refs-bibtex.bib}
+\usepackage{ubonn-biblatex}
+
 \addbibresource{../mythesis/thesis_refs.bib}
 \addbibresource{../refs/standard_refs-biber.bib}
+% \addbibresource{../refs/standard_refs-bibtex.bib}
 \end{verbatim}
 in the document preamble and \Macro{printbibliography} where they
 should be printed. The commented out lines are for \TeXLive 2009 with
@@ -128,9 +127,7 @@ the \Option{bibtex8} backend.
 \par\noindent
 If you use \BibTeX{} you need something like:
 \begin{verbatim}
-%
 % Use BibTeX for the bibliography
-%
 \bibliographystyle{unsrt}
 \bibliography{../mythesis/thesis_refs,%
   ../refs/standard_refs-bibtex}
@@ -138,6 +135,9 @@ If you use \BibTeX{} you need something like:
 at the point where the references should be printed.
 Note that \LaTeX{} is sometimes picky about lists of directories that
 have spaces between them, so it is safer to include all files on one line.
+Note that as of version 3.0 of the thesis package,
+the \Package{biblatex} command is included in \Package{ubonn-thesis}.
+To turn it off add the option \Option{biblatex=false}.
 
 Which should you use? \BibTeX{} has been around for a long time and is
 therefore better known. However, it has many problems when it comes to
@@ -158,7 +158,7 @@ old syntax \verb+\"{a}+. This problem is completely solved if you use
 
 If you use \Package{biblatex} and the \Option{bibtex8} backend (default
 setting for \TeXLive 2009), then you have to encode your \texttt{.bib}
-files with latin1 and use the line:
+files with latin1 and use the line:\\
 \Macro*{usepackage[bibencoding=latin1]\{biblatex\}}.\footnote{%
   If you do not include umlauts directly in the references you do not
   need this option.}
@@ -213,8 +213,7 @@ types that \Package{biblatex} has are not part of \BibTeX.
 \item[@report] Use it for conference\index{conference note}\index{note!conference} and
   internal\index{internal note}\index{note!internal} notes. This is
   probably also the best type to use for preprints. You can also use
-  \Option{@online}. However, then the title is usually printed in
-  italics rather than upright text inside quotes.
+  \Option{booklet} or \Option{@online}.
 \item[@online] Use it for things that are only available online,
   e.g.~\cite{lshort}.
 \item[@thesis] The name says it all.\index{thesis}
@@ -249,6 +248,8 @@ both double quotes and braces. If not, collaborations and accelerators
 tend to be converted to lowercase, e.g.\ \enquote{lhc} instead of
 \enquote{LHC}. If you use an author such as ``ATLAS Collaboration'' it
 gets printed as \enquote{A.\ Collaboration}.
+If part of a title should not have its case changed enclose it in \{...\},
+e.g.\ \enquote{"The \{ATLAS\} Detector"}
 
 
 %------------------------------------------------------------------------------
@@ -316,8 +317,10 @@ syntax is likely to get mangled.
 What about collaboration names? If you use Inspire as the source of
 your \BibTeX{} entries, you will see that it has a field for the
 collaboration. This is often, but not always, formatted
-correctly. However, very few \BibTeX{} styles pay any attention to
-this field. The ones from Spires listed below will work properly. The
+correctly. 
+However, very few \BibTeX{} styles, and as far as I know no \Package{biblatex} styles, 
+pay any attention to this field.
+The ones from Inpire listed below will work properly. The
 only other reliable alternative I have found is to use the following
 syntax:
 \begin{verbatim}
@@ -355,13 +358,13 @@ numeric style.
 \subsection{\Package{biblatex} styles}
 \label{sec:ref:bbx}
 
-My experience with \Package{biblatex} has only recently been acquired and I
-am still learning, but I have tried out a few things that I will
-document here. The first official stable release was 19 Oct
-2010. Active and rapid development is ongoing -- there were many
-updates in 2011.  \TeXLive 2009 includes either Version 0.8e (ATLAS
-cluster Ubuntu 10.04) or 1.4c (Kubuntu 11.10), so some things I
-recommend below may work a bit differently depending on which version
+My experience with \Package{biblatex} has taken off in the last year, 
+since I started rewriting the ATLAS \LaTeX\ templates.
+The first official stable release of \Package{biblatex} was 19 Oct 2010.
+Active and rapid development is ongoing -- there were many
+updates in 2011.\footnote{\TeXLive 2009 includes either 
+  Version 0.8e (Ubuntu 10.04) or 1.4c (Kubuntu 11.10)} 
+Some things I recommend below may work a bit differently depending on which version
 you have. See Appendix~\ref{sec:app:tex} on how to install a newer
 version of \TeXLive if you want a more up-do-date version of \LaTeX.
 
@@ -369,14 +372,35 @@ Looking for numeric styles you can either use the built-in
 \Option{numeric} or \Option{numeric-comp}.  The \Option{numeric-comp}
 style is used by default in the thesis skeleton. I made a few
 adjustments that are included in the file
-\texttt{./biblatex/biblatex-num-v2009.sty} or
-\texttt{./biblatex/biblatex-num-v2011.sty}. Again which file is used
-by default is steered by the \Macro{texlive} macro which is set in the
-main file.
+\texttt{ubonn-biblatex.sty}%
+\footnote{In the past (before version 3.0) these files were called
+  \texttt{./biblatex/biblatex-num-v2009.sty} and
+  \texttt{./biblatex/biblatex-num-v2011.sty}. Which file was used
+  by default was steered by the \Macro{texlive} macro which is set in the
+  main file.}
+
+You can change some of the things in the style file by passing options to it.
+The syntax \Option{articletitle} and \Option{articletitle=true} is equivalent.
+Use \Option{articletitle=false} to turn off an option.
+The following options exist:
+
+\begin{tabular}{llp{10.0cm}}
+  \toprule
+  Option & Default & Description \\
+  \midrule
+  texlive & 2011 & Specify the \TeXLive version. Valid values are 2009 and 2011.
+  You can also use the older command \verb|\newcommand*{\texlive}{2011}|.\\
+  articletitle & true & Show the titles of articleand reports;\\
+  titlequote & false & Enclose the title in quotes rather than using a slanted font.\\
+  boldvol & false & Show the volume in bold face.\\
+  showurl & true & Show the URL field.\\
+  showdoi & false & Show the DOI separately. Otherwise it is linked from the journal reference.\\
+  \bottomrule
+\end{tabular}
 
 You can fine tune things even more by using hooks that are
-available. For example, if you do not want to print the URL field you
-can include the command:
+available. For example, the way I turn off the URL field is
+to include the command:
 \begin{verbatim}
 \AtEveryBibitem{\clearfield{url}}
 \end{verbatim}
@@ -398,6 +422,13 @@ just make adjustments in your preamble. I have found a number of very
 useful hints on how to make changes in
 \url{http://tex.stackexchange.com/} -- just search for \Package{biblatex}.
 
+If you include \Package{ubonn-thesis} with the option \Option{astrobib},
+the references will be formatted in the style usually used in astrophysics publications.\index{astronomy}\index{astrophysics}
+Version 3.0 contains a first version of this option.
+A few more tweaks may still be needed. You can use the command
+\verb|make astro| instead of \verb|make new| to make a thesis skeleton with the appropriate
+options set and the template introduction uses typical citation commands.
+
 If it is available, \Option{biber} is probably the preferred backend to
 \Option{bibtex8}. However, the backend is mostly relevant for
 sorting, so it probably does not matter which you use if you use an
@@ -418,7 +449,9 @@ Compilation failed in require at Biber/Utils.pm line 21.
 }
 \noindent
 then you should delete the directory \texttt{/tmp/par-...} and try to
-run again.
+run again. The directory name depends on the operating system you are using.
+Use the command \verb|biber --cache| to find out where it is.
+If you are adventurous, the command \verb|rm -rf `biber --cache`| will do it all for you!
 
 %------------------------------------------------------------------------------
 \subsection{\BibTeX{} styles}
@@ -511,6 +544,17 @@ collaboration~\cite{Chekanov:2009qja,Chekanov:2009zz,Chekanov:2009tu}
 as well as several articles from both the H1 and ZEUS
 collaborations\cite{Chekanov:2009wt,Aaron:2009wg}. See
 Section~\ref{sec:ref:mcite} on how to do this with \BibTeX.
+
+In some areas, it is more common to give a bibliography per chapter,
+rather than collecting all references at the end of the thesis.
+This is straightforward to achieve with \Package{biblatex}.
+Simply add the option \Option{refsection=chapter} when you include \Package{biblatex}.
+This and more can be done by passing the option \Option{astrobib} to \Package{ubonn-thesis}.
+In addition you have give the command \Macro{printbibliography[heading=subbibliography]} at the end of each chapter.
+The thesis skeleton contains such commands commented out.
+The option \Option{astrobib} also sets things up so that the \Package{natbib} citation
+commands \Macro{citep}, \Macro{citet} and \Macro{citealt} can be used,
+so that the citation appears as expected for astronomy publications.
 
 You are nearing the end of your thesis and have to properly format all
 the references that you have. However, they are spread over several

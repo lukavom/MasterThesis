@@ -27,7 +27,7 @@ ifndef MPOSTDIR
 MPOSTDIR = ./mpost_tmp
 endif
 
-.PHONY: new \
+.PHONY: new astro \
 	feynmf feynmp tikz \
 	cleanfeynmf cleanfeynmp cleantikz cleanpictpdf \
 	help test
@@ -43,6 +43,21 @@ new:
 	cp thesis_skel/thesis_cv.tex          $(THESIS)/
 	cp thesis_skel/cover_only.tex         $(THESIS)/
 	cp ubonn-thesis.sty                   $(THESIS)/
+	cp ubonn-biblatex.sty                 $(THESIS)/
+	cp thesis_skel/Makefile               $(THESIS)/
+
+astro:
+	mkdir $(THESIS)
+	cp thesis_skel/thesis_astro_skel.tex  $(THESIS)/$(THESIS).tex
+	cp thesis_skel/thesis_defs.sty        $(THESIS)/
+	cp thesis_skel/thesis_refs.bib        $(THESIS)/
+	cp thesis_skel/thesis_astro_intro.tex $(THESIS)/thesis_intro.tex
+	cp thesis_skel/thesis_appendix.tex    $(THESIS)/
+	cp thesis_skel/thesis_acknowledge.tex $(THESIS)/
+	cp thesis_skel/thesis_cv.tex          $(THESIS)/
+	cp thesis_skel/cover_only.tex         $(THESIS)/
+	cp ubonn-thesis.sty                   $(THESIS)/
+	cp ubonn-biblatex.sty                 $(THESIS)/
 	cp thesis_skel/Makefile               $(THESIS)/
 
 feynmf: $(FEYNFILES)

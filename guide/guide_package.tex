@@ -51,6 +51,7 @@ The packages are listed in Table~\ref{tab:package:layout}.
 \begin{table}[htbp]
   \centering
   \begin{tabular}{lp{0.8\textwidth}}
+    \toprule
     \Package{geometry} & Provides simple options for page layout such
     as \Option{scale=0.75} to cover 75\% of the page.\\
     \Package{typearea} & Does much the same, but here you specify how
@@ -67,7 +68,8 @@ The packages are listed in Table~\ref{tab:package:layout}.
     \Package{scrpage2} & Set headers and footer.\\
     \Package{xspace} & Avoid having to put
     \enquote{\texttt{\textbackslash\ }} or
-    \enquote{\texttt{\{\}}} after a macro.
+    \enquote{\texttt{\{\}}} after a macro.\\
+    \bottomrule
   \end{tabular}
   \caption{Useful packages for layout.}
   \label{tab:package:layout}
@@ -80,12 +82,23 @@ The packages are listed in Table~\ref{tab:package:layout}.
 
 It used to be the case that nearly all \LaTeX{} documents used the
 Computer Modern Fonts. That is no longer necessary. There are rather
-complete font sets that are also free that you can use instead. In
-this guide I use the \Package{txfonts} package. Other fonts that look
-quite nice (e.g.\ Palatino) can also be used. You have to use a
-package such as \Package{pxfonts} to get both text and math fonts in
-the same style. Some examples of other possible font packages are
-given in the style file.
+complete font sets that are also free that you can use instead.
+%In this guide I use a combination of \Package{Palatino} and other fonts.
+The default font for theses is \Package{txfonts}.
+\Package{newtx} is a new version of this package that is available
+as of \TeXLive 2013.
+If you have this package, then I would recommend using it.
+Some of the spacings in equations have been improved 
+and there is a better balance of the sizes of serif, \textsf{sans serif} and \texttt{typewriter} fonts.
+Other fonts that look quite nice (e.g.\ Palatino) can also be used.
+The option \Option{palatino} in \Package{ubonn-thesis} can be used to select this
+(as is done for this guide).
+The option actually selects the font packages \Package{mathpazo}, \Package{courier} and \Package{helvet}.
+Another alternative is a package such as \Package{pxfonts} 
+to get both text and math fonts in the same style. 
+Some examples of other possible font packages are given in the style file.
+As mentioned above, certain fonts can be selected directly via options:
+\Option{txfonts}, \Option{newtx} or \Option{palatino}.
 
 Commonly used packages associated with fonts, tables and
 figures are listed in Table~\ref{tab:package:appearance}.
@@ -93,12 +106,13 @@ figures are listed in Table~\ref{tab:package:appearance}.
 \begin{table}[htbp]
   \centering
   \begin{tabular}{lp{0.8\textwidth}}
+    \toprule
     \Package{siunitx} & Typeset units properly with correct spacing.\\
     \Package{graphicx} & The package to use for including graphics.\\
     \Package{rotating} & Package to use for rotating tables etc. The
     \Macro{includegraphics} command can rotate figures directly.\\
     \Package{array} & Adds extra column formatting capabilities.\\
-    \Package{longtable} & Can produce tables that extend over more
+    \Package{xtab} & Can produce tables that extend over more
     than one page.\\
     \Package{booktabs} & Help for producing nicer tables.\\
     \Package{amsmath}, \Package{amssymb} & Extra math commands and symbols from
@@ -108,15 +122,26 @@ figures are listed in Table~\ref{tab:package:appearance}.
     \Package{xfrac} & Some more options for typesetting fractions.\\
     \Package{xcolor} & Add colour commands.\\
     \Package{titlesec} & Change the appearance of chapter and section
-    headings.\\
+    headings. See below for more information.\\
+    \bottomrule
   \end{tabular}
   \caption{Useful packages for appearance.}
   \label{tab:package:appearance}
 \end{table}
 
-As an alternative to \Package{longtable}, one can also use
-\Package{supertab}. Both packages also have the advantage that you
+As alternatives to \Package{xtab}, one can also use
+\Package{supertabular} or \Package{longtable}. 
+All these packages also have the advantage that you
 can specify header and footer text.
+If you use the \Env{mpxtabuar} environment from \Package{xtab} 
+you can include footnotes in a table.
+See the \Package{xtab} documentation for more details.
+It is probably best to only use one of these three packages to avoid conflicts.
+
+Use of the \Package{titlesec} package gives a warning when using \KOMAScript{}; hence
+as of version 3.0 the chapter title formatting is done by hand in \Package{ubonn-thesis}.
+You can switch back to using \Package{titlesec} by giving the option \Option{titlesec}.
+
 
 %------------------------------------------------------------------------------
 \section{Other packages}
@@ -130,9 +155,9 @@ Table~\ref{tab:package:other1}.
 \begin{table}[htbp]
   \centering
   \begin{tabular}{lp{0.8\textwidth}}
+    \toprule
     \Package{ifthen} & Provides the \Macro{ifthenelse} command.\\
     \Package{IEEEtrantools} & Contains useful environments for multiline equations.\\
-    \Package{feynmf} & Draw Feynman graphs with Metafont\\
     \Package{feynmp} & Draw Feynman graphs with Metapost.\\
     \Package{axodraw} & Draw Feynman graphs.\\
     \Package{tikz} & General drawing package that can also be used for
@@ -143,29 +168,25 @@ Table~\ref{tab:package:other1}.
     to click on entries on table of contents etc.\\
     \Package{subfiles} & Provides a nice alternative to
     \Macro{include}.\\
-    \Package{subfig} & As the name suggests make sub-figures and add
-    separate captions for them. \emph{This package has apparently been
-      deprecated.}\\
-    \Package{subcaption} & An alternative to \Package{subfig}.\\
+    \Package{subcaption} & An newer alternative to \Package{subfig}.\\
     \Package{tabularx} & Allows fixed table width with flexible column
     widths.\\
     \Package{floatrow} & Add ability to define own floats.\\
+    \Package{commath} & Some useful extra maths commands, especially for differentials.\\
+    \Package{skmath} & More maths commands that could be very useful.\\
     \Package{adjustbox} & Add much more sophisticated clipping
     capabilities than offered by \Package{graphicx}.\\
-    \Package{caption} & Much more control on captions -- as
-    \KOMAScript{} also has many options, not sure this is necessary.\\
     \Package{wrapfig} & Allow text to flow around figures.\\
     \Package{floatflt} & Similar capabilities to \Package{wrapfig} -- allow text to flow around figures.\\
     \Package{glossaries} & Provide commands for creating a
     glossary. This is intended to replace the \Package{glossary}
     package.\\
-    \Package{nomencl} & Another package for creating a glossary.\\
-    \Package{fncychap} & Another package for changing the style of the
-    chapter heading.\\
-    \Package{quotchap} & Another package for changing the style of the
-    chapter heading.\\
+    \Package{dcolumn} & Very helpful for lining up columns on character
+    strings such as a decimal point. \Package{siunitx} offers similar
+    and better functionality.\\
     \Package{refcheck} & Check whether labels are used, i.e.\ if figures
     and tables are actually referenced.\\
+    \bottomrule
   \end{tabular}
   \caption{Other useful packages.}
   \label{tab:package:other1}
@@ -194,6 +215,10 @@ example for more information. If you want to use the package you have
 to download it and install for yourself. You can do much the same
 thing using AUCTeX inside \texttt{emacs}.
 
+The packages \Package{commath} and \Package{skmath} provide some additional maths command.
+Differentials etc.\ are particularly useful. 
+\Package{skmath} does quite a lot more and even modifies/enhances some standard commands.
+
 A list of other packages that are commonly used is given in
 Table~\ref{tab:package:other2}. They are not
 included in the list above, because they are either not really needed
@@ -202,6 +227,7 @@ or have been superseded by other packages.
 \begin{table}[htbp]
   \centering
   \begin{tabular}{lp{0.8\textwidth}}
+    \toprule
     \Package{hepunits} & Typeset units properly with correct spacing\\
     \Package{units} & Typeset units properly with correct spacing.\\
     \Package{SIunits} & Typeset units properly with correct
@@ -210,14 +236,25 @@ or have been superseded by other packages.
     \Package{fancyhdr} & As the name suggests, do your own header and
     footer configuration. Within \KOMAScript{} it is recommended to use
     \Package{scrpage2} instead\\
-    \Package{dcolumn} & Very helpful for lining up columns on character
-    strings such as a decimal point. \Package{siunitx} offers similar
-    and better functionality.\\
+    \Package{feynmf} & Draw Feynman graphs with Metafont\\
+    \Package{subfig} & As the name suggests make sub-figures and add
+    separate captions for them. \emph{This package has apparently been
+      deprecated.}\\
+    \Package{subfigure} & As the name suggests make sub-figures and add
+    separate captions for them. \emph{This package is deprecated.}\\
     \Package{color} & Add colour commands -- \Package{xcolor} is
     needed to colour boxes around links.\\
     \Package{float} & As far as I can tell \Package{floatflt} offers more options.\\
+    \Package{caption} & Much more control on captions -- as
+    \KOMAScript{} also has many options, not sure this is necessary.\\
     \Package{ziffer} & Spacing with a comma as decimal separator is
-    correct.
+    correct.\\
+    \Package{nomencl} & Another package for creating a glossary.\\
+    \Package{fncychap} & Another package for changing the style of the
+    chapter heading.\\
+    \Package{quotchap} & Another package for changing the style of the
+    chapter heading.\\
+    \bottomrule
   \end{tabular}
   \caption{Other packages that are often used, but I have already
     given alternatives.}

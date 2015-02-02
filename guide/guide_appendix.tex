@@ -13,60 +13,92 @@ information.
   \toprule
   Date & Comment\\
   \midrule
+  02 Feb 2015 & Add ability to pass options to \texttt{ubonn-thesis.sty}
+  using \Package{keyval} package.
+  \TeXlive version can be passed as an option. Improve its handling.
+  Change a few default packages:
+  \Package{longtable} $\to$ \Package{xtab};
+  \Package{subfig} $\to$ \Package{subcaption}.
+  Add options for different fonts. 
+  Add inclusion of \Package{biblatex} package into style file.
+  Put \Package{biblatex} fine tuning into a new style file \texttt{ubonn-biblatex.sty}.
+  Add options so that bibliography in standard astronomy style can be produced.
+  Add \Macro{boldmath} command to bold font by default.
+  Remove inclusion of \Package{feynmf}/\Package{feynmp} by default.\\
+  
   10 Jul 2013 & Move thesis main file to \texttt{mythesis}
   subdirectory. Also put \texttt{Makefile} and copy
   \texttt{ubonn-thesis.sty} into \texttt{mythesis} subdirectory. Split
   main \texttt{Makefile} into several files, one for thesis, one for
   the guide an done for
   pictures and Feynman graphs.\\
+  
   06 Jul 2013 & Use the \Package{standalone} package in the
   \Package{tikz} figures. Add commented out code to \Package{feynmp}
   figures to show how to use \Package{standalone} for them as
   well. Move the guide main file to the
   \texttt{guide} subdirectory so that this works properly.\\
+  
   04 Jul 2013 & Add a few examples of using the \Package{tikz}
   package. Switch to using \Package{feynmp} rather than
   \Package{feynmf} by default (for \TeXLive 2011). Add \Macro{write18}
   statements for
   Feynman graphs with \Package{feynmp} and adapt \texttt{Makefile}.\\
+  
   18 May 2013 & Add some information on the \Package{refcheck} package
   and back-referencing with \Package{biblatex}.\\
+  
   23 Apr 2013 & Rename pibonn-thesis to ubonn-thesis. Make thesis
   submission a separate chapter (so that PhD submission can also be a
   separate document). Make \TeXLive
   2011 the default. Make Inspire rather than Spires default.\\
+  
   31 Mar 2013 & Add instructions on how to use \LaTeX\ backport under
   Ubuntu variants.\\
+  
   28 Mar 2013 & Updated and hopefully complete and correct
   instructions on thesis submission. Move to USenglish and UKenglish
   as languages rather than american and british.\\
+  
   14 Mar 2013 & Change the style of the chapter heading. Add some more
   instructions which cover pages are needed when.\\
+  
   24 Jan 2013 & Add watermark possibility with \Package{background} package.\\
+  
   14 Dec 2012 & Added a glossary and a list of acronyms as well as
   instructions on how to make them. Skeleton CV for PhD thesis added
   -- has still to be cross-checked with the Promotionsbüro.\\
+  
   04 Dec 2012 & Add some hints on what title pages to use when and
   what you have to worry about when printing and submitting your thesis.\\
+  
   02 Dec 2012 & Use American-style quotation marks by default with the
   \Package{csquotes} package. This means outer \enquote{double quote
     and inner \enquote{single quote}}, which seems to be quite
   common, even in British (UK) English publications such as CERN Courier.\\
+  
   22 Oct 2012 & Replace \Package{color} by \Package{xcolor} so that
   one can colour boxes around links.\\
+  
   12 Oct 2012 & Add some more information on installing \TeXLive
   2011. Add some thesis examples. Add some hints on using
   Kile. Sorting of references turned off for \TeXLive 2011. Some
   more information on which reference types to use added.\\
+  
   24 Aug 2012 & Update svn information due to PI changes.\\
+  
   19 Jun 2012 & Make a separate file for cover so that page
   numbering starts properly.\\
+  
   18 Jun 2012 & Add instructions for \TeXLive under Windows.\\
+  
   05 Jun 2012 & Move current version into the trunk subdirectory to
   conform to usual svn structure.\\
+  
   24 May 2012 & Made the guide more generic so that it can be sent to
   other institutes. Used \Macro{ifthenelse} everywhere rather than
   having separate files for different \TeXLive versions.\\
+  
   15 May 2012 & Reorganised switching between \TeXLive 2009 and
   2011. The version should be set first before loading the style
   file. Without the option \TeXLive 2009 is assumed. Some changes to
@@ -74,24 +106,31 @@ information.
   options. Added some comments on ways of writing axis names for
   coordinates. Added some information on using \Package{feynmp}
   rather than \Package{feynmf}.\\
+  
   14 May 2012 & Only include one title page for Bachelor theses.  Add
   some more sources of information. Reorganise and improve a bit the
   references chapter. Reorganise information on installing a \TeX\
   setup. Move Windows XP to a separate subsection. Add a bit of
   information for a Mac. Add a bit of information on
   the \Package{subfiles} package.\\
+  
   06 Mar 2012 & Add more information on formatting footnotes.\\
+  
   23 Jan 2012 & Added more and better examples of using the
   \Option{S} column format in tables.\\
+  
   20 Jan 2012 & Add more information on \Package{biblatex} and make
   this the default (unsorted, numeric) for a thesis.\\
+  
   11 Jul 2011 & Removed dot after chapter and figure/table numbers.\\
+  
   17 Jun 2011 & Added discussion of \Package{siunitx} package. Added
   some extra tables that also use this package. Added
   \Package{booktabs} package which include \Macro{toprule},
   \Macro{midrule} and \Macro{bottomrule} to get better looking
   tables. Also switched from \Macro{usepackage} to
   \Macro{RequirePackage} in \texttt{ubonn-thesis.sty}.\\
+  
   23 May 2011 & Changed default font to txfonts. Added more font
   options and explanation.\\
   \bottomrule
@@ -100,12 +139,11 @@ information.
 Here is a list of ideas for more information that could be added to
 this guide:
 \begin{itemize}
-\item Add an example table using \Package{ctable} and footnotes in a table.
 \item Add drawing of Feynman graphs with \Package{axodraw} and/or
   \Package{jaxodraw}.
 \item Add instructions on content of CV and summary for PhD thesis.
-\item Add information on the \Package{import} package.
 \end{itemize}
+
 
 %==============================================================================
 \chapter{Long tables}
@@ -120,19 +158,54 @@ appendices. Code or data cards can also be included here.  Examples of
 complicated typesetting have been given already in
 Chapter~\ref{sec:table}. In this appendix I give an example of a table
 (Table~\ref{tab:alphabet}) that goes over more than one page using the
-\Package{longtable} package. Note that \Package{longtable} is a
+\Package{xtab} package. If instead you use \Package{longtable},
+note that it is a
 combination of \Env{tabular} and \Env{table} in one
-environment. As mentioned in Chapter~\ref{sec:package}, an alternative
-is the \Package{supertab} package. Footnotes do not work properly in a
-normal \Env{tabular}, but they do work in \Env{longtable}.
+environment. 
+As mentioned in Chapter~\ref{sec:package}, an alternative
+is the \Package{supertabular} package.
+ 
+While footnotes do not work properly in a
+normal \Env{tabular}, but they do work in \Env{longtable}
+if you use \Package{longtable}.
+You can use the \Env{mpxtabuar} environment to include footnotes in a table
+if you use \Package{xtab}.
 
-\begin{longtable}{rcl}
-  \toprule
+If you use the \Package{xtab} package, 
+note that you should specify the table header and footer outside the table itself.
+Do not include \Env{xtabular} inside a \Env{table} environment, as the table will
+then be output on one page, which is not what you want!
+Such packages sometimes need a bit of help to get the page breaks in the right place.
+According to the \Package{xtab} documentation you should first try to play
+around with the variable \Macro{xentrystretch}. The default value is \num{0.1}.
+Decrease this to put more on a page and increase it to get less.
+You can even set it to a negative value!
+The value can be set per table.
+As an alternative you can use the \Macro{shrinkheight} command.
+
+\clearpage
+\tablefirsthead{\toprule
   \multicolumn{1}{c}{Number} &
   \multicolumn{1}{c}{Letter} &
   \multicolumn{1}{c}{Explanation}\\
   \midrule
-  \endhead
+}
+\tablehead{\midrule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+}
+\tabletail{\midrule
+  \multicolumn{3}{r}{Continued on next page}\\
+  \midrule
+}
+\tablelasttail{\bottomrule}
+\bottomcaption{The alphabet.}
+\label{tab:alphabet}
+\xentrystretch{-0.15}
+\begin{center}
+  \begin{mpxtabular}{rcl}
    1 & a & The lowercase 1st letter in the alphabet%
    \footnote{\enquote{a} deserves a footnote}\\
    2 & b & The lowercase 2nd letter in the alphabet\\
@@ -187,10 +260,8 @@ normal \Env{tabular}, but they do work in \Env{longtable}.
   24 & X & The uppercase 24th letter in the alphabet\\
   25 & Y & The uppercase 25th letter in the alphabet\\
   26 & Z & The uppercase 26th letter in the alphabet\\
-  \bottomrule
-\caption{The alphabet.}
-\label{tab:alphabet}
-\end{longtable}
+  \end{mpxtabular}
+\end{center}
 
 
 %==============================================================================
@@ -218,6 +289,7 @@ As I mentioned in the introduction, the institute is a member of Dante
 and I therefore receive a copy of the \TeX\ Collection DVD every
 year. You can also download the installation you need from the \TeX\
 Users (TUG) group web page: \url{http://www.tug.org/texcollection}.
+
 
 %------------------------------------------------------------------------------
 \section{Integrated environments}
@@ -318,6 +390,14 @@ biblatex
 \end{verbatim}
 For Kubuntu 13.04 I also had to install \texttt{texlive-metapost} in
 order to compile the guide.
+
+With (Ku|Xu|U)buntu 14.04, it seems that a few more packages may have to be installed:
+\texttt{texlive-fonts-recommended},
+\texttt{texlive-fonts-extra},
+\texttt{texlive-latex-extra},
+\texttt{texlive-bibtex-extra},
+\texttt{biber}.
+\texttt{biblatex} now seems to be included in \texttt{texlive-bibtex-extra} rather than having its own package.
 
 \noindent
 Using these packages I was able to issue to following commands to
@@ -638,6 +718,11 @@ process the glossary, you need to run the command
 and/or \texttt{make thesis09} if you want to make a glossary for your
 thesis.
 
+If you use the package \Package{xtab} for long tables,
+then you should include \Package{glossaries} with the option \Option{nosuper}
+to avoid it loading \Package{supertabular}.
+Use styles with a \texttt{long} rather than a \texttt{super} variant if you want such features.
+
 I illustrate the use with the standard description of the ZEUS
 detector, which includes the abbreviations that are used in the rest
 of a ZEUS paper.  As a first step you define the terms for the
@@ -740,7 +825,7 @@ We have tried out \foreignquote{ngerman}{Druckerei Eberwein}. Their
 price was reasonable and they delivered quickly and in good quality.
 
 %==============================================================================
-\chapter{A famous equation is \boldmath$E = mc^{2}$}
+\chapter{A famous equation is $E = mc^{2}$}
 \label{sec:emc2}\index{math!bold}
 %==============================================================================
 
@@ -753,12 +838,12 @@ No optional title for a chapter is needed as the chapter title is typeset in bol
 font also in the table of contents.
 
 %------------------------------------------------------------------------------
-\section[A slightly less famous equation is $F = m a$]%
-        {A slightly less famous equation is \boldmath$F = m a$}
+\section{A slightly less famous equation $F = m a$}
 \label{sec:fma}
 %------------------------------------------------------------------------------
 
-The optional title here does not include \Macro{boldmath}, as the
+The title here does not include \Macro{boldmath}, as the bold font series turns on bold math by default.
+Note that the
 section in the table of contents is typeset in a normal font when
 writing a book or report.
 
@@ -769,8 +854,8 @@ writing a book or report.
 \label{sec:sig}
 %------------------------------------------------------------------------------
 
-This attempt uses Greek letters and some specific font and appears to
-also work OK.
+This attempt includes \Macro{boldmath} by hand and uses Greek letters and some specific font.
+It appears to also work OK.
 
 
 %==============================================================================

@@ -1,43 +1,22 @@
 \documentclass[a4paper,twoside,ngerman,UKenglish]{scrbook}
 %------------------------------------------------------------------------------
-% Wrapper for testing cover pages for theses in the
-% Physikalisches Institut, Uni Bonn
+% Wrapper for testing cover pages for theses for the
+% physics and astronomy institutes in the University of Bonn
 
 %------------------------------------------------------------------------------
 % Set to 2009 for biblatex and bibtex8 (TeX Live 2009)
 % Set to 2011 for biblatex and biber   (TeX Live 2011 or later)
 % This must be set before \usepackage{ubonn-thesis}
 \newcommand*{\texlive}{2011}
-%
-\usepackage{../ubonn-thesis}
+
+\usepackage[backref=false]{../ubonn-thesis}
+\usepackage{../ubonn-biblatex}
 \usepackage{../thesis_skel/thesis_defs}
 
 %------------------------------------------------------------------------------
-% Use bibtex8 for TeX Live 2009
-%   If you do not have umlauts etc. in your refs, you can drop bibencoding=latin1
-% Use biber   for TeX Live 2011 or later
-%
-\ifthenelse {\texlive = 2009} {%
-  \usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
-    style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
-}{%
-  \usepackage[backend=biber,
-    style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
-}
 % Specify the bibliography files here and not at the end!
-% Use standard_refs-bibtex if you use bibtex8
-% and standard_refs-biber  if you use biber
-\ifthenelse {\texlive = 2009} {%
-  % Adjustments to output are in this style file:
-  \usepackage{../biblatex/biblatex-num-v2009}
-  \bibliography{../thesis_skel/thesis_refs.bib,%
-    ./refs/standard_refs-bibtex.bib}
-}{%
-  % Adjustments to output are in this style file:
-  \usepackage{../biblatex/biblatex-num-v2011}
-  \addbibresource{../thesis_skel/thesis_refs.bib}
-  \addbibresource{../refs/standard_refs-biber.bib}
-}
+\addbibresource{../refs/standard_refs-biber.bib}
+\addbibresource{../thesis_skel/thesis_refs.bib}
 
 %------------------------------------------------------------------------------
 % The following definitions are used to produce the title pages
@@ -55,14 +34,14 @@
 \newcommand*{\thesisrefereetwo}{Prof.\ Dr.\ Anne Jones}
 % Date when thesis was submitted (Master/Diplom)
 % Year or Month, Year when thesis was submitted (PhD)
-\newcommand*{\thesissubmit}{XX.YY.2013}
-% \newcommand*{\thesissubmit}{Month 2013}
+\newcommand*{\thesissubmit}{XX.YY.2015}
+% \newcommand*{\thesissubmit}{Month 2015}
 % Date of thesis examination (PhD)
-\newcommand*{\thesispromotion}{XX.YY.2013}
+\newcommand*{\thesispromotion}{XX.YY.2015}
 % Month and year of the final printed version of the thesis
 \newcommand*{\thesismonth}{MMM}
-\newcommand*{\thesisyear}{2013}
-\newcommand*{\thesisnumber}{BONN-IR-2013-XXX}
+\newcommand*{\thesisyear}{2015}
+\newcommand*{\thesisnumber}{BONN-IR-2015-XXX}
 
 %------------------------------------------------------------------------------
 % The abstract is only needed for the printed version and should be in

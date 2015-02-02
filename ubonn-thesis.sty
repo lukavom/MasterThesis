@@ -97,11 +97,10 @@
 
 % Check backend - if TeX Live is earlier than 2012 and backend is biber,
 % change it to something more appropropriate
-\ifthenelse {\texlive < 2012} {%
-  ifthenelse {\UBN@backend = biber} {%
-    \typeout{ubonn-thesis: Setting backend to bibtex8}
-    \renewcommand*{\UBN@backend}{backend=bibtex8,bibencoding=latin1}
-  }
+\ifthenelse {\texlive < 2012 \AND \equal{\UBN@backend}{biber}}{%
+  \typeout{ubonn-thesis: Setting backend to bibtex8}
+  %\renewcommand*{\UBN@backend}{backend=bibtex8,bibencoding=latin1}
+}{%
 }
 
 %------------------------------------------------------------------------------

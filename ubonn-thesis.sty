@@ -99,12 +99,12 @@
 % change it to something more appropropriate
 \ifthenelse {\texlive < 2012 \AND \equal{\UBN@backend}{biber}}{%
   \typeout{ubonn-thesis: Setting backend to bibtex8}
-  \renewcommand*{\UBN@backend}{backend=bibtex8,bibencoding=latin1}
+  \renewcommand*{\UBN@backend}{bibtex8,bibencoding=latin1}
 }{%
 }
 
 % Switch from subcaption to subfig if TeX Live is earlier than 2012
-\ifthenelse {\texlive < 2012 \AND \UBN@subcaption}{%
+\ifthenelse {\texlive < 2012 \AND \boolean{UBN@subcaption}}{%
   \typeout{ubonn-thesis: Use subfig instead of subcaption}
     \UBN@subfigurefalse
     \UBN@subfigtrue

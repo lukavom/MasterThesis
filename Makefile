@@ -2,7 +2,8 @@
 # Makefile to create a new thesis skeleton
 # Can also run feynmf/feynmp/tikz on files in a directory
 #
-THESIS = mythesis
+THESIS  = mythesis
+TEXLIVE = 2014
 # EXTRACMD = --shell-escape
 ifndef FEYNDIR
 FEYNDIR = ./feynmf
@@ -34,7 +35,8 @@ endif
 
 new:
 	mkdir $(THESIS)
-	cp thesis_skel/thesis_skel.tex        $(THESIS)/$(THESIS).tex
+	#cp thesis_skel/thesis_skel.tex        $(THESIS)/$(THESIS).tex
+	sed 's/texlive=2014/texlive=$(TEXLIVE)/' thesis_skel/thesis_skel.tex > $(THESIS)/$(THESIS).tex
 	cp thesis_skel/thesis_defs.sty        $(THESIS)/
 	cp thesis_skel/thesis_refs.bib        $(THESIS)/
 	cp thesis_skel/thesis_intro.tex       $(THESIS)/
@@ -48,7 +50,8 @@ new:
 
 astro:
 	mkdir $(THESIS)
-	cp thesis_skel/thesis_astro_skel.tex  $(THESIS)/$(THESIS).tex
+	#cp thesis_skel/thesis_astro_skel.tex  $(THESIS)/$(THESIS).tex
+	sed 's/texlive=2014/texlive=$(TEXLIVE)/' thesis_skel/thesis_skel.tex > $(THESIS)/$(THESIS).tex
 	cp thesis_skel/thesis_defs.sty        $(THESIS)/
 	cp thesis_skel/thesis_refs.bib        $(THESIS)/
 	cp thesis_skel/thesis_astro_intro.tex $(THESIS)/thesis_intro.tex

@@ -12,9 +12,10 @@ ifdef file
 FEYNFILES = $(FEYNDIR)/$(file).tex
 TIKZFILES = $(TIKZDIR)/$(file).tex
 endif
+BIBTEX = biber
 AWKDIR=..
 
-.PHONY: thesis thesis09 thesis11 cover \
+.PHONY: thesis cover \
 	feynmf feynmp tikz \
 	cleanthesis cleancover \
 	cleanfeynmf cleanfeynmp cleantikz cleanpictpdf \
@@ -24,16 +25,16 @@ AWKDIR=..
 
 thesis: thesis11
 
-thesis09:
+thesis09: $(THESIS).tex *.tex *.bib
 	pdflatex  $(EXTRACMD) $(THESIS)
-	bibtex    $(THESIS)
+	bibtex8   $(THESIS)
 	# makeglossaries $(THESIS)
 	pdflatex  $(EXTRACMD) $(THESIS)
 	pdflatex  $(EXTRACMD) $(THESIS)
 
-thesis11:
+thesis11: $(THESIS).tex *.tex *.bib
 	pdflatex  $(EXTRACMD) $(THESIS)
-	biber     $(THESIS)
+	$(BIBTEX) $(THESIS)
 	# makeglossaries $(THESIS)
 	pdflatex  $(EXTRACMD) $(THESIS)
 	pdflatex  $(EXTRACMD) $(THESIS)

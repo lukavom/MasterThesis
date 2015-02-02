@@ -15,10 +15,12 @@ information.
   \midrule
   02 Feb 2015 & Add ability to pass options to \texttt{ubonn-thesis.sty}
   using \Package{keyval} package.
-  \TeXlive version can be passed as an option. Improve its handling.
+  \TeXLive 2014 is now the default.
+  \TeXLive version can be passed as an option. Improve its handling.
+  Use \texttt{bibtex8} instead of \texttt{bibtex} for old \TeXLive versions.
   Change a few default packages:
   \Package{longtable} $\to$ \Package{xtab};
-  \Package{subfig} $\to$ \Package{subcaption}.
+  \Package{subfig} $\to$ \Package{subcaption} (for \TeX Live 2012 and later).
   Add options for different fonts. 
   Add inclusion of \Package{biblatex} package into style file.
   Put \Package{biblatex} fine tuning into a new style file \texttt{ubonn-biblatex.sty}.
@@ -41,7 +43,7 @@ information.
   
   04 Jul 2013 & Add a few examples of using the \Package{tikz}
   package. Switch to using \Package{feynmp} rather than
-  \Package{feynmf} by default (for \TeXLive 2011). Add \Macro{write18}
+  \Package{feynmf} by default (as of \TeXLive 2011). Add \Macro{write18}
   statements for
   Feynman graphs with \Package{feynmp} and adapt \texttt{Makefile}.\\
   
@@ -283,7 +285,7 @@ Other packages that I recommend and that are subject to rapid
 development still are \Package{biblatex} and
 \Package{siunitx}. If you want to fully exploit their capabilities,
 you should make sure you \LaTeX{} installation is as recent as
-possible -- I recommend \TeXLive 2011 or 2012.
+possible -- I recommend \TeXLive 2013 or 2014.
 
 As I mentioned in the introduction, the institute is a member of Dante
 and I therefore receive a copy of the \TeX\ Collection DVD every
@@ -304,7 +306,7 @@ about which files should be included when compiling.
 Kile\index{kile} is quite popular, especially if you use the KDE
 desktop environment. \TeXstudio\index{TeXstudio} and
 \TeXmaker\index{TeXmaker} can be installed under Windows, MacOSX or
-Linux. I have tried \TeXstudio under Windows and it works nicely. It
+Linux. I have tried \TeXstudio in all three systems and it works nicely. It
 can be downloaded from \url{http://texstudio.sourceforge.net/}. Others
 report good experience with \TeXmaker (under Ubuntu). As mentioned
 above it is available as an Ubuntu package or from
@@ -319,7 +321,7 @@ under:  \textsf{Options} $\to$ \textsf{Configure TeXstudio} $\to$
 \enquote{BuildWithGlossary}. This executes \texttt{pdflatex, biber,
   makeindex, makeglossary, pdflatex, pdflatex}.
 
-I continue to use is \texttt{emacs}\index{emacs} and AUCTeX, as I can
+I used to use \texttt{emacs}\index{emacs} and AUCTeX, as I can
 then use the same editor for everything. Note that the
 RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
 tools for finding and inserting cross-references and the names of
@@ -361,8 +363,8 @@ Kile, but it should be possible to do it in the same way as you add a
 \label{sec:app:kubuntu}\index{Linux}\index{Ubuntu}\index{Kubuntu}\index{Xubuntu}
 %------------------------------------------------------------------------------
 
-For my most recent tests I have been using my laptop with Kubuntu 12.10
-and using \TeXLive 2012, which I installed by hand.
+For my most recent tests with Ubuntu I have been using Xubuntu 14.04 and 
+\TeXLive 2013.
 
 I also made the guide on a plain Xubuntu 12.04
 installation, which used the default packages from the Xubuntu image. At
@@ -530,10 +532,13 @@ link from \texttt{/usr/local/bin/gnome-open} to
 %------------------------------------------------------------------------------
 
 I also tried to to make the guide and a skeleton thesis under
-Windows. I used the 2010 \TeX{} Collection DVD from Dante to install
-pro\TeX t, which is based on MiK\TeX. What the user sees is \TeXworks
+Windows. I have had success with the 2010 \TeX{} Collection DVD from Dante to install
+pro\TeX t, which is based on MiK\TeX. 
+What the user sees is \TeXworks
 which is deliberately supposed to look like the Mac's \TeX Shop. This
 is discussed in Section~\ref{sec:app:miktex}.
+More recently I simply downloaded the MiK\TeX\ installer from
+\url{htp://miktex.org}.
 You can also install \TeXLive for Windows. Some hints on how to do
 this are given below (Section~\ref{sec:app:texlive}).
 
@@ -649,17 +654,17 @@ You can either use \TeXworks as the front end or you can install
 \label{sec:app:mac}\index{mac}
 %------------------------------------------------------------------------------
 
-Even though they are becoming more and more popular, I do not have any
-experience installing and running \LaTeX\ on a Mac. I have been told
-that the standard package to install is \TeX Shop. Together with
-Basic\TeX\ this provides a basic
-environment. However, if you want to do more (like write a thesis),
+For the past year, I have been installing and running \LaTeX\ on a MacBook Pro.
+The standard package you start with is \TeX Shop. 
+Together with Basic\TeX\ this provides a basic environment. 
+However, if you want to do more (like write a thesis),
 you should install \TeXLive. Note that the Dante \TeX\
 Collection DVD includes Mac\TeX, which is what the \TeX Shop web page
 recommends as the best combination to install.
+You can also doenload Mac\TeX from \url{http://www.tug.org/mactex/}.
 
 There are MacOSX versions of \TeXstudio and \TeXmaker which you can
-also try.
+also try. I have been using \TeXstudio.
 
 
 %==============================================================================
@@ -831,11 +836,16 @@ price was reasonable and they delivered quickly and in good quality.
 
 \LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
 \noindent
-This chapter is included to illustrate how to get bold mathematics in
-a chapter/section title and how to avoid it in the table of contents.
+This chapter was included to check that one gets bold mathematics in
+a chapter/section title, but not in the table of contents.
 
-No optional title for a chapter is needed as the chapter title is typeset in bold
-font also in the table of contents.
+As of release of the \Package{ubonn-thesis} package, no special handling of
+titles should be necessary. This is because the following line was added:
+\begin{verbatim}
+  \def\bfseries{\fontseries\bfdefault\selectfont\boldmath}
+\end{verbatim}
+%No optional title for a chapter is needed as the chapter title is typeset in bold
+%font also in the table of contents.
 
 %------------------------------------------------------------------------------
 \section{A slightly less famous equation $F = m a$}
@@ -850,7 +860,7 @@ writing a book or report.
 
 %------------------------------------------------------------------------------
 \section[The cross-section is given by $\sigma = N / \mathcal{L}$]%
-        {The cross-section is given by \boldmath$\sigma = N / \mathcal{L}$}
+        {The cross-section is given by $\sigma = N / \mathcal{L}$}
 \label{sec:sig}
 %------------------------------------------------------------------------------
 
@@ -872,7 +882,7 @@ this guide is compiled with \TeXLive 2011 or later.
 
 \begin{figure}[htbp]
   \centering
-  \ifthenelse {\texlive = 2009} {%
+  \ifthenelse {\texlive < 2011} {%
     \fbox{\parbox[c]{0.8\textwidth}{%
         Sorry, \Package{tikz} is too old in \TeXLive 2009 and
         earlier to make this plot.

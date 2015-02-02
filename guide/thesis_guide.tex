@@ -59,7 +59,7 @@
 \addbibresource{../guide/refs/zeus_2010.bib}
 % Use example_refs-latin1 and standard_refs-bibtex with bibtex8
 % and example_refs-utf8   and standard_refs-biber  if you use biber
-\ifthenelse {\texlive = 2009} {%
+\ifthenelse {\texlive < 2011} {%
   \addbibresource{../refs/standard_refs-bibtex.bib}
   \addbibresource{../refs/example_refs-latin1.bib}
 }{%

@@ -84,11 +84,11 @@ clearly a bit clumsy, but it does work!
 
 The \Package{siunitx} package contains some nice tools that make the
 correct alignment of numbers simpler. The syntax of some of the
-options changed between version 1 (2009) and version 2 (2011). I
+options changed between version 1 ($\leq 2009$) and version 2 ($\geq 2011$). I
 discuss the version 2 options in the main text and give the equivalent
 version 1 options as a footnote. If you look at the \LaTeX\ code, the
 \TeXLive 2009 version is inside \Macro{ifthenelse}\{\textbackslash
-texlive = 2009\}, while the \TeXLive 2011 version is in the second
+texlive < 2011\}, while the \TeXLive 2011 version is in the second
 block.
 
 A first simple example is shown
@@ -101,7 +101,7 @@ centre the temperatures as the heading is wider than the numbers.
 
 \begin{table}[htbp]
   \centering
-\ifthenelse {\texlive = 2009} {%
+\ifthenelse {\texlive < 2011} {%
   \begin{tabular}{lS[tabformat = 4.2]S}
     \toprule
     Liquid & {Temp.} & {Viscosity $\eta$}\\
@@ -137,7 +137,7 @@ centre the temperatures as the heading is wider than the numbers.
   \end{tabular}
 }
   \quad
-\ifthenelse {\texlive = 2009} {%
+\ifthenelse {\texlive < 2011} {%
   \foreignlanguage{ngerman}{%
   \begin{tabular}{lS[tabformat = 4.2]S}
     \toprule
@@ -195,7 +195,7 @@ Table~\ref{tab:viscosity}.
 \begin{table}[htbp]
   \centering
   \renewcommand{\arraystretch}{1.2}
-\ifthenelse {\texlive = 2009} {%
+\ifthenelse {\texlive < 2011} {%
   \begin{tabular}{%
       r@{\,:\,}S[tabnumalign=centredecimal]%
       r@{\,}c@{\,}l@{\,}l%
@@ -303,7 +303,7 @@ without any special formatting!
 \begin{table}[htbp]
   \centering
   \renewcommand{\arraystretch}{1.2}
-\ifthenelse {\texlive = 2009} {%
+\ifthenelse {\texlive < 2011} {%
   \sisetup{retainplus}
   \begin{tabular}{%
       S@{\,:\,}S
@@ -344,7 +344,7 @@ without any special formatting!
   \end{tabular}
 }
   \quad
-\ifthenelse {\texlive = 2009} {%
+\ifthenelse {\texlive < 2011} {%
   \sisetup{dp = 2}
   \begin{tabular}{%
       S[tabformat=3.2, tabnumalign = right]@{\,:\,}S
@@ -402,7 +402,7 @@ Another example using \Package{siunitx} tools that contains a similar
 problem is:
 
 \begin{center}
-\ifthenelse {\texlive = 2009} {%
+\ifthenelse {\texlive < 2011} {%
   \begin{tabular}{%
     S[tabnumalign=centerdecimal]@{$\,\pm$}S[tabnumalign=centerdecimal]|%
     c%

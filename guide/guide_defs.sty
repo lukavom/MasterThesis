@@ -47,7 +47,7 @@
 %
 % Units that were in hepunits
 %
-\ifthenelse {\texlive < 2010} {%
+\ifthenelse {\texlive < 2011} {%
   % \newunit[per=slash]{\MeVovercsq}{\MeV\per\clight\squared}
   % \newunit[per=slash]{\GeVovercsq}{\GeV\per\clight\squared}
 }{%
@@ -66,7 +66,7 @@
 %
 \newcommand*\valuesep{\,}
 % \newcommand*\valuesep{\quad}
-\ifthenelse {\texlive < 2010} {%
+\ifthenelse {\texlive < 2011} {%
   \sisetup{valuesep = \valuesep}
 }{%
   \sisetup{number-unit-product = \valuesep}
@@ -77,7 +77,7 @@
   \ensuremath{\pm \num{#2}\valuesep\text{(#3)}}%
   \endgroup
 }
-\ifthenelse {\texlive < 2010} {%
+\ifthenelse {\texlive < 2011} {%
   \newcommand*\numpmerr[3][]{%
     \begingroup
     \sisetup{#1}%

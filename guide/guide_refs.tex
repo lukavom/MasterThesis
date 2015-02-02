@@ -122,8 +122,11 @@ need something like:
 % \addbibresource{../refs/standard_refs-bibtex.bib}
 \end{verbatim}
 in the document preamble and \Macro{printbibliography} where they
-should be printed. The commented out lines are for \TeXLive 2009 with
+should be printed. The commented out lines are for \TeXLive 2011 and earlier with
 the \Option{bibtex8} backend.
+Note that as of version 3.0 of the thesis package,
+the \Package{biblatex} command is included in \Package{ubonn-thesis}.
+To turn it off add the option \Option{biblatex=false}.
 \par\noindent
 If you use \BibTeX{} you need something like:
 \begin{verbatim}
@@ -135,9 +138,6 @@ If you use \BibTeX{} you need something like:
 at the point where the references should be printed.
 Note that \LaTeX{} is sometimes picky about lists of directories that
 have spaces between them, so it is safer to include all files on one line.
-Note that as of version 3.0 of the thesis package,
-the \Package{biblatex} command is included in \Package{ubonn-thesis}.
-To turn it off add the option \Option{biblatex=false}.
 
 Which should you use? \BibTeX{} has been around for a long time and is
 therefore better known. However, it has many problems when it comes to
@@ -157,7 +157,7 @@ old syntax \verb+\"{a}+. This problem is completely solved if you use
 \Package{biblatex} and the \Option{biber} backend.
 
 If you use \Package{biblatex} and the \Option{bibtex8} backend (default
-setting for \TeXLive 2009), then you have to encode your \texttt{.bib}
+setting for \TeXLive 2011 and earler), then you have to encode your \texttt{.bib}
 files with latin1 and use the line:\\
 \Macro*{usepackage[bibencoding=latin1]\{biblatex\}}.\footnote{%
   If you do not include umlauts directly in the references you do not
@@ -296,10 +296,12 @@ hand.
 An example of a typical ATLAS paper as it comes from
 Inspire~\cite{Aad:2010ey-inspire} needs a bit of work.  With \TeXLive
 2011 the link to DOI and arXiv both work well~\cite{Aad:2010ey-final}.
+
+\textcolor{red}{Check if this is still true:
 With \TeXLive 2009, it worked on my laptop, but did not work properly
 on ATLAS machines (Ubuntu 10.04) that had version 0.8e of \Package{biblatex}.
 It may be that one can get it to work with a bit of help, but I have
-not tried all possible options.
+not tried all possible options.}
 
 % Depending on which\TeXLive 2009 version you actually have, you might
 % have to give a bit of help for the arXiv link to
@@ -361,9 +363,7 @@ numeric style.
 My experience with \Package{biblatex} has taken off in the last year, 
 since I started rewriting the ATLAS \LaTeX\ templates.
 The first official stable release of \Package{biblatex} was 19 Oct 2010.
-Active and rapid development is ongoing -- there were many
-updates in 2011.\footnote{\TeXLive 2009 includes either 
-  Version 0.8e (Ubuntu 10.04) or 1.4c (Kubuntu 11.10)} 
+Active and rapid development is ongoing -- there were many updates in 2011.
 Some things I recommend below may work a bit differently depending on which version
 you have. See Appendix~\ref{sec:app:tex} on how to install a newer
 version of \TeXLive if you want a more up-do-date version of \LaTeX.
@@ -388,8 +388,8 @@ The following options exist:
   \toprule
   Option & Default & Description \\
   \midrule
-  texlive & 2011 & Specify the \TeXLive version. Valid values are 2009 and 2011.
-  You can also use the older command \verb|\newcommand*{\texlive}{2011}|.\\
+  texlive & 2014 & Specify the \TeXLive version.
+  You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
   articletitle & true & Show the titles of articleand reports;\\
   titlequote & false & Enclose the title in quotes rather than using a slanted font.\\
   boldvol & false & Show the volume in bold face.\\
@@ -409,7 +409,7 @@ paragraph. It is not clear to me if you also need
 \verb+\AtEveryCitekey{\clearfield{url}}+.
 
 A fairly nice-looking style is \Option{ieee}. This is only be
-available in recent releases (2011) of \TeXLive. After playing around
+available in recent releases ($\geq 2011$) of \TeXLive. After playing around
 a bit with the \Option{ieee} style, I decided it is too new and has
 too many settings that depend on having a new version of
 \Package{biblatex} for now.
@@ -433,7 +433,7 @@ If it is available, \Option{biber} is probably the preferred backend to
 \Option{bibtex8}. However, the backend is mostly relevant for
 sorting, so it probably does not matter which you use if you use an
 option that gives the references in the order that they were
-cited. \Option{biber} seems to work well with \TeXLive 2011; it is
+cited. \Option{biber} seems to work well with \TeXLive 2012 and later; it is
 often not available with earlier versions.
 
 If you want to find out where your references are actually cited, you
@@ -526,9 +526,9 @@ In \texttt{standard\_refs-biber.bib} and
 \texttt{standard\_refs-bibtex.bib} I have put in the three standard
 references for the Standard Model~\cite{gsw}. They are combined by
 using \Option{@Set}\index{biblatex!Set option@"@Set option} and the relevant
-keys. If you use a recent version of \texttt{biber} (\TeXLive 2011)
+keys. If you use a recent version of \texttt{biber} (\TeXLive 2012 and later)
 this is all you have to do.  If, however, you are using \TeXLive
-2009, and therefore the \texttt{bibtex8} backend, the
+2011 or earler, and therefore the \texttt{bibtex8} backend, the
 \texttt{crossref} field must contain the same key as the first one in
 \texttt{entryset}.
 

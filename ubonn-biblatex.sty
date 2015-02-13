@@ -5,7 +5,7 @@
 % See ChangeLog or SVN log for history of changes.
 % Responsible: Ian Brock (ian.brock@cern.ch)
 %-------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-biblatex}[2015/01/28 Version 3.0 University of Bonn biblatex style]
+\ProvidesPackage{ubonn-biblatex}[2015/02/04 Version 3.0 University of Bonn biblatex style]
 \NeedsTeXFormat{LaTeX2e}
 
 %\typeout{University of Bonn biblatex style Version 3.0}
@@ -21,6 +21,7 @@
 \DeclareBoolOption[false]{boldvol}
 \DeclareBoolOption[false]{showdoi}
 \DeclareBoolOption[true]{showurl}
+\DeclareBoolOption[true]{eprint}
 \DeclareStringOption{texlive}
 \ProcessKeyvalOptions*
 
@@ -39,6 +40,13 @@
   %\DeclareFieldFormat{title}{\usebibmacro{string+doi}{\mkbibemph{#1}}}
 \fi
 
+% Turn off printing of arXiv
+\ifUBNB@eprint
+  \relax
+\else
+  \ExecuteBibliographyOptions{eprint=false}
+\fi
+
 % date=year option works for TeX Live 2013 or so onwards
 \typeout{atlasbiblatex: UBNB@texlive is [\UBNB@texlive]}
 \ifthenelse{\UBNB@texlive < 2013}{%
@@ -54,10 +62,12 @@
   \ifUBNB@titlequote
     \DeclareFieldFormat[article]{title}{\mkbibquote{#1}\isdot}
     \DeclareFieldFormat[booklet]{title}{\mkbibquote{#1}\isdot}
+    \DeclareFieldFormat[report]{title}{\mkbibquote{#1}\isdot}
     \DeclareFieldFormat[thesis]{title}{\mkbibquote{#1}\isdot}
   \else
     \DeclareFieldFormat[article]{title}{\emph{#1}\isdot}
     \DeclareFieldFormat[booklet]{title}{\emph{#1}\isdot}
+    \DeclareFieldFormat[report]{title}{\emph{#1}\isdot}
     \DeclareFieldFormat[thesis]{title}{\emph{#1}\isdot}
   \fi
 \else

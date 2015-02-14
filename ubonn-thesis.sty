@@ -41,6 +41,7 @@
 \DeclareStringOption{texlive}
 \DeclareStringOption[true]{backref}
 \DeclareStringOption[biber]{backend}
+\DeclareStringOption{bibencoding}
 \DeclareStringOption[numeric-comp]{bibstyle}
 \ProcessKeyvalOptions*
 
@@ -95,9 +96,9 @@
   \fi
 \fi
 
-% Check backend - if TeX Live is earlier than 2012 and backend is biber,
-% change it to something more appropropriate
-\ifthenelse {\texlive < 2012 \AND \equal{\UBN@backend}{biber}}{%
+% Check backend - if TeX Live is earlier than 2011 and backend is biber,
+% change it to something more appropriate
+\ifthenelse {\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
   \typeout{*** ubonn-thesis: setting backend to bibtex8}
   \renewcommand*{\UBN@backend}{bibtex8,bibencoding=latin1}
 }{%
@@ -312,20 +313,28 @@
 % Some more tweaks should be made to the appearance,
 % see/include bibtex/bst/atlas-biblatex.sty
 \ifUBN@biblatex
+  \ifx\UBN@bibencoding\@empty
+    \newcommand*{\UBN@biblatexencoding}{}
+  \else
+    \newcommand*{\UBN@biblatexencoding}{bibencoding=\UBN@bibencoding,}
+  \fi
   \ifUBN@astrobib
 %    \RequirePackage[backend=\UBN@backend,backref=\UBN@backref,
 %      style=authoryear,uniquelist=minyear,uniquename=init,refsection=chapter,natbib=true,
 %      block=none]{biblatex}
-    \RequirePackage[backend=\UBN@backend,backref=\UBN@backref,
+    \RequirePackage[backend=\UBN@backend,\UBN@biblatexencoding
+    backref=\UBN@backref,
     style=authoryear,natbib=true,refsection=chapter,
     block=none,firstinits=true]{biblatex}
   \else
     \ifthenelse {\texlive < 2010} {%
-      \RequirePackage[backend=\UBN@backend,hyperref=true,backref=\UBN@backref,
+      \RequirePackage[backend=\UBN@backend,hyperref=true,\UBN@biblatexencoding
+        backref=\UBN@backref,
         style=\UBN@bibstyle,sorting=none,
         block=ragged,firstinits=true]{biblatex}
     }{%
-      \RequirePackage[backend=\UBN@backend,backref=\UBN@backref,
+      \RequirePackage[backend=\UBN@backend,\UBN@biblatexencoding
+        backref=\UBN@backref,
         style=\UBN@bibstyle,sorting=none,
         block=ragged,firstinits=true]{biblatex}
     }

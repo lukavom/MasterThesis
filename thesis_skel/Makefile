@@ -26,22 +26,22 @@ AWKDIR=..
 thesis: thesis11
 
 thesis09: $(THESIS).tex *.tex *.bib
-	pdflatex  $(EXTRACMD) $(THESIS)
-	bibtex8   $(THESIS)
+	pdflatex   $(EXTRACMD) $(THESIS)
+	bibtex8 -H $(THESIS)
 	# makeglossaries $(THESIS)
-	pdflatex  $(EXTRACMD) $(THESIS)
-	pdflatex  $(EXTRACMD) $(THESIS)
+	pdflatex   $(EXTRACMD) $(THESIS)
+	pdflatex   $(EXTRACMD) $(THESIS)
 
 thesis11: $(THESIS).tex *.tex *.bib
-	pdflatex  $(EXTRACMD) $(THESIS)
-	$(BIBTEX) $(THESIS)
+	pdflatex   $(EXTRACMD) $(THESIS)
+	$(BIBTEX)  $(THESIS)
 	# makeglossaries $(THESIS)
-	pdflatex  $(EXTRACMD) $(THESIS)
-	pdflatex  $(EXTRACMD) $(THESIS)
+	pdflatex   $(EXTRACMD) $(THESIS)
+	pdflatex   $(EXTRACMD) $(THESIS)
 
 cover:
-	pdflatex  $(EXTRACMD) cover_only
-	pdflatex  $(EXTRACMD) cover_only
+	pdflatex   $(EXTRACMD) cover_only
+	pdflatex   $(EXTRACMD) cover_only
 
 feynmf:
 	make -f ../Makefile FEYNDIR=$(FEYNDIR) FEYNFILES="$(FEYNFILES)" \

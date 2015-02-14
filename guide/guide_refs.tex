@@ -35,7 +35,7 @@ include them in one reference or do you want to keep one article per
 reference?
 I give some hints on
 useful options and settings for \Package{biblatex} below (Section~\ref{sec:ref:bbx}).
-If you use \BibTeX, then you probably have to use the \Package{mcite}
+If you use traditional \BibTeX, then you probably have to use the \Package{mcite}
 package -- see Section~\ref{sec:ref:mcite}.
 Just to take a silly example. The ZEUS collaboration
 publications in
@@ -128,7 +128,7 @@ Note that as of version 3.0 of the thesis package,
 the \Package{biblatex} command is included in \Package{ubonn-thesis}.
 To turn it off add the option \Option{biblatex=false}.
 \par\noindent
-If you use \BibTeX{} you need something like:
+If you use traditional \BibTeX{} you need something like:
 \begin{verbatim}
 % Use BibTeX for the bibliography
 \bibliographystyle{unsrt}
@@ -139,7 +139,7 @@ at the point where the references should be printed.
 Note that \LaTeX{} is sometimes picky about lists of directories that
 have spaces between them, so it is safer to include all files on one line.
 
-Which should you use? \BibTeX{} has been around for a long time and is
+Which should you use? Traditional \BibTeX{} has been around for a long time and is
 therefore better known. However, it has many problems when it comes to
 sorting, handling more modern sources of information (e.g.\ the web),
 etc. \Package{biblatex} is still developing rather quickly and
@@ -157,7 +157,7 @@ old syntax \verb+\"{a}+. This problem is completely solved if you use
 \Package{biblatex} and the \Option{biber} backend.
 
 If you use \Package{biblatex} and the \Option{bibtex8} backend (default
-setting for \TeXLive 2011 and earler), then you have to encode your \texttt{.bib}
+setting for \TeXLive 2010 and earler), then you have to encode your \texttt{.bib}
 files with latin1 and use the line:\\
 \Macro*{usepackage[bibencoding=latin1]\{biblatex\}}.\footnote{%
   If you do not include umlauts directly in the references you do not
@@ -297,11 +297,11 @@ An example of a typical ATLAS paper as it comes from
 Inspire~\cite{Aad:2010ey-inspire} needs a bit of work.  With \TeXLive
 2011 the link to DOI and arXiv both work well~\cite{Aad:2010ey-final}.
 
-\textcolor{red}{Check if this is still true:
-With \TeXLive 2009, it worked on my laptop, but did not work properly
-on ATLAS machines (Ubuntu 10.04) that had version 0.8e of \Package{biblatex}.
-It may be that one can get it to work with a bit of help, but I have
-not tried all possible options.}
+%\textcolor{red}{Check if this is still true:
+%With \TeXLive 2009, it worked on my laptop, but did not work properly
+%on ATLAS machines (Ubuntu 10.04) that had version 0.8e of \Package{biblatex}.
+%It may be that one can get it to work with a bit of help, but I have
+%not tried all possible options.}
 
 % Depending on which\TeXLive 2009 version you actually have, you might
 % have to give a bit of help for the arXiv link to
@@ -344,7 +344,7 @@ from the \texttt{.bib} files, you have to tell them what format you
 want!  For a start, you have to choose between an alphabetic and a
 numeric scheme for the references. Most journals use a numeric
 style. This corresponds to style \Option{unsrt} or a variant thereof
-using standard \BibTeX.  If you use \Package{biblatex} you include the
+using traditional \BibTeX.  If you use \Package{biblatex} you include the
 package with option \Option{numeric-comp} or
 \Option{numeric}. \Option{numeric-comp} produces more compact
 citations (e.g.\ [1-4,7,9]) than \Option{numeric} (e.g.\
@@ -415,9 +415,9 @@ too many settings that depend on having a new version of
 \Package{biblatex} for now.
 
 There are slowly more and more \Package{biblatex} styles around, but
-not as many as \BibTeX. It is, however, much easier to change things
+not as many as traditional \BibTeX. It is, however, much easier to change things
 (usually you can just change an option) with \Package{biblatex} than it
-was for \BibTeX, so you can probably start with a standard file and
+was for traditonal \BibTeX, so you can probably start with a standard file and
 just make adjustments in your preamble. I have found a number of very
 useful hints on how to make changes in
 \url{http://tex.stackexchange.com/} -- just search for \Package{biblatex}.
@@ -433,8 +433,13 @@ If it is available, \Option{biber} is probably the preferred backend to
 \Option{bibtex8}. However, the backend is mostly relevant for
 sorting, so it probably does not matter which you use if you use an
 option that gives the references in the order that they were
-cited. \Option{biber} seems to work well with \TeXLive 2012 and later; it is
-often not available with earlier versions.
+cited. \Option{biber} seems to work well with \TeXLive 2012 and later;\footnote{%
+I have seen occasional problems with \TeXLive 2011, but it is mostly OK.}
+it is often not available with earlier versions.
+\texttt{ubonn-thesis} switches to \Option{bibtex8} automatically for \TeXLive
+versions earlier than 2011. It also sets the encoding to \texttt{latin1}.
+If you want to set the backend yourself, use the option \Option{backend}.
+Set the encoding with the option \Option{bibencoding} if necessary.
 
 If you want to find out where your references are actually cited, you
 can include the option \Option{backref=true}.
@@ -528,7 +533,7 @@ references for the Standard Model~\cite{gsw}. They are combined by
 using \Option{@Set}\index{biblatex!Set option@"@Set option} and the relevant
 keys. If you use a recent version of \texttt{biber} (\TeXLive 2012 and later)
 this is all you have to do.  If, however, you are using \TeXLive
-2011 or earler, and therefore the \texttt{bibtex8} backend, the
+2011 or earlier, and therefore the \texttt{bibtex} or \texttt{bibtex8} backend, the
 \texttt{crossref} field must contain the same key as the first one in
 \texttt{entryset}.
 

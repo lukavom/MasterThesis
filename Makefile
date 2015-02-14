@@ -106,7 +106,8 @@ cleanpictpdf:
 
 help:
 	@echo "Possible commands:"
-	@echo "new [THESIS=dirname]: Create a new thesis skeleton"
+	@echo "new [THESIS=dirname] [TEXLIVE=YYYY]: Create a new thesis skeleton"
+	@ECHO "  Default TeX Live version is 2014"
 	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIR)"
 	@echo "feynmp: Run feynmp for all .tex files in $(FEYNDIR)"
 	@echo "tikz:   Run tikz for all .tex files in $(TIKZDIR)"

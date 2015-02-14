@@ -25,22 +25,22 @@ AWKDIR=..
 guide: guide11
 
 guide09:
-	pdflatex  $(EXTRACMD) $(GUIDE)
-	bibtex    $(GUIDE)
-	pdflatex  $(EXTRACMD) $(GUIDE)
-	bibtex    $(GUIDE)
-	makeindex $(GUIDE)
+	pdflatex   $(EXTRACMD) $(GUIDE)
+	bibtex8 -H $(GUIDE)
+	pdflatex   $(EXTRACMD) $(GUIDE)
+	bibtex8 -H $(GUIDE)
+	makeindex  $(GUIDE)
 	makeglossaries $(GUIDE)
-	pdflatex  $(GUIDE)
-	pdflatex  $(GUIDE)
+	pdflatex   $(GUIDE)
+	pdflatex   $(GUIDE)
 
 guide11:
-	pdflatex  $(EXTRACMD) $(GUIDE)
-	biber     $(GUIDE)
-	makeindex $(GUIDE)
+	pdflatex   $(EXTRACMD) $(GUIDE)
+	biber      $(GUIDE)
+	makeindex  $(GUIDE)
 	makeglossaries $(GUIDE)
-	pdflatex  $(EXTRACMD) $(GUIDE)
-	pdflatex  $(GUIDE)
+	pdflatex   $(EXTRACMD) $(GUIDE)
+	pdflatex   $(GUIDE)
 
 feynmf:
 	make -f ../Makefile FEYNDIR=$(FEYNDIR) FEYNFILES="$(FEYNFILES)" \

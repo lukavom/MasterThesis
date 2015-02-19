@@ -21,7 +21,10 @@ do you format them? Sources of references are discussed in
 Section~\ref{sec:ref:sources}.
 There are two options for the formatting. Either you do it by
 hand, formatting \Macro{bibitem} entries yourself or you use
-\BibTeX. While \BibTeX\ may appear to be the more complicated option
+\BibTeX. 
+More precisely you should use the \Package{biblatex} package.
+which is a replacement for traditional \BibTeX.
+While \Package{biblatex} and/or \BibTeX\ may appear to be the more complicated option
 at the beginning, I strongly recommend that you use it.
 
 In addition, you have to make sure that authors' names are
@@ -35,7 +38,7 @@ include them in one reference or do you want to keep one article per
 reference?
 I give some hints on
 useful options and settings for \Package{biblatex} below (Section~\ref{sec:ref:bbx}).
-If you use traditional \BibTeX, then you probably have to use the \Package{mcite}
+If you use traditional \BibTeX (which I do not recommend), then you probably have to use the \Package{mcite}
 package -- see Section~\ref{sec:ref:mcite}.
 Just to take a silly example. The ZEUS collaboration
 publications in
@@ -76,7 +79,7 @@ I won't pretend that \BibTeX{} is the most user-friendly way of
 handling references and there are several things that you have to pay
 attention to when you use it for your references.
 
-The two big advantages of \BibTeX{} are: only references that you
+The two big advantages of \Package{biblatex} and/or \BibTeX{} are: only references that you
 actually refer to appear in the bibliography; you can change the
 format (consistently) of all articles in the bibliography simply by
 changing the style!
@@ -555,7 +558,8 @@ rather than collecting all references at the end of the thesis.
 This is straightforward to achieve with \Package{biblatex}.
 Simply add the option \Option{refsection=chapter} when you include \Package{biblatex}.
 This and more can be done by passing the option \Option{astrobib} to \Package{ubonn-thesis}.
-In addition you have give the command \Macro{printbibliography[heading=subbibliography]} at the end of each chapter.
+In addition you have give the command\\
+\Macro{printbibliography[heading=subbibliography]} at the end of each chapter.
 The thesis skeleton contains such commands commented out.
 The option \Option{astrobib} also sets things up so that the \Package{natbib} citation
 commands \Macro{citep}, \Macro{citet} and \Macro{citealt} can be used,

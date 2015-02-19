@@ -14,13 +14,14 @@ information.
   Date & Comment\\
   \midrule
   02 Feb 2015 & Add ability to pass options to \texttt{ubonn-thesis.sty}
-  using \Package{keyval} package.
+  using the \Package{keyval} package.
   \TeXLive 2014 is now the default.
-  \TeXLive version can be passed as an option. Improve its handling.
+  The \TeXLive version can be passed as an option. Improve its handling.
   Change a few default packages:
   \Package{longtable} $\to$ \Package{xtab};
-  \Package{subfig} $\to$ \Package{subcaption} (for \TeX Live 2012 and later).
-  Add options for different fonts. 
+  \Package{subfig} $\to$ \Package{subcaption} (for \TeXLive 2012 and later).
+  Add options for different fonts. Stick with \Package{xfonts} as default, 
+  but encourage use of \Package{newtx} if it is available.
   Add inclusion of \Package{biblatex} package into style file.
   Put \Package{biblatex} fine tuning into a new style file \texttt{ubonn-biblatex.sty}.
   Add options so that bibliography in standard astronomy style can be produced.
@@ -147,125 +148,6 @@ this guide:
 
 
 %==============================================================================
-\chapter{Long tables}
-\label{sec:app:tables}
-%==============================================================================
-
-\LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
-\noindent
-Long and complicated tables, such as tables containing the breakdown
-of the systematic error for each data point are usually put into the
-appendices. Code or data cards can also be included here.  Examples of
-complicated typesetting have been given already in
-Chapter~\ref{sec:table}. In this appendix I give an example of a table
-(Table~\ref{tab:alphabet}) that goes over more than one page using the
-\Package{xtab} package. If instead you use \Package{longtable},
-note that it is a
-combination of \Env{tabular} and \Env{table} in one
-environment. 
-As mentioned in Chapter~\ref{sec:package}, an alternative
-is the \Package{supertabular} package.
- 
-While footnotes do not work properly in a
-normal \Env{tabular}, but they do work in \Env{longtable}
-if you use \Package{longtable}.
-You can use the \Env{mpxtabuar} environment to include footnotes in a table
-if you use \Package{xtab}.
-
-If you use the \Package{xtab} package, 
-note that you should specify the table header and footer outside the table itself.
-Do not include \Env{xtabular} inside a \Env{table} environment, as the table will
-then be output on one page, which is not what you want!
-Such packages sometimes need a bit of help to get the page breaks in the right place.
-According to the \Package{xtab} documentation you should first try to play
-around with the variable \Macro{xentrystretch}. The default value is \num{0.1}.
-Decrease this to put more on a page and increase it to get less.
-You can even set it to a negative value!
-The value can be set per table.
-As an alternative you can use the \Macro{shrinkheight} command.
-
-\clearpage
-\tablefirsthead{\toprule
-  \multicolumn{1}{c}{Number} &
-  \multicolumn{1}{c}{Letter} &
-  \multicolumn{1}{c}{Explanation}\\
-  \midrule
-}
-\tablehead{\midrule
-  \multicolumn{1}{c}{Number} &
-  \multicolumn{1}{c}{Letter} &
-  \multicolumn{1}{c}{Explanation}\\
-  \midrule
-}
-\tabletail{\midrule
-  \multicolumn{3}{r}{Continued on next page}\\
-  \midrule
-}
-\tablelasttail{\bottomrule}
-\bottomcaption{The alphabet.}
-\label{tab:alphabet}
-\xentrystretch{-0.15}
-\begin{center}
-  \begin{mpxtabular}{rcl}
-   1 & a & The lowercase 1st letter in the alphabet%
-   \footnote{\enquote{a} deserves a footnote}\\
-   2 & b & The lowercase 2nd letter in the alphabet\\
-   3 & c & The lowercase 3rd letter in the alphabet\\
-   4 & d & The lowercase 4th letter in the alphabet\\
-   5 & e & The lowercase 5th letter in the alphabet\\
-   6 & f & The lowercase 6th letter in the alphabet\\
-   7 & g & The lowercase 7th letter in the alphabet\\
-   8 & h & The lowercase 8th letter in the alphabet\\
-   9 & i & The lowercase 9th letter in the alphabet\\
-  10 & j & The lowercase 10th letter in the alphabet%
-  \footnote{\enquote{j} deserves another footnote}\\
-  11 & k & The lowercase 11th letter in the alphabet\\
-  12 & l & The lowercase 12th letter in the alphabet\\
-  13 & m & The lowercase 13th letter in the alphabet\\
-  14 & n & The lowercase 14th letter in the alphabet\\
-  15 & o & The lowercase 15th letter in the alphabet\\
-  16 & p & The lowercase 16th letter in the alphabet\\
-  17 & q & The lowercase 17th letter in the alphabet\\
-  18 & r & The lowercase 18th letter in the alphabet\\
-  19 & s & The lowercase 19th letter in the alphabet\\
-  20 & t & The lowercase 20th letter in the alphabet\\
-  21 & u & The lowercase 21st letter in the alphabet\\
-  22 & v & The lowercase 22nd letter in the alphabet\\
-  23 & w & The lowercase 23rd letter in the alphabet\\
-  24 & x & The lowercase 24th letter in the alphabet\\
-  25 & y & The lowercase 25th letter in the alphabet\\
-  26 & z & The lowercase 26th letter in the alphabet\\
-   1 & A & The uppercase 1st letter in the alphabet\\
-   2 & B & The uppercase 2nd letter in the alphabet\\
-   3 & C & The uppercase 3rd letter in the alphabet\\
-   4 & D & The uppercase 4th letter in the alphabet\\
-   5 & E & The uppercase 5th letter in the alphabet\\
-   6 & F & The uppercase 6th letter in the alphabet\\
-   7 & G & The uppercase 7th letter in the alphabet\\
-   8 & H & The uppercase 8th letter in the alphabet\\
-   9 & I & The uppercase 9th letter in the alphabet\\
-  10 & J & The uppercase 10th letter in the alphabet\\
-  11 & K & The uppercase 11th letter in the alphabet\\
-  12 & L & The uppercase 12th letter in the alphabet\\
-  13 & M & The uppercase 13th letter in the alphabet\\
-  14 & N & The uppercase 14th letter in the alphabet\\
-  15 & O & The uppercase 15th letter in the alphabet\\
-  16 & P & The uppercase 16th letter in the alphabet\\
-  17 & Q & The uppercase 17th letter in the alphabet\\
-  18 & R & The uppercase 18th letter in the alphabet\\
-  19 & S & The uppercase 19th letter in the alphabet\\
-  20 & T & The uppercase 20th letter in the alphabet\\
-  21 & U & The uppercase 21st letter in the alphabet\\
-  22 & V & The uppercase 22nd letter in the alphabet\\
-  23 & W & The uppercase 23rd letter in the alphabet\\
-  24 & X & The uppercase 24th letter in the alphabet\\
-  25 & Y & The uppercase 25th letter in the alphabet\\
-  26 & Z & The uppercase 26th letter in the alphabet\\
-  \end{mpxtabular}
-\end{center}
-
-
-%==============================================================================
 \chapter{\TeX{} setup and packages}
 \label{sec:app:tex}
 %==============================================================================
@@ -275,7 +157,7 @@ As an alternative you can use the \Macro{shrinkheight} command.
 If you have an older \LaTeX{} installation (with a \KOMAScript{}
 version less than 3.0) you will probably have to make a few changes to
 the style file and your main thesis file.
-In particular the \Macro{KOMAoptions} does not exist. In this case, you
+In particular the \Macro{KOMAoptions} macro does not exist. In this case, you
 have to put the options into the document class options. Also some of
 the names have changed. Consult the \KOMAScript{} manual for more
 information.
@@ -307,8 +189,8 @@ desktop environment. \TeXstudio\index{TeXstudio} and
 \TeXmaker\index{TeXmaker} can be installed under Windows, MacOSX or
 Linux. I have tried \TeXstudio in all three systems and it works nicely. It
 can be downloaded from \url{http://texstudio.sourceforge.net/}. Others
-report good experience with \TeXmaker (under Ubuntu). As mentioned
-above it is available as an Ubuntu package or from
+report good experience with \TeXmaker (under Ubuntu).
+It is available as an Ubuntu package or from
 \url{http://www.xm1math.net/texmaker}.
 \TeXmaker and \TeXstudio (\TeX makerX) split in 2009, so both packages
 contain a lot of similarities.
@@ -393,11 +275,13 @@ For Ubuntu 13.04 and later I also had to install \texttt{texlive-metapost} in
 order to compile the guide.
 
 With (Ku|Xu|U)buntu 14.04, it seems that a few more packages may have to be installed:
-\texttt{texlive-fonts-recommended},
-\texttt{texlive-fonts-extra},
-\texttt{texlive-latex-extra},
-\texttt{texlive-bibtex-extra},
-\texttt{biber}.
+\begin{verbatim}
+texlive-fonts-recommended
+texlive-fonts-extra
+texlive-latex-extra
+texlive-bibtex-extra
+biber
+\end{verbatim}
 \texttt{biblatex} now seems to be included in \texttt{texlive-bibtex-extra} rather than having its own package.
 
 \noindent
@@ -462,13 +346,14 @@ parallel.
 A \TeX nische Komödie issue (3/2011) contained detailed instructions on
 how to install a newer version of \TeXLive in parallel to the
 default version in Kubuntu (Ubuntu works in almost exactly the
-same way). For a while,I did this as standard practice on my laptop
-and it worked very well. Another useful source of information on how to
-install \TeXLive can be found under
+same way). 
+For a while, I did this as standard practice on my laptop and it worked very well.
+Another useful source of information on how to install \TeXLive can be found under
 \url{http://tug.org/texlive/quickinstall.html}.
 
 A brief summary of how to do the installation by hand: you must have
-\texttt{perl-tk} installed.  Go to a directory where you want the
+\texttt{perl-tk} installed.
+Go to a directory where you want the
 install script to be and then execute the following chain of commands:
 \begin{verbatim}
 wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
@@ -563,7 +448,7 @@ To set up your thesis, you have to do by hand what the
 \texttt{mythesis}, copy \texttt{thesis\_skel/thesis\_skel.tex} to
 \texttt{mythesis/mythesis.tex}, and copy the rest of the files from
 \texttt{thesis\_skel} into \texttt{mythesis}. in addition you should
-copy the style file \texttt{ubonn-thesis.sty} into the
+copy the style files \texttt{ubonn-thesis.sty} and \texttt{ubonn-biblatex.sty} into the
 \texttt{mythesis} directory.
 
 To compile things, I ran the sequence PDF\LaTeX, \BibTeX, PDF\LaTeX,
@@ -666,6 +551,52 @@ You can also doenload Mac\TeX from \url{http://www.tug.org/mactex/}.
 
 There are MacOSX versions of \TeXstudio and \TeXmaker which you can
 also try. I have been using \TeXstudio.
+
+
+%==============================================================================
+\chapter{Print shops}
+\label{app:printer}
+%==============================================================================
+
+For a PhD thesis, as mentioned in Section~\ref{sec:submit:phd}, you
+have to print and bind the five copies that are needed by the
+university library externally. Some print shops in the Bonn region
+that can supply the required quality at a reasonable price are:
+
+\begin{itemize}
+\item
+Typo-Druck \& Verlags-GmbH\\
+Irmintrudisstr. 1b\\
+53111 Bonn\\
+Telefon 0228-650905\\
+\url{http://www.typo-druck.de}
+
+\item
+Buchbinderei Hennemann\\
+Paulusplatz 12\\
+53119 Bonn\\
+Telefon 0228-223521\\
+\url{http://www.buchbinderei-hennemann.de}
+
+% Druckerei Schwarz
+% Annaberger Str. 206
+% 53175 Bonn
+% Telefon 0228-319052
+% druckerei-schwarz.de
+\end{itemize}
+
+It is also possible to order online, e.g.:
+\begin{itemize}
+\item \url{http://www.druckerei-eberwein.de/shop}
+\item \url{http://www.kunsthaus-schwanheide.de}
+\item \url{http://www.druckterminal}
+\item \url{http://www.sedruck.de}
+\item \url{http://hundt-druck.de}
+\item \url{http://copyteamcologne.de}
+\item \url{http://dr.hut-verlag.de}
+\end{itemize}
+We have tried out \foreignquote{ngerman}{Druckerei Eberwein}. Their
+price was reasonable and they delivered quickly and in good quality.
 
 
 %==============================================================================
@@ -786,49 +717,153 @@ there, while the \gls{MVD} was also installed later.
 
 
 %==============================================================================
-\chapter{Print shops}
-\label{app:printer}
+\chapter{Plots with \Package{tikz}}
+\label{sec:app:tikz}
 %==============================================================================
 
-For a PhD thesis, as mentioned in Section~\ref{sec:submit:phd}, you
-have to print and bind the five copies that are needed by the
-university library externally. Some print shops in the Bonn region
-that can supply the required quality at a reasonable price are:
+Figure~\ref{fig:tikz:syst} shows how you can produce a plot showing
+the contributions of many different systematic uncertainties to a
+result. Note that this plot uses some modern features of
+\Package{tikz} and \Package{pgfplots}. Hence it is only included if
+this guide is compiled with \TeXLive 2011 or later.
 
-\begin{itemize}
-\item
-Typo-Druck \& Verlags-GmbH\\
-Irmintrudisstr. 1b\\
-53111 Bonn\\
-Telefon 0228-650905\\
-\url{http://www.typo-druck.de}
 
-\item
-Buchbinderei Hennemann\\
-Paulusplatz 12\\
-53119 Bonn\\
-Telefon 0228-223521\\
-\url{http://www.buchbinderei-hennemann.de}
+\begin{figure}[htbp]
+  \centering
+  \ifthenelse {\texlive < 2011} {%
+    \fbox{\parbox[c]{0.8\textwidth}{%
+        Sorry, \Package{tikz} is too old in \TeXLive 2009 and
+        earlier to make this plot.
+        See the file \texttt{./tikz/zeus\_Ds\_systematics.tex}.}}
+  }{%
+    \input{../tikz/zeus_Ds_systematics.tex}
+  }
+  \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The
+    results of strange excited charm meson fragmentation fraction and
+    branching ratio with systematic variations.  The individual
+    systematic variations are put into groups $\delta_1-\delta_5$.}
+  \label{fig:tikz:syst}
+\end{figure}
 
-% Druckerei Schwarz
-% Annaberger Str. 206
-% 53175 Bonn
-% Telefon 0228-319052
-% druckerei-schwarz.de
-\end{itemize}
 
-It is also possible to order online, e.g.:
-\begin{itemize}
-\item \url{http://www.druckerei-eberwein.de/shop}
-\item \url{http://www.kunsthaus-schwanheide.de}
-\item \url{http://www.druckterminal}
-\item \url{http://www.sedruck.de}
-\item \url{http://hundt-druck.de}
-\item \url{http://copyteamcologne.de}
-\item \url{http://dr.hut-verlag.de}
-\end{itemize}
-We have tried out \foreignquote{ngerman}{Druckerei Eberwein}. Their
-price was reasonable and they delivered quickly and in good quality.
+%==============================================================================
+\chapter{Long tables}
+\label{sec:app:tables}
+%==============================================================================
+
+\LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
+\noindent
+Long and complicated tables, such as tables containing the breakdown
+of the systematic error for each data point are usually put into the
+appendices. Code or data cards can also be included here.  Examples of
+complicated typesetting have been given already in
+Chapter~\ref{sec:table}. In this appendix I give an example of a table
+(Table~\ref{tab:alphabet}) that goes over more than one page using the
+\Package{xtab} package. If instead you use \Package{longtable},
+note that it is a
+combination of \Env{tabular} and \Env{table} in one
+environment. 
+As mentioned in Chapter~\ref{sec:package}, an alternative
+is the \Package{supertabular} package.
+ 
+While footnotes do not work properly in a
+normal \Env{tabular}, but they do work in \Env{longtable}
+if you use \Package{longtable}.
+You can use the \Env{mpxtabuar} environment to include footnotes in a table
+if you use \Package{xtab}.
+
+If you use the \Package{xtab} package, 
+note that you should specify the table header and footer outside the table itself.
+Do not include \Env{xtabular} inside a \Env{table} environment, as the table will
+then be output on one page, which is not what you want!
+Such packages sometimes need a bit of help to get the page breaks in the right place.
+According to the \Package{xtab} documentation you should first try to play
+around with the variable \Macro{xentrystretch}. The default value is \num{0.1}.
+Decrease this to put more on a page and increase it to get less.
+You can even set it to a negative value!
+The value can be set per table.
+As an alternative you can use the \Macro{shrinkheight} command.
+
+\clearpage
+\tablefirsthead{\toprule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+}
+\tablehead{\midrule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+}
+\tabletail{\midrule
+  \multicolumn{3}{r}{Continued on next page}\\
+  \midrule
+}
+\tablelasttail{\bottomrule}
+\bottomcaption{The alphabet.}
+\label{tab:alphabet}
+\xentrystretch{-0.15}
+\begin{center}
+  \begin{mpxtabular}{rcl}
+   1 & a & The lowercase 1st letter in the alphabet%
+   \footnote{\enquote{a} deserves a footnote}\\
+   2 & b & The lowercase 2nd letter in the alphabet\\
+   3 & c & The lowercase 3rd letter in the alphabet\\
+   4 & d & The lowercase 4th letter in the alphabet\\
+   5 & e & The lowercase 5th letter in the alphabet\\
+   6 & f & The lowercase 6th letter in the alphabet\\
+   7 & g & The lowercase 7th letter in the alphabet\\
+   8 & h & The lowercase 8th letter in the alphabet\\
+   9 & i & The lowercase 9th letter in the alphabet\\
+  10 & j & The lowercase 10th letter in the alphabet%
+  \footnote{\enquote{j} deserves another footnote}\\
+  11 & k & The lowercase 11th letter in the alphabet\\
+  12 & l & The lowercase 12th letter in the alphabet\\
+  13 & m & The lowercase 13th letter in the alphabet\\
+  14 & n & The lowercase 14th letter in the alphabet\\
+  15 & o & The lowercase 15th letter in the alphabet\\
+  16 & p & The lowercase 16th letter in the alphabet\\
+  17 & q & The lowercase 17th letter in the alphabet\\
+  18 & r & The lowercase 18th letter in the alphabet\\
+  19 & s & The lowercase 19th letter in the alphabet\\
+  20 & t & The lowercase 20th letter in the alphabet\\
+  21 & u & The lowercase 21st letter in the alphabet\\
+  22 & v & The lowercase 22nd letter in the alphabet\\
+  23 & w & The lowercase 23rd letter in the alphabet\\
+  24 & x & The lowercase 24th letter in the alphabet\\
+  25 & y & The lowercase 25th letter in the alphabet\\
+  26 & z & The lowercase 26th letter in the alphabet\\
+   1 & A & The uppercase 1st letter in the alphabet\\
+   2 & B & The uppercase 2nd letter in the alphabet\\
+   3 & C & The uppercase 3rd letter in the alphabet\\
+   4 & D & The uppercase 4th letter in the alphabet\\
+   5 & E & The uppercase 5th letter in the alphabet\\
+   6 & F & The uppercase 6th letter in the alphabet\\
+   7 & G & The uppercase 7th letter in the alphabet\\
+   8 & H & The uppercase 8th letter in the alphabet\\
+   9 & I & The uppercase 9th letter in the alphabet\\
+  10 & J & The uppercase 10th letter in the alphabet\\
+  11 & K & The uppercase 11th letter in the alphabet\\
+  12 & L & The uppercase 12th letter in the alphabet\\
+  13 & M & The uppercase 13th letter in the alphabet\\
+  14 & N & The uppercase 14th letter in the alphabet\\
+  15 & O & The uppercase 15th letter in the alphabet\\
+  16 & P & The uppercase 16th letter in the alphabet\\
+  17 & Q & The uppercase 17th letter in the alphabet\\
+  18 & R & The uppercase 18th letter in the alphabet\\
+  19 & S & The uppercase 19th letter in the alphabet\\
+  20 & T & The uppercase 20th letter in the alphabet\\
+  21 & U & The uppercase 21st letter in the alphabet\\
+  22 & V & The uppercase 22nd letter in the alphabet\\
+  23 & W & The uppercase 23rd letter in the alphabet\\
+  24 & X & The uppercase 24th letter in the alphabet\\
+  25 & Y & The uppercase 25th letter in the alphabet\\
+  26 & Z & The uppercase 26th letter in the alphabet\\
+  \end{mpxtabular}
+\end{center}
+
 
 %==============================================================================
 \chapter{A famous equation is $E = mc^{2}$}
@@ -867,36 +902,6 @@ writing a book or report.
 
 This attempt includes \Macro{boldmath} by hand and uses Greek letters and some specific font.
 It appears to also work OK.
-
-
-%==============================================================================
-\chapter{Plots with \Package{tikz}}
-\label{sec:app:tikz}
-%==============================================================================
-
-Figure~\ref{fig:tikz:syst} shows how you can produce a plot showing
-the contributions of many different systematic uncertainties to a
-result. Note that this plot uses some modern features of
-\Package{tikz} and \Package{pgfplots}. Hence it is only included if
-this guide is compiled with \TeXLive 2011 or later.
-
-
-\begin{figure}[htbp]
-  \centering
-  \ifthenelse {\texlive < 2011} {%
-    \fbox{\parbox[c]{0.8\textwidth}{%
-        Sorry, \Package{tikz} is too old in \TeXLive 2009 and
-        earlier to make this plot.
-        See the file \texttt{./tikz/zeus\_Ds\_systematics.tex}.}}
-  }{%
-    \input{../tikz/zeus_Ds_systematics.tex}
-  }
-  \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The
-    results of strange excited charm meson fragmentation fraction and
-    branching ratio with systematic variations.  The individual
-    systematic variations are put into groups $\delta_1-\delta_5$.}
-  \label{fig:tikz:syst}
-\end{figure}
 
 
 %==============================================================================

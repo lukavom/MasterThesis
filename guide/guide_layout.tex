@@ -125,7 +125,7 @@ problems. The \Package{ctable} package allows you to include footnotes
 that are part of the table. It also supports \Package{booktabs}, so it
 should be possible to keep the same format. If you use the package
 \Package{xtab} you can use the environment \Env{mpxtabular} 
-instead of \Env{xtabular} to get footnotes.
+instead of \Env{xtabular} to get footnotes
 -- see Appendix~\ref{sec:app:tables} for an example. 
 If you use the \Package{longtable} package, use \Env{longtable}
 rather than \Env{table} and \Env{tabular} in order to easily include
@@ -170,7 +170,7 @@ single table for example by using constructions such as
 change full stops into commas -- see Chapter~\ref{sec:table}.
 
 Another way to avoid this problem by using the \Package{ziffer} package. It is
-usually commented out in \texttt{ubonn-thesis.sty}. An alternative
+commented out in \texttt{ubonn-thesis.sty}. An alternative
 is to remove the comments on the \TeX{} code snippet at the top
 of the file \texttt{thesis\_defs.sty}:
 \begin{verbatim}
@@ -232,7 +232,7 @@ Which font should I use?
 \url{http://tug.ctan.org/tex-archive/info/Free_Math_Font_Survey/en/survey.html}
 has a list of fonts that one can consider using. I have included
 commented out packages that use some of these in the style file. Good
-alternatives to \Package{txfonts} (with the \Option{varg} option) seem
+alternatives to Package(newtx) and \Package{txfonts} (with the \Option{varg} option) seem
 to be either \Package{lmodern} or \Package{pxfonts}. See
 Section~\ref{sec:tips:units} for some of the things you have to worry
 about if you use a font for which the text mode and math mode display
@@ -272,7 +272,7 @@ spelling, while \Package{csquotes} options calls the same thing
 you use commands such as \Macro{foreignquote} you can specify
 \Option{ngerman} as the language.
 
-Having used \Package{csquotes} for a year of so now, I find it a
+Having used \Package{csquotes} for several years now, I find it a
 really nice way of quoting things properly in the language you are
 writing your text in without having to worry about using the correct
 opening and closing quotes, so I warmly recommend it.
@@ -291,8 +291,9 @@ For the printed version you probably do not want these things to be
 coloured. You can change the \Package{hyperref} options using the
 \Macro{hypersetup} command as indicated in the main file of your
 thesis. Using these changes, such links will be surrounded by a
-coloured box when viewed on the screen and not shown when the thesis
+coloured box when viewed on the screen, while the box will not be shown when the thesis
 is printed.
+
 
 %------------------------------------------------------------------------------
 \section{Chapter headings}
@@ -304,7 +305,10 @@ You can make some changes with the \KOMAScript\ options, but nothing
 very radical. A number of packages exist that can make larger
 changes. I tried out \Package{fncychap}, \Package{quotchap} and
 \Package{titlesec}. A variant of \Package{titlesec} is used for this
-guide and by default for the thesis. If you want to get back to the
+guide and by default for the thesis.
+As combining \Package{titlesec} with \KOMAScript{} is not recommended,
+the settings are now done by hand by default.
+If you want to get back to the
 usual style, just comment out the appropriate lines in
 \texttt{ubonn-thesis.sty}. See the documentation on
 \Package{titlesec} on how to make further adjustments.

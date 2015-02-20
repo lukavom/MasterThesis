@@ -1,9 +1,9 @@
-Version 2.1 12/07/2013
+Version 3.0 20/02/2015
 
-The idea with this document is that you also look at the LaTeX that
+The idea with this package is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
 
-The files that make up this document are available in a subversion
+The files that make up this package are available in a subversion
 repository and as a tar file. To get the latest subversion
 entries given the command:
 
@@ -18,11 +18,11 @@ It can be obtained from:
 
 http://www-biblio.physik.uni-bonn.de/info/index.shtml#info:titelvorl
 
-You can then give the command:
+You can give the command:
 
-make new [THESIS=dirname]
+make new [THESIS=dirname] [TEXLIVE=YYYY]
 
-to create a new directory with a couple of files to help you get
+to create a new directory with a few files to help you get
 started. By default the directory name will be mythesis.
 To compile your thesis try:
 
@@ -38,11 +38,13 @@ TeX installations.  However, some of the packages I recommend have
 been changing quite a lot over the past few years, particularly
 biblatex and siunitx.  It may therefore be necessary to make a few
 changes in order to get the thesis to compile on your machine. The
-default version assumes that you have TeX Live 2011 or later.  If you
-have TeX Live 2009, which implies that you have siunitx version 1 and
-that you use bibtex8 with biblatex, you should set \texlive to 2009
-in mythesis.tex. You should then use the command `make thesis09'
-instead of `make thesis'.
+default version assumes that you have TeX Live 2013 or later.  If you
+have an older version set \texlive in mythesis.tex.
+If you make a new document, you can do this by passing the argument 
+`TEXLIVE=YYYY' when giving the command `make new'.
+If your version of TeX Live is earlier than 2011, which implies that you have
+siunitx version 1 and that you use bibtex8 with biblatex,
+you should use the command `make thesis09' instead of `make thesis' in order to compile.
 
 If you just want to make the cover pages, use the file cover_only.tex.
 Be sure to adapt the font selected in ubonn-thesis.sty to the font
@@ -59,9 +61,10 @@ You can create your own copy of the guide using the commands:
 cd guide
 make guide
 
+If you have a verison of TeX Live older than 2013, you should set 
+\texlive appropriately thesis_guide.tex. 
+If your version of TeX Live is older than 2011, you need to compile the 
+guide with the commands `make feynmf; make guide09' instead of `make guide'.
+
 The guide also includes a description of how to use the package under
 Windows.
-
-If you have TeX Live 2009 or earlier, you should set \texlive to 2009 in
-thesis_guide.tex. In this case you need to compile the guide with the
-commands `make feynmf; make guide09' instead of `make guide'.

@@ -1,6 +1,6 @@
 % Style file for a thesis written in the University of Bonn
 %------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-thesis}[2015/02/04 Version 3.0 University of Bonn thesis package]
+\ProvidesPackage{ubonn-thesis}[2015/02/20 Version 3.0 University of Bonn thesis package]
 \NeedsTeXFormat{LaTeX2e}
 
 % Set TeX Live version
@@ -223,9 +223,16 @@
 \ifUBN@siunitx 
   \ifthenelse {\texlive < 2011} {%
     \RequirePackage[seperr,
-    repeatunits = false,
-    alsoload = hep]{siunitx}
+    repeatunits=false,
+    noload=addn,
+    alsoload=hep]{siunitx}
     \sisetup{obeyall}
+    \newunit{\barn}{b}
+    \newunit{\TeVc}{\tera\eVperc}
+    \newunit{\GeVc}{\giga\eVperc}
+    \newunit{\MeVc}{\mega\eVperc}
+    \newunit{\keVc}{\kilo\eVperc}
+    \newunit{\eVc}{\eVperc}
   }{%
     \RequirePackage[separate-uncertainty,
     range-units = repeat]{siunitx}

@@ -1,8 +1,11 @@
-\documentclass[ngerman,UKenglish]{scrbook}
+\documentclass[Master,ngerman,UKenglish]{scrbook}
 %------------------------------------------------------------------------------
 % This file contains a skeleton thesis for
 % a Physics or Astronomy Institute in the University of Bonn
-%
+
+% Specify the thesis type as an option: PhD, Master, Diplom, Bachelor
+% Specify the thesis stage as an option: Draft (default), Submit, Final, PILibrary
+
 % Specify the language(s) in the class and then use babel.
 % If you need more than one language, give the default language last,
 % e.g. ngerman,UKenglish for a thesis in British (UK) English where you want
@@ -41,19 +44,14 @@
 % time in the output file. Comment this out for the final version.
 \ifoot[\today{} \thistime]{\today{} \thistime}
 
-% Include the words DRAFT on the cover pages - turned off for \mainmatter
-% Comment this out before you submit!
-% \usepackage{background}
-% \backgroundsetup{contents=DRAFT, color=blue!30}
-
 % In order to check if your labels are referenced try the refcheck package
 % \usepackage{refcheck}
 
 %------------------------------------------------------------------------------
 % biblatex is included by ubonn-thesis. Look there for the settings used.
 % See the options for settings that can be changed easily.
-% For further changes copy the \RequirePackage here and include
-% ubonn-thesis with the option biblatex=false.
+% For further changes copy the \RequirePackage[...]{biblatex} here
+% and include ubonn-thesis with the option biblatex=false.
 
 % Specify the bibliography files here and not at the end!
 % Use standard_refs-bibtex if you use bibtex8
@@ -115,9 +113,9 @@
 % Give a list of directories where figures can be found. Do not leave
 % any spaces in the list and end the directory name with a /
 \graphicspath{%
-  {../figs/},%
-  {../figs/cover/},%
-  {../figs/graphics/},%
+  {../figs/}%
+  {../figs/cover/}%
+  {../figs/graphics/}%
   {../feynmf/}%
 }
 
@@ -128,45 +126,39 @@
 % Glossary entries
 % \input{thesis_glossary}
 
+% Draft version - add the word DRAFT on the cover pages
+\ifthenelse{\equal{\ThesisVersion}{Draft}}{%
+  \usepackage{background}
+  \backgroundsetup{contents=DRAFT, color=blue!30}
+}
+
 %------------------------------------------------------------------------------
 \begin{document}
 
 % Cover page of thesis - this is only needed for the printed final
 % version to be submitted to the department library
 % Do not use this page for thesis submission to the Prüfungsamt or Promotionsbüro!
-% \input{../cover/PhD_Cover}
-% \input{../cover/Master_Cover}
-% \input{../cover/Diplom_Cover}
+\ifthenelse{\equal{\ThesisVersion}{PILibrary}}{%
+  \input{../cover/\ThesisType_cover}
+}{}
 
 % Start counting pages from the title page
 \frontmatter
 % Dedication has to come before \maketitle
 % \dedication{For ...}
 
-%------------------------------------------------------------------------------
-% PhD Title page
-% Use this command when you submit your thesis
-% \input{../cover/PhD_Submit_Title}
-% Use this command for the print version
-% \input{../cover/PhD_Final_Title}
-
-%------------------------------------------------------------------------------
-% Diplom Title page
-% Use this command when you submit your thesis
-% \input{../cover/Diplom_Submit_Title}
-% Use this command for the print version
-% \input{../cover/Diplom_Final_Title}
-
-%------------------------------------------------------------------------------
-% Master Title page
-% Use this command when you submit your thesis
-\input{../cover/Master_Submit_Title}
-% Use this command for the print version
-% \input{../cover/Master_Final_Title}
-
-%------------------------------------------------------------------------------
-% Bachelor Title page
-% \input{../cover/Bachelor_Title}
+% Select the correct title page(s)
+\ifthenelse{\equal{\ThesisType}{Unknown}}{%
+  \typeout{Unknown thesis type - no title page printed}
+}{%
+  \ifthenelse{\equal{\ThesisVersion}{Final}}{%
+    \input{../cover/\ThesisType_Final_Title}
+  }{%
+    \input{../cover/\ThesisType_Submit_Title}
+    \ifthenelse{\equal{\ThesisVersion}{Submit}}{%
+    }{}
+  }
+}
 
 \pagestyle{scrplain}
 
@@ -181,7 +173,9 @@
 \pagestyle{scrheadings}
 
 % Turn off DRAFT for the following pages
-% \backgroundsetup{contents={}}
+\ifthenelse{\equal{\ThesisVersion}{Draft}}{%
+ \backgroundsetup{contents={}}
+}{}
 
 %------------------------------------------------------------------------------
 % Add your chapters here - don't forget to also add them to \includeonly above
@@ -206,6 +200,12 @@
 % Chapter/section numbers are turned off
 
 %------------------------------------------------------------------------------
+% Use biblatex for the bibliography
+% Add bibliography to Table of Contents
+% Comment out this command if your references are printed for each chapter.
+\printbibliography[heading=bibintoc]
+
+%------------------------------------------------------------------------------
 % Include the following lines and comment out \printbibliography if
 % you use BiBTeX for the bibliography.
 % If you use biblatex package the files should be specified in the preamble.
@@ -214,12 +214,6 @@
 %   \bibliographystyle{unsrt}
 %   \bibliography{./thesis_refs,../refs/standard_refs-bibtex}
 % }
-
-%------------------------------------------------------------------------------
-% Use biblatex for the bibliography
-% Add bibliography to Table of Contents
-% Comment out this command if your references are printed for each chapter.
-\printbibliography[heading=bibintoc]
 
 \listoffigures
 \listoftables

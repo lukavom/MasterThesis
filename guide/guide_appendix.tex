@@ -9,18 +9,25 @@ In this section I document briefly the major changes to this guide. I
 also indicate other topics for which I would like to add some more
 information.
 
-\begin{longtable}{lp{0.8\textwidth}}
+\begin{longtable}{llp{0.8\textwidth}}
+  \caption{Changes to the \Package{ubonn-thesis} and \Package{ubonn-biblatex} style files.
+  \label{tab:ubonn-thesis:changes}}
+  \endhead
   \toprule
-  Date & Comment\\
+  Date & Version & Comment\\
   \midrule
-  02 Feb 2015 & Add ability to pass options to \texttt{ubonn-thesis.sty}
+  21 Aug 2015 & 4.0 &Add options for thesis type and stage.
+    This simplifies and improves how the different cover and title pages are included.
+    Small updates to submission instructions and operating systems.\\
+  
+  02 Feb 2015 & 3.0 & Add ability to pass options to \texttt{ubonn-thesis.sty}
   using the \Package{keyval} package.
   \TeXLive 2014 is now the default.
   The \TeXLive version can be passed as an option. Improve its handling.
   Change a few default packages:
   \Package{longtable} $\to$ \Package{xtab};
   \Package{subfig} $\to$ \Package{subcaption} (for \TeXLive 2012 and later).
-  Add options for different fonts. Stick with \Package{xfonts} as default, 
+  Add options for different fonts. Stick with \Package{txfonts} as default, 
   but encourage use of \Package{newtx} if it is available.
   Add inclusion of \Package{biblatex} package into style file.
   Put \Package{biblatex} fine tuning into a new style file \texttt{ubonn-biblatex.sty}.
@@ -28,33 +35,42 @@ information.
   Add \Macro{boldmath} command to bold font by default.
   Remove inclusion of \Package{feynmf}/\Package{feynmp} by default.\\
   
-  10 Jul 2013 & Move thesis main file to \texttt{mythesis}
+  10 Jul 2013 & 2.1 & Move thesis main file to \texttt{mythesis}
   subdirectory. Also put \texttt{Makefile} and copy
   \texttt{ubonn-thesis.sty} into \texttt{mythesis} subdirectory. Split
   main \texttt{Makefile} into several files, one for thesis, one for
   the guide an done for
   pictures and Feynman graphs.\\
   
-  06 Jul 2013 & Use the \Package{standalone} package in the
+  06 Jul 2013 &     & Use the \Package{standalone} package in the
   \Package{tikz} figures. Add commented out code to \Package{feynmp}
   figures to show how to use \Package{standalone} for them as
   well. Move the guide main file to the
   \texttt{guide} subdirectory so that this works properly.\\
   
-  04 Jul 2013 & Add a few examples of using the \Package{tikz}
+  04 Jul 2013 &     & Add a few examples of using the \Package{tikz}
   package. Switch to using \Package{feynmp} rather than
   \Package{feynmf} by default (as of \TeXLive 2011). Add \Macro{write18}
   statements for
   Feynman graphs with \Package{feynmp} and adapt \texttt{Makefile}.\\
   
-  18 May 2013 & Add some information on the \Package{refcheck} package
+  18 May 2013 &     & Add some information on the \Package{refcheck} package
   and back-referencing with \Package{biblatex}.\\
   
-  23 Apr 2013 & Rename pibonn-thesis to ubonn-thesis. Make thesis
+  23 Apr 2013 & 2.0 & Rename pibonn-thesis to ubonn-thesis. Make thesis
   submission a separate chapter (so that PhD submission can also be a
   separate document). Make \TeXLive
   2011 the default. Make Inspire rather than Spires default.\\
+  \bottomrule
+\end{longtable}
   
+\begin{longtable}{lp{0.8\textwidth}}
+  \caption{Changes to the \Package{pibonn-thesis} style files.
+  \label{tab:pibonn-thesis:changes}}
+  \endhead
+  \toprule
+  Date & Comment\\
+  \midrule
   31 Mar 2013 & Add instructions on how to use \LaTeX\ backport under
   Ubuntu variants.\\
   
@@ -166,7 +182,7 @@ Other packages that I recommend and that are subject to rapid
 development still are \Package{biblatex} and
 \Package{siunitx}. If you want to fully exploit their capabilities,
 you should make sure you \LaTeX{} installation is as recent as
-possible -- I recommend \TeXLive 2013 or 2014.
+possible -- I recommend \TeXLive 2013, 2014or 2015.
 
 As I mentioned in the introduction, the institute is a member of Dante
 and I therefore receive a copy of the \TeX\ Collection DVD every
@@ -184,8 +200,7 @@ that you use an integrated environment for editing and compiling your
 thesis. All such tools allow you to define projects, which then know
 about which files should be included when compiling.
 
-Kile\index{kile} is quite popular, especially if you use the KDE
-desktop environment. \TeXstudio\index{TeXstudio} and
+\TeXstudio\index{TeXstudio} and
 \TeXmaker\index{TeXmaker} can be installed under Windows, MacOSX or
 Linux. I have tried \TeXstudio in all three systems and it works nicely. It
 can be downloaded from \url{http://texstudio.sourceforge.net/}. Others
@@ -194,6 +209,8 @@ It is available as an Ubuntu package or from
 \url{http://www.xm1math.net/texmaker}.
 \TeXmaker and \TeXstudio (\TeX makerX) split in 2009, so both packages
 contain a lot of similarities.
+Kile\index{kile} is quite popular, especially if you use the KDE
+desktop environment. 
 
 You can also make a glossary from within \TeXstudio. In order to do
 this you have to define a user build command. You can find such commands
@@ -207,6 +224,24 @@ then use the same editor for everything. Note that the
 RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
 tools for finding and inserting cross-references and the names of
 citations easily.
+
+
+%------------------------------------------------------------------------------
+\subsection{\TeXstudio}
+\label{sec:app:texstudio}\index{TeXStudio}
+
+I have been using \TeXstudio as my main tool for creating \LaTeX\ documents since 2013.
+One very nice feature is that it works under MacOSX, Windows and Linux.
+It is fairly easy to adapt to your preferences.
+Additional keyboard shortcuts can be added and the editor can be customised.
+I usually change the \texttt{TAB} behaviour so that spaces rather than TABs are inserted.
+
+If you use the integrated PDF viewer, it is very easy to switch between the PDF file and
+the \LaTeX\ source code, which is extremely helpful.
+You can also usually click on an error in the Message window and the cursor will jump to the right spot.
+This makes debugging and proofreading much easier.
+
+It is easy to switch between \texttt{biber} and \texttt{bibtex} using the Build preferences.
 
 
 %------------------------------------------------------------------------------
@@ -240,6 +275,24 @@ Kile, but it should be possible to do it in the same way as you add a
 
 
 %------------------------------------------------------------------------------
+\section{Mac}
+\label{sec:app:mac}\index{mac}
+%------------------------------------------------------------------------------
+
+For the past year, I have been installing and running \LaTeX\ on a MacBook Pro.
+The standard package you start with is \TeX Shop. 
+Together with Basic\TeX\ this provides a basic environment. 
+However, if you want to do more (like write a thesis),
+you should install \TeXLive. Note that the Dante \TeX\
+Collection DVD includes Mac\TeX, which is what the \TeX Shop web page
+recommends as the best combination to install.
+You can also doenload Mac\TeX from \url{http://www.tug.org/mactex/}.
+
+As discussed above, there are MacOSX versions of \TeXstudio and \TeXmaker which you can try.
+I have been using \TeXstudio.
+
+
+%------------------------------------------------------------------------------
 \section{(Ku|Xu|U)buntu}
 \label{sec:app:kubuntu}\index{Linux}\index{Ubuntu}\index{Kubuntu}\index{Xubuntu}
 %------------------------------------------------------------------------------
@@ -252,8 +305,8 @@ installation, which used the default packages from the Xubuntu image. At
 installation time I enabled the usage of 3rd party non-free
 software. This is be needed for \texttt{acroread} among other
 things.\footnote{Nowadays you have to download \texttt{acroread} from
-  the Adobe web page.} If
-you want to write your thesis in British (UK) English you should make sure
+  the Adobe web page.} 
+If you want to write your thesis in British (UK) English you should make sure
 that that language is fully installed. If you want to write your
 thesis in German, then also install German as a language, even if
 your system is in English.
@@ -288,9 +341,8 @@ biber
 Using these packages I was able to issue to following commands to
 produce the guide (assuming that you have \TeXLive 2011 or later):
 \begin{verbatim}
-mkdir ubonn-thesis; cd ubonn-thesis
-svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
-cd trunk
+svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk ubonn-thesis
+cd ubonn-thesis
 \end{verbatim}
 Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
 Then the following worked:
@@ -299,7 +351,8 @@ cd guide
 make guide
 \end{verbatim}
 so all packages are there as well as at least the default font which I
-selected: \Package{txfonts}.
+selected. If you version of \TeXLive is older than 2013, you should set
+\Macro{texlive} accordingly and not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
 
 The default version of the guide uses \Option{biber} for the
 \Package{biblatex} package and includes\\
@@ -532,25 +585,6 @@ load the default repository.
 
 You can either use \TeXworks as the front end or you can install
 \TeXstudio or \TeXmaker.
-
-
-
-%------------------------------------------------------------------------------
-\section{Mac}
-\label{sec:app:mac}\index{mac}
-%------------------------------------------------------------------------------
-
-For the past year, I have been installing and running \LaTeX\ on a MacBook Pro.
-The standard package you start with is \TeX Shop. 
-Together with Basic\TeX\ this provides a basic environment. 
-However, if you want to do more (like write a thesis),
-you should install \TeXLive. Note that the Dante \TeX\
-Collection DVD includes Mac\TeX, which is what the \TeX Shop web page
-recommends as the best combination to install.
-You can also doenload Mac\TeX from \url{http://www.tug.org/mactex/}.
-
-There are MacOSX versions of \TeXstudio and \TeXmaker which you can
-also try. I have been using \TeXstudio.
 
 
 %==============================================================================

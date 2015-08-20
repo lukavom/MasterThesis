@@ -1,4 +1,4 @@
-Version 3.0 20/02/2015
+Version 4.0 21/08/2015
 
 The idea with this package is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
@@ -39,7 +39,8 @@ been changing quite a lot over the past few years, particularly
 biblatex and siunitx.  It may therefore be necessary to make a few
 changes in order to get the thesis to compile on your machine. The
 default version assumes that you have TeX Live 2013 or later.  If you
-have an older version set \texlive in mythesis.tex.
+have an older version pass the option 'texlive=YYYY' to the document class
+of mythesis.tex.
 If you make a new document, you can do this by passing the argument 
 `TEXLIVE=YYYY' when giving the command `make new'.
 If your version of TeX Live is earlier than 2011, which implies that you have
@@ -62,7 +63,8 @@ cd guide
 make guide
 
 If you have a verison of TeX Live older than 2013, you should set 
-\texlive appropriately thesis_guide.tex. 
+\texlive appropriately thesis_guide.tex and
+should not pass the newtx option to ubonn-thesis.
 If your version of TeX Live is older than 2011, you need to compile the 
 guide with the commands `make feynmf; make guide09' instead of `make guide'.
 

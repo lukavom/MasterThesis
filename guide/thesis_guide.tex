@@ -13,7 +13,7 @@
 % Set to >2010 for biblatex and biber   (TeX Live 2011 or later)
 % This must be set before \usepackage{ubonn-thesis}
 \newcommand*{\texlive}{2014}
-\newcommand*{\guideversion}{3.0}
+\newcommand*{\guideversion}{4.0}
 
 % Main thesis style file
 \usepackage[newtx,bibstyle=alphabetic,feynmp]{../ubonn-thesis}
@@ -21,7 +21,7 @@
 % Adjustments to biblatex output are in this style file:
 \usepackage{../ubonn-biblatex}
 
-\ifthenelse {\texlive < 2010} {%
+\ifthenelse{\texlive < 2010} {%
 }{%
   \usepackage{import}
   \usepackage{standalone}
@@ -59,7 +59,7 @@
 \addbibresource{../guide/refs/zeus_2010.bib}
 % Use example_refs-latin1 and standard_refs-bibtex with bibtex
 % and example_refs-utf8   and standard_refs-biber  if you use biber
-\ifthenelse {\texlive < 2011} {%
+\ifthenelse{\texlive < 2011} {%
   \addbibresource{../refs/standard_refs-bibtex.bib}
   \addbibresource{../refs/example_refs-latin1.bib}
 }{%
@@ -143,9 +143,9 @@
 % Give a list of directories where figures can be found. Do not leave
 % any spaces in the list and end the directory name with a /
 \graphicspath{%
-  {../figs/},%
-  {../figs/cover/},%
-  {../figs/graphics/}
+  {../figs/}%
+  {../figs/cover/}%
+  {../figs/graphics/}%
 }
 
 %-------------------------------------------------------------------------------

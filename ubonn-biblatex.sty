@@ -5,10 +5,8 @@
 % See ChangeLog or SVN log for history of changes.
 % Responsible: Ian Brock (ian.brock@cern.ch)
 %-------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-biblatex}[2015/02/20 Version 3.0 University of Bonn biblatex style]
+\ProvidesPackage{ubonn-biblatex}[2015/08/21 Version 4.0 University of Bonn biblatex style]
 \NeedsTeXFormat{LaTeX2e}
-
-%\typeout{University of Bonn biblatex style Version 3.0}
 
 % Use kvoptions package to set options
 \RequirePackage{kvoptions}
@@ -29,6 +27,7 @@
 \ifx\UBNB@texlive\@empty
   \renewcommand*{\UBNB@texlive}{\texlive}
 \fi
+\typeout{ubonn-biblatex: UBNB@texlive is [\UBNB@texlive]}
 
 % Include the DOI as a hyerlink with the journal.
 \ifUBNB@showdoi
@@ -48,7 +47,6 @@
 \fi
 
 % date=year option works for TeX Live 2013 or so onwards
-\typeout{atlasbiblatex: UBNB@texlive is [\UBNB@texlive]}
 \ifthenelse{\UBNB@texlive < 2013}{%
   \relax
 }{%
@@ -121,6 +119,13 @@
     %\printfield{pages}%
     \newunit}
 \fi
+
+  % Print only first page - only works for TeX Live 2012 onwards I think
+\ifthenelse{\UBNB@texlive < 2013}{%
+  \relax
+}{%
+  \DeclareFieldFormat{pages}{\mkfirstpage[{\mkpageprefix[bookpagination]}]{#1}}
+}
 
 % Change punctuation to comma
 \renewcommand*{\newunitpunct}{\addcomma\space}

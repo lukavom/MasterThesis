@@ -1,6 +1,6 @@
 % Style file for a thesis written in the University of Bonn
 %------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-thesis}[2015/02/20 Version 3.0 University of Bonn thesis package]
+\ProvidesPackage{ubonn-thesis}[2015/08/21 Version 4.0 University of Bonn thesis package]
 \NeedsTeXFormat{LaTeX2e}
 
 % Set TeX Live version
@@ -11,15 +11,31 @@
 \providecommand*{\inInstitute}{\inPI}
 \providecommand*{\InstituteAddress}{\PIaddress}
 
+% Thesis type
+\providecommand*{\ThesisType}{Unknown}
+\providecommand*{\ThesisVersion}{Draft}
+
 % ifthen package gives more possibilities than native \if
 \RequirePackage{ifthen}
 
+%-------------------------------------------------------------------------------
 % Use kvoptions package to set options
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
   family=UBN,
   prefix=UBN@
 }
+\DeclareBoolOption[false]{PhD}
+\DeclareBoolOption[false]{Master}
+\DeclareBoolOption[false]{Diplom}
+\DeclareBoolOption[false]{Bachelor}
+\DeclareBoolOption[false]{Draft}
+\DeclareBoolOption[false]{Submit}
+\DeclareBoolOption[false]{Final}
+\DeclareBoolOption[false]{PILibrary}
+\DeclareStringOption{thesistype}
+\DeclareStringOption{thesisversion}
+
 \DeclareBoolOption[false]{newtx}
 \DeclareBoolOption[true]{txfonts}
 \DeclareBoolOption[false]{palatino}
@@ -45,26 +61,73 @@
 \DeclareStringOption[numeric-comp]{bibstyle}
 \ProcessKeyvalOptions*
 
+%-------------------------------------------------------------------------------
 % TeX Live version specified as an option
 \ifx\UBN@texlive\@empty
   \relax
 \else
   \renewcommand*{\texlive}{\UBN@texlive}
 \fi
+\typeout{ubonn-thesis: texlive is [\texlive]}
+
+% Thesis type specified as an option
+\ifUBN@PhD
+  \typeout{ubonn-thesis: setting things up for a PhD thesis}
+  \renewcommand*{\ThesisType}{PhD}
+\fi
+\ifUBN@Master
+  \typeout{ubonn-thesis: setting things up for a Master thesis}
+  \renewcommand*{\ThesisType}{Master}
+\fi
+\ifUBN@Diplom
+  \typeout{ubonn-thesis: setting things up for a Diplom thesis}
+  \renewcommand*{\ThesisType}{Diplom}
+\fi
+\ifUBN@Bachelor
+  \typeout{ubonn-thesis: setting things up for a Bachelor thesis}
+  \renewcommand*{\ThesisType}{Bachelor}
+\fi
+
+% PI library thesis version - includes extra cover page
+\ifUBN@PILibrary
+  \typeout{ubonn-thesis: creating version for PI library}
+  \renewcommand*{\ThesisVersion}{PILibrary}
+\fi
+% Submission version of thesis
+\ifUBN@Submit
+  \typeout{ubonn-thesis: creating submission version of thesis}
+  \renewcommand*{\ThesisVersion}{Submit}
+\fi
+% Final print version of thesis
+\ifUBN@Final
+  \typeout{ubonn-thesis: creating final version of thesis for print shop and ULB}
+  \renewcommand*{\ThesisVersion}{Final}
+\fi
+% Thesis type/version specified as a string
+\ifx\UBN@thesistype\@empty
+  \relax
+\else
+  \renewcommand*{\ThesisType}{\UBN@thesistype}
+\fi
+\ifx\UBN@thesisversion\@empty
+  \relax
+\else
+  \renewcommand*{\ThesisVersion}{\UBN@thesisversion}
+\fi
 
 % Only one font package at a time!
 \ifUBN@newtx
-  \typeout{Using newtx fonts}
+  \typeout{ubonn-thesis: using newtx fonts}
   \UBN@txfontsfalse
   \UBN@palatinofalse
 \else
   \ifUBN@palatino
-    \typeout{Using Palatino fonts}
+    \typeout{ubonn-thesis: using Palatino fonts}
     \UBN@txfontsfalse
     \UBN@newtxfalse
   \else
     \ifUBN@txfonts
-      \typeout{Using txfonts}
+      \typeout{ubonn-thesis: using txfonts}
       \UBN@newtxfalse
       \UBN@palatinofalse
     \fi
@@ -98,15 +161,15 @@
 
 % Check backend - if TeX Live is earlier than 2011 and backend is biber,
 % change it to something more appropriate
-\ifthenelse {\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
-  \typeout{*** ubonn-thesis: setting backend to bibtex8}
+\ifthenelse{\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
+  \typeout{ubonn-thesis: setting backend to bibtex8}
   \renewcommand*{\UBN@backend}{bibtex8,bibencoding=latin1}
 }{%
 }
 
 % Switch from subcaption to subfig if TeX Live is earlier than 2012
-\ifthenelse {\texlive < 2012 \AND \boolean{UBN@subcaption}}{%
-  \typeout{*** ubonn-thesis: use subfig instead of subcaption}
+\ifthenelse{\texlive < 2012 \AND \boolean{UBN@subcaption}}{%
+  \typeout{ubonn-thesis: use subfig instead of subcaption}
     \UBN@subfigurefalse
     \UBN@subfigtrue
     \UBN@subcaptionfalse
@@ -143,8 +206,6 @@
 % Math packages that have to come early 
 % AMS math (for some font collections this has to come before their selection)
 \RequirePackage{amsmath,amssymb}
-% Nicer fractions
-\RequirePackage{xfrac}
 
 %-------------------------------------------------------------------------------
 % Input encoding, font and language
@@ -281,6 +342,10 @@
 % \RequirePackage{subcaption}
 
 %-------------------------------------------------------------------------------
+% Nicer fractions
+\RequirePackage{xfrac}
+
+%-------------------------------------------------------------------------------
 % Tables
 \RequirePackage{rotating}
 \RequirePackage{array}
@@ -381,8 +446,8 @@
 
 % Do not put a dot after Section/Chapter, nor in the figure caption.
 \KOMAoptions{numbers=noendperiod}
-% Write Chapter 1 at beginning of each chapter
-\KOMAoptions{chapterprefix=true,appendixprefix=true}
+% Write Chapter 1 at beginning of each chapter, if this is not an article
+\@ifclassloaded{scrartcl}{}{\KOMAoptions{chapterprefix=true,appendixprefix=true}}
 
 %-------------------------------------------------------------------------------
 \ifUBN@titlesec

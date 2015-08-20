@@ -29,7 +29,7 @@ document are available in a subversion repository and as a
 command:
 
 {\small\begin{verbatim}
-svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
+svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk ubonn-thesis
 \end{verbatim}}
 \noindent
 If you want to checkout a particular version you can give the command:
@@ -48,7 +48,7 @@ svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M
 The tar file (and the tag tree (as of version 1.5)) also includes
 the guide as a PDF file: \texttt{thesis\_guide.pdf}.  It can be
 obtained from:\\
-\url{http://www-biblio.physik.uni-bonn.de/info/index.shtml#info:titelvorl}
+\url{http://www.pi.uni-bonn.de/teaching/uni-bonn-thesis}
 and\\
 \url{http://www.pi.uni-bonn.de/lehre/uni-bonn-thesis}.
 
@@ -96,32 +96,52 @@ you have. It also implies that if you want the update to have an
 effect on your thesis you should copy the \texttt{Makefile} and
 \texttt{ubonn-thesis.sty} into the directory with your thesis.
 
-\noindent
-In the main thesis file, \texttt{mythesis.tex}, you need to specify
-which cover page should be used:\index{cover page}
-\begin{description}
-\item[\texttt{PhD\_Submit\_Title.tex} and \texttt{PhD\_Final\_Title.tex}:]
-  the title pages for a PhD thesis;\index{PhD}\index{thesis!PhD}
-\item[\texttt{Master\_Submit\_Title.tex} and \texttt{Master\_Final\_Title.tex}:]
-  the title pages for an MSc thesis;\index{MSc}\index{thesis!Master}
-\item[\texttt{Diplom\_Submit\_Title.tex} and \texttt{Diplom\_Final\_Title.tex}:]
-  the title pages for a Diplom thesis;\index{Diplom}\index{thesis!Diplom}
-\item[\texttt{Bachelor\_Title.tex}:]
-  the title pages for a BSc thesis.\index{BSc}\index{thesis!Bachelor}
+As of Version~4.0 of the package, you specify the type of thesis and the stage as options
+to the \Macro{documentclass} or to the \Package{ubonn-thesis} package.
+These options select the appropriate title and cover pages.
+The following thesis types exist:
+\begin{description}\setlength{\parskip}{0pt}\setlength{\itemsep}{0pt}
+\item[PhD] a PhD thesis;\index{PhD}\index{thesis!PhD}
+\item[Master] a Master thesis;\index{MSc}\index{thesis!Master}
+\item[Diplom] a Diplom thesis;\index{Diplom}\index{thesis!Diplom}
+\item[Bachelor] a Bachelor thesis.\index{BSc}\index{thesis!Bachelor}
 \end{description}
-For the printed version for the department library you also need to
-include the appropriate cover page (with an abstract):\index{cover}
-\begin{description}
-\item[\texttt{PhD\_Cover.tex}:]
-  The cover page for a PhD thesis;
-\item[\texttt{Diplom\_Cover.tex}:]
-  The cover page for a Diplom thesis;
-\item[\texttt{Master\_Cover.tex}:]
-  The cover page for an MSc thesis.
+The following stages exist:
+\begin{description}\setlength{\parskip}{0pt}\setlength{\itemsep}{0pt}
+\item[Draft] you are still writing your thesis;
+\item[Submit] you are ready to submit your thesis;
+\item[Final] the final version of your thesis.
+  For PhD theses this is the version that goes to ULB;
+\item[PILibrary] final version of your thesis with an extra cover page\index{cover}
+  including an abstract for the PI library.
 \end{description}
-This extra cover should not be included for the version of the PhD
-thesis that is submitted to the university library (ULB). See
-Chapter~\ref{sec:submit} for some more details.
+%
+%\noindent
+%In the main thesis file, \texttt{mythesis.tex}, you need to specify
+%which cover page should be used:\index{cover page}
+%\begin{description}
+%\item[\texttt{PhD\_Submit\_Title.tex} and \texttt{PhD\_Final\_Title.tex}:]
+%  the title pages for a PhD thesis;\index{PhD}\index{thesis!PhD}
+%\item[\texttt{Master\_Submit\_Title.tex} and \texttt{Master\_Final\_Title.tex}:]
+%  the title pages for an MSc thesis;\index{MSc}\index{thesis!Master}
+%\item[\texttt{Diplom\_Submit\_Title.tex} and \texttt{Diplom\_Final\_Title.tex}:]
+%  the title pages for a Diplom thesis;\index{Diplom}\index{thesis!Diplom}
+%\item[\texttt{Bachelor\_Title.tex}:]
+%  the title pages for a BSc thesis.\index{BSc}\index{thesis!Bachelor}
+%\end{description}
+%For the printed version for the department library you also need to
+%include the appropriate cover page (with an abstract):\index{cover}
+%\begin{description}
+%\item[\texttt{PhD\_Cover.tex}:]
+%  The cover page for a PhD thesis;
+%\item[\texttt{Diplom\_Cover.tex}:]
+%  The cover page for a Diplom thesis;
+%\item[\texttt{Master\_Cover.tex}:]
+%  The cover page for an MSc thesis.
+%\end{description}
+%This extra cover should not be included for the version of the PhD
+%thesis that is submitted to the university library (ULB).
+See Chapter~\ref{sec:submit} for some more details about thesis submission.
 
 If you are not a member of the
 \foreignquote{ngerman}{Physikalisches Institut} you should
@@ -171,8 +191,18 @@ The following options exist:
 \begin{tabular}{llp{10.0cm}}
   Option & Default & Description \\
   \midrule
+  PhD & false & A PhD thesis.\\
+  Master & false & A Master thesis.\\
+  Diplom & false & A Diplom thesis.\\
+  Bachelor & false & A Bachelor thesis.\\
+  Draft & true & Draft version of the thesis.\\
+  Submit & false & Version of the thesis to be submitted.\\
+  Final & false & Final version of the thesis (for PhD theses ready to go to ULB).\\
+  PILibrary & false & Final version including an extra cover page for the PI library.\\
+  thesistype & Unknown & Specify the thesis type.\\
+  thesisversion & Draft & Specify the stage of the thesis.\\
   texlive & 2014 & Specify the \TeXLive version.
-  You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
+    You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
   siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
   mhchem & true & A nice package for chemical elements and processes.\\
   dcolumn & true & A package for helping to align things in tables.\\
@@ -395,6 +425,17 @@ in Appendix~\ref{sec:app:tex}.
   where E is the energy of the particle and m is its mass}, i.e.\ $E$
   and $m$ are in math mode in the equation, but in text mode in the
   text where they are explained.
+\item Do not start a new paragraph when describing the elements in an equation.
+  The equation above is described correctly. Wrong would be:
+  The most famous equation in the world is:
+  \begin{equation}
+    \label{eq:emc2}
+    E = m c^{2}
+  \end{equation}
+  
+  where $E$ is the energy of the particle and $m$ is its mass.
+  Using the paragraph options of this guide, you add extra space.
+  If your paragraphs are indented, \enquote{where} would also be indented.
 \item Another example of how not to write things is something like
   \enquote{The scale factor, SF, used to correct the MC is determined in
   an independent dataset using $SF = N_{data} / N_{MC}$}. Note the

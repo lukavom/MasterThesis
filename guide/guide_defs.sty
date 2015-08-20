@@ -1,20 +1,5 @@
-%
-% If you use the siunitx package include any decimal number in \SI or \num
-% e.g. \num{2.3} \SI{2.3E4}{\GeV}. The decimal point will be replaced
-% by a comma if you switch your document language to German!
-% You do this by specifying the locale in siunitx
-%
-% The old way to achieve this is commented out here.
-% Include the following definition to
-% make ',' an ordinary symbol in decimal numbers
-%\DecimalMathComma
-% \mathchardef\CommaOrdinary="013B
-% \mathchardef\CommaPunct   ="613B
-% \mathcode`,="8000   % , im Math-Mode aktiv ("8000) machen
-% {\catcode`\,=\active
-%  \gdef ,{\obeyspaces\futurelet\next\CommaCheck}}
-% \def\CommaCheck{\if\space\next\CommaPunct\else\CommaOrdinary\fi}
-%
+% Definitions needed by the thesis guide
+
 \RequirePackage{suffix}
 \newcommand*\Package[1]{\textsf{#1}\index{#1}}
 \newcommand*\PackageG[1]{\textsf{\gls{#1}}\index{#1}}
@@ -32,7 +17,7 @@
 \newcommand*{\TeXstudio}{\TeX studio\xspace}
 \newcommand*{\TeXworks}{\TeX works\xspace}
 \newcommand*{\TikZ}{Ti\textit{k}Z\xspace}
-%
+
 \newcommand*{\pT}{\ensuremath{p_{\text{T}}}\xspace}
 \newcommand*{\pTjet}{\ensuremath{p_{\text{T}}^{\text{jet}}}\xspace}
 \newcommand*{\etajet}{\ensuremath{\eta^{\text{jet}}}\xspace}
@@ -41,29 +26,15 @@
 \newcommand*{\diffetab}{\ensuremath{\dif\sigma_{b}/\dif \eta^{b}}\xspace}
 \newcommand*{\diffnloetab}{\ensuremath{\dif\sigma_{b}^{\text{NLO}}/\dif p_{T}^{b}}\xspace}
 \newcommand*{\Cbhad}{\ensuremath{\mathcal{C}_{b}^{\text{had}}}\xspace}
-%
+
 \newcommand*{\Bo}{\ensuremath{B^{0}}\xspace}
 \newcommand*{\Bobar}{\ensuremath{\bar{B}^{0}}\xspace}
-%
-% Units that were in hepunits
-%
-\ifthenelse {\texlive < 2011} {%
-  % \newunit[per=slash]{\MeVovercsq}{\MeV\per\clight\squared}
-  % \newunit[per=slash]{\GeVovercsq}{\GeV\per\clight\squared}
-}{%
-  \DeclareSIUnit\clight{\ensuremath{c}}
-  \DeclareSIUnit[per-mode=symbol]\MeVovercsq{\MeV\per\clight\squared}
-  \DeclareSIUnit[per-mode=symbol]\GeVovercsq{\GeV\per\clight\squared}
-  \DeclareSIUnit\nb{\nano\barn}
-  \DeclareSIUnit\pb{\pico\barn}
-}
 
 \newcommand*{\stat}{\ensuremath{\text{stat.}}}
 \newcommand*{\sys}{\ensuremath{\text{sys.}}}
-%
+
 % Extra commands to copy with separate statistical and systematic
 % errors as well as asymmetric errors
-%
 \newcommand*\valuesep{\,}
 % \newcommand*\valuesep{\quad}
 \ifthenelse {\texlive < 2011} {%
@@ -153,7 +124,6 @@
     \valuesep\si{#5}}%
   \endgroup
 }
-
 \newcommand*\SIpmerrs[7][]{%
   \begingroup
   \sisetup{#1}%
@@ -163,3 +133,19 @@
     \valuesep\si{#7}}%
   \endgroup
 }
+
+% If you use the siunitx package include any decimal number in \SI or \num
+% e.g. \num{2.3} \SI{2.3E4}{\GeV}. The decimal point will be replaced
+% by a comma if you switch your document language to German!
+% You do this by specifying the locale in siunitx
+%
+% The old way to achieve this is commented out here.
+% Include the following definition to
+% make ',' an ordinary symbol in decimal numbers
+%\DecimalMathComma
+% \mathchardef\CommaOrdinary="013B
+% \mathchardef\CommaPunct   ="613B
+% \mathcode`,="8000   % , im Math-Mode aktiv ("8000) machen
+% {\catcode`\,=\active
+%  \gdef ,{\obeyspaces\futurelet\next\CommaCheck}}
+% \def\CommaCheck{\if\space\next\CommaPunct\else\CommaOrdinary\fi}

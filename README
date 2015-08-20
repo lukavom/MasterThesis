@@ -40,7 +40,7 @@ biblatex and siunitx.  It may therefore be necessary to make a few
 changes in order to get the thesis to compile on your machine. The
 default version assumes that you have TeX Live 2013 or later.  If you
 have an older version pass the option 'texlive=YYYY' to the document class
-of mythesis.tex.
+or ubonn-thesis package in mythesis.tex.
 If you make a new document, you can do this by passing the argument 
 `TEXLIVE=YYYY' when giving the command `make new'.
 If your version of TeX Live is earlier than 2011, which implies that you have

@@ -114,7 +114,7 @@ need something like:
 %
 \usepackage[backend=biber,
   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
-% \usepackage[backend=bibtex8,hyperref=true,bibencoding=latin1,
+% \usepackage[backend=bibtex,hyperref=true,
 %   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
 
 % Adjustments to output are in this style file:
@@ -126,7 +126,7 @@ need something like:
 \end{verbatim}
 in the document preamble and \Macro{printbibliography} where they
 should be printed. The commented out lines are for \TeXLive 2011 and earlier with
-the \Option{bibtex8} backend.
+the \Option{bibtex} backend.
 Note that as of version 3.0 of the thesis package,
 the \Package{biblatex} command is included in \Package{ubonn-thesis}.
 To turn it off add the option \Option{biblatex=false}.
@@ -159,15 +159,14 @@ etc.\ directly, this does not work with \BibTeX. You can use the
 old syntax \verb+\"{a}+. This problem is completely solved if you use
 \Package{biblatex} and the \Option{biber} backend.
 
-If you use \Package{biblatex} and the \Option{bibtex8} backend (default
-setting for \TeXLive 2010 and earler), then you have to encode your \texttt{.bib}
+If you use \Package{biblatex} and the \Option{bibtex8} backend
+you have to encode your \texttt{.bib}
 files with latin1 and use the line:\\
 \Macro*{usepackage[bibencoding=latin1]\{biblatex\}}.\footnote{%
   If you do not include umlauts directly in the references you do not
-  need this option.}
+  need the \Option{bibencoding} option.}
 For this reason, as indicated above the thesis package includes two
-versions of the file with some standard references and also of the
-files with some example references:
+versions of the file with some example references:
 \begin{itemize}
 \setlength{\parskip}{0pt}\setlength{\itemsep}{0pt}
 \item \texttt{./ref/examples\_refs-latin1.bib} with latin1 encoding
@@ -176,6 +175,10 @@ files with some example references:
 If you try to compile the guide with the wrong file using \BibTeX, you
 will get some errors as I have included some umlauts in the example
 references.
+Given that the above only applies to rather old versions of \TeXLive
+and introduces additional complications,
+I have decided to set things up for traditional \BibTeX\ with \TeXLive older than 2011.
+This is what you get if you make a new thesis with the command \texttt{make new09}.
 
 That's it? Well almost! First, you will have to make sure that the
 entry type that you use corresponds to the type of document that you
@@ -216,7 +219,7 @@ types that \Package{biblatex} has are not part of \BibTeX.
 \item[@report] Use it for conference\index{conference note}\index{note!conference} and
   internal\index{internal note}\index{note!internal} notes. This is
   probably also the best type to use for preprints. You can also use
-  \Option{booklet} or \Option{@online}.
+  \Option{@booklet} or \Option{@online}.
 \item[@online] Use it for things that are only available online,
   e.g.~\cite{lshort}.
 \item[@thesis] The name says it all.\index{thesis}
@@ -432,17 +435,19 @@ A few more tweaks may still be needed. You can use the command
 \verb|make astro| instead of \verb|make new| to make a thesis skeleton with the appropriate
 options set and the template introduction uses typical citation commands.
 
-If it is available, \Option{biber} is probably the preferred backend to
-\Option{bibtex8}. However, the backend is mostly relevant for
+If it is available, \Option{biber} is the preferred backend over
+\Option{bibtex} or \Option{bibtex8}.
+However, the backend is mostly relevant for
 sorting, so it probably does not matter which you use if you use an
 option that gives the references in the order that they were
-cited. \Option{biber} seems to work well with \TeXLive 2012 and later;\footnote{%
-I have seen occasional problems with \TeXLive 2011, but it is mostly OK.}
-it is often not available with earlier versions.
-\texttt{ubonn-thesis} switches to \Option{bibtex8} automatically for \TeXLive
-versions earlier than 2011. It also sets the encoding to \texttt{latin1}.
+cited. \Option{biber} seems to work well with \TeXLive 2012 and later and hence is the default.
+For such old versions of \TeXLive, a better solution is \texttt{make new09}
+followed by \texttt{make thesis09} that then uses traditional \BibTeX.\footnote{%
+You can still use \Package{biblatex} if you want to.
+\texttt{ubonn-thesis} switches to \Option{bibtex} automatically for \TeXLive
+versions earlier than 2011.
 If you want to set the backend yourself, use the option \Option{backend}.
-Set the encoding with the option \Option{bibencoding} if necessary.
+Set the encoding with the option \Option{bibencoding} if necessary.}
 
 If you want to find out where your references are actually cited, you
 can include the option \Option{backref=true}.
@@ -462,7 +467,7 @@ Use the command \verb|biber --cache| to find out where it is.
 If you are adventurous, the command \verb|rm -rf `biber --cache`| will do it all for you!
 
 %------------------------------------------------------------------------------
-\subsection{\BibTeX{} styles}
+\subsection{Traditional \BibTeX{} styles}
 \label{sec:ref:bst}
 
 If you use references directly from Spires or Inspire, then it is
@@ -477,6 +482,10 @@ which could save quite a bit of work. The big advantage of
 The equivalent of \Package{biblatex}'s \Option{ieee} style in \BibTeX\ is
 \Option{ieeetr}. It also knows about arXiv and preprints. However, it
 does not know about collaborations.
+
+There are also standard ATLAS style files that work fairly well:
+\texttt{atlasBibStyleWithTitle.bst} and \texttt{atlasBibStyleWoTitle.bst}
+These are included in the \texttt{refs} directory.
 
 
 %------------------------------------------------------------------------------
@@ -536,7 +545,7 @@ references for the Standard Model~\cite{gsw}. They are combined by
 using \Option{@Set}\index{biblatex!Set option@"@Set option} and the relevant
 keys. If you use a recent version of \texttt{biber} (\TeXLive 2012 and later)
 this is all you have to do.  If, however, you are using \TeXLive
-2011 or earlier, and therefore the \texttt{bibtex} or \texttt{bibtex8} backend, the
+2011 or earlier with \Package{biblatex}, and therefore the \texttt{bibtex} or \texttt{bibtex8} backend, the
 \texttt{crossref} field must contain the same key as the first one in
 \texttt{entryset}.
 

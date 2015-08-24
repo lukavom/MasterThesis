@@ -26,9 +26,9 @@ guide: guide11
 
 guide09:
 	pdflatex   $(EXTRACMD) $(GUIDE)
-	bibtex8 -H $(GUIDE)
+	bibtex     $(GUIDE)
 	pdflatex   $(EXTRACMD) $(GUIDE)
-	bibtex8 -H $(GUIDE)
+	bibtex     $(GUIDE)
 	makeindex  $(GUIDE)
 	makeglossaries $(GUIDE)
 	pdflatex   $(GUIDE)

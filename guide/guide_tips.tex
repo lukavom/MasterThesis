@@ -69,8 +69,9 @@ To compile your thesis try:\index{compiling}
 cd mythesis [or dirname]
 make thesis
 \end{verbatim}
-If your version of \TeXLive is lower than 2011, use the command \enquote{\texttt{make thesis09}}
-or \enquote{\texttt{make thesis BIBTEX='bibtex8 -H'}}.
+If your version of \TeXLive is lower than 2011, use the command \enquote{\texttt{make new09}}
+followed by \enquote{\texttt{make thesis09}}
+or \enquote{\texttt{make thesis BIBTEX='bibtex'}}.
 See Section~\ref{sec:tips:options} for a list of the options that can be passed to the package.
 
 My original idea was that the style file should work for all recent
@@ -83,7 +84,9 @@ This is also the setting to use for an up-to-date version of MikTeX (2.9).
 Things should compile without any changes if you use \TeXLive 2013 or later.
 Look in the style file to see what changes are made depending on the year you use.
 You can change the \TeXLive version when you make a new thesis 
-by giving a command like \enquote{\texttt{make new TEXLIVE=2009}}.
+by giving a command like \enquote{\texttt{make new TEXLIVE=2011}}.\footnote{%
+For even older versions of \TeXLive use the command \enquote{\texttt{make new09}}.
+This turns off the use of \Package{biblatex}.}
 If you switch \TeXLive versions do a
 \enquote{\texttt{make clean cleanbbl cleanblx}} in between.
 
@@ -168,8 +171,10 @@ some of the Feynman graphs in the directories \texttt{./feynmf} and
 \TeXLive 2013 or later. For earlier versions set \Macro{texlive} in
 \texttt{thesis\_guide.tex} to the appropriate value.
 Set the default font to \Package{txfonts} for \TeXLive 2011 and older.
-If you want to compile the guide with \TeXLive older than 2009,
-you probably have to switch from \Package{biblatex} to traditional \BibTeX.
+If you want to compile the guide with \TeXLive older than 2011,
+it is probably easier to switch from \Package{biblatex} to traditional \BibTeX.
+This is done via the \texttt{make new09} command.
+
 %The guide will not compile for \TeXLive versions lower than 2012,
 %as the \Package{subcaption} package and the way to load it was different earlier.
 
@@ -222,13 +227,16 @@ The following options exist:
   biblatex & true & Include \Package{biblatex}.\\
   astrobib & false & Adjust \Package{biblatex} options to conform to the usual astronomy style.\\
   backend & biber & Specify the backend to use.
-  Possibilities are \Option{biber}, \Option{bibtex} or \Option{bibtex8}.\\
+    Possibilities are \Option{biber}, \Option{bibtex} or \Option{bibtex8}.\\
   backref & true & The bibliography lists where the reference is cited.
-  This option is very useful when writing your thesis,
-  but should probably be turned off for the final version.\\
+    This option is very useful when writing your thesis,
+    but should probably be turned off for the final version.\\
   bibstyle & numeric-comp & Specify the style to use for the references. 
-  Standard values are \Option{numeric-comp} or \Option{alphabetic}.\\
+    Standard values are \Option{numeric-comp} or \Option{alphabetic}.\\
 \end{tabular}
+
+Some default option values are adjusted depending on the \TeXLive version.
+See the \texttt{ubonn-thesis} style file to find out what is changed.
 
 
 %------------------------------------------------------------------------------

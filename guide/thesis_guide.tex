@@ -2,25 +2,27 @@
 %-------------------------------------------------------------------------------
 % This file contains the guide to writing theses for the
 % physics and astronomy institutes, Universität Bonn
-%
+
 % Specify the language(s) in the class and then use babel.
 % If you need more than one language, give the defalt language last,
 % e.g. ngerman,UKenglish for a thesis in British (UK) English where you want
 % to be able to set the language to German for some part of it
 
 %-------------------------------------------------------------------------------
-% Set to <2010 for biblatex and bibtex8 (TeX Live 2009)
-% Set to >2010 for biblatex and biber   (TeX Live 2011 or later)
-% This must be set before \usepackage{ubonn-thesis}
-\newcommand*{\texlive}{2014}
-\newcommand*{\guideversion}{4.0}
-
 % Main thesis style file
-\usepackage[newtx,bibstyle=alphabetic,feynmp]{../ubonn-thesis}
+\newcommand*{\guideversion}{4.0}
+\newcommand*{\texlive}{2014}
+\usepackage{ifthen}
 
 % Adjustments to biblatex output are in this style file:
-\usepackage{../ubonn-biblatex}
+\ifthenelse{\texlive < 2011} {%
+  \usepackage[biblatex=false,feynmp]{../ubonn-thesis}
+}{%
+  \usepackage[newtx,bibstyle=alphabetic,feynmp]{../ubonn-thesis}
+  \usepackage{../ubonn-biblatex}
+}
 
+% Tikz
 \ifthenelse{\texlive < 2010} {%
 }{%
   \usepackage{import}
@@ -32,6 +34,7 @@
   \usetikzlibrary{decorations.pathmorphing}
   \usetikzlibrary{decorations.markings}
 }
+% Other packages needed for the guide
 \usepackage{makeidx}
 \usepackage[acronym,toc,nosuper]{glossaries}
 \usepackage{../thesis_skel/thesis_defs}
@@ -54,16 +57,10 @@
 % For further changes copy the \RequirePackage here and include
 % ubonn-thesis with the option biblatex=false.
 % Specify the bibliography files here and not at the end!
-\addbibresource{guide_refs.bib}
-\addbibresource{../guide/refs/zeus_2009.bib}
-\addbibresource{../guide/refs/zeus_2010.bib}
-% Use example_refs-latin1 and standard_refs-bibtex with bibtex
-% and example_refs-utf8   and standard_refs-biber  if you use biber
-\ifthenelse{\texlive < 2011} {%
-  \addbibresource{../refs/standard_refs-bibtex.bib}
-  \addbibresource{../refs/example_refs-latin1.bib}
-}{%
-  % Adjustments to output are in this style file:
+\ifthenelse{\texlive > 2010} {%
+  \addbibresource{guide_refs.bib}
+  \addbibresource{../guide/refs/zeus_2009.bib}
+  \addbibresource{../guide/refs/zeus_2010.bib}
   \addbibresource{../refs/standard_refs-biber.bib}
   \addbibresource{../refs/example_refs-utf8.bib}
 }
@@ -206,26 +203,26 @@
 \include{guide_appendix}
 %\printbibliography[heading=subbibliography]
 
-\backmatter
 %-------------------------------------------------------------------------------
-% Declare bibliography, lists of figures and tables and acknowledgements as backmatter
-% Chapter/section numbers are turned off
-%
-% Include the following lines and comment out \printbibliography if
-% you use BiBTeX for the bibliography.
-% If you use biblatex package the files should de specified in the preamble.
-% {\raggedright
-%   \bibliographystyle{unsrt}
-%   \bibliography{./guide_refs.bib,../refs/standard_refs-bibtex,../refs/example_refs-latin1,%
-%     ../guide/refs/zeus_2009,%
-%     ../guide/refs/zeus_2010}
-%  }
+\ifthenelse{\texlive > 2010} {%
+  % Use biblatex for the bibliography and add bibliography to Table Of Contents
+  \printbibliography[heading=bibintoc]
+}{% 
+  % Use traditional BibTeX for the bibliography.
+  {\raggedright
+    \bibliographystyle{../refs/atlasBibStyleWithTitle.bst}
+    %\bibliographystyle{unsrt}
+    \bibliography{./guide_refs.bib,%
+      ../guide/refs/zeus_2009,%
+      ../guide/refs/zeus_2010,%
+      ../refs/standard_refs-bibtex,../refs/example_refs-latin1}
+  }
+}
 
 %-------------------------------------------------------------------------------
-% Use biblatex for the bibliography
-% Add bibliography to Table Of Contents
-%
-\printbibliography[heading=bibintoc]
+% Declare lists of figures and tables and acknowledgements as backmatter
+% Chapter/section numbers are turned off
+\backmatter
 
 \listoffigures
 \listoftables

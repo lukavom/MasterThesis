@@ -16,8 +16,13 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
-  21 Aug 2015 & 4.0 &Add options for thesis type and stage.
+  24 Aug 2015 & 4.0 & Add options for thesis type and stage.
     This simplifies and improves how the different cover and title pages are included.
+    Put bibliography before appendix (this seems to be more standard).
+    Use \KOMAScript{} options to add lines around chapter headings -- small change to the style.
+    Add a skeleton that compiles with \TeXLive 2009 -- \texttt{make new09} command.
+    Remove most advice and switches to use \texttt{bibtex8}.
+    The 2009 version of the skeleton uses traditional \BibTeX.
     Small updates to submission instructions and operating systems.\\
   
   02 Feb 2015 & 3.0 & Add ability to pass options to \texttt{ubonn-thesis.sty}
@@ -129,7 +134,7 @@ information.
   some more sources of information. Reorganise and improve a bit the
   references chapter. Reorganise information on installing a \TeX\
   setup. Move Windows XP to a separate subsection. Add a bit of
-  information for a Mac. Add a bit of information on
+  information for MacOSX. Add a bit of information on
   the \Package{subfiles} package.\\
   
   06 Mar 2012 & Add more information on formatting footnotes.\\
@@ -275,18 +280,18 @@ Kile, but it should be possible to do it in the same way as you add a
 
 
 %------------------------------------------------------------------------------
-\section{Mac}
-\label{sec:app:mac}\index{mac}
+\section{MacOSX}
+\label{sec:app:mac}\index{MacOSX}
 %------------------------------------------------------------------------------
 
 For the past year, I have been installing and running \LaTeX\ on a MacBook Pro.
 The standard package you start with is \TeX Shop. 
 Together with Basic\TeX\ this provides a basic environment. 
 However, if you want to do more (like write a thesis),
-you should install \TeXLive. Note that the Dante \TeX\
-Collection DVD includes Mac\TeX, which is what the \TeX Shop web page
+you should install \TeXLive.
+You can download Mac\TeX\ from \url{http://www.tug.org/mactex/}.
+The Dante \TeX\ Collection DVD also includes Mac\TeX, which is what the \TeX Shop web page
 recommends as the best combination to install.
-You can also doenload Mac\TeX from \url{http://www.tug.org/mactex/}.
 
 As discussed above, there are MacOSX versions of \TeXstudio and \TeXmaker which you can try.
 I have been using \TeXstudio.
@@ -355,11 +360,12 @@ selected. If you version of \TeXLive is older than 2013, you should set
 \Macro{texlive} accordingly and not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
 
 The default version of the guide uses \Option{biber} for the
-\Package{biblatex} package and includes\\
-\texttt{./refs/example\_refs-utf8} rather than
-\texttt{./refs/example\_refs-latin1}. You give the command \texttt{make
-  guide} to compile, which uses \texttt{biber}\index{biber} rather than
-\texttt{bibtex8}\index{bibtex8} to process the \texttt{.bib} files.
+\Package{biblatex} package and includes
+\texttt{./refs/example\_refs-utf8.bib} which contains some umlauts.\footnote{%
+The same references with latin1 encoding (suitable for \texttt{bibtex8}) can be found in
+\texttt{./refs/example\_refs-latin1.bib}.}
+You give the command \texttt{make guide} to compile, which uses \texttt{biber}\index{biber} rather than
+\texttt{bibtex}\index{bibtex} to process the \texttt{.bib} files.
 
 For a older version of \TeXLive (2009), in addition to changing
 \Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}.
@@ -377,7 +383,7 @@ have to pass the option \Option{feynmf} instead of \Option{feynmp} to \texttt{ub
 and give the command \texttt{make feynmf} before \texttt{make guide}.
 
 If you want to switch from \texttt{biber}\index{biber} to
-\texttt{bibtex8}\index{bibtex8} or \texttt{bibtex}\index{bibtex} or vice versa, give the commands
+\texttt{bibtex}\index{bibtex} or \texttt{bibtex8}\index{bibtex8} or vice versa, give the commands
 \texttt{make cleanguide cleanbbl cleanblx} before you try to compile
 the guide (or your thesis).
 

@@ -1,7 +1,6 @@
-#
 # Makefile to run latex, dvips, and pdflatex on a thesis
 # Can also run feynmf/feynmp/tikz on files in a directory
-#
+
 THESIS = mythesis
 # EXTRACMD = --shell-escape
 FEYNDIR = ../feynmf
@@ -25,9 +24,10 @@ AWKDIR=..
 
 thesis: thesis11
 
+# - in front of bibtex means compilation continues even if there is an error
 thesis09: $(THESIS).tex *.tex *.bib
 	pdflatex   $(EXTRACMD) $(THESIS)
-	bibtex8 -H $(THESIS)
+	-bibtex $(THESIS)
 	# makeglossaries $(THESIS)
 	pdflatex   $(EXTRACMD) $(THESIS)
 	pdflatex   $(EXTRACMD) $(THESIS)

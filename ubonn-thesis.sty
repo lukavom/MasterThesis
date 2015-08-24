@@ -68,39 +68,39 @@
 \else
   \renewcommand*{\texlive}{\UBN@texlive}
 \fi
-\typeout{ubonn-thesis: texlive is [\texlive]}
+\typeout{Package ubonn-thesis Info: texlive is [\texlive]}
 
 % Thesis type specified as an option
 \ifUBN@PhD
-  \typeout{ubonn-thesis: setting things up for a PhD thesis}
+  \typeout{Package ubonn-thesis Info: Setting things up for a PhD thesis}
   \renewcommand*{\ThesisType}{PhD}
 \fi
 \ifUBN@Master
-  \typeout{ubonn-thesis: setting things up for a Master thesis}
+  \typeout{Package ubonn-thesis Info: Setting things up for a Master thesis}
   \renewcommand*{\ThesisType}{Master}
 \fi
 \ifUBN@Diplom
-  \typeout{ubonn-thesis: setting things up for a Diplom thesis}
+  \typeout{Package ubonn-thesis Info: Setting things up for a Diplom thesis}
   \renewcommand*{\ThesisType}{Diplom}
 \fi
 \ifUBN@Bachelor
-  \typeout{ubonn-thesis: setting things up for a Bachelor thesis}
+  \typeout{Package ubonn-thesis Info: Setting things up for a Bachelor thesis}
   \renewcommand*{\ThesisType}{Bachelor}
 \fi
 
 % PI library thesis version - includes extra cover page
 \ifUBN@PILibrary
-  \typeout{ubonn-thesis: creating version for PI library}
+  \typeout{Package ubonn-thesis Info: Creating version for PI library}
   \renewcommand*{\ThesisVersion}{PILibrary}
 \fi
 % Submission version of thesis
 \ifUBN@Submit
-  \typeout{ubonn-thesis: creating submission version of thesis}
+  \typeout{Package ubonn-thesis Info: Creating submission version of thesis}
   \renewcommand*{\ThesisVersion}{Submit}
 \fi
 % Final print version of thesis
 \ifUBN@Final
-  \typeout{ubonn-thesis: creating final version of thesis for print shop and ULB}
+  \typeout{Package ubonn-thesis Info: Creating final version of thesis for print shop and ULB}
   \renewcommand*{\ThesisVersion}{Final}
 \fi
 % Thesis type/version specified as a string
@@ -117,17 +117,17 @@
 
 % Only one font package at a time!
 \ifUBN@newtx
-  \typeout{ubonn-thesis: using newtx fonts}
+  \typeout{Package ubonn-thesis Info: Using newtx fonts}
   \UBN@txfontsfalse
   \UBN@palatinofalse
 \else
   \ifUBN@palatino
-    \typeout{ubonn-thesis: using Palatino fonts}
+    \typeout{Package ubonn-thesis Info: Using Palatino fonts}
     \UBN@txfontsfalse
     \UBN@newtxfalse
   \else
     \ifUBN@txfonts
-      \typeout{ubonn-thesis: using txfonts}
+      \typeout{Package ubonn-thesis Info: Using txfonts}
       \UBN@newtxfalse
       \UBN@palatinofalse
     \fi
@@ -162,19 +162,19 @@
 % Check backend - if TeX Live is earlier than 2011 and backend is biber,
 % change it to something more appropriate
 \ifthenelse{\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
-  \typeout{ubonn-thesis: setting backend to bibtex8}
-  \renewcommand*{\UBN@backend}{bibtex8,bibencoding=latin1}
+  \typeout{Package ubonn-thesis Warning: Setting backend to bibtex}
+  \renewcommand*{\UBN@backend}{bibtex} %Used to be {bibtex8,bibencoding=latin1}
 }{%
 }
 
 % Switch from subcaption to subfig if TeX Live is earlier than 2012
-\ifthenelse{\texlive < 2012 \AND \boolean{UBN@subcaption}}{%
-  \typeout{ubonn-thesis: use subfig instead of subcaption}
-    \UBN@subfigurefalse
-    \UBN@subfigtrue
-    \UBN@subcaptionfalse
-}{%
-}
+%\ifthenelse{\texlive < 2012 \AND \boolean{UBN@subcaption}}{%
+%  \typeout{Package ubonn-thesis Warning: Using subfig instead of subcaption}
+%    \UBN@subfigurefalse
+%    \UBN@subfigtrue
+%    \UBN@subcaptionfalse
+%}{%
+%}
 
 %------------------------------------------------------------------------------
 % General KOMA script options - other options affecting header/footer
@@ -182,10 +182,9 @@
 \KOMAoptions{fontsize=11pt,paper=a4,twoside}
 % Add List of Figures/Tables to Table of Contents
 \KOMAoptions{listof=totoc}
-% Also add bibliography to the Table of Contents - this option only
-% works for BiBTeX. If you use biblatex you have to add the option
-% [heading=bibintoc] to \printbibliography
-\KOMAoptions{bibliography=totocnumbered}
+% Commands to add bibliography to the Table of Contents are in the main file
+% For biblatex, add option [heading=bibintoc] to \printbibliography
+% For traditional BibTeX, add option \KOMAoptions{toc=bibliography}
 % No paragraph indentation, but instead half-line space
 % \KOMAoptions{parskip=half}
 
@@ -281,28 +280,39 @@
 % \setquotestyle{mythesis}
 
 %-------------------------------------------------------------------------------
+% Nicer fractions - load before siunitx for older versions of TeX Live
+\RequirePackage{xfrac}
+
+%-------------------------------------------------------------------------------
 \ifUBN@siunitx 
-  \ifthenelse {\texlive < 2011} {%
-    \RequirePackage[seperr,
-    repeatunits=false,
-    noload=addn,
-    alsoload=hep]{siunitx}
-    \sisetup{obeyall}
-    \newunit{\barn}{b}
-    \newunit{\TeVc}{\tera\eVperc}
-    \newunit{\GeVc}{\giga\eVperc}
-    \newunit{\MeVc}{\mega\eVperc}
-    \newunit{\keVc}{\kilo\eVperc}
-    \newunit{\eVc}{\eVperc}
-  }{%
-    \RequirePackage[separate-uncertainty,
-    range-units = repeat]{siunitx}
-    \sisetup{detect-family = true}
-    \ifthenelse {\texlive < 2012} {%
-      \sisetup{group-decimal-digits=false, group-four-digits=true}
+  \ifthenelse{\texlive < 2012}{
+    \ifthenelse{\texlive < 2011} {%
+      \RequirePackage[noload=addn]{siunitx}
+      \sisetup{alsoload=hep}
+      \sisetup{seperr}
+      \sisetup{repeatunits=false}
+      \sisetup{obeyall}
+      \sisetup{sepfour}
+      \newunit{\barn}{b}
+      \newunit{\TeVc}{\tera\eVperc}
+      \newunit{\GeVc}{\giga\eVperc}
+      \newunit{\MeVc}{\mega\eVperc}
+      \newunit{\keVc}{\kilo\eVperc}
+      \newunit{\eVc}{\eVperc}
     }{%
-      \sisetup{group-digits=integer, group-minimum-digits=4}
+      \RequirePackage{siunitx}
+      \sisetup{load-configurations=abbreviations}
+      \sisetup{separate-uncertainty}
+      \sisetup{detect-all}
+      \sisetup{range-units=single, list-units=single}
+      \sisetup{group-digits=true, group-four-digits=true}
     }
+  }{%
+    \RequirePackage{siunitx}
+    \sisetup{separate-uncertainty}
+    \sisetup{range-units=single, list-units=single}
+    \sisetup{group-digits=integer, group-minimum-digits=4}
+    \sisetup{detect-all}
   }
   % Units - for German thesis \num{4.3} will be printed as 4,3
   \addto\extrasngerman{\sisetup{locale = DE}}
@@ -327,23 +337,27 @@
 \fi
 
 \ifUBN@subcaption
-  \RequirePackage{subcaption}
+  \ifthenelse{\texlive < 2012}{%
+    \RequirePackage{caption}
+  }{%
+  }
+  \RequirePackage[labelformat=simple]{subcaption}
+  \renewcommand\thesubfigure{(\alph{subfigure})}
+  \renewcommand\thesubtable{(\alph{subtable})}
 \else
   \ifUBN@subfig
-    \RequirePackage{subfig}
+    \RequirePackage[labelformat=simple,listofformat=subsimple,subrefformat=empty]{subfig}
+    \renewcommand\thesubfigure{(\alph{subfigure})}
+    \renewcommand\thesubtable{(\alph{subtable})}
   \else
     \ifUBN@subfigure
-      \RequirePackage{subfigure}
+      \RequirePackage[TABBOTCAP]{subfigure}
     \fi
   \fi
 \fi
 % \RequirePackage[lofdepth,lotdepth]{subfig}
 % Alternative to subfig, which is also newer
 % \RequirePackage{subcaption}
-
-%-------------------------------------------------------------------------------
-% Nicer fractions
-\RequirePackage{xfrac}
 
 %-------------------------------------------------------------------------------
 % Tables
@@ -369,7 +383,9 @@
 % the future
 % \RequirePackage{mcite}
 % Chemical elements
-\RequirePackage[version=3]{mhchem}
+\ifUBN@mhchem
+  \RequirePackage[version=3]{mhchem}
+\fi
 
 \RequirePackage{xcolor}
 \RequirePackage{xspace}
@@ -464,71 +480,56 @@
     [\vspace{1ex}%
     \titlerule]
 \else
-  % Adjust the \chapter heading
-  % Taken from http://tex.stackexchange.com/questions/173389/chapter-title-adjusting-with-koma-script
-  \def\@makechapterhead#1{%
-    \vspace*{10\p@}%
-    {\parindent \z@ \raggedleft \reset@font
-      \sffamily \bfseries \Huge \MakeUppercase{\Large\@chapapp}  \thechapter\vspace*{-5\p@}
-      \par\nobreak
-      \interlinepenalty\@M\hrulefill\newline\vspace*{-5\p@}
-      \huge \bfseries #1\par\nobreak
-      \vspace*{-8\p@}%
-      \hrulefill
-      \par\nobreak
-      \vskip 30\p@
-    }
+  % Code from http://www.komascript.de/chapterwithlines
+  \RequirePackage{microtype}
+  %\renewcommand*{\thechapter}{\Roman{chapter}}
+  \newcommand*{\chapternumbersize}{\Huge}
+  \renewcommand*{\chapterformat}{%
+    \raggedleft
+    %\textls{\MakeUppercase{\Large\chapapp}}\enskip\chapternumbersize\thechapter\\
+    \MakeUppercase{\Large\chapapp}\enskip\chapternumbersize\thechapter\\
+  \hrulefill\\[-.25ex]
   }
-  
-  % Adjust the \chapter* heading
-  \def\@makeschapterhead#1{%
-    \vspace*{4\p@}%
-    {\parindent \z@ \raggedright \reset@font
-      \sffamily
-      \interlinepenalty\@M\hrulefill\newline\vspace*{-5\p@}
-      \huge \bfseries #1\par\nobreak
-      \vspace*{-8\p@}%
-      \hrulefill
-      \par\nobreak
-      \vskip 30\p@
-    }
+  \renewcommand*{\chapterheadstartvskip}{\vskip 4\baselineskip}
+  \renewcommand*{\chapterheadendvskip}{%
+    \vspace{-\baselineskip}\noindent{\setlength{\parskip}{0pt}\Huge\hrulefill\par}
+    \vspace{\baselineskip}
   }
 \fi
 
-%\setkomafont{chapter}{\raggedleft\huge}
+% Adjust the \chapter heading
+% Taken from http://tex.stackexchange.com/questions/173389/chapter-title-adjusting-with-koma-script
+% This code works well, except that the bibliography gets a chapter number.
+% The KOMA-Script solution above is also simpler.
+%  \def\@makechapterhead#1{%
+%    \vspace*{10\p@}%
+%    {\parindent \z@ \raggedleft \reset@font
+%      \sffamily \bfseries \Huge \MakeUppercase{\Large\@chapapp}  \thechapter\vspace*{-5\p@}
+%      \par\nobreak
+%      \interlinepenalty\@M\hrulefill\newline\vspace*{-5\p@}
+%      \huge \bfseries #1\par\nobreak
+%      \vspace*{-8\p@}%
+%      \hrulefill
+%      \par\nobreak
+%      \vskip 30\p@
+%    }
+%  }
 %
-%%\let\origchapapp\chapapp
-%%\renewcommand{\chapapp}{\scshape{\origchapapp}}  % or \scshape{\origchapapp}
-%
-%%\renewcommand*{\chapterheadstartvskip}{\vskip-10pt}
-%\renewcommand*{\chapterformat}{%
-%  \raggedleft
-%  {\MakeUppercase{\Large\chapapp}}\enskip\thechapter\\
-%  \hrulefill\\[-9pt]
-%}
-%\renewcommand*{\chapterheadendvskip}{%
-%  \vspace{-12pt}\noindent{\setlength{\parskip}{0pt}\Huge\hrulefill\par}
-%  \vspace{\baselineskip}
-%}
+%  % Adjust the \chapter* heading
+%  \def\@makeschapterhead#1{%
+%    \vspace*{4\p@}%
+%    {\parindent \z@ \raggedright \reset@font
+%      \sffamily
+%      \interlinepenalty\@M\hrulefill\newline\vspace*{-5\p@}
+%      \huge \bfseries #1\par\nobreak
+%      \vspace*{-8\p@}%
+%      \hrulefill
+%      \par\nobreak
+%      \vskip 30\p@
+%    }
+%  }
+% \fi
 
-% Packages to change the chapter heading format
-% titlesec works, but gives a warning from KOMA-Script
-%\RequirePackage{titlesec}
-%\titleformat{\chapter}[display]
-%  {\bfseries\sffamily\huge}
-%  {\filleft\MakeUppercase{\Large\chaptertitlename} \Huge\thechapter}
-%  {2ex}
-%  {\titlerule
-%    \vspace{1ex}%
-%    \filright}
-%  [\vspace{1ex}%
-%  \titlerule]
-% \newcommand*{\justifyheading}{\raggedleft}
-% \titleformat{\chapter}[display]
-%   {\normalfont\huge\bfseries\justifyheading}{{\fontsize{60}{72}\selectfont\thechapter}}
-%   {20pt}{\Huge}
-% \RequirePackage[Sonny]{fncychap}
-% \RequirePackage[libertine]{quotchap}
 
 %-------------------------------------------------------------------------------
 % Do not centre one-line figure captions.

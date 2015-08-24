@@ -248,10 +248,11 @@ Fig.~\ref{fig:tikz:coord}.
 
 \begin{figure}[htbp]
   \centering
-  \ifthenelse {\texlive < 2011} {%
+  \ifthenelse {\texlive < 2012} {%
     \fbox{\parbox[c]{0.8\textwidth}{%
     Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
-    earlier. See the file \texttt{./tikz/zeus\_coords.tex}.}}
+    earlier. See the file \texttt{./tikz/zeus\_coords.tex}.}
+    This example also does not work with \TeXLive 2011.}
   }{%
     \input{../tikz/zeus_coords.tex}
   }

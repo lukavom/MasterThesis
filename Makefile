@@ -4,6 +4,7 @@
 #
 THESIS  = mythesis
 TEXLIVE = 2014
+TEXOLD = 2009
 # EXTRACMD = --shell-escape
 ifndef FEYNDIR
 FEYNDIR = ./feynmf
@@ -28,33 +29,31 @@ ifndef MPOSTDIR
 MPOSTDIR = ./mpost_tmp
 endif
 
-.PHONY: new astro \
+.PHONY: skelcopy \
 	feynmf feynmp tikz \
 	cleanfeynmf cleanfeynmp cleantikz cleanpictpdf \
 	help test
 
-new:
-	mkdir $(THESIS)
+# New thesis
+new: skelcopy
 	#cp thesis_skel/thesis_skel.tex        $(THESIS)/$(THESIS).tex
 	sed 's/texlive=2014/texlive=$(TEXLIVE)/' thesis_skel/thesis_skel.tex > $(THESIS)/$(THESIS).tex
+
+# New thesis with astrophysics style of references
+astro: skelcopy
+	#cp thesis_skel/thesis_astro_skel.tex  $(THESIS)/$(THESIS).tex
+	sed 's/texlive=2014/texlive=$(TEXLIVE)/' thesis_skel/thesis_astro_skel.tex > $(THESIS)/$(THESIS).tex
+
+# New thesis with old version of TeX Live
+new09: skelcopy
+	#cp thesis_skel/thesis_2009_skel.tex  $(THESIS)/$(THESIS).tex
+	sed 's/texlive=2009/texlive=$(TEXOLD)/' thesis_skel/thesis_2009_skel.tex > $(THESIS)/$(THESIS).tex
+
+skelcopy:
+	mkdir $(THESIS)
 	cp thesis_skel/thesis_defs.sty        $(THESIS)/
 	cp thesis_skel/thesis_refs.bib        $(THESIS)/
 	cp thesis_skel/thesis_intro.tex       $(THESIS)/
-	cp thesis_skel/thesis_appendix.tex    $(THESIS)/
-	cp thesis_skel/thesis_acknowledge.tex $(THESIS)/
-	cp thesis_skel/thesis_cv.tex          $(THESIS)/
-	cp thesis_skel/cover_only.tex         $(THESIS)/
-	cp ubonn-thesis.sty                   $(THESIS)/
-	cp ubonn-biblatex.sty                 $(THESIS)/
-	cp thesis_skel/Makefile               $(THESIS)/
-
-astro:
-	mkdir $(THESIS)
-	#cp thesis_skel/thesis_astro_skel.tex  $(THESIS)/$(THESIS).tex
-	sed 's/texlive=2014/texlive=$(TEXLIVE)/' thesis_skel/thesis_skel.tex > $(THESIS)/$(THESIS).tex
-	cp thesis_skel/thesis_defs.sty        $(THESIS)/
-	cp thesis_skel/thesis_refs.bib        $(THESIS)/
-	cp thesis_skel/thesis_astro_intro.tex $(THESIS)/thesis_intro.tex
 	cp thesis_skel/thesis_appendix.tex    $(THESIS)/
 	cp thesis_skel/thesis_acknowledge.tex $(THESIS)/
 	cp thesis_skel/thesis_cv.tex          $(THESIS)/
@@ -106,8 +105,11 @@ cleanpictpdf:
 
 help:
 	@echo "Possible commands:"
-	@echo "new [THESIS=dirname] [TEXLIVE=YYYY]: Create a new thesis skeleton"
-	@ECHO "  Default TeX Live version is 2014"
+	@echo "new   [THESIS=dirname] [TEXLIVE=YYYY]: Create a new thesis skeleton"
+	@echo "astro [THESIS=dirname] [TEXLIVE=YYYY]: Create a new astrophysics thesis skeleton"
+	@echo "  Default TeX Live version is 2014"
+	@echo "new09 [THESIS=dirname] [TEXOLD=YYYY]: Create a new thesis skeleton"
+	@echo "  Default old TeX Live version is 2009"
 	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIR)"
 	@echo "feynmp: Run feynmp for all .tex files in $(FEYNDIR)"
 	@echo "tikz:   Run tikz for all .tex files in $(TIKZDIR)"

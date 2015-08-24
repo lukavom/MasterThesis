@@ -165,6 +165,7 @@ Table~\ref{tab:package:other1}.
     directly compile for each figure and also input to another document.\\
     \Package{hyperref} & Adds \Macro{url} command as well as ability
     to click on entries on table of contents etc.\\
+    \Package{background} & Allows you to add things like DRAFT across the whole document page.\\
     \Package{subfiles} & Provides a nice alternative to
     \Macro{include}.\\
     \Package{subcaption} & An newer alternative to \Package{subfig}.\\
@@ -218,6 +219,11 @@ The packages \Package{commath} and \Package{skmath} provide some additional math
 Differentials etc.\ are particularly useful. 
 \Package{skmath} does quite a lot more and even modifies/enhances some standard commands.
 
+It is often useful to indicate whether your thesis is in the draft stage.\index{draft}
+The thesis skeleton uses the \Package{background} for this.
+It is only available as of \TeXLive 2011.
+If you have an older version of \TeXLive you can use \Package{draftwatermark} instead.
+
 A list of other packages that are commonly used is given in
 Table~\ref{tab:package:other2}. They are not
 included in the list above, because they are either not really needed
@@ -235,7 +241,8 @@ or have been superseded by other packages.
     \Package{fancyhdr} & As the name suggests, do your own header and
     footer configuration. Within \KOMAScript{} it is recommended to use
     \Package{scrpage2} instead.\\
-    \Package{feynmf} & Draw Feynman graphs with Metafont\\
+    \Package{feynmf} & Draw Feynman graphs with Metafont.\\
+    \Package{draftwatermark} & Another package that allows you to add DRAFT to each page.\\
     \Package{subfig} & As the name suggests make sub-figures and add
     separate captions for them. \emph{This package has apparently been
       deprecated.}\\

@@ -379,8 +379,7 @@
 % Be careful trying to use ziffer and dcolumn together
 % \RequirePackage{ziffer}
 % Multiple references - does not seem to work together with hyperref
-% Also is not compatible with biblatex, which is probably the way of
-% the future
+% Also is not compatible with biblatex, which is the way to go
 % \RequirePackage{mcite}
 % Chemical elements
 \ifUBN@mhchem
@@ -399,7 +398,7 @@
 % block=ragged    turns off block form, which avoids large spaces
 % firstinits=true means initials are used for first names
 % Some more tweaks should be made to the appearance,
-% see/include bibtex/bst/atlas-biblatex.sty
+% see/include ubonn-biblatex.sty
 \ifUBN@biblatex
   \ifx\UBN@bibencoding\@empty
     \newcommand*{\UBN@biblatexencoding}{}
@@ -486,8 +485,8 @@
   \newcommand*{\chapternumbersize}{\Huge}
   \renewcommand*{\chapterformat}{%
     \raggedleft
-    %\textls{\MakeUppercase{\Large\chapapp}}\enskip\chapternumbersize\thechapter\\
-    \MakeUppercase{\Large\chapapp}\enskip\chapternumbersize\thechapter\\
+    \textls{\MakeUppercase{\Large\chapapp}}\enskip\chapternumbersize\thechapter\\
+    %\MakeUppercase{\Large\chapapp}\enskip\chapternumbersize\thechapter\\
   \hrulefill\\[-.25ex]
   }
   \renewcommand*{\chapterheadstartvskip}{\vskip 4\baselineskip}
@@ -497,7 +496,7 @@
   }
 \fi
 
-% Adjust the \chapter heading
+% Alternative way of adjusting the \chapter heading
 % Taken from http://tex.stackexchange.com/questions/173389/chapter-title-adjusting-with-koma-script
 % This code works well, except that the bibliography gets a chapter number.
 % The KOMA-Script solution above is also simpler.

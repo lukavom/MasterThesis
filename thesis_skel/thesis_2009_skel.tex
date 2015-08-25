@@ -123,7 +123,10 @@
 % \input{thesis_glossary}
 
 % Draft version - add the word DRAFT on the cover page
+% Note that this only works if \unitlength is set to 1pt
+% This is normally not the case - it is set to 1mm in ubonn-thesis.sty
 \ifthenelse{\equal{\ThesisVersion}{Draft}}{%
+  \setlength{\unitlength}{1pt}
   \usepackage[firstpage]{draftwatermark}
   \SetWatermarkAngle{60.0}
   \SetWatermarkScale{1.5}

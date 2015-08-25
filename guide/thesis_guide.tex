@@ -22,7 +22,7 @@
   \usepackage{../ubonn-biblatex}
 }
 
-% Tikz
+% TikZ
 \ifthenelse{\texlive < 2010} {%
 }{%
   \usepackage{import}
@@ -59,10 +59,10 @@
 % Specify the bibliography files here and not at the end!
 \ifthenelse{\texlive > 2010} {%
   \addbibresource{guide_refs.bib}
-  \addbibresource{../guide/refs/zeus_2009.bib}
-  \addbibresource{../guide/refs/zeus_2010.bib}
+  \addbibresource{./refs/zeus_2009.bib}
+  \addbibresource{./refs/zeus_2010.bib}
   \addbibresource{../refs/standard_refs-biber.bib}
-  \addbibresource{../refs/example_refs-utf8.bib}
+  \addbibresource{./refs/example_refs-utf8.bib}
 }
 
 %-------------------------------------------------------------------------------
@@ -213,9 +213,9 @@
     \bibliographystyle{../refs/atlasBibStyleWithTitle.bst}
     %\bibliographystyle{unsrt}
     \bibliography{./guide_refs.bib,%
-      ../guide/refs/zeus_2009,%
-      ../guide/refs/zeus_2010,%
-      ../refs/standard_refs-bibtex,../refs/example_refs-latin1}
+      ./refs/zeus_2009,%
+      ./refs/zeus_2010,%
+      ../refs/standard_refs-bibtex,./refs/example_refs-ascii}
   }
 }
 

@@ -89,10 +89,10 @@ files. For this document they can be found in:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \item \url{../guide/guide_refs.bib};
-\item \url{../refs/standard_refs-bibtex.bib} or
-  \url{../refs/standard_refs-biber.bib};
-\item \url{../refs/example_refs-latin1.bib} or
-  \url{../refs/example_refs-utf8.bib};
+\item \url{../refs/standard_refs-biber.bib} or
+  \url{../refs/standard_refs-bibtex.bib};
+\item \url{../guide/refs/example_refs-utf8.bib} or
+  \url{../guide/refs/example_refs-ascii.bib};
 \item \url{../guide/refs/zeus_2009.bib} and
   \url{../guide/refs/zeus_2010.bib}.
 \end{itemize}
@@ -109,9 +109,7 @@ original \BibTeX\index{BibTeX@\BibTeX} or the more modern
 \Package{biblatex}. If you use \Package{biblatex} you
 need something like:
 \begin{verbatim}
-%
 % Use biblatex for the bibliography
-%
 \usepackage[backend=biber,
   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
 % \usepackage[backend=bibtex,hyperref=true,
@@ -122,69 +120,69 @@ need something like:
 
 \addbibresource{../mythesis/thesis_refs.bib}
 \addbibresource{../refs/standard_refs-biber.bib}
-% \addbibresource{../refs/standard_refs-bibtex.bib}
 \end{verbatim}
 in the document preamble and \Macro{printbibliography} where they
-should be printed. The commented out lines are for \TeXLive 2011 and earlier with
-the \Option{bibtex} backend.
+should be printed.
 Note that as of version 3.0 of the thesis package,
-the \Package{biblatex} command is included in \Package{ubonn-thesis}.
+the \Package{biblatex} command is included in \Package{ubonn-thesis} directly.
 To turn it off add the option \Option{biblatex=false}.
 \par\noindent
 If you use traditional \BibTeX{} you need something like:
 \begin{verbatim}
 % Use BibTeX for the bibliography
-\bibliographystyle{unsrt}
+\bibliographystyle{../refs/atlasBibStyleWithTitle.bst}
+% \bibliographystyle{unsrt}
 \bibliography{../mythesis/thesis_refs,%
   ../refs/standard_refs-bibtex}
 \end{verbatim}
 at the point where the references should be printed.
-Note that \LaTeX{} is sometimes picky about lists of directories that
-have spaces between them, so it is safer to include all files on one line.
+Note that \LaTeX{} is sometimes picky about spaces in lists of files,
+so you either terminate each line in \Macro{bibliography} with a \% or include all files on one line.
 
 Which should you use? Traditional \BibTeX{} has been around for a long time and is
 therefore better known. However, it has many problems when it comes to
 sorting, handling more modern sources of information (e.g.\ the web),
-etc. \Package{biblatex} is still developing rather quickly and
-so some options and ways of doing things may change. It supports
-things like online references and enables you to click on references
+etc. 
+By now (2015) \Package{biblatex} is rather stable,
+so future changes should be minor.
+It supports things like online references and enables you to click on references
 using the preprint number or DOI to look at a reference. It is also
 easier though to change the way your references look. I therefore
 strongly recommend that you use \Package{biblatex}.
 
 Another serious problem with \BibTeX{} is that it cannot handle
 umlauts etc.\ properly. While I have said elsewhere in this document
-that you should use UTF-8 or latin1 encoding so that you can enter ä
+that you should use UTF-8 encoding so that you can enter ä
 etc.\ directly, this does not work with \BibTeX. You can use the
-old syntax \verb+\"{a}+. This problem is completely solved if you use
-\Package{biblatex} and the \Option{biber} backend.
-
-If you use \Package{biblatex} and the \Option{bibtex8} backend
+old syntax \verb+\"{a}+.\footnote{%
+In fact you have to write this as \texttt{author = "Br\{\textbackslash"\{u\}\}ning, Oliver"} for it to work properly!
+As an aside, while it might seem natural to use \Macro{verb} here, verbatim does not work in footnotes,
+unless you include other packages such as \Package{fancyvrb}.}
+This problem is completely solved if you use
+\Package{biblatex} and the \Option{biber} backend.\footnote{%
+If for some reason you want to use \Package{biblatex} with the \Option{bibtex8} backend
 you have to encode your \texttt{.bib}
-files with latin1 and use the line:\\
-\Macro*{usepackage[bibencoding=latin1]\{biblatex\}}.\footnote{%
-  If you do not include umlauts directly in the references you do not
-  need the \Option{bibencoding} option.}
-For this reason, as indicated above the thesis package includes two
-versions of the file with some example references:
+files with latin1 instead of UTF-8 if they includes umlauts and use the line:\\
+\Macro*{usepackage[backend=bibtex8,bibencoding=latin1]\{biblatex\}}.}
+As indicated above, the references in the guide include two versions of the file with some example references:
 \begin{itemize}
 \setlength{\parskip}{0pt}\setlength{\itemsep}{0pt}
-\item \texttt{./ref/examples\_refs-latin1.bib} with latin1 encoding
-\item \texttt{./ref/examples\_refs-utf8.bib} with UTF-8 encoding.
+\item \texttt{./guide/refs/examples\_refs-utf8.bib} with UTF-8 encoding;
+\item \texttt{./guide/refs/examples\_refs-ascii.bib} without any umlauts.
 \end{itemize}
 If you try to compile the guide with the wrong file using \BibTeX, you
 will get some errors as I have included some umlauts in the example
 references.
-Given that the above only applies to rather old versions of \TeXLive
-and introduces additional complications,
-I have decided to set things up for traditional \BibTeX\ with \TeXLive older than 2011.
-This is what you get if you make a new thesis with the command \texttt{make new09}.
+The thesis skeletons use traditional \BibTeX\ with \TeXLive older than 2011
+and \Package{biblatex} with the \Option{biber} backend for newer versions.
+See the skeleton \texttt{thesis\_skel/theis\_2009\_skel.tex} for the complete syntax
+if you want to use traditional \BibTeX.
 
 That's it? Well almost! First, you will have to make sure that the
 entry type that you use corresponds to the type of document that you
 are citing. Second, you will probably get some or all of your
 references from standard sources such as Spires\footnote{I
-  will refer to both as Inspire in this chapter}, Inspire or CDS you will have
+  will refer to both as Inspire in this chapter.}, Inspire or CDS, you will have
 to change the entries a bit so that they get formatted the way you want.
 
 
@@ -423,7 +421,7 @@ too many settings that depend on having a new version of
 There are slowly more and more \Package{biblatex} styles around, but
 not as many as traditional \BibTeX. It is, however, much easier to change things
 (usually you can just change an option) with \Package{biblatex} than it
-was for traditonal \BibTeX, so you can probably start with a standard file and
+was for traditional \BibTeX, so you can probably start with a standard file and
 just make adjustments in your preamble. I have found a number of very
 useful hints on how to make changes in
 \url{http://tex.stackexchange.com/} -- just search for \Package{biblatex}.
@@ -434,6 +432,7 @@ Version 3.0 contains a first version of this option.
 A few more tweaks may still be needed. You can use the command
 \verb|make astro| instead of \verb|make new| to make a thesis skeleton with the appropriate
 options set and the template introduction uses typical citation commands.
+The option \Option{astrobib} only works for \TeXLive 2011 and later, i.e.\ with \Package{biblatex}.
 
 If it is available, \Option{biber} is the preferred backend over
 \Option{bibtex} or \Option{bibtex8}.

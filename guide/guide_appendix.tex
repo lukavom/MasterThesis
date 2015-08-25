@@ -19,10 +19,12 @@ information.
   24 Aug 2015 & 4.0 & Add options for thesis type and stage.
     This simplifies and improves how the different cover and title pages are included.
     Put bibliography before appendix (this seems to be more standard).
+    With this the bibliography moves into \Macro{mainmatter}.
     Use \KOMAScript{} options to add lines around chapter headings -- small change to the style.
     Add a skeleton that compiles with \TeXLive 2009 -- \texttt{make new09} command.
     Remove most advice and switches to use \texttt{bibtex8}.
-    The 2009 version of the skeleton uses traditional \BibTeX.
+    The 2009 version of the skeleton now uses traditional \BibTeX.
+    Add ATLAS bibliography style files.
     Small updates to submission instructions and operating systems.\\
   
   02 Feb 2015 & 3.0 & Add ability to pass options to \texttt{ubonn-thesis.sty}
@@ -68,7 +70,10 @@ information.
   2011 the default. Make Inspire rather than Spires default.\\
   \bottomrule
 \end{longtable}
-  
+
+Table~\ref{tab:pibonn-thesis:changes} summarises the changes that were made during the 
+development of the \Package{pibonn-thesis} package.
+
 \begin{longtable}{lp{0.8\textwidth}}
   \caption{Changes to the \Package{pibonn-thesis} style files.
   \label{tab:pibonn-thesis:changes}}
@@ -361,9 +366,9 @@ selected. If you version of \TeXLive is older than 2013, you should set
 
 The default version of the guide uses \Option{biber} for the
 \Package{biblatex} package and includes
-\texttt{./refs/example\_refs-utf8.bib} which contains some umlauts.\footnote{%
-The same references with latin1 encoding (suitable for \texttt{bibtex8}) can be found in
-\texttt{./refs/example\_refs-latin1.bib}.}
+\texttt{./guide/refs/example\_refs-utf8.bib} which contains some umlauts.\footnote{%
+The same references using normal ascii test (suitable for \texttt{bibtex}) can be found in
+\texttt{./guide/refs/example\_refs-ascii.bib}.}
 You give the command \texttt{make guide} to compile, which uses \texttt{biber}\index{biber} rather than
 \texttt{bibtex}\index{bibtex} to process the \texttt{.bib} files.
 

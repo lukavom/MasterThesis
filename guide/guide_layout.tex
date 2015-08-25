@@ -304,10 +304,16 @@ The standard appearance of the chapter headings is not very exciting!
 You can make some changes with the \KOMAScript\ options, but nothing
 very radical. A number of packages exist that can make larger
 changes. I tried out \Package{fncychap}, \Package{quotchap} and
-\Package{titlesec}. A variant of \Package{titlesec} is used for this
-guide and by default for the thesis.
+\Package{titlesec}. A variant of \Package{titlesec} was used for this
+guide and for theses (version 3.0).
 As combining \Package{titlesec} with \KOMAScript{} is not recommended,
 the settings are now done by hand by default.
+The problem with this version was that the bibliography was given a chapter number,
+if it was part of \Macro{mainmatter} rather than \Macro{backmatter}.
+As of version 4.0, I use a very similar style,
+but this time the changes are made using \KOMAScript{} adjustment as suggested by the author.\footnote{%
+\url{http://www.komascript.de/chapterwithlines}}
+This seems to work better.
 If you want to get back to the
 usual style, just comment out the appropriate lines in
 \texttt{ubonn-thesis.sty}. See the documentation on

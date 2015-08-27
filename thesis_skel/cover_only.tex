@@ -1,13 +1,13 @@
-\documentclass[ngerman,UKenglish]{scrbook}
+\documentclass[Master,Submit,ngerman,UKenglish]{scrbook}
 %------------------------------------------------------------------------------
 % Wrapper for producing cover pages for theses in the
 % a Physics or Astronomy Institute in the University of Bonn
 
+% Specify the thesis type as an option: PhD, Master, Diplom, Bachelor
+% Specify the thesis stage as an option: Draft (default), Submit, Final, PILibrary
 %------------------------------------------------------------------------------
-% Set to <2010 for biblatex and bibtex8 (TeX Live 2009)
-% Set to >2009 for biblatex and biber   (TeX Live 2011 or later)
-% Set before \usepackage{ubonn-thesis} or pass as an option to ubonn-thesis
-% \newcommand*{\texlive}{2014}
+% Pass TeX Live version to the package
+% Use command pdflatex --version to find out which version you are running
 \usepackage[texlive=2014]{ubonn-thesis}
 
 %------------------------------------------------------------------------------
@@ -26,14 +26,14 @@
 \newcommand*{\thesisrefereetwo}{Prof.\ Dr.\ Anne Jones}
 % Date when thesis was submitted (Master/Diplom)
 % Year or Month, Year when thesis was submitted (PhD)
-\newcommand*{\thesissubmit}{XX.YY.2013}
-% \newcommand*{\thesissubmit}{Month 2013}
+\newcommand*{\thesissubmit}{XX.YY.2015}
+% \newcommand*{\thesissubmit}{Month 2015}
 % Date of thesis examination (PhD)
-\newcommand*{\thesispromotion}{XX.YY.2013}
+\newcommand*{\thesispromotion}{XX.YY.2015}
 % Month and year of the final printed version of the thesis
 \newcommand*{\thesismonth}{MMM}
-\newcommand*{\thesisyear}{2013}
-\newcommand*{\thesisnumber}{BONN-IR-2013-XXX}
+\newcommand*{\thesisyear}{2015}
+\newcommand*{\thesisnumber}{BONN-IR-2015-XXX}
 
 %------------------------------------------------------------------------------
 % The abstract is only needed for the printed version and should be in
@@ -60,43 +60,38 @@
 
 %------------------------------------------------------------------------------
 \begin{document}
-%
+
 % Cover page of thesis - this is only needed for the printed final
 % version to be submitted to the department library
-% \input{../cover/PhD_Cover}
-% \input{../cover/Master_Cover}
-% \input{../cover/Diplom_Cover}
-%
+% Do not use this page for thesis submission to the Prüfungsamt or Promotionsbüro!
+\ifthenelse{\equal{\ThesisVersion}{PILibrary}}{%
+  \typeout{Document \jobname, Info: PI library version of thesis}
+  \input{../cover/\ThesisType_Cover}
+}{}
+
 % Start counting pages from the title page
-%
 \frontmatter
-%
 % Dedication has to come before \maketitle
 % \dedication{For my friends and supporters}
 
-%------------------------------------------------------------------------------
-% PhD Title page
-% Use this command when you submit your thesis
-% \input{../cover/PhD_Submit_Title}
-% Use this command for the print version
-% \input{../cover/PhD_Final_Title}
-
-%------------------------------------------------------------------------------
-% Diplom Title page
-% Use this command when you submit your thesis
-% \input{../cover/Diplom_Submit_Title}
-% Use this command for the print version
-% \input{../cover/Diplom_Final_Title}
-
-%------------------------------------------------------------------------------
-% Master Title page
-% Use this command when you submit your thesis
-\input{../cover/Master_Submit_Title}
-% Use this command for the print version
-% \input{../cover/Master_Final_Title}
-
-%------------------------------------------------------------------------------
-% Bachelor Title page
-% \input{../cover/Bachelor_Title}
+% Select the correct title page(s)
+\ifthenelse{\equal{\ThesisType}{Unknown}}{%
+  \typeout{Document \jobname, Error: Unknown thesis type - no title page printed}
+}{%
+  % Bachelor thesis only has one title page
+  \ifthenelse{\equal{\ThesisType}{Bachelor}}{%
+    \typeout{Document \jobname, Info: Bachelor thesis}
+    \input{../cover/\ThesisType_Title}
+  }{%
+    \ifthenelse{\equal{\ThesisVersion}{Final} \OR \equal{\ThesisVersion}{PILibrary}}{%
+      % Final and PI library versions
+      \typeout{Document \jobname, Info: Final version of a \ThesisType  thesis}
+      \input{../cover/\ThesisType_Final_Title}
+    }{% Submission and draft versions
+      \input{../cover/\ThesisType_Submit_Title}
+      \typeout{Document \jobname, Info: Draft/submission version of a \ThesisType  thesis}
+    }
+  }
+}
 
 \end{document}

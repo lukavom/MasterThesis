@@ -1,4 +1,4 @@
-Version 4.0 21/08/2015
+Version 4.0 27/08/2015
 
 The idea with this package is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
@@ -43,9 +43,12 @@ have an older version pass the option 'texlive=YYYY' to the document class
 or ubonn-thesis package in mythesis.tex.
 If you make a new document, you can do this by passing the argument 
 `TEXLIVE=YYYY' when giving the command `make new'.
+
 If your version of TeX Live is earlier than 2011, which implies that you have
 siunitx version 1 and that you use bibtex8 with biblatex,
 you should use the command `make thesis09' instead of `make thesis' in order to compile.
+You can use the command 'make new09' to make a thesis skeleton suitable for use with
+TeX Live 2009. This version also uses traditional BibTeX by default.
 
 If you just want to make the cover pages, use the file cover_only.tex.
 Be sure to adapt the font selected in ubonn-thesis.sty to the font

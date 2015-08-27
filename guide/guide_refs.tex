@@ -38,7 +38,7 @@ include them in one reference or do you want to keep one article per
 reference?
 I give some hints on
 useful options and settings for \Package{biblatex} below (Section~\ref{sec:ref:bbx}).
-If you use traditional \BibTeX (which I do not recommend), then you probably have to use the \Package{mcite}
+If you use traditional \BibTeX\ (which I do not recommend), then you probably have to use the \Package{mcite}
 package -- see Section~\ref{sec:ref:mcite}.
 Just to take a silly example. The ZEUS collaboration
 publications in
@@ -99,9 +99,9 @@ files. For this document they can be found in:
 For each article you specify things like its
 title, author, journal etc.
 
-You then include these files into your \LaTeX{} document where you
-want the bibliography to appear and specify which style should be
-used.
+You then include these files into your \LaTeX{} document and
+specify which style should be used.
+You also have to indicate where you want the bibliography to appear.
 
 At this point you also have to decide which interface to the contents
 of the \texttt{.bib} files you want to use. You have a choice of the
@@ -147,7 +147,7 @@ By now (2015) \Package{biblatex} is rather stable,
 so future changes should be minor.
 It supports things like online references and enables you to click on references
 using the preprint number or DOI to look at a reference. It is also
-easier though to change the way your references look. I therefore
+easier to change the way your references look. I therefore
 strongly recommend that you use \Package{biblatex}.
 
 Another serious problem with \BibTeX{} is that it cannot handle
@@ -155,9 +155,11 @@ umlauts etc.\ properly. While I have said elsewhere in this document
 that you should use UTF-8 encoding so that you can enter ä
 etc.\ directly, this does not work with \BibTeX. You can use the
 old syntax \verb+\"{a}+.\footnote{%
-In fact you have to write this as \texttt{author = "Br\{\textbackslash"\{u\}\}ning, Oliver"} for it to work properly!
-As an aside, while it might seem natural to use \Macro{verb} here, verbatim does not work in footnotes,
-unless you include other packages such as \Package{fancyvrb}.}
+  In fact you have to write this as \texttt{author = "Br\{\textbackslash"\{u\}\}ning, Oliver"} for it to work properly!
+  As an aside, if you look at the \LaTeX\ source code for this footnote,
+  it might seem natural to use \Macro{verb} for \texttt{author = ...}.
+  However, verbatim does not work in footnotes,
+  unless you include other packages such as \Package{fancyvrb}.}
 This problem is completely solved if you use
 \Package{biblatex} and the \Option{biber} backend.\footnote{%
 If for some reason you want to use \Package{biblatex} with the \Option{bibtex8} backend
@@ -394,11 +396,12 @@ The following options exist:
   \midrule
   texlive & 2014 & Specify the \TeXLive version.
   You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
-  articletitle & true & Show the titles of articleand reports;\\
+  articletitle & true & Show the titles of articles and reports;\\
   titlequote & false & Enclose the title in quotes rather than using a slanted font.\\
   boldvol & false & Show the volume in bold face.\\
   showurl & true & Show the URL field.\\
   showdoi & false & Show the DOI separately. Otherwise it is linked from the journal reference.\\
+  eprint & true & Show the arXiv entry.\\
   \bottomrule
 \end{tabular}
 
@@ -440,11 +443,12 @@ However, the backend is mostly relevant for
 sorting, so it probably does not matter which you use if you use an
 option that gives the references in the order that they were
 cited. \Option{biber} seems to work well with \TeXLive 2012 and later and hence is the default.
-For such old versions of \TeXLive, a better solution is \texttt{make new09}
+For older versions of \TeXLive, a better solution is probably \texttt{make new09}
 followed by \texttt{make thesis09} that then uses traditional \BibTeX.\footnote{%
-You can still use \Package{biblatex} if you want to.
-\texttt{ubonn-thesis} switches to \Option{bibtex} automatically for \TeXLive
+You can still try to use \Package{biblatex} if you want to -- use \texttt{make new} to create a new skeleton --
+as \texttt{ubonn-thesis} switches to \Option{bibtex} automatically for \TeXLive
 versions earlier than 2011.
+Compile the thesis with \texttt{make thesis09} though.
 If you want to set the backend yourself, use the option \Option{backend}.
 Set the encoding with the option \Option{bibencoding} if necessary.}
 
@@ -569,6 +573,7 @@ This and more can be done by passing the option \Option{astrobib} to \Package{ub
 In addition you have give the command\\
 \Macro{printbibliography[heading=subbibliography]} at the end of each chapter.
 The thesis skeleton contains such commands commented out.
+The command \texttt{make astro} uses a skeleton with a bilbiogrpaphy per chapter.
 The option \Option{astrobib} also sets things up so that the \Package{natbib} citation
 commands \Macro{citep}, \Macro{citet} and \Macro{citealt} can be used,
 so that the citation appears as expected for astronomy publications.
@@ -583,9 +588,9 @@ bibtool -x mythesis.aux -o refs.bib
 will extract the entries that you use and in future you can use and
 correct \texttt{refs.bib}, which only contains the references that you
 actually cite.\footnote{%
-I got this tip from
-\url{http://tex.stackexchange.com/questions/417/how-to-split-all-bibtex-referenced-entries-from-a-big-bibtex-database-to-a-copy}. Do
-not forget to change \texttt{mythesis.tex} to use
+I got this tip from\\
+{\scriptsize\url{http://tex.stackexchange.com/questions/417/how-to-split-all-bibtex-referenced-entries-from-a-big-bibtex-database-to-a-copy}.}
+Do not forget to change \texttt{mythesis.tex} to use
 \texttt{refs.bib} instead of the previous sources.}
 
 

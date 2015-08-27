@@ -122,14 +122,17 @@
 % Glossary entries
 % \input{thesis_glossary}
 
-% Draft version - add the word DRAFT on the cover page
-% Note that this only works if \unitlength is set to 1pt
-% This is normally not the case - it is set to 1mm in ubonn-thesis.sty
+% Draft version - add DRAFT to header.
+% You can use draftwatermark to add DRAFT to the cover page.
+% Note that this only works if \unitlength is set to 1pt.
+% This is normally not the case - it is set to 1mm in ubonn-thesis.sty.
+% The background package is used for later versions of TeX Live.
+%\setlength{\unitlength}{1pt}
 \ifthenelse{\equal{\ThesisVersion}{Draft}}{%
-  \setlength{\unitlength}{1pt}
-  \usepackage[firstpage]{draftwatermark}
-  \SetWatermarkAngle{60.0}
-  \SetWatermarkScale{1.5}
+  \chead{\fbox{DRAFT}}
+%  \usepackage[firstpage]{draftwatermark}
+%  \SetWatermarkAngle{60.0}
+%  \SetWatermarkScale{1.5}
 }
 
 %------------------------------------------------------------------------------

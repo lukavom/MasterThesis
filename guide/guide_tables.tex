@@ -87,8 +87,8 @@ correct alignment of numbers simpler. The syntax of some of the
 options changed between version 1 ($\leq 2009$) and version 2 ($\geq 2011$). I
 discuss the version 2 options in the main text and give the equivalent
 version 1 options as a footnote. If you look at the \LaTeX\ code, the
-\TeXLive 2009 version is inside \Macro{ifthenelse}\{\textbackslash
-texlive < 2011\}, while the \TeXLive 2011 version is in the second
+\TeXLive 2009 version is inside \Macro{ifthenelse\{\textbackslash
+texlive < 2011\}}, while the \TeXLive 2011 version is in the second
 block.
 
 A first simple example is shown
@@ -244,7 +244,7 @@ Table~\ref{tab:viscosity}.
 With \Macro{num} you can also specify the precision with which each
 number is shown separately. With \Option{S} you specify the format for
 the whole column. With \Package{siunitx} version 1 this is done using
-the \Option{dp} option gives the number of decimal places for the
+the \Option{dp} option and gives the number of decimal places for the
 rounding.  With \Package{siunitx} version 2 you should also make sure
 that you specify the rounding mode in the preamble of the table (usually
 \Option{figures} or \Option{places} -- you can also choose

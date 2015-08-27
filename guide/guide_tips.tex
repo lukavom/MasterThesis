@@ -69,9 +69,9 @@ To compile your thesis try:\index{compiling}
 cd mythesis [or dirname]
 make thesis
 \end{verbatim}
-If your version of \TeXLive is lower than 2011, use the command \enquote{\texttt{make new09}}
+If your version of \TeXLive is older than 2011, use the command \enquote{\texttt{make new09}}
 followed by \enquote{\texttt{make thesis09}}
-or \enquote{\texttt{make thesis BIBTEX='bibtex'}}.
+or \enquote{\texttt{make thesis BIBTEX=bibtex}}.
 See Section~\ref{sec:tips:options} for a list of the options that can be passed to the package.
 
 My original idea was that the style file should work for all recent
@@ -193,7 +193,7 @@ The syntax \Option{siunitx} and \Option{siunitx=true} is equivalent.
 Use \Option{siunitx=false} to turn off an option.
 The following options exist:
 
-\begin{tabular}{llp{10.0cm}}
+\begin{xtabular}{llp{10.0cm}}
   Option & Default & Description \\
   \midrule
   PhD & false & A PhD thesis.\\
@@ -233,7 +233,7 @@ The following options exist:
     but should probably be turned off for the final version.\\
   bibstyle & numeric-comp & Specify the style to use for the references. 
     Standard values are \Option{numeric-comp} or \Option{alphabetic}.\\
-\end{tabular}
+\end{xtabular}
 
 Some default option values are adjusted depending on the \TeXLive version.
 See the \texttt{ubonn-thesis} style file to find out what is changed.
@@ -396,14 +396,16 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
 \end{itemize}
 
 Not really a strict \enquote{Do}: I highly recommend that you use an
-integrated environment for editing and compiling your thesis. If you
-are on a Mac or under Windows you probably get TEXshop or
-\TeXLive by default. Under Linux you can use Kile\index{kile} or the way I used to work
-was to use \texttt{emacs}\index{emacs} and AUCTeX. Note that the
-RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
-tools for finding cross-references and the names of citations
-easily. \TeXstudio is based on \TeXmaker and is available for Linux,
+integrated environment for editing and compiling your thesis.
+If you are on a Mac or under Windows you probably get TEXshop or
+\TeXLive by default. 
+\TeXstudio is based on \TeXmaker and is available for Linux,
 Windows and MacOSX. It is now my standard environment under all systems!
+Under Linux you can also use Kile\index{kile} or the way I used to work
+was to use \texttt{emacs}\index{emacs} and AUCTeX.
+Note that the RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
+tools for finding cross-references and the names of citations easily.
+
 One advantage of such environments is that it is usually
 possible to switch between a position output and the relevant place in
 the source code and vice versa. This makes it much quicker to fix
@@ -605,7 +607,7 @@ Note that the \Macro{clight} symbol that is used in the macro
 \Package{siunitx} version 2. As this is not the way it is usually
 written in high energy physics I redefined it using:
 \begin{verbatim}
-  \DeclareSIUnit\clight{\ensuremath{c}}
+  \DeclareSIUnit\clight{\text{\ensuremath{c}}}
 \end{verbatim}
 
 Two things that are currently not built in are separate statistical and
@@ -865,7 +867,7 @@ production, $\sigma^{q}$, with $q\in\{b,c\}$ is given by
   \sigma^{q} = \frac{N_{q}^{\text{rec,Data}}}%
     {\mathcal{A}_{q}\cdot\mathcal{L}_{\text{Data}}}.
 \end{equation*}
-end{linenomath}
+\end{linenomath}
 Here, $\mathcal{L}_{\text{Data}}$ denotes the integrated luminosity,
 $\mathcal{A}_{q}$ is the acceptance and $N_{q}^{\text{rec,Data}}$ the
 number of reconstructed heavy-quark jets in data, which was determined

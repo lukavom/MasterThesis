@@ -200,7 +200,7 @@ equations. \Package{IEEEtrantools}, in particular the
 or the package documentation for more details.
 
 \Package{standalone} is both a package and a document class. It is
-available from \TeXLive 2012 onward. It allows you to have a
+available from \TeXLive 2012 onwards. It allows you to have a
 standalone document for a \Package{tikz} or \Package{feynmf} figure
 and also input this file into another document. If you run PDF\LaTeX\
 on the file it also automatically crops the resulting picture. This is
@@ -220,9 +220,14 @@ Differentials etc.\ are particularly useful.
 \Package{skmath} does quite a lot more and even modifies/enhances some standard commands.
 
 It is often useful to indicate whether your thesis is in the draft stage.\index{draft}
-The thesis skeleton uses the \Package{background} for this.
+The thesis skeleton uses the package \Package{background} for this.
 It is only available as of \TeXLive 2011.
-If you have an older version of \TeXLive you can use \Package{draftwatermark} instead.
+Hence \enquote{Draft} is instead put in the heading for older versions.
+As an alternative, you can try the package \Package{draftwatermark}.\footnote{%
+\Package{draftwatermark} needs \Macro{unitlength} to be set to \SI{1}{pt}.
+This is not the default setting in \Package{ubonn-thesis}.
+The 2009 thesis skeleton contains \Macro{setlength\{\Macro{unitlength\}\{1pt\}}} (commented out).
+Given that this is a global setting, neither it nor \Package{draftwatermark} are included by default.}
 
 A list of other packages that are commonly used is given in
 Table~\ref{tab:package:other2}. They are not
@@ -242,7 +247,7 @@ or have been superseded by other packages.
     footer configuration. Within \KOMAScript{} it is recommended to use
     \Package{scrpage2} instead.\\
     \Package{feynmf} & Draw Feynman graphs with Metafont.\\
-    \Package{draftwatermark} & Another package that allows you to add DRAFT to each page.\\
+    \Package{draftwatermark} & Another package that allows you to add DRAFT to the background each page.\\
     \Package{subfig} & As the name suggests make sub-figures and add
     separate captions for them. \emph{This package has apparently been
       deprecated.}\\

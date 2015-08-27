@@ -16,7 +16,7 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
-  24 Aug 2015 & 4.0 & Add options for thesis type and stage.
+  27 Aug 2015 & 4.0 & Add options for thesis type and stage.
     This simplifies and improves how the different cover and title pages are included.
     Put bibliography before appendix (this seems to be more standard).
     With this the bibliography moves into \Macro{mainmatter}.
@@ -50,7 +50,7 @@ information.
   pictures and Feynman graphs.\\
   
   06 Jul 2013 &     & Use the \Package{standalone} package in the
-  \Package{tikz} figures. Add commented out code to \Package{feynmp}
+  \TikZ\ figures. Add commented out code to \Package{feynmp}
   figures to show how to use \Package{standalone} for them as
   well. Move the guide main file to the
   \texttt{guide} subdirectory so that this works properly.\\
@@ -762,14 +762,14 @@ there, while the \gls{MVD} was also installed later.
 
 
 %==============================================================================
-\chapter{Plots with \Package{tikz}}
+\chapter{Plots with \Package{\TikZ}}
 \label{sec:app:tikz}
 %==============================================================================
 
 Figure~\ref{fig:tikz:syst} shows how you can produce a plot showing
 the contributions of many different systematic uncertainties to a
 result. Note that this plot uses some modern features of
-\Package{tikz} and \Package{pgfplots}. Hence it is only included if
+the \Package{tikz} and \Package{pgfplots} packages. Hence it is only included if
 this guide is compiled with \TeXLive 2011 or later.
 
 

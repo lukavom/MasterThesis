@@ -192,7 +192,7 @@ Other packages that I recommend and that are subject to rapid
 development still are \Package{biblatex} and
 \Package{siunitx}. If you want to fully exploit their capabilities,
 you should make sure you \LaTeX{} installation is as recent as
-possible -- I recommend \TeXLive 2013, 2014or 2015.
+possible -- I recommend \TeXLive 2013, 2014 or 2015.
 
 As I mentioned in the introduction, the institute is a member of Dante
 and I therefore receive a copy of the \TeX\ Collection DVD every
@@ -294,7 +294,8 @@ The standard package you start with is \TeX Shop.
 Together with Basic\TeX\ this provides a basic environment. 
 However, if you want to do more (like write a thesis),
 you should install \TeXLive.
-You can download Mac\TeX\ from \url{http://www.tug.org/mactex/}.
+There is a complete \TeXLive installation call Mac\TeX\ 
+that you can download from \url{http://www.tug.org/mactex/}.
 The Dante \TeX\ Collection DVD also includes Mac\TeX, which is what the \TeX Shop web page
 recommends as the best combination to install.
 
@@ -365,7 +366,7 @@ selected. If you version of \TeXLive is older than 2013, you should set
 \Macro{texlive} accordingly and not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
 
 The default version of the guide uses \Option{biber} for the
-\Package{biblatex} package and includes
+\Package{biblatex} package and includes\\
 \texttt{./guide/refs/example\_refs-utf8.bib} which contains some umlauts.\footnote{%
 The same references using normal ascii test (suitable for \texttt{bibtex}) can be found in
 \texttt{./guide/refs/example\_refs-ascii.bib}.}
@@ -393,9 +394,9 @@ If you want to switch from \texttt{biber}\index{biber} to
 the guide (or your thesis).
 
 In order to edit \LaTeX\ you need an editor such as \texttt{emacs} or
-use a package such as \texttt{kile} (and the associated
+use a program such as \texttt{kile} (and the associated
 \texttt{kile-doc}), \TeXstudio or \TeXmaker. These were discussed
-breifly in the previous section.
+briefly in the previous section.
 
 If your \LaTeX\ installation is old, you may want to bring it
 up-to-date.  For Ubuntu variants there is a simple solution. Just add
@@ -511,7 +512,7 @@ To set up your thesis, you have to do by hand what the
 \texttt{Makefile} does under Linux, i.e.\ make a new directory
 \texttt{mythesis}, copy \texttt{thesis\_skel/thesis\_skel.tex} to
 \texttt{mythesis/mythesis.tex}, and copy the rest of the files from
-\texttt{thesis\_skel} into \texttt{mythesis}. in addition you should
+\texttt{thesis\_skel} into \texttt{mythesis}. In addition you should
 copy the style files \texttt{ubonn-thesis.sty} and \texttt{ubonn-biblatex.sty} into the
 \texttt{mythesis} directory.
 
@@ -534,7 +535,7 @@ using \Package{feynmp} work well. With \TeXstudio, you can simply
 include this option in the PDF\LaTeX\ command: \textsf{Options} $\to$
 \textsf{Configure TeXstudio} $\to$ \textsf{Commands}.
 
-I have not yet invested any effort in trying to get \texttt{feynmf}
+I have not invested any effort in trying to get \texttt{feynmf}
 working under Windows. The output files are produced, but I have not
 tried to run Metafont on them.
 

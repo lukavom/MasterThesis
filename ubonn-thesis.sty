@@ -465,36 +465,39 @@
 \@ifclassloaded{scrartcl}{}{\KOMAoptions{chapterprefix=true,appendixprefix=true}}
 
 %-------------------------------------------------------------------------------
-\ifUBN@titlesec
-% Packages to change the chapter heading format
-% titlesec works, but gives a warning from KOMA-Script
-  \RequirePackage{titlesec}
-  \titleformat{\chapter}[display]
-    {\bfseries\sffamily\huge}
-    {\filleft\MakeUppercase{\Large\chaptertitlename} \Huge\thechapter}
-    {2ex}
-    {\titlerule
-      \vspace{1ex}%
-      \filright}
-    [\vspace{1ex}%
-    \titlerule]
-\else
-  % Code from http://www.komascript.de/chapterwithlines
-  \RequirePackage{microtype}
-  %\renewcommand*{\thechapter}{\Roman{chapter}}
-  \newcommand*{\chapternumbersize}{\Huge}
-  \renewcommand*{\chapterformat}{%
-    \raggedleft
-    \textls{\MakeUppercase{\Large\chapapp}}\enskip\chapternumbersize\thechapter\\
-    %\MakeUppercase{\Large\chapapp}\enskip\chapternumbersize\thechapter\\
-  \hrulefill\\[-.25ex]
-  }
-  \renewcommand*{\chapterheadstartvskip}{\vskip 4\baselineskip}
-  \renewcommand*{\chapterheadendvskip}{%
-    \vspace{-\baselineskip}\noindent{\setlength{\parskip}{0pt}\Huge\hrulefill\par}
-    \vspace{\baselineskip}
-  }
-\fi
+% Only change chapter titles if this ios not an article
+\@ifclassloaded{scrartcl}{}{%
+  \ifUBN@titlesec
+  % Packages to change the chapter heading format
+  % titlesec works, but gives a warning from KOMA-Script
+    \RequirePackage{titlesec}
+    \titleformat{\chapter}[display]
+      {\bfseries\sffamily\huge}
+      {\filleft\MakeUppercase{\Large\chaptertitlename} \Huge\thechapter}
+      {2ex}
+      {\titlerule
+        \vspace{1ex}%
+        \filright}
+      [\vspace{1ex}%
+      \titlerule]
+  \else
+    % Code from http://www.komascript.de/chapterwithlines
+    \RequirePackage{microtype}
+    %\renewcommand*{\thechapter}{\Roman{chapter}}
+    \newcommand*{\chapternumbersize}{\Huge}
+    \renewcommand*{\chapterformat}{%
+      \raggedleft
+      \textls{\MakeUppercase{\Large\chapapp}}\enskip\chapternumbersize\thechapter\\
+      %\MakeUppercase{\Large\chapapp}\enskip\chapternumbersize\thechapter\\
+    \hrulefill\\[-.25ex]
+    }
+    \renewcommand*{\chapterheadstartvskip}{\vskip 4\baselineskip}
+    \renewcommand*{\chapterheadendvskip}{%
+      \vspace{-\baselineskip}\noindent{\setlength{\parskip}{0pt}\Huge\hrulefill\par}
+      \vspace{\baselineskip}
+    }
+  \fi
+}
 
 % Alternative way of adjusting the \chapter heading
 % Taken from http://tex.stackexchange.com/questions/173389/chapter-title-adjusting-with-koma-script

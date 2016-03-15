@@ -24,17 +24,17 @@ To help you with this, each chapter contains a link to the relevant
 file at the top. This link should work if you have compiled the guide
 yourself and are in the \texttt{guide} subdirectory of the
 \texttt{ubonn-thesis} directory tree.  The files that make up this
-document are available in a subversion repository and as a
-\texttt{tar} file. To get the latest subversion entries give the
+document are available in a Git repository and as a
+\texttt{tar} file. To get the latest Git entries give the
 command:
 
 {\small\begin{verbatim}
-svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk ubonn-thesis
+git clone https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 \end{verbatim}}
 \noindent
 If you want to checkout a particular version you can give the command:
 {\small\begin{verbatim}
-svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M
+git clone --branch vN.M https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 \end{verbatim}}
 % \noindent
 % If you have checked out a version of the guide before 20 August 2012
@@ -258,7 +258,10 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
 \item Make sure every table and figure is referenced in the text. I
   get very irritated when I suddenly find a figure that is not
   described in the text. A useful package to check this is
-  \Package{refcheck}. You need to run \LaTeX\ one more time for it to
+  \Package{refcheck}.\footnote{%
+  There is a conflict if you use \Package{refcheck}, \Package{subcaption} and \Package{hyperref} together.
+  See \url{http://tex.stackexchange.com/questions/273970/conflict-refcheck-subcaption-packages-for-label-with-underscores} for a workaround.}
+  You need to run \LaTeX\ one more time for it to
   work. It indicates both in the log file and the resulting PDF which
   figures, tables, equations and sections are referenced.
 \item Use a units package to format numbers and their units. Recent
@@ -882,7 +885,7 @@ Then the line numbering will be correct, see Fig.~\ref{fig:lineno}b.
 %------------------------------------------------------------------------------
 
 What is the best way to update \Package{ubonn-thesis}? If you are
-using SVN, then you just need to do an \texttt{svn update}. If you use
+using Git, then you just need to do an \texttt{git pull}. If you use
 a tar file, then you should unpack it and copy over your
 \texttt{mythesis} directory tree and any other files you need to the new tree.
 

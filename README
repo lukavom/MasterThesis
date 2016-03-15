@@ -1,22 +1,22 @@
-Version 4.0 27/08/2015
+Version 5.0 15/03/2016
 
 The idea with this package is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
 
-The files that make up this package are available in a subversion
+The files that make up this package are available in a git
 repository and as a tar file. To get the latest subversion
 entries given the command:
 
-svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk
+git clone https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 
 If you want a particular release use the command:
 
-svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M
+git clone --branch v4.0 https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 
 The tar file also includes the guide as a PDF file: guide/thesis_guide.pdf.
 It can be obtained from:
 
-http://www-biblio.physik.uni-bonn.de/info/index.shtml#info:titelvorl
+https://www.pi.uni-bonn.de/lehre/uni-bonn-thesis
 
 You can give the command:
 

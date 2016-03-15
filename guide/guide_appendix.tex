@@ -16,6 +16,9 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
+  15 Mar 2016 & 5.0 & Move from SVN to Git repository. Update documentation accordingly.
+    Small fix so comma is not part of link from journal entry to DOI.
+    Add a workaround for conflicts involving \Package{refcheck}, \Package{subcaption} and \Package{refcheck}.\\
   27 Aug 2015 & 4.0 & Add options for thesis type and stage.
     This simplifies and improves how the different cover and title pages are included.
     Put bibliography before appendix (this seems to be more standard).
@@ -113,7 +116,7 @@ development of the \Package{pibonn-thesis} package.
   Kile. Sorting of references turned off for \TeXLive 2011. Some
   more information on which reference types to use added.\\
   
-  24 Aug 2012 & Update svn information due to PI changes.\\
+  24 Aug 2012 & Update SVN information due to PI changes.\\
   
   19 Jun 2012 & Make a separate file for cover so that page
   numbering starts properly.\\
@@ -121,7 +124,7 @@ development of the \Package{pibonn-thesis} package.
   18 Jun 2012 & Add instructions for \TeXLive under Windows.\\
   
   05 Jun 2012 & Move current version into the trunk subdirectory to
-  conform to usual svn structure.\\
+  conform to usual SVN structure.\\
   
   24 May 2012 & Made the guide more generic so that it can be sent to
   other institutes. Used \Macro{ifthenelse} everywhere rather than
@@ -352,7 +355,7 @@ biber
 Using these packages I was able to issue to following commands to
 produce the guide (assuming that you have \TeXLive 2011 or later):
 \begin{verbatim}
-svn co https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk ubonn-thesis
+git clone https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 cd ubonn-thesis
 \end{verbatim}
 Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
@@ -497,16 +500,16 @@ For a first attempt I used Windows XP in a virtual machine using
 VirtualBox. More recently all my tests have been done using Windows 7.
 
 Once you have a \TeX\ installation, you have to get the guide. To do
-this I used \texttt{TortoiseSVN} which is available from
-\url{http://tortoisesvn.net/} as the interface between Windows and
-\texttt{subversion}.\index{tortoisesvn}\index{svn}\index{subversion}
+this I used \texttt{TortoiseGit} which is available from
+\url{https://tortoisegit.org} as the interface between Windows and
+\texttt{Git}.\index{tortoisegit}\index{Git}
 
 To checkout the files, simply start Windows Explorer and go to the
 top-level directory where you want to do the checkout, right-click on
 the mouse and enter\\
-\texttt{https://svn.physik.uni-bonn.de/basic/ubonn-thesis/trunk} or\\
-\texttt{https://svn.physik.uni-bonn.de/basic/ubonn-thesis/tags/ubonn-thesis-N.M}
+\texttt{https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git}
 as the URL.
+If you want a particular version then specify the branch you want, e.g.\ \enquote{v5.0}.
 
 To set up your thesis, you have to do by hand what the
 \texttt{Makefile} does under Linux, i.e.\ make a new directory

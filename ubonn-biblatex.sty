@@ -5,7 +5,7 @@
 % See ChangeLog or SVN log for history of changes.
 % Responsible: Ian Brock (ian.brock@cern.ch)
 %-------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-biblatex}[2015/08/27 Version 4.0 University of Bonn biblatex style]
+\ProvidesPackage{ubonn-biblatex}[2016/03/15 Version 5.0 University of Bonn biblatex style]
 \NeedsTeXFormat{LaTeX2e}
 
 % Use kvoptions package to set options
@@ -34,8 +34,10 @@
   \relax
 \else
   \ExecuteBibliographyOptions{doi=false}
-  \newbibmacro{string+doi}[1]{%
+  \DeclareFieldFormat{string+doi}{%
     \iffieldundef{doi}{#1}{\href{http://dx.doi.org/\thefield{doi}}{#1}}}
+  %\newbibmacro{string+doi}[1]{%
+  %  \iffieldundef{doi}{#1}{\href{http://dx.doi.org/\thefield{doi}}{#1}}}
   %\DeclareFieldFormat{title}{\usebibmacro{string+doi}{\mkbibemph{#1}}}
 \fi
 
@@ -95,7 +97,8 @@
   % Adapted from /usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
   % Merge page number into jounral+issuetitle and remove it from note+pages
   \renewbibmacro*{journal+issuetitle}{%
-    \usebibmacro{string+doi}{%
+    %\usebibmacro{string+doi}{%
+    \printtext[string+doi]{%
     \usebibmacro{journal}%
     \setunit*{\addspace}%
     \iffieldundef{series}

@@ -11,7 +11,7 @@ git clone https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 
 If you want a particular release use the command:
 
-git clone --branch v4.0 https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
+git clone --branch v5.0 https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 
 The tar file also includes the guide as a PDF file: guide/thesis_guide.pdf.
 It can be obtained from:

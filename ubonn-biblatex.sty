@@ -20,6 +20,8 @@
 \DeclareBoolOption[false]{showdoi}
 \DeclareBoolOption[true]{showurl}
 \DeclareBoolOption[true]{eprint}
+\DeclareBoolOption[false]{address}
+\DeclareBoolOption[false]{location}
 \DeclareStringOption{texlive}
 \ProcessKeyvalOptions*
 
@@ -55,6 +57,10 @@
   \ExecuteBibliographyOptions{date=year}
 }
 
+% Don't want months
+\AtEveryBibitem{%
+  \clearfield{month}
+}
 
 % Turn off title for articles and booklets (CONF/PUB notes)
 \ifUBNB@articletitle
@@ -88,6 +94,24 @@
   \DeclareFieldFormat[article]{volume}{\textbf{#1}\isdot}
 \fi
 
+  % Suppress issue number
+  \AtEveryBibitem{
+    \ifentrytype{article}{\clearfield{number}}{}
+  }
+  
+% Do not print out the address
+\ifUBNB@address
+  \relax
+\else
+  \ifUBNB@location
+    \relax
+  \else
+    \AtEveryBibitem{%
+      \clearlist{location}
+    }
+  \fi
+\fi
+
 % DOI as link with journal reference
 \ifUBNB@showdoi
   \relax
@@ -95,7 +119,7 @@
   %\DeclareFieldFormat[article]{journaltitle}{\usebibmacro{string+doi}{#1\isdot}}
   %\DeclareFieldFormat[article]{journal+issuetitle}{\usebibmacro{string+doi}{#1}}
   % Adapted from /usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
-  % Merge page number into jounral+issuetitle and remove it from note+pages
+  % Merge page number into journal+issuetitle and remove it from note+pages
   \renewbibmacro*{journal+issuetitle}{%
     %\usebibmacro{string+doi}{%
     \printtext[string+doi]{%

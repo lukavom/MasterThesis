@@ -566,8 +566,24 @@ possible in the placing, so it is usual to use the options
 \Option{[htbp]} for the placement. In particular, be very careful with
 using just \Option{[h]} or \Option{[H]} as the placement option. It very
 easily leads to \LaTeX{} putting single lines of text either above or
-below a figure. You can also add an \Option{!} at the end of the list
+below a figure.
+One way to get rid of single lines is to remove the option \Option{h},
+as the figure must then be placed at the top or bottom of the page
+(or on a page of floats).
+You can also add an \Option{!} in the list
 of options, which suspends spacing and number restrictions.
+
+A nice summary of the logic behind the placement can be found in
+\href{http://tex.stackexchange.com/questions/39017/how-to-influence-the-position-of-float-environments-like-figure-and-table-in-lat}{\TeX/\LaTeX\ Stack Exchange} (click on the link!).
+A couple of points from there that are worth mentioning here:
+\begin{itemize}
+\item The order of the options \Option{htbp} has no effect!
+\item If a float is placed in the middle of a paragraph,
+  the reference point for deciding where it will appear is the next line break or page break in the paragraph,
+  following the float.
+\item The order of figures (and tables) is fixed to the order that they are included in a document.
+  However, the order of figures and tables relative to each other is not fixed.
+\end{itemize}
 
 The
 \href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=floats}{UK List of FAQ}
@@ -611,6 +627,11 @@ The distribution shows something that I do not understand.
 Given that this is not understood we went to the pub for a beer to
 think about it a bit more.
 \end{verbatim}
+
+However, it is hard to give a hard and fast rule here.
+As indicated above, the effect of these different ways of including a figure (and table) is the point in the text (reference point) that \LaTeX\ uses to start trying to place the figure.
+In general, you should only try to tweak the position of figures and tables when your text is final,
+as a change in the text way well move some of the floats.
 
 %%% Local Variables:
 %%% mode: latex

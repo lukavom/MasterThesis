@@ -1,3 +1,5 @@
+% !TeX root = thesis_guide.tex
+
 %==============================================================================
 \chapter{Useful packages}
 \label{sec:package}
@@ -85,8 +87,7 @@ Computer Modern Fonts. That is no longer necessary. There are rather
 complete font sets that are also free that you can use instead.
 %In this guide I use a combination of \Package{Palatino} and other fonts.
 The default font for theses is \Package{txfonts}.
-\Package{newtx} is a new version of this package that is available
-as of \TeXLive 2013.
+\Package{newtx} is a new version of this package that is available as of \TeXLive 2013.
 If you have this package, then I would recommend using it.
 Some of the spacings in equations have been improved 
 and there is a better balance of the sizes of serif, \textsf{sans serif} and \texttt{typewriter} fonts.
@@ -109,19 +110,20 @@ figures are listed in Table~\ref{tab:package:appearance}.
     \Package{siunitx} & Typeset units properly with correct spacing.\\
     \Package{graphicx} & The package to use for including graphics.\\
     \Package{rotating} & Package to use for rotating tables etc. The
-    \Macro{includegraphics} command can rotate figures directly.\\
+      \Macro{includegraphics} command can rotate figures directly.\\
     \Package{array} & Adds extra column formatting capabilities.\\
-    \Package{xtab} & Can produce tables that extend over more
-    than one page.\\
+    \Package{xtab} & Can produce tables that extend over more than one page.\\
     \Package{booktabs} & Help for producing nicer tables.\\
-    \Package{amsmath}, \Package{amssymb} & Extra math commands and symbols from
-    AMS.\\
-    \Package{mhchem} & Nice package for typesetting chemical elements
-    correctly.\\
+    \Package{amsmath}, \Package{amssymb} & Extra math commands and symbols from AMS.\\
+    \Package{hepnicenames} & A somewhat restricted list of predefined elementary particles.\\
+    \Package{heppennames} & A more complete list of predefined elementary particles.
+      Note that \Package{hepnicenames} also loads \Package{heppennames}.
+      The packages are based on \Package{hepparticles}, which you can use to define further particles.\\
+    \Package{mhchem} & Nice package for typesetting chemical elements correctly.\\
     \Package{xfrac} & Some more options for typesetting fractions.\\
     \Package{xcolor} & Add colour commands.\\
-    \Package{titlesec} & Change the appearance of chapter and section
-    headings. See below for more information.\\
+    \Package{titlesec} & Change the appearance of chapter and section headings. 
+      See below for more information.\\
     \bottomrule
   \end{tabular}
   \caption{Useful packages for appearance.}
@@ -159,8 +161,7 @@ Table~\ref{tab:package:other1}.
     \Package{IEEEtrantools} & Contains useful environments for multiline equations.\\
     \Package{feynmp} & Draw Feynman graphs with Metapost.\\
     \Package{axodraw} & Draw Feynman graphs.\\
-    \Package{tikz} & General drawing package that can also be used for
-    Feynman graphs.\\
+    \Package{tikz} & General drawing package that can also be used for Feynman graphs.\\
     \Package{standalone} & Allows you to have a document that you can
     directly compile for each figure and also input to another document.\\
     \Package{hyperref} & Adds \Macro{url} command as well as ability
@@ -169,23 +170,20 @@ Table~\ref{tab:package:other1}.
     \Package{subfiles} & Provides a nice alternative to
     \Macro{include}.\\
     \Package{subcaption} & An newer alternative to \Package{subfig}.\\
-    \Package{tabularx} & Allows fixed table width with flexible column
-    widths.\\
+    \Package{tabularx} & Allows fixed table width with flexible column widths.\\
     \Package{floatrow} & Add ability to define own floats.\\
-    \Package{commath} & Some useful extra maths commands, especially for differentials.\\
-    \Package{skmath} & More maths commands that could be very useful.\\
+    \Package{physics} & Some useful extra maths commands, especially for differentials.\\
+    \Package{commath} & Some useful extra maths commands -- has not been updated for a while.\\
+    \Package{skmath} & More maths commands that could be useful.\\
     \Package{adjustbox} & Add much more sophisticated clipping
     capabilities than offered by \Package{graphicx}.\\
     \Package{wrapfig} & Allow text to flow around figures.\\
     \Package{floatflt} & Similar capabilities to \Package{wrapfig} -- allow text to flow around figures.\\
-    \Package{glossaries} & Provide commands for creating a
-    glossary. This is intended to replace the \Package{glossary}
-    package.\\
-    \Package{dcolumn} & Very helpful for lining up columns on character
-    strings such as a decimal point. \Package{siunitx} offers similar
-    and better functionality.\\
-    \Package{refcheck} & Check whether labels are used, i.e.\ if figures
-    and tables are actually referenced.\\
+    \Package{glossaries} & Provide commands for creating a glossary.
+      This is intended to replace the \Package{glossary} package.\\
+    \Package{dcolumn} & Very helpful for lining up columns on character strings such as a decimal point.
+      \Package{siunitx} offers similar and better functionality.\\
+    \Package{refcheck} & Check whether labels are used, i.e.\ if figures and tables are actually referenced.\\
     \bottomrule
   \end{tabular}
   \caption{Other useful packages.}
@@ -195,9 +193,9 @@ Table~\ref{tab:package:other1}.
 While the \Package{amsmath} package solves many problems that occur if
 you just use the normal \LaTeX{} math mode commands, there are some
 things that are not so nice with long and complicated multiline
-equations. \Package{IEEEtrantools}, in particular the
-\Env{IEEEeqnarray} environment, can help here. See Ref.~\cite{lshort}
-or the package documentation for more details.
+equations. 
+\Package{IEEEtrantools}, in particular the \Env{IEEEeqnarray} environment, can help here.
+See Ref.~\cite{lshort} or the package documentation for more details.
 
 \Package{standalone} is both a package and a document class. It is
 available from \TeXLive 2012 onwards. It allows you to have a
@@ -215,9 +213,12 @@ example for more information. If you want to use the package you have
 to download it and install for yourself. You can do much the same
 thing using AUCTeX inside \texttt{emacs}.
 
-The packages \Package{commath} and \Package{skmath} provide some additional maths command.
-Differentials etc.\ are particularly useful. 
-\Package{skmath} does quite a lot more and even modifies/enhances some standard commands.
+The packages \Package{physics}, \Package{commath} and \Package{skmath} provide some additional maths commands.
+Differentials etc.\ are particularly useful.
+The \Package{physics} package contains a lot of nice and flexible definitions and also handles the spacing around things like $\dd{x}$ well,
+if you use the \verb|\dd{x}| construction.
+The \Package{commath} package has not been updated for a while.
+\Package{skmath} does quite a lot more then \Package{commath} and even modifies/enhances some standard commands.
 
 Note that there is a conflict if you use \Package{refcheck}, \Package{subcaption} and \Package{hyperref} together.
 See \url{http://tex.stackexchange.com/questions/273970/conflict-refcheck-subcaption-packages-for-label-with-underscores} for a workaround.
@@ -241,14 +242,12 @@ or have been superseded by other packages.
   \centering
   \begin{tabular}{lp{0.8\textwidth}}
     \toprule
-    \Package{hepunits} & Typeset units properly with correct spacing\\
+    \Package{hepunits} & Typeset units properly with correct spacing.\\
     \Package{units} & Typeset units properly with correct spacing.\\
-    \Package{SIunits} & Typeset units properly with correct
-    spacing. \Package{hepunits} uses this package, so it does not need
-    to be added explicitly\\
-    \Package{fancyhdr} & As the name suggests, do your own header and
-    footer configuration. Within \KOMAScript{} it is recommended to use
-    \Package{scrpage2} instead.\\
+    \Package{SIunits} & Typeset units properly with correct spacing.
+      \Package{hepunits} uses this package, so it does not need to be added explicitly\\
+    \Package{fancyhdr} & As the name suggests, do your own header and footer configuration.
+      Within \KOMAScript{} it is recommended to use \Package{scrpage2} instead.\\
     \Package{feynmf} & Draw Feynman graphs with Metafont.\\
     \Package{draftwatermark} & Another package that allows you to add DRAFT to the background each page.\\
     \Package{subfig} & As the name suggests make sub-figures and add
@@ -287,9 +286,3 @@ package contains the same functionality, which can simply be steered
 by changing the document language, as discussed in
 Section~\ref{sec:table:siunitx}. Hence, \Package{ziffer} is not really
 needed anymore.
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "./thesis_guide"
-%%% End:

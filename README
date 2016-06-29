@@ -1,4 +1,4 @@
-Version 5.0 15/03/2016
+Version 5.1 30/06/2016
 
 The idea with this package is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
@@ -11,7 +11,7 @@ git clone https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 
 If you want a particular release use the command:
 
-git clone --branch v5.0 https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
+git clone --branch v5.1 https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 
 The tar file also includes the guide as a PDF file: guide/thesis_guide.pdf.
 It can be obtained from:

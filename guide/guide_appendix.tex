@@ -16,9 +16,15 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
+  30 Jun 2016 & 5.1 & Add \Package{hepnicenames} and \Package{heppennames} packages.
+    Add a bit more documentation on particle definitions.
+    Added some more information and updated the guidelines on positioning of figures.
+    Month and address/location are not include in references by default.\\
+    
   15 Mar 2016 & 5.0 & Move from SVN to Git repository. Update documentation accordingly.
     Small fix so comma is not part of link from journal entry to DOI.
     Add a workaround for conflicts involving \Package{refcheck}, \Package{subcaption} and \Package{refcheck}.\\
+    
   27 Aug 2015 & 4.0 & Add options for thesis type and stage.
     This simplifies and improves how the different cover and title pages are included.
     Put bibliography before appendix (this seems to be more standard).
@@ -365,7 +371,7 @@ cd guide
 make guide
 \end{verbatim}
 so all packages are there as well as at least the default font which I
-selected. If you version of \TeXLive is older than 2013, you should set
+selected. If your version of \TeXLive is older than 2013, you should set
 \Macro{texlive} accordingly and not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
 
 The default version of the guide uses \Option{biber} for the

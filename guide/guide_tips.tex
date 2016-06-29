@@ -1,3 +1,5 @@
+% !TeX root = thesis_guide.tex
+
 %==============================================================================
 \chapter{Tips and tricks}
 \label{sec:tips}\index{tips}
@@ -209,6 +211,9 @@ The following options exist:
   texlive & 2014 & Specify the \TeXLive version.
     You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
   siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
+  physics & false & Useful mathematical constructions for physics.\\
+  hepparticles & true & Standardised names and formatting for particle physics.\\
+  hepitalic & true & Standardised names and formatting for particle physics.\\
   mhchem & true & A nice package for chemical elements and processes.\\
   dcolumn & true & A package for helping to align things in tables.\\
   feynmf & false & Include the \Package{feynmf} package for Feynman graphs.\\
@@ -250,11 +255,13 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
   opinions on how things should be written, how much detail should be
   included etc.\ and these opinions will not necessarily agree with
   each other!
+
 \item Write \enquote{nice} \LaTeX. It makes it much easier to find mistakes
   in your document. If you like to use the keyboard rather than the
   mouse when moving round in a document, turn on \enquote{auto-fill-mode
   (emacs)}\index{emacs} or its equivalent in any other editor, so
   that line breaks are inserted.
+
 \item Make sure every table and figure is referenced in the text. I
   get very irritated when I suddenly find a figure that is not
   described in the text. A useful package to check this is
@@ -264,6 +271,7 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
   You need to run \LaTeX\ one more time for it to
   work. It indicates both in the log file and the resulting PDF which
   figures, tables, equations and sections are referenced.
+
 \item Use a units package to format numbers and their units. Recent
   versions of \LaTeX\ include the \PackageG{siunitx} package, which
   is a superior replacement of \Package{SIunits}. I used to
@@ -272,13 +280,19 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
   physics units such as \si{\GeV}. Use of these packages will be
   discussed in Section~\ref{sec:tips:units}. An alternative is the
   \Package{units} package.
+
 \item Define any complicated symbols once you use them more than
   once:
 \begin{verbatim}
-\newcommand{\etajet}{\ensuremath{\eta_{\text{jet}}}\xspace}
+\newcommand*{\etajet}{\ensuremath{\eta_{\text{jet}}}\xspace}
 \end{verbatim}
   If you decide at a later date that jet should be a superscript
   rather than a subscript you only have to change this in one place!
+
+  Note that Kopka~\cite{kopka04}
+  recommends using \Macro{newcommand*} rather than \Macro{newcommand}
+  for short commands.
+
 \item If you use normal words in superscripts or subscripts (or
   anything else in math mode) enclose them in \Macro{text}. You can
   also use \Macro{mathrm} or \Macro{textrm}. However, if you then use
@@ -301,6 +315,7 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
     2009} for the \Macro{SI} command in the 2nd expression.
   In the first expression I use \Macro{text} for \enquote{jet}, while
   I use \Macro{mathrm} in the second expression.
+  
 \item Use \Macro{xspace} and
   \Macro{ensuremath} in all commands where you would
   like to use a symbol both in text mode and in math mode. Without
@@ -308,37 +323,19 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
   \texttt{\textbackslash} or \texttt{\{\}}, otherwise the space is used
   to signify the end of the symbol, e.g. in \LaTeX we have to pay
   attention otherwise the symbol and the next word run together.
+
 \item Decide how you want to write abbreviations for particles and
   stick to it -- you should probably define the particle names in your
-  style file and always use them (also for quarks). At some point the
-  CERN Computer Newsletter claimed that all particle should be written
-  upright, e.g. $\text{Z}$ boson, $\text{b}$ quark. However, nowadays
-  it seems to be much more common to use math mode. This is also how
-  the particles are written in the PDG. I would therefore
-  recommend one of the following definitions:
-\begin{verbatim}
-\newcommand*{\Zo}{\ensuremath{Z}\xspace}
-\newcommand*{\Zo}{\ensuremath{\text{Z}}\xspace}
-\newcommand*{\bbarQ}{\ensuremath{\bar{b}}\xspace}
-\newcommand*{\bbarQ}{\ensuremath{\bar{\text{b}}}\xspace}
-\end{verbatim}\index{particles}
-  which produce \ensuremath{Z}, \ensuremath{\text{Z}},
-  \ensuremath{\bar{b}}, \ensuremath{\bar{\text{b}}}. Note that you are
-  not allowed to include numbers in the names of commands, so
-  \Macro{Z0} or \Macro{U1S} are not valid commands. For
-  $\overline{B}^{\pm}_{c}$ and other particles whose names are capital
-  letters, it can be debated whether it better to use
-  \Macro{overline} than
-  \Macro{bar}. Compare $\overline{B}^{\pm}_{c}$ and
-  $\bar{B}^{\pm}_{c}$. If you use upright letters the choice is maybe
-  easier: $\overline{\text{B}}^{\pm}_{\text{c}}$ and
-  $\bar{\text{B}}^{\pm}_{\text{c}}$ or
-  $\overline{\text{K}}^{0}_{\text{S}}$ and
-  $\bar{\text{K}}^{0}_{\text{L}}$.
+  style file and always use them (also for quarks).
+  There are packages \Package{hepnicenames} and \Package{heppennames},
+  which use \Package{hepparticles}.\footnote{%
+    Note that \Package{hepnicenames} automatically includes \Package{heppennames},
+    so it is sufficient to include \Package{hepnicenames} to use both sets of definitions.}
+  These packages have many predefined particles and a standard convention for naming.
+  It is easy to add further definitions.
+  See Section~\ref{sec:tips:hepparticles} for some more details on how to write particles
+  that are relevant for particle physics.
 
-  Note that Kopka~\cite{kopka04}
-  recommends using \Macro{newcommand*} rather than \Macro{newcommand}
-  for short commands.
 \item Decide how you want to write coordinate axes\index{coordinates}
   and stick to it. Far too often I see text like: \enquote{The proton
     beam defines the Z direction, while the interaction point is
@@ -347,6 +344,7 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
   the best way of writing the coordinates? As $x$, $y$ and $z$ are
   often used for kinematic variables, there are arguments in favour of
   $(X, Y, Z)$.
+
 \item Use \Macro{enquote} from the \PackageG{csquotes} package to
   quote text rather than using explicit quotation marks. This has the
   advantage that consistent quotation marks are used everywhere (also
@@ -393,6 +391,8 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
   \end{equation*}
   This is also one of the the very few places, where it makes sense
   to put some spacing in by hand -- normally you should leave this to \TeX.
+  Note that the \Package{physics} package provides the command \verb|\dd{x}|,
+  which does the spacing for you.
 \item Pay attention to the alignment of numbers in
   tables. \Package{siunitx} provides the \Option{S} column specifier to
   help with this. Packages such as \Package{dcolumn} also provide assistance.
@@ -608,7 +608,7 @@ numbers. These aspects are discussed in Chapter~\ref{sec:table}.
 Note that the \Macro{clight} symbol that is used in the macro
 \Macro{MeVovercsq} to produce \si{\MeVovercsq} is defined as $c_{0}$ in
 \Package{siunitx} version 2. As this is not the way it is usually
-written in high energy physics I redefined it using:
+written in particle physics I redefined it using:
 \begin{verbatim}
   \DeclareSIUnit\clight{\text{\ensuremath{c}}}
 \end{verbatim}
@@ -741,6 +741,71 @@ There are other ways to get around the problem with Palatino.
 You can try either the \Package{pxfonts} or the
 \Package{mathpazo} packages -- for my taste the sans serif font used
 in \Package{pxfonts} looks a bit better.
+
+
+%------------------------------------------------------------------------------
+\section{Definitions in particle physics}
+\label{sec:tips:hepparticles}
+%------------------------------------------------------------------------------
+
+At some point the CERN Computer Newsletter claimed that all particles should be written
+upright, e.g. $\text{Z}$ boson, $\text{b}$ quark.
+However, nowadays it seems to be much more common to use italics.
+This is also how the particles are written in the PDG.
+While ATLAS usually uses italics, CMS (and the CERN Courier) use upright letters.
+
+If you use the \Package{hepnicenames}, \Package{heppennames} and/or \Package{hepparticles} packages,
+you can use the option \Option{italic} to switch from upright and italics.
+This is of course very nice!
+You just have to get used to the conventions used there for particle names.
+Many particles are available in \Package{hepnicenames},
+while \Package{heppennames} is more complete.
+\begin{description}
+\item[Some examples from \Package{heppennames}:]
+  \Macro{Pe} produces \Pe;
+  \Macro{Pl} produces \Pl;
+  \Macro{Pqt} produces \Pqt;
+  \Macro{PZ} produces \PZ;
+  \Macro{PWpm} produces \PWpm;
+  \Macro{PBz} produces \PBz;
+  \Macro{PBpm} produces \PBpm;
+  \Macro{PacB} produces \PacB;
+  \Macro{PBz}\{\}\Macro{PaBz} produces \PBz{}\PaBz, while
+  \Macro{PBz}\Macro{PaBz} produces \PBz\PaBz.
+\item[Some examples from \Package{hepnicenames}:]
+  \Macro{APelectron} produces \APelectron;
+  \Macro{Plepton} produces \Plepton;
+  \Macro{Ptop} produces \Ptop;
+  \Macro{PZ} produces \PZ;
+  \Macro{PWpm} produces \PWpm;
+  \Macro{PBzero} produces \PBzero;
+  \Macro{PBpm} produces \PBpm;
+  \Macro{APBc} produces \APBc;
+  \Macro{PBzero}\{\}\Macro{PaBzero} produces \PBzero{}\APBzero, while
+  \Macro{PBzero}\Macro{APBzero} produces \PBzero\APBzero.
+\end{description}
+
+If you define particles yourself,
+I would therefore recommend one of the following definitions:
+\begin{verbatim}
+\newcommand*{\Zo}{\ensuremath{Z}\xspace}
+\newcommand*{\Zo}{\ensuremath{\text{Z}}\xspace}
+\newcommand*{\bbarQ}{\ensuremath{\bar{b}}\xspace}
+\newcommand*{\bbarQ}{\ensuremath{\bar{\text{b}}}\xspace}
+\end{verbatim}\index{particles}
+which produce \ensuremath{Z}, \ensuremath{\text{Z}},
+\ensuremath{\bar{b}}, \ensuremath{\bar{\text{b}}}. Note that you are
+not allowed to include numbers in the names of commands, so
+\Macro{Z0} or \Macro{U1S} are not valid commands. For
+$\overline{B}^{\pm}_{c}$ and other particles whose names are capital
+letters, it can be debated whether it better to use
+\Macro{overline} than
+\Macro{bar}. Compare $\overline{B}^{\pm}_{c}$ and
+$\bar{B}^{\pm}_{c}$. If you use upright letters the choice is maybe
+easier: $\overline{\text{B}}^{\pm}_{\text{c}}$ and
+$\bar{\text{B}}^{\pm}_{\text{c}}$ or
+$\overline{\text{K}}^{0}_{\text{S}}$ and
+$\bar{\text{K}}^{0}_{\text{L}}$.
 
 
 %------------------------------------------------------------------------------

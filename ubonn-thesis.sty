@@ -1,7 +1,10 @@
-
-% Style file for a thesis written in the University of Bonn
 %------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-thesis}[2016/03/15 Version 5.0 University of Bonn thesis package]
+% Style file for a thesis written in the University of Bonn
+%
+% See ChangeLog or Git log for history of changes.
+% Responsible: Ian Brock (brock@physik.uni-bonn.de)
+%------------------------------------------------------------------------------
+\ProvidesPackage{ubonn-thesis}[2016/06/30 Version 5.1 University of Bonn thesis package]
 \NeedsTeXFormat{LaTeX2e}
 
 % Set TeX Live version
@@ -51,6 +54,9 @@
 \DeclareBoolOption[true]{biblatex}
 \DeclareBoolOption[true]{siunitx}
 \DeclareBoolOption[true]{dcolumn}
+\DeclareBoolOption[false]{physics}
+\DeclareBoolOption[true]{hepparticles}
+\DeclareBoolOption[true]{hepitalic}
 \DeclareBoolOption[true]{mhchem}
 \DeclareBoolOption[false]{titlesec}
 \DeclareBoolOption[false]{astrobib}
@@ -379,9 +385,25 @@
 \fi
 % Be careful trying to use ziffer and dcolumn together
 % \RequirePackage{ziffer}
+
 % Multiple references - does not seem to work together with hyperref
 % Also is not compatible with biblatex, which is the way to go
 % \RequirePackage{mcite}
+
+% Mathematical construction that are useful in physics
+\ifUBN@physics
+  \RequirePackage{physics}
+\fi
+
+% Standardised particles names and format
+\ifUBN@hepparticles
+  \ifUBN@hepitalic
+    \RequirePackage[italic]{hepnicenames}
+  \else
+    \RequirePackage{hepnicenames}
+  \fi
+\fi
+
 % Chemical elements
 \ifUBN@mhchem
   \RequirePackage[version=3]{mhchem}
@@ -410,21 +432,21 @@
 %    \RequirePackage[backend=\UBN@backend,backref=\UBN@backref,
 %      style=authoryear,uniquelist=minyear,uniquename=init,refsection=chapter,natbib=true,
 %      block=none]{biblatex}
-    \RequirePackage[backend=\UBN@backend,\UBN@biblatexencoding
-    backref=\UBN@backref,
-    style=authoryear,natbib=true,refsection=chapter,
-    block=none,firstinits=true]{biblatex}
+    \RequirePackage[backend=\UBN@backend, \UBN@biblatexencoding
+      backref=\UBN@backref,
+      style=authoryear, natbib=true, refsection=chapter,
+      block=none, firstinits=true]{biblatex}
   \else
     \ifthenelse {\texlive < 2010} {%
-      \RequirePackage[backend=\UBN@backend,hyperref=true,\UBN@biblatexencoding
+      \RequirePackage[backend=\UBN@backend, hyperref=true, \UBN@biblatexencoding
         backref=\UBN@backref,
-        style=\UBN@bibstyle,sorting=none,
-        block=ragged,firstinits=true]{biblatex}
+        style=\UBN@bibstyle, sorting=none,
+        block=ragged, firstinits=true]{biblatex}
     }{%
-      \RequirePackage[backend=\UBN@backend,\UBN@biblatexencoding
+      \RequirePackage[backend=\UBN@backend, \UBN@biblatexencoding
         backref=\UBN@backref,
-        style=\UBN@bibstyle,sorting=none,
-        block=ragged,firstinits=true]{biblatex}
+        style=\UBN@bibstyle, sorting=none,
+        block=ragged, firstinits=true]{biblatex}
     }
   \fi
 \fi

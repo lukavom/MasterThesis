@@ -9,9 +9,8 @@ In this section I document briefly the major changes to this guide. I
 also indicate other topics for which I would like to add some more
 information.
 
-\begin{longtable}{llp{0.8\textwidth}}
-  \caption{Changes to the \Package{ubonn-thesis} and \Package{ubonn-biblatex} style files.
-  \label{tab:ubonn-thesis:changes}}
+\begin{longtable}{llp{0.7\textwidth}}
+  \caption{Changes to the \Package{ubonn-thesis} and \Package{ubonn-biblatex} style files.}
   \endhead
   \toprule
   Date & Version & Comment\\
@@ -19,7 +18,9 @@ information.
   30 Jun 2016 & 5.1 & Add \Package{hepnicenames} and \Package{heppennames} packages.
     Add a bit more documentation on particle definitions.
     Added some more information and updated the guidelines on positioning of figures.
-    Month and address/location are not include in references by default.\\
+    Month and address/location are not include in references by default.
+    Move back to american and british as languages rather than USenglish and UKenglish,
+    as \Package{csquotes} gives warnings when using USenglish as a foreign language.\\
     
   15 Mar 2016 & 5.0 & Move from SVN to Git repository. Update documentation accordingly.
     Small fix so comma is not part of link from journal entry to DOI.
@@ -78,14 +79,14 @@ information.
   separate document). Make \TeXLive
   2011 the default. Make Inspire rather than Spires default.\\
   \bottomrule
+  \label{tab:ubonn-thesis:changes}
 \end{longtable}
 
 Table~\ref{tab:pibonn-thesis:changes} summarises the changes that were made during the 
 development of the \Package{pibonn-thesis} package.
 
 \begin{longtable}{lp{0.8\textwidth}}
-  \caption{Changes to the \Package{pibonn-thesis} style files.
-  \label{tab:pibonn-thesis:changes}}
+  \caption{Changes to the \Package{pibonn-thesis} style files.}
   \endhead
   \toprule
   Date & Comment\\
@@ -171,6 +172,7 @@ development of the \Package{pibonn-thesis} package.
   23 May 2011 & Changed default font to txfonts. Added more font
   options and explanation.\\
   \bottomrule
+  \label{tab:pibonn-thesis:changes}
 \end{longtable}
 
 Here is a list of ideas for more information that could be added to

@@ -193,11 +193,13 @@ A few default packages also changed with this version.
 \Package{longtable} $\to$ \Package{xtab}.
 The syntax \Option{siunitx} and \Option{siunitx=true} is equivalent.
 Use \Option{siunitx=false} to turn off an option.
-The following options exist:
+The following options exist:\\
 
-\begin{xtabular}{llp{10.0cm}}
-  Option & Default & Description \\
-  \midrule
+\tablehead{Option & Default & Description \\
+  \midrule}
+\tablelasttail{\bottomrule\\}
+\xentrystretch{-0.05}
+\begin{xtabular}{llp{11.0cm}}
   PhD & false & A PhD thesis.\\
   Master & false & A Master thesis.\\
   Diplom & false & A Diplom thesis.\\
@@ -212,8 +214,9 @@ The following options exist:
     You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
   siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
   physics & false & Useful mathematical constructions for physics.\\
-  hepparticles & true & Standardised names and formatting for particle physics.\\
-  hepitalic & true & Standardised names and formatting for particle physics.\\
+  hepparticles & true & Standardised names and formatting for particle physics.
+    This loads \Package{hepnicenames} and \Package{heppennames}.\\
+  hepitalic & true & Use italics rather than upright letters for particles.\\
   mhchem & true & A nice package for chemical elements and processes.\\
   dcolumn & true & A package for helping to align things in tables.\\
   feynmf & false & Include the \Package{feynmf} package for Feynman graphs.\\
@@ -312,7 +315,7 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
     in \TeXLive 2009.} option is set in \texttt{ubonn-thesis.sty}
   (see Section~\ref{sec:tips:siunitx}).  I used the option
   \Option{detect-family=false}\footnote{\Option{obeyfamily=false} in \TeXLive
-    2009} for the \Macro{SI} command in the 2nd expression.
+    2009.} for the \Macro{SI} command in the 2nd expression.
   In the first expression I use \Macro{text} for \enquote{jet}, while
   I use \Macro{mathrm} in the second expression.
   
@@ -330,7 +333,7 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
   There are packages \Package{hepnicenames} and \Package{heppennames},
   which use \Package{hepparticles}.\footnote{%
     Note that \Package{hepnicenames} automatically includes \Package{heppennames},
-    so it is sufficient to include \Package{hepnicenames} to use both sets of definitions.}
+    so it is sufficient to include \Package{hepnicenames} to be able to use both sets of definitions.}
   These packages have many predefined particles and a standard convention for naming.
   It is easy to add further definitions.
   See Section~\ref{sec:tips:hepparticles} for some more details on how to write particles
@@ -353,9 +356,9 @@ See the \texttt{ubonn-thesis} style file to find out what is changed.
     By default, British English\index{British English}\index{UK English}
     uses `British quoted text' for outer quotation marks,
     while American (US) English\index{American English}\index{US English}
-    uses \foreignquote{USenglish}{American quoted text}. In this guide
+    uses \foreignquote{american}{American quoted text}. In this guide
     (and in \texttt{ubonn-thesis.sty})
-    \foreignquote{USenglish}{American (US) quotes} are used even if you
+    \foreignquote{american}{American (US) quotes} are used even if you
     write in British (UK) English.})  you are writing your thesis in. You
   can also see in the Chapter~\ref{sec:intro} how this works, even
   when switching languages inside a paragraph.
@@ -432,7 +435,7 @@ in Appendix~\ref{sec:app:tex}.
   my pet hates is:
   \enquote{The most famous equation in the world is:
   \begin{equation}
-    \label{eq:emc2}
+    \label{eq:emc1}
     E = m c^{2}
   \end{equation}
   where E is the energy of the particle and m is its mass}, i.e.\ $E$

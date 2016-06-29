@@ -1,4 +1,4 @@
-\documentclass[a4paper,twoside,ngerman,UKenglish]{scrbook}
+\documentclass[a4paper,twoside,ngerman,american,british]{scrbook}
 %-------------------------------------------------------------------------------
 % This file contains the guide to writing theses for the
 % physics and astronomy institutes, Universität Bonn
@@ -41,6 +41,11 @@
 \usepackage{../thesis_skel/thesis_defs}
 \usepackage{guide_defs}
 \usepackage[italic]{hepnicenames}
+
+% Add many more possibilities to break URLs
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
 
 % In order to check if your labels are referenced try the refcheck package
 % \usepackage{refcheck}
@@ -103,7 +108,7 @@
 % The abstract is only needed for the printed version. and should be in
 % English regardless of the language of the thesis
 \newcommand{\thesisabstract}{%
-  \begin{otherlanguage}{UKenglish}
+  \begin{otherlanguage}{british}
     This document is supposed to provide both a skeleton as well as
     some guidelines as how to format a thesis using \LaTeX\ for the
     Department of Physics and Astronomy of the University of Bonn. The

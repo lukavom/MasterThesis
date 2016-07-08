@@ -319,8 +319,8 @@ I have been using \TeXstudio.
 \label{sec:app:kubuntu}\index{Linux}\index{Ubuntu}\index{Kubuntu}\index{Xubuntu}
 %------------------------------------------------------------------------------
 
-For my most recent tests with Ubuntu I have been using Xubuntu 14.04 and 
-\TeXLive 2013.
+For most of my tests with Ubuntu I have been using Xubuntu 14.04 and 
+\TeXLive 2013. Very recently I have also used Xubuntu 16.04 and \TeXLive 015.
 
 I also made the guide on a plain Xubuntu 12.04
 installation, which used the default packages from the Xubuntu image. At
@@ -341,23 +341,23 @@ texlive
 texlive-doc-en
 texlive-science
 texlive-science-doc
-texlive-latex3
 texlive-lang-german
+texlive-fonts-recommended
+texlive-fonts-extra
+texlive-latex-extra
 feynmf
-biblatex
+texlive-bibtex-extra
+biber
 \end{verbatim}
 For Ubuntu 13.04 and later I also had to install \texttt{texlive-metapost} in
 order to compile the guide.
 
-With (Ku|Xu|U)buntu 14.04, it seems that a few more packages may have to be installed:
-\begin{verbatim}
-texlive-fonts-recommended
-texlive-fonts-extra
-texlive-latex-extra
-texlive-bibtex-extra
-biber
-\end{verbatim}
-\texttt{biblatex} now seems to be included in \texttt{texlive-bibtex-extra} rather than having its own package.
+\noindent
+(Ku|Xu|U)buntu 12.04 has \TeXLive 2009 installed by default.
+You will need to install \texttt{texlive-latex3}.
+Later versions include the relevant packages in \texttt{texlive-latex-recommended} which is installed by default.
+You also have to install \texttt{biblatex} rather than \texttt{texlive-bibtex-extra}.
+I recommend using traditional \BibTeX rather than \Package{biber} with such an old version,so do not install \texttt{biber}.
 
 \noindent
 Using these packages I was able to issue to following commands to

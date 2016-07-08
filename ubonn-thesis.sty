@@ -53,6 +53,7 @@
 \DeclareBoolOption[false]{supertabular}
 \DeclareBoolOption[true]{biblatex}
 \DeclareBoolOption[true]{siunitx}
+\DeclareBoolOption[false]{eVkern}
 \DeclareBoolOption[true]{dcolumn}
 \DeclareBoolOption[false]{physics}
 \DeclareBoolOption[true]{hepparticles}
@@ -313,6 +314,10 @@
       \sisetup{detect-all}
       \sisetup{range-units=single, list-units=single}
       \sisetup{group-digits=true, group-four-digits=true}
+      \ifUBN@eVkern
+        \typeout{ubonn-thesis: Applying kern to eV}
+        \DeclareSIUnit\electronvolt{\text{e\kern-.1em V}}
+      \fi
     }
   }{%
     \RequirePackage{siunitx}
@@ -320,6 +325,10 @@
     \sisetup{range-units=single, list-units=single}
     \sisetup{group-digits=integer, group-minimum-digits=4}
     \sisetup{detect-all}
+    \ifUBN@eVkern
+      \typeout{ubonn-thesis: Applying kern to eV}
+      \DeclareSIUnit\electronvolt{\text{e\kern-.1em V}}
+    \fi
   }
   % Units - for German thesis \num{4.3} will be printed as 4,3
   \addto\extrasngerman{\sisetup{locale = DE}}

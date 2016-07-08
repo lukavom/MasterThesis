@@ -213,6 +213,7 @@ The following options exist:\\
   texlive & 2014 & Specify the \TeXLive version.
     You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
   siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
+  eVkern & Apply a kern of -0.1em to \si{\eV} in order to move \enquote{e} and \enquote{V} closer together.\\
   physics & false & Useful mathematical constructions for physics.\\
   hepparticles & true & Standardised names and formatting for particle physics.
     This loads \Package{hepnicenames} and \Package{heppennames}.\\
@@ -245,6 +246,12 @@ The following options exist:\\
 
 Some default option values are adjusted depending on the \TeXLive version.
 See the \texttt{ubonn-thesis} style file to find out what is changed.
+
+Depending on the font you use, you may find that the \enquote{e} and \enquote{V} in \si{\eV}, \si{\MeV} etc.\
+are too far apart.
+You can pass the option \Option{eVkern} to \Package{ubonn-thesis} in order to move them 0.1em closer together.\footnote{%
+This option has no effect for \TeX\ Live 2011 and older, as \Package{siunitx}
+adjusted the spacing internally using the parameter \Option{eVcorra}.}
 
 
 %------------------------------------------------------------------------------
@@ -452,29 +459,61 @@ in Appendix~\ref{sec:app:tex}.
   where $E$ is the energy of the particle and $m$ is its mass.
   Using the paragraph options of this guide, you add extra space.
   If your paragraphs are indented, \enquote{where} would also be indented.
+  
 \item Another example of how not to write things is something like
   \enquote{The scale factor, SF, used to correct the MC is determined in
   an independent dataset using $SF = N_{data} / N_{MC}$}. Note the
   wrong font and spacing of $SF$, $data$ and $MC$. All should be
   enclosed in \Macro{text}: $\text{SF} = N_{\text{data}} / N_{\text{MC}}$.
-\item Do not include the directory or the extension of the file in
-  \Macro{includegraphics}
-  commands. Use
-  \Macro{graphicspath}
+  
+\item Do not include the directory (or at least the top-level directory) 
+  or the extension of the file in \Macro{includegraphics} commands.
+  Use \Macro{graphicspath}
   instead to set up a list of directories that hold the
   figures.\index{figures!directories} Let \LaTeX{} or PDF\LaTeX{} pick
   the extension for the figure, so that you can (in principle) easily
   switch between the two.
+
+\item Do not use the old font commands \Macro{rm}, \Macro{tt}, \Macro{sc} etc.
+  If you are running a recent version of \TeXLive, you may have seen warnings of the form:
+  \begin{verbatim}
+  Class scrartcl Warning: Usage of deprecated font command `\sc'!
+  (scrartcl)              You should note, that in 1994 font command `\sc' has
+  (scrartcl)              been defined for compatiblitiy to Script 2.0 only.
+  (scrartcl)              Now, after two decades of LaTeX2e and NFSS2, you
+  (scrartcl)              shouldn't use such commands any longer and within
+  (scrartcl)              KOMA-Script usage of `\sc' is definitely deprecated.
+  (scrartcl)              See `fntguide.pdf' for more information about
+  (scrartcl)              recommended font commands.
+  (scrartcl)              Note also, that KOMA-Script will remove the definition
+  (scrartcl)              of `\sc' anytime until release of about version 3.20.
+  (scrartcl)              But for now, KOMA-Script will replace deprecated `\sc'
+  (scrartcl)              by `\normalfont \scshape ' on input line 94.
+  \end{verbatim}
+  If you have \TeXLive 2016, you will find that KOMA-Script has gone ahead with its threat 
+  and \Macro{sc} etc.\ now give errors and compilation stops!
+  Instead you should use \Macro{textsc} etc.
+  You should also use \verb|\mathcal{L}| instead of \verb|{\cal L}|.
+  A nice, brief explanation of the differences can be found in \foreignlanguage{ngerman}{\enquote{Das \LaTeX2e\ Sündenregister}},
+  which you can find with the command \texttt{texdoc l2tabu}.
+  The English variant is called \enquote{An essential guide to \LaTeX2e\ usage: Obsolete commands and packages}
+  and can be found with the command \texttt{texdoc l2tabuen}.
+  I highly recommend you reading this document to find out what constructs you should avoid in your documents.
+  You can read the font guide by giving the command \texttt{texdoc fntguide}.
+  
 \item Do not try to end paragraphs with
   \textbackslash\textbackslash. These should be used sparingly when
   for some reason you really have to start a new line. Just leave an
   empty line for a new paragraph.
+  
 \item Do not draw conclusions or interpret figures in the caption. The
   caption should just describe what is in the figure. Interpretation
   belongs in the main body of the text.
+  
 \item Do not start trying to format figure and table captions inside
   each caption -- use the options available in \KOMAScript{} to set
   such things at the beginning of the document.
+  
 \item Do not worry about overfull boxes, positions of figures
   and tables, etc.\ until you reach the final version of your thesis.
 \end{itemize}
@@ -809,6 +848,14 @@ easier: $\overline{\text{B}}^{\pm}_{\text{c}}$ and
 $\bar{\text{B}}^{\pm}_{\text{c}}$ or
 $\overline{\text{K}}^{0}_{\text{S}}$ and
 $\bar{\text{K}}^{0}_{\text{L}}$.
+
+Another problem is that, depending on the font you use, the spacing between \enquote{e} and \enquote{V}
+on \si{\eV} and its derivatives, e.g.\ \si{\GeV}, can be larger than you would like.
+As this is font dependent the \Package{siunitx} package does not try to fix this.\footnote{%
+A discussion of this can be found in
+\url{http://tex.stackexchange.com/questions/219854/can-i-declare-a-new-automatic-kern-for-ev-without-modifying-font-metrics}.}
+The \Package{ubonn-thesis} package contains an option \Option{eVkern} that introduces a -0.1em kerning,
+i.e.\ shift of \enquote{V} closer to \enquote{e} by 0.1em, which you can turn on if necessary.
 
 
 %------------------------------------------------------------------------------

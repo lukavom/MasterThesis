@@ -494,22 +494,20 @@ link from \texttt{/usr/local/bin/gnome-open} to
 \label{sec:app:windows}\index{windows}
 %------------------------------------------------------------------------------
 
-I also tried to to make the guide and a skeleton thesis under
-Windows. I have had success with the 2010 \TeX{} Collection DVD from Dante to install
-pro\TeX t, which is based on MiK\TeX. 
-What the user sees is \TeXworks
-which is deliberately supposed to look like the Mac's \TeX Shop. This
-is discussed in Section~\ref{sec:app:miktex}.
-More recently I simply downloaded the MiK\TeX\ installer from
-\url{htp://miktex.org}.
+I also tried to to make the guide and a skeleton thesis under Windows. 
+My tests have been done with Windows 7 and more recently Windows 10.
+I simply downloaded the MiK\TeX\ installer from \url{http://miktex.org}.
+This is discussed in Section~\ref{sec:app:miktex}.
 You can also install \TeXLive for Windows. Some hints on how to do
-this are given below (Section~\ref{sec:app:texlive}).
+this are given below (Section~\ref{sec:app:texlive}).\footnote{%
+I have had success with the 2010 \TeX{} Collection DVD from Dante to install
+pro\TeX t, which is based on MiK\TeX.
+Newer versions should also work without problems.
+What the user sees is \TeXworks
+which is deliberately supposed to look like the Mac's \TeX Shop.}
 
-For a first attempt I used Windows XP in a virtual machine using
-VirtualBox. More recently all my tests have been done using Windows 7.
-
-Once you have a \TeX\ installation, you have to get the guide. To do
-this I used \texttt{TortoiseGit} which is available from
+Once you have a \TeX\ installation, you have to get the thesis style files and the guide.
+To do this I used \texttt{TortoiseGit} which is available from
 \url{https://tortoisegit.org} as the interface between Windows and
 \texttt{Git}.\index{tortoisegit}\index{Git}
 
@@ -518,22 +516,41 @@ top-level directory where you want to do the checkout, right-click on
 the mouse and enter\\
 \texttt{https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git}
 as the URL.
+If you do this you can stay at the cutting edge!
 If you want a particular version then specify the branch you want, e.g.\ \enquote{v5.0}.
+You can of course simply download the appropriate tar file from the PI webpages.
 
 To set up your thesis, you have to do by hand what the
-\texttt{Makefile} does under Linux, i.e.\ make a new directory
+\texttt{Makefile} does under Linux or install GNU Make.
+If you want to do it by hand, you should make a new directory
 \texttt{mythesis}, copy \texttt{thesis\_skel/thesis\_skel.tex} to
-\texttt{mythesis/mythesis.tex}, and copy the rest of the files from
+\texttt{mythesis/mythesis.tex}, and copy the rest of the files you need from
 \texttt{thesis\_skel} into \texttt{mythesis}. In addition you should
 copy the style files \texttt{ubonn-thesis.sty} and \texttt{ubonn-biblatex.sty} into the
 \texttt{mythesis} directory.
 
 To compile things, I ran the sequence PDF\LaTeX, \BibTeX, PDF\LaTeX,
 PDF\LaTeX\ to get the output file for the skeleton thesis.
-
 If you want to use \texttt{biber} instead of traditional \BibTeX, then you should
 change the \BibTeX\ command from \texttt{bibtex} to \texttt{biber} in
 \TeXstudio or \TeXworks.
+
+If you want to install GNU Make you can try the following:
+You should install the \enquote{Minimal Gnu for Windows} from \url{http://www.mingw.org}.
+I downloaded and ran \texttt{mingw-get-setup.exe}.
+Once you have installed it you can run the \enquote{MinGW Installer} to install the software you want.
+I think you should install \Package{msys-base} from \enquote{Basic Setup}.
+This installs \texttt{make} and quite a lot of other typical Unix commands.
+Finally you have to add \verb|C:\MinGW\msys\1.0\bin| to your \texttt{PATH}.
+One way to do this is with the command \verb|setx PATH %PATH%;C:\MinGW\msys\1.0\bin| using a Windows Command Prompt, 
+i.e.\ \texttt{cmd.exe}.
+You can also use the GUI in the System Administration to set environment variables.
+If you get \texttt{make} to work properly you start \texttt{cmd.exe},
+navigate to the correct directory and give the usual commands to create and compile your thesis:
+\begin{verbatim}
+make new
+make
+\end{verbatim}
 
 \TeXstudio knows about indexes and glossaries. You have to set up a
 user command to execute \texttt{makeindex} and \texttt{makeglossaries}
@@ -561,17 +578,19 @@ I have installed \TeX\ under Windows both from the \TeX{} Collection
 an Administrator and then opened the DVD. It opened a \TeX\ Collection
 window and I then clicked on pro\TeX t Quick Install and installed
 MiK\TeX{} (minimal version),\index{MiKTeX}
-Ghostscript\index{ghostscript} and Ghostview\index{ghostview} for all
-users. Once the installation was finished, I also updated all the
+Ghostscript\index{ghostscript} and Ghostview\index{ghostview} for all users.
+Once the installation was finished, I also updated all the
 packages using the MiK\TeX{} Maintenance (Admin) $\to$ Update (Admin)
 program. Be patient -- these updates always take a while!
 
 With the minimal version of MiK\TeX{} you are then asked whether to
 install the missing packages when first compiling a file that needs
 them. Note that such missing packages are installed in your local
-directory tree and not in the central directory tree. Be patient if
-the first compilation appears to hang. This usually means that new
-packages are being installed.
+directory tree and not in the central directory tree.
+This means that if you want to update MiK\TeX{} in the future
+you should run the MiK\TeX{} Update both as Admin and as a normal user.
+Be patient if the first compilation of a document appears to hang.
+This usually means that new packages are being installed.
 
 Note that the Dante \TeX\ Collection 2011 DVD has dropped
 \TeXnicCenter within pro\TeX t and is using the \TeX makerX front-end

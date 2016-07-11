@@ -18,9 +18,7 @@ information.
   30 Jun 2016 & 5.1 & Add \Package{hepnicenames} and \Package{heppennames} packages.
     Add a bit more documentation on particle definitions.
     Added some more information and updated the guidelines on positioning of figures.
-    Month and address/location are not include in references by default.
-    Move back to american and british as languages rather than USenglish and UKenglish,
-    as \Package{csquotes} gives warnings when using USenglish as a foreign language.\\
+    Month and address/location are not include in references by default.\\
     
   15 Mar 2016 & 5.0 & Move from SVN to Git repository. Update documentation accordingly.
     Small fix so comma is not part of link from journal entry to DOI.
@@ -373,8 +371,11 @@ cd guide
 make guide
 \end{verbatim}
 so all packages are there as well as at least the default font which I
-selected. If your version of \TeXLive is older than 2013, you should set
+selected.
+If your version of \TeXLive is older than 2013, you should set
 \Macro{texlive} accordingly and not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
+In addition, I had to download and install the package \Package{physics} from CTAN when
+using \TeXLive 2011 and Scientific Linux 6.
 
 The default version of the guide uses \Option{biber} for the
 \Package{biblatex} package and includes\\
@@ -467,9 +468,9 @@ alias in your \texttt{.bashrc} or \texttt{.bash\_aliases}:
 \begin{verbatim}
 function sutlmgr () {
     if [[ -z "$@" ]]; then
-	sudo /opt/texbin/tlmgr -gui
+      sudo /opt/texbin/tlmgr -gui
     else
-	sudo /opt/texbin/tlmgr "$@"
+      sudo /opt/texbin/tlmgr "$@"
     fi
 }
 \end{verbatim}

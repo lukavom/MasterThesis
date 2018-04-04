@@ -63,6 +63,7 @@ new09: skelcopy
 skelcopy:
 	mkdir $(THESIS)
 	mkdir $(THESIS)/bib
+	mkdir $(THESIS)/figs
 	cp thesis_skel/thesis_defs.sty        $(THESIS)/
 	cp thesis_skel/thesis_intro.tex       $(THESIS)/
 	cp thesis_skel/thesis_appendix.tex    $(THESIS)/
@@ -74,7 +75,7 @@ skelcopy:
 	cp thesis_skel/Makefile               $(THESIS)/
 	cp thesis_skel/thesis_refs.bib        $(THESIS)/bib/
 	cp refs/standard_refs-biber.bib       $(THESIS)/bib/
-	cp -R figs/cover                      $(THESIS)/
+	cp -R figs/cover                      $(THESIS)/figs/
 
 update:
 	-cp -i ubonn-thesis.sty                $(THESIS)/

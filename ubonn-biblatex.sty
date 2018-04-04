@@ -2,10 +2,12 @@
 % This file contains adjustments to the numeric-comp (and numeric)
 % biblatex styles that are suggested for University of Bonn theses.
 %
+% Note that "make update" can overwrite this file.
+%
 % See ChangeLog or Git log for history of changes.
 % Responsible: Ian Brock (brock@physik.uni-bonn.de)
 %-------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-biblatex}[2016/07/11 Version 5.X University of Bonn biblatex style]
+\ProvidesPackage{ubonn-biblatex}[2018/04/04 Version 6.0 University of Bonn biblatex style]
 \NeedsTeXFormat{LaTeX2e}
 
 % Use kvoptions package to set options
@@ -14,6 +16,8 @@
   family=UBNB,
   prefix=UBNB@
 }
+\DeclareStringOption[ragged]{block}
+\DeclareStringOption[5]{maxbibnames}
 \DeclareBoolOption[true]{articletitle}
 \DeclareBoolOption[false]{titlequote}
 \DeclareBoolOption[false]{boldvol}
@@ -31,7 +35,7 @@
 \fi
 \typeout{Package ubonn-biblatex Info: UBNB@texlive is [\UBNB@texlive]}
 
-% Include the DOI as a hyerlink with the journal.
+% Include the DOI as a hyperlink with the journal.
 \ifUBNB@showdoi
   \relax
 \else
@@ -50,8 +54,8 @@
   \ExecuteBibliographyOptions{eprint=false}
 \fi
 
-% date=year option works for TeX Live 2013 or so onwards
-\ifthenelse{\UBNB@texlive < 2013}{%
+% date=year option works for TeX Live 2014 or so onwards
+\ifthenelse{\UBNB@texlive < 2014}{%
   \relax
 }{%
   \ExecuteBibliographyOptions{date=year}
@@ -80,6 +84,7 @@
   \AtEveryBibitem{
     \ifentrytype{article}{\clearfield{title}}{}
     \ifentrytype{booklet}{\clearfield{title}}{}
+    \ifentrytype{report}{\clearfield{title}}{}
   }
 \fi
 
@@ -94,10 +99,10 @@
   \DeclareFieldFormat[article]{volume}{\textbf{#1}\isdot}
 \fi
 
-  % Suppress issue number
-  \AtEveryBibitem{
-    \ifentrytype{article}{\clearfield{number}}{}
-  }
+% Suppress issue number
+\AtEveryBibitem{
+  \ifentrytype{article}{\clearfield{number}}{}
+}
   
 % Do not print out the address
 \ifUBNB@address
@@ -148,7 +153,7 @@
 \fi
 
   % Print only first page - only works for TeX Live 2012 onwards I think
-\ifthenelse{\UBNB@texlive < 2013}{%
+\ifthenelse{\UBNB@texlive < 2012}{%
   \relax
 }{%
   \DeclareFieldFormat{pages}{\mkfirstpage[{\mkpageprefix[bookpagination]}]{#1}}
@@ -156,6 +161,12 @@
 
 % Change punctuation to comma
 \renewcommand*{\newunitpunct}{\addcomma\space}
+
+% Avoid unnecessary comma between author and year with astrobib
+% This should only be necessary for older versions (before 3.5) of biblatex
+% \ifUBN@astrobib
+%   \renewcommand*{\nameyeardelim}{\addspace}
+% \fi
 
 % You can include the following line(s) if you want to shorten your
 % bibliography by not including url fields
@@ -175,6 +186,10 @@
 % Remove p. or pp. by pages - this has to be done for every language
 % separately as these strings depend on the language
 \renewcommand{\bibpagespunct}{\space}
+\DefineBibliographyStrings{english}{%
+  page = {},
+  pages = {}
+}
 \DefineBibliographyStrings{american}{%
   page = {},
   pages = {}

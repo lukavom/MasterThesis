@@ -1,4 +1,4 @@
-Version 5.2 11/07/2016
+Version 6.0 04/04/2018
 
 The idea with this package is that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
@@ -11,7 +11,7 @@ git clone https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 
 If you want a particular release use the command:
 
-git clone --branch v5.1 https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
+git clone --branch v6.0 https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
 
 The tar file also includes the guide as a PDF file: guide/thesis_guide.pdf.
 It can be obtained from:
@@ -65,7 +65,7 @@ You can create your own copy of the guide using the commands:
 cd guide
 make guide
 
-If you have a verison of TeX Live older than 2013, you should set 
+If you have a version of TeX Live older than 2013, you should set 
 \texlive appropriately thesis_guide.tex and
 should not pass the newtx option to ubonn-thesis.
 If your version of TeX Live is older than 2011, you need to compile the 

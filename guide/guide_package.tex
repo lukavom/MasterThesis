@@ -13,7 +13,7 @@ one of your friend's theses and use his/her packages and conventions,
 as there is a steady and regular improvement in the packages
 available.
 
-This chapter lists some useful packages -- maybe also some that
+This chapter lists some useful packages --- maybe also some that
 are not so commonly known. Here I only say what the package is used
 for. More detailed instructions on the usage can be found in the
 relevant chapters. I first list the packages used in this guide
@@ -48,6 +48,10 @@ options. In the past I have used \Package{geometry}, but I also see no
 reason not to just use \Package{typearea}. Note that you should not
 include the \Package{typearea} package, you should simply set the
 options using \Macro{KOMAoptions}.
+Generally, all you need to do is specify \Option{DIV} (set by default to 12),
+which divides the page into a number of divisions and
+\Option{BCOR} (set by default to \SI{5}{\mm},
+which leaves some space for the binding.
 The packages are listed in Table~\ref{tab:package:layout}.
 
 \begin{table}[htbp]
@@ -55,9 +59,10 @@ The packages are listed in Table~\ref{tab:package:layout}.
   \begin{tabular}{lp{0.8\textwidth}}
     \toprule
     \Package{geometry} & Provides simple options for page layout such
-    as \Option{scale=0.75} to cover 75\% of the page.\\
+    as \Option{scale=0.75} to cover \SI{75}{\%} of the page.\\
     \Package{typearea} & Does much the same, but here you specify how
-    many elements to split the page into. You do not have to include
+    many elements to split the page into, e.g.\ \Option{DIV=12}.
+    You do not have to include
     this package explicitly if you use \KOMAScript.\\
     \Package{setspace} & Useful options to change spacing.\\
     \Package{fontenc} & The encoding used for fonts. Recommended is
@@ -66,8 +71,8 @@ The packages are listed in Table~\ref{tab:package:layout}.
     that you can input German letters such as ä, ü and ß directly.\\
     \Package{babel} & Language specific typesetting.\\
     \Package{csquotes} & Package for quoting things using the correct
-    language-dependent symbol.\\
-    \Package{scrpage2} & Set headers and footer.\\
+    language-dependent quotation marks.\\
+    \Package{scrlayer-scrpage} & Set headers and footer.\\
     \Package{xspace} & Avoid having to put
     \enquote{\texttt{\textbackslash\ }} or
     \enquote{\texttt{\{\}}} after a macro.\\
@@ -76,6 +81,10 @@ The packages are listed in Table~\ref{tab:package:layout}.
   \caption{Useful packages for layout.}
   \label{tab:package:layout}
 \end{table}
+
+The package \Package{scrlayer-scrpage} has superseded \Package{scrpage2}.
+If your version of \LaTeX{} is so old that it does not know about
+\Package{scrlayer-scrpage} adjust the \Package{ubonn-thesis} style file accordingly.
 
 %------------------------------------------------------------------------------
 \section{Appearance}
@@ -86,10 +95,10 @@ It used to be the case that nearly all \LaTeX{} documents used the
 Computer Modern Fonts. That is no longer necessary. There are rather
 complete font sets that are also free that you can use instead.
 %In this guide I use a combination of \Package{Palatino} and other fonts.
-The default font for theses is \Package{txfonts}.
-\Package{newtx} is a new version of this package that is available as of \TeXLive 2013.
+The default font for theses is \Package{newtx} that is available as of \TeXLive 2013.
 If you have this package, then I would recommend using it.
-Some of the spacings in equations have been improved 
+\Package{txfonts} is an older version of this package that can be used instead, if necessary.
+Some of the spacings in equations have been improved in \Package{newtx}
 and there is a better balance of the sizes of serif, \textsf{sans serif} and \texttt{typewriter} fonts.
 Other fonts that look quite nice (e.g.\ Palatino) can also be used.
 The option \Option{palatino} in \Package{ubonn-thesis} can be used to select this.
@@ -124,6 +133,7 @@ figures are listed in Table~\ref{tab:package:appearance}.
     \Package{xcolor} & Add colour commands.\\
     \Package{titlesec} & Change the appearance of chapter and section headings. 
       See below for more information.\\
+    \Package{microtype} & Small adjustments to word spacings.\\
     \bottomrule
   \end{tabular}
   \caption{Useful packages for appearance.}
@@ -143,6 +153,9 @@ Use of the \Package{titlesec} package gives a warning when using \KOMAScript{}; 
 as of version 3.0 the chapter title formatting is done by hand in \Package{ubonn-thesis}.
 You can switch back to using \Package{titlesec} by giving the option \Option{titlesec}.
 
+The package \Package{microtype} declares itself to be responsible for
+\enquote{Subliminal refinements towards typographical perfection}.
+Need I say more?
 
 %------------------------------------------------------------------------------
 \section{Other packages}
@@ -166,6 +179,10 @@ Table~\ref{tab:package:other1}.
     directly compile for each figure and also input to another document.\\
     \Package{hyperref} & Adds \Macro{url} command as well as ability
     to click on entries on table of contents etc.\\
+    \Package{cleveref} & Provides \enquote{Fig.}, \enquote{Table} etc. when you use
+      the \Macro{cref\{fig:plot\}} syntax.\\
+    \Package{todonotes} & Nice package to add notes to your text.
+      You can also use it to indicate missing figures.\\
     \Package{background} & Allows you to add things like DRAFT across the whole document page.\\
     \Package{subfiles} & Provides a nice alternative to
     \Macro{include}.\\
@@ -173,12 +190,12 @@ Table~\ref{tab:package:other1}.
     \Package{tabularx} & Allows fixed table width with flexible column widths.\\
     \Package{floatrow} & Add ability to define own floats.\\
     \Package{physics} & Some useful extra maths commands, especially for differentials.\\
-    \Package{commath} & Some useful extra maths commands -- has not been updated for a while.\\
+    \Package{commath} & Some useful extra maths commands --- has not been updated for a while.\\
     \Package{skmath} & More maths commands that could be useful.\\
     \Package{adjustbox} & Add much more sophisticated clipping
     capabilities than offered by \Package{graphicx}.\\
     \Package{wrapfig} & Allow text to flow around figures.\\
-    \Package{floatflt} & Similar capabilities to \Package{wrapfig} -- allow text to flow around figures.\\
+    \Package{floatflt} & Similar capabilities to \Package{wrapfig} --- allow text to flow around figures.\\
     \Package{glossaries} & Provide commands for creating a glossary.
       This is intended to replace the \Package{glossary} package.\\
     \Package{dcolumn} & Very helpful for lining up columns on character strings such as a decimal point.
@@ -197,6 +214,22 @@ equations.
 \Package{IEEEtrantools}, in particular the \Env{IEEEeqnarray} environment, can help here.
 See Ref.~\cite{lshort} or the package documentation for more details.
 
+The packages \Package{physics}, \Package{commath} and \Package{skmath} provide some additional maths commands.
+Differentials etc.\ are particularly useful.
+The \Package{physics} package contains a lot of nice and flexible definitions and also handles the spacing around things like $\dd{x}$ well,
+if you use the \verb|\dd{x}| construction.
+The \Package{commath} package has not been updated for a while.
+\Package{skmath} does quite a lot more then \Package{commath} and even modifies/enhances some standard commands.
+
+The \Package{todonotes} is a very nice package that enables you to add notes to your text.
+By default they will be put in the margin of your document.
+More details can be found in \cref{sec:package:todo}.
+
+The \Package{cleveref} package appears to be a great package for specifying references to
+figures, tables, sections etc.
+You just give the command \Macro{cref\{fig:plot\}} and it will add \enquote{Fig.} or whatever
+you set to the figure number and an unbreakable space.
+
 \Package{standalone} is both a package and a document class. It is
 available from \TeXLive 2012 onwards. It allows you to have a
 standalone document for a \Package{tikz} or \Package{feynmf} figure
@@ -212,13 +245,6 @@ included in \TeXLive by default. Have a look at
 example for more information. If you want to use the package you have
 to download it and install for yourself. You can do much the same
 thing using AUCTeX inside \texttt{emacs}.
-
-The packages \Package{physics}, \Package{commath} and \Package{skmath} provide some additional maths commands.
-Differentials etc.\ are particularly useful.
-The \Package{physics} package contains a lot of nice and flexible definitions and also handles the spacing around things like $\dd{x}$ well,
-if you use the \verb|\dd{x}| construction.
-The \Package{commath} package has not been updated for a while.
-\Package{skmath} does quite a lot more then \Package{commath} and even modifies/enhances some standard commands.
 
 \begin{sloppypar}
 Note that there is a conflict if you use \Package{refcheck}, \Package{subcaption} and \Package{hyperref} together.
@@ -249,7 +275,7 @@ or have been superseded by other packages.
     \Package{SIunits} & Typeset units properly with correct spacing.
       \Package{hepunits} uses this package, so it does not need to be added explicitly\\
     \Package{fancyhdr} & As the name suggests, do your own header and footer configuration.
-      Within \KOMAScript{} it is recommended to use \Package{scrpage2} instead.\\
+      Within \KOMAScript{} it is recommended to use \Package{scrlayer-scrpage} instead.\\
     \Package{feynmf} & Draw Feynman graphs with Metafont.\\
     \Package{draftwatermark} & Another package that allows you to add DRAFT to the background each page.\\
     \Package{subfig} & As the name suggests make sub-figures and add
@@ -257,10 +283,10 @@ or have been superseded by other packages.
       deprecated.}\\
     \Package{subfigure} & As the name suggests make sub-figures and add
     separate captions for them. \emph{This package is deprecated.}\\
-    \Package{color} & Add colour commands -- \Package{xcolor} is
+    \Package{color} & Add colour commands --- \Package{xcolor} is
     needed to colour boxes around links.\\
     \Package{float} & As far as I can tell \Package{floatflt} offers more options.\\
-    \Package{caption} & Much more control on captions -- as
+    \Package{caption} & Much more control on captions --- as
     \KOMAScript{} also has many options, not sure this is necessary.\\
     \Package{ziffer} & Spacing with a comma as decimal separator is
     correct.\\
@@ -288,3 +314,38 @@ package contains the same functionality, which can simply be steered
 by changing the document language, as discussed in
 Section~\ref{sec:table:siunitx}. Hence, \Package{ziffer} is not really
 needed anymore.
+
+%------------------------------------------------------------------------------
+\section{ToDo Notes}
+\label{sec:package:todo}
+%------------------------------------------------------------------------------
+
+If you include the option \Option{todonotes} with \Package{ubonn-thesis},
+the margin of the thesis will also be adjusted a bit to leave more space for such notes.
+As an example, the \Macro{mynote} command is defined.
+
+If you turn on the option \Option{todonotes}, the package will be loaded.
+With the option \Option{shownotes} they will also be 
+\mynote{displayed.}{The \Option{shownotes} also turns on \Option{todonotes}.}
+
+Another nice feature of the \Package{todonotes} package is that you can use
+\Macro{missingfigure\{text\}} to indicate figures that you still want to include.
+See for example \cref{fig:missing}. You can get a list of your notes
+by adding the \Macro{listoftodos} command somewhere.
+
+The macro \Macro{todo} has some problems inside floats.
+You should pass the option \Option{inline} to \Macro{mynote} if you
+want a comment inside a caption. If you also include a \enquote{List of Tables}
+or \enquote{List of Figures}, then you have to provide a short caption
+as an option or move the note outside (after) the caption.
+
+\begin{figure}[htbp]
+  \missingfigure{Still need to create the plot to be included here.}
+  \caption[Optional caption without \Macro{mynote} so that \enquote{List of Figures} does not break.]{%
+    This figure still has to be added.
+    \mynote[inline]{}{Use the option \Option{inline} to include a note in a caption,
+    as this is floating. A note that does not point to a block of text needs a
+    blank first argument.}
+  }
+  \label{fig:missing}
+\end{figure}

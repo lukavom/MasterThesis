@@ -50,7 +50,7 @@ echo '\\end{document}'                >>${file}_mp.tex
 echo "Directory: <$dir>"
 echo "File: <$file>"
 #
-# Run pdflatext and metapost
+# Run pdflatex and metapost
 #
 pdflatex ${file}_mp
 mpost ${file}

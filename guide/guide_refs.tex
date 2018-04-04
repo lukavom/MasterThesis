@@ -1,3 +1,5 @@
+% !TEX root = thesis_guide.tex
+
 %==============================================================================
 \chapter{References}
 \label{sec:ref}
@@ -39,7 +41,7 @@ reference?
 I give some hints on
 useful options and settings for \Package{biblatex} below (Section~\ref{sec:ref:bbx}).
 If you use traditional \BibTeX\ (which I do not recommend), then you probably have to use the \Package{mcite}
-package -- see Section~\ref{sec:ref:mcite}.
+package --- see Section~\ref{sec:ref:mcite}.
 Just to take a silly example. The ZEUS collaboration
 publications in
 2010~\cite{Abramowicz:2010ih,Abramowicz:2010xc,Abramowicz:2010nj} were
@@ -111,9 +113,9 @@ need something like:
 \begin{verbatim}
 % Use biblatex for the bibliography
 \usepackage[backend=biber,
-  style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
-% \usepackage[backend=bibtex,hyperref=true,
-%   style=numeric-comp,sorting=none,block=ragged,firstinits=true]{biblatex}
+  style=numeric-comp, sorting=none, block=ragged, firstinits=true]{biblatex}
+% \usepackage[backend=bibtex, hyperref=true,
+%   style=numeric-comp, sorting=none, block=ragged, firstinits=true]{biblatex}
 
 % Adjustments to output are in this style file:
 \usepackage{ubonn-biblatex}
@@ -302,6 +304,8 @@ hand.
 An example of a typical ATLAS paper as it comes from
 Inspire~\cite{Aad:2010ey-inspire} needs a bit of work.  With \TeXLive
 2011 the link to DOI and arXiv both work well~\cite{Aad:2010ey-final}.
+Note that the LHC collaborations specify that the first author should not
+be included, i.e. \verb|author = "{ATLAS Collaboration}",|.
 
 %\textcolor{red}{Check if this is still true:
 %With \TeXLive 2009, it worked on my laptop, but did not work properly
@@ -366,10 +370,10 @@ numeric style.
 \subsection{\Package{biblatex} styles}
 \label{sec:ref:bbx}
 
-My experience with \Package{biblatex} has taken off in the last year, 
-since I started rewriting the ATLAS \LaTeX\ templates.
+My experience with \Package{biblatex} took off 
+when I started rewriting the ATLAS \LaTeX\ templates in 2014.
 The first official stable release of \Package{biblatex} was 19 Oct 2010.
-Active and rapid development is ongoing -- there were many updates in 2011.
+Active and rapid development is ongoing --- there were many updates in 2011.
 Some things I recommend below may work a bit differently depending on which version
 you have. See Appendix~\ref{sec:app:tex} on how to install a newer
 version of \TeXLive if you want a more up-do-date version of \LaTeX.
@@ -402,6 +406,8 @@ The following options exist:
   showurl & true & Show the URL field.\\
   showdoi & false & Show the DOI separately. Otherwise it is linked from the journal reference.\\
   eprint & true & Show the arXiv entry.\\
+  address & false & Print the address, if given.\\
+  location & false & Print the location, if given.\\
   \bottomrule
 \end{tabular}
 
@@ -445,7 +451,7 @@ option that gives the references in the order that they were
 cited. \Option{biber} seems to work well with \TeXLive 2012 and later and hence is the default.
 For older versions of \TeXLive, a better solution is probably \texttt{make new09}
 followed by \texttt{make thesis09} that then uses traditional \BibTeX.\footnote{%
-You can still try to use \Package{biblatex} if you want to -- use \texttt{make new} to create a new skeleton --
+You can still try to use \Package{biblatex} if you want to --- use \texttt{make new} to create a new skeleton ---
 as \texttt{ubonn-thesis} switches to \Option{bibtex} automatically for \TeXLive
 versions earlier than 2011.
 Compile the thesis with \texttt{make thesis09} though.
@@ -469,9 +475,12 @@ run again. The directory name depends on the operating system you are using.
 Use the command \verb|biber --cache| to find out where it is.
 If you are adventurous, the command \verb|rm -rf `biber --cache`| will do it all for you!
 
+
 %------------------------------------------------------------------------------
 \subsection{Traditional \BibTeX{} styles}
 \label{sec:ref:bst}
+
+I strongly recommend that you use \Package{biblatex} and \Package{biber}, but if you insist\ldots
 
 If you use references directly from Spires or Inspire, then it is
 probably best to use one of the style files that is compatible with
@@ -492,14 +501,58 @@ These are included in the \texttt{refs} directory.
 
 
 %------------------------------------------------------------------------------
+\section{Errata}
+\label{sec:ref:errata}
+
+What is the best way to include errata?\index{Errata}
+\Package{biblatex} offers a nice mechanism for this using the \texttt{related} field.
+For example, Ref~\cite{EXOT-2013-13} has an erratum.
+This is achieved using the following:
+\begin{verbatim}
+@Article{EXOT-2013-13,
+    author         = "{ATLAS Collaboration}",
+    title          = "{Search for new phenomena in final states ...}",
+    journal        = "Eur. Phys. J. C",
+    volume         = "75",
+    year           = "2015",
+    pages          = "299",
+    doi            = "10.1140/epjc/s10052-015-3517-3",
+    reportNumber   = "CERN-PH-EP-2014-299",
+    eprint         = "1502.01518",
+    archivePrefix  = "arXiv",
+    primaryClass   = "hep-ex",
+    related        = "EXOT-2013-13-err",
+    relatedstring  = "Erratum:",
+}
+
+@Article{EXOT-2013-13-err,
+    author         = "{ATLAS Collaboration}",
+    journal        = "Eur. Phys. J. C",
+    volume         = "75",
+    year           = "2015",
+    pages          = "408",
+    doi            = "10.1140/epjc/s10052-015-3639-7",
+    reportNumber   = "CERN-PH-EP-2014-299",
+}
+\end{verbatim}
+
+This mechanism is used in \texttt{ATLAS.bib} and will be extended to \texttt{CMS.bib} once
+I have a list of the CMS Errata.
+
+The mechanism only works if the \texttt{biber} backend is used.
+Using the standard files with the \texttt{bibtex} backend and/or traditional \BibTeX\ does not cause errors when compiling.
+However, the Errata are simply ignored.
+
+
+%------------------------------------------------------------------------------
 \section{Sources for references}
 \label{sec:ref:sources}
 %------------------------------------------------------------------------------
 
-The ZEUS collaboration kept a reasonably up-to-date list of ZEUS and
-H1 publications (as well as some others) in \BibTeX{} format. ATLAS
-also keeps such a list and I assume that other collaborations keep
-similar lists.
+ATLAS keeps a checked list of ATLAS and CMS publications in \BibTeX{} format. 
+The ZEUS collaboration also kept a reasonably up-to-date list of ZEUS and
+H1 publications (as well as some others),
+and I assume that other collaborations keep similar lists.
 
 Within experimental high energy physics the standard way to get a
 reference is to use Inspire
@@ -573,10 +626,19 @@ This and more can be done by passing the option \Option{astrobib} to \Package{ub
 In addition you have give the command\\
 \Macro{printbibliography[heading=subbibliography]} at the end of each chapter.
 The thesis skeleton contains such commands commented out.
-The command \texttt{make astro} uses a skeleton with a bilbiogrpaphy per chapter.
+The command \texttt{make astro} uses a skeleton with a bibliography per chapter.
 The option \Option{astrobib} also sets things up so that the \Package{natbib} citation
 commands \Macro{citep}, \Macro{citet} and \Macro{citealt} can be used,
 so that the citation appears as expected for astronomy publications.
+If you use \Macro{citep} and an old version of \Package{biblatex},
+you may see an extra comma between the author name and the year in parentheses.
+This can been removed by uncommenting the lines:
+\begin{verbatim}
+% \ifUBN@astrobib
+%   \renewcommand*{\nameyeardelim}{\addspace}
+% \fi
+\end{verbatim}
+in \Package{ubonn-biblatex.sty}
 
 You are nearing the end of your thesis and have to properly format all
 the references that you have. However, they are spread over several

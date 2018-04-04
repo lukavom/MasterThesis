@@ -1,24 +1,24 @@
-\documentclass[a4paper,twoside,ngerman,USenglish,UKenglish]{scrbook}
+\documentclass[ngerman, USenglish, UKenglish]{scrbook}
 %-------------------------------------------------------------------------------
 % This file contains the guide to writing theses for the
 % physics and astronomy institutes, Universität Bonn
 
 % Specify the language(s) in the class and then use babel.
-% If you need more than one language, give the defalt language last,
-% e.g. ngerman,british for a thesis in British (UK) English where you want
-% to be able to set the language to German for some part of it
+% If you need more than one language, give the default language last,
+% e.g. ngerman, UKenglish for a thesis in British (UK) English where you want
+% to be able to set the language to German for some part of it.
 
 %-------------------------------------------------------------------------------
 % Main thesis style file
-\newcommand*{\guideversion}{5.X}
-\newcommand*{\texlive}{2014}
+\newcommand*{\guideversion}{6.0}
+\newcommand*{\texlive}{2016}
 \usepackage{ifthen}
 
-% Adjustments to biblatex output are in this style file:
+% Adjustments to biblatex output are in ubonn-biblatex style file:
 \ifthenelse{\texlive < 2011} {%
-  \usepackage[biblatex=false,feynmp]{../ubonn-thesis}
+  \usepackage[shownotes, cleveref, biblatex=false, feynmp]{../ubonn-thesis}
 }{%
-  \usepackage[newtx,bibstyle=alphabetic,feynmp]{../ubonn-thesis}
+  \usepackage[shownotes, cleveref, bibstyle=alphabetic, feynmp]{../ubonn-thesis}
   \usepackage{../ubonn-biblatex}
 }
 
@@ -34,10 +34,11 @@
   \usetikzlibrary{decorations.pathmorphing}
   \usetikzlibrary{decorations.markings}
 }
+
 % Other packages needed for the guide
 \usepackage{physics}
 \usepackage{makeidx}
-\usepackage[acronym,toc,nosuper]{glossaries}
+\usepackage[acronym, toc, nosuper]{glossaries}
 \usepackage{../thesis_skel/thesis_defs}
 \usepackage{guide_defs}
 \usepackage[italic]{hepnicenames}
@@ -95,14 +96,14 @@
 \newcommand*{\thesisrefereetwo}{Prof.\ Dr.\ Anne Jones}
 % Date when thesis was submitted (Master/Diplom)
 % Year or Month, Year when thesis was submitted (PhD)
-\newcommand*{\thesissubmit}{XX.YY.2016}
-% \newcommand*{\thesissubmit}{Month 2016}
+\newcommand*{\thesissubmit}{XX.YY.2018}
+% \newcommand*{\thesissubmit}{Month 2018}
 % Date of thesis examination (PhD)
-\newcommand*{\thesispromotion}{XX.YY.2016}
+\newcommand*{\thesispromotion}{XX.YY.2018}
 % Month and year of the final printed version of the thesis
-\newcommand*{\thesismonth}{March}
-\newcommand*{\thesisyear}{2016}
-\newcommand*{\thesisnumber}{BONN-IR-2016-XXX}
+\newcommand*{\thesismonth}{January}
+\newcommand*{\thesisyear}{2018}
+\newcommand*{\thesisnumber}{BONN-IR-2018-XXX}
 
 %-------------------------------------------------------------------------------
 % The abstract is only needed for the printed version. and should be in
@@ -111,15 +112,17 @@
   \begin{otherlanguage}{UKenglish}
     This document is supposed to provide both a skeleton as well as
     some guidelines as how to format a thesis using \LaTeX\ for the
-    Department of Physics and Astronomy of the University of Bonn. The
-    recommendations should also be valid for any other department in
-    the Faculty of Mathematics and Natural Sciences. The guide
-    contains examples and recommendations on what packages to use and
-    how to use them. Title pages for PhD, Diplom, Master and Bachelor
-    theses are included. It makes no attempt to be an introduction to
-    \LaTeX. Indeed some basic \LaTeX{} knowledge is assumed. While the
-    guide is primarily geared to (particle) physics theses, it should
-    also be useful for others.
+    Department of Physics and Astronomy of the University of Bonn.
+    The recommendations should also be valid for any other department in
+    the Faculty of Mathematics and Natural Sciences.
+    The guide contains examples and recommendations on what packages to use
+    and how to use them.
+    Title pages for PhD, Diplom, Master and Bachelor
+    theses are included.
+    It makes no attempt to be an introduction to \LaTeX.
+    Indeed some basic \LaTeX{} knowledge is assumed.
+    While the guide is primarily geared to (particle) physics theses,
+    it should also be useful for others.
   \end{otherlanguage}
 }
 
@@ -206,7 +209,7 @@
 % Appendices etc.
 \appendix
 
-% \part*{Appendix}
+% \part*{Appendices}
 \include{guide_appendix}
 %\printbibliography[heading=subbibliography]
 
@@ -220,8 +223,8 @@
     \bibliographystyle{../refs/atlasBibStyleWithTitle.bst}
     %\bibliographystyle{unsrt}
     \bibliography{./guide_refs.bib,%
-      ./refs/zeus_2009,%
-      ./refs/zeus_2010,%
+      refs/zeus_2009,%
+      refs/zeus_2010,%
       ../refs/standard_refs-bibtex,./refs/example_refs-ascii}
   }
 }
@@ -247,8 +250,3 @@
 \include{guide_acknowledge2}
 
 \end{document}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:

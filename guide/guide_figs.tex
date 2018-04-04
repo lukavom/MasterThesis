@@ -1,3 +1,5 @@
+% !TeX root = thesis_guide.tex
+
 %==============================================================================
 \chapter{Figures}
 \label{sec:fig}\index{figures}
@@ -188,7 +190,7 @@ theses) you can use the \Package{wrapfig} package.
 
 
 %------------------------------------------------------------------------------
-\section{Figure Formats}
+\section{Figure formats}
 \label{sec:fig:formats}\index{figures~formats}
 %------------------------------------------------------------------------------
 
@@ -231,11 +233,14 @@ examples I give come from Andrii Verbytskyi or are adapted from
 questions and answers found on
 \url{http://tex.stackexchange.com/}. The examples included in this
 guide and a few more are collected in the \texttt{tikz}
-subdirectory. Note that some of the examples only work with \TeXLive
+subdirectory.
+If you want to get started with \TikZ you can copy this directory
+into your thesis directory, e.g.\ \File{mythesis}.\footnote{%
+Note that some of the examples only work with \TeXLive
 2011 and later. This is indicated in the file. I also did not manage
 to compile the guide without errors when including \Package{tikz} with
 \TeXLive 2009, so some of the figures may be missing if you compile
-your own version of the guide with \TeXLive 2009.
+your own version of the guide with \TeXLive 2009.}
 
 \TikZ is not included by default in a new skeleton thesis. See the
 commented out packages in a new thesis skeleton or
@@ -311,15 +316,20 @@ your thesis.
 %------------------------------------------------------------------------------
 
 You have lots of Feynman graphs you want to include, but how do you
-generate them? This is another area where most people (including me)
-have found one way to do it and never change! I use \texttt{Mn\_Fit},
-mainly because I wrote it and therefore know inside out how it
-works. Examples can be found on my web page:
+generate them? 
+Recently I have moved to a Python package \Package{PyFeyn} (\url{https://pyfeyn.hepforge.org})
+that works quite nicely.
+Before that I followed the example of many people,
+where I found one way doing it and never changed!
+I used to use \texttt{Mn\_Fit},
+mainly because I wrote it and therefore know inside out how it works.
+Examples can be found on my web page:
 \url{http://pi.physik.uni-bonn.de/~brock/feynman}.
 
 Alternatives include \Package{axodraw} and the \Package{feynmf} or
-\Package{feynmp} packages.  It is also possible to use
-\Package{tikz}. The use of \Package{feynmf} and \Package{feynmp} is
+\Package{feynmp} packages.
+It is also possible to use \Package{tikz}.
+The use of \Package{feynmf} and \Package{feynmp} is
 described in Section~\ref{sec:fig:feynman:feynmf}, while a few
 examples of usage of \Package{tikz} are given in
 Section~\ref{sec:fig:feynman:tikz}. Examples of Feynman graphs made
@@ -348,6 +358,60 @@ show a charged current process.
 
 
 %------------------------------------------------------------------------------
+\subsection{PyFeyn}
+\label{sec:fig:pyfeyn}\index{PyFeyn}
+
+As the name suggests, \Package{PyFeyn} (\url{https://pyfeyn.hepforge.org})
+is a Python package for drawing Feynman graphs.
+It combines the advantages of using a programming language to draw the graphs
+with the ability to use \LaTeX\ and the same fonts as you use in your thesis
+for the text.
+I also wanted to improve my Python skills, 
+so now use this package for my graphs.
+
+The package \Package{hepnicename} is included by \Package{PyFeyn}.
+If you want your particles to be written with italics,
+you have to add this option to \File{\_\_init\_\_.py} in the \File{pyfeyn} directory.
+
+\Package{PyFeyn} should work pretty much out of the box,
+but may need a specific version of the \Package{pyx} package.
+If you want to use the \Package{newtx} fonts, you may have to apply a patch.
+In order to install the package using Homebrew Python under MacOS, I did:
+\begin{verbatim}
+  pip(3) install PyX==0.12.1 (Python 2 needs 0.12.1)
+  pip(3) install PyFeyn
+  Stuff goes in /usr/local/lib/python2.7/site-packages/... etc.
+  To use newtx fonts had to patch pyx/dvi/vffiles.py
+  https://sourceforge.net/p/pyx/code/3678/    
+\end{verbatim}
+So far I have not tested its use with operating systems other than MacOS,
+but it should work.
+
+While functions exist to draw a number of lines, I added my own wrapper functions
+that adjust the style as I wanted.
+Have a look at \File{pyfeyn/myPyFeyn/\_\_init\_\_.py} to see what default settings I use
+to get the font and colours that I want.
+Examples of Feynman graphs drawn using the package can be found in
+\cref{fig:tZq-pyfeyn} and are included in the \File{pyfeyn} directory.
+If you want to get started with \Package{PyFeyn} you can copy this directory
+into your thesis directory, e.g.\ \File{mythesis}.
+
+\begin{figure}[htbp]
+  \centering
+  \raisebox{0ex}{%
+    \includegraphics[width=0.4\textwidth]{../pyfeyn/tZq_4FS_feyn}
+  }
+  \quad
+  \raisebox{2ex}{%
+    \includegraphics[width=0.4\textwidth]{../pyfeyn/tZq_5FS_feyn}
+  }
+  \caption{Example Feynman graphs for the associated production
+    of a top quark and a \PZ boson.}
+  \label{fig:tZq-pyfeyn}
+\end{figure}
+
+
+%------------------------------------------------------------------------------
 \subsection{FeynMF and FeynMP}
 \label{sec:fig:feynman:feynmf}\index{feynmf}\index{feynmp}
 
@@ -356,9 +420,10 @@ the commands to draw the graph in a \LaTeX{} file and then process
 this file with \LaTeX{} and either Metafont or
 Metapost.\footnote{\texttt{ubonn-thesis.sty} now includes \Package{feynmp}
   by default for \TeXLive 2011 and later. If you want to use
-  \Package{feynmf} instead just change the name.}  You can either make
+  \Package{feynmf} instead just change the name.} 
+You can either make
 a separate \LaTeX{} file containing the Feynman graph or include the
-commands inside your normal \LaTeX\ file.  Metapost\index{metafont} is
+commands inside your normal \LaTeX\ file.  Metapost\index{metapost} is
 a bit easier to use than Metafont.  You should be able to just run
 \texttt{mpost} after \texttt{(pdf)latex} and then run
 \texttt{pdflatex} again twice. Note that you have to run
@@ -376,7 +441,7 @@ I think a better way to proceed is the following:
 \begin{itemize}
 \item make a separate \LaTeX{} file for each of the Feynman graphs;
 \item input this file in your figure;
-\item use the \texttt{Makefile} described below to automatically run
+\item use the \File{Makefile} described below to automatically run
   over one or all \Package{feynmp}/\Package{feynmf} \LaTeX{} files by giving the
   command \texttt{make feynmp} or \texttt{make feynmf}.\\
   Check
@@ -386,7 +451,8 @@ I think a better way to proceed is the following:
 \item run \texttt{bibtex} or \texttt{biber};
 \item run \LaTeX{} or PDF\LaTeX{} again, at least twice.
 \end{itemize}
-The last three steps are done with the command \texttt{make thesis} or
+The last three steps are done with the command \texttt{make thesis},
+\texttt{make thesis11} or
 \texttt{make thesis09}.
 The big advantage of this procedure is that the graphs are included
 \enquote{properly} in the thesis, their fonts should automatically
@@ -395,10 +461,11 @@ converting and clipping. I have written a small script that is
 executed by the \texttt{Makefile} to do the third step.
 The script is \texttt{run\_mf} for \Package{feynmf} and
 \texttt{run\_mp} for \Package{feynmp}. These are
-included in the directory with this file.
-The scripts assume that all Feynman
-graphs are in the \texttt{feynmf} subdirectory. This can clearly be
+included in the main directory \File{ubonn-thesis}.
+The scripts assume that all Feynman graphs are in 
+a \texttt{feynmf} subdirectory. This can clearly be
 adjusted in the \texttt{Makefile} as necessary.
+To get started you can copy the \File{feynmf} directory from \File{ubonn-thesis}.
 
 The \texttt{run\_mf} script assumes that all files of type
 \texttt{tex} (except those that start with \texttt{feynmf\_}) are
@@ -429,6 +496,13 @@ Figure~\ref{fig:nccc-feynmf} shows the same neutral current and
 charged current graphs, but this time inputting the appropriate
 \Package{feynmf} commands directly. The graphs are enclosed in
 \Macro{fbox} for illustration purposes only.
+The plots are made using \Package{feynmp},
+where an appropriate
+\Macro{write18} statement is included in the \LaTeX\ source code,
+e.g.\ \verb+\write18 mpost gluon+, after the figure, where the figure
+starts with \verb+\begin{fmffile}{gluon}+.%
+\footnote{If you use \TeXstudio you may have to give the full pathname for \texttt{mpost},
+  e.g.\ \texttt{/usr/texbin/mpost}, as \TeXstudio does not parse your \texttt{PATH} properly.}
 
 \begin{figure}[htbp]
   \centering
@@ -443,18 +517,10 @@ charged current graphs, but this time inputting the appropriate
   }{
     \write18{mpost ep_cc}
   }
-  \caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
+  \caption{NC and CC graphs for \(ep\) scattering using \Package{feynmf}
     code directly.}
   \label{fig:nccc-feynmf}
 \end{figure}
-
-If you are using \Package{feynmp}, another way to do things is
-illustrated in Fig.~\ref{fig:nccc-feynmf}. Here an appropriate
-\Macro{write18} statement is included in the \LaTeX\ source code,
-e.g.\ \verb+\write18 mpost gluon+, after the figure, where the figure
-starts with \verb+\begin{fmffile}{gluon}+.%
-\footnote{If you use \TeXstudio you may have to give the full pathname for \texttt{mpost},
-  e.g.\ \texttt{/usr/texbin/mpost}, as \TeXstudio does not parse your \texttt{PATH} properly.}
 
 With the \TeXLive 2011 and later setups I use to test this guide,
 this is all you need. If \texttt{mpost} does not run automatically,
@@ -466,6 +532,8 @@ own file and the \Macro{write18} statement in the main file so that
 I can test \Package{feynmf} and \Package{feynmp} with the same
 \LaTeX\ code. In your thesis, you should probably put the
 \Macro{write18} statement in the file with the Feynman graph.
+If you use \Command{latexmk} to compile you probably need to use 
+the commented out version of the \Command{latexmk} command in the File{{Makefile}.
 
 As mentioned above, you probably want to first draw the graphs outside
 of your thesis to get them into the form that you need. If you give

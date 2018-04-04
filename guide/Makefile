@@ -3,7 +3,7 @@
 # Can also run feynmf/feynmp/tikz on files in a directory
 #
 GUIDE = thesis_guide
-# EXTRACMD = --shell-escape
+EXTRACMD = -shell-escape
 FEYNDIR = ../feynmf
 FEYNFILES = $(wildcard $(FEYNDIR)/*.tex)
 TIKZDIR = ../tikz
@@ -14,7 +14,7 @@ TIKZFILES = $(TIKZDIR)/$(file).tex
 endif
 AWKDIR=..
 
-.PHONY: guide guide09 guide11 phdsubmit \
+.PHONY: guide09 guide11 phdsubmit \
 	feynmf feynmp tikz \
 	cleanguide \
 	cleanfeynmf cleanfeynmp  cleantikz cleanpictpdf \
@@ -22,7 +22,19 @@ AWKDIR=..
 	cleanglo cleanphd \
 	help test
 
-guide: guide11
+guide: run_latexmk
+
+run_latexmk: *.tex
+	latexmk -e '$$pdflatex=q/pdflatex %O -shell-escape %S/' -pdf $(GUIDE)
+	# latexmk -pdf $(GUIDE)
+
+guide11:
+	pdflatex   $(EXTRACMD) $(GUIDE)
+	biber      $(GUIDE)
+	makeindex  $(GUIDE)
+	makeglossaries $(GUIDE)
+	pdflatex   $(EXTRACMD) $(GUIDE)
+	pdflatex   $(GUIDE)
 
 guide09:
 	pdflatex   $(EXTRACMD) $(GUIDE)
@@ -32,14 +44,6 @@ guide09:
 	makeindex  $(GUIDE)
 	makeglossaries $(GUIDE)
 	pdflatex   $(GUIDE)
-	pdflatex   $(GUIDE)
-
-guide11:
-	pdflatex   $(EXTRACMD) $(GUIDE)
-	biber      $(GUIDE)
-	makeindex  $(GUIDE)
-	makeglossaries $(GUIDE)
-	pdflatex   $(EXTRACMD) $(GUIDE)
 	pdflatex   $(GUIDE)
 
 feynmf:
@@ -66,6 +70,7 @@ cleanguide:
 	-rm $(GUIDE).lof $(GUIDE).lot $(GUIDE).out
 	-rm $(GUIDE).blg $(GUIDE).bbl $(GUIDE).pdf
 	-rm $(GUIDE)-blx.bib $(GUIDE).bcf $(GUIDE).run.xml
+	-rm $(GUIDE).fdb_latexmk .$(GUIDE).lb $(GUIDE).synctex.gz
 	-rm $(GUIDE).ind $(GUIDE).idx $(GUIDE).ilg
 	-rm $(GUIDE).acn $(GUIDE).acr $(GUIDE).alg
 	-rm $(GUIDE).glg $(GUIDE).glo $(GUIDE).gls

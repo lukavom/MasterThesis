@@ -15,6 +15,18 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
+  10 Mar 2018 & 6.0 & After a \Command{make new} the \File{mythesis} directory should now be standalone.
+    This make it easier to use Git etc.
+    Bibliography files now go in \File{bib} subdirectory.
+    Use \Command{latexmk} by default to compile.
+    Add a command \Command{make update} to update to a newer version of the style files.
+    Switch to \Package{newtx} as the default font.
+    Add a section on \enquote{Typical English mistakes}.
+    Add documentation on \Package{todonotes} and \Package{cleveref} packages.
+    Switch from \Package{scrpage2} to \Package{scrlayer-scrpage} package.
+    Add information on how to handle errata.
+    Improve bar width in \Package{heppennames} and \Package{hepnicenames}.\\
+  
   30 Jun 2016 & 5.1 & Add \Package{hepnicenames} and \Package{heppennames} packages.
     Add a bit more documentation on particle definitions.
     Added some more information and updated the guidelines on positioning of figures.
@@ -147,7 +159,7 @@ development of the \Package{pibonn-thesis} package.
   some more sources of information. Reorganise and improve a bit the
   references chapter. Reorganise information on installing a \TeX\
   setup. Move Windows XP to a separate subsection. Add a bit of
-  information for MacOSX. Add a bit of information on
+  information for MacOS. Add a bit of information on
   the \Package{subfiles} package.\\
   
   06 Mar 2012 & Add more information on formatting footnotes.\\
@@ -178,6 +190,7 @@ this guide:
 \begin{itemize}
 \item Add drawing of Feynman graphs with \Package{axodraw} and/or
   \Package{jaxodraw}.
+\item Add drawing of Feynman graphs with \Package{PyFeyn}.
 \item Add instructions on content of CV and summary for PhD thesis.
 \end{itemize}
 
@@ -220,7 +233,7 @@ thesis. All such tools allow you to define projects, which then know
 about which files should be included when compiling.
 
 \TeXstudio\index{TeXstudio} and
-\TeXmaker\index{TeXmaker} can be installed under Windows, MacOSX or
+\TeXmaker\index{TeXmaker} can be installed under Windows, MacOS or
 Linux. I have tried \TeXstudio in all three systems and it works nicely. It
 can be downloaded from \url{http://texstudio.sourceforge.net/}. Others
 report good experience with \TeXmaker (under Ubuntu).
@@ -238,6 +251,18 @@ under:  \textsf{Options} $\to$ \textsf{Configure TeXstudio} $\to$
 \enquote{BuildWithGlossary}. This executes \texttt{pdflatex, biber,
   makeindex, makeglossary, pdflatex, pdflatex}.
 
+I currently use Visual Studio Code as my editor for both
+\LaTeX\ and other programs.
+It is available for Windows, MacOS and Linux.
+The big advantage is that you have one editor for both documentation and code.
+It works quite well for writign \LaTeX,
+but assumes that you know the \LaTeX\ commands that you want to include.
+Rapid development is ongoing,
+also for the \LaTeX extension \enquote{LaTeX Workshop} that you should certainly install.
+If you have \Command{chktex} installed you should also enable it,
+as it helps you to fnd errors 
+and gives a lot of information on the quality of your \LaTeX.
+
 I used to use \texttt{emacs}\index{emacs} and AUCTeX, as I can
 then use the same editor for everything. Note that the
 RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
@@ -250,7 +275,7 @@ citations easily.
 \label{sec:app:texstudio}\index{TeXStudio}
 
 I have been using \TeXstudio as my main tool for creating \LaTeX\ documents since 2013.
-One very nice feature is that it works under MacOSX, Windows and Linux.
+One very nice feature is that it works under MacOS, Windows and Linux.
 It is fairly easy to adapt to your preferences.
 Additional keyboard shortcuts can be added and the editor can be customised.
 I usually change the \texttt{TAB} behaviour so that spaces rather than TABs are inserted.
@@ -294,8 +319,8 @@ Kile, but it should be possible to do it in the same way as you add a
 
 
 %------------------------------------------------------------------------------
-\section{MacOSX}
-\label{sec:app:mac}\index{MacOSX}
+\section{MacOS}
+\label{sec:app:mac}\index{MacOS}
 %------------------------------------------------------------------------------
 
 For the past year, I have been installing and running \LaTeX\ on a MacBook Pro.
@@ -308,7 +333,7 @@ that you can download from \url{http://www.tug.org/mactex/}.
 The Dante \TeX\ Collection DVD also includes Mac\TeX, which is what the \TeX Shop web page
 recommends as the best combination to install.
 
-As discussed above, there are MacOSX versions of \TeXstudio and \TeXmaker which you can try.
+As discussed above, there are MacOS versions of \TeXstudio and \TeXmaker which you can try.
 I have been using \TeXstudio.
 
 
@@ -737,6 +762,28 @@ then you should include \Package{glossaries} with the option \Option{nosuper}
 to avoid it loading \Package{supertabular}.
 Use styles with a \texttt{long} rather than a \texttt{super} variant if you want such features.
 
+If you have a glossary and want it to compile it using \Command{latexmk}
+you should add the following
+lines to \File{~/.latexmkrc} or to \File{~/.config/latexmk/latexmkrc}:\footnote{%
+I got this information from \url{https://tex.stackexchange.com/questions/1226/how-to-make-latexmk-use-makeglossaries}}
+\begin{verbatim}
+  add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
+  add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');
+  
+  sub run_makeglossaries {
+    if ( $silent ) {
+      system "makeglossaries -q '$_[0]'";
+    }
+    else {
+      system "makeglossaries '$_[0]'";
+    };
+  }
+  
+  push @generated_exts, 'glo', 'gls', 'glg';
+  push @generated_exts, 'acn', 'acr', 'alg';
+  $clean_ext .= ' %R.ist %R.xdy';
+\end{verbatim}
+
 I illustrate the use with the standard description of the ZEUS
 detector, which includes the abbreviations that are used in the rest
 of a ZEUS paper.  As a first step you define the terms for the
@@ -1079,7 +1126,7 @@ you have specified the page size appropriately as discussed above.
 %------------------------------------------------------------------------------
 \subsection{Windows XP}
 
-As I know longer have access to a Windows XP machine, and Windows XP is
+As I no longer have access to a Windows XP machine, and Windows XP is
 slowly disappearing, my experience with Windows XP stopped 2011.
 
 I started the \TeX{} Collection 2010 DVD. I started it as an

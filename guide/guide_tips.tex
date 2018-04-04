@@ -10,8 +10,10 @@
 Over time I have collected quite a lengthy list of things you should
 \enquote{Do} and \enquote{Not Do} (at least in my head) that I think
 it is useful to write down early in the document, so that you may
-actually read them!  In this chapter I will first tell you how to get
+actually read them!  In this chapter I first tell you how to get
 and use the style file and then give some tips.
+I have also started to add a list of common English mistakes,
+especially those made by German speakers!
 
 %------------------------------------------------------------------------------
 \section{How to use the \Package{ubonn-thesis} style}
@@ -74,7 +76,17 @@ make thesis
 If your version of \TeXLive is older than 2011, use the command \enquote{\texttt{make new09}}
 followed by \enquote{\texttt{make thesis09}}
 or \enquote{\texttt{make thesis BIBTEX=bibtex}}.
-See Section~\ref{sec:tips:options} for a list of the options that can be passed to the package.
+See \cref{sec:tips:options} for a list of the options that can be passed to the package.
+
+As of version 6.0, \Command{make thesis} uses the \Command{latexmk}\index{latexmk} command for compilation.
+\Command{latexmk} looks at your logfile and decides how many times \Command{pdflatex} etc.
+have to be run.
+If you use \Package{feynmf} or \Package{feynmp} you should use the commented out version
+of the \Command{LATEXMK} variable that includes the \Option{-shell-escape} option.\footnote{%
+  I got this information from \url{https://tex.stackexchange.com/questions/374160/how-to-have-latexmk-always-use-shell-escape}.}
+For details on how to compile a glossary with \Command{latexmk} see \cref{sec:app:glossary}.
+If for some reason \Command{latexmk} does not work you can use the command
+\Command{make thesis11} instead.
 
 My original idea was that the style file should work for all recent
 \TeX\ installations.  However, some of the packages I recommend have
@@ -100,6 +112,7 @@ you can look for differences between the new style file and the one
 you have. It also implies that if you want the update to have an
 effect on your thesis you should copy the \texttt{Makefile} and
 \texttt{ubonn-thesis.sty} into the directory with your thesis.
+For more details see \cref{sec:tips:update}.
 
 As of version~4.0 of the package, you specify the type of thesis and the stage as options
 to the \Macro{documentclass} or to the \Package{ubonn-thesis} package.
@@ -146,14 +159,14 @@ The following stages exist:
 %\end{description}
 %This extra cover should not be included for the version of the PhD
 %thesis that is submitted to the university library (ULB).
-See Chapter~\ref{sec:submit} for some more details about thesis submission.
+See \cref{sec:submit} for some more details about thesis submission.
 
 If you are not a member of the
 \foreignquote{ngerman}{Physikalisches Institut} you should
 also change \Macro{InstituteName}, \Macro{inInstitute} and
 \Macro{InstituteAddress}. The style file \texttt{ubonn-thesis.sty}
 already contains the appropriate definitions for PI, HISKP, IAP and
-AIFA.
+AIfA.
 
 All packages that are needed should be part of your \TeX\
 installation. If not you may have to install them or ask your system
@@ -213,13 +226,14 @@ The following options exist:\\
   texlive & 2014 & Specify the \TeXLive version.
     You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
   siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
-  eVkern & false & Apply a kern of -0.1em to \si{\eV} in order to move \enquote{e} and \enquote{V} closer together.\\
+  eVkern & false & Apply a kern of -0.1em to \si{\eV} in order to move \enquote{e} and \enquote{V} closer together.
+  This is not necessary if you use the \Package{newtx} font package.\\
+  dcolumn & true & A package for helping to align things in tables.\\
   physics & false & Useful mathematical constructions for physics.\\
   hepparticles & true & Standardised names and formatting for particle physics.
     This loads \Package{hepnicenames} and \Package{heppennames}.\\
   hepitalic & true & Use italics rather than upright letters for particles.\\
   mhchem & true & A nice package for chemical elements and processes.\\
-  dcolumn & true & A package for helping to align things in tables.\\
   feynmf & false & Include the \Package{feynmf} package for Feynman graphs.\\
   feynmp & false & Include the \Package{feynmp} package for Feynman graphs.\\
   subcaption & true & A package for making sub-figures (and sub-tables) and captions for them.\\
@@ -228,18 +242,23 @@ The following options exist:\\
   xtab & true & A package for tables that are longer than one page.\\
   longtable & false &  Another package for tables that are longer than one page.\\
   supertabular & false &  Another package for tables that are longer than one page.\\
-  newtx & false & Use the \Package{newtx} font packages (newer version of \Package{txfonts}).\\
-  txfonts & true & Use a Times-Roman-like font.\\
+  newtx & true & Use the \Package{newtx} font packages (newer version of \Package{txfonts}).\\
+  txfonts & false & Use a Times-Roman-like font.\\
   palatino & false & Use a combination of Palatino, Courier and Helvetica fonts.\\
   titlesec & false & Use the \Package{titlesec} package for formatting chapter titles.\\
   floatopt & true & Adjust settings that control the number and placement of floats.\\
   biblatex & true & Include \Package{biblatex}.\\
   astrobib & false & Adjust \Package{biblatex} options to conform to the usual astronomy style.\\
-  backend & biber & Specify the backend to use.
+  todonotes & false & Turn on use of the \Package{todonotes} package and define \Macro{mynote}.\\
+  shownotes & false & Show the ToDo notes (also turns on \Option{todonotes}).\\
+  cleveref & false & Turn on use of the \Package{cleveref} package.\\
+  clevercaps & true & Capitalise Fig., Table etc.\\
+  backend & biber & Specify the backend to use for \Package{biblatex}.
     Possibilities are \Option{biber}, \Option{bibtex} or \Option{bibtex8}.\\
   backref & true & The bibliography lists where the reference is cited.
     This option is very useful when writing your thesis,
     but should probably be turned off for the final version.\\
+  bibencoding & & Set the encoding for the bibliography (usually not needed).\\
   bibstyle & numeric-comp & Specify the style to use for the references. 
     Standard values are \Option{numeric-comp} or \Option{alphabetic}.\\
 \end{xtabular}
@@ -251,7 +270,8 @@ Depending on the font you use, you may find that the \enquote{e} and \enquote{V}
 are too far apart.
 You can pass the option \Option{eVkern} to \Package{ubonn-thesis} in order to move them 0.1em closer together.\footnote{%
 This option has no effect for \TeX\ Live 2011 and older, as \Package{siunitx}
-adjusted the spacing internally using the parameter \Option{eVcorra}.}
+adjusted the spacing internally using the parameter \Option{eVcorra}.
+It is not needed if you use the \Package{newtx} font package.}
 
 
 %------------------------------------------------------------------------------
@@ -287,9 +307,9 @@ adjusted the spacing internally using the parameter \Option{eVcorra}.}
   is a superior replacement of \Package{SIunits}. I used to
   use \Package{SIunits}, or rather \Package{hepunits} which is
   built on top of \Package{SIunits}, and defines common particle
-  physics units such as \si{\GeV}. Use of these packages will be
-  discussed in Section~\ref{sec:tips:units}. An alternative is the
-  \Package{units} package.
+  physics units such as \si{\GeV}. Use of these packages is
+  discussed in \cref{sec:tips:units}.
+  An alternative is the \Package{units} package.
 
 \item Define any complicated symbols once you use them more than
   once:
@@ -320,7 +340,7 @@ adjusted the spacing internally using the parameter \Option{eVcorra}.}
   because the
   \Macro{sisetup}\texttt{\{detect-family=true\}}\footnote{\Option{obeyall}
     in \TeXLive 2009.} option is set in \texttt{ubonn-thesis.sty}
-  (see Section~\ref{sec:tips:siunitx}).  I used the option
+  (see \cref{sec:tips:siunitx}).  I used the option
   \Option{detect-family=false}\footnote{\Option{obeyfamily=false} in \TeXLive
     2009.} for the \Macro{SI} command in the 2nd expression.
   In the first expression I use \Macro{text} for \enquote{jet}, while
@@ -331,7 +351,7 @@ adjusted the spacing internally using the parameter \Option{eVcorra}.}
   like to use a symbol both in text mode and in math mode. Without
   \Macro{xspace} you have to make sure that you end every symbol with
   \texttt{\textbackslash} or \texttt{\{\}}, otherwise the space is used
-  to signify the end of the symbol, e.g. in \LaTeX we have to pay
+  to signify the end of the symbol, e.g.\ in \LaTeX we have to pay
   attention otherwise the symbol and the next word run together.
 
 \item Decide how you want to write abbreviations for particles and
@@ -343,7 +363,7 @@ adjusted the spacing internally using the parameter \Option{eVcorra}.}
     so it is sufficient to include \Package{hepnicenames} to be able to use both sets of definitions.}
   These packages have many predefined particles and a standard convention for naming.
   It is easy to add further definitions.
-  See Section~\ref{sec:tips:hepparticles} for some more details on how to write particles
+  See \cref{sec:tips:hepparticles} for some more details on how to write particles
   that are relevant for particle physics.
 
 \item Decide how you want to write coordinate axes\index{coordinates}
@@ -367,8 +387,9 @@ adjusted the spacing internally using the parameter \Option{eVcorra}.}
     (and in \texttt{ubonn-thesis.sty})
     \foreignquote{USenglish}{American (US) quotes} are used even if you
     write in British (UK) English.})  you are writing your thesis in. You
-  can also see in the Chapter~\ref{sec:intro} how this works, even
+  can also see in the \cref{sec:intro} how this works, even
   when switching languages inside a paragraph.
+  
 \item Use sizes that depend on the font size, \texttt{em}\index{em}
   (width of \enquote{M}) and \texttt{ex}\index{ex} (height of \enquote{x}), for
   spacing that should change with the text size. Use absolute sizes
@@ -376,6 +397,7 @@ adjusted the spacing internally using the parameter \Option{eVcorra}.}
   pages, boxes, etc. \Macro{quad} and
   \Macro{qquad} are also useful sizes in tables and
   equations.
+  
 \item Add a \textbackslash{} (or \{\}) after abbreviations that end with a full
   stop such as e.g.\ if followed directly by text. If you do not, an
   end of sentence space is added rather than a normal interword
@@ -386,14 +408,23 @@ adjusted the spacing internally using the parameter \Option{eVcorra}.}
   where \textbackslash{} was included in the second version. In this
   example the difference is small. However, if \LaTeX{} increases the
   spacing between words to fill a line the effect is more obvious.
+
+\item If a capital letter ends a sentence you should add the
+  command \Macro{@} before the full stop, e.g.\
+  \verb|\ldots as discussed in the chapter on QCD\@.| 
+  which produces \ldots as discussed in the chapter on QCD\@.
+  This is necessary, as otherwise only an interword space is used 
+  before the next sentence.
+
 \item Ask someone (me) if you cannot easily find out how to solve
-  formatting problems. I recently saw a thesis in German, where the
+  formatting problems. I once saw a thesis in German, where the
   author wanted to use commas instead of full stops in numbers and
   wrote numbers as \verb+$2,\!47$+ to produce $2,\!47$ instead of
   $2,47$. There are usually much better solutions, e.g.\
   \verb+\num{2.47}+ with the \Package{siunitx} package produces
   \num{2.47} in English and \foreignlanguage{ngerman}{\num{2.47}} in
   German. In the end such solutions will save you time!
+
 \item Use punctuation in equations and \enquote{\dif}, i.e.\ \Macro{dif} for
   derivatives,\index{derivative} e.g.
   \begin{equation*}
@@ -403,6 +434,7 @@ adjusted the spacing internally using the parameter \Option{eVcorra}.}
   to put some spacing in by hand -- normally you should leave this to \TeX.
   Note that the \Package{physics} package provides the command \verb|\dd{x}|,
   which does the spacing for you.
+  
 \item Pay attention to the alignment of numbers in
   tables. \Package{siunitx} provides the \Option{S} column specifier to
   help with this. Packages such as \Package{dcolumn} also provide assistance.
@@ -413,15 +445,20 @@ integrated environment for editing and compiling your thesis.
 If you are on a Mac or under Windows you probably get TEXshop or
 \TeXLive by default. 
 \TeXstudio is based on \TeXmaker and is available for Linux,
-Windows and MacOSX. It is now my standard environment under all systems!
+Windows and MacOS\@.
+It is my preferred \LaTeX\ environment under all systems!
+I often use the \texttt{Visual Studio Code} editor instead.
+The main reason for this is so that I can use the same program
+for editing scripts, e.g.\ a \File{Makefile} as I use for \LaTeX\ code.
 Under Linux you can also use Kile\index{kile} or the way I used to work
 was to use \texttt{emacs}\index{emacs} and AUCTeX.
 Note that the RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
 tools for finding cross-references and the names of citations easily.
 
 One advantage of such environments is that it is usually
-possible to switch between a position output and the relevant place in
-the source code and vice versa. This makes it much quicker to fix
+possible to switch between a position in your output file
+and the relevant place in the source code and vice versa.
+This makes it much quicker to fix
 things when you spot an error in your output PDF file. You can usually
 also step through the errors when you try to compile your file and fix
 them directly. In addition, they know which environments and
@@ -429,11 +466,11 @@ mathematical symbols exist, which can speed things up if you have not
 been working with \LaTeX\ for the past 20 years!
 
 More details on installing \TeX\ for different systems can be found
-in Appendix~\ref{sec:app:tex}.
+in \cref{sec:app:tex}.
 
 
 %------------------------------------------------------------------------------
-\section{Do Not}
+\section{Do not}
 \label{sec:tips:dont}
 %------------------------------------------------------------------------------
 
@@ -448,6 +485,7 @@ in Appendix~\ref{sec:app:tex}.
   where E is the energy of the particle and m is its mass}, i.e.\ $E$
   and $m$ are in math mode in the equation, but in text mode in the
   text where they are explained.
+  
 \item Do not start a new paragraph when describing the elements in an equation.
   The equation above is described correctly. Wrong would be:
   The most famous equation in the world is:
@@ -456,9 +494,12 @@ in Appendix~\ref{sec:app:tex}.
     E = m c^{2}
   \end{equation}
   
-  where $E$ is the energy of the particle and $m$ is its mass.
+  \hspace*{1em}where $E$ is the energy of the particle and $m$ is its mass.
   Using the paragraph options of this guide, you add extra space.
   If your paragraphs are indented, \enquote{where} would also be indented.
+  
+  If you want to leave a blank line in your \LaTeX\ file for clarity,
+  you should make it a comment line, i.e.\ \enquote{\%}.
   
 \item Another example of how not to write things is something like
   \enquote{The scale factor, SF, used to correct the MC is determined in
@@ -479,7 +520,7 @@ in Appendix~\ref{sec:app:tex}.
   \begin{verbatim}
   Class scrartcl Warning: Usage of deprecated font command `\sc'!
   (scrartcl)              You should note, that in 1994 font command `\sc' has
-  (scrartcl)              been defined for compatiblitiy to Script 2.0 only.
+  (scrartcl)              been defined for compatibility to Script 2.0 only.
   (scrartcl)              Now, after two decades of LaTeX2e and NFSS2, you
   (scrartcl)              shouldn't use such commands any longer and within
   (scrartcl)              KOMA-Script usage of `\sc' is definitely deprecated.
@@ -490,7 +531,7 @@ in Appendix~\ref{sec:app:tex}.
   (scrartcl)              But for now, KOMA-Script will replace deprecated `\sc'
   (scrartcl)              by `\normalfont \scshape ' on input line 94.
   \end{verbatim}
-  If you have \TeXLive 2016, you will find that KOMA-Script has gone ahead with its threat 
+  If you have \TeXLive 2016 or later, you will find that KOMA-Script has gone ahead with its threat 
   and \Macro{sc} etc.\ now give errors and compilation stops!
   Instead you should use \Macro{textsc} etc.
   You should also use \verb|\mathcal{L}| instead of \verb|{\cal L}|.
@@ -524,7 +565,7 @@ in Appendix~\ref{sec:app:tex}.
 \label{sec:tips:units}\index{units}
 %------------------------------------------------------------------------------
 
-As just mentioned above, but I'll say it again just to make the point,
+As mentioned above, but I'll say it again just to make the point,
 one of my pet hates is inconsistent and poor typesetting and spacing
 of units. At least three standard packages exist to solve this
 problem: \Package{siunitx}, \Package{SIunits} and \Package{units}. My
@@ -549,10 +590,11 @@ macros \Macro{SI} and \Macro{num} rather than \Macro{unit}.
 \label{sec:tips:siunitx}\index{siunitx}
 
 This package is a more modern and complete package than either
-\Package{SIunits} or \Package{units}. As the package is rather new it
-is also still developing. There are quite a few changes from version 1
+\Package{SIunits} or \Package{units}.
+% As the package is rather new it is also still developing.
+There were quite a few changes from version 1
 (\TeXLive 2009)\index{TeXLive@\TeXLive!2009} to version 2 (\TeXLive
-2011 or later)\index{TeXLive@\TeXLive!2011} which means that several of the
+2011 or later)\index{TeXLive@\TeXLive!2011}, which means that several of the
 examples I include here have somewhat different syntaxes depending on
 which version of \TeXLive is being used to compile this guide. If you
 use \TeXLive 2011 or later, but want to use units which were available in
@@ -589,7 +631,7 @@ numbers in a single way and then a full stop or a comma will be used
 as the decimal point, depending on which language you set for your
 document. This means that computer generated decimal numbers can be
 output with commas in a German thesis just by changing the language of
-your thesis -- this for me is \LaTeX{} at its best! For example,
+your thesis --- this for me is \LaTeX{} at its best! For example,
 writing \verb+\num{1.2345E-3}+ produces \num{1.2345E-3} in the default
 language of the document and
 \foreignlanguage{ngerman}{\num{1.2345E-3}} if I say that this piece of
@@ -631,12 +673,16 @@ with \Option{per-mode=symbol}\footnote{%
 \end{itemize}
 You use \enquote{.} or \enquote{,} to make a space between the units,
 as illustrated in the last bullet.
-Angles are also very straightforward -- just use \Macro{ang} as in
+Angles are also very straightforward --- just use \Macro{ang} as in
 \ang{90}.
+
+If you want to write something like \SI[parse-numbers=false]{90(99)}{\%},
+include the option \Option{parse-numbers=false} with the \Macro{SI} command,
+so that it does not try to interpret \num[parse-numbers=false]{90(99)}.
 
 If you also want to use \Package{siunitx} in slides, where one usually
 uses a sans serif font, you may at first be disappointed that
-\Package{siunitx} uses a serif font for the units! DO not despair!
+\Package{siunitx} uses a serif font for the units! Do not despair!
 You can use the command
 \Macro{sisetup}\texttt{\{detect-family=true\}}\footnote{\Option{obeyall}
   in \TeXLive 2009.} to ensure that the package uses the current font
@@ -645,7 +691,7 @@ You can use the command
 Have a look at the manual, \texttt{texdoc siunitx}, for many more
 examples. \Package{siunitx} also contains useful and powerful tools
 for typesetting tables and as mentioned above can be used to round
-numbers. These aspects are discussed in Chapter~\ref{sec:table}.
+numbers. These aspects are discussed in \cref{sec:table}.
 
 Note that the \Macro{clight} symbol that is used in the macro
 \Macro{MeVovercsq} to produce \si{\MeVovercsq} is defined as $c_{0}$ in
@@ -725,7 +771,7 @@ they were.
 
 Note that \Package{SIunits} typesets the value in text mode and the
 unit in math mode. You only have to worry about this if you want to
-use math mode symbols e.g. $10^{8}$ in the value. Three different ways
+use math mode symbols e.g.\ $10^{8}$ in the value. Three different ways
 of writing the velocity of light are:
 \begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
 \item $c$ is \verb+\unit{$3 \cdot 10^{8}$}{\metre\per\second}+
@@ -739,8 +785,9 @@ of writing the velocity of light are:
   \end{equation*}
 \end{verbatim}
 \end{itemize}
-Note the difference in spacing in the examples. The first
-example gives the best result. Two different ways of handling the value
+If you try these examples you will see differences in the spacing.
+The first example gives the best result.
+Two different ways of handling the value
 are used in the second and third examples, either without or with space between
 the number and \verb+$\cdot$+. In the fourth example, where you use
 \Macro{unit} in math mode, you still need to enclose the value in
@@ -778,10 +825,10 @@ If you compile the guide
 with a different font and the numbers $1234.56$ and 1234.56 look the
 same then you do not have to worry! 
 Recent versions of this guide contain a Palatino font combination that works in both
-text and math mode -- see the style file.
+text and math mode --- see the style file.
 There are other ways to get around the problem with Palatino. 
 You can try either the \Package{pxfonts} or the
-\Package{mathpazo} packages -- for my taste the sans serif font used
+\Package{mathpazo} packages --- for my taste the sans serif font used
 in \Package{pxfonts} looks a bit better.
 
 
@@ -791,7 +838,7 @@ in \Package{pxfonts} looks a bit better.
 %------------------------------------------------------------------------------
 
 At some point the CERN Computer Newsletter claimed that all particles should be written
-upright, e.g. $\text{Z}$ boson, $\text{b}$ quark.
+upright, e.g.\ $\text{Z}$ boson, $\text{b}$ quark.
 However, nowadays it seems to be much more common to use italics.
 This is also how the particles are written in the PDG.
 While ATLAS usually uses italics, CMS (and the CERN Courier) use upright letters.
@@ -827,8 +874,10 @@ while \Package{heppennames} is more complete.
   \Macro{PBzero}\Macro{APBzero} produces \PBzero\APBzero.
 \end{description}
 
+You can use commands like \Macro{HepParticle} to define particles that are missing.
+There are also macros for antiparticles and supersymmetric psrticles.
 If you define particles yourself,
-I would therefore recommend one of the following definitions:
+I would recommend one of the following definitions:
 \begin{verbatim}
 \newcommand*{\Zo}{\ensuremath{Z}\xspace}
 \newcommand*{\Zo}{\ensuremath{\text{Z}}\xspace}
@@ -866,7 +915,7 @@ i.e.\ shift of \enquote{V} closer to \enquote{e} by 0.1em, which you can turn on
 \Package{xspace} is great, but how do you write $B^{0}\bar{B}^{0}$ when
 you have defined the symbols \Macro{Bo} and \Macro{Bobar} with
 \Macro{xspace} at the end. Here you need \verb+{}+ between the two
-commands, e.g. \verb+\Bo{}\Bobar+ produces \Bo{}\Bobar while
+commands, e.g.\ \verb+\Bo{}\Bobar+ produces \Bo{}\Bobar while
 \verb+\Bo\Bobar+ produces \Bo\Bobar.
 
 How should you write \enquote{between $10^{4}$ and $10^{5}$}?\index{range}
@@ -941,8 +990,63 @@ An alternative solution is to add the command\\
 \verb|\def\bfseries{\fontseries\bfdefault\selectfont\boldmath}|.
 As of version 3.0 of \Package{ubonn-thesis} this command is included,
 so \Macro{boldmath} should no longer be needed.
-An illustration of how this works is given in Appendix~\ref{sec:emc2}.
+An illustration of how this works is given in \cref{sec:emc2}.
 
+
+%------------------------------------------------------------------------------
+\section{Common English mistakes}
+\label{sec:tips:english}\index{English mistakes}
+%------------------------------------------------------------------------------
+
+Several constructs are often used by German (and other non-native) speakers
+that are not grammatically correct in English.
+Additions to the list are welcome.
+These are the ones I remember coming across so far:
+\begin{itemize}
+\item \enquote{He has been living here since five years.}
+  Correct: \enquote{\emph{He has been living here for five years.}}
+  An example of the correct use of \enquote{since}:
+  \enquote{Since becoming ATLAS spokesperson he has implemented \ldots.}
+\item \enquote{This allows to measure $m_{\PH}$ very accurately.}
+  Correct: \enquote{\emph{This allows $m_{\PH}$ to be measured very accurately.}}
+\item \enquote{The table contains lots of informations.}
+  Correct: \enquote{The table contains a lot of information.}
+\item \enquote{The table contains a lot of information, that is redundant.}
+  Correct: \enquote{\emph{The table contains a lot of information that is redundant.}}
+  You do not need a comma before \enquote{that} in English.
+\item \enquote{The main topics to discuss include: Building a new detector; \ldots}
+  Correct: \enquote{\emph{The main topics to discuss include: building a new detector; \ldots}}
+  Do not capitalise the word after a colon.
+\item \enquote{less} and \enquote{fewer}: use \enquote{fewer} for things that you can count and
+  \enquote{less} for things you cannot count: \enquote{less energy} and \enquote{fewer jets}.
+\item \enquote{The interaction occurs with a highly energetic hadron.}
+  Correct: \enquote{\emph{The interaction occurs with a high energy hadron.}}
+  One could argue that: \enquote{\emph{The interaction occurs with a high-energy hadron.}}
+  is even better, as it makes clear that \enquote{high} is describing the energy of the hadron.
+\item \enquote{Energy is measured in the hadronic calorimeter.}
+  Correct: \enquote{Energy is measured in the hadron calorimeter.}
+  This is somewhat controversial. There are in fact ATLAS publication that use the term \enquote{hadronic calorimeter}.
+\item \enquote{We are not sensible to this effect.}
+  Correct: \enquote{\emph{We are not sensitive to this effect.}}
+\item \enquote{We have to choose between Xenon (Xe)  and Argon (Ar).}
+  Correct: \enquote{\emph{We have to choose between xenon (Xe) and argon (Ar).}}
+\item \enquote{We loose \SI{50}{\%} of the signal due to this cut.}
+  Correct: \enquote{\emph{We lose \SI{50}{\%} of the signal due to this cut.}}
+\end{itemize}
+
+One further important point: decide early on if you are going to write your thesis in American or British English.
+Typical American spellings include: flavor, color, hadronize.
+The British English spellings are: flavour, colour, hadronise.
+Choose one or the other and do not mix them.
+Note that the conventions on punctuation and where references appear relative to punctuation
+are different in American and British English.
+
+You should also decide how to capitalise your chapter and section headings.
+You can either capitalise just the first word (and proper names and acronyms),
+or every important word.
+Most journals have moved to the first option,
+but there are some that use the latter (most notably APS journals).
+Both are fine --- just be consistent!
 
 %------------------------------------------------------------------------------
 \section{Line numbering}
@@ -955,7 +1059,7 @@ occasionally has some problems, I thought I would include some
 information here.
 
 \Package{lineno} is the package to use to get line numbers in your text,
-but sometimes a block of lines is not numbered - see Fig.~\ref{fig:lineno}a.
+but sometimes a block of lines is not numbered - see \cref{fig:lineno}a.
 
 \begin{figure}[htbp]
   \centering
@@ -991,7 +1095,7 @@ $\mathcal{A}_{q}$ is the acceptance and $N_{q}^{\text{rec,Data}}$ the
 number of reconstructed heavy-quark jets in data, which was determined
 \end{verbatim}
 \noindent
-Then the line numbering will be correct, see Fig.~\ref{fig:lineno}b.
+Then the line numbering will be correct, see \cref{fig:lineno}b.
 
 
 %------------------------------------------------------------------------------
@@ -999,29 +1103,39 @@ Then the line numbering will be correct, see Fig.~\ref{fig:lineno}b.
 \label{sec:tips:update}\index{upadting}\index{ubonn-thesis!updating}
 %------------------------------------------------------------------------------
 
-What is the best way to update \Package{ubonn-thesis}? If you are
-using Git, then you just need to do an \texttt{git pull}. If you use
-a tar file, then you should unpack it and copy over your
-\texttt{mythesis} directory tree and any other files you need to the new tree.
-
-Note that when you make a new thesis skeleton (as of version 2.1) the files
+When you make a new thesis skeleton (as of version 2.1) the files
 \texttt{thesis\_skel/Makefile} and \texttt{ubonn-thesis.sty} 
 (and \texttt{ubonn-biblatex.sty}) are copied
-to your \texttt{mythesis} directory. If you want to profit from
-updates to one of these files, you therefore need to copy the new
-version into \texttt{mythesis} again. The advantage of this scheme is
+to your \texttt{mythesis} directory.
+As of version 6.0, your \File{mythesis} directory should be completely standalone
+and does not rely on any files in the parent directory.
+If you want to profit from updates to \Package{ubonn-thesis},
+you therefore need to copy the new version into \texttt{mythesis} again.
+The advantage of this scheme is
 that you can easily check what the differences are before you do the
 copy. More importantly, if you have made your own changes to the style
 file, it should be relatively easy to merge the two versions. Having
 all files in the \texttt{mythesis} subdirectory also makes it much easier
 for you to use your own version manager for your thesis.
 
+What is therefore the best way to update \Package{ubonn-thesis}?
+If you are using Git, then you first need to do a \Command{git pull}
+in the \File{ubonn-thesis} directory.
+If you use a tar file, then you should unpack it and copy over your
+\texttt{mythesis} directory tree to the new \File{ubonn-thesis} tree.
+As of version 6.0, you can then use a command like
+\Command{make update THESIS=mythesis} to copy the style files,
+the \File{Makefile}, the bib file with the standard references and the covers to your
+\File{mythesis} directory.
+You will be asked before existing files are overwritten.
+If you overwrite the \File{Makefile} make sure you update the value of \Command{THESIS} afterwards.
+
 As a side remark, I would also recommend that you put all Feynman
 graphs etc.\ in subdirectories of \texttt{mythesis}. You may have to
 change some variables that are set at the beginning of the
 \texttt{Makefile} so that this works if you use \Package{feynmf}. If
-you use \Package{feynmp} just add \Macro{write18} statements. See
-Section~\ref{sec:fig:feynman} for some more details.
+you use \Package{feynmp} just add \Macro{write18} statements.
+See \cref{sec:fig:feynman} for some more details.
 
 
 %%% Local Variables:

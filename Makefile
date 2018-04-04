@@ -1,37 +1,48 @@
-#
 # Makefile to create a new thesis skeleton
 # Can also run feynmf/feynmp/tikz on files in a directory
 #
+# Note that "make update" can overwrite this file
+
 THESIS  = mythesis
-TEXLIVE = 2014
+TEXLIVE = 2016
 TEXOLD = 2009
 # EXTRACMD = --shell-escape
 ifndef FEYNDIR
-FEYNDIR = ./feynmf
+FEYNDIR = feynmf
 endif
 ifndef FEYNFILES
 FEYNFILES = $(wildcard $(FEYNDIR)/*.tex)
 endif
 ifndef TIKZDIR
-TIKZDIR = ./tikz
+TIKZDIR = tikz
+endif
+ifndef PYFEYNDIR
+PYFEYNDIR = pyfeyn
 endif
 ifndef TIKZFILES
 TIKZFILES = $(wildcard $(TIKZDIR)/*.tex)
 endif
+ifndef PYFEYNFILES
+PYFEYNFILES = $(wildcard $(PYFEYNDIR)/*.py)
+endif
 ifdef file
 FEYNFILES = $(FEYNDIR)/$(file).tex
 TIKZFILES = $(TIKZDIR)/$(file).tex
+PYFEYNFILES = $(PYFEYNDIR)/$(file).py
 endif
 ifndef AWKDIR
 AWKDIR = .
 endif
 ifndef MPOSTDIR
-MPOSTDIR = ./mpost_tmp
+MPOSTDIR = mpost_tmp
 endif
+LATEXMK = latexmk -pdf
+# LATEXMK = latexmk -e '$$pdflatex=q/pdflatex %O -shell-escape %S/' -pdf $(GUIDE)
+
 
 .PHONY: skelcopy \
-	feynmf feynmp tikz \
-	cleanfeynmf cleanfeynmp cleantikz cleanpictpdf \
+	feynmf feynmp tikz pyfeyn \
+	cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpictpdf \
 	help test
 
 # New thesis
@@ -41,8 +52,8 @@ new: skelcopy
 
 # New thesis with astrophysics style of references
 astro: skelcopy
-	#cp thesis_skel/thesis_astro_skel.tex  $(THESIS)/$(THESIS).tex
 	sed 's/texlive=2014/texlive=$(TEXLIVE)/' thesis_skel/thesis_astro_skel.tex > $(THESIS)/$(THESIS).tex
+	cp thesis_skel/thesis_astro_intro.tex  $(THESIS)/thesis_intro.tex
 
 # New thesis with old version of TeX Live
 new09: skelcopy
@@ -51,8 +62,8 @@ new09: skelcopy
 
 skelcopy:
 	mkdir $(THESIS)
+	mkdir $(THESIS)/bib
 	cp thesis_skel/thesis_defs.sty        $(THESIS)/
-	cp thesis_skel/thesis_refs.bib        $(THESIS)/
 	cp thesis_skel/thesis_intro.tex       $(THESIS)/
 	cp thesis_skel/thesis_appendix.tex    $(THESIS)/
 	cp thesis_skel/thesis_acknowledge.tex $(THESIS)/
@@ -61,6 +72,16 @@ skelcopy:
 	cp ubonn-thesis.sty                   $(THESIS)/
 	cp ubonn-biblatex.sty                 $(THESIS)/
 	cp thesis_skel/Makefile               $(THESIS)/
+	cp thesis_skel/thesis_refs.bib        $(THESIS)/bib/
+	cp refs/standard_refs-biber.bib       $(THESIS)/bib/
+	cp -R figs/cover                      $(THESIS)/
+
+update:
+	-cp -i ubonn-thesis.sty                $(THESIS)/
+	-cp -i ubonn-biblatex.sty              $(THESIS)/
+	-cp -i thesis_skel/Makefile            $(THESIS)/
+	-cp -i refs/standard_refs-biber.bib    $(THESIS)/bib/
+	-cp -i -R figs/cover                   $(THESIS)/
 
 feynmf: $(FEYNFILES)
 	@echo "Feymf Feynman graph files: $^"
@@ -81,6 +102,10 @@ tikz: $(TIKZFILES)
 	@echo "TikZ Feynman graph files: $^"
 	(cd $(TIKZDIR); $(foreach tikzfile, $^, pdflatex $(notdir $(tikzfile));))
 
+pyfeyn: $(PYFEYNFILES)
+	@echo "PyFeyn Feynman graph files: $^"
+	(cd $(PYFEYNDIR); $(foreach pyfeynfile, $^, ./$(notdir $(pyfeynfile));))
+
 cleanall: clean cleanpictpdf
 
 clean: cleanfeynmf cleanfeynmp cleantikz
@@ -99,26 +124,35 @@ cleanfeynmp:
 cleantikz:
 	-rm $(TIKZDIR)/*.log $(TIKZDIR)/*.aux
 
+cleanpyfeyn:
+	-rm $(PYFEYNDIR)/*.pdf
+
 cleanpictpdf:
 	-rm $(FEYNDIR)/*.pdf
 	-rm $(TIKZDIR)/*.pdf
+	-rm $(PYFEYNDIR)/*.pdf
 
 help:
 	@echo "Possible commands:"
-	@echo "new   [THESIS=dirname] [TEXLIVE=YYYY]: Create a new thesis skeleton"
-	@echo "astro [THESIS=dirname] [TEXLIVE=YYYY]: Create a new astrophysics thesis skeleton"
+	@echo "new   [THESIS=dirname] [TEXLIVE=YYYY]: create a new thesis skeleton"
+	@echo "astro [THESIS=dirname] [TEXLIVE=YYYY]: create a new astrophysics thesis skeleton"
 	@echo "  Default TeX Live version is 2014"
-	@echo "new09 [THESIS=dirname] [TEXOLD=YYYY]: Create a new thesis skeleton"
+	@echo "new09 [THESIS=dirname] [TEXOLD=YYYY]: create a new thesis skeleton"
 	@echo "  Default old TeX Live version is 2009"
-	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIR)"
-	@echo "feynmp: Run feynmp for all .tex files in $(FEYNDIR)"
-	@echo "tikz:   Run tikz for all .tex files in $(TIKZDIR)"
-	@echo "cleanfeynmf: Clean up feynmf output files"
-	@echo "cleanfeynmp: Clean up feynmp output files"
-	@echo "cleantikz:   Clean up tikz   output files"
+	@echo "update [THESIS=dirname]: update to a newer version of ubonn-thesis"
+	@echo "feynmf: run feynmf for all .tex files in $(FEYNDIR)"
+	@echo "feynmp: run feynmp for all .tex files in $(FEYNDIR)"
+	@echo "tikz:   run tikz for all .tex files in $(TIKZDIR)"
+	@echo "pyfeyn: run Python for all .py files in $(PYFEYNDIR)"
+	@echo "cleanfeynmf: clean up feynmf output files"
+	@echo "cleanfeynmp: clean up feynmp output files"
+	@echo "cleantikz:   clean up tikz   output files"
+	@echo "cleanpyfeyn: clean up pyfeyn output files"
 
 test:
 	@echo "Feynmf Feynman graphs dir: $(FEYNDIR)"
 	@echo "Feynmf Feynman graphs files: $(FEYNFILES)"
 	@echo "TikZ   Feynman graphs dir: $(TIKZDIR)"
 	@echo "TikZ   Feynman graphs files: $(TIKZFILES)"
+	@echo "PyFeyn Feynman graphs dir: $(PYFEYNDIR)"
+	@echo "PyFeyn Feynman graphs files: $(PYFEYNFILES)"

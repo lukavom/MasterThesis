@@ -1,14 +1,16 @@
 %------------------------------------------------------------------------------
 % Style file for a thesis written in the University of Bonn
 %
+% Note that "make update" can overwrite this file.
+%
 % See ChangeLog or Git log for history of changes.
 % Responsible: Ian Brock (brock@physik.uni-bonn.de)
 %------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-thesis}[2016/07/11 Version 5.X University of Bonn thesis package]
+\ProvidesPackage{ubonn-thesis}[2018/04/04 Version 6.0 University of Bonn thesis package]
 \NeedsTeXFormat{LaTeX2e}
 
 % Set TeX Live version
-\providecommand*{\texlive}{2014}
+\providecommand*{\texlive}{2016}
 
 % Set institute information
 \providecommand*{\InstituteName}{\PI}
@@ -40,11 +42,9 @@
 \DeclareStringOption{thesistype}
 \DeclareStringOption{thesisversion}
 
-\DeclareBoolOption[false]{newtx}
-\DeclareBoolOption[true]{txfonts}
+\DeclareBoolOption[true]{newtx}
+\DeclareBoolOption[false]{txfonts}
 \DeclareBoolOption[false]{palatino}
-\DeclareBoolOption[false]{feynmf}
-\DeclareBoolOption[false]{feynmp}
 \DeclareBoolOption[true]{subcaption}
 \DeclareBoolOption[false]{subfig}
 \DeclareBoolOption[false]{subfigure}
@@ -59,9 +59,15 @@
 \DeclareBoolOption[true]{hepparticles}
 \DeclareBoolOption[true]{hepitalic}
 \DeclareBoolOption[true]{mhchem}
+\DeclareBoolOption[false]{feynmf}
+\DeclareBoolOption[false]{feynmp}
 \DeclareBoolOption[false]{titlesec}
 \DeclareBoolOption[false]{astrobib}
 \DeclareBoolOption[true]{floatopt}
+\DeclareBoolOption[false]{todonotes}
+\DeclareBoolOption[false]{shownotes}
+\DeclareBoolOption[false]{cleveref}
+\DeclareBoolOption[true]{clevecaps}
 \DeclareStringOption{texlive}
 \DeclareStringOption[true]{backref}
 \DeclareStringOption[biber]{backend}
@@ -76,39 +82,39 @@
 \else
   \renewcommand*{\texlive}{\UBN@texlive}
 \fi
-\typeout{Package ubonn-thesis Info: texlive is [\texlive]}
+\typeout{Package ubonn-thesis info: texlive is [\texlive]}
 
 % Thesis type specified as an option
 \ifUBN@PhD
-  \typeout{Package ubonn-thesis Info: Setting things up for a PhD thesis}
+  \typeout{Package ubonn-thesis info: setting things up for a PhD thesis}
   \renewcommand*{\ThesisType}{PhD}
 \fi
 \ifUBN@Master
-  \typeout{Package ubonn-thesis Info: Setting things up for a Master thesis}
+  \typeout{Package ubonn-thesis info: setting things up for a Master thesis}
   \renewcommand*{\ThesisType}{Master}
 \fi
 \ifUBN@Diplom
-  \typeout{Package ubonn-thesis Info: Setting things up for a Diplom thesis}
+  \typeout{Package ubonn-thesis info: setting things up for a Diplom thesis}
   \renewcommand*{\ThesisType}{Diplom}
 \fi
 \ifUBN@Bachelor
-  \typeout{Package ubonn-thesis Info: Setting things up for a Bachelor thesis}
+  \typeout{Package ubonn-thesis info: setting things up for a Bachelor thesis}
   \renewcommand*{\ThesisType}{Bachelor}
 \fi
 
 % PI library thesis version - includes extra cover page
 \ifUBN@PILibrary
-  \typeout{Package ubonn-thesis Info: Creating version for PI library}
+  \typeout{Package ubonn-thesis info: creating version for PI library}
   \renewcommand*{\ThesisVersion}{PILibrary}
 \fi
 % Submission version of thesis
 \ifUBN@Submit
-  \typeout{Package ubonn-thesis Info: Creating submission version of thesis}
+  \typeout{Package ubonn-thesis info: creating submission version of thesis}
   \renewcommand*{\ThesisVersion}{Submit}
 \fi
 % Final print version of thesis
 \ifUBN@Final
-  \typeout{Package ubonn-thesis Info: Creating final version of thesis for print shop and ULB}
+  \typeout{Package ubonn-thesis info: creating final version of thesis for print shop and ULB}
   \renewcommand*{\ThesisVersion}{Final}
 \fi
 % Thesis type/version specified as a string
@@ -125,12 +131,12 @@
 
 % Only one font package at a time!
 \ifUBN@newtx
-  \typeout{Package ubonn-thesis Info: Using newtx fonts}
+  \typeout{Package ubonn-thesis info: using newtx fonts}
   \UBN@txfontsfalse
   \UBN@palatinofalse
 \else
   \ifUBN@palatino
-    \typeout{Package ubonn-thesis Info: Using Palatino fonts}
+    \typeout{Package ubonn-thesis info: using Palatino fonts}
     \UBN@txfontsfalse
     \UBN@newtxfalse
   \else
@@ -167,6 +173,12 @@
   \fi
 \fi
 
+% If asked to show notes also turn on todonotes
+\ifUBN@shownotes
+  \UBN@todonotestrue
+\fi
+
+
 % Check backend - if TeX Live is earlier than 2011 and backend is biber,
 % change it to something more appropriate
 \ifthenelse{\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
@@ -184,10 +196,23 @@
 %}{%
 %}
 
+% Specify the language(s) in the documentclass and then use babel.
+\RequirePackage{babel}
+
+% Define a variable with the language to pass to todonotes and cleveref
+\RequirePackage{iflang}
+\typeout{ubonn-thesis: current language is \languagename}
+\IfLanguageName{ngerman}{%
+  \typeout{ubonn-thesis: setting language to ngerman}
+  \newcommand*{\UBN@language}{ngerman}
+}{%
+  \typeout{ubonn-thesis: setting language to english}
+  \newcommand*{\UBN@language}{english}
+}
 %------------------------------------------------------------------------------
 % General KOMA script options - other options affecting header/footer
 % section titles and captions are at the end of this file
-\KOMAoptions{fontsize=11pt,paper=a4,twoside}
+\KOMAoptions{fontsize=11pt, paper=a4, twoside}
 % Add List of Figures/Tables to Table of Contents
 \KOMAoptions{listof=totoc}
 % Commands to add bibliography to the Table of Contents are in the main file
@@ -204,15 +229,16 @@
 % The DIV parameter tells it how many elements the page
 % should be split into.
 % \RequirePackage[scale=0.75]{geometry}
-\KOMAoptions{DIV=14,BCOR=8mm}
-\KOMAoptions{headinclude=true}
+\KOMAoptions{DIV=12, BCOR=5mm}
+\KOMAoptions{headinclude=true, footinclude=false}
 % Header and footer
-\RequirePackage[headsepline]{scrpage2}
+\RequirePackage[headsepline]{scrlayer-scrpage}
+% \RequirePackage[headsepline]{scrpage2}
 
 %-------------------------------------------------------------------------------
 % Math packages that have to come early 
 % AMS math (for some font collections this has to come before their selection)
-\RequirePackage{amsmath,amssymb}
+\RequirePackage{amsmath, amssymb}
 
 %-------------------------------------------------------------------------------
 % Input encoding, font and language
@@ -254,11 +280,9 @@
 % \RequirePackage{palatino}
 
 %------------------------------------------------------------------------------
-% Specify the language(s) in the documentclass and then use babel.
 % csquotes is recommended for quoting correctly for the language used
 % The option autostyle=true continuously adapts the style to the language.
 % Use autostyle=once to fix it to the main language of the document.
-\RequirePackage{babel}
 % \RequirePackage[german=guillemets,autostyle=true,style=mythesis]{csquotes}
 \ifthenelse {\texlive < 2010} {%
   % Use babel=true for older versions (2009 and earlier) of csquotes
@@ -399,18 +423,21 @@
 % Also is not compatible with biblatex, which is the way to go
 % \RequirePackage{mcite}
 
-% Mathematical construction that are useful in physics
+% Mathematical constructions that are useful in physics
 \ifUBN@physics
   \RequirePackage{physics}
 \fi
 
 % Standardised particles names and format
+% hepnicenames also includes heppennames
 \ifUBN@hepparticles
   \ifUBN@hepitalic
     \RequirePackage[italic]{hepnicenames}
   \else
     \RequirePackage{hepnicenames}
   \fi
+  % Adjust the kerning for bar over particles with narrow glyphs (from Andy Buckley)
+  \def\@shiftlen@anti@gen@bar{0mu}
 \fi
 
 % Chemical elements
@@ -418,10 +445,31 @@
   \RequirePackage[version=3]{mhchem}
 \fi
 
+\RequirePackage{microtype}
 \RequirePackage{xcolor}
 \RequirePackage{xspace}
 \RequirePackage{setspace}
 \RequirePackage{scrdate,scrtime}
+
+% Add a \mynote command
+\ifUBN@todonotes
+  \ifUBN@shownotes
+    \typeout{ubonn-thesis: showing notes}
+    % \KOMAoptions{BCOR=-1cm}
+    % \addtolength{\marginparwidth}{1.5cm}
+    % \addtolength{\textwidth}{-1.5cm}
+    \RequirePackage[\UBN@language, textsize=scriptsize]{todonotes}
+    \newcommand{\mynote}[3][]{%
+      \ifthenelse{ \equal{#1}{} }
+        {\textcolor{magenta}{#2}\todo[color=magenta!20, linecolor=magenta]{#3}\xspace}
+        {\textcolor{magenta}{#2}\todo[color=magenta!20, linecolor=magenta, #1]{#3}\xspace}
+    }
+  \else
+    \typeout{ubonn-thesis: not showing notes}
+    \RequirePackage[disable, \UBN@language, textsize=scriptsize]{todonotes}
+    \newcommand{\mynote}[3][]{\todo[#1]{#2}\xspace}
+  \fi
+\fi
 
 %-------------------------------------------------------------------------------
 % Use biblatex and biber for the bibliography
@@ -481,6 +529,17 @@
 % \newcommand{\url}[1]{\texttt{#1}}
 
 %-------------------------------------------------------------------------------
+% cleveref has to be included late
+% Decide whether to capitalise Fig., Table etc. or not.
+\ifUBN@cleveref
+  \ifUBN@clevecaps
+    \RequirePackage[capitalise, \UBN@language]{cleveref}
+  \else
+    \RequirePackage[\UBN@language]{cleveref}
+  \fi
+\fi
+
+%-------------------------------------------------------------------------------
 % More options for KOMA script
 
 % Turn on bold math when using \bfseries
@@ -514,7 +573,6 @@
       \titlerule]
   \else
     % Code from http://www.komascript.de/chapterwithlines
-    \RequirePackage{microtype}
     %\renewcommand*{\thechapter}{\Roman{chapter}}
     \newcommand*{\chapternumbersize}{\Huge}
     \renewcommand*{\chapterformat}{%

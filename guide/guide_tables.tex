@@ -1,3 +1,5 @@
+% !TEX root = thesis_guide.tex
+
 %==============================================================================
 \chapter{Tables}
 \label{sec:table}
@@ -247,8 +249,7 @@ the whole column. With \Package{siunitx} version 1 this is done using
 the \Option{dp} option and gives the number of decimal places for the
 rounding.  With \Package{siunitx} version 2 you should also make sure
 that you specify the rounding mode in the preamble of the table (usually
-\Option{figures} or \Option{places} -- you can also choose
-\Option{off}).
+\Option{figures} or \Option{places} --- you can also choose \Option{off}).
 
 If you know that you are going to make such a table, it is very easy
 to use either of these options to write it out in this format using a
@@ -444,8 +445,41 @@ tricks with the formatting of the intercolumn separator
 \verb+@{\,\pm\!\!}+ to get the spacing nice! This confirms my
 statement above that the \Option{S} format is most useful for aligning
 simple numbers easily, while \Macro{num} is very nice for rounding to
-a given precision -- note that you can use either the \Option{dp} or
+a given precision --- note that you can use either the \Option{dp} or
 \Option{sf} options to achieve what you want.
+
+If your header is wider than the content,
+you may also have to tweak a few things to get the correct alignment.
+A good way of doing this is to insert some \Macro{hspace*} into the header.
+The table on the left is without \Macro{hspace}, while the one on the right is
+with an \Macro{hspace} of 2em.
+The tables contain vertical lines that I would normally not include to illustrate the alignment.
+\begin{center}
+  \renewcommand{\arraystretch}{1.4}
+  \sisetup{round-mode = places, retain-explicit-plus}
+  \begin{tabular}{|S[table-format=5.0]@{\,}l|}
+    \toprule
+    \multicolumn{2}{| c |}{\diffnloetab} \\
+    \multicolumn{2}{| c |}{[\si{\pico\barn\per\GeV}]} \\
+    \midrule
+      72 & $^{+22}_{-13}$ \\
+     182 & $^{+50}_{-30}$ \\
+     255 & $^{+69}_{-42}$ \\
+    \bottomrule
+  \end{tabular}
+  \qquad
+  \begin{tabular}{|S[table-format=5.0]@{\,}l@{\hspace*{2em}}|}
+    \toprule
+    \multicolumn{2}{| c |}{\diffnloetab} \\
+    \multicolumn{2}{| c |}{[\si{\pico\barn\per\GeV}]} \\
+    \midrule
+      72 & $^{+22}_{-13}$ \\
+     182 & $^{+50}_{-30}$ \\
+     255 & $^{+69}_{-42}$ \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
 
 
 %------------------------------------------------------------------------------

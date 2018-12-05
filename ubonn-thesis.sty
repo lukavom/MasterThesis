@@ -224,14 +224,14 @@
 %------------------------------------------------------------------------------
 % Page layout
 % You can either use geometry or the built-in typearea
-% Typarea allows you to easily take into acccount extra space needed
+% typearea allows you to easily take into account extra space needed
 % for binding using the BCOR parameter.
 % The DIV parameter tells it how many elements the page
 % should be split into.
 % \RequirePackage[scale=0.75]{geometry}
 \KOMAoptions{DIV=12, BCOR=5mm}
 \KOMAoptions{headinclude=true, footinclude=false}
-% Header and footer
+% Header and footer - if scrlayer-scrpage is not available try scrpage2 instead.
 \RequirePackage[headsepline]{scrlayer-scrpage}
 % \RequirePackage[headsepline]{scrpage2}
 
@@ -442,7 +442,7 @@
 
 % Chemical elements
 \ifUBN@mhchem
-  \RequirePackage[version=3]{mhchem}
+  \RequirePackage[version=4]{mhchem}
 \fi
 
 \RequirePackage{microtype}
@@ -476,7 +476,8 @@
 % Style is numeric and comp option changes [1,2,3] into [1-3]
 % sorting=none    means the order is as they are cited
 % block=ragged    turns off block form, which avoids large spaces
-% firstinits=true means initials are used for first names
+% giveninits=true means initials are used for first names
+% Older versions of TeX Live use the option firstinits instead.
 % Some more tweaks should be made to the appearance,
 % see/include ubonn-biblatex.sty
 \ifUBN@biblatex
@@ -492,7 +493,7 @@
     \RequirePackage[backend=\UBN@backend, \UBN@biblatexencoding
       backref=\UBN@backref,
       style=authoryear, natbib=true, refsection=chapter,
-      block=none, firstinits=true]{biblatex}
+      block=none, giveninits=true]{biblatex}
   \else
     \ifthenelse {\texlive < 2010} {%
       \RequirePackage[backend=\UBN@backend, hyperref=true, \UBN@biblatexencoding
@@ -549,6 +550,8 @@
 % \setkomafont{disposition}{\rmfamily\bfseries\upshape}
 \setkomafont{title}{\normalfont\bfseries\huge}
 \setkomafont{subtitle}{\normalfont\Large}
+% Upright font for headers and footers
+\setkomafont{pageheadfoot}{\normalfont}
 
 % Do not put a dot after Section/Chapter, nor in the figure caption.
 \KOMAoptions{numbers=noendperiod}
@@ -556,7 +559,7 @@
 \@ifclassloaded{scrartcl}{}{\KOMAoptions{chapterprefix=true,appendixprefix=true}}
 
 %-------------------------------------------------------------------------------
-% Only change chapter titles if this ios not an article
+% Only change chapter titles if this is not an article
 \@ifclassloaded{scrartcl}{}{%
   \ifUBN@titlesec
   % Packages to change the chapter heading format

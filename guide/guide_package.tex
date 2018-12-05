@@ -1,7 +1,8 @@
 % !TeX root = thesis_guide.tex
+% chktex-file 1 chktex-file 21
 
 %==============================================================================
-\chapter{Useful packages}
+\chapter{Useful packages}%
 \label{sec:package}
 %==============================================================================
 
@@ -34,7 +35,7 @@ you would have to modify the style file.
 
 
 %------------------------------------------------------------------------------
-\section{Layout and language}
+\section{Layout and language}%
 \label{sec:package:layout}
 %------------------------------------------------------------------------------
 
@@ -50,9 +51,9 @@ include the \Package{typearea} package, you should simply set the
 options using \Macro{KOMAoptions}.
 Generally, all you need to do is specify \Option{DIV} (set by default to 12),
 which divides the page into a number of divisions and
-\Option{BCOR} (set by default to \SI{5}{\mm},
+\Option{BCOR} (set by default to \SI{5}{\mm}),
 which leaves some space for the binding.
-The packages are listed in Table~\ref{tab:package:layout}.
+The packages are listed in \cref{tab:package:layout}.
 
 \begin{table}[htbp]
   \centering
@@ -78,7 +79,7 @@ The packages are listed in Table~\ref{tab:package:layout}.
     \enquote{\texttt{\{\}}} after a macro.\\
     \bottomrule
   \end{tabular}
-  \caption{Useful packages for layout.}
+  \caption{Useful packages for layout.}%
   \label{tab:package:layout}
 \end{table}
 
@@ -87,7 +88,7 @@ If your version of \LaTeX{} is so old that it does not know about
 \Package{scrlayer-scrpage} adjust the \Package{ubonn-thesis} style file accordingly.
 
 %------------------------------------------------------------------------------
-\section{Appearance}
+\section{Appearance}%
 \label{sec:package:appearance}
 %------------------------------------------------------------------------------
 
@@ -110,7 +111,7 @@ As mentioned above, certain fonts can be selected directly via options:
 \Option{txfonts}, \Option{newtx} or \Option{palatino}.
 
 Commonly used packages associated with fonts, tables and
-figures are listed in Table~\ref{tab:package:appearance}.
+figures are listed in \cref{tab:package:appearance}.
 
 \begin{table}[htbp]
   \centering
@@ -136,7 +137,7 @@ figures are listed in Table~\ref{tab:package:appearance}.
     \Package{microtype} & Small adjustments to word spacings.\\
     \bottomrule
   \end{tabular}
-  \caption{Useful packages for appearance.}
+  \caption{Useful packages for appearance.}%
   \label{tab:package:appearance}
 \end{table}
 
@@ -158,13 +159,13 @@ The package \Package{microtype} declares itself to be responsible for
 Need I say more?
 
 %------------------------------------------------------------------------------
-\section{Other packages}
+\section{Other packages}%
 \label{sec:package:other}
 %------------------------------------------------------------------------------
 
 Some other useful packages, some of which are included in
 \texttt{ubonn-thesis.sty} are listed in
-Table~\ref{tab:package:other1}.
+\cref{tab:package:other1}.
 
 \begin{table}[htbp]
   \centering
@@ -179,14 +180,14 @@ Table~\ref{tab:package:other1}.
     directly compile for each figure and also input to another document.\\
     \Package{hyperref} & Adds \Macro{url} command as well as ability
     to click on entries on table of contents etc.\\
-    \Package{cleveref} & Provides \enquote{Fig.}, \enquote{Table} etc. when you use
+    \Package{cleveref} & Provides \enquote{Fig.}, \enquote{Table} etc.\ when you use
       the \Macro{cref\{fig:plot\}} syntax.\\
     \Package{todonotes} & Nice package to add notes to your text.
       You can also use it to indicate missing figures.\\
     \Package{background} & Allows you to add things like DRAFT across the whole document page.\\
     \Package{subfiles} & Provides a nice alternative to
     \Macro{include}.\\
-    \Package{subcaption} & An newer alternative to \Package{subfig}.\\
+    \Package{subcaption} & A newer alternative to \Package{subfig}.\\
     \Package{tabularx} & Allows fixed table width with flexible column widths.\\
     \Package{floatrow} & Add ability to define own floats.\\
     \Package{physics} & Some useful extra maths commands, especially for differentials.\\
@@ -203,7 +204,7 @@ Table~\ref{tab:package:other1}.
     \Package{refcheck} & Check whether labels are used, i.e.\ if figures and tables are actually referenced.\\
     \bottomrule
   \end{tabular}
-  \caption{Other useful packages.}
+  \caption{Other useful packages.}%
   \label{tab:package:other1}
 \end{table}
 
@@ -216,7 +217,7 @@ See Ref.~\cite{lshort} or the package documentation for more details.
 
 The packages \Package{physics}, \Package{commath} and \Package{skmath} provide some additional maths commands.
 Differentials etc.\ are particularly useful.
-The \Package{physics} package contains a lot of nice and flexible definitions and also handles the spacing around things like $\dd{x}$ well,
+The \Package{physics} package contains a lot of nice and flexible definitions and also handles the spacing around things like \(\dd{x}\) well,
 if you use the \verb|\dd{x}| construction.
 The \Package{commath} package has not been updated for a while.
 \Package{skmath} does quite a lot more then \Package{commath} and even modifies/enhances some standard commands.
@@ -225,10 +226,11 @@ The \Package{todonotes} is a very nice package that enables you to add notes to 
 By default they will be put in the margin of your document.
 More details can be found in \cref{sec:package:todo}.
 
-The \Package{cleveref} package appears to be a great package for specifying references to
+The \Package{cleveref} package is a great package for specifying references to
 figures, tables, sections etc.
 You just give the command \Macro{cref\{fig:plot\}} and it will add \enquote{Fig.} or whatever
 you set to the figure number and an unbreakable space.
+This guide has been converted to use the \Package{cleveref} everywhere.
 
 \Package{standalone} is both a package and a document class. It is
 available from \TeXLive 2012 onwards. It allows you to have a
@@ -262,7 +264,7 @@ The 2009 thesis skeleton contains \Macro{setlength\{\Macro{unitlength\}\{1pt\}}}
 Given that this is a global setting, neither it nor \Package{draftwatermark} are included by default.}
 
 A list of other packages that are commonly used is given in
-Table~\ref{tab:package:other2}. They are not
+\cref{tab:package:other2}. They are not
 included in the list above, because they are either not really needed
 or have been superseded by other packages.
 
@@ -298,25 +300,25 @@ or have been superseded by other packages.
     \bottomrule
   \end{tabular}
   \caption{Other packages that are often used, but I have already
-    given alternatives.}
+    given alternatives.}%
   \label{tab:package:other2}
 \end{table}
 
 As indicated, the \Package{ziffer} package is advertised as providing
 the correct spacing after a comma in math mode if you use the comma as
-the decimal separator. Compare $2,5$ with 2,5 and $2{,}5$. The first
+the decimal separator. Compare \(2,5\) with 2,5 and \(2{,}5\). The first
 spacing is wrong. If you use the \Package{ziffer} package it will be
 correct. However, it does seem to conflict with the use of the
 \Package{dcolumn} package, so I cannot compile this guide
 if \Package{ziffer} is included. Some  workarounds are discussed in
-Section~\ref{sec:layout:german}. In addition, the \Package{siunitx}
+\cref{sec:layout:german}. In addition, the \Package{siunitx}
 package contains the same functionality, which can simply be steered
 by changing the document language, as discussed in
-Section~\ref{sec:table:siunitx}. Hence, \Package{ziffer} is not really
-needed anymore.
+\cref{sec:table:siunitx}.
+Hence, \Package{ziffer} is not really needed anymore.
 
 %------------------------------------------------------------------------------
-\section{ToDo Notes}
+\section{ToDo Notes}%
 \label{sec:package:todo}
 %------------------------------------------------------------------------------
 
@@ -346,6 +348,6 @@ as an option or move the note outside (after) the caption.
     \mynote[inline]{}{Use the option \Option{inline} to include a note in a caption,
     as this is floating. A note that does not point to a block of text needs a
     blank first argument.}
-  }
+  }%
   \label{fig:missing}
 \end{figure}

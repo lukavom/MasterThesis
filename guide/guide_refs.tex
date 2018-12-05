@@ -1,7 +1,8 @@
 % !TEX root = thesis_guide.tex
+% chktex-file 1 
 
 %==============================================================================
-\chapter{References}
+\chapter{References}%
 \label{sec:ref}
 %==============================================================================
 
@@ -19,8 +20,7 @@ it.\footnote{After some research, it appears to me that the footnote
   refers to the last word of the phrase or sentence.}
 
 That is the easy part!  Where do you get the references from and how
-do you format them? Sources of references are discussed in
-Section~\ref{sec:ref:sources}.
+do you format them? Sources of references are discussed in \cref{sec:ref:sources}.
 There are two options for the formatting. Either you do it by
 hand, formatting \Macro{bibitem} entries yourself or you use
 \BibTeX. 
@@ -33,15 +33,15 @@ In addition, you have to make sure that authors' names are
 printed consistently, you include the appropriate collaboration
 name, the title is formatted correctly and journals are given
 consistent abbreviations. Such topics are discussed in
-Section~\ref{sec:ref:bib}.
+\cref{sec:ref:bib}.
 
 What about citing a series of articles? Can you
 include them in one reference or do you want to keep one article per
 reference?
 I give some hints on
-useful options and settings for \Package{biblatex} below (Section~\ref{sec:ref:bbx}).
+useful options and settings for \Package{biblatex} below (\cref{sec:ref:bbx}).
 If you use traditional \BibTeX\ (which I do not recommend), then you probably have to use the \Package{mcite}
-package --- see Section~\ref{sec:ref:mcite}.
+package --- see \cref{sec:ref:mcite}.
 Just to take a silly example. The ZEUS collaboration
 publications in
 2010~\cite{Abramowicz:2010ih,Abramowicz:2010xc,Abramowicz:2010nj} were
@@ -53,7 +53,7 @@ one, write the list as [m--n] etc.
 
 
 %------------------------------------------------------------------------------
-\section{Formatting by hand}
+\section{Formatting by hand}%
 \label{sec:ref:bibitem}
 %------------------------------------------------------------------------------
 
@@ -69,11 +69,11 @@ conference proceedings or a paper in a journal. Every place where you
 publish will have it's own preferred format for the references that
 almost certainly will not be the one you chose for your thesis.
 
-If you insist on following this route, consult a book on \LaTeX!
+If you insist on following this route, consult a book on \LaTeX{}!
 
 
 %------------------------------------------------------------------------------
-\section{Using \BibTeX\ and \Package{biblatex}}
+\section{Using \BibTeX\ and \Package{biblatex}}%
 \label{sec:ref:bibtex}\index{BibTeX@\BibTeX}
 %------------------------------------------------------------------------------
 
@@ -113,9 +113,9 @@ need something like:
 \begin{verbatim}
 % Use biblatex for the bibliography
 \usepackage[backend=biber,
-  style=numeric-comp, sorting=none, block=ragged, firstinits=true]{biblatex}
+  style=numeric-comp, sorting=none, block=ragged, giveninits=true]{biblatex}
 % \usepackage[backend=bibtex, hyperref=true,
-%   style=numeric-comp, sorting=none, block=ragged, firstinits=true]{biblatex}
+%   style=numeric-comp, sorting=none, block=ragged, giveninits=true]{biblatex}
 
 % Adjustments to output are in this style file:
 \usepackage{ubonn-biblatex}
@@ -124,7 +124,9 @@ need something like:
 \addbibresource{../refs/standard_refs-biber.bib}
 \end{verbatim}
 in the document preamble and \Macro{printbibliography} where they
-should be printed.
+should be printed.\footnote{%
+If you use an older version of \TeXLive you may have to replace
+\texttt{giveninits} by \texttt{firstinits}.}
 Note that as of version 3.0 of the thesis package,
 the \Package{biblatex} command is included in \Package{ubonn-thesis} directly.
 To turn it off add the option \Option{biblatex=false}.
@@ -145,7 +147,7 @@ Which should you use? Traditional \BibTeX{} has been around for a long time and 
 therefore better known. However, it has many problems when it comes to
 sorting, handling more modern sources of information (e.g.\ the web),
 etc. 
-By now (2015) \Package{biblatex} is rather stable,
+By now (written in 2015) \Package{biblatex} is rather stable,
 so future changes should be minor.
 It supports things like online references and enables you to click on references
 using the preprint number or DOI to look at a reference. It is also
@@ -157,9 +159,9 @@ umlauts etc.\ properly. While I have said elsewhere in this document
 that you should use UTF-8 encoding so that you can enter ä
 etc.\ directly, this does not work with \BibTeX. You can use the
 old syntax \verb+\"{a}+.\footnote{%
-  In fact you have to write this as \texttt{author = "Br\{\textbackslash"\{u\}\}ning, Oliver"} for it to work properly!
+  In fact you have to write this as \texttt{author = "Br\{\textbackslash"\{u\}\}ning, Oliver"} for it to work properly! % chktex 18
   As an aside, if you look at the \LaTeX\ source code for this footnote,
-  it might seem natural to use \Macro{verb} for \texttt{author = ...}.
+  it might seem natural to use \Macro{verb} for \texttt{author = \dots}.
   However, verbatim does not work in footnotes,
   unless you include other packages such as \Package{fancyvrb}.}
 This problem is completely solved if you use
@@ -179,7 +181,7 @@ will get some errors as I have included some umlauts in the example
 references.
 The thesis skeletons use traditional \BibTeX\ with \TeXLive older than 2011
 and \Package{biblatex} with the \Option{biber} backend for newer versions.
-See the skeleton \texttt{thesis\_skel/theis\_2009\_skel.tex} for the complete syntax
+See the skeleton \texttt{thesis\_skel/thesis\_2009\_skel.tex} for the complete syntax
 if you want to use traditional \BibTeX.
 
 That's it? Well almost! First, you will have to make sure that the
@@ -191,7 +193,7 @@ to change the entries a bit so that they get formatted the way you want.
 
 
 %------------------------------------------------------------------------------
-\section{\BibTeX{} entries}
+\section{\BibTeX{} entries}%
 \label{sec:ref:bib}
 
 In this section I discuss how to format your \BibTeX\ databases,
@@ -200,7 +202,7 @@ how you make your references look the way you want them to be in your
 thesis.
 
 %------------------------------------------------------------------------------
-\subsection{Entry types}
+\subsection{Entry types}%
 \label{sec:ref:entry}
 
 One question is what entry type you should use for what? I give here
@@ -208,9 +210,9 @@ recommendations on what to use for \Package{biblatex}. Some of the entry
 types that \Package{biblatex} has are not part of \BibTeX.
 
 \begin{description}
-\item[@article] This is easy -- use it for articles\index{article} published in
+\item[@article] This is easy --- use it for articles\index{article} published in
   journals, e.g.~\cite{Abramowicz:2010ih}.
-\item[@book] Just as easy -- use it for books,\index{book} e.g.~\cite{kopka04}.
+\item[@book] Just as easy --- use it for books,\index{book} e.g.~\cite{kopka04}.
 \item[@proceedings, @inproceedings] The name says it all. Use
   \Option{@inproceedings} for a paper in the proceedings\index{proceedings} and
   \Option{@proceedings} for the whole volume.
@@ -251,18 +253,18 @@ expects for preprints etc. More details on this are given below.
 What else do you have to be careful about? The first thing to know is
 that \Package{biblatex} and \BibTeX{} will try to format your author
 names and titles. Thus, if you want the title to remain in exactly the
-form you have typed it in include it in \enquote{"\{Title\}"}, i.e.\
-both double quotes and braces. If not, collaborations and accelerators
+form you have typed it in include it in \enquote{"\{Title\}"}, % chktex 18
+i.e.\ both double quotes and braces. If not, collaborations and accelerators
 tend to be converted to lowercase, e.g.\ \enquote{lhc} instead of
 \enquote{LHC}. If you use an author such as ``ATLAS Collaboration'' it
 gets printed as \enquote{A.\ Collaboration}.
-If part of a title should not have its case changed enclose it in \{...\},
-e.g.\ \enquote{"The \{ATLAS\} Detector"}
+If part of a title should not have its case changed enclose it in \{\ldots\},
+e.g.\ \enquote{"The \{ATLAS\} Detector"} % chktex 18
 
 
 %------------------------------------------------------------------------------
-\subsection{Entries from Inspire and CDS}
-\index{spires}\index{inspire}\index{CDS}
+\subsection{Entries from Inspire and CDS}%
+\index{spires}\index{inspire}\index{CDS}%
 \label{sec:ref:cds}
 
 Things like the LHC Design Report\index{design report} are by default
@@ -277,10 +279,10 @@ link as a \texttt{url} field.
 Conference notes,\index{conference note} e.g.\ from ATLAS, are defined
 as \Option{@techreport} by CDS~\cite{ATLAS-CONF-2011-008-CDS}. It is
 better to just call them \Option{@report}. You should add an author,
-usually just \texttt{author = "\{ATLAS
-  Collaboration\}",}~\cite{ATLAS-CONF-2011-008-final}. You may also
-have to change the month format to avoid error messages. For internal
-notes, also call them report and add \texttt{type = {internal report}}
+usually just
+\texttt{author = "\{ATLAS Collaboration\}",}~\cite{ATLAS-CONF-2011-008-final}. % chktex 18
+You may also have to change the month format to avoid error messages.
+For internal notes, also call them report and add \texttt{type = {internal report}}
 to the entry. Again you could add the CDS link as a \texttt{url}
 field. For preprints,\index{preprint} I also think it is best to use
 the \Option{@report} entry type.
@@ -295,7 +297,7 @@ then add a \texttt{type} field. Alternatively you can use
 \Option{@mastersthesis} or \Option{@phdthesis}.
 
 In all cases you probably have to edit the titles a bit to get
-things like $\sqrt{s} = \SI{7}{\TeV}$ printed properly. An open
+things like \(\sqrt{s} = \SI{7}{\TeV}\) printed properly. An open
 question is whether you should assume the use of a units package in
 the formatting of the title. If you want to make your \texttt{.bib}
 files usable by others, it is probably best to do the formatting by
@@ -319,7 +321,7 @@ be included, i.e. \verb|author = "{ATLAS Collaboration}",|.
 
 
 %------------------------------------------------------------------------------
-\subsection{More on names}
+\subsection{More on names}%
 \label{sec:ref:names}
 
 The best way to format author names so that they appear correctly
@@ -346,7 +348,7 @@ accordingly.
 
 
 %------------------------------------------------------------------------------
-\section{Formatting references}
+\section{Formatting references}%
 \label{sec:ref:format}
 
 While \BibTeX{} or \Package{biblatex} format the references for you
@@ -357,8 +359,7 @@ style. This corresponds to style \Option{unsrt} or a variant thereof
 using traditional \BibTeX.  If you use \Package{biblatex} you include the
 package with option \Option{numeric-comp} or
 \Option{numeric}. \Option{numeric-comp} produces more compact
-citations (e.g.\ [1-4,7,9]) than \Option{numeric} (e.g.\
-[1,2,3,4,7,9].
+citations (e.g.\ [1--4,7,9]) than \Option{numeric} (e.g.\ [1,2,3,4,7,9]).
 
 For this guide (for a change) I use an alphabetic style:
 \Option{alpha} with \BibTeX{} or option \Option{alphabetic} with
@@ -367,7 +368,7 @@ numeric style.
 
 
 %------------------------------------------------------------------------------
-\subsection{\Package{biblatex} styles}
+\subsection{\Package{biblatex} styles}%
 \label{sec:ref:bbx}
 
 My experience with \Package{biblatex} took off 
@@ -375,15 +376,15 @@ when I started rewriting the ATLAS \LaTeX\ templates in 2014.
 The first official stable release of \Package{biblatex} was 19 Oct 2010.
 Active and rapid development is ongoing --- there were many updates in 2011.
 Some things I recommend below may work a bit differently depending on which version
-you have. See Appendix~\ref{sec:app:tex} on how to install a newer
+you have. See \cref{sec:app:tex} on how to install a newer
 version of \TeXLive if you want a more up-do-date version of \LaTeX.
 
 Looking for numeric styles you can either use the built-in
 \Option{numeric} or \Option{numeric-comp}.  The \Option{numeric-comp}
 style is used by default in the thesis skeleton. I made a few
 adjustments that are included in the file
-\texttt{ubonn-biblatex.sty}%
-\footnote{In the past (before version 3.0) these files were called
+\texttt{ubonn-biblatex.sty}.\footnote{%
+  In the past (before version 3.0) these files were called
   \texttt{./biblatex/biblatex-num-v2009.sty} and
   \texttt{./biblatex/biblatex-num-v2011.sty}. Which file was used
   by default was steered by the \Macro{texlive} macro which is set in the
@@ -400,6 +401,8 @@ The following options exist:
   \midrule
   texlive & 2014 & Specify the \TeXLive version.
   You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
+  block & ragged & Specify the justification of each reference;\\
+  maxbibnames & 5 & Numbers of authors to list before switching to \enquote{et al.};\\
   articletitle & true & Show the titles of articles and reports;\\
   titlequote & false & Enclose the title in quotes rather than using a slanted font.\\
   boldvol & false & Show the volume in bold face.\\
@@ -422,7 +425,7 @@ paragraph. It is not clear to me if you also need
 \verb+\AtEveryCitekey{\clearfield{url}}+.
 
 A fairly nice-looking style is \Option{ieee}. This is only be
-available in recent releases ($\geq 2011$) of \TeXLive. After playing around
+available in recent releases (\(\geq 2011\)) of \TeXLive. After playing around
 a bit with the \Option{ieee} style, I decided it is too new and has
 too many settings that depend on having a new version of
 \Package{biblatex} for now.
@@ -433,7 +436,7 @@ not as many as traditional \BibTeX. It is, however, much easier to change things
 was for traditional \BibTeX, so you can probably start with a standard file and
 just make adjustments in your preamble. I have found a number of very
 useful hints on how to make changes in
-\url{http://tex.stackexchange.com/} -- just search for \Package{biblatex}.
+\url{http://tex.stackexchange.com/} --- just search for \Package{biblatex}.
 
 If you include \Package{ubonn-thesis} with the option \Option{astrobib},
 the references will be formatted in the style usually used in astrophysics publications.\index{astronomy}\index{astrophysics}
@@ -470,14 +473,14 @@ Compilation failed in require at Biber/Utils.pm line 21.
 \end{verbatim}
 }
 \noindent
-then you should delete the directory \texttt{/tmp/par-...} and try to
+then you should delete the directory \texttt{/tmp/par-\ldots} and try to
 run again. The directory name depends on the operating system you are using.
 Use the command \verb|biber --cache| to find out where it is.
-If you are adventurous, the command \verb|rm -rf `biber --cache`| will do it all for you!
+If you are adventurous, the command \verb|rm -rf $(biber --cache)| will do it all for you!
 
 
 %------------------------------------------------------------------------------
-\subsection{Traditional \BibTeX{} styles}
+\subsection{Traditional \BibTeX{} styles}%
 \label{sec:ref:bst}
 
 I strongly recommend that you use \Package{biblatex} and \Package{biber}, but if you insist\ldots
@@ -486,7 +489,7 @@ If you use references directly from Spires or Inspire, then it is
 probably best to use one of the style files that is compatible with
 their format. A list can be found on
 \url{http://www.slac.stanford.edu/spires/hep/refs/bibstyles.shtml}. I
-have used \Option{utphys} a few times and it works OK. I see that
+have used \Option{utphys} a few times and it works OK\@. I see that
 there are also style files available there for common HEP journals,
 which could save quite a bit of work. The big advantage of
 \Option{utphys} is that it also knows about the arXiv and preprints.
@@ -501,7 +504,7 @@ These are included in the \texttt{refs} directory.
 
 
 %------------------------------------------------------------------------------
-\section{Errata}
+\section{Errata}%
 \label{sec:ref:errata}
 
 What is the best way to include errata?\index{Errata}
@@ -545,7 +548,7 @@ However, the Errata are simply ignored.
 
 
 %------------------------------------------------------------------------------
-\section{Sources for references}
+\section{Sources for references}%
 \label{sec:ref:sources}
 %------------------------------------------------------------------------------
 
@@ -585,7 +588,7 @@ change things such as \verb+Q^2+ to \verb+$Q^{2}$+.
 
 
 %------------------------------------------------------------------------------
-\section{Common wishes}
+\section{Common wishes}%
 \label{sec:ref:tips}
 %------------------------------------------------------------------------------
 
@@ -606,7 +609,7 @@ this is all you have to do.  If, however, you are using \TeXLive
 \texttt{entryset}.
 
 One thing you should always do is include all references in a single
-\Macro{cite}. e.g.\ there were quite a few ZEUS publications in
+\Macro{cite}, e.g.\ there were quite a few ZEUS publications in
 2009~\cite{Chekanov:2009qja,Chekanov:2009zz,Chekanov:2009tu} is better
 than~\cite{Chekanov:2009qja}\cite{Chekanov:2009zz}\cite{Chekanov:2009tu}.
 If you want to get a list of references printed in the form \enquote{[m--n]},
@@ -616,7 +619,7 @@ ZEUS
 collaboration~\cite{Chekanov:2009qja,Chekanov:2009zz,Chekanov:2009tu}
 as well as several articles from both the H1 and ZEUS
 collaborations\cite{Chekanov:2009wt,Aaron:2009wg}. See
-Section~\ref{sec:ref:mcite} on how to do this with \BibTeX.
+\cref{sec:ref:mcite} on how to do this with \BibTeX.
 
 In some areas, it is more common to give a bibliography per chapter,
 rather than collecting all references at the end of the thesis.
@@ -646,7 +649,8 @@ files and these files also contain many references that you do not use
 or want to correct. How best to proceed?
 \begin{verbatim}
 bibtool -x mythesis.aux -o refs.bib
-\end{verbatim}\index{bibtool}
+\end{verbatim}%
+\index{bibtool}
 will extract the entries that you use and in future you can use and
 correct \texttt{refs.bib}, which only contains the references that you
 actually cite.\footnote{%
@@ -657,7 +661,7 @@ Do not forget to change \texttt{mythesis.tex} to use
 
 
 %------------------------------------------------------------------------------
-\section{Using \Package{mcite}}
+\section{Using \Package{mcite}}%
 \label{sec:ref:mcite}
 %------------------------------------------------------------------------------
 
@@ -666,9 +670,9 @@ of combining several articles into a single references and also
 getting them to be printed out in the form \enquote{[m--n]}, rather
 than \enquote{[l,m,n]} or \enquote{[l],[m],[n]}. How do you achieve
 this?  Just put all the articles in a single \Macro{cite} and prefix
-those that should be lumped together with a \enquote{*}, e.g.\
-\verb+\cite{Chekanov:2009wt,*Aaron:2009wg,*Aaron:2009sma}+.  The
-problem is that this package does not appear to be compatible with the
+those that should be lumped together with a \enquote{*},\\
+e.g.\ \verb+\cite{Chekanov:2009wt,*Aaron:2009wg,*Aaron:2009sma}+.
+The problem is that this package does not appear to be compatible with the
 \Package{hyperref} package, so you have to choose between the
 two. Given the ability that the \Package{hyperref} package offers to
 jump directly to sections, equations, references referred to in a

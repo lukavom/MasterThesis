@@ -1,5 +1,8 @@
+% !TeX root = thesis_guide.tex
+% chktex-file 1 chktex-file 46
+
 %==============================================================================
-\chapter{Changes and plans}
+\chapter{Changes and plans}%
 \label{sec:app:changes}
 %==============================================================================
 
@@ -15,9 +18,10 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
-  10 Mar 2018 & 6.0 & After a \Command{make new} the \File{mythesis} directory should now be standalone.
+  05 Dec 2018 & 6.0 & \TeXLive 2016 is now the default.
+    After a \Command{make new} the \File{mythesis} directory should now be standalone.
     This make it easier to use Git etc.
-    Bibliography files now go in \File{bib} subdirectory.
+    Bibliography files now go in the \File{bib} subdirectory.
     Use \Command{latexmk} by default to compile.
     Add a command \Command{make update} to update to a newer version of the style files.
     Switch to \Package{newtx} as the default font.
@@ -25,23 +29,24 @@ information.
     Add documentation on \Package{todonotes} and \Package{cleveref} packages.
     Switch from \Package{scrpage2} to \Package{scrlayer-scrpage} package.
     Add information on how to handle errata.
-    Improve bar width in \Package{heppennames} and \Package{hepnicenames}.\\
+    Improve bar width in \Package{heppennames} and \Package{hepnicenames}.
+    Switch to version 4 of \Package{mhchem}.\\
   
   30 Jun 2016 & 5.1 & Add \Package{hepnicenames} and \Package{heppennames} packages.
     Add a bit more documentation on particle definitions.
-    Added some more information and updated the guidelines on positioning of figures.
-    Month and address/location are not include in references by default.\\
+    Add some more information and updated the guidelines on positioning of figures.
+    Month and address/location are not included in references by default.\\
     
   15 Mar 2016 & 5.0 & Move from SVN to Git repository. Update documentation accordingly.
-    Small fix so comma is not part of link from journal entry to DOI.
+    Small fix so comma is not part of link from journal entry to DOI\@.
     Add a workaround for conflicts involving \Package{refcheck}, \Package{subcaption} and \Package{refcheck}.\\
     
   27 Aug 2015 & 4.0 & Add options for thesis type and stage.
     This simplifies and improves how the different cover and title pages are included.
     Put bibliography before appendix (this seems to be more standard).
     With this the bibliography moves into \Macro{mainmatter}.
-    Use \KOMAScript{} options to add lines around chapter headings -- small change to the style.
-    Add a skeleton that compiles with \TeXLive 2009 -- \texttt{make new09} command.
+    Use \KOMAScript{} options to add lines around chapter headings --- small change to the style.
+    Add a skeleton that compiles with \TeXLive 2009 --- \texttt{make new09} command.
     Remove most advice and switches to use \texttt{bibtex8}.
     The 2009 version of the skeleton now uses traditional \BibTeX.
     Add ATLAS bibliography style files.
@@ -88,11 +93,11 @@ information.
   submission a separate chapter (so that PhD submission can also be a
   separate document). Make \TeXLive
   2011 the default. Make Inspire rather than Spires default.\\
-  \bottomrule
+  \bottomrule%
   \label{tab:ubonn-thesis:changes}
 \end{longtable}
 
-Table~\ref{tab:pibonn-thesis:changes} summarises the changes that were made during the 
+\Cref{tab:pibonn-thesis:changes} summarises the changes that were made during the 
 development of the \Package{pibonn-thesis} package.
 
 \begin{longtable}{lp{0.8\textwidth}}
@@ -115,7 +120,7 @@ development of the \Package{pibonn-thesis} package.
   
   14 Dec 2012 & Added a glossary and a list of acronyms as well as
   instructions on how to make them. Skeleton CV for PhD thesis added
-  -- has still to be cross-checked with the Promotionsbüro.\\
+  --- has still to be cross-checked with the Promotionsbüro.\\
   
   04 Dec 2012 & Add some hints on what title pages to use when and
   what you have to worry about when printing and submitting your thesis.\\
@@ -159,7 +164,7 @@ development of the \Package{pibonn-thesis} package.
   some more sources of information. Reorganise and improve a bit the
   references chapter. Reorganise information on installing a \TeX\
   setup. Move Windows XP to a separate subsection. Add a bit of
-  information for MacOS. Add a bit of information on
+  information for MacOS\@. Add a bit of information on
   the \Package{subfiles} package.\\
   
   06 Mar 2012 & Add more information on formatting footnotes.\\
@@ -181,7 +186,7 @@ development of the \Package{pibonn-thesis} package.
   
   23 May 2011 & Changed default font to txfonts. Added more font
   options and explanation.\\
-  \bottomrule
+  \bottomrule%
   \label{tab:pibonn-thesis:changes}
 \end{longtable}
 
@@ -190,13 +195,12 @@ this guide:
 \begin{itemize}
 \item Add drawing of Feynman graphs with \Package{axodraw} and/or
   \Package{jaxodraw}.
-\item Add drawing of Feynman graphs with \Package{PyFeyn}.
 \item Add instructions on content of CV and summary for PhD thesis.
 \end{itemize}
 
 
 %==============================================================================
-\chapter{\TeX{} setup and packages}
+\chapter{\TeX{} setup and packages}%
 \label{sec:app:tex}
 %==============================================================================
 
@@ -214,7 +218,7 @@ Other packages that I recommend and that are subject to rapid
 development still are \Package{biblatex} and
 \Package{siunitx}. If you want to fully exploit their capabilities,
 you should make sure you \LaTeX{} installation is as recent as
-possible -- I recommend \TeXLive 2013, 2014 or 2015.
+possible --- I recommend at least \TeXLive 2013 and preferably later.
 
 As I mentioned in the introduction, the institute is a member of Dante
 and I therefore receive a copy of the \TeX\ Collection DVD every
@@ -223,11 +227,11 @@ Users (TUG) group web page: \url{http://www.tug.org/texcollection}.
 
 
 %------------------------------------------------------------------------------
-\section{Integrated environments}
+\section{Integrated environments}%
 \label{sec:app:compile}
 %------------------------------------------------------------------------------
 
-As already mentioned in Section~\ref{sec:tips:do}, I highly recommend
+As already mentioned in \cref{sec:tips:do}, I highly recommend
 that you use an integrated environment for editing and compiling your
 thesis. All such tools allow you to define projects, which then know
 about which files should be included when compiling.
@@ -241,27 +245,11 @@ It is available as an Ubuntu package or from
 \url{http://www.xm1math.net/texmaker}.
 \TeXmaker and \TeXstudio (\TeX makerX) split in 2009, so both packages
 contain a lot of similarities.
+Visual Studio Code\index{Visual Studio Code}\footnote{%
+\url{https://code.visualstudio.com}}
+has a very nice extension for \LaTeX\ documents.
 Kile\index{kile} is quite popular, especially if you use the KDE
 desktop environment. 
-
-You can also make a glossary from within \TeXstudio. In order to do
-this you have to define a user build command. You can find such commands
-under:  \textsf{Options} $\to$ \textsf{Configure TeXstudio} $\to$
-\textsf{Build}. I defined a new command which I called
-\enquote{BuildWithGlossary}. This executes \texttt{pdflatex, biber,
-  makeindex, makeglossary, pdflatex, pdflatex}.
-
-I currently use Visual Studio Code as my editor for both
-\LaTeX\ and other programs.
-It is available for Windows, MacOS and Linux.
-The big advantage is that you have one editor for both documentation and code.
-It works quite well for writign \LaTeX,
-but assumes that you know the \LaTeX\ commands that you want to include.
-Rapid development is ongoing,
-also for the \LaTeX extension \enquote{LaTeX Workshop} that you should certainly install.
-If you have \Command{chktex} installed you should also enable it,
-as it helps you to fnd errors 
-and gives a lot of information on the quality of your \LaTeX.
 
 I used to use \texttt{emacs}\index{emacs} and AUCTeX, as I can
 then use the same editor for everything. Note that the
@@ -271,7 +259,7 @@ citations easily.
 
 
 %------------------------------------------------------------------------------
-\subsection{\TeXstudio}
+\subsection{\TeXstudio}%
 \label{sec:app:texstudio}\index{TeXStudio}
 
 I have been using \TeXstudio as my main tool for creating \LaTeX\ documents since 2013.
@@ -285,15 +273,44 @@ the \LaTeX\ source code, which is extremely helpful.
 You can also usually click on an error in the Message window and the cursor will jump to the right spot.
 This makes debugging and proofreading much easier.
 
+You can configure \TeXstudio to use \Command{latexmk}\index{latexmk} by default.
 It is easy to switch between \texttt{biber} and \texttt{bibtex} using the Build preferences.
+
+You can also make a glossary from within \TeXstudio. In order to do
+this you have to define a user build command. You can find such commands
+under:  \textsf{Options} $\to$ \textsf{Configure TeXstudio} $\to$
+\textsf{Build}. I defined a new command which I called
+\enquote{BuildWithGlossary}. This executes \texttt{pdflatex, biber,
+  makeindex, makeglossary, pdflatex, pdflatex}.
 
 
 %------------------------------------------------------------------------------
-\subsection{Kile}
+\subsection{Visual Studio Code}%
+\label{sec:app:vscode}\index{Visual Studio Code}\index{vscode}
+
+I currently use Visual Studio Code\index{Visual Studio Code} as my editor for both
+\LaTeX\ and other programs.
+It is available for Windows, MacOS and Linux.
+The big advantage is that you have one editor for both documentation and code.
+It works quite well for writing \LaTeX,
+but assumes that you know the \LaTeX\ commands that you want to include.
+Rapid development is ongoing,
+also for the \LaTeX extension \enquote{LaTeX Workshop} that you should certainly install.
+If you have \Command{chktex} installed you should also enable it,
+as it helps you to find errors 
+and gives a lot of information on the quality of your \LaTeX.
+
+
+%------------------------------------------------------------------------------
+\subsection{Kile}%
 \label{sec:app:kubuntu:kile}\index{kile}
 
 Many people use Kile as their environment for editing and compiling
-\LaTeX. If you use \texttt{bibtex} for your references then the default
+\LaTeX. 
+I have not used it for a number of years,
+so some of the instructions I give here may be out of date.
+
+If you use \texttt{bibtex} for your references then the default
 setup does not have to be changed. If you want to use the
 \Option{biber}\index{biber} backend then you should integrate the
 command into Kile.
@@ -319,11 +336,12 @@ Kile, but it should be possible to do it in the same way as you add a
 
 
 %------------------------------------------------------------------------------
-\section{MacOS}
+\section{MacOS}%
 \label{sec:app:mac}\index{MacOS}
 %------------------------------------------------------------------------------
 
-For the past year, I have been installing and running \LaTeX\ on a MacBook Pro.
+For the past several years,
+I have been installing and running \LaTeX\ on a MacBook Pro.
 The standard package you start with is \TeX Shop. 
 Together with Basic\TeX\ this provides a basic environment. 
 However, if you want to do more (like write a thesis),
@@ -338,12 +356,13 @@ I have been using \TeXstudio.
 
 
 %------------------------------------------------------------------------------
-\section{(Ku|Xu|U)buntu}
+\section{(Ku|Xu|U)buntu}% chktex 36
 \label{sec:app:kubuntu}\index{Linux}\index{Ubuntu}\index{Kubuntu}\index{Xubuntu}
 %------------------------------------------------------------------------------
 
 For most of my tests with Ubuntu I have been using Xubuntu 14.04 and 
-\TeXLive 2013. Very recently I have also used Xubuntu 16.04 and \TeXLive 015.
+\TeXLive 2013.
+More recently I have also used Xubuntu 16.04 and \TeXLive 015.
 
 I also made the guide on a plain Xubuntu 12.04
 installation, which used the default packages from the Xubuntu image. At
@@ -376,7 +395,7 @@ For Ubuntu 13.04 and later I also had to install \texttt{texlive-metapost} in
 order to compile the guide.
 
 \noindent
-(Ku|Xu|U)buntu 12.04 has \TeXLive 2009 installed by default.
+(Ku|Xu|U)buntu 12.04 has \TeXLive 2009 installed by default. % chktex 36
 You will need to install \texttt{texlive-latex3}.
 Later versions include the relevant packages in \texttt{texlive-latex-recommended} which is installed by default.
 You also have to install \texttt{biblatex} rather than \texttt{texlive-bibtex-extra}.
@@ -420,7 +439,8 @@ make guide09
 \end{verbatim}
 
 The default version of the guide also compiles on ATLAS Bonn desktop
-computers ((K)Ubuntu 12.04 with \TeXLive 2012). If you want to use
+computers (Ubuntu 18.04 with \TeXLive 2017). % chktex 36
+If you want to use
 \Package{feynmf} instead of \Package{feynmp} to compile the guide, you
 have to pass the option \Option{feynmf} instead of \Option{feynmp} to \texttt{ubonn-thesis.sty} 
 and give the command \texttt{make feynmf} before \texttt{make guide}.
@@ -485,8 +505,8 @@ and that \LaTeX\ is then taken from there rather than the usual
 
 With Kubuntu 13.04, I had to install \texttt{texdoc} in addition in
 order to be able to use it to access the documentation with
-it.\footnote{This was not necessary for earlier (K)Ubuntu versions. I
-  found it a bit strange, but it seems to be needed.}
+it.\footnote{This was not necessary for earlier (K)Ubuntu versions. % chktex 36
+  I found it a bit strange, but it seems to be needed.}
 
 For updating, additions of packages etc., it is useful to define an
 alias in your \texttt{.bashrc} or \texttt{.bash\_aliases}:
@@ -515,16 +535,16 @@ link from \texttt{/usr/local/bin/gnome-open} to
 
 
 %------------------------------------------------------------------------------
-\section{Windows}
+\section{Windows}%
 \label{sec:app:windows}\index{windows}
 %------------------------------------------------------------------------------
 
 I also tried to to make the guide and a skeleton thesis under Windows. 
 My tests have been done with Windows 7 and more recently Windows 10.
 I simply downloaded the MiK\TeX\ installer from \url{http://miktex.org}.
-This is discussed in Section~\ref{sec:app:miktex}.
+This is discussed in \cref{sec:app:miktex}.
 You can also install \TeXLive for Windows. Some hints on how to do
-this are given below (Section~\ref{sec:app:texlive}).\footnote{%
+this are given below (\cref{sec:app:texlive}).\footnote{%
 I have had success with the 2010 \TeX{} Collection DVD from Dante to install
 pro\TeX t, which is based on MiK\TeX.
 Newer versions should also work without problems.
@@ -540,7 +560,7 @@ To checkout the files, simply start Windows Explorer and go to the
 top-level directory where you want to do the checkout, right-click on
 the mouse and enter\\
 \texttt{https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git}
-as the URL.
+as the URL\@.
 If you do this you can stay at the cutting edge!
 If you want a particular version then specify the branch you want, e.g.\ \enquote{v5.0}.
 You can of course simply download the appropriate tar file from the PI webpages.
@@ -579,12 +599,12 @@ make
 
 \TeXstudio knows about indexes and glossaries. You have to set up a
 user command to execute \texttt{makeindex} and \texttt{makeglossaries}
-as discussed in Section~\ref{sec:app:compile}. With the addition of
+as discussed in \cref{sec:app:compile}. With the addition of
 these commands, you should also be able to compile this guide.
 
 If you run PDF\LaTeX\ with the option \texttt{-enable-write18} and
-include appropriate \texttt{mpost} commands in your \LaTeX\ file(s), as
-discussed in Section~\ref{sec:fig:feynman:feynmf}, Feynman graphs made
+include appropriate \texttt{mpost} commands in your \LaTeX\ file(s), %chktex 36
+as discussed in \cref{sec:fig:feynman:feynmf}, Feynman graphs made
 using \Package{feynmp} work well. With \TeXstudio, you can simply
 include this option in the PDF\LaTeX\ command: \textsf{Options} $\to$
 \textsf{Configure TeXstudio} $\to$ \textsf{Commands}.
@@ -595,18 +615,18 @@ tried to run Metafont on them.
 
 
 %------------------------------------------------------------------------------
-\subsection{MiK\TeX}
+\subsection{MiK\TeX}%
 \label{sec:app:miktex}
 
 I have installed \TeX\ under Windows both from the \TeX{} Collection
 2010 DVD and via a download from Internet. For the DVD I logged in as
-an Administrator and then opened the DVD. It opened a \TeX\ Collection
+an Administrator and then opened the DVD\@. It opened a \TeX\ Collection
 window and I then clicked on pro\TeX t Quick Install and installed
 MiK\TeX{} (minimal version),\index{MiKTeX}
 Ghostscript\index{ghostscript} and Ghostview\index{ghostview} for all users.
 Once the installation was finished, I also updated all the
 packages using the MiK\TeX{} Maintenance (Admin) $\to$ Update (Admin)
-program. Be patient -- these updates always take a while!
+program. Be patient --- these updates always take a while!
 
 With the minimal version of MiK\TeX{} you are then asked whether to
 install the missing packages when first compiling a file that needs
@@ -621,11 +641,11 @@ Note that the Dante \TeX\ Collection 2011 DVD has dropped
 \TeXnicCenter within pro\TeX t and is using the \TeX makerX front-end
 instead. \TeX makerX has recently been superseded by \TeXstudio, My
 comments on \TeXnicCenter have been relegated to
-Chapter~\ref{sec:app:old}. There is also the package \TeXmaker.
+\cref{sec:app:old}. There is also the package \TeXmaker.
 
 
 %------------------------------------------------------------------------------
-\subsection{\TeXLive}
+\subsection{\TeXLive}%
 \label{sec:app:texlive}
 
 You can install \TeXLive instead of pro\TeX t. To do that you can
@@ -638,7 +658,7 @@ scheme. The following extra collections were needed:
 \begin{itemize}
 \item \textsf{BibTeX additional styles}
 \item \textsf{Generic additional packages}
-\item \textsf{LaTeX additional packages} -- needed for \Package{csquotes}
+\item \textsf{LaTeX additional packages} --- needed for \Package{csquotes}
 \item \textsf{Natural and computer sciences}
 \end{itemize}
 I also added the German documentation. Do not forget to toggle the
@@ -656,11 +676,11 @@ You can either use \TeXworks as the front end or you can install
 
 
 %==============================================================================
-\chapter{Print shops}
+\chapter{Print shops}%
 \label{app:printer}
 %==============================================================================
 
-For a PhD thesis, as mentioned in Section~\ref{sec:submit:phd}, you
+For a PhD thesis, as mentioned in \cref{sec:submit:phd}, you
 have to print and bind the five copies that are needed by the
 university library externally. Some print shops in the Bonn region
 that can supply the required quality at a reasonable price are:
@@ -670,14 +690,14 @@ that can supply the required quality at a reasonable price are:
 Typo-Druck \& Verlags-GmbH\\
 Irmintrudisstr. 1b\\
 53111 Bonn\\
-Telefon 0228-650905\\
+Telefon 0228-650905\\ % chktex 8
 \url{http://www.typo-druck.de}
 
 \item
 Buchbinderei Hennemann\\
 Paulusplatz 12\\
 53119 Bonn\\
-Telefon 0228-223521\\
+Telefon 0228-223521\\ % chktex 8
 \url{http://www.buchbinderei-hennemann.de}
 
 % Druckerei Schwarz
@@ -702,7 +722,7 @@ price was reasonable and they delivered quickly and in good quality.
 
 
 %==============================================================================
-\chapter{Making a glossary or list of acronyms}
+\chapter{Making a glossary or list of acronyms}%
 \label{sec:app:glossary}
 %==============================================================================
 
@@ -798,7 +818,7 @@ Once an acronym is defined, the first time the acronym is used,
 \Macro{gls}\{acronym\}, the full text and the abbreviation is
 printed. Every time after that only the abbreviation is printed.
 
-\section{ZEUS detector description}
+\section{ZEUS detector description}%
 \label{sec:app:glossary:zeus}
 
 In the kinematic range of the analysis, charged particles were tracked
@@ -841,11 +861,11 @@ there, while the \gls{MVD} was also installed later.
 
 
 %==============================================================================
-\chapter{Plots with \Package{\TikZ}}
+\chapter{Plots with \Package{\TikZ}}%
 \label{sec:app:tikz}
 %==============================================================================
 
-Figure~\ref{fig:tikz:syst} shows how you can produce a plot showing
+\Cref{fig:tikz:syst} shows how you can produce a plot showing
 the contributions of many different systematic uncertainties to a
 result. Note that this plot uses some modern features of
 the \Package{tikz} and \Package{pgfplots} packages. Hence it is only included if
@@ -865,13 +885,13 @@ this guide is compiled with \TeXLive 2011 or later.
   \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The
     results of strange excited charm meson fragmentation fraction and
     branching ratio with systematic variations.  The individual
-    systematic variations are put into groups $\delta_1-\delta_5$.}
+    systematic variations are put into groups $\delta_1-\delta_5$.}%
   \label{fig:tikz:syst}
 \end{figure}
 
 
 %==============================================================================
-\chapter{Long tables}
+\chapter{Long tables}%
 \label{sec:app:tables}
 %==============================================================================
 
@@ -881,13 +901,13 @@ Long and complicated tables, such as tables containing the breakdown
 of the systematic error for each data point are usually put into the
 appendices. Code or data cards can also be included here.  Examples of
 complicated typesetting have been given already in
-Chapter~\ref{sec:table}. In this appendix I give an example of a table
-(Table~\ref{tab:alphabet}) that goes over more than one page using the
+\cref{sec:table}. In this appendix I give an example of a table
+(\cref{tab:alphabet}) that goes over more than one page using the
 \Package{xtab} package. If instead you use \Package{longtable},
 note that it is a
 combination of \Env{tabular} and \Env{table} in one
 environment. 
-As mentioned in Chapter~\ref{sec:package}, an alternative
+As mentioned in \cref{sec:package}, an alternative
 is the \Package{supertabular} package.
  
 While footnotes do not work properly in a
@@ -926,7 +946,7 @@ As an alternative you can use the \Macro{shrinkheight} command.
   \midrule
 }
 \tablelasttail{\bottomrule}
-\bottomcaption{The alphabet.}
+\bottomcaption{The alphabet.}%
 \label{tab:alphabet}
 \xentrystretch{-0.15}
 \begin{center}
@@ -990,7 +1010,7 @@ As an alternative you can use the \Macro{shrinkheight} command.
 
 
 %==============================================================================
-\chapter{A famous equation is $E = mc^{2}$}
+\chapter{A famous equation is $E = mc^{2}$}%
 \label{sec:emc2}\index{math!bold}
 %==============================================================================
 
@@ -1008,7 +1028,7 @@ titles should be necessary. This is because the following line was added:
 %font also in the table of contents.
 
 %------------------------------------------------------------------------------
-\section{A slightly less famous equation $F = m a$}
+\section{A slightly less famous equation $F = m a$}%
 \label{sec:fma}
 %------------------------------------------------------------------------------
 
@@ -1020,16 +1040,16 @@ writing a book or report.
 
 %------------------------------------------------------------------------------
 \section[The cross-section is given by $\sigma = N / \mathcal{L}$]%
-        {The cross-section is given by $\sigma = N / \mathcal{L}$}
+        {The cross-section is given by $\sigma = N / \mathcal{L}$}%
 \label{sec:sig}
 %------------------------------------------------------------------------------
 
 This attempt includes \Macro{boldmath} by hand and uses Greek letters and some specific font.
-It appears to also work OK.
+It appears to also work OK\@.
 
 
 %==============================================================================
-\chapter{Old or obsolete information and instructions}
+\chapter{Old or obsolete information and instructions}%
 \label{sec:app:old}
 %==============================================================================
 
@@ -1040,7 +1060,7 @@ cluttering up the main chapters of the guide with outdated or obsolete
 information, such things are collected in this appendix.
 
 %------------------------------------------------------------------------------
-\section{More on \Package{feynmf}}
+\section{More on \Package{feynmf}}%
 \label{sec:app:feynmf}
 %------------------------------------------------------------------------------
 
@@ -1049,7 +1069,7 @@ because I think it is much easier to just use \Package{feynmp} than
 \Package{feynmf}. If you have \TeXLive 2012, you can combine
 \Package{feynmp} with \Package{standalone} for a very convenient way
 to develop and include Feynman graphs, as discussed in
-Section~\ref{sec:fig:feynman:feynmf}.
+\cref{sec:fig:feynman:feynmf}.
 
 If you use \Package{feynmp} you can just give the command \texttt{make
 feynmp} and it will produce PDF files of all the \texttt{tex} files in
@@ -1066,7 +1086,7 @@ graph.\footnote{Note that the example files that are included in this
   document tree are missing the \Macro{documentclass} and
   \Macro{usepackage} commands.}  This produces a \texttt{dvi} file
 that you then have to convert to Encapsulated Postscript and/or
-PDF. This is not totally trivial.
+PDF\@. This is not totally trivial.
 
 The best way is to specify the options to the \Package{geometry}
 package so that the page size corresponds to the Feynman graph. For a
@@ -1119,7 +1139,7 @@ you have specified the page size appropriately as discussed above.
 
 
 %------------------------------------------------------------------------------
-\section{Windows}
+\section{Windows}%
 \label{sec:app:old:windows}
 %------------------------------------------------------------------------------
 
@@ -1129,13 +1149,13 @@ you have specified the page size appropriately as discussed above.
 As I no longer have access to a Windows XP machine, and Windows XP is
 slowly disappearing, my experience with Windows XP stopped 2011.
 
-I started the \TeX{} Collection 2010 DVD. I started it as an
+I started the \TeX{} Collection 2010 DVD\@. I started it as an
 Administrator, it opened a \TeX\ Collection window and I then clicked
 on proTeXt Quick Install and installed MiK\TeX{} (minimal
 version),\index{MiKTeX}\index{TeXnic Center} \TeXnicCenter,
 Ghostscript and Ghostview for all users. Once the installation was
 finished, I also updated all the packages using the MiK\TeX{}
-Maintenance (Admin) $\to$ Update (Admin) program. Be patient -- these
+Maintenance (Admin) $\to$ Update (Admin) program. Be patient --- these
 updates always take a while!
 
 You should then be able to double-click on \texttt{mythesis.tex} and
@@ -1157,7 +1177,7 @@ not install it automatically. I had to use the MiK\TeX{} Maintenance
 
 
 %------------------------------------------------------------------------------
-\subsection{\TeXnicCenter}
+\subsection{\TeXnicCenter}%
 \label{sec:app:texnic}\index{TeXnic Center}
 
 I tried out the \TeXnicCenter, which is also available. You first
@@ -1195,9 +1215,3 @@ see much signs of progress.
 
 As \TeXnicCenter has been dropped on the Dante \TeX\ Collection 2011
 DVD I have relegated this information to a subsection.
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "./thesis_guide"
-%%% End:

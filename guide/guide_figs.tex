@@ -1,7 +1,8 @@
 % !TeX root = thesis_guide.tex
+% chktex-file 1 chktex-file 21
 
 %==============================================================================
-\chapter{Figures}
+\chapter{Figures}%
 \label{sec:fig}\index{figures}
 %==============================================================================
 
@@ -19,13 +20,13 @@ The chapter also contains some suggestions as to how to create Feynman
 graphs with a number of different packages.
 
 %------------------------------------------------------------------------------
-\section{Simple figures}
+\section{Simple figures}%
 \label{sec:fig:simple}
 %------------------------------------------------------------------------------
 
 A simple figure and its associated caption is straightforward to
 include. For example, the layout of the LHC and its experiments is
-shown in Fig.~\ref{fig:LHC}.
+shown in \cref{fig:LHC}.
 
 \begin{figure}[htbp]
   \centering
@@ -34,7 +35,7 @@ shown in Fig.~\ref{fig:LHC}.
   the surrounding countryside.]{Sketch of the LHC ring, the position
     of the experiments and the surrounding countryside. The four big
     LHC experiments are indicated. The location of the injection lines
-    and the SPS are also shown.}
+    and the SPS are also shown.}%
   \label{fig:LHC}
 \end{figure}
 
@@ -60,12 +61,12 @@ in \texttt{ubonn-thesis.sty}. Some examples of the possibilities are
 included in the style file.
 
 Another thing to consider is whether the text should be indented or
-not. For short captions, indentation is OK. I do not think it looks
+not. For short captions, indentation is OK\@. I do not think it looks
 good for long captions. Hence the style file sets
 \Macro{setcapindent}\texttt{\{0pt\}}.
 
 %------------------------------------------------------------------------------
-\section{Fancier figures}
+\section{Fancier figures}%
 \label{sec:fig:fancy}\index{figures!multiple}
 %------------------------------------------------------------------------------
 
@@ -75,10 +76,10 @@ the text to \enquote{flow} around the figure. For the first case I like to
 use the \Env{tabular} environment to place the plots, although
 there are other ways of doing it.
 
-Another very nice way to add (a), (b) etc. to the figure is to use the
+Another very nice way to add (a), (b) etc.\ to the figure is to use the
 \Macro{put} command. This has the big advantage that you can display
 the letters in the figure without actually having to add them to the
-EPS/PDF file. Figure~\ref{fig:letters1} shows how this is done. Note
+EPS/PDF file. \Cref{fig:letters1} shows how this is done. Note
 that the origin of the coordinate system is the bottom right-hand
 corner of the file that you have included (assuming that the
 \Macro{put} command comes just after the \Macro{includegraphics}).
@@ -86,8 +87,8 @@ The units for the \Macro{put} command are set with the
 \Macro{setlength}\texttt{\{\textbackslash unitlength\}} command, which
 is by default set to \SI{1}{\mm} in \texttt{ubonn-thesis.sty}. The
 same units are also used for Feynman graphs made with the
-\Package{feynmf} and/or \Package{feynmp} package -- see
-Section~\ref{sec:fig:feynman:feynmf}.
+\Package{feynmf} and/or \Package{feynmp} package --- see
+\cref{sec:fig:feynman:feynmf}.
 
 \begin{figure}[htbp]
   \centering
@@ -95,13 +96,13 @@ Section~\ref{sec:fig:feynman:feynmf}.
   \put(-130,14){(a)}
   \put(-80,14){(b)}
   \put(-35,14){(c)}
-  \caption{Adding letters to figures with \Macro{put}.}
+  \caption{Adding letters to figures with \Macro{put}.}%
   \label{fig:letters1}
 \end{figure}
 
 Another way of achieving the same thing, but this time with the letter
 outside the figure is to use \Env{tabular}. An example of this is
-shown in Fig.~\ref{fig:letters2}.
+shown in \cref{fig:letters2}.
 
 \begin{figure}[htbp]
   \centering
@@ -109,7 +110,7 @@ shown in Fig.~\ref{fig:letters2}.
     \multicolumn{3}{c}{\includegraphics[width=\figwidth]{gg_tt}}\\
     (a) & (b) & (c)
   \end{tabular}
-  \caption{Adding letters to figures with \Env{tabular}.}
+  \caption{Adding letters to figures with \Env{tabular}.}%
   \label{fig:letters2}
 \end{figure}
 
@@ -132,7 +133,7 @@ width equal to \Macro{figwidth} and then the offset to \texttt{-\Macro*{figwidth
   \centering
   \begin{captionbeside}{A small figure with a simple caption beside it.}[i][\figwidth][-\figwidth]
     \includegraphics[width=0.3\textwidth]{qq_tt}
-  \end{captionbeside}
+  \end{captionbeside}%
   \label{fig:qqtt}
 \end{figure}
 
@@ -142,12 +143,12 @@ An alternative, and successor, to \Package{subfig} is
 \Package{subcaption}. It works in much the same way as
 \Package{subfig}. A nice tutorial on its use can be found in
 \url{http://www.peteryu.ca/tutorials/publishing/latex_captions}.
-An example of its use can be seen in Fig.~\ref{fig:nccc}.
+An example of its use can be seen in \cref{fig:nccc}.
 The \LaTeX\ file \texttt{guide\_figs.tex} contains examples for both \Package{subfig} and 
 \Package{subcaption}, as the way \Package{subcaption} should be used was
 different for \TeXLive 2011 and earlier.
 You can see how to reference
-the different parts of the figure in Section~\ref{sec:fig:feynman}. If
+the different parts of the figure in \cref{sec:fig:feynman}. If
 you want the captions of the sub-figures to also appear in the
 \enquote{List of Figures} you should include the package with the
 option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
@@ -157,15 +158,15 @@ option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
 \begin{figure}[htbp]
   \centering
   \subfloat[NC scattering]{%
-    \includegraphics[width=0.5\figwidth]{ep_nc}
+    \includegraphics[width=0.5\figwidth]{ep_nc}%
     \label{fig:nccc-nc}
   }
   \qquad
   \subfloat[CC scattering]{%
-    \includegraphics[width=0.5\figwidth]{ep_cc}
+    \includegraphics[width=0.5\figwidth]{ep_cc}%
     \label{fig:nccc-cc}
   }
-  \caption{Processes in $ep$ scattering.}
+  \caption{Processes in \(ep\) scattering.}%
   \label{fig:nccc}
 \end{figure}
 }{%
@@ -180,7 +181,7 @@ option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
     \includegraphics[width=0.5\figwidth]{ep_cc}
     \caption{CC scattering}\label{fig:nccc-cc}
   \end{subfigure}
-  \caption{Processes in $ep$ scattering.}
+  \caption{Processes in \(ep\) scattering.}%
   \label{fig:nccc}
 \end{figure}
 }
@@ -190,7 +191,7 @@ theses) you can use the \Package{wrapfig} package.
 
 
 %------------------------------------------------------------------------------
-\section{Figure formats}
+\section{Figure formats}%
 \label{sec:fig:formats}\index{figures~formats}
 %------------------------------------------------------------------------------
 
@@ -202,7 +203,7 @@ This restriction has finally been lifted with \TeXLive 2011. It
 simply converts the EPS files to PDF inline.}
 I would still recommend that you always try to use
 a vector graphic format. What usually works well is to either create
-PDF directly or to create EPS and then convert from EPS to PDF.
+PDF directly or to create EPS and then convert from EPS to PDF\@.
 
 The tool I use for conversion is \texttt{epstopdf}. Occasionally this
 fails; in that case \texttt{eps2eps} can help. It is important that
@@ -215,7 +216,7 @@ which is a successor to \texttt{xfig}. Professionals use Adobe Illustrator!
 
 
 %------------------------------------------------------------------------------
-\section{\TikZ and PGF}
+\section{\TikZ and PGF}%
 \label{sec:fig:tikz}\index{TikZ@\TikZ}
 %------------------------------------------------------------------------------
 
@@ -223,7 +224,7 @@ which is a successor to \texttt{xfig}. Professionals use Adobe Illustrator!
 creating graphics \enquote{inline}. For 3D figures you also need
 \Package{tikz-3dplot}. PGF is the backend, while \TikZ is what the
 user interacts with directly. The manual contains all the information
-you should need, but is 726 pages long at the last count, so it may
+you should need, but was 1161 pages long at the last count, so it may
 not to be too easy to find what you want!
 
 I do not have much experience with using these packages so far, so
@@ -249,7 +250,7 @@ you should include if you want to use it.
 
 You often want to include a figure of your experiment's coordinate
 system in your thesis. One way to do this is illustrated in
-Fig.~\ref{fig:tikz:coord}.
+\cref{fig:tikz:coord}.
 
 \begin{figure}[htbp]
   \centering
@@ -261,12 +262,12 @@ Fig.~\ref{fig:tikz:coord}.
   }{%
     \input{../tikz/zeus_coords.tex}
   }
-  \caption{The ZEUS coordinate system.}
+  \caption{The ZEUS coordinate system.}%
   \label{fig:tikz:coord}
 \end{figure}
 
 It is also possible to make flow charts with \TikZ. This is
-illustrated in Fig.~\ref{fig:tikz:flow}.
+illustrated in \cref{fig:tikz:flow}.
 
 \begin{figure}[htbp]
   \centering
@@ -278,20 +279,110 @@ illustrated in Fig.~\ref{fig:tikz:flow}.
   }{%
     \input{../tikz/zeus_reconstruction.tex}
   }
-  \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}
+  \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}%
   \label{fig:tikz:flow}
 \end{figure}
 
 There are many more possibilities,
 including plots which you would otherwise make with \texttt{root} or
 some other graphics program. An example plot showing the effect of
-systematic variations can be found in App.~\ref{sec:app:tikz}. Making
-Feynman graphs with \TikZ is covered in
-Section~\ref{sec:fig:feynman:tikz}.
+systematic variations can be found in \cref{sec:app:tikz}. Making
+Feynman graphs with \TikZ is covered in \cref{sec:fig:feynman:tikz}.
 
 
 %------------------------------------------------------------------------------
-\subsection{\Package{standalone} package and class}
+\subsection{Accelerator lattices}%
+\label{sec:fig:accelerator}
+
+If you want to include an accelerator lattice in your thesis you can try
+\Package{tikz-palattice}\footnote{%
+  \url{https://ctan.org/pkg/tikz-palattice}
+  written by Jan Schmidt, who gave me a number of useful tips for this guide.}
+He used the package to make lattices of particle accelerators for his PhD thesis.
+
+
+%------------------------------------------------------------------------------
+\section{Placement}%
+\label{sec:fig:placement}
+%------------------------------------------------------------------------------
+
+Even after many years of including figures into \LaTeX{} files, I
+still think there is a fair amount of black magic involved in getting
+them into the place that you want them to be.
+
+In general, you are advised to give \LaTeX{} as much freedom as
+possible in the placing, so it is usual to use the options
+\Option{[htbp]} for the placement. In particular, be very careful with
+using just \Option{[h]} or \Option{[H]} as the placement option. It very
+easily leads to \LaTeX{} putting single lines of text either above or
+below a figure.
+One way to get rid of single lines is to remove the option \Option{h},
+as the figure must then be placed at the top or bottom of the page
+(or on a page of floats).
+You can also add an \Option{!} in the list
+of options, which suspends spacing and number restrictions.
+
+A nice summary of the logic behind the placement can be found in
+\href{http://tex.stackexchange.com/questions/39017/how-to-influence-the-position-of-float-environments-like-figure-and-table-in-lat}{\TeX/\LaTeX\ Stack Exchange} (click on the link!).
+A couple of points from there that are worth mentioning here:
+\begin{itemize}
+\item The order of the options \Option{htbp} has no effect!
+\item If a float is placed in the middle of a paragraph,
+  the reference point for deciding where it will appear is the next line break or page break in the paragraph,
+  following the float.
+\item The order of figures (and tables) is fixed to the order that they are included in a document.
+  However, the order of figures and tables relative to each other is not fixed.
+\end{itemize}
+
+The
+\href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=floats}{UK List of FAQ}
+recommends changing several default \LaTeX\ options so that there are fewer problems
+with figure and table placement.
+It is certainly worth reading that page for further advice.
+As it is very hard to really test how well these options work
+they can be turned on or off in \Package{ubonn-thesis} via the option \Option{floatopt=true|false}.
+The default value is set to \Option{true}.
+
+I used to think it was better to attach the figure to a paragraph:
+\begin{verbatim}
+The distribution is shown in \cref{fig:funny1}.
+%
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\figwidth]{file}
+  \caption{An odd plot that I don't understand.}
+  \label{fig:funny1}
+\end{figure}
+%
+The distribution shows something that I do not understand.
+
+Given that this is not understood we went to the pub for a beer to
+think about it a bit more.
+\end{verbatim}
+
+More recently it appears to me to be better to separate the figure
+from the paragraph:
+\begin{verbatim}
+The distribution is shown in \cref{fig:funny2}.
+The distribution shows something that I do not understand.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\figwidth]{file}
+  \caption{An odd plot that I don't understand.}
+  \label{fig:funny2}
+\end{figure}
+
+Given that this is not understood we went to the pub for a beer to
+think about it a bit more.
+\end{verbatim}
+
+However, it is hard to give a hard and fast rule here.
+As indicated above, the effect of these different ways of including a figure (and table) is the point in the text (reference point) that \LaTeX\ uses to start trying to place the figure.
+In general, you should only try to tweak the position of figures and tables when your text is final,
+as a change in the text way well move some of the floats.
+%------------------------------------------------------------------------------
+\subsection{\Package{standalone} package and class}%
 \label{sec:fig:standalone}
 
 The \Package{standalone} package provides a great way of developing
@@ -311,7 +402,7 @@ your thesis.
 
 
 %------------------------------------------------------------------------------
-\section{Feynman graphs}
+\section{Feynman graphs}%
 \label{sec:fig:feynman}\index{figures!Feynman graphs}\index{Feynman graphs}
 %------------------------------------------------------------------------------
 
@@ -330,15 +421,15 @@ Alternatives include \Package{axodraw} and the \Package{feynmf} or
 \Package{feynmp} packages.
 It is also possible to use \Package{tikz}.
 The use of \Package{feynmf} and \Package{feynmp} is
-described in Section~\ref{sec:fig:feynman:feynmf}, while a few
+described in \cref{sec:fig:feynman:feynmf}, while a few
 examples of usage of \Package{tikz} are given in
-Section~\ref{sec:fig:feynman:tikz}. Examples of Feynman graphs made
+\cref{sec:fig:feynman:tikz}. Examples of Feynman graphs made
 with \Package{feynmf} and \Package{feynmp} can be found in the
 \texttt{feynmf} directory, while those made with \Package{tikz} can
 be found in the \texttt{tikz} subdirectory.
 
 Instructions on how to use \Package{axodraw} may come at a later
-date -- contributions would be welcome! Several people have claimed
+date --- contributions would be welcome! Several people have claimed
 that \texttt{jaxodraw} is the way to go. This is a Java package which
 you can download from \url{http://jaxodraw.sourceforge.net/}. It has
 a Graphical User Interface (GUI) to \Package{axodraw} and so is simple and
@@ -349,16 +440,16 @@ figure that uses the environment \Env{subfigure} from the package \Package{subca
 If you compile the guide with \TeXLive 2011 or earlier the
 environment \Env{subcaption} from the package \Package{subfig} is used.
 The NC and CC graphs shown in
-Fig.~\ref{fig:nccc}, or more accurately in Fig.~\ref{fig:nccc-nc} and
-Fig.~\ref{fig:nccc-cc} were made with \Package{feynmp}. Another way of
-saying the same thing is that typical Feynman graphs for $ep$
-scattering are shown in Fig.~\ref{fig:nccc}, where
+\cref{fig:nccc}, or more accurately in \cref{fig:nccc-nc} and
+\cref{fig:nccc-cc} were made with \Package{feynmp}. Another way of
+saying the same thing is that typical Feynman graphs for \(ep\)
+scattering are shown in \cref{fig:nccc}, where
 \subref{fig:nccc-nc} shows a neutral current and \subref{fig:nccc-cc}
 show a charged current process.
 
 
 %------------------------------------------------------------------------------
-\subsection{PyFeyn}
+\subsection{PyFeyn}%
 \label{sec:fig:pyfeyn}\index{PyFeyn}
 
 As the name suggests, \Package{PyFeyn} (\url{https://pyfeyn.hepforge.org})
@@ -406,13 +497,13 @@ into your thesis directory, e.g.\ \File{mythesis}.
     \includegraphics[width=0.4\textwidth]{../pyfeyn/tZq_5FS_feyn}
   }
   \caption{Example Feynman graphs for the associated production
-    of a top quark and a \PZ boson.}
+    of a top quark and a \PZ boson.}%
   \label{fig:tZq-pyfeyn}
 \end{figure}
 
 
 %------------------------------------------------------------------------------
-\subsection{FeynMF and FeynMP}
+\subsection{FeynMF and FeynMP}%
 \label{sec:fig:feynman:feynmf}\index{feynmf}\index{feynmp}
 
 In order to use \Package{feynmf} or \Package{feynmp}, you have to put
@@ -425,7 +516,7 @@ You can either make
 a separate \LaTeX{} file containing the Feynman graph or include the
 commands inside your normal \LaTeX\ file.  Metapost\index{metapost} is
 a bit easier to use than Metafont.  You should be able to just run
-\texttt{mpost} after \texttt{(pdf)latex} and then run
+\texttt{mpost} after \texttt{(pdf)latex} and then run % chktex 36
 \texttt{pdflatex} again twice. Note that you have to run
 \texttt{mpost} on all the files whose names are defined at the
 beginning of the \Env{fmffile} environment. While Metapost works well
@@ -446,8 +537,8 @@ I think a better way to proceed is the following:
   command \texttt{make feynmp} or \texttt{make feynmf}.\\
   Check
   \texttt{./feynmf/feynmf\_all.dvi} or
-  \texttt{./feynmf/feynmf\_all.pdf} to see if the graphs are OK;
-\item run \LaTeX{} or PDF\LaTeX;
+  \texttt{./feynmf/feynmf\_all.pdf} to see if the graphs are OK\@;
+\item run \LaTeX{} or PDF\LaTeX; % chktex 13
 \item run \texttt{bibtex} or \texttt{biber};
 \item run \LaTeX{} or PDF\LaTeX{} again, at least twice.
 \end{itemize}
@@ -492,7 +583,7 @@ file. If you use this option, you should probably also adjust the
 as the target \texttt{tikz}. You have to run \texttt{pdflatex} twice
 on each file.
 
-Figure~\ref{fig:nccc-feynmf} shows the same neutral current and
+\Cref{fig:nccc-feynmf} shows the same neutral current and
 charged current graphs, but this time inputting the appropriate
 \Package{feynmf} commands directly. The graphs are enclosed in
 \Macro{fbox} for illustration purposes only.
@@ -518,22 +609,24 @@ starts with \verb+\begin{fmffile}{gluon}+.%
     \write18{mpost ep_cc}
   }
   \caption{NC and CC graphs for \(ep\) scattering using \Package{feynmf}
-    code directly.}
+    code directly.}%
   \label{fig:nccc-feynmf}
 \end{figure}
 
 With the \TeXLive 2011 and later setups I use to test this guide,
 this is all you need. If \texttt{mpost} does not run automatically,
-you must execute the command \texttt{pdflatex --shell-escape
-  mythesis} when you compile your thesis. This can be achieved by
+you must execute the command
+\texttt{pdflatex --shell-escape mythesis} when you compile your thesis.
+This can be achieved by
 including the \texttt{EXTRACMD} definition that is commented out in
-the \texttt{Makefile}. In this guide I put the Feynman graph in its
+the \texttt{Makefile}.
+In this guide I put the Feynman graph in its
 own file and the \Macro{write18} statement in the main file so that
 I can test \Package{feynmf} and \Package{feynmp} with the same
 \LaTeX\ code. In your thesis, you should probably put the
 \Macro{write18} statement in the file with the Feynman graph.
-If you use \Command{latexmk} to compile you probably need to use 
-the commented out version of the \Command{latexmk} command in the File{{Makefile}.
+If you use \Command{latexmk}\index{latexmk} to compile you probably need to use 
+the commented out version of the \Command{latexmk} command in the \File{Makefile}.
 
 As mentioned above, you probably want to first draw the graphs outside
 of your thesis to get them into the form that you need. If you give
@@ -547,7 +640,7 @@ then be looked at in \texttt{feynmf\_all.dvi} or\\
 
 
 %------------------------------------------------------------------------------
-\subsection{Feynman graphs with \TikZ}
+\subsection{Feynman graphs with \TikZ}%
 \label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}
 
 In order to draw Feynman graphs with \TikZ, you need to include some
@@ -565,7 +658,7 @@ at all, with very recent versions of \Package{tikz}.
 
 As a start we can directly compare a scattering graph made with
 \Package{feynmp} and \Package{tikz}. This is shown in
-Fig.~\ref{fig:feyn:cf}. As you can see the quality of the graphs is
+\cref{fig:feyn:cf}. As you can see the quality of the graphs is
 very similar. Further tweaking can probably make them almost
 identical.
 
@@ -597,7 +690,7 @@ identical.
       }
     }\label{fig:feyn:tikz}
   \end{minipage}
-  \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}
+  \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}%
   \label{fig:feyn:cf}
 \end{figure}
 }{%
@@ -615,91 +708,12 @@ identical.
     \input{../tikz/moeller.tex}
     \subcaption{\TikZ}\label{fig:feyn:tikz}
   \end{minipage}
-  \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}
+  \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}%
   \label{fig:feyn:cf}
 \end{figure}
 }
 
-%------------------------------------------------------------------------------
-\section{Placement}
-\label{sec:fig:placement}
-%------------------------------------------------------------------------------
 
-Even after many years of including figures into \LaTeX{} files, I
-still think there is a fair amount of black magic involved in getting
-them into the place that you want them to be.
-
-In general, you are advised to give \LaTeX{} as much freedom as
-possible in the placing, so it is usual to use the options
-\Option{[htbp]} for the placement. In particular, be very careful with
-using just \Option{[h]} or \Option{[H]} as the placement option. It very
-easily leads to \LaTeX{} putting single lines of text either above or
-below a figure.
-One way to get rid of single lines is to remove the option \Option{h},
-as the figure must then be placed at the top or bottom of the page
-(or on a page of floats).
-You can also add an \Option{!} in the list
-of options, which suspends spacing and number restrictions.
-
-A nice summary of the logic behind the placement can be found in
-\href{http://tex.stackexchange.com/questions/39017/how-to-influence-the-position-of-float-environments-like-figure-and-table-in-lat}{\TeX/\LaTeX\ Stack Exchange} (click on the link!).
-A couple of points from there that are worth mentioning here:
-\begin{itemize}
-\item The order of the options \Option{htbp} has no effect!
-\item If a float is placed in the middle of a paragraph,
-  the reference point for deciding where it will appear is the next line break or page break in the paragraph,
-  following the float.
-\item The order of figures (and tables) is fixed to the order that they are included in a document.
-  However, the order of figures and tables relative to each other is not fixed.
-\end{itemize}
-
-The
-\href{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=floats}{UK List of FAQ}
-recommends changing several default \LaTeX\ options so that there are fewer problems
-with figure and table placement.
-It is certainly worth reading that page for further advice.
-As it is very hard to really test how well these options work
-they can be turned on or off in \Package{ubonn-thesis} via the option \Option{floatopt=true|false}.
-The default value is set to \Option{true}.
-
-I used to think it was better to attach the figure to a paragraph:
-\begin{verbatim}
-The distribution is shown in Fig.~\ref{fig:funny1}.
-%
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\figwidth]{file}
-  \caption{An odd plot that I don't understand.}
-  \label{fig:funny1}
-\end{figure}
-%
-The distribution shows something that I do not understand.
-
-Given that this is not understood we went to the pub for a beer to
-think about it a bit more.
-\end{verbatim}
-
-More recently it appears to me to be better to separate the figure
-from the paragraph:
-\begin{verbatim}
-The distribution is shown in Fig.~\ref{fig:funny2}.
-The distribution shows something that I do not understand.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\figwidth]{file}
-  \caption{An odd plot that I don't understand.}
-  \label{fig:funny2}
-\end{figure}
-
-Given that this is not understood we went to the pub for a beer to
-think about it a bit more.
-\end{verbatim}
-
-However, it is hard to give a hard and fast rule here.
-As indicated above, the effect of these different ways of including a figure (and table) is the point in the text (reference point) that \LaTeX\ uses to start trying to place the figure.
-In general, you should only try to tweak the position of figures and tables when your text is final,
-as a change in the text way well move some of the floats.
 
 %%% Local Variables:
 %%% mode: latex

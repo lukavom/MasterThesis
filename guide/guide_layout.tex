@@ -1,5 +1,8 @@
+% !TEX root = thesis_guide.tex
+% chktex-file 1 chktex-file 21
+
 %==============================================================================
-\chapter{Layout and language}
+\chapter{Layout and language}%
 \label{sec:layout}
 %==============================================================================
 
@@ -11,7 +14,7 @@ on how you can change things.
 
 
 %------------------------------------------------------------------------------
-\section{Page layout}
+\section{Page layout}%
 \label{sec:layout:page}\index{page}
 %------------------------------------------------------------------------------
 
@@ -20,8 +23,8 @@ Page geometry can be changed using either the \Package{typearea} or
 the \Package{geometry} package. In this guide I use \Package{typearea}
 as it is closely tied into \KOMAScript. The basic command is to
 specify how many pieces to divide the page into. This guide uses
-\Option{DIV=14} by default with a binding correction of
-\Option{BCOR=8mm}.  You can then let \KOMAScript{} and
+\Option{DIV=12} by default with a binding correction of
+\Option{BCOR=5mm}.  You can then let \KOMAScript{} and
 \Package{typearea} sort out the rest. Note that \Package{typearea}
 will issue a warning that you have \enquote{Bad type area settings}
 when using \Option{DIV=14}. If you want to avoid this warning, you can
@@ -31,7 +34,7 @@ page is reduced by quite a bit and your thesis will cover more pages.
 The alternative is to use \Package{geometry}, where by default I say
 that the text should cover about 75\% of the page. In practice, I have
 found \Package{geometry} easier to use if you want to specify exactly
-the layout, e.g. making single Feynman graphs with
+the layout, e.g.\ making single Feynman graphs with
 \Package{feynmf}. \Package{typearea} is probably to be preferred for
 documents on normal paper sizes.
 
@@ -44,7 +47,7 @@ available in \KOMAScript.
 
 
 %------------------------------------------------------------------------------
-\section{Footnotes}
+\section{Footnotes}%
 \label{sec:layout:footnote}\index{footnote}
 %------------------------------------------------------------------------------
 
@@ -85,11 +88,11 @@ This is illustrated in footnote~\footref{foot:short}.
 To try out footnotes we try first an example which is probably how you
 would first try to write a footnote:
 \footnote{
-  This is an example of a footnote with extra space at the beginning.
+  This is an example of a footnote with extra space at the beginning.%
   \label{foot:short}
 }
 As you can see this is not really satisfactory. You have a spurious
-space between the colon and the footnote mark $^{1}$. If may even
+space between the colon and the footnote mark \(^{1}\). If may even
 be the case that the footnote mark appears on the next line! To get the spacing
 correct and still have \enquote{nice} \LaTeX{} you have to add some
 judicious \texttt{\%} signs:
@@ -118,7 +121,7 @@ footnote~\footref{foot:short}. Using this mechanism it is even
 possible to click on the reference if you use PDF\LaTeX.
 
 When a footnote contains a complete sentence, people still often
-forget to add a full stop at the end of it -- try not to!
+forget to add a full stop at the end of it --- try not to!
 
 If you try to use footnotes in tables, you will probably have some
 problems. The \Package{ctable} package allows you to include footnotes
@@ -126,7 +129,7 @@ that are part of the table. It also supports \Package{booktabs}, so it
 should be possible to keep the same format. If you use the package
 \Package{xtab} you can use the environment \Env{mpxtabular} 
 instead of \Env{xtabular} to get footnotes
--- see Appendix~\ref{sec:app:tables} for an example. 
+--- see \cref{sec:app:tables} for an example. 
 If you use the \Package{longtable} package, use \Env{longtable}
 rather than \Env{table} and \Env{tabular} in order to easily include
 footnotes.
@@ -136,7 +139,7 @@ Another recent package (\TeXLive 2011) is
 
 
 %------------------------------------------------------------------------------
-\section{Thesis in German}
+\section{Thesis in German}%
 \label{sec:layout:german}\index{German}
 %---------------------------------------------------- --------------------------
 
@@ -154,8 +157,8 @@ worry about? First, set the languages in the \Macro{documentclass} to
 
 Second, if you want to use a comma rather than a full stop for the
 decimal point you may notice that numbers are sometimes not written
-properly. In text mode they are OK, e.g. 91,1234, while in math mode
-there is a small space after the comma, e.g. $91,1234$.
+properly. In text mode they are OK, e.g.\ 91,1234, while in math mode
+there is a small space after the comma, e.g.\ \(91,1234\).
 
 If you use the \Package{siunitx} package, you can simply specify the
 locale: \Macro{sisetup}\texttt{\{locale = DE\}}. This is already done
@@ -167,7 +170,7 @@ by far the best way to handle such things.
 You can also do such things locally in a
 single table for example by using constructions such as
 \enquote{\texttt{S[decimalsymbol=comma]}} in the column description of a table to
-change full stops into commas -- see Chapter~\ref{sec:table}.
+change full stops into commas --- see \cref{sec:table}.
 
 Another way to avoid this problem by using the \Package{ziffer} package. It is
 commented out in \texttt{ubonn-thesis.sty}. An alternative
@@ -192,11 +195,11 @@ full stop to a comma, i.e.\ use the form \verb+D{.}{,}{2}+. The table
 below illustrates this usage:
 \begin{otherlanguage}{ngerman}
 \begin{center}
-  \begin{tabular}{l|D{.}{,}{4}@{$\,\pm\,$}D{.}{,}{4}}
+  \begin{tabular}{l|D{.}{,}{4}@{\(\,\pm\,\)}D{.}{,}{4}} % chktex 44
     Teilchen & \multicolumn{2}{c}{Masse [\si{\GeVovercsq}]}\\
     \midrule
-    $Z$ boson & 91.0372 & 0.0002\\
-    $W$ boson & 83 & 0.035\\
+    \(Z\) boson & 91.0372 & 0.0002\\
+    \(W\) boson & 83 & 0.035\\
     Top quark & 173.3 & 1.1\\
   \end{tabular}
 \end{center}
@@ -212,12 +215,11 @@ to get \"a, or just to type in the character directly. I strongly
 recommend typing the characters directly. It makes your \LaTeX{} much
 easier to read and spell-check. You can either switch your keyboard to
 German (this is simple under Windows, MacOS, KDE or Gnome (Unity)) or set the
-compose key and then type the sequence \texttt{Compose " a} to get ä
-for example.
+compose key and then type the sequence \texttt{Compose " a} to get ä for example. % chktex 18
 
 
 %------------------------------------------------------------------------------
-\section{Fonts}
+\section{Fonts}%
 \label{sec:layout:font}
 %------------------------------------------------------------------------------
 
@@ -232,15 +234,15 @@ Which font should I use?
 \url{http://tug.ctan.org/tex-archive/info/Free_Math_Font_Survey/en/survey.html}
 has a list of fonts that one can consider using. I have included
 commented out packages that use some of these in the style file. Good
-alternatives to Package(newtx) and \Package{txfonts} (with the \Option{varg} option) seem
+alternatives to \Package(newtx) and \Package{txfonts} (with the \Option{varg} option) seem
 to be either \Package{lmodern} or \Package{pxfonts}. See
-Section~\ref{sec:tips:units} for some of the things you have to worry
+\cref{sec:tips:units} for some of the things you have to worry
 about if you use a font for which the text mode and math mode display
 numbers differently.
 
 
 %------------------------------------------------------------------------------
-\section{Other languages}
+\section{Other languages}%
 \label{sec:layout:lang}
 %------------------------------------------------------------------------------
 
@@ -279,7 +281,7 @@ opening and closing quotes, so I warmly recommend it.
 
 
 %------------------------------------------------------------------------------
-\section{Coloured links}
+\section{Coloured links}%
 \label{sec:layout:link}\index{color!link}
 %------------------------------------------------------------------------------
 
@@ -296,7 +298,7 @@ is printed.
 
 
 %------------------------------------------------------------------------------
-\section{Chapter headings}
+\section{Chapter headings}%
 \label{sec:layout:chapter}\index{chapter!heading}
 %------------------------------------------------------------------------------
 

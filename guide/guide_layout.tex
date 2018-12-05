@@ -232,14 +232,14 @@ examples there.
 
 Which font should I use?
 \url{http://tug.ctan.org/tex-archive/info/Free_Math_Font_Survey/en/survey.html}
-has a list of fonts that one can consider using. I have included
-commented out packages that use some of these in the style file. Good
-alternatives to \Package(newtx) and \Package{txfonts} (with the \Option{varg} option) seem
-to be either \Package{lmodern} or \Package{pxfonts}. See
-\cref{sec:tips:units} for some of the things you have to worry
+has a list of fonts that one can consider using.
+I have included
+commented out packages that use some of these in the style file.
+Good alternatives to \Package{newtx} and \Package{txfonts} (with the \Option{varg} option) seem
+to be either \Package{lmodern} or \Package{pxfonts}.
+See \cref{sec:tips:units} for some of the things you have to worry
 about if you use a font for which the text mode and math mode display
 numbers differently.
-
 
 %------------------------------------------------------------------------------
 \section{Other languages}%
@@ -262,13 +262,13 @@ within \Macro{thesisabstract}.
 
 The \Package{csquotes} package advertises itself as the way to cope
 with quoting\index{quotes} things in different languages. The basic
-command to use is \Macro{enquote}\index{quotation
-  marks} for quoting things in the current default language, while you
+command to use is \Macro{enquote}\index{quotation marks}
+for quoting things in the current default language, while you
 use \Macro{foreignquote} to quote things in another language. For
 example, John said \enquote{I have too much to do at the moment},
 while \foreignlanguage{ngerman}{Johannes sagte}
-\foreignquote{ngerman}{ich habe im Moment alle Zeit der Welt}. Note
-that \Package{babel} uses \Option{ngerman} for \enquote{new} German
+\foreignquote{ngerman}{ich habe im Moment alle Zeit der Welt}.
+Note that \Package{babel} uses \Option{ngerman} for \enquote{new} German
 spelling, while \Package{csquotes} options calls the same thing
 \Option{german}. However, this only affects the setting of options. If
 you use commands such as \Macro{foreignquote} you can specify
@@ -278,7 +278,6 @@ Having used \Package{csquotes} for several years now, I find it a
 really nice way of quoting things properly in the language you are
 writing your text in without having to worry about using the correct
 opening and closing quotes, so I warmly recommend it.
-
 
 %------------------------------------------------------------------------------
 \section{Coloured links}%

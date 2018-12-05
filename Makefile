@@ -137,7 +137,7 @@ help:
 	@echo "Possible commands:"
 	@echo "new   [THESIS=dirname] [TEXLIVE=YYYY]: create a new thesis skeleton"
 	@echo "astro [THESIS=dirname] [TEXLIVE=YYYY]: create a new astrophysics thesis skeleton"
-	@echo "  Default TeX Live version is 2014"
+	@echo "  Default TeX Live version is 2016"
 	@echo "new09 [THESIS=dirname] [TEXOLD=YYYY]: create a new thesis skeleton"
 	@echo "  Default old TeX Live version is 2009"
 	@echo "update [THESIS=dirname]: update to a newer version of ubonn-thesis"

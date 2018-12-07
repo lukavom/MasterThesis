@@ -48,11 +48,11 @@ LATEXMK = latexmk -pdf
 # New thesis
 new: skelcopy
 	#cp thesis_skel/thesis_skel.tex        $(THESIS)/$(THESIS).tex
-	sed 's/texlive=2014/texlive=$(TEXLIVE)/' thesis_skel/thesis_skel.tex > $(THESIS)/$(THESIS).tex
+	sed 's/texlive=2016/texlive=$(TEXLIVE)/' thesis_skel/thesis_skel.tex > $(THESIS)/$(THESIS).tex
 
 # New thesis with astrophysics style of references
 astro: skelcopy
-	sed 's/texlive=2014/texlive=$(TEXLIVE)/' thesis_skel/thesis_astro_skel.tex > $(THESIS)/$(THESIS).tex
+	sed 's/texlive=2016/texlive=$(TEXLIVE)/' thesis_skel/thesis_astro_skel.tex > $(THESIS)/$(THESIS).tex
 	cp thesis_skel/thesis_astro_intro.tex  $(THESIS)/thesis_intro.tex
 
 # New thesis with old version of TeX Live

@@ -67,7 +67,8 @@
 \DeclareBoolOption[false]{todonotes}
 \DeclareBoolOption[false]{shownotes}
 \DeclareBoolOption[false]{cleveref}
-\DeclareBoolOption[true]{clevecaps}
+\DeclareBoolOption[true]{clevercaps}
+\DeclareBoolOption[false]{firstinits}
 \DeclareStringOption{texlive}
 \DeclareStringOption[true]{backref}
 \DeclareStringOption[biber]{backend}
@@ -171,6 +172,13 @@
       \UBN@subfigfalse
     \fi
   \fi
+\fi
+
+% Use firstinits or giveninits
+\ifUBN@firstinits
+  \newcommand*{\UBN@initials}{firstinits=true}
+\else
+  \newcommand*{\UBN@initials}{giveninits=true}
 \fi
 
 % If asked to show notes also turn on todonotes
@@ -493,7 +501,7 @@
     \RequirePackage[backend=\UBN@backend, \UBN@biblatexencoding
       backref=\UBN@backref,
       style=authoryear, natbib=true, refsection=chapter,
-      block=none, giveninits=true]{biblatex}
+      block=none, \UBN@initials]{biblatex}
   \else
     \ifthenelse {\texlive < 2010} {%
       \RequirePackage[backend=\UBN@backend, hyperref=true, \UBN@biblatexencoding
@@ -504,7 +512,7 @@
       \RequirePackage[backend=\UBN@backend, \UBN@biblatexencoding
         backref=\UBN@backref,
         style=\UBN@bibstyle, sorting=none,
-        block=ragged, firstinits=true]{biblatex}
+        block=ragged, \UBN@initials]{biblatex}
     }
   \fi
 \fi
@@ -533,7 +541,7 @@
 % cleveref has to be included late
 % Decide whether to capitalise Fig., Table etc. or not.
 \ifUBN@cleveref
-  \ifUBN@clevecaps
+  \ifUBN@clevercaps
     \RequirePackage[capitalise, \UBN@language]{cleveref}
   \else
     \RequirePackage[\UBN@language]{cleveref}

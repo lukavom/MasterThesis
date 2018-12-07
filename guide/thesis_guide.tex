@@ -18,7 +18,9 @@
 
 % Adjustments to biblatex output are in ubonn-biblatex style file
 % Note that testall.py looks for biblatex=false string
-\ifthenelse{\texlive < 2011} {%
+% Compilation probably fails for TeX Live < 2011.
+%   Needs at least todonotes installed by hand and scrlayer-scrpage switched to scrpage2.
+\ifthenelse{\texlive < 2011} {% Probably will not work - 
   \usepackage[shownotes, cleveref, biblatex=false, txfonts, feynmp]{../ubonn-thesis}
 }{%
   \usepackage[shownotes, cleveref, bibstyle=alphabetic, feynmp]{../ubonn-thesis}

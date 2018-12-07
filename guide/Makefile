@@ -74,7 +74,8 @@ cleanguide:
 	-rm $(GUIDE).ind $(GUIDE).idx $(GUIDE).ilg
 	-rm $(GUIDE).acn $(GUIDE).acr $(GUIDE).alg
 	-rm $(GUIDE).glg $(GUIDE).glo $(GUIDE).gls
-	-rm $(GUIDE).ist
+	-rm $(GUIDE).ist $GUIDE).fls
+	-rm $(GUIDE).tex.bak
 	-rm *.aux
 
 cleanfeynmf:

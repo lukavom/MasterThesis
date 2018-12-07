@@ -30,7 +30,9 @@ information.
     Switch from \Package{scrpage2} to \Package{scrlayer-scrpage} package.
     Add information on how to handle errata.
     Improve bar width in \Package{heppennames} and \Package{hepnicenames}.
-    Switch to version 4 of \Package{mhchem}.\\
+    Switch to version 4 of \Package{mhchem}.
+    The thesis guide no longer compiles using \TeXLive versions earlier than 2011,
+    as it uses some packages that were not available then.\\
   
   30 Jun 2016 & 5.1 & Add \Package{hepnicenames} and \Package{heppennames} packages.
     Add a bit more documentation on particle definitions.
@@ -431,14 +433,14 @@ The same references using normal ascii test (suitable for \texttt{bibtex}) can b
 You give the command \texttt{make guide} to compile, which uses \texttt{biber}\index{biber} rather than
 \texttt{bibtex}\index{bibtex} to process the \texttt{.bib} files.
 
-For a older version of \TeXLive (2009), in addition to changing
-\Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}.
-you have to compile using the command \texttt{make guide09}.
-i.e.\ do the following:
-\begin{verbatim}
-make feynmf
-make guide09
-\end{verbatim}
+% For a older version of \TeXLive (2009), in addition to changing
+% \Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}.
+% you have to compile using the command \texttt{make guide09}.
+% i.e.\ do the following:
+% \begin{verbatim}
+% make feynmf
+% make guide09
+% \end{verbatim}
 
 The default version of the guide also compiles on ATLAS Bonn desktop
 computers (Ubuntu 18.04 with \TeXLive 2017). % chktex 36
@@ -774,8 +776,8 @@ the thesis skeleton, as the \Package{glossaries} package is rather new
 and may not be available in older \TeX\ installations. In order to
 process the glossary, you need to run the command
 \texttt{makeglossaries filename}. This is included in the
-\texttt{Makefile} for the commands \texttt{make guide} and
-\texttt{make guide09} and should be added to \texttt{make thesis}
+\texttt{Makefile} for the commands \texttt{make guide}
+and should be added to \texttt{make thesis}
 and/or \texttt{make thesis09} if you want to make a glossary for your
 thesis.
 

@@ -130,9 +130,9 @@
 \fi
 
 % Only one font package at a time!
-\ifUBN@newtx
-  \typeout{Package ubonn-thesis info: using newtx fonts}
-  \UBN@txfontsfalse
+\ifUBN@txfonts
+  \typeout{Package ubonn-thesis info: using txfonts fonts}
+  \UBN@newtxfalse
   \UBN@palatinofalse
 \else
   \ifUBN@palatino
@@ -140,9 +140,9 @@
     \UBN@txfontsfalse
     \UBN@newtxfalse
   \else
-    \ifUBN@txfonts
-      \typeout{Package ubonn-thesis Info: Using txfonts}
-      \UBN@newtxfalse
+    \ifUBN@newtx
+      \typeout{Package ubonn-thesis Info: Using newtx fonts}
+      \UBN@txfontsfalse
       \UBN@palatinofalse
     \fi
   \fi

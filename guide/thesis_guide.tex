@@ -16,9 +16,10 @@
 \newcommand*{\texlive}{2016}
 \usepackage{ifthen}
 
-% Adjustments to biblatex output are in ubonn-biblatex style file:
+% Adjustments to biblatex output are in ubonn-biblatex style file
+% Note that testall.py looks for biblatex=false string
 \ifthenelse{\texlive < 2011} {%
-  \usepackage[shownotes, cleveref, biblatex=false, feynmp]{../ubonn-thesis}
+  \usepackage[shownotes, cleveref, biblatex=false, txfonts, feynmp]{../ubonn-thesis}
 }{%
   \usepackage[shownotes, cleveref, bibstyle=alphabetic, feynmp]{../ubonn-thesis}
   \usepackage{../ubonn-biblatex}

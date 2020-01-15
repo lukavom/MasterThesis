@@ -278,6 +278,11 @@ This makes debugging and proofreading much easier.
 You can configure \TeXstudio to use \Command{latexmk}\index{latexmk} by default.
 It is easy to switch between \texttt{biber} and \texttt{bibtex} using the Build preferences.
 
+\TeXstudio should also know about your citations.
+If you do not get a list of citations when you type \verb+\cite+,
+you should first close the file and open 
+in \TeXstudio \Option{Options \(\rightarrow\) Configure TexStudio \(\rightarrow\) Completion} and check \File{biblatex.cwl}.
+
 You can also make a glossary from within \TeXstudio. In order to do
 this you have to define a user build command. You can find such commands
 under:  \textsf{Options} $\to$ \textsf{Configure TeXstudio} $\to$
@@ -424,6 +429,7 @@ If your version of \TeXLive is older than 2013, you should set
 \Macro{texlive} accordingly and not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
 In addition, I had to download and install the package \Package{physics} from CTAN when
 using \TeXLive 2011 and Scientific Linux 6.
+The guide will not compile with version of \TeXLive earlier than 2011.
 
 The default version of the guide uses \Option{biber} for the
 \Package{biblatex} package and includes\\
@@ -955,8 +961,8 @@ As an alternative you can use the \Macro{shrinkheight} command.
 \xentrystretch{-0.15}
 \begin{center}
   \begin{mpxtabular}{rcl}
-   1 & a & The lowercase 1st letter in the alphabet%
-   \footnote{\enquote{a} deserves a footnote}\\
+   1 & a & The lowercase 1st letter in the alphabet\footnote{%
+    \enquote{a} deserves a footnote}\\
    2 & b & The lowercase 2nd letter in the alphabet\\
    3 & c & The lowercase 3rd letter in the alphabet\\
    4 & d & The lowercase 4th letter in the alphabet\\
@@ -965,8 +971,8 @@ As an alternative you can use the \Macro{shrinkheight} command.
    7 & g & The lowercase 7th letter in the alphabet\\
    8 & h & The lowercase 8th letter in the alphabet\\
    9 & i & The lowercase 9th letter in the alphabet\\
-  10 & j & The lowercase 10th letter in the alphabet%
-  \footnote{\enquote{j} deserves another footnote}\\
+  10 & j & The lowercase 10th letter in the alphabet\footnote{%
+    \enquote{j} deserves another footnote}\\
   11 & k & The lowercase 11th letter in the alphabet\\
   12 & l & The lowercase 12th letter in the alphabet\\
   13 & m & The lowercase 13th letter in the alphabet\\

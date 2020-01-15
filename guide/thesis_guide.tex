@@ -46,6 +46,8 @@
 \usepackage[acronym, toc, nosuper]{glossaries}
 \usepackage{../thesis_skel/thesis_defs}
 \usepackage{guide_defs}
+\usepackage{guide_listings}
+\usepackage{showexpl}
 \usepackage[italic]{hepnicenames}
 
 % Add many more possibilities to break URLs
@@ -140,7 +142,8 @@
 % \includeonly{%
 %   guide_acknowledge1,
 %   guide_intro,
-%   guide_tips,
+%   guide_tips
+% }
 %   guide_submit,
 %   guide_package,
 %   guide_figs,
@@ -204,7 +207,7 @@
 \include{guide_tables}
 %\printbibliography[heading=subbibliography]
 
-\input{guide_refs}
+\include{guide_refs}
 %\printbibliography[heading=subbibliography]
 
 \include{guide_layout}

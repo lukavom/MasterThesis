@@ -532,9 +532,10 @@ a bit easier to use than Metafont.  You should be able to just run
 \texttt{mpost} after \texttt{(pdf)latex} and then run % chktex 36
 \texttt{pdflatex} again twice. Note that you have to run
 \texttt{mpost} on all the files whose names are defined at the
-beginning of the \Env{fmffile} environment. While Metapost works well
-as of \TeXLive 2011, I did not get it to work properly with \TeXLive
-2009 for unknown reasons.
+beginning of the \Env{fmffile} environment.\footnote{%
+  While Metapost works well
+  as of \TeXLive 2011, I did not get it to work properly with \TeXLive
+  2009 for unknown reasons.}
 
 Metafont\index{metafont} is a bit trickier. On Unix systems the
 \texttt{feynmf} perl script exists that runs both \LaTeX{} and
@@ -658,6 +659,7 @@ then be looked at in \texttt{feynmf\_all.dvi} or\\
 
 There are (at least) two packages based in \TikZ that exist to draw Feynman graphs:
 \Package{tikz-feynman} and \Package{tikz-feynhand}.
+Examples of how to use these packages will be added.
 
 If you want to draw Feynman graphs using \TikZ directly,
 you need to include some extra \TikZ packages and libraries.

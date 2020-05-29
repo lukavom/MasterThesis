@@ -48,7 +48,7 @@ If you want to checkout a particular version you can give the command:
 git clone --branch vN.M https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
 \end{verbatim}
 }
-Note that you have to be in the University of Bonn network for this command to work.
+Note that you have to be in the University of Bonn network for the clone commands to work.
 % \noindent
 % If you have checked out a version of the guide before 20 August 2012
 % and want to update things, you need to change the location:
@@ -82,12 +82,13 @@ To compile your thesis try:\index{compiling}
 cd mythesis [or dirname]
 make thesis
 \end{verbatim}
-If your version of \TeXLive is older than 2011,
-you should really update to a newer version!
-If this is not possible, use the command \enquote{\texttt{make new09}}
-followed by \enquote{\texttt{make thesis09}}
-or \enquote{\texttt{make thesis BIBTEX=bibtex}}.
 See \cref{sec:tips:options} for a list of the options that can be passed to the package.
+I no longer support versions of \TeXLive older than 2011,
+and can only test things for \TeXLive 2014 and later.
+% you should really update to a newer version!
+% If this is not possible, use the command \enquote{\texttt{make new09}}
+% followed by \enquote{\texttt{make thesis09}}
+% or \enquote{\texttt{make thesis BIBTEX=bibtex}}.
 
 As of version 6.0, \Command{make thesis} uses the \Command{latexmk}\index{latexmk} command for compilation.
 \Command{latexmk} looks at your logfile and decides how many times \Command{pdflatex} etc.
@@ -110,12 +111,12 @@ You should therefore set the \TeXLive version you are using appropriately.
 The default setting is 2016.\footnote{%
 Setting the \TeXLive version to one that is lower than your installation should not cause any problems.}
 This is also the setting to use for an up-to-date version of MikTeX (2.9).
-Things should compile without any changes if you use \TeXLive 2013 or later.
+Things should compile without any changes if you use \TeXLive 2016 or later.
 Look in the style file to see what changes are made depending on the year you use.
 You can change the \TeXLive version when you make a new thesis
-by giving a command like \enquote{\texttt{make new TEXLIVE=2011}}.\footnote{%
-For even older versions of \TeXLive use the command \enquote{\texttt{make new09}}.
-This turns off the use of \Package{biblatex}.}
+by giving a command like \enquote{\texttt{make new TEXLIVE=2013}}. %\footnote{%
+% For even older versions of \TeXLive use the command \enquote{\texttt{make new09}}.
+% This turns off the use of \Package{biblatex}.}
 If you switch \TeXLive versions do a
 \enquote{\texttt{make clean cleanbbl cleanblx}} in between.
 
@@ -202,12 +203,12 @@ The main file for this guide is \texttt{guide/thesis\_guide.tex} and
 it includes the \LaTeX{} files in the directory \texttt{./guide} and
 some of the Feynman graphs in the directories \texttt{./feynmf} and
 \texttt{./tikz}. Again this guide should compile without changes for
-\TeXLive 2013 or later. For earlier versions set \Macro{texlive} in
+\TeXLive 2016 or later. For earlier versions set \Macro{texlive} in
 \texttt{thesis\_guide.tex} to the appropriate value.
-Set the default font to \Package{txfonts} for \TeXLive 2011 and older.
-If you want to compile the guide with \TeXLive older than 2011,
-it is probably easier to switch from \Package{biblatex} to traditional \BibTeX.
-This is done via the \texttt{make new09} command.
+Set the default font to \Package{txfonts} for \TeXLive 2011.
+% If you want to compile the guide with \TeXLive older than 2011,
+% it is probably easier to switch from \Package{biblatex} to traditional \BibTeX.
+% This is done via the \texttt{make new09} command.
 
 %The guide will not compile for \TeXLive versions lower than 2012,
 %as the \Package{subcaption} package and the way to load it was different earlier.
@@ -358,11 +359,11 @@ It is not needed if you use the \Package{newtx} font package.}
     }}
   The \si{\GeV} in the first expression is in sans-serif. This is
   because the
-  \Macro{sisetup}\texttt{\{detect-family=true\}}\footnote{\Option{obeyall}
-    in \TeXLive 2009.} option is set in \texttt{ubonn-thesis.sty}
+  \Macro{sisetup}\texttt{\{detect-family=true\}} % \footnote{\Option{obeyall} in \TeXLive 2009.}
+  option is set in \texttt{ubonn-thesis.sty}
   (see \cref{sec:tips:siunitx}).  I used the option
-  \Option{detect-family=false}\footnote{\Option{obeyfamily=false} in \TeXLive
-    2009.} for the \Macro{SI} command in the 2nd expression.
+  \Option{detect-family=false} % \footnote{\Option{obeyfamily=false} in \TeXLive 2009.}
+  for the \Macro{SI} command in the 2nd expression.
   In the first expression I use \Macro{text} for \enquote{jet}, while
   I use \Macro{mathrm} in the second expression.
 
@@ -619,36 +620,39 @@ This package is a more modern and complete package than either
 % As the package is rather new it is also still developing.
 There were quite a few changes from version 1
 (\TeXLive 2009)\index{TeXLive@\TeXLive!2009} to version 2 (\TeXLive
-2011 or later)\index{TeXLive@\TeXLive!2011}, which means that several of the
-examples I include here have somewhat different syntaxes depending on
-which version of \TeXLive is being used to compile this guide. If you
-use \TeXLive 2011 or later, but want to use units which were available in
-\TeXLive 2009 or the older syntax you can include the option
-\Option{version-1-compatibility}. Note that \TeXLive 2009 was the
-default version for Ubuntu releases up to and including
-12.04\index{ubuntu!12.04}.
-I will give the \Package{siunitx} version
-2 options in the text and the version 1 options as footnotes.
+2011 or later)\index{TeXLive@\TeXLive!2011}.
+As of Version 7.0 of this guide, I only include version 2 examples.
+% , which means that several of the
+% examples I include here have somewhat different syntaxes depending on
+% which version of \TeXLive is being used to compile this guide.
+% If you use \TeXLive 2011 or later, but want to use units which were available in
+% \TeXLive 2009 or the older syntax you can include the option
+% \Option{version-1-compatibility}. Note that \TeXLive 2009 was the
+% default version for Ubuntu releases up to and including
+% 12.04\index{ubuntu!12.04}.
+% I will give the \Package{siunitx} version
+% 2 options in the text and the version 1 options as footnotes.
 
 One very attractive feature is that it allows you to format
 computer-generated numbers such as \verb+1.4E4+ automatically,
-e.g. \verb+\num{1.4E4}+ produces \num{1.4E4}. Depending on the
+e.g.\ \verb+\num{1.4E4}+ produces \num{1.4E4}. Depending on the
 language or using the option
-\Option{exponent-product}\footnote{\Option{expproduct} in \TeXLive
-  2009.} you can also get
-\ifthenelse {\texlive < 2011} {%
-  \num[expproduct=cdot]{-3.4E-6}.  }{%
-  \num[exponent-product=\cdot]{-3.4E-6}.
-}
+\Option{exponent-product} % \footnote{\Option{expproduct} in \TeXLive 2009.}
+you can also get \num[exponent-product=\cdot]{-3.4E-6}.
+% \ifthenelse {\texlive < 2011} {%
+%   \num[expproduct=cdot]{-3.4E-6}.  }{%
+%   \num[exponent-product=\cdot]{-3.4E-6}.
+% }
 It is even possible to set
 the number of decimal places, cf.\ \SI{2.99467E8}{\metre\per\second}
 and
-\ifthenelse {\texlive < 2011} {%
-  \SI[dp=1]{2.99467E8}{\metre\per\second}, }{%
-  \SI[round-mode=places,round-precision=1]{2.99467E8}{\metre\per\second},
-}
+\SI[round-mode=places,round-precision=1]{2.99467E8}{\metre\per\second},
+% \ifthenelse {\texlive < 2011} {%
+%   \SI[dp=1]{2.99467E8}{\metre\per\second}, }{%
+%   \SI[round-mode=places,round-precision=1]{2.99467E8}{\metre\per\second},
+% }
 which only differ by the use of the \Option{round-mode} and
-\Option{round-precision}\footnote{\Option{dp} in \TeXLive 2009}
+\Option{round-precision} % \footnote{\Option{dp} in \TeXLive 2009}
 options, and even rounds correctly!
 
 Another extremely nice feature of the package is that you can typeset
@@ -664,8 +668,8 @@ text is in German (\Option{ngerman} to be exact).
 
 In keeping with \LaTeX{} philosophy, you can specify a number and its
 error using \verb+\num{2.88(32)}+ to produce \num{2.88(32)} with the
-\Option{separate-uncertainty}\footnote{\Option{seperr} in \TeXLive
-  2009.} option (which I specify) or \(2.88(32)\) with the default
+\Option{separate-uncertainty} % \footnote{\Option{seperr} in \TeXLive 2009.}
+option (which I specify) or \(2.88(32)\) with the default
 option. Errors and powers can also be combined, e.g.\
 \verb+\num{2.88(32)E-3}+ produces \num{2.88(32)E-3}. % chktex 36
 You also give as
@@ -681,20 +685,21 @@ Some examples are given below:
 }{%
   \SI[per-mode=fraction,fraction-function=\sfrac]{3E8}{\metre\per\second}
 }
-  --- using \Option{per-mode=fraction,fraction-function=\Macro{sfrac}}\footnote{%
-    \Option{per=fraction,fraction=nice} in \TeXLive 2009}
+  --- using \Option{per-mode=fraction,fraction-function=\Macro{sfrac}}; % \footnote{\Option{per=fraction,fraction=nice} in \TeXLive 2009}
 \item written in \Env{displaymath} or preferably \Env{equation*}:
-\ifthenelse {\texlive < 2011} {%
-  \begin{equation*}
-    c = \SI[per=slash]{2.99E8}{\metre\per\second}
-  \end{equation*}
-}{%
-  \begin{equation*}
-    c = \SI[per-mode=symbol]{2.99E8}{\metre\per\second}
-  \end{equation*}
-}
-with \Option{per-mode=symbol}\footnote{%
-  \Option{per=slash} in \TeXLive 2009};
+\begin{equation*}
+  c = \SI[per-mode=symbol]{2.99E8}{\metre\per\second}
+\end{equation*}
+% \ifthenelse {\texlive < 2011} {%
+%   \begin{equation*}
+%     c = \SI[per=slash]{2.99E8}{\metre\per\second}
+%   \end{equation*}
+% }{%
+%   \begin{equation*}
+%     c = \SI[per-mode=symbol]{2.99E8}{\metre\per\second}
+%   \end{equation*}
+% }
+with \Option{per-mode=symbol}; % \footnote{\Option{per=slash} in \TeXLive 2009};
 \item \(\hbar\) is \SI{1.054E-34}{\joule.\second}.
 \end{itemize}
 You use \enquote{.} or \enquote{,} to make a space between the units,
@@ -710,8 +715,8 @@ If you also want to use \Package{siunitx} in slides, where one usually
 uses a sans serif font, you may at first be disappointed that
 \Package{siunitx} uses a serif font for the units! Do not despair!
 You can use the command
-\Macro{sisetup}\texttt{\{detect-family=true\}}\footnote{\Option{obeyall}
-  in \TeXLive 2009.} to ensure that the package uses the current font
+\Macro{sisetup}\texttt{\{detect-family=true\}} % \footnote{\Option{obeyall} in \TeXLive 2009.}
+to ensure that the package uses the current font
 (in all its aspects) rather than its default.
 
 Have a look at the manual, \texttt{texdoc siunitx}, for many more
@@ -875,11 +880,17 @@ This is of course very nice!
 You just have to get used to the conventions used there for particle names.
 Many particles are available in \Package{hepnicenames},
 while \Package{heppennames} is more complete.
+Note that there appears to be a bug in
+\Package{hepnicenames}, \Package{heppennames} and/or \Package{hepparticles} packages
+as of \TeXLive 2019.
+Upright particles are not printed.
+So far I have not found a way to get round the problem.
 \begin{description}
 \item[Some examples from \Package{heppennames}:]
   \Macro*{Pe} produces \Pe;
   \Macro*{Pl} produces \Pl;
   \Macro*{Pqt} produces \Pqt;
+  \Macro*{Paqt} produces \Paqt;
   \Macro*{PZ} produces \PZ; % chktex 13
   \Macro*{PWpm} produces \PWpm;
   \Macro*{PBz} produces \PBz;
@@ -891,13 +902,14 @@ while \Package{heppennames} is more complete.
   \Macro*{APelectron} produces \APelectron;
   \Macro*{Plepton} produces \Plepton;
   \Macro*{Ptop} produces \Ptop;
+  \Macro*{APtop} produces \APtop;
   \Macro*{PZ} produces \PZ; % chktex 13
   \Macro*{PWpm} produces \PWpm;
   \Macro*{PBzero} produces \PBzero;
   \Macro*{PBpm} produces \PBpm;
   \Macro*{APBc} produces \APBc;
   \Macro*{PBzero}\{\}\Macro*{PaBzero} produces \PBzero{}\APBzero, while
-  \Macro*{PBzero}\Macro{*APBzero} produces \PBzero\APBzero.
+  \Macro*{PBzero}\Macro*{APBzero} produces \PBzero\APBzero.
 \end{description}
 
 You can use commands like \Macro{HepParticle} to define particles that are missing.
@@ -1136,6 +1148,7 @@ number of reconstructed heavy-quark jets in data, which was determined
 \noindent
 Then the line numbering will be correct, see \cref{fig:lineno}b.
 
+The ATLAS \Package{atlasdoc} class contains a patch that gets round this problem.
 
 %------------------------------------------------------------------------------
 \section{Updating \Package{ubonn-thesis}}%

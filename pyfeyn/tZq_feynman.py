@@ -42,7 +42,7 @@ draw_fermion(vtx[0], pntOut[0], dCOLOR, r'\Pqd', displacement=+0.2)
 draw_boson(vtx[2], vtx[0], pCOLOR, r'\PW')
 draw_boson(vtx[1], vtx[2], pCOLOR, r'\PW')
 draw_fermion(pntIn[1], vtx[1], bCOLOR, r'\Pqb')
-draw_fermion(vtx[1], pntOut[1], tCOLOR, r'\Pqt')
+draw_fermion(vtx[1], pntOut[1], tCOLOR, r'\Paqt')
 draw_boson(vtx[2], pntOut[2], ZCOLOR, r'\PZ')
 
 fileout = 'tZq_5FS_feyn.pdf'

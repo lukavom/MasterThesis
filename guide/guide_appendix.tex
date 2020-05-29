@@ -18,6 +18,10 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
+  29 May 2020 & 7.0 & Remove support and documentation for \TeXLive versions older than 2011.
+    Add some documentation on making Feynman graphs using \Package{TikZ} packages.
+    Deprecate the usage of PyFeyn.\\
+
   05 Dec 2018 & 6.0 & \TeXLive 2016 is now the default.
     After a \Command{make new} the \File{mythesis} directory should now be standalone.
     This make it easier to use Git etc.
@@ -220,7 +224,7 @@ Other packages that I recommend and that are subject to rapid
 development still are \Package{biblatex} and
 \Package{siunitx}. If you want to fully exploit their capabilities,
 you should make sure you \LaTeX{} installation is as recent as
-possible --- I recommend at least \TeXLive 2013 and preferably later.
+possible --- I recommend at least \TeXLive 2016 and preferably later.
 
 As I mentioned in the introduction, the institute is a member of Dante
 and I therefore receive a copy of the \TeX\ Collection DVD every
@@ -352,32 +356,34 @@ For the past several years,
 I have been installing and running \LaTeX\ on a MacBook Pro.
 The standard package you start with is \TeX Shop. 
 Together with Basic\TeX\ this provides a basic environment. 
-However, if you want to do more (like write a thesis),
-you should install \TeXLive.
-There is a complete \TeXLive installation call Mac\TeX\ 
+However, if you want to do more (like write a thesis), you should install \TeXLive.
+There is a complete \TeXLive installation called Mac\TeX\ 
 that you can download from \url{http://www.tug.org/mactex/}.
 The Dante \TeX\ Collection DVD also includes Mac\TeX, which is what the \TeX Shop web page
 recommends as the best combination to install.
+You can also install Mac\TeX{} using Homebrew\index{Homebrew}.
+Install and run the \TeX\ Live Utility to keep your installation up to date.
 
 As discussed above, there are MacOS versions of \TeXstudio and \TeXmaker which you can try.
-I have been using \TeXstudio.
-
+I used to use \TeXstudio.
+More recently I switched to using Visual Studio Code,
+which is a very nice editor with integrated \LaTeX\ and Git support.
 
 %------------------------------------------------------------------------------
 \section{(Ku|Xu|U)buntu}% chktex 36
 \label{sec:app:kubuntu}\index{Linux}\index{Ubuntu}\index{Kubuntu}\index{Xubuntu}
 %------------------------------------------------------------------------------
 
-For most of my tests with Ubuntu I have been using Xubuntu 14.04 and 
-\TeXLive 2013.
-More recently I have also used Xubuntu 16.04 and \TeXLive 015.
+For my tests with Ubuntu I use Xubuntu 20.04 and \TeXLive 2019.
+I also check that things work with 2015 and 2017 version.
+The oldest version of \TeXLive that I have access to is 2014.
 
-I also made the guide on a plain Xubuntu 12.04
-installation, which used the default packages from the Xubuntu image. At
-installation time I enabled the usage of 3rd party non-free
-software. This is be needed for \texttt{acroread} among other
-things.\footnote{Nowadays you have to download \texttt{acroread} from
-  the Adobe web page.} 
+% I also made the guide on a plain Xubuntu 12.04
+% installation, which used the default packages from the Xubuntu image. At
+% installation time I enabled the usage of 3rd party non-free
+% software. This is be needed for \texttt{acroread} among other
+% things.\footnote{Nowadays you have to download \texttt{acroread} from
+%   the Adobe web page.} 
 If you want to write your thesis in British (UK) English you should make sure
 that that language is fully installed. If you want to write your
 thesis in German, then also install German as a language, even if
@@ -388,33 +394,31 @@ I explicitly installed the following packages in addition:
 (k|x)ubuntu-restricted-extras
 git #Used to be subversion
 texlive
-texlive-doc-en
 texlive-science
-texlive-science-doc
-texlive-lang-german
-texlive-fonts-recommended
+texlive-bibtex-extra
 texlive-fonts-extra
 texlive-latex-extra
-feynmf
-texlive-bibtex-extra
+texlive-math-extra
 biber
+latexmk
+texlive-lang-german
+feynmf
 \end{verbatim}
-For Ubuntu 13.04 and later I also had to install \texttt{texlive-metapost} in
-order to compile the guide.
-The guide also needs \texttt{texlive-generic-extra}, at least for \TeXLive 2015.
+I also had to install \texttt{texlive-metapost} in order to compile the guide.
+% The guide also needs \texttt{texlive-generic-extra}, at least for \TeXLive 2015.
 
-\noindent
-(Ku|Xu|U)buntu 12.04 has \TeXLive 2009 installed by default. % chktex 36
-You will need to install \texttt{texlive-latex3}.
-Later versions include the relevant packages in \texttt{texlive-latex-recommended} which is installed by default.
-You also have to install \texttt{biblatex} rather than \texttt{texlive-bibtex-extra}.
-I recommend using traditional \BibTeX rather than \Package{biber} with such an old version,so do not install \texttt{biber}.
+% \noindent
+% (Ku|Xu|U)buntu 12.04 has \TeXLive 2009 installed by default. % chktex 36
+% You will need to install \texttt{texlive-latex3}.
+% Later versions include the relevant packages in \texttt{texlive-latex-recommended} which is installed by default.
+% You also have to install \texttt{biblatex} rather than \texttt{texlive-bibtex-extra}.
+% I recommend using traditional \BibTeX rather than \Package{biber} with such an old version,so do not install \texttt{biber}.
 
 \noindent
 Using these packages I was able to issue to following commands to
 produce the guide (assuming that you have \TeXLive 2011 or later):
 \begin{verbatim}
-git clone https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git
+git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
 cd ubonn-thesis
 \end{verbatim}
 Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
@@ -425,10 +429,11 @@ make guide
 \end{verbatim}
 so all packages are there as well as at least the default font which I
 selected.
-If your version of \TeXLive is older than 2013, you should set
-\Macro{texlive} accordingly and not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
-In addition, I had to download and install the package \Package{physics} from CTAN when
-using \TeXLive 2011 and Scientific Linux 6.
+If your version of \TeXLive is older than 2016, you should set
+\Macro{texlive} accordingly.
+If your version is older than 2013 you should not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
+% In addition, I had to download and install the package \Package{physics} from CTAN when
+% using \TeXLive 2011 and Scientific Linux 6.
 The guide will not compile with version of \TeXLive earlier than 2011.
 
 The default version of the guide uses \Option{biber} for the
@@ -477,8 +482,7 @@ parallel.
 
 A \TeX nische Komödie issue (3/2011) contained detailed instructions on
 how to install a newer version of \TeXLive in parallel to the
-default version in Kubuntu (Ubuntu works in almost exactly the
-same way). 
+default version in Kubuntu (Ubuntu works in almost exactly the same way). 
 For a while, I did this as standard practice on my laptop and it worked very well.
 Another useful source of information on how to install \TeXLive can be found under
 \url{http://tug.org/texlive/quickinstall.html}.
@@ -497,26 +501,28 @@ sudo ./install-tl -gui perltk
   Install
 \end{verbatim}
 I installed the scheme \Option{scheme-tetex} and added the
-collections: \Option{BibTeX additional styles}, \Option{Generic additional
-  packages}, \Option{LaTeX additional packages} and
-\Option{Natural and computer sciences}.  When the
-installation is complete (can easily take \numrange{1}{2} hours):
+collections: \Option{BibTeX additional styles}, \Option{Additional fonts} and
+\Option{LaTeX additional packages}.
+If you want to use the package \Package{TikZ-Feynman} you probably need to include \Option{LuaTeX packages}.
+If you want to use Xe\TeX{} include \Option{XeTeX and packages}.
+When the installation is complete (can easily take \numrange{1}{2} hours):
 \begin{verbatim}
 cd ..
 echo 'export PATH=/opt/texbin:${PATH}' > texlive.sh
 sudo cp texlive.sh /etc/profile.d/
-sudo ln -s /usr/local/texlive/2011/bin/i386-linux /opt/texbin
+sudo ln -s /usr/local/texlive/2020/bin/x86\_64-linux /opt/texbin
 \end{verbatim}
-If you have a 64-bit installation replace \texttt{i386-linux} with
-\texttt{x86\_64-linux}. Note that the last 3 commands set things up so
+You probably have to login again to activate the new \texttt{PATH}.
+If you have a 32-bit installation replace \texttt{x86\_64-linux} with\texttt{i386-linux}.
+Note that the last 3 commands set things up so
 that \texttt{/opt/texbin} is at the beginning of your \texttt{PATH}
 and that \LaTeX\ is then taken from there rather than the usual
 \texttt{/usr/bin}.
 
-With Kubuntu 13.04, I had to install \texttt{texdoc} in addition in
-order to be able to use it to access the documentation with
-it.\footnote{This was not necessary for earlier (K)Ubuntu versions. % chktex 36
-  I found it a bit strange, but it seems to be needed.}
+% With Kubuntu 13.04, I had to install \texttt{texdoc} in addition in
+% order to be able to use it to access the documentation with
+% it.\footnote{This was not necessary for earlier (K)Ubuntu versions. % chktex 36
+%   I found it a bit strange, but it seems to be needed.}
 
 For updating, additions of packages etc., it is useful to define an
 alias in your \texttt{.bashrc} or \texttt{.bash\_aliases}:
@@ -531,17 +537,16 @@ function sutlmgr () {
 \end{verbatim}
 You then give the command \texttt{sutlmgr} to start the \TeXLive
 manager interface. You can use this interface to install new packages
-as well as to update the ones you have installed. If you want to
-update things, you should first click on \enquote{Load default} to
-load a repository and then you can do things such as \enquote{Update
-  all installed}.
+as well as to update the ones you have installed.
+If you want to update things, you should first click on \enquote{Load default} to
+load a repository and then you can do things such as
+\enquote{Update all installed}.
 
-If you are using Ubuntu 11.10, you may well get an error:
-\enquote{\texttt{sh: gnome-open: not found}} when you try to give a
-\texttt{texdoc} command. I fixed this by making a
-link from \texttt{/usr/local/bin/gnome-open} to
-\texttt{/usr/bin/xdg-open}.
-
+% If you are using Ubuntu 11.10, you may well get an error:
+% \enquote{\texttt{sh: gnome-open: not found}} when you try to give a
+% \texttt{texdoc} command. I fixed this by making a
+% link from \texttt{/usr/local/bin/gnome-open} to
+% \texttt{/usr/bin/xdg-open}.
 
 
 %------------------------------------------------------------------------------
@@ -550,7 +555,7 @@ link from \texttt{/usr/local/bin/gnome-open} to
 %------------------------------------------------------------------------------
 
 I also tried to to make the guide and a skeleton thesis under Windows. 
-My tests have been done with Windows 7 and more recently Windows 10.
+My tests have been done with Windows 10.
 I simply downloaded the MiK\TeX\ installer from \url{http://miktex.org}.
 This is discussed in \cref{sec:app:miktex}.
 You can also install \TeXLive for Windows. Some hints on how to do
@@ -569,10 +574,10 @@ To do this I used \texttt{TortoiseGit} which is available from
 To checkout the files, simply start Windows Explorer and go to the
 top-level directory where you want to do the checkout, right-click on
 the mouse and enter\\
-\texttt{https://git.physik.uni-bonn.de/cgit/projects/ubonn-thesis.git}
+\texttt{https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git}
 as the URL\@.
 If you do this you can stay at the cutting edge!
-If you want a particular version then specify the branch you want, e.g.\ \enquote{v5.0}.
+If you want a particular version then specify the branch you want, e.g.\ \enquote{v7.0}.
 You can of course simply download the appropriate tar file from the PI webpages.
 
 To set up your thesis, you have to do by hand what the
@@ -584,11 +589,11 @@ If you want to do it by hand, you should make a new directory
 copy the style files \texttt{ubonn-thesis.sty} and \texttt{ubonn-biblatex.sty} into the
 \texttt{mythesis} directory.
 
-To compile things, I ran the sequence PDF\LaTeX, \BibTeX, PDF\LaTeX,
+To compile things, I ran the sequence PDF\LaTeX, Biber, PDF\LaTeX,
 PDF\LaTeX\ to get the output file for the skeleton thesis.
-If you want to use \texttt{biber} instead of traditional \BibTeX, then you should
-change the \BibTeX\ command from \texttt{bibtex} to \texttt{biber} in
-\TeXstudio or \TeXworks.
+You should make sure that the \BibTeX\ command in \TeXstudio or \TeXworks
+is set to \texttt{biber},
+unless for some reason you want to use traditional \BibTeX.
 
 If you want to install GNU Make you can try the following:
 You should install the \enquote{Minimal Gnu for Windows} from \url{http://www.mingw.org}.
@@ -628,30 +633,35 @@ tried to run Metafont on them.
 \subsection{MiK\TeX}%
 \label{sec:app:miktex}
 
-I have installed \TeX\ under Windows both from the \TeX{} Collection
-2010 DVD and via a download from Internet. For the DVD I logged in as
-an Administrator and then opened the DVD\@. It opened a \TeX\ Collection
-window and I then clicked on pro\TeX t Quick Install and installed
-MiK\TeX{} (minimal version),\index{MiKTeX}
-Ghostscript\index{ghostscript} and Ghostview\index{ghostview} for all users.
-Once the installation was finished, I also updated all the
-packages using the MiK\TeX{} Maintenance (Admin) $\to$ Update (Admin)
-program. Be patient --- these updates always take a while!
+I usually install \TeX\ under Windows via a download from Internet.
+You should decide whether to install Mik\TeX{} for yourself or for all users.
+I think maintenance is easier if you just install it for yourself.
+Once the installation is finished, I also update all the
+packages using the MiK\TeX{} Maintenance (Admin) $\to$ Update (Admin) program.
+Be patient --- these updates always take a while!
 
 With the minimal version of MiK\TeX{} you are then asked whether to
 install the missing packages when first compiling a file that needs
 them. Note that such missing packages are installed in your local
 directory tree and not in the central directory tree.
 This means that if you want to update MiK\TeX{} in the future
-you should run the MiK\TeX{} Update both as Admin and as a normal user.
+you should run the MiK\TeX{} Update both as Admin and as a normal user,
+if you installed Mik\TeX{} for all users.
 Be patient if the first compilation of a document appears to hang.
 This usually means that new packages are being installed.
 
+The last time I have installed \TeX\ under Windows using a DVD was
+from the \TeX{} Collection 2010 DVD. 
+To do this I logged in as an Administrator and then opened the DVD\@.
+It opened a \TeX\ Collection window and I then clicked on pro\TeX t Quick Install and installed
+MiK\TeX{} (minimal version),\index{MiKTeX}
+Ghostscript\index{ghostscript} and Ghostview\index{ghostview} for all users.
+
 Note that the Dante \TeX\ Collection 2011 DVD has dropped
-\TeXnicCenter within pro\TeX t and is using the \TeX makerX front-end
-instead. \TeX makerX has recently been superseded by \TeXstudio, My
-comments on \TeXnicCenter have been relegated to
-\cref{sec:app:old}. There is also the package \TeXmaker.
+\TeXnicCenter within pro\TeX t and is using the \TeX makerX front-end instead.
+\TeX makerX has been superseded by \TeXstudio.
+My comments on \TeXnicCenter have been relegated to \cref{sec:app:old}.
+There is also the package \TeXmaker.
 
 
 %------------------------------------------------------------------------------
@@ -685,50 +695,51 @@ You can either use \TeXworks as the front end or you can install
 \TeXstudio or \TeXmaker.
 
 
-%==============================================================================
-\chapter{Print shops}%
-\label{app:printer}
-%==============================================================================
+% %==============================================================================
+% \chapter{Print shops}%
+% \label{app:printer}
+% %==============================================================================
 
-For a PhD thesis, as mentioned in \cref{sec:submit:phd}, you
-have to print and bind the five copies that are needed by the
-university library externally. Some print shops in the Bonn region
-that can supply the required quality at a reasonable price are:
+% For a PhD thesis, as mentioned in \cref{sec:submit:phd},
+% you have to print and bind the five copies that are needed by the
+% university library externally.
+% Contact the ULB for suggestions on print shops that 
+% that can supply the required quality at a reasonable price.
 
-\begin{itemize}
-\item
-Typo-Druck \& Verlags-GmbH\\
-Irmintrudisstr. 1b\\
-53111 Bonn\\
-Telefon 0228-650905\\ % chktex 8
-\url{http://www.typo-druck.de}
+% \begin{itemize}
+% \item
+% Typo-Druck \& Verlags-GmbH\\
+% Irmintrudisstr. 1b\\
+% 53111 Bonn\\
+% Telefon 0228-650905\\ % chktex 8
+% \url{http://www.typo-druck.de}
 
-\item
-Buchbinderei Hennemann\\
-Paulusplatz 12\\
-53119 Bonn\\
-Telefon 0228-223521\\ % chktex 8
-\url{http://www.buchbinderei-hennemann.de}
+% \item
+% Buchbinderei Hennemann\\
+% Paulusplatz 12\\
+% 53119 Bonn\\
+% Telefon 0228-223521\\ % chktex 8
+% \url{http://www.buchbinderei-hennemann.de}
 
-% Druckerei Schwarz
-% Annaberger Str. 206
-% 53175 Bonn
-% Telefon 0228-319052
-% druckerei-schwarz.de
-\end{itemize}
+% % Druckerei Schwarz
+% % Annaberger Str. 206
+% % 53175 Bonn
+% % Telefon 0228-319052
+% % druckerei-schwarz.de
+% \end{itemize}
 
-It is also possible to order online, e.g.:
-\begin{itemize}
-\item \url{http://www.druckerei-eberwein.de/shop}
-\item \url{http://www.kunsthaus-schwanheide.de}
-\item \url{http://www.druckterminal}
-\item \url{http://www.sedruck.de}
-\item \url{http://hundt-druck.de}
-\item \url{http://copyteamcologne.de}
-\item \url{http://dr.hut-verlag.de}
-\end{itemize}
-We have tried out \foreignquote{ngerman}{Druckerei Eberwein}. Their
-price was reasonable and they delivered quickly and in good quality.
+% It is also possible to order online, e.g.:
+% \begin{itemize}
+% \item \url{http://www.druckerei-eberwein.de/shop}
+% \item \url{http://www.kunsthaus-schwanheide.de}
+% \item \url{http://www.druckterminal}
+% \item \url{http://www.sedruck.de}
+% \item \url{http://hundt-druck.de}
+% \item \url{http://copyteamcologne.de}
+% \item \url{http://dr.hut-verlag.de}
+% \end{itemize}
+% We have tried out \foreignquote{ngerman}{Druckerei Eberwein}. Their
+% price was reasonable and they delivered quickly and in good quality.
 
 
 %==============================================================================

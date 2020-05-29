@@ -189,11 +189,11 @@
 
 % Check backend - if TeX Live is earlier than 2011 and backend is biber,
 % change it to something more appropriate
-\ifthenelse{\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
-  \typeout{Package ubonn-thesis Warning: Setting backend to bibtex}
-  \renewcommand*{\UBN@backend}{bibtex} %Used to be {bibtex8,bibencoding=latin1}
-}{%
-}
+% \ifthenelse{\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
+%   \typeout{Package ubonn-thesis Warning: Setting backend to bibtex}
+%   \renewcommand*{\UBN@backend}{bibtex} %Used to be {bibtex8,bibencoding=latin1}
+% }{%
+% }
 
 % Switch from subcaption to subfig if TeX Live is earlier than 2012
 %\ifthenelse{\texlive < 2012 \AND \boolean{UBN@subcaption}}{%
@@ -292,15 +292,15 @@
 % The option autostyle=true continuously adapts the style to the language.
 % Use autostyle=once to fix it to the main language of the document.
 % \RequirePackage[german=guillemets,autostyle=true,style=mythesis]{csquotes}
-\ifthenelse {\texlive < 2010} {%
-  % Use babel=true for older versions (2009 and earlier) of csquotes
-  \RequirePackage[babel=true]{csquotes}
-}{%
-  % Use autostyle=true for newer versions (2011 and later) of csquotes
-  % Use American quotes `` xxx `yyy' '' instead of British default.
-  \RequirePackage[autostyle=true]{csquotes}
-  % \RequirePackage[german=guillemets,autostyle=true]{csquotes}
-}
+% \ifthenelse {\texlive < 2010} {%
+%   % Use babel=true for older versions (2009 and earlier) of csquotes
+%   \RequirePackage[babel=true]{csquotes}
+% }{%
+% Use autostyle=true for newer versions (2011 and later) of csquotes
+% Use American quotes `` xxx `yyy' '' instead of British default.
+\RequirePackage[autostyle=true]{csquotes}
+% \RequirePackage[german=guillemets,autostyle=true]{csquotes}
+% }
 
 % It seems common in British documents to use American-like quotes,
 % i.e. outer double quotes and inner single quotes
@@ -326,31 +326,31 @@
 %-------------------------------------------------------------------------------
 \ifUBN@siunitx 
   \ifthenelse{\texlive < 2012}{
-    \ifthenelse{\texlive < 2011} {%
-      \RequirePackage[noload=addn]{siunitx}
-      \sisetup{alsoload=hep}
-      \sisetup{seperr}
-      \sisetup{repeatunits=false}
-      \sisetup{obeyall}
-      \sisetup{sepfour}
-      \newunit{\barn}{b}
-      \newunit{\TeVc}{\tera\eVperc}
-      \newunit{\GeVc}{\giga\eVperc}
-      \newunit{\MeVc}{\mega\eVperc}
-      \newunit{\keVc}{\kilo\eVperc}
-      \newunit{\eVc}{\eVperc}
-    }{%
-      \RequirePackage{siunitx}
-      \sisetup{load-configurations=abbreviations}
-      \sisetup{separate-uncertainty}
-      \sisetup{detect-all}
-      \sisetup{range-units=single, list-units=single}
-      \sisetup{group-digits=true, group-four-digits=true}
-      \ifUBN@eVkern
-        \typeout{ubonn-thesis: Applying kern to eV}
-        \DeclareSIUnit\electronvolt{\text{e\kern-.1em V}}
-      \fi
-    }
+    % \ifthenelse{\texlive < 2011} {%
+    %   \RequirePackage[noload=addn]{siunitx}
+    %   \sisetup{alsoload=hep}
+    %   \sisetup{seperr}
+    %   \sisetup{repeatunits=false}
+    %   \sisetup{obeyall}
+    %   \sisetup{sepfour}
+    %   \newunit{\barn}{b}
+    %   \newunit{\TeVc}{\tera\eVperc}
+    %   \newunit{\GeVc}{\giga\eVperc}
+    %   \newunit{\MeVc}{\mega\eVperc}
+    %   \newunit{\keVc}{\kilo\eVperc}
+    %   \newunit{\eVc}{\eVperc}
+    % }{%
+    \RequirePackage{siunitx}
+    \sisetup{load-configurations=abbreviations}
+    \sisetup{separate-uncertainty}
+    \sisetup{detect-all}
+    \sisetup{range-units=single, list-units=single}
+    \sisetup{group-digits=true, group-four-digits=true}
+    \ifUBN@eVkern
+      \typeout{ubonn-thesis: Applying kern to eV}
+      \DeclareSIUnit\electronvolt{\text{e\kern-.1em V}}
+    \fi
+    % }
   }{%
     \RequirePackage{siunitx}
     \sisetup{separate-uncertainty}
@@ -503,17 +503,17 @@
       style=authoryear, natbib=true, refsection=chapter,
       block=none, \UBN@initials]{biblatex}
   \else
-    \ifthenelse {\texlive < 2010} {%
-      \RequirePackage[backend=\UBN@backend, hyperref=true, \UBN@biblatexencoding
-        backref=\UBN@backref,
-        style=\UBN@bibstyle, sorting=none,
-        block=ragged, firstinits=true]{biblatex}
-    }{%
-      \RequirePackage[backend=\UBN@backend, \UBN@biblatexencoding
-        backref=\UBN@backref,
-        style=\UBN@bibstyle, sorting=none,
-        block=ragged, \UBN@initials]{biblatex}
-    }
+    % \ifthenelse {\texlive < 2010} {%
+    %   \RequirePackage[backend=\UBN@backend, hyperref=true, \UBN@biblatexencoding
+    %     backref=\UBN@backref,
+    %     style=\UBN@bibstyle, sorting=none,
+    %     block=ragged, firstinits=true]{biblatex}
+    % }{%
+    \RequirePackage[backend=\UBN@backend, \UBN@biblatexencoding
+      backref=\UBN@backref,
+      style=\UBN@bibstyle, sorting=none,
+      block=ragged, \UBN@initials]{biblatex}
+    % }
   \fi
 \fi
 

@@ -145,8 +145,8 @@ An alternative, and successor, to \Package{subfig} is
 \url{http://www.peteryu.ca/tutorials/publishing/latex_captions}.
 An example of its use can be seen in \cref{fig:nccc}.
 The \LaTeX\ file \texttt{guide\_figs.tex} contains examples for both \Package{subfig} and 
-\Package{subcaption}, as the way \Package{subcaption} should be used was
-different for \TeXLive 2011 and earlier.
+\Package{subcaption}.
+% , as the way \Package{subcaption} should be used was different for \TeXLive 2011 and earlier.
 You can see how to reference
 the different parts of the figure in \cref{sec:fig:feynman}. If
 you want the captions of the sub-figures to also appear in the
@@ -154,22 +154,22 @@ you want the captions of the sub-figures to also appear in the
 option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
 
 
-\ifthenelse{\texlive < 2012}{%
-\begin{figure}[htbp]
-  \centering
-  \subfloat[NC scattering]{%
-    \includegraphics[width=0.5\figwidth]{ep_nc}%
-    \label{fig:nccc-nc}
-  }
-  \qquad
-  \subfloat[CC scattering]{%
-    \includegraphics[width=0.5\figwidth]{ep_cc}%
-    \label{fig:nccc-cc}
-  }
-  \caption{Processes in $ep$ scattering.}%
-  \label{fig:nccc}
-\end{figure}
-}{%
+% \ifthenelse{\texlive < 2012}{%
+% \begin{figure}[htbp]
+%   \centering
+%   \subfloat[NC scattering]{%
+%     \includegraphics[width=0.5\figwidth]{ep_nc}%
+%     \label{fig:nccc-nc}
+%   }
+%   \qquad
+%   \subfloat[CC scattering]{%
+%     \includegraphics[width=0.5\figwidth]{ep_cc}%
+%     \label{fig:nccc-cc}
+%   }
+%   \caption{Processes in $ep$ scattering.}%
+%   \label{fig:nccc}
+% \end{figure}
+% }{%
 \begin{figure}[htbp]
   \centering
   \begin{subfigure}[b]{0.5\figwidth}
@@ -184,7 +184,7 @@ option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
   \caption{Processes in $ep$ scattering.}%
   \label{fig:nccc}
 \end{figure}
-}
+% }
 
 If you run out of space (applies more often to proceedings than to
 theses) you can use the \Package{wrapfig} package.
@@ -381,6 +381,7 @@ However, it is hard to give a hard and fast rule here.
 As indicated above, the effect of these different ways of including a figure (and table) is the point in the text (reference point) that \LaTeX\ uses to start trying to place the figure.
 In general, you should only try to tweak the position of figures and tables when your text is final,
 as a change in the text way well move some of the floats.
+
 %------------------------------------------------------------------------------
 \subsection{\Package{standalone} package and class}%
 \label{sec:fig:standalone}
@@ -408,8 +409,13 @@ your thesis.
 
 You have lots of Feynman graphs you want to include, but how do you
 generate them? 
-Recently I have moved to a Python package \Package{PyFeyn} (\url{https://pyfeyn.hepforge.org})
-that works quite nicely.
+For the past few years I have used a Python package \Package{PyFeyn} (\url{https://pyfeyn.hepforge.org})
+that works quite nicely once you have it set up.
+However, the package does not seem to be actively developed any more
+and fixes are needed before it works with the latest \Package{PyX} version,
+which is the drawing tool it uses.
+For the future I plan to move to a \TikZ package.
+Two possibilities are \Package{tikz-feynman} and \Package{tikz-feynhand}.
 Before that I followed the example of many people,
 where I found one way doing it and never changed!
 I used to use \texttt{Mn\_Fit},
@@ -455,28 +461,35 @@ show a charged current process.
 As the name suggests, \Package{PyFeyn} (\url{https://pyfeyn.hepforge.org})
 is a Python package for drawing Feynman graphs.
 It combines the advantages of using a programming language to draw the graphs
-with the ability to use \LaTeX\ and the same fonts as you use in your thesis
-for the text.
-I also wanted to improve my Python skills, 
-so now use this package for my graphs.
+with the ability to use \LaTeX\ and the same fonts as you use in your thesis for the text.
+I also wanted to improve my Python skills, so used this package quite a lot for my graphs.
 
-The package \Package{hepnicename} is included by \Package{PyFeyn}.
+The package \Package{hepnicenames} is included by \Package{PyFeyn}.
 If you want your particles to be written with italics,
 you have to add this option to \File{\_\_init\_\_.py} in the \File{pyfeyn} directory.
+As of \TeXLive 2019 particles using the upright font do not seem to be printed properly,
+so you really have to write your particles with italics.
+This appears to be a bug in \Package{hepparticles} (which is the underlying package of \Package{hepnicenames}),
+but I do not have a fix for it.
+Hence, you have to change the line:
+\begin{verbatim}
+  pyx.text.default_runner.preamble(r"\usepackage{hepnicenames}")
+\end{verbatim}
+to
+\begin{verbatim}
+  pyx.text.default_runner.preamble(r"\usepackage[italic]{hepnicenames}")
+\end{verbatim}
 
 \Package{PyFeyn} should work pretty much out of the box,
-but may need a specific version of the \Package{pyx} package.
-If you want to use the \Package{newtx} fonts, you may have to apply a patch.
-In order to install the package using Homebrew Python under MacOS, I did:
+but may need a specific version of the \Package{PyX} package.
+In order to install the package using Homebrew Python (set up with \Package{pyenv} under MacOS), I did:
 \begin{verbatim}
-  pip(3) install PyX==0.12.1 (Python 2 needs 0.12.1)
-  pip(3) install PyFeyn
-  Stuff goes in /usr/local/lib/python2.7/site-packages/... etc.
-  To use newtx fonts had to patch pyx/dvi/vffiles.py
-  https://sourceforge.net/p/pyx/code/3678/    
+  pip install pyx==0.14.1
+  pip install pyfeyn
+  Stuff goes in \File{~/.pyenv/versions/3.8.2/lib/python3.8/site-packages/\ldots} etc.
 \end{verbatim}
-So far I have not tested its use with operating systems other than MacOS,
-but it should work.
+For older versions of \Package{PyX} you may have to patch \File{pyx/dvi/vffiles.py}
+to use the newtx fonts: \url{https://sourceforge.net/p/pyx/code/3678/}.
 
 While functions exist to draw a number of lines, I added my own wrapper functions
 that adjust the style as I wanted.
@@ -643,8 +656,12 @@ then be looked at in \texttt{feynmf\_all.dvi} or\\
 \subsection{Feynman graphs with \TikZ}%
 \label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}
 
-In order to draw Feynman graphs with \TikZ, you need to include some
-extra \TikZ packages and libraries. In addition it makes sense to
+There are (at least) two packages based in \TikZ that exist to draw Feynman graphs:
+\Package{tikz-feynman} and \Package{tikz-feynhand}.
+
+If you want to draw Feynman graphs using \TikZ directly,
+you need to include some extra \TikZ packages and libraries.
+In addition it makes sense to
 define things like gluons, photons and incoming and outgoing particles
 once, as these are objects that are often needed.
 
@@ -713,9 +730,3 @@ identical.
 \end{figure}
 }
 
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "./thesis_guide"
-%%% End:

@@ -5,7 +5,7 @@
 
 THESIS  = mythesis
 TEXLIVE = 2016
-TEXOLD = 2009
+# TEXOLD = 2009
 # EXTRACMD = --shell-escape
 ifndef FEYNDIR
 FEYNDIR = feynmf
@@ -39,7 +39,6 @@ endif
 LATEXMK = latexmk -pdf
 # LATEXMK = latexmk -e '$$pdflatex=q/pdflatex %O -shell-escape %S/' -pdf $(GUIDE)
 
-
 .PHONY: skelcopy \
 	feynmf feynmp tikz pyfeyn \
 	cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpictpdf \
@@ -56,9 +55,9 @@ astro: skelcopy
 	cp thesis_skel/thesis_astro_intro.tex  $(THESIS)/thesis_intro.tex
 
 # New thesis with old version of TeX Live
-new09: skelcopy
-	#cp thesis_skel/thesis_2009_skel.tex  $(THESIS)/$(THESIS).tex
-	sed 's/texlive=2009/texlive=$(TEXOLD)/' thesis_skel/thesis_2009_skel.tex > $(THESIS)/$(THESIS).tex
+# new09: skelcopy
+# 	#cp thesis_skel/thesis_2009_skel.tex  $(THESIS)/$(THESIS).tex
+# 	sed 's/texlive=2009/texlive=$(TEXOLD)/' thesis_skel/thesis_2009_skel.tex > $(THESIS)/$(THESIS).tex
 
 skelcopy:
 	mkdir $(THESIS)
@@ -138,8 +137,8 @@ help:
 	@echo "new   [THESIS=dirname] [TEXLIVE=YYYY]: create a new thesis skeleton"
 	@echo "astro [THESIS=dirname] [TEXLIVE=YYYY]: create a new astrophysics thesis skeleton"
 	@echo "  Default TeX Live version is 2016"
-	@echo "new09 [THESIS=dirname] [TEXOLD=YYYY]: create a new thesis skeleton"
-	@echo "  Default old TeX Live version is 2009"
+	# @echo "new09 [THESIS=dirname] [TEXOLD=YYYY]: create a new thesis skeleton"
+	# @echo "  Default old TeX Live version is 2009"
 	@echo "update [THESIS=dirname]: update to a newer version of ubonn-thesis"
 	@echo "feynmf: run feynmf for all .tex files in $(FEYNDIR)"
 	@echo "feynmp: run feynmp for all .tex files in $(FEYNDIR)"

@@ -415,7 +415,7 @@ However, the package does not seem to be actively developed any more
 and fixes are needed before it works with the latest \Package{PyX} version,
 which is the drawing tool it uses.
 For the future I plan to move to a \TikZ package.
-Two possibilities are \Package{tikz-feynman} and \Package{tikz-feynhand}.
+Two possibilities are \Package{TikZ-Feynman} and \Package{TikZ-FeynHand}.
 Before that I followed the example of many people,
 where I found one way doing it and never changed!
 I used to use \texttt{Mn\_Fit},
@@ -658,8 +658,15 @@ then be looked at in \texttt{feynmf\_all.dvi} or\\
 \label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}
 
 There are (at least) two packages based in \TikZ that exist to draw Feynman graphs:
-\Package{tikz-feynman} and \Package{tikz-feynhand}.
-Examples of how to use these packages will be added.
+\Package{TikZ-Feynman} and \Package{TikZ-FeynHand}.
+\Package{TikZ-Feynman} requires you to use Lua\LaTeX,
+so I will only give examples for \Package{TikZ-FeynHand} here.
+Note that it does not seem to be possible to adjust the amplitude and frequency
+of boson and gluon oscillations explicitly.
+This has to be done using the \Macro*{setlength{\textbackslash feynhandlinesize}{1.0pt}} command.
+This also, as the name suggest, changes the line thickness.
+After a bit of playing around \num{1.0}{pt} seems to work well,
+with a Feynman graph size of about \SI[parse-numbers=false]{2 by 2}{\cm^{2}}
 
 If you want to draw Feynman graphs using \TikZ directly,
 you need to include some extra \TikZ packages and libraries.
@@ -668,67 +675,75 @@ define things like gluons, photons and incoming and outgoing particles
 once, as these are objects that are often needed.
 
 Given the multitude of possibilities that exist to draw things with
-\TikZ, it is not surprising that there are several ways of achieving the
-same end. It is also debatable whether \Package{feymp} or \Package{tikz}
-is better. If you use \TikZ for drawing other things, then it is
-probably easier to use it also for Feynman graphs. However, if you
-want things like gluons on an arc, this may well only be available, if
-at all, with very recent versions of \Package{tikz}.
+\TikZ, it is not surprising that there are several ways of achieving the same end.
+It is also debatable whether \Package{feymp} or \Package{\TikZ} is better.
+If you use \TikZ for drawing other things, then it is
+probably easier to use it also for Feynman graphs.
+However, if you want things like gluons on an arc, this may well only be available, if
+at all, with very recent versions of \Package{\TikZ}.
 
 As a start we can directly compare a scattering graph made with
-\Package{feynmp} and \Package{tikz}. This is shown in
-\cref{fig:feyn:cf}. As you can see the quality of the graphs is
-very similar. Further tweaking can probably make them almost
-identical.
+\Package{feynmp}, \Package{\TikZ} and \Package{TikZ-FeynHand}.
+This is shown in \cref{fig:feyn:cf}.
+As you can see the quality of the graphs is very similar.
+Further tweaking can probably make them almost identical.
+In the TikZ-FeynHand graph, I use lots of colours to illustrate how they work.
 
-\ifthenelse{\texlive < 2012}{%
+% \ifthenelse{\texlive < 2012}{%
+% \begin{figure}[htbp]
+%   \centering
+%   \begin{minipage}[b]{0.5\figwidth}
+%     \centering
+%     \subfloat[Feynmp]{%
+%       \input{../feynmf/moeller.tex}
+%       \ifthenelse {\texlive < 2011}{%
+%       }{
+%         \write18{mpost moeller}
+%       }
+%     }\label{fig:feyn:feynmp}
+%   \end{minipage}
+%   \qquad
+%   \begin{minipage}[b]{0.5\figwidth}
+%     \centering
+%     \subfloat[\TikZ]{%
+%       \ifthenelse {\texlive < 2011} {%
+%         \fbox{\parbox[b]{0.4\textwidth}{%
+%           Error messages appear when trying to
+%           compile the guide with \Package{tikz} and \TeXLive 2009,
+%           so the figure cannot be included.
+%           See the file \texttt{../tikz/moeller.tex}.}}
+%       }{%
+%         \input{../tikz/moeller.tex}
+%       }
+%     }\label{fig:feyn:tikz}
+%   \end{minipage}
+%   \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}%
+%   \label{fig:feyn:cf}
+% \end{figure}
+% }{%
 \begin{figure}[htbp]
   \centering
-  \begin{minipage}[b]{0.5\figwidth}
-    \centering
-    \subfloat[Feynmp]{%
-      \input{../feynmf/moeller.tex}
-      \ifthenelse {\texlive < 2011}{%
-      }{
-        \write18{mpost moeller}
-      }
-    }\label{fig:feyn:feynmp}
-  \end{minipage}
-  \qquad
-  \begin{minipage}[b]{0.5\figwidth}
-    \centering
-    \subfloat[\TikZ]{%
-      \ifthenelse {\texlive < 2011} {%
-        \fbox{\parbox[b]{0.4\textwidth}{%
-          Error messages appear when trying to
-          compile the guide with \Package{tikz} and \TeXLive 2009,
-          so the figure cannot be included.
-          See the file \texttt{../tikz/moeller.tex}.}}
-      }{%
-        \input{../tikz/moeller.tex}
-      }
-    }\label{fig:feyn:tikz}
-  \end{minipage}
-  \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}%
-  \label{fig:feyn:cf}
-\end{figure}
-}{%
-\begin{figure}[htbp]
-  \centering
-  \begin{minipage}[b]{0.5\figwidth}
+  \fbox{\begin{minipage}[b]{0.29\textwidth}
     \centering
     \input{../feynmf/moeller.tex}
     \write18{mpost moeller}
-    \subcaption{Feynmp}\label{fig:feyn:feynmp}
-  \end{minipage}
-  \qquad
-  \begin{minipage}[b]{0.5\figwidth}
+    \subcaption{feynmp}\label{fig:feyn:feynmp}
+  \end{minipage}}
+  \quad
+  \fbox{\begin{minipage}[b]{0.29\textwidth}
     \centering
-    \input{../tikz/moeller.tex}
+    \input{../tikz/moeller-tikz.tex}
     \subcaption{\TikZ}\label{fig:feyn:tikz}
-  \end{minipage}
-  \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}%
+  \end{minipage}}
+  \quad
+  \fbox{\begin{minipage}[b]{0.29\textwidth}
+    \centering
+    \input{../tikz/moeller-feynhand.tex}
+    \subcaption{TikZ-FeynHand}\label{fig:feyn:feynhand}
+  \end{minipage}}
+  \caption{Feynman graphs drawn with \Package{feynmp}, \Package{tikz} and \Package{tikz-feynhand}.
+    The frames around the boxes are for illustration only.}%
   \label{fig:feyn:cf}
 \end{figure}
-}
+% }
 

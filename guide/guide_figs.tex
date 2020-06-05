@@ -221,11 +221,12 @@ which is a successor to \texttt{xfig}. Professionals use Adobe Illustrator!
 %------------------------------------------------------------------------------
 
 \Package{pgfplots} and \Package{tikz} are packages to help with
-creating graphics \enquote{inline}. For 3D figures you also need
-\Package{tikz-3dplot}. PGF is the backend, while \TikZ is what the
-user interacts with directly. The manual contains all the information
-you should need, but was 1161 pages long at the last count, so it may
-not to be too easy to find what you want!
+creating graphics \enquote{inline}.
+For 3D figures you also need \Package{tikz-3dplot}.
+PGF is the backend, while \TikZ is what the user interacts with directly.
+The manual contains all the information you should need,
+but was 1318 pages long at the last count,
+so it may not to be too easy to find what you want!
 
 I do not have much experience with using these packages so far, so
 this section will certainly not cover all possibilities. There may
@@ -344,8 +345,8 @@ they can be turned on or off in \Package{ubonn-thesis} via the option \Option{fl
 The default value is set to \Option{true}.
 
 I used to think it was better to attach the figure to a paragraph:
-\begin{verbatim}
-The distribution is shown in \cref{fig:funny1}.
+\begin{lstlisting}%[language={[LaTeX]TeX}]
+  The distribution is shown in \cref{fig:funny1}.
 %
 \begin{figure}[htbp]
   \centering
@@ -358,11 +359,11 @@ The distribution shows something that I do not understand.
 
 Given that this is not understood we went to the pub for a beer to
 think about it a bit more.
-\end{verbatim}
+\end{lstlisting}
 
 More recently it appears to me to be better to separate the figure
 from the paragraph:
-\begin{verbatim}
+\begin{lstlisting}%[language={[LaTeX]TeX}]
 The distribution is shown in \cref{fig:funny2}.
 The distribution shows something that I do not understand.
 
@@ -375,7 +376,7 @@ The distribution shows something that I do not understand.
 
 Given that this is not understood we went to the pub for a beer to
 think about it a bit more.
-\end{verbatim}
+\end{lstlisting}
 
 However, it is hard to give a hard and fast rule here.
 As indicated above, the effect of these different ways of including a figure (and table) is the point in the text (reference point) that \LaTeX\ uses to start trying to place the figure.
@@ -395,10 +396,12 @@ available from \TeXLive 2012 onward. It allows you to have a
 standalone document for a \Package{tikz} or \Package{feynmf} figure
 and also input this file into another document. If you run PDF\LaTeX\
 on the file it also automatically crops the resulting picture. This is
-one of those packages where you think \enquote{Why didn't someone
-  create this years ago?}. The \TikZ figures that I include in this
-guide (see subdirectory \texttt{tikz}) make use of this package. If
-you want to use it, make sure that you also include this package in
+one of those packages where you think
+\enquote{Why didn't someone create this years ago?}.
+The \TikZ figures (as well as those made using \Package{TikZ-FeynHand})
+that I include in this guide (see subdirectories \texttt{tikz} and \texttt{pyfeynhand})
+make use of this package.
+If you want to use it, make sure that you also include this package in
 your thesis.
 
 
@@ -409,30 +412,36 @@ your thesis.
 
 You have lots of Feynman graphs you want to include, but how do you
 generate them? 
-For the past few years I have used a Python package \Package{PyFeyn} (\url{https://pyfeyn.hepforge.org})
+For a few years I used a Python package \Package{PyFeyn} (\url{https://pyfeyn.hepforge.org})
 that works quite nicely once you have it set up.
 However, the package does not seem to be actively developed any more
 and fixes are needed before it works with the latest \Package{PyX} version,
 which is the drawing tool it uses.
-For the future I plan to move to a \TikZ package.
+Hence, I am moving my graphs to a \TikZ package, which means that they are created in a \LaTeX\ file.
 Two possibilities are \Package{TikZ-Feynman} and \Package{TikZ-FeynHand}.
-Before that I followed the example of many people,
-where I found one way doing it and never changed!
-I used to use \texttt{Mn\_Fit},
+I have written a Python wrapper for \Package{TikZ-FeynHand},
+which hopefully allows me to combine the best of both worlds!
+The wrapper code and an example can be found in the \File{pyfeynhand} directory.
+
+Before I started using Python packages, I followed the example of many people,
+where I found one way doing making graphs and never changed!
+I used \texttt{Mn\_Fit},
 mainly because I wrote it and therefore know inside out how it works.
 Examples can be found on my web page:
 \url{http://pi.physik.uni-bonn.de/~brock/feynman}.
-
 Alternatives include \Package{axodraw} and the \Package{feynmf} or
 \Package{feynmp} packages.
-It is also possible to use \Package{tikz}.
+
 The use of \Package{feynmf} and \Package{feynmp} is
 described in \cref{sec:fig:feynman:feynmf}, while a few
 examples of usage of \Package{tikz} are given in
-\cref{sec:fig:feynman:tikz}. Examples of Feynman graphs made
-with \Package{feynmf} and \Package{feynmp} can be found in the
-\texttt{feynmf} directory, while those made with \Package{tikz} can
-be found in the \texttt{tikz} subdirectory.
+\cref{sec:fig:feynman:tikz}.
+Usage of \Package{TikZ-FeynHand} and my Python wrapper \Package{PyFeynhand}
+can also be found in \cref{sec:fig:feynman:tikz}.
+Examples of Feynman graphs made
+with \Package{feynmf} and \Package{feynmp} can be found in the \texttt{feynmf} directory;
+those made with \Package{TikZ-FeynHand} can be found in the \texttt{pyfeynhand} and \texttt{tikz} subdirectories;
+while those made with \Package{tikz} can be found in the \texttt{tikz} subdirectory.
 
 Instructions on how to use \Package{axodraw} may come at a later
 date --- contributions would be welcome! Several people have claimed
@@ -455,6 +464,146 @@ show a charged current process.
 
 
 %------------------------------------------------------------------------------
+\subsection{Feynman graphs with \TikZ}%
+\label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}
+
+There are (at least) two packages based on \TikZ that exist to draw Feynman graphs:
+\Package{TikZ-Feynman} and \Package{TikZ-FeynHand}.
+\Package{TikZ-Feynman} requires you to use Lua\LaTeX,
+so I will only give examples for \Package{TikZ-FeynHand} here.
+Note that it does not seem to be possible to adjust the amplitude and frequency
+of boson and gluon oscillations explicitly.
+This has to be done using the \Macro*{setlength{\textbackslash feynhandlinesize}{1.0pt}} command.
+This also, as the name suggest, changes the line thickness.
+After a bit of playing around \num{1.0}{pt} seems to work well,
+with a Feynman graph size of about \SI[parse-numbers=false]{2 \times 2}{\cm^{2}}
+
+I like using a scripting language, e.g.\ Python, to draw my graphs.
+I have therefore written a Python wrapper for \Package{TikZ-FeynHand}.
+You can find the wrapper and an example script in the \File{pyfeynhand} directory.
+The wrapper creates a \LaTeX{} file,
+which can either be compiled or included directly in your document,
+as it uses the \Package{standalone} package.
+\Cref{fig:feyn:tZq} shows two graphs from one of my favourite processes.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}{0.5\figwidth}
+    \centering
+    \missingfigure{Still need to create the plot to be included here.}
+    % \input{../pyfreynhand/tZq1.tex}
+    \caption{\LaTeX\ file}%
+    \label{fig:feyn:tZq1}
+  \end{subfigure}
+  \begin{subfigure}{0.5\figwidth}
+    \centering
+    \missingfigure{Still need to create the plot to be included here.}
+    % \includegraphics[width=0.3put{../pyfreynhand/tZq1.tex}
+    \caption{PDF file}%
+    \label{fig:feyn:tZq2}
+  \end{subfigure}
+  \caption{Feynman graphs made with the \Package{TikZ-FeynHand} package.
+    This example uses the \Env{subfigure} environment from the \Package{subcaption} package.}%
+  \label{fig:feyn:tZq}
+\end{figure}
+
+If you want to draw Feynman graphs using \TikZ directly,
+you need to include some extra \TikZ packages and libraries.
+In addition it makes sense to
+define things like gluons, photons and incoming and outgoing particles
+once, as these are objects that are often needed.
+
+% Given the multitude of possibilities that exist to draw things with
+% \TikZ, it is not surprising that there are several ways of achieving the same end.
+% If you want to work with \TikZ directly, you could also consider \Package{feymp},
+% which has very similar capabilities and is dedicated to Feynman graphs.
+% If you use \TikZ for drawing other things, then it is
+% probably easier to use it also for Feynman graphs.
+% However, if you want things like gluons on an arc, this may well only be available, if
+% at all, with very recent versions of \Package{\TikZ}.
+
+We can directly compare a scattering graph made with
+\Package{feynmp}, \Package{\TikZ} and \Package{TikZ-FeynHand}.
+This is shown in \cref{fig:feyn:cf}.
+As you can see the quality of the graphs is very similar.
+Further tweaking can probably make them almost identical.
+In the \Package{TikZ-FeynHand} graph, I use lots of colours to illustrate how they work.
+
+% \ifthenelse{\texlive < 2012}{%
+% \begin{figure}[htbp]
+%   \centering
+%   \begin{minipage}[b]{0.5\figwidth}
+%     \centering
+%     \subfloat[Feynmp]{%
+%       \input{../feynmf/moeller.tex}
+%       \ifthenelse {\texlive < 2011}{%
+%       }{
+%         \write18{mpost moeller}
+%       }
+%     }\label{fig:feyn:feynmp}
+%   \end{minipage}
+%   \qquad
+%   \begin{minipage}[b]{0.5\figwidth}
+%     \centering
+%     \subfloat[\TikZ]{%
+%       \ifthenelse {\texlive < 2011} {%
+%         \fbox{\parbox[b]{0.4\textwidth}{%
+%           Error messages appear when trying to
+%           compile the guide with \Package{tikz} and \TeXLive 2009,
+%           so the figure cannot be included.
+%           See the file \texttt{../tikz/moeller.tex}.}}
+%       }{%
+%         \input{../tikz/moeller.tex}
+%       }
+%     }\label{fig:feyn:tikz}
+%   \end{minipage}
+%   \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}%
+%   \label{fig:feyn:cf}
+% \end{figure}
+% }{%
+\begin{figure}[htbp]
+  \centering
+  \subcaptionbox{feynmp\label{fig:feyn:feynmp}}
+    [0.3\textwidth]{\fbox{%
+      \input{../feynmf/moeller.tex}
+      \write18{mpost moeller}}
+  }
+  \subcaptionbox{\TikZ\label{fig:feyn:tikz}}
+    [0.3\textwidth]{\fbox{%
+    \input{../tikz/moeller-tikz.tex}}
+  }
+  \subcaptionbox{TikZ-FeynHand\label{fig:feyn:feynhand}}
+    [0.3\textwidth]{\fbox{%
+    \input{../tikz/moeller-feynhand.tex}}
+  }
+  % \fbox{\begin{minipage}[b]{0.29\textwidth}
+  %   \centering
+  %   \input{../feynmf/moeller.tex}
+  %   \write18{mpost moeller}
+  %   \subcaption{feynmp}\label{fig:feyn:feynmp}
+  % \end{minipage}}
+  % \quad
+  % \fbox{\begin{minipage}[b]{0.29\textwidth}
+  %   \centering
+  %   \input{../tikz/moeller-tikz.tex}
+  %   \subcaption{\TikZ}\label{fig:feyn:tikz}
+  % \end{minipage}}
+  % \quad
+  % \fbox{\begin{minipage}[b]{0.29\textwidth}
+  %   \centering
+  %   \input{../tikz/moeller-feynhand.tex}
+  %   \subcaption{TikZ-FeynHand}\label{fig:feyn:feynhand}
+  % \end{minipage}}
+  \caption{Feynman graphs drawn with \Package{feynmp}, \Package{tikz} and \Package{tikz-feynhand}.
+    The frames around the boxes are for illustration only.
+    As you can see the \Package{feynmp} box does not include the labels.
+    This example uses the \Macro{subcaptionbox} macro from the \Package{subcaption} package.}%
+  \label{fig:feyn:cf}
+\end{figure}
+% }
+
+
+%------------------------------------------------------------------------------
 \subsection{PyFeyn}%
 \label{sec:fig:pyfeyn}\index{PyFeyn}
 
@@ -471,25 +620,42 @@ As of \TeXLive 2019 particles using the upright font do not seem to be printed p
 so you really have to write your particles with italics.
 This appears to be a bug in \Package{hepparticles} (which is the underlying package of \Package{hepnicenames}),
 but I do not have a fix for it.
-Hence, you have to change the line:
-\begin{verbatim}
+Hence, in \File{\_\_init\_\_.py} of the package you have replace
+\begin{lstlisting}[language=Python]
   pyx.text.default_runner.preamble(r"\usepackage{hepnicenames}")
-\end{verbatim}
-to
-\begin{verbatim}
+\end{lstlisting}
+by
+\begin{lstlisting}[language=Python]
   pyx.text.default_runner.preamble(r"\usepackage[italic]{hepnicenames}")
-\end{verbatim}
+\end{lstlisting}
 
-\Package{PyFeyn} should work pretty much out of the box,
-but may need a specific version of the \Package{PyX} package.
+\Package{PyFeyn} does not work out of the box any more,
+unless you use a specific version of the \Package{PyX} package.
 In order to install the package using Homebrew Python (set up with \Package{pyenv} under MacOS), I did:
-\begin{verbatim}
+\begin{lstlisting}[language=bash]
   pip install pyx==0.14.1
   pip install pyfeyn
-  Stuff goes in \File{~/.pyenv/versions/3.8.2/lib/python3.8/site-packages/\ldots} etc.
-\end{verbatim}
+\end{lstlisting}
+This installed the packages in \File{~/.pyenv/versions/3.8.2/lib/python3.8/site-packages/\ldots} etc.
 For older versions of \Package{PyX} you may have to patch \File{pyx/dvi/vffiles.py}
 to use the newtx fonts: \url{https://sourceforge.net/p/pyx/code/3678/}.
+For the most recent version of \Package{PyX} (0.15), you also have to patch \Package{PyFeyn} to make it work.
+This means replacing
+\verb+pyx.text.defaulttexrunner.text+ by
+\verb+pyx.text.defaulttextengine.text+
+in \File{deco.py}
+You have to adjust \File{\_\_init\_\_.py} in a similar way including the following lines:
+\begin{lstlisting}[language=Python]
+if pyxversion >= Version("0.15.0"):
+    pyx.text.set(pyx.text.LatexEngine)
+elif pyxversion >= Version("0.13.0"):
+    pyx.text.set(pyx.text.LatexRunner)
+else:
+    pyx.text.defaulttexrunner.set(mode="latex")
+\end{lstlisting}
+
+Given these difficulties, I am moving to \Package{TikZ-FeynHand},
+as discussed above.
 
 While functions exist to draw a number of lines, I added my own wrapper functions
 that adjust the style as I wanted.
@@ -652,98 +818,4 @@ then be looked at in \texttt{feynmf\_all.dvi} or\\
 \texttt{feynmf\_all.pdf}. You can use the same syntax for
 \texttt{make feynmp} and \texttt{make tikz}.
 
-
-%------------------------------------------------------------------------------
-\subsection{Feynman graphs with \TikZ}%
-\label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}
-
-There are (at least) two packages based in \TikZ that exist to draw Feynman graphs:
-\Package{TikZ-Feynman} and \Package{TikZ-FeynHand}.
-\Package{TikZ-Feynman} requires you to use Lua\LaTeX,
-so I will only give examples for \Package{TikZ-FeynHand} here.
-Note that it does not seem to be possible to adjust the amplitude and frequency
-of boson and gluon oscillations explicitly.
-This has to be done using the \Macro*{setlength{\textbackslash feynhandlinesize}{1.0pt}} command.
-This also, as the name suggest, changes the line thickness.
-After a bit of playing around \num{1.0}{pt} seems to work well,
-with a Feynman graph size of about \SI[parse-numbers=false]{2 by 2}{\cm^{2}}
-
-If you want to draw Feynman graphs using \TikZ directly,
-you need to include some extra \TikZ packages and libraries.
-In addition it makes sense to
-define things like gluons, photons and incoming and outgoing particles
-once, as these are objects that are often needed.
-
-Given the multitude of possibilities that exist to draw things with
-\TikZ, it is not surprising that there are several ways of achieving the same end.
-It is also debatable whether \Package{feymp} or \Package{\TikZ} is better.
-If you use \TikZ for drawing other things, then it is
-probably easier to use it also for Feynman graphs.
-However, if you want things like gluons on an arc, this may well only be available, if
-at all, with very recent versions of \Package{\TikZ}.
-
-As a start we can directly compare a scattering graph made with
-\Package{feynmp}, \Package{\TikZ} and \Package{TikZ-FeynHand}.
-This is shown in \cref{fig:feyn:cf}.
-As you can see the quality of the graphs is very similar.
-Further tweaking can probably make them almost identical.
-In the TikZ-FeynHand graph, I use lots of colours to illustrate how they work.
-
-% \ifthenelse{\texlive < 2012}{%
-% \begin{figure}[htbp]
-%   \centering
-%   \begin{minipage}[b]{0.5\figwidth}
-%     \centering
-%     \subfloat[Feynmp]{%
-%       \input{../feynmf/moeller.tex}
-%       \ifthenelse {\texlive < 2011}{%
-%       }{
-%         \write18{mpost moeller}
-%       }
-%     }\label{fig:feyn:feynmp}
-%   \end{minipage}
-%   \qquad
-%   \begin{minipage}[b]{0.5\figwidth}
-%     \centering
-%     \subfloat[\TikZ]{%
-%       \ifthenelse {\texlive < 2011} {%
-%         \fbox{\parbox[b]{0.4\textwidth}{%
-%           Error messages appear when trying to
-%           compile the guide with \Package{tikz} and \TeXLive 2009,
-%           so the figure cannot be included.
-%           See the file \texttt{../tikz/moeller.tex}.}}
-%       }{%
-%         \input{../tikz/moeller.tex}
-%       }
-%     }\label{fig:feyn:tikz}
-%   \end{minipage}
-%   \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}%
-%   \label{fig:feyn:cf}
-% \end{figure}
-% }{%
-\begin{figure}[htbp]
-  \centering
-  \fbox{\begin{minipage}[b]{0.29\textwidth}
-    \centering
-    \input{../feynmf/moeller.tex}
-    \write18{mpost moeller}
-    \subcaption{feynmp}\label{fig:feyn:feynmp}
-  \end{minipage}}
-  \quad
-  \fbox{\begin{minipage}[b]{0.29\textwidth}
-    \centering
-    \input{../tikz/moeller-tikz.tex}
-    \subcaption{\TikZ}\label{fig:feyn:tikz}
-  \end{minipage}}
-  \quad
-  \fbox{\begin{minipage}[b]{0.29\textwidth}
-    \centering
-    \input{../tikz/moeller-feynhand.tex}
-    \subcaption{TikZ-FeynHand}\label{fig:feyn:feynhand}
-  \end{minipage}}
-  \caption{Feynman graphs drawn with \Package{feynmp}, \Package{tikz} and \Package{tikz-feynhand}.
-    The frames around the boxes are for illustration only.}%
-  \label{fig:feyn:cf}
-\end{figure}
-% }
 

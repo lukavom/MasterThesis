@@ -45,14 +45,16 @@ include them in one reference or do you want to keep one article per
 reference?
 I give some hints on
 useful options and settings for \Package{biblatex} below (\cref{sec:ref:bbx}).
-If you use traditional \BibTeX\ (which I do not recommend), then you probably have to use the \Package{mcite}
-package --- see \cref{sec:ref:mcite}.
+If you use traditional \BibTeX\ (which I do not recommend),
+then you probably have to use the \Package{mcite}
+package --- see \cref{sec:app:ref:mcite}.
 Just to take a silly example. The ZEUS collaboration
 publications in
 2010~\cite{Abramowicz:2010ih,Abramowicz:2010xc,Abramowicz:2010nj} were
 not as numerous as in previous years. If you use the standard
 \Macro{cite} command and the \Option{unsrt} option or its equivalent,
-you get a list of numbers.  In the past one could use the
+you get a list of numbers.
+In the past one could use the
 \Package{mcite} package to make the references nicer, put them all in
 one, write the list as [m--n] etc.
 
@@ -115,7 +117,7 @@ of the \texttt{.bib} files you want to use. You have a choice of the
 original \BibTeX\index{BibTeX@\BibTeX} or the more modern
 \Package{biblatex}. If you use \Package{biblatex} you
 need something like:
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 % Use biblatex for the bibliography
 \usepackage[backend=biber,
   style=numeric-comp, sorting=none, block=ragged, giveninits=true]{biblatex}
@@ -127,7 +129,7 @@ need something like:
 
 \addbibresource{../mythesis/thesis_refs.bib}
 \addbibresource{../refs/standard_refs-biber.bib}
-\end{verbatim}
+\end{tcblisting}
 in the document preamble and \Macro{printbibliography} where they
 should be printed.\footnote{%
 If you use an older version of \TeXLive you may have to replace
@@ -137,13 +139,13 @@ the \Package{biblatex} command is included in \Package{ubonn-thesis} directly.
 To turn it off add the option \Option{biblatex=false}.
 \par\noindent
 If you use traditional \BibTeX{} you need something like:
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 % Use BibTeX for the bibliography
 \bibliographystyle{../refs/atlasBibStyleWithTitle.bst}
 % \bibliographystyle{unsrt}
 \bibliography{../mythesis/thesis_refs,%
   ../refs/standard_refs-bibtex}
-\end{verbatim}
+\end{tcblisting}
 at the point where the references should be printed.
 Note that \LaTeX{} is sometimes picky about spaces in lists of files,
 so you either terminate each line in \Macro{bibliography} with a \% or include all files on one line.
@@ -342,10 +344,10 @@ pay any attention to this field.
 The ones from Inpire listed below will work properly. The
 only other reliable alternative I have found is to use the following
 syntax:
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 @Article{Chekanov:2009qja,
      author    = "{ZEUS Collab.} and Chekanov, S. and others",
-\end{verbatim}
+\end{tcblisting}
 which then usually gets formatted as \enquote{ZEUS Collab., S.\ Chekanov et
 al.,}.
 I went through and changed the references in \texttt{zeus\_2009.bib}
@@ -404,8 +406,8 @@ The following options exist:
   \toprule
   Option & Default & Description \\
   \midrule
-  texlive & 2014 & Specify the \TeXLive version.
-  You can also use the older command \verb|\newcommand*{\texlive}{2014}|.\\
+  texlive & 2016 & Specify the \TeXLive version.
+  You can also use the older command \verb|\newcommand*{\texlive}{2016}|.\\
   block & ragged & Specify the justification of each reference;\\
   maxbibnames & 5 & Numbers of authors to list before switching to \enquote{et al.};\\
   articletitle & true & Show the titles of articles and reports;\\
@@ -422,9 +424,9 @@ The following options exist:
 You can fine tune things even more by using hooks that are
 available. For example, the way I turn off the URL field is
 to include the command:
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 \AtEveryBibitem{\clearfield{url}}
-\end{verbatim}
+\end{tcblisting}
 in the preamble or in the relevant style file given in the previous
 paragraph. It is not clear to me if you also need
 \verb+\AtEveryCitekey{\clearfield{url}}+.
@@ -455,57 +457,33 @@ If it is available, \Option{biber} is the preferred backend over
 \Option{bibtex} or \Option{bibtex8}.
 However, the backend is mostly relevant for
 sorting, so it probably does not matter which you use if you use an
-option that gives the references in the order that they were
-cited. \Option{biber} seems to work well with \TeXLive 2012 and later and hence is the default.
-For older versions of \TeXLive, a better solution is probably \texttt{make new09}
-followed by \texttt{make thesis09} that then uses traditional \BibTeX.\footnote{%
-You can still try to use \Package{biblatex} if you want to --- use \texttt{make new} to create a new skeleton ---
-as \texttt{ubonn-thesis} switches to \Option{bibtex} automatically for \TeXLive
-versions earlier than 2011.
-Compile the thesis with \texttt{make thesis09} though.
-If you want to set the backend yourself, use the option \Option{backend}.
-Set the encoding with the option \Option{bibencoding} if necessary.}
+option that gives the references in the order that they were cited.
+\Option{biber} seems to work well with \TeXLive 2012 and later and hence is the default.
+% For older versions of \TeXLive, a better solution is probably \texttt{make new09}
+% followed by \texttt{make thesis09} that then uses traditional \BibTeX.\footnote{%
+% You can still try to use \Package{biblatex} if you want to --- use \texttt{make new} to create a new skeleton ---
+% as \texttt{ubonn-thesis} switches to \Option{bibtex} automatically for \TeXLive
+% versions earlier than 2011.
+% Compile the thesis with \texttt{make thesis09} though.
+% If you want to set the backend yourself, use the option \Option{backend}.
+% Set the encoding with the option \Option{bibencoding} if necessary.}
 
 If you want to find out where your references are actually cited, you
 can include the option \Option{backref=true}.
 
 If you get an error such as:
 {\scriptsize
-\begin{verbatim}
+\begin{bashlisting}
 biber     thesis_guide
 data source /tmp/par-62726f636b/cache-ab06f20732bfab23dfa35f56998ad4edca61bee1//inc/lib/Biber/LaTeX/recode_data.xml not found in .
 Compilation failed in require at Biber/Utils.pm line 21.
-\end{verbatim}
+\end{bashlisting}
 }
 \noindent
 then you should delete the directory \texttt{/tmp/par-\ldots} and try to
 run again. The directory name depends on the operating system you are using.
 Use the command \verb|biber --cache| to find out where it is.
 If you are adventurous, the command \verb|rm -rf $(biber --cache)| will do it all for you!
-
-
-%------------------------------------------------------------------------------
-\subsection{Traditional \BibTeX{} styles}%
-\label{sec:ref:bst}
-
-I strongly recommend that you use \Package{biblatex} and \Package{biber}, but if you insist\ldots
-
-If you use references directly from Spires or Inspire, then it is
-probably best to use one of the style files that is compatible with
-their format. A list can be found on
-\url{http://www.slac.stanford.edu/spires/hep/refs/bibstyles.shtml}. I
-have used \Option{utphys} a few times and it works OK\@. I see that
-there are also style files available there for common HEP journals,
-which could save quite a bit of work. The big advantage of
-\Option{utphys} is that it also knows about the arXiv and preprints.
-
-The equivalent of \Package{biblatex}'s \Option{ieee} style in \BibTeX\ is
-\Option{ieeetr}. It also knows about arXiv and preprints. However, it
-does not know about collaborations.
-
-There are also standard ATLAS style files that work fairly well:
-\texttt{atlasBibStyleWithTitle.bst} and \texttt{atlasBibStyleWoTitle.bst}
-These are included in the \texttt{refs} directory.
 
 
 %------------------------------------------------------------------------------
@@ -516,7 +494,7 @@ What is the best way to include errata?\index{Errata}
 \Package{biblatex} offers a nice mechanism for this using the \texttt{related} field.
 For example, Ref~\cite{EXOT-2013-13} has an erratum.
 This is achieved using the following:
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 @Article{EXOT-2013-13,
     author         = "{ATLAS Collaboration}",
     title          = "{Search for new phenomena in final states ...}",
@@ -542,7 +520,7 @@ This is achieved using the following:
     doi            = "10.1140/epjc/s10052-015-3639-7",
     reportNumber   = "CERN-PH-EP-2014-299",
 }
-\end{verbatim}
+\end{tcblisting}
 
 This mechanism is used in \texttt{ATLAS.bib} and will be extended to \texttt{CMS.bib} once
 I have a list of the CMS Errata.
@@ -574,14 +552,14 @@ directly.
 
 To get the ZEUS references I used above I first tried the following
 command in Inspire:
-\begin{verbatim}
+\begin{bashlisting}
 find exp zeus and date 2009
-\end{verbatim}
+\end{bashlisting}
 This does not really give you the references you expect though! It
 seems much more reliable to use an author name so I used:
-\begin{verbatim}
+\begin{bashlisting}
 find a chekanov and date 2009
-\end{verbatim}
+\end{bashlisting}
 and then selecting \BibTeX{} format, saving the resulting page in a file
 and removing the \texttt{<pre>} and \texttt{</pre>} entries between
 references. This worked better, even though I got a whole load of
@@ -623,8 +601,8 @@ then with \Package{biblatex} you should use the style
 ZEUS
 collaboration~\cite{Chekanov:2009qja,Chekanov:2009zz,Chekanov:2009tu}
 as well as several articles from both the H1 and ZEUS
-collaborations\cite{Chekanov:2009wt,Aaron:2009wg}. See
-\cref{sec:ref:mcite} on how to do this with \BibTeX.
+collaborations\cite{Chekanov:2009wt,Aaron:2009wg}.
+See \cref{sec:app:ref:mcite} on how to do this with \BibTeX.
 
 In some areas, it is more common to give a bibliography per chapter,
 rather than collecting all references at the end of the thesis.
@@ -641,21 +619,20 @@ so that the citation appears as expected for astronomy publications.
 If you use \Macro{citep} and an old version of \Package{biblatex},
 you may see an extra comma between the author name and the year in parentheses.
 This can been removed by uncommenting the lines:
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 % \ifUBN@astrobib
 %   \renewcommand*{\nameyeardelim}{\addspace}
 % \fi
-\end{verbatim}
+\end{tcblisting}
 in \Package{ubonn-biblatex.sty}
 
 You are nearing the end of your thesis and have to properly format all
 the references that you have. However, they are spread over several
 files and these files also contain many references that you do not use
-or want to correct. How best to proceed?
-\begin{verbatim}
+or want to correct. How best to proceed?\index{bibtool}
+\begin{bashlisting}
 bibtool -x mythesis.aux -o refs.bib
-\end{verbatim}%
-\index{bibtool}
+\end{bashlisting}
 will extract the entries that you use and in future you can use and
 correct \texttt{refs.bib}, which only contains the references that you
 actually cite.\footnote{%
@@ -664,34 +641,3 @@ I got this tip from
 Do not forget to change \texttt{mythesis.tex} to use
 \texttt{refs.bib} instead of the previous sources.}
 
-
-%------------------------------------------------------------------------------
-\section{Using \Package{mcite}}%
-\label{sec:ref:mcite}
-%------------------------------------------------------------------------------
-
-As mentioned above, the \Package{mcite} package used to be a good way
-of combining several articles into a single references and also
-getting them to be printed out in the form \enquote{[m--n]}, rather
-than \enquote{[l,m,n]} or \enquote{[l],[m],[n]}. How do you achieve
-this?  Just put all the articles in a single \Macro{cite} and prefix
-those that should be lumped together with a \enquote{*},\\
-e.g.\ \verb+\cite{Chekanov:2009wt,*Aaron:2009wg,*Aaron:2009sma}+.
-The problem is that this package does not appear to be compatible with the
-\Package{hyperref} package, so you have to choose between the
-two. Given the ability that the \Package{hyperref} package offers to
-jump directly to sections, equations, references referred to in a
-document, I guess most of you will go with \Package{hyperref} rather
-than \Package{mcite}.
-
-As mentioned above the \Package{biblatex} package offers a
-more modern alternative and different ways of achieving the same
-results! It is also not compatible with \Package{mcite}.
-
-A modified version \Package{mcite} is used by ZEUS in its LaTeX4ZEUS
-environment, which is why I include a short description here.
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "./thesis_guide"
-%%% End:

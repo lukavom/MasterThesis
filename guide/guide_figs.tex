@@ -2,8 +2,8 @@
 % chktex-file 1 chktex-file 21
 
 %==============================================================================
-\chapter{Figures}%
-\label{sec:fig}\index{figures}
+\chapter{Figures and Feynman graphs}%
+\label{sec:fig}\index{figures}\index{Feynman graph}
 %==============================================================================
 
 \LaTeX{} file: \url{./guide_figs.tex}\\[1ex]
@@ -11,7 +11,7 @@
 This chapter discusses what you need to know to include graphics in
 your thesis. The basic command to use is \Macro{includegraphics}.
 
-I recently found a pretty complete guide (in German) called \texttt{l2piqfaq}
+I found a pretty complete guide (in German) called \texttt{l2piqfaq}
 which can be obtained from
 \url{http://www.ctan.org/tex-archive/info/l2picfaq/german}. It contains
 a lot of detailed information and tricks.
@@ -85,10 +85,10 @@ corner of the file that you have included (assuming that the
 \Macro{put} command comes just after the \Macro{includegraphics}).
 The units for the \Macro{put} command are set with the
 \Macro{setlength}\texttt{\{\textbackslash unitlength\}} command, which
-is by default set to \SI{1}{\mm} in \texttt{ubonn-thesis.sty}. The
-same units are also used for Feynman graphs made with the
+is by default set to \SI{1}{\mm} in \texttt{ubonn-thesis.sty}.
+The same units are also used for Feynman graphs made with the
 \Package{feynmf} and/or \Package{feynmp} package --- see
-\cref{sec:fig:feynman:feynmf}.
+\cref{sec:fig:feynman:feynmp}.
 
 \begin{figure}[htbp]
   \centering
@@ -216,93 +216,6 @@ which is a successor to \texttt{xfig}. Professionals use Adobe Illustrator!
 
 
 %------------------------------------------------------------------------------
-\section{\TikZ and PGF}%
-\label{sec:fig:tikz}\index{TikZ@\TikZ}
-%------------------------------------------------------------------------------
-
-\Package{pgfplots} and \Package{tikz} are packages to help with
-creating graphics \enquote{inline}.
-For 3D figures you also need \Package{tikz-3dplot}.
-PGF is the backend, while \TikZ is what the user interacts with directly.
-The manual contains all the information you should need,
-but was 1318 pages long at the last count,
-so it may not to be too easy to find what you want!
-
-I do not have much experience with using these packages so far, so
-this section will certainly not cover all possibilities. There may
-also be better ways of doing things than I illustrate here. The
-examples I give come from Andrii Verbytskyi or are adapted from
-questions and answers found on
-\url{http://tex.stackexchange.com/}. The examples included in this
-guide and a few more are collected in the \texttt{tikz}
-subdirectory.
-If you want to get started with \TikZ you can copy this directory
-into your thesis directory, e.g.\ \File{mythesis}.\footnote{%
-Note that some of the examples only work with \TeXLive
-2011 and later. This is indicated in the file. I also did not manage
-to compile the guide without errors when including \Package{tikz} with
-\TeXLive 2009, so some of the figures may be missing if you compile
-your own version of the guide with \TeXLive 2009.}
-
-\TikZ is not included by default in a new skeleton thesis. See the
-commented out packages in a new thesis skeleton or
-\texttt{thesis\_guide.tex} for the packages and \TikZ libraries that
-you should include if you want to use it.
-
-You often want to include a figure of your experiment's coordinate
-system in your thesis. One way to do this is illustrated in
-\cref{fig:tikz:coord}.
-
-\begin{figure}[htbp]
-  \centering
-  \ifthenelse {\texlive < 2012} {%
-    \fbox{\parbox[c]{0.8\textwidth}{%
-    Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
-    earlier. See the file \texttt{./tikz/zeus\_coords.tex}.}
-    This example also does not work with \TeXLive 2011.}
-  }{%
-    \input{../tikz/zeus_coords.tex}
-  }
-  \caption{The ZEUS coordinate system.}%
-  \label{fig:tikz:coord}
-\end{figure}
-
-It is also possible to make flow charts with \TikZ. This is
-illustrated in \cref{fig:tikz:flow}.
-
-\begin{figure}[htbp]
-  \centering
-  \ifthenelse {\texlive < 2011} {%
-    \fbox{\parbox[c]{0.8\textwidth}{%
-        Error messages appear when trying to compile the guide with
-        \Package{tikz} and \TeXLive 2009, so the figure is not included.
-        See the file \texttt{../tikz/zeus\_reconstruction.tex}.}}
-  }{%
-    \input{../tikz/zeus_reconstruction.tex}
-  }
-  \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}%
-  \label{fig:tikz:flow}
-\end{figure}
-
-There are many more possibilities,
-including plots which you would otherwise make with \texttt{root} or
-some other graphics program. An example plot showing the effect of
-systematic variations can be found in \cref{sec:app:tikz}. Making
-Feynman graphs with \TikZ is covered in \cref{sec:fig:feynman:tikz}.
-
-
-%------------------------------------------------------------------------------
-\subsection{Accelerator lattices}%
-\label{sec:fig:accelerator}
-
-If you want to include an accelerator lattice in your thesis you can try
-\Package{tikz-palattice}\footnote{%
-  \url{https://ctan.org/pkg/tikz-palattice}
-  written by Jan Schmidt, who gave me a number of useful tips for this guide.}
-He used the package to make lattices of particle accelerators for his PhD thesis.
-
-
-%------------------------------------------------------------------------------
 \section{Placement}%
 \label{sec:fig:placement}
 %------------------------------------------------------------------------------
@@ -313,7 +226,8 @@ them into the place that you want them to be.
 
 In general, you are advised to give \LaTeX{} as much freedom as
 possible in the placing, so it is usual to use the options
-\Option{[htbp]} for the placement. In particular, be very careful with
+\Option{[htbp]} for the placement.
+In particular, be very careful with
 using just \Option{[h]} or \Option{[H]} as the placement option. It very
 easily leads to \LaTeX{} putting single lines of text either above or
 below a figure.
@@ -344,9 +258,12 @@ As it is very hard to really test how well these options work
 they can be turned on or off in \Package{ubonn-thesis} via the option \Option{floatopt=true|false}.
 The default value is set to \Option{true}.
 
-I used to think it was better to attach the figure to a paragraph:
-\begin{lstlisting}%[language={[LaTeX]TeX}]
-  The distribution is shown in \cref{fig:funny1}.
+I used to think it was better to attach the figure to a paragraph.
+More recently it appears to me to be better to separate the figure
+from the paragraph.
+What I mean is illustrated below:
+\begin{tcblisting}{listing only}
+\Cref{fig:funny1} is attached to the paragraph.
 %
 \begin{figure}[htbp]
   \centering
@@ -359,12 +276,10 @@ The distribution shows something that I do not understand.
 
 Given that this is not understood we went to the pub for a beer to
 think about it a bit more.
-\end{lstlisting}
+\end{tcblisting}
 
-More recently it appears to me to be better to separate the figure
-from the paragraph:
-\begin{lstlisting}%[language={[LaTeX]TeX}]
-The distribution is shown in \cref{fig:funny2}.
+\begin{tcblisting}{listing only}
+\Cref{fig:funny2} is separated from the paragraph by a blank line.
 The distribution shows something that I do not understand.
 
 \begin{figure}[htbp]
@@ -376,7 +291,7 @@ The distribution shows something that I do not understand.
 
 Given that this is not understood we went to the pub for a beer to
 think about it a bit more.
-\end{lstlisting}
+\end{tcblisting}
 
 However, it is hard to give a hard and fast rule here.
 As indicated above, the effect of these different ways of including a figure (and table) is the point in the text (reference point) that \LaTeX\ uses to start trying to place the figure.
@@ -433,7 +348,7 @@ Alternatives include \Package{axodraw} and the \Package{feynmf} or
 \Package{feynmp} packages.
 
 The use of \Package{feynmf} and \Package{feynmp} is
-described in \cref{sec:fig:feynman:feynmf}, while a few
+described in \cref{sec:fig:feynman:feynmp}, while a few
 examples of usage of \Package{tikz} are given in
 \cref{sec:fig:feynman:tikz}.
 Usage of \Package{TikZ-FeynHand} and my Python wrapper \Package{PyFeynhand}
@@ -621,21 +536,21 @@ so you really have to write your particles with italics.
 This appears to be a bug in \Package{hepparticles} (which is the underlying package of \Package{hepnicenames}),
 but I do not have a fix for it.
 Hence, in \File{\_\_init\_\_.py} of the package you have replace
-\begin{lstlisting}[language=Python]
-  pyx.text.default_runner.preamble(r"\usepackage{hepnicenames}")
-\end{lstlisting}
+\begin{bashlisting}
+pyx.text.default_runner.preamble(r"\usepackage{hepnicenames}")
+\end{bashlisting}
 by
-\begin{lstlisting}[language=Python]
-  pyx.text.default_runner.preamble(r"\usepackage[italic]{hepnicenames}")
-\end{lstlisting}
+\begin{bashlisting}
+pyx.text.default_runner.preamble(r"\usepackage[italic]{hepnicenames}")
+\end{bashlisting}
 
 \Package{PyFeyn} does not work out of the box any more,
 unless you use a specific version of the \Package{PyX} package.
-In order to install the package using Homebrew Python (set up with \Package{pyenv} under MacOS), I did:
-\begin{lstlisting}[language=bash]
-  pip install pyx==0.14.1
-  pip install pyfeyn
-\end{lstlisting}
+In order to install the package using Homebrew Python (set up with \Package{pyenv} under macOS), I did:
+\begin{bashlisting}
+pip install pyx==0.14.1
+pip install pyfeyn
+\end{bashlisting}
 This installed the packages in \File{~/.pyenv/versions/3.8.2/lib/python3.8/site-packages/\ldots} etc.
 For older versions of \Package{PyX} you may have to patch \File{pyx/dvi/vffiles.py}
 to use the newtx fonts: \url{https://sourceforge.net/p/pyx/code/3678/}.
@@ -645,14 +560,14 @@ This means replacing
 \verb+pyx.text.defaulttextengine.text+
 in \File{deco.py}
 You have to adjust \File{\_\_init\_\_.py} in a similar way including the following lines:
-\begin{lstlisting}[language=Python]
+\begin{bashlisting}
 if pyxversion >= Version("0.15.0"):
     pyx.text.set(pyx.text.LatexEngine)
 elif pyxversion >= Version("0.13.0"):
     pyx.text.set(pyx.text.LatexRunner)
 else:
     pyx.text.defaulttexrunner.set(mode="latex")
-\end{lstlisting}
+\end{bashlisting}
 
 Given these difficulties, I am moving to \Package{TikZ-FeynHand},
 as discussed above.
@@ -682,10 +597,10 @@ into your thesis directory, e.g.\ \File{mythesis}.
 
 
 %------------------------------------------------------------------------------
-\subsection{FeynMF and FeynMP}%
-\label{sec:fig:feynman:feynmf}\index{feynmf}\index{feynmp}
+\subsection{FeynMP}%
+\label{sec:fig:feynman:feynmp}\index{feynmp}
 
-In order to use \Package{feynmf} or \Package{feynmp}, you have to put
+In order to use the \Package{feynmp} package, you have to put
 the commands to draw the graph in a \LaTeX{} file and then process
 this file with \LaTeX{} and either Metafont or
 Metapost.\footnote{\texttt{ubonn-thesis.sty} now includes \Package{feynmp}
@@ -693,18 +608,21 @@ Metapost.\footnote{\texttt{ubonn-thesis.sty} now includes \Package{feynmp}
   \Package{feynmf} instead just change the name.} 
 You can either make
 a separate \LaTeX{} file containing the Feynman graph or include the
-commands inside your normal \LaTeX\ file.  Metapost\index{metapost} is
-a bit easier to use than Metafont.  You should be able to just run
+commands inside your normal \LaTeX\ file.
+Metapost\index{metapost} is a bit easier to use than Metafont.
+You should be able to just run
 \texttt{mpost} after \texttt{(pdf)latex} and then run % chktex 36
-\texttt{pdflatex} again twice. Note that you have to run
+\texttt{pdflatex} again twice.
+Note that you have to run
 \texttt{mpost} on all the files whose names are defined at the
 beginning of the \Env{fmffile} environment.\footnote{%
   While Metapost works well
   as of \TeXLive 2011, I did not get it to work properly with \TeXLive
   2009 for unknown reasons.}
 
-Metafont\index{metafont} is a bit trickier. On Unix systems the
-\texttt{feynmf} perl script exists that runs both \LaTeX{} and
+Metafont\index{metafont} is a bit trickier and details have been relegated to
+\cref{sec:app:fig:feynman:feynmf}. 
+On Unix systems the \texttt{feynmf} perl script exists that runs both \LaTeX{} and
 Metafont for you. This will produce a \texttt{dvi} file that you then
 then look at or use to make a Postscript/PDF file.
 
@@ -818,4 +736,94 @@ then be looked at in \texttt{feynmf\_all.dvi} or\\
 \texttt{feynmf\_all.pdf}. You can use the same syntax for
 \texttt{make feynmp} and \texttt{make tikz}.
 
+
+%------------------------------------------------------------------------------
+\section{\TikZ and PGF}%
+\label{sec:fig:tikz}\index{TikZ@\TikZ}
+%------------------------------------------------------------------------------
+
+\Package{pgfplots} and \Package{tikz} are packages to help with
+creating graphics \enquote{inline}.
+For 3D figures you also need \Package{tikz-3dplot}.
+PGF is the backend, while \TikZ is what the user interacts with directly.
+The manual contains all the information you should need,
+but was 1318 pages long at the last count,
+so it may not to be too easy to find what you want!
+
+I do not have much experience with using these packages so far,
+except for Feynman graphs discussed above.
+Hence, this section will certainly not cover all possibilities. There may
+also be better ways of doing things than I illustrate here. The
+examples I give come from Andrii Verbytskyi or are adapted from
+questions and answers found on
+\url{http://tex.stackexchange.com/}.
+The examples included in this
+guide and a few more are collected in the \texttt{tikz} directory.
+If you want to get started with \TikZ you can copy this directory
+into your thesis directory, e.g.\ \File{mythesis}.
+% \footnote{%
+% Note that some of the examples only work with \TeXLive
+% 2011 and later. This is indicated in the file.
+% I also did not manage
+% to compile the guide without errors when including \Package{\TikZ} with
+% \TeXLive 2009, so some of the figures may be missing if you compile
+% your own version of the guide with \TeXLive 2009.}
+
+\TikZ is not included by default in a new skeleton thesis. See the
+commented out packages in a new thesis skeleton or
+\texttt{thesis\_guide.tex} for the packages and \TikZ libraries that
+you should include if you want to use it.
+
+You often want to include a figure of your experiment's coordinate
+system in your thesis. One way to do this is illustrated in
+\cref{fig:tikz:coord}.
+
+\begin{figure}[htbp]
+  \centering
+  \input{../tikz/zeus_coords.tex}
+    % \ifthenelse {\texlive < 2012} {%
+  %   \fbox{\parbox[c]{0.8\textwidth}{%
+  %   Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
+  %   earlier. See the file \texttt{./tikz/zeus\_coords.tex}.}
+  %   This example also does not work with \TeXLive 2011.}
+  % }{%
+  %   \input{../tikz/zeus_coords.tex}
+  % }
+  \caption{The ZEUS coordinate system.}%
+  \label{fig:tikz:coord}
+\end{figure}
+
+It is also possible to make flow charts with \TikZ. This is
+illustrated in \cref{fig:tikz:flow}.
+
+\begin{figure}[htbp]
+  \centering
+  \ifthenelse {\texlive < 2011} {%
+    \fbox{\parbox[c]{0.8\textwidth}{%
+        Error messages appear when trying to compile the guide with
+        \Package{tikz} and \TeXLive 2009, so the figure is not included.
+        See the file \texttt{../tikz/zeus\_reconstruction.tex}.}}
+  }{%
+    \input{../tikz/zeus_reconstruction.tex}
+  }
+  \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}%
+  \label{fig:tikz:flow}
+\end{figure}
+
+There are many more possibilities,
+including plots which you would otherwise make with \texttt{root} or
+some other graphics program. An example plot showing the effect of
+systematic variations can be found in \cref{sec:app:tikz}. Making
+Feynman graphs with \TikZ is covered in \cref{sec:fig:feynman:tikz}.
+
+
+%------------------------------------------------------------------------------
+\subsection{Accelerator lattices}%
+\label{sec:fig:accelerator}
+
+If you want to include an accelerator lattice in your thesis you can try
+\Package{tikz-palattice}\footnote{%
+  \url{https://ctan.org/pkg/tikz-palattice}
+  written by Jan Schmidt, who gave me a number of useful tips for this guide.}
+He used the package to make lattices of particle accelerators for his PhD thesis.
 

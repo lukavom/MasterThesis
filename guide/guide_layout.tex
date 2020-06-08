@@ -56,13 +56,13 @@ way you want them rather than using the default \KOMAScript{}
 settings.
 
 The default setting of \KOMAScript{} is:
-\begin{verbatim}
-  \deffootnote[1em]{1.5em}{1em}{\textsuperscript{\thefootnotemark}}
-\end{verbatim}
+\begin{tcblisting}{listing only}
+\deffootnote[1em]{1.5em}{1em}{\textsuperscript{\thefootnotemark}}
+\end{tcblisting}
 In this guide and in \texttt{ubonn-thesis.sty} I have changed this to:
-\begin{verbatim}
-  \deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark}\ }
-\end{verbatim}
+\begin{tcblisting}{listing only}
+\deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark}\ }
+\end{tcblisting}
 The differences are:
 \begin{itemize}
 \item The optional argument is missing that sets the box width for the
@@ -75,49 +75,71 @@ The differences are:
   footnote mark is not quite so close to the text.
 \end{itemize}
 
+\deffootnote[1em]{1.5em}{1em}{\textsuperscript{\thefootnotemark}}
 You might think that a nice way to write footnotes is:
-\begin{verbatim}
+\begin{tcblisting}{}
 We want to include a footnote
 \footnote{
   This is the footnote text.
 }
 about what the footnote should look like.
-\end{verbatim}
-If you do this you will find some extra space where it should not be.
-This is illustrated in footnote~\footref{foot:short}.
-To try out footnotes we try first an example which is probably how you
-would first try to write a footnote:
-\footnote{
-  This is an example of a footnote with extra space at the beginning.%
-  \label{foot:short}
-}
+\end{tcblisting}
+% If you do this you will find some extra space where it should not be.
+% This is illustrated in footnote~\footref{foot:short}.
+% \begin{tcblisting}{}
+% To try out footnotes we try first an example which is probably how you
+% would first try to write a footnote:
+% \footnote{
+%   This is an example of a footnote with extra space at the beginning.%
+%   \label{foot:short}
+% }
+% \end{tcblisting}
+\noindent
+This example uses the default footnote settings.
 As you can see this is not really satisfactory. You have a spurious
-space between the colon and the footnote mark \(^{1}\). If may even
-be the case that the footnote mark appears on the next line! To get the spacing
+space between the colon and the footnote mark \(^{a}\). If may even
+be the case that the footnote mark appears on the next line! 
+To get the spacing
 correct and still have \enquote{nice} \LaTeX{} you have to add some
 judicious \texttt{\%} signs:
-\begin{verbatim}
+\begin{tcblisting}{}
 We want to include a footnote%
-\footnote{%
+\footnote{\label{foot:one}
   This is the footnote text.
+  it is longer than the previous one, but about nothing in particular.
+  It goes over more than one line to make sure that we can also have a proper
+  look at the effect of indentation.
+  It also demonstrates that footnotes can be given a label,
+  if they need to be referred to from elsewhere.
 }
 about what the footnote should look like.
-\end{verbatim}
-To show how this works%
-\footnote{\label{foot:long}%
+The space between \enquote{\(^{a}\)} and \enquote{This} should not actually be there
+with the default footnote settings.
+If you look very carefully \enquote{This} is not properly aligned with \enquote{than}.
+\end{tcblisting}
+\deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark}\ }
+\begin{tcblisting}{}
+The same footnote with the \File{ubonn\_thesis.sty} default settings
+demonstrates the effect of the changed spacing.%
+\footnote{\label{foot:two}%
   This is a longer footnote about nothing in particular that goes
   over more than one line to make sure that we can also have a proper
-  look at the effect of indentation.}
-have a look at the footnote referred to above.
+  look at the effect of indentation.
+  It also demonstrates that footnotes can be given a label,
+  if they need to be referred to from elsewhere.
+}
+\end{tcblisting}
 
-In standard \LaTeX{} you can use
-\Macro{footnotemark} to set the symbol for a
-footnote and refer to it. \KOMAScript{} has a better solution for
-this. You define a \Macro{label} inside the footnote and
-then refer to it via the label and \Macro{footref}. You
-can see how to do this in footnote~\footref{foot:long} and if you were
-paying attention you will have seen that I also used it to refer to
-footnote~\footref{foot:short}. Using this mechanism it is even
+In standard \LaTeX{} you can use \Macro{footnotemark}
+to set the symbol for a footnote and refer to it.
+\KOMAScript{} has a better solution for this.
+You define a \Macro{label} inside the footnote and
+then refer to it via the label and \Macro{footref}.
+You can see how to do this in footnote~\footref{foot:one}.
+The \Package{cleverref} package claims to also know about footnote label.
+However, if I use \Macro{cref\{foot:two\}} to refer to it, \cref{foot:two},
+it points to the section and not the footnote.
+Using the \Macro{footref} mechanism it is even
 possible to click on the reference if you use PDF\LaTeX.
 
 When a footnote contains a complete sentence, people still often
@@ -176,14 +198,14 @@ Another way to avoid this problem by using the \Package{ziffer} package. It is
 commented out in \texttt{ubonn-thesis.sty}. An alternative
 is to remove the comments on the \TeX{} code snippet at the top
 of the file \texttt{thesis\_defs.sty}:
-\begin{verbatim}
+\begin{tcblisting}{}
 \mathchardef\CommaOrdinary="013B
 \mathchardef\CommaPunct   ="613B
 \mathcode`,="8000   % , im Math-Mode aktiv ("8000) machen
 {\catcode`\,=\active
  \gdef ,{\obeyspaces\futurelet\next\CommaCheck}}
 \def\CommaCheck{\if\space\next\CommaPunct\else\CommaOrdinary\fi}
-\end{verbatim}
+\end{tcblisting}
 As far as I have able to tell this above code does just what one wants
 and so is probably better than trying to use \Package{ziffer}.
 
@@ -193,19 +215,21 @@ that seems to work is to use the full stop as the decimal point in
 columns that are formatted using \Package{dcolumn} and then just change
 full stop to a comma, i.e.\ use the form \verb+D{.}{,}{2}+. The table
 below illustrates this usage:
+\begin{tcblisting}{listing side text}
 \begin{otherlanguage}{ngerman}
-\begin{center}
-  \begin{tabular}{l|D{.}{,}{4}@{\(\,\pm\,\)}D{.}{,}{4}} % chktex 44
-    Teilchen & \multicolumn{2}{c}{Masse [\si{\GeVovercsq}]}\\
-    \midrule
-    \(Z\) boson & 91.0372 & 0.0002\\
-    \(W\) boson & 83 & 0.035\\
-    Top quark & 173.3 & 1.1\\
-  \end{tabular}
-\end{center}
+\begin{tabular}{l|
+  D{.}{,}{4}@{\(\,\pm\,\)}
+  D{.}{,}{4}}
+  Teilchen & \multicolumn{2}{c}{Masse [\si{\GeVovercsq}]}\\
+  \midrule
+  \(Z\) boson & 91.0372 & 0.0002\\
+  \(W\) boson & 83 & 0.035\\
+  Top quark & 173.3 & 1.1\\
+\end{tabular}
 \end{otherlanguage}
+\end{tcblisting}
 If you use \Package{ziffer} and want to keep the decimal symbol,
-e.g. \verb+D{.}{.}+ or \verb+D{,}{,}+ this does
+e.g.\ \verb+D{.}{.}+ or \verb+D{,}{,}+ this does
 not seem to work. Hence if you try to use \Package{ziffer} with this
 guide you will get error messages.
 
@@ -214,7 +238,7 @@ writing letter with umlauts: \verb+\"{u}+ to get \"{u}, or \verb+\"a+
 to get \"a, or just to type in the character directly. I strongly
 recommend typing the characters directly. It makes your \LaTeX{} much
 easier to read and spell-check. You can either switch your keyboard to
-German (this is simple under Windows, MacOS, KDE or Gnome (Unity)) or set the
+German (this is simple under Windows, macOS, KDE or Gnome (Unity)) or set the
 compose key and then type the sequence \texttt{Compose " a} to get ä for example. % chktex 18
 
 
@@ -224,8 +248,9 @@ compose key and then type the sequence \texttt{Compose " a} to get ä for exampl
 %------------------------------------------------------------------------------
 
 Fonts to use for the various parts of a
-document can usually be set using the \Macro{setkomafont} command. I
-have set a few such fonts in \texttt{ubonn-thesis.sty}. In particular
+document can usually be set using the \Macro{setkomafont} command.
+I have set a few such fonts in \texttt{ubonn-thesis.sty}.
+In particular
 I set the fonts for the title page so that it conforms more closely to
 the requirements for theses and also have a few more commented out
 examples there.
@@ -240,6 +265,18 @@ to be either \Package{lmodern} or \Package{pxfonts}.
 See \cref{sec:tips:units} for some of the things you have to worry
 about if you use a font for which the text mode and math mode display
 numbers differently.
+
+I have tried to compile the guide using Xe\LaTeX\index{XeLaTeX} Lua\LaTeX\index{LuaLaTeX}.
+After a few tweaks it mostly works.
+However, Xe\LaTeX\ has problems with Greek letters in section titles.
+Lua\LaTeX\ seems to have problems with some tables, as well as listings.
+You can use the command \Command{make guidexe} to try to compile using Xe\LaTeX.
+You can use the command \Command{make guidelua} to try to compile using Xe\LaTeX.
+The TeX Gyre fonts Pagella or Termes are used, depending on whether you pass the
+\Option{palatino} option to the document class or not.
+The advantage of these tools is that you can use any font that you have installed on your computer.
+However, the number of (free) fonts that also have all the math symbols is very limited.
+I need to tweak settings more before the options can be considered anything other than experikmental!
 
 %------------------------------------------------------------------------------
 \section{Other languages}%

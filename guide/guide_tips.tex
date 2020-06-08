@@ -34,29 +34,18 @@ I have started using the \Package{showexpl} package that allows me to show
 both the \LaTeX{} and the result automatically.
 Hence in some places you will find compiled \LaTeX{} and the source code side by side.
 The files that make up this document are available in a Git repository and as a \texttt{tar} file.
-To get the latest Git entries give the command:
+To get the latest Git version give the command:
 
-{\small
-\begin{verbatim}
+\begin{bashlisting}
 git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
-\end{verbatim}
-}
+\end{bashlisting}
 \noindent
 If you want to checkout a particular version you can give the command:
-{\small
-\begin{verbatim}
-git clone --branch vN.M https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
-\end{verbatim}
-}
+\begin{bashlisting}
+git clone --branch vN.M \
+  https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
+\end{bashlisting}
 Note that you have to be in the University of Bonn network for the clone commands to work.
-% \noindent
-% If you have checked out a version of the guide before 20 August 2012
-% and want to update things, you need to change the location:
-% \begin{verbatim}
-% cd ~/ubonn-thesis/trunk
-% svn switch --relocate svn://svn.physik.uni-bonn.de/ubonn-thesis \
-%  https://svn.physik.uni-bonn.de/basic/ubonn-thesis
-% \end{verbatim}
 \noindent
 The tar file (and the tag tree (as of version 1.5)) also includes
 the guide as a PDF file: \texttt{thesis\_guide.pdf}.  It can be
@@ -67,9 +56,9 @@ and\\
 
 \par\noindent
 Once you have the files, you can then give the command:
-\begin{verbatim}
+\begin{bashlisting}
 make new [THESIS=dirname] [TEXLIVE=YYYY]
-\end{verbatim}
+\end{bashlisting}
 to create a new directory with several files to help you get
 started. By default the directory name will be \texttt{mythesis}.
 If you want to write a thesis that uses the astronomy style of references
@@ -78,10 +67,10 @@ give the command \enquote{\texttt{make astro [THESIS=dirname]}}.
 % If you choose a different name, you have to adjust the \Macro{include}
 % commands inside \texttt{./dirname.tex}.
 To compile your thesis try:\index{compiling}
-\begin{verbatim}
+\begin{bashlisting}
 cd mythesis [or dirname]
 make thesis
-\end{verbatim}
+\end{bashlisting}
 See \cref{sec:tips:options} for a list of the options that can be passed to the package.
 I no longer support versions of \TeXLive older than 2011,
 and can only test things for \TeXLive 2014 and later.
@@ -201,8 +190,9 @@ then choose \Package{lmodern}\index{font!lmodern} in the style file.
 
 The main file for this guide is \texttt{guide/thesis\_guide.tex} and
 it includes the \LaTeX{} files in the directory \texttt{./guide} and
-some of the Feynman graphs in the directories \texttt{./feynmf} and
-\texttt{./tikz}. Again this guide should compile without changes for
+some of the Feynman graphs in the directories 
+\texttt{./feynmf}, \texttt{pyfeyn}, \texttt{pyfeynhand} and \texttt{./tikz}.
+Again this guide should compile without changes for
 \TeXLive 2016 or later. For earlier versions set \Macro{texlive} in
 \texttt{thesis\_guide.tex} to the appropriate value.
 Set the default font to \Package{txfonts} for \TeXLive 2011.
@@ -334,9 +324,9 @@ It is not needed if you use the \Package{newtx} font package.}
 
 \item Define any complicated symbols once you use them more than
   once:
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 \newcommand*{\etajet}{\ensuremath{\eta_{\text{jet}}}\xspace}
-\end{verbatim}
+\end{tcblisting}
   If you decide at a later date that jet should be a superscript
   rather than a subscript you only have to change this in one place!
 
@@ -407,8 +397,9 @@ It is not needed if you use the \Package{newtx} font package.}
     uses \foreignquote{USenglish}{American quoted text}. In this guide
     (and in \texttt{ubonn-thesis.sty})
     \foreignquote{USenglish}{American (US) quotes} are used even if you
-    write in British (UK) English.})  you are writing your thesis in. You
-  can also see in the \cref{sec:intro} how this works, even
+    write in British (UK) English.})
+  you are writing your thesis in.
+  You can also see in \cref{sec:intro} how this works, even
   when switching languages inside a paragraph.
 
 \item Use sizes that depend on the font size, \texttt{em}\index{em}
@@ -463,16 +454,16 @@ It is not needed if you use the \Package{newtx} font package.}
 
 Not really a strict \enquote{Do}: I highly recommend that you use an
 integrated environment for editing and compiling your thesis.
-If you are on a Mac or under Windows you probably get TEXshop or
-\TeXLive by default.
+If you are on a Mac or under Windows you probably get TeXShop or
+TeXworks by default.
 \TeXstudio is based on \TeXmaker and is available for Linux,
-Windows and MacOS\@.
+Windows and macOS\@.
 It used to be my preferred \LaTeX\ environment under all systems!
 In the past couple of years,
 I have switched to the Visual Studio Code\index{Visual Studio Code} editor instead.
 The main reason for this is so that I can use the same program
 for editing scripts, e.g.\ a \File{Makefile} as I use for \LaTeX\ code.
-The \textsf{\LaTeX\ Workshop}\index{LaTeX Workshop@\LaTeX\ Workshop} extension is being actively developed
+The \textsf{LaTeX Workshop}\index{LaTeX Workshop@\LaTeX\ Workshop} extension is being actively developed
 and is very nice.
 The \Package{Spell Right} spelling checker works very well
 and I have also activated the use of \Package{ChkTeX} to improve my \LaTeX\ syntax.
@@ -521,7 +512,7 @@ in \cref{sec:app:tex}.
   \end{equation}
 
   \hspace*{1em}where \(E\) is the energy of the particle and \(m\) is its mass.
-  Using the paragraph options of this guide, you add extra space.
+  Using the paragraph options of this guide, you add extra vertical space.
   If your paragraphs are indented, \enquote{where} would also be indented.
 
   If you want to leave a blank line in your \LaTeX\ file for clarity,
@@ -597,18 +588,8 @@ of units. At least three standard packages exist to solve this
 problem: \Package{siunitx}, \Package{SIunits} and \Package{units}. My
 favourite is \Package{siunitx} as it offers many extra features in
 addition to the correct typesetting of numbers and their units.
-
-Instead of \Package{SIunits}, I used to use \Package{hepunits}, which
-is based on \Package{SIunits} but includes units commonly used in
-particle physics such as \si{\GeV} and \si{\pico\barn}. Unfortunately
-the syntax of the \Package{hepunits} and \Package{units} packages is
-different even though they use the same macro name. In
-\Package{hepunits} you write \verb+\unit{10}{\GeV}+, while in
-\Package{units} you write \verb+\unit[10]{\GeV}+. The
-\Package{siunitx} package is quite new and older versions were
-supposed to have compatibility modes for both \Package{SIunits} and
-\Package{units}, but I had problems getting them working. It uses the
-macros \Macro{SI} and \Macro{num} rather than \Macro{unit}.
+Information on the other (older) packages has been relegated to
+\cref{sec:app:tips:units}.
 
 
 %------------------------------------------------------------------------------
@@ -634,82 +615,79 @@ As of Version 7.0 of this guide, I only include version 2 examples.
 % 2 options in the text and the version 1 options as footnotes.
 
 One very attractive feature is that it allows you to format
-computer-generated numbers such as \verb+1.4E4+ automatically,
-e.g.\ \verb+\num{1.4E4}+ produces \num{1.4E4}. Depending on the
-language or using the option
-\Option{exponent-product} % \footnote{\Option{expproduct} in \TeXLive 2009.}
-you can also get \num[exponent-product=\cdot]{-3.4E-6}.
-% \ifthenelse {\texlive < 2011} {%
-%   \num[expproduct=cdot]{-3.4E-6}.  }{%
-%   \num[exponent-product=\cdot]{-3.4E-6}.
-% }
-It is even possible to set
-the number of decimal places, cf.\ \SI{2.99467E8}{\metre\per\second}
-and
-\SI[round-mode=places,round-precision=1]{2.99467E8}{\metre\per\second},
-% \ifthenelse {\texlive < 2011} {%
-%   \SI[dp=1]{2.99467E8}{\metre\per\second}, }{%
-%   \SI[round-mode=places,round-precision=1]{2.99467E8}{\metre\per\second},
-% }
-which only differ by the use of the \Option{round-mode} and
-\Option{round-precision} % \footnote{\Option{dp} in \TeXLive 2009}
-options, and even rounds correctly!
+computer-generated numbers
+such as \verb+1.4E4+ automatically:
+\begin{tcblisting}{}
+\num{1.4E4}\\
+\num[exponent-product=\cdot]{-3.4E-6}\\
+\SI{2.99467E8}{\metre\per\second}\\
+\SI[round-mode=places,round-precision=1]{2.99467E8}{\m.\s^{-1}}
+\end{tcblisting}
+\noindent
+Depending on the language or using the option \Option{exponent-product}
+you can change the way exponents are output.
+It is even possible to set the number of decimal places
+using the rounding abilities.
+The last two examples only differ by the use of the \Option{round-mode} and
+\Option{round-precision} options, and even rounds correctly!
 
 Another extremely nice feature of the package is that you can typeset
 numbers in a single way and then a full stop or a comma will be used
 as the decimal point, depending on which language you set for your
 document. This means that computer generated decimal numbers can be
 output with commas in a German thesis just by changing the language of
-your thesis --- this for me is \LaTeX{} at its best! For example,
-writing \verb+\num{1.2345E-3}+ produces \num{1.2345E-3} in the default
-language of the document and
-\foreignlanguage{ngerman}{\num{1.2345E-3}} if I say that this piece of
-text is in German (\Option{ngerman} to be exact).
+your thesis --- this for me is \LaTeX{} at its best! For example:
+\begin{tcblisting}{}
+\num{1.2345E-3}\\
+\foreignlanguage{ngerman}{\num{1.2345E-3}}
+\end{tcblisting}
+\noindent
+where the 1st example is in the default language of the document and
+the second says that this piece of text is in German
+(\Option{ngerman} to be exact).
 
 In keeping with \LaTeX{} philosophy, you can specify a number and its
-error using \verb+\num{2.88(32)}+ to produce \num{2.88(32)} with the
-\Option{separate-uncertainty} % \footnote{\Option{seperr} in \TeXLive 2009.}
-option (which I specify) or \(2.88(32)\) with the default
-option. Errors and powers can also be combined, e.g.\
-\verb+\num{2.88(32)E-3}+ produces \num{2.88(32)E-3}. % chktex 36
+error:
+\begin{tcblisting}{}
+\num{2.88(32)}\\
+\num[separate-uncertainty=false]{2.88(32)}\\
+\num{2.88(32)E-3}
+\end{tcblisting}
+The 1st example uses \Option{separate-uncertainty} option
+(which I specify), while the 2nd uses the package default
+(given here as \Option{separate-uncertainty=false}).
+Errors and powers can also be combined.
 You also give as
 an option how units with negative powers of units should be shown,
 e.g.\ per second. This can be changed for a single command.
 
 Some examples are given below:
-\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
-\item \(c\) is \SI{3E8}{\metre\per\second} --- default \Macro{per};
-\item \(c\) is
-\ifthenelse {\texlive < 2011} {%
-  \SI[per=fraction,fraction=nice]{3E8}{\metre\per\second}
-}{%
-  \SI[per-mode=fraction,fraction-function=\sfrac]{3E8}{\metre\per\second}
-}
-  --- using \Option{per-mode=fraction,fraction-function=\Macro{sfrac}}; % \footnote{\Option{per=fraction,fraction=nice} in \TeXLive 2009}
-\item written in \Env{displaymath} or preferably \Env{equation*}:
-\begin{equation*}
-  c = \SI[per-mode=symbol]{2.99E8}{\metre\per\second}
-\end{equation*}
-% \ifthenelse {\texlive < 2011} {%
-%   \begin{equation*}
-%     c = \SI[per=slash]{2.99E8}{\metre\per\second}
-%   \end{equation*}
-% }{%
-%   \begin{equation*}
-%     c = \SI[per-mode=symbol]{2.99E8}{\metre\per\second}
-%   \end{equation*}
-% }
-with \Option{per-mode=symbol}; % \footnote{\Option{per=slash} in \TeXLive 2009};
-\item \(\hbar\) is \SI{1.054E-34}{\joule.\second}.
-\end{itemize}
+\begin{tcblisting}{}
+\(c\) is \SI{3E8}{\metre\per\second}\\
+\(c\) is \SI[per-mode=fraction, fraction-function=\sfrac]{3E8}{\metre\per\second}\\
+\(c = \SI[per-mode=symbol]{2.99E8}{\metre\per\second}\)\\
+\(\hbar\) is \SI{1.054E-34}{\joule.\second}
+\end{tcblisting}
+\noindent
+The 1st example uses the default \Macro{per},
+while the 2nd example uses\\
+\Option{per-mode=fraction, fraction-function=\Macro{sfrac}}. % \footnote{\Option{per=fraction,fraction=nice} in \TeXLive 2009}
+The 3rd example shows that it does not matter whether one is in math mode or not
+and uses \Option{per-mode=symbol}.
 You use \enquote{.} or \enquote{,} to make a space between the units,
-as illustrated in the last bullet.
-Angles are also very straightforward --- just use \Macro{ang} as in
-\ang{90}.
+as illustrated in the last example.
+
+Angles are also very straightforward:
+\begin{tcblisting}{listing side text}
+\ang{90}
+\end{tcblisting}
 
 If you want to write something like \SI[parse-numbers=false]{90(99)}{\%},
 include the option \Option{parse-numbers=false} with the \Macro{SI} command,
-so that it does not try to interpret \num[parse-numbers=false]{90(99)}.
+so that it does not try to interpret \num[parse-numbers=false]{90(99)}:
+\begin{tcblisting}{listing side text}
+\SI[parse-numbers=false]{90(99)}{\%}
+\end{tcblisting}
 
 If you also want to use \Package{siunitx} in slides, where one usually
 uses a sans serif font, you may at first be disappointed that
@@ -728,139 +706,53 @@ Note that the \Macro{clight} symbol that is used in the macro
 \Macro{MeVovercsq} to produce \si{\MeVovercsq} is defined as \(c_{0}\) in
 \Package{siunitx} version 2. As this is not the way it is usually
 written in particle physics I redefined it using:
-\begin{verbatim}
-  \DeclareSIUnit\clight{\text{\ensuremath{c}}}
-\end{verbatim}
+\begin{tcblisting}{listing only, hbox}
+\DeclareSIUnit\clight{\text{\ensuremath{c}}}
+\end{tcblisting}
 
 Two things that are currently not built in are separate statistical and
 systematic errors and asymmetric errors. From the author I got some
 suggestions on how to define such things. They are included in
 \texttt{guide\_defs.sty} at present and can be added to
-\texttt{thesis\_defs.sty}. Two versions of a few of the commands are
-defined depending on the value of \Macro{texlive}, as some of the
-options changed when moving from version 1 to version 2 of
-\Package{siunitx}. Several new macros have been defined there:
+\texttt{thesis\_defs.sty}.
+% Two versions of a few of the commands are
+% defined depending on the value of \Macro{texlive}, as some of the
+% options changed when moving from version 1 to version 2 of
+% \Package{siunitx}.
+Several new macros have been defined there:
 \Macro{numerrt}, \Macro{numpmerr} and \Macro{numpmerrt} to write
-errors with a description, which are asymmetric and both,
-respectively. The corresponding macros for values and errors are
+errors with a description, which are asymmetric and both, respectively.
+The corresponding macros for values and errors are
 \Macro{SIerrt}, \Macro{SIpmerr} and \Macro{SIpmerrt}. For the macros
 whose names end with \enquote{\texttt{t}}, you also have to provide
-the descriptive text. If you have two errors then use \Macro{SIerrtt}
-or \Macro{SIpmerrtt}, which have two or three more arguments,
-respectively. For the standard case of statistical and systematic
+the descriptive text.
+If you have two errors then use \Macro{SIerrtt}
+or \Macro{SIpmerrtt}, which have two or three more arguments, respectively.
+For the standard case of statistical and systematic
 errors, you can use the macros \Macro{SIerrs} and
 \Macro{SIpmerrs}. Examples of their use are:
-\begin{itemize}
-\item \(\sigma = \SIerrs{3.42}{0.46}{0.32}{\pico\barn}\)
-\item \(\sigma = \SIpmerr{3.42}{0.46}{0.32}{\pico\barn}\)
-\item \(\sigma = \SIpmerrt{3.42}{0.46}{0.32}{\stat}{\pico\barn}\)
-\item \(\sigma = \SIpmerrs{3.42}{0.46}{0.32}{0.06}{0.04}{\pico\barn}\)
-\item \(\sigma = \SIpmerrtt{3.42}{0.46}{0.32}{\stat}{0.06}{0.04}{\sys}{\pico\barn}\)
-\end{itemize}
+\begin{tcblisting}{}
+\begin{align*}
+  \sigma & = \SIerrs{3.42}{0.46}{0.32}{\pico\barn}\\
+  \sigma & = \SIpmerr{3.42}{0.46}{0.32}{\pico\barn}\\
+  \sigma & = \SIpmerrt{3.42}{0.46}{0.32}{\stat}{\pico\barn}\\
+  \sigma & = \SIpmerrs{3.42}{0.46}{0.32}{0.06}{0.04}{\pico\barn}\\
+  \sigma & = \SIpmerrtt{3.42}{0.46}{0.32}{\stat}{0.06}{0.04}{\sys}{\pico\barn}
+\end{align*}
+\end{tcblisting}
 The last two examples use \Macro{SIpmerrs} and \Macro{SIpmerrtt} just
 to show that they can both give the same output. If you need even more
 complicated combinations of errors, or more errors, have a look at the
 definitions, e.g.
+\begin{tcblisting}{}
 \begin{equation*}
   \sigma_{t\bar{t}} = (\num{164.6}%
   \valuesep\numerrt{8.7}{\stat}%
   \valuesep\numpmerrt{6.4}{5.3}{\sys}%
   \valuesep\numerrt{8.2}{lumi.})%
   \valuesep\si{\pico\barn}
-\end{equation*}
-
-
-%------------------------------------------------------------------------------
-\subsection{SIunits/hepunits packages}%
-\label{sec:tips:siunits}\index{SIunits}\index{hepunits}
-
-Before I found \Package{siunitx} these used to be my preferred units
-packages.
-% While \Package{siunitx} is supposed to have a compatibility
-% mode for \Package{hepunits} I had problems getting this working.
-This section therefore gives examples on how to use \Package{hepunits}
-and what you should be careful about. As \Package{siunitx} has got
-stricter about what it allows for a syntax, I have had to cheat in the
-\LaTeX\ code several times to show the effect.
-
-Even though \Macro{xspace} is used for some units in \Package{hepunits}
-it does not appear to have the usual effect.
-Hence, if you use units in normal text it is probably wise to
-terminate them with \enquote{\textbackslash } or \enquote{\{\}}. Compare
-\begin{itemize}
-\item The \si{\GeV}is a
-  heavily used unit in particle physics and cross-sections measured in
-  \si{\pico\barn}or \si{\nano\barn}are quite common.
-  Masses can be given in either \si{\MeVovercsq}or \si{\MeV}.
-\item The \si{\GeV} is a
-  heavily used unit in particle physics and cross-sections measured in
-  \si{\pico\barn} or \si{\nano\barn} are quite common.
-  Masses can be given in either \si{\MeVovercsq} or \si{\MeV}.
-\end{itemize}
-In the first bullet the units were not terminated, while in the second
-they were.
-
-Note that \Package{SIunits} typesets the value in text mode and the
-unit in math mode. You only have to worry about this if you want to
-use math mode symbols e.g.\ \(10^{8}\) in the value. Three different ways
-of writing the velocity of light are:
-\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
-\item \(c\) is \verb+\unit{\(3 \cdot 10^{8}\)}{\metre\per\second}+
-\item \(c\) is
-  \verb+\unit{3\(\cdot\)\power{10}{8}}{\metre\reciprocal\second}+
-\item \(c\) is \verb+\unit{3 \(\cdot\) \power{10}{8}}{\metre\usk\reciprocal\second}+
-\item Written in \Env{displaymath} or preferably \Env{equation*}:
-\begin{verbatim}
-  \begin{equation*}
-    c = \unit{$3 \times \power{10}{8}$}{\metre\usk\reciprocal\second}
-  \end{equation*}
-\end{verbatim}
-\end{itemize}
-If you try these examples you will see differences in the spacing.
-The first example gives the best result.
-Two different ways of handling the value
-are used in the second and third examples, either without or with space between
-the number and \verb+\(\cdot\)+. In the fourth example, where you use
-\Macro{unit} in math mode, you still need to enclose the value in
-\$\ldots\$ if it includes characters from math mode.  Conversely if for
-some reason you want normal text in your units, you should put it
-inside \Macro{text}, e.g.\ the velocity of light is
-\(\SI{3E8}{\text{metres per second}}\). If you forgot the
-\Macro{text} command using\\
-\verb+\unit{\(3 \cdot \power{10}{8}\)}{metres per second}+ you would
-get:
-\(3 \cdot 10^{8}\,metres per second\) or if you tried to write the units
-yourself you would get \(3 \times 10^8\,m s^{-1}\).
-
-If you have negative powers then you can play around with
-the \Macro{power} command and the usual superscript:
-\begin{itemize}
-\item \(\hbar\) is \verb+\unit{\(1.054 \times 10^{-34}\)}{\joule\usk\second}+
-\item \(\hbar\) is \verb+\unit{1.054 \(\times\) \power{10}{-34}}{\joule\usk\second}+
-\item \(\hbar\) is \verb+\unit{1.054 \(\times\) \power{10}{\(-34\)}}{\joule\usk\second}+
-\end{itemize}
-Note the use of \Macro{usk} to get a bit of space between the
-units. In the second example the minus sign appears as a dash,
-\enquote{-}, rather than \enquote{\(-\)}, which is too small. Hence, if you
-use \Macro{power} you should put the power in math mode.
-
-Just to complicate things further, if you use the Palatino font for
-example, then the standard \TeX{} font is used in math mode. You thus
-have to decide from the very beginning whether numbers should
-\textbf{ALL} be in text or in math mode. This is clearly one of the
-disadvantages of using a font for which the math mode is different
-from the text mode. ATLAS uses either the \Package{newtx} or \Package{txfonts} package,
-which do not have this problem.
-This is why I use \Package{newtx} in this guide.
-If you compile the guide
-with a different font and the numbers \(1234.56\) and 1234.56 look the
-same then you do not have to worry!
-Recent versions of this guide contain a Palatino font combination that works in both
-text and math mode --- see the style file.
-There are other ways to get around the problem with Palatino.
-You can try either the \Package{pxfonts} or the
-\Package{mathpazo} packages --- for my taste the sans serif font used
-in \Package{pxfonts} looks a bit better.
+\end{equation*}    
+\end{tcblisting}
 
 
 %------------------------------------------------------------------------------
@@ -885,44 +777,35 @@ Note that there appears to be a bug in
 as of \TeXLive 2019.
 Upright particles are not printed.
 So far I have not found a way to get round the problem.
-\begin{description}
-\item[Some examples from \Package{heppennames}:]
-  \Macro*{Pe} produces \Pe;
-  \Macro*{Pl} produces \Pl;
-  \Macro*{Pqt} produces \Pqt;
-  \Macro*{Paqt} produces \Paqt;
-  \Macro*{PZ} produces \PZ; % chktex 13
-  \Macro*{PWpm} produces \PWpm;
-  \Macro*{PBz} produces \PBz;
-  \Macro*{PBpm} produces \PBpm;
-  \Macro*{PacB} produces \PacB; % chktex 13
-  \Macro*{PBz}\{\}\Macro*{PaBz} produces \PBz{}\PaBz, while
-  \Macro*{PBz}\Macro*{PaBz} produces \PBz\PaBz.
-\item[Some examples from \Package{hepnicenames}:]
-  \Macro*{APelectron} produces \APelectron;
-  \Macro*{Plepton} produces \Plepton;
-  \Macro*{Ptop} produces \Ptop;
-  \Macro*{APtop} produces \APtop;
-  \Macro*{PZ} produces \PZ; % chktex 13
-  \Macro*{PWpm} produces \PWpm;
-  \Macro*{PBzero} produces \PBzero;
-  \Macro*{PBpm} produces \PBpm;
-  \Macro*{APBc} produces \APBc;
-  \Macro*{PBzero}\{\}\Macro*{PaBzero} produces \PBzero{}\APBzero, while
-  \Macro*{PBzero}\Macro*{APBzero} produces \PBzero\APBzero.
-\end{description}
+
+\noindent\textbf{Some examples from \Package{heppennames}:}\\
+\begin{tcblisting}{listing side text}
+\Pe, \Pl, \Pqt, \Paqt\\
+\PZ, \PWpm\\
+\PBz, \PBpm, \PacB\\
+\PBz{}\PBz, \PBz\PBz
+\end{tcblisting}
+
+\noindent\textbf{Some examples from \Package{hepnicenames}:}\\
+\begin{tcblisting}{listing side text}
+\APelectron, \Plepton, \Ptop, \APtop\\
+\PZ, \PWpm\\
+\PBzero, \PBpm, \APBc\\
+\PBzero{}\PBzero, \PBzero\PBzero
+\end{tcblisting}
 
 You can use commands like \Macro{HepParticle} to define particles that are missing.
 There are also macros for antiparticles and supersymmetric particles.
 If you define particles yourself,
 I would recommend one of the following definitions:
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 \newcommand*{\Zo}{\ensuremath{Z}\xspace}
 \newcommand*{\Zo}{\ensuremath{\text{Z}}\xspace}
 \newcommand*{\bbarQ}{\ensuremath{\bar{b}}\xspace}
 \newcommand*{\bbarQ}{\ensuremath{\bar{\text{b}}}\xspace}
-\end{verbatim}%
+\end{tcblisting}
 \index{particles}
+\noindent
 which produce \ensuremath{Z}, \ensuremath{\text{Z}},
 \ensuremath{\bar{b}}, \ensuremath{\bar{\text{b}}}. Note that you are
 not allowed to include numbers in the names of commands, so
@@ -965,26 +848,18 @@ it is \verb+\(10^{4}\)--\(10^{5}\)+ which produces
 
 With \Package{siunitx} and \Macro{num} there is a built-in option.
 You simply write
-\begin{LTXexample}
-  \numrange{3e4}{7e4}
-\end{LTXexample}
-or
-\begin{LTXexample}
-  \SIrange[range-phrase=--]{5}{7}{\GeV}
-\end{LTXexample}
-If you only want the unit to appear once write
-\begin{LTXexample}
-  \SIrange[range-units=single, range-phrase=--]{5}{7}{\GeV}
-\end{LTXexample}
+\begin{tcblisting}{listing side text}
+\numrange{3e4}{7e4}
+\end{tcblisting}
+You can steer how often the units are written out:
+\begin{tcblisting}{}
+\SIrange[range-units=repeat, range-phrase=--]{5}{7}{\GeV}\\
+\SIrange[range-units=single, range-phrase=--]{5}{7}{\GeV}\\
+\SIrange[range-units=brackets, range-phrase=--]{5}{7}{\GeV}
+\end{tcblisting}
 In a single range, such settings are rather long-winded!
 However, they can be applied to the whole
 document using the \Macro{sisetup} macro.
-
-With \Package{SIunits} and \Macro{unit} you can write
-\verb+\unit{\power{10}{4}--\power{10}{5}}{}+, which would look almost
-correct, but leaves some space for the unit! If you want to write
-between 5 and \SI{7}{\GeV}, then \Macro{unit} works well:
-\verb+\unit{5--7}{\GeV}+.
 
 A similar problem is how do you write \enquote{about 10\%}?  Again the
 simple solution \(\sim 10\%\) or \(\sim\) 10\% have too much space. In the
@@ -1004,11 +879,11 @@ converted all my predefined symbols to use \Macro{text} rather than
 \Macro{mathrm} or \Macro{textrm}, and don't have to worry any
 more. However, I can given an example for the definition
 of the transverse energy of the highest energy jet:
-\begin{LTXexample}
-  \(p_{\mathrm{T}}^{\mathrm{1^{\text{st}} jet}}\) \\
-  \(p_{\textrm{T}}^{\textrm{1}^{\text{st}}\textrm{ jet}}\) \\
-  \(p_{\text{T}}^{1^{\text{st}}\text{ jet}}\)
-\end{LTXexample}
+\begin{tcblisting}{}
+\(p_{\mathrm{T}}^{\mathrm{1^{\text{st}} jet}}\)\\
+\(p_{\textrm{T}}^{\textrm{1}^{\text{st}}\textrm{ jet}}\)\\
+\(p_{\text{T}}^{1^{\text{st}}\text{ jet}}\)
+\end{tcblisting}
 As you can see
 from this example, the key difference is that \Macro{mathrm} switches
 to an upright font, but keeps you in math mode --- hence ignoring any
@@ -1132,7 +1007,7 @@ not work for recommended \Package{amsmath} environments such as \Env{equation*},
 \Env{align(*)} and \Env{alignat(*)}. % chktex 36
 
 The solution is to enclose the equation in \Env{linenomath} environment, e.g.
-\begin{verbatim}
+\begin{tcblisting}{listing only}
 The total visible cross section for inclusive heavy-quark jet
 production, \(\sigma^{q}\), with \(q\in\{b,c\}\) is given by
 \begin{linenomath}
@@ -1144,11 +1019,12 @@ production, \(\sigma^{q}\), with \(q\in\{b,c\}\) is given by
 Here, \(\mathcal{L}_{\text{Data}}=\) denotes the integrated luminosity,
 \(\mathcal{A}_{q}\) is the acceptance and \(N_{q}^{\text{rec,Data}}\) the
 number of reconstructed heavy-quark jets in data, which was determined
-\end{verbatim}
+\end{tcblisting}
 \noindent
 Then the line numbering will be correct, see \cref{fig:lineno}b.
 
 The ATLAS \Package{atlasdoc} class contains a patch that gets round this problem.
+
 
 %------------------------------------------------------------------------------
 \section{Updating \Package{ubonn-thesis}}%

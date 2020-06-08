@@ -202,7 +202,8 @@ Some other useful packages, some of which are included in
     \Package{dcolumn} & Very helpful for lining up columns on character strings such as a decimal point.
       \Package{siunitx} offers similar and better functionality.\\
     \Package{refcheck} & Check whether labels are used, i.e.\ if figures and tables are actually referenced.\\
-    \bottomrule
+    \Package{tcolorbox} & Fancy coloured boxes. Also works very well for code listings.\\
+    \bottomrule\\
   \end{tabular}
   \caption{Other useful packages.}%
   \label{tab:package:other1}
@@ -243,6 +244,13 @@ on the file it also automatically crops the resulting picture. This is
 one of those packages where you think \enquote{Why didn't someone
   create this years ago?}. The \Package{tikz} figures included in this
 guide make use of it.
+
+If you want to include code listings,
+you can use the packages \Package{tcolorbox} or \Package{listings}.
+I used \Package{listings} for quite a while,
+but \Package{tcolorbox} can be used for anything associated with boxes and
+has much more flexibility.
+This guide can has now been adjusted to use \Package{tcolorbox}.
 
 I do not recommend the \Package{subfiles} package by default as it is not
 included in \TeXLive by default. Have a look at
@@ -296,6 +304,7 @@ or have been superseded by other packages.
     \Package{ziffer} & Spacing with a comma as decimal separator is
     correct.\\
     \Package{nomencl} & Another package for creating a glossary.\\
+    \Package{listings} & Code listings. I switched to \Package{tcolorbox}.\\
     \Package{fncychap} & Another package for changing the style of the
     chapter heading.\\
     \Package{quotchap} & Another package for changing the style of the

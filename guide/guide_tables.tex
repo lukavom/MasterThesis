@@ -94,34 +94,34 @@ version 1 options as a footnote. If you look at the \LaTeX\ code, the
 texlive < 2011\}}, while the \TeXLive 2011 version is in the second
 block.
 
-A first simple example is shown
-in \cref{tab:viscosity}. In fact I show the table twice, once
+A first simple example is shown in \cref{tab:viscosity}.
+In fact I show the table twice, once
 with the language set to default and once with it set to German. The
 \Env{tabular} contents are identical, the second tabular is inside a
 \Macro{foreignlanguage}. Note the use of
-\Option{table-format}\footnote{\Option{tabformat} in \TeXLive 2009} to
-centre the temperatures as the heading is wider than the numbers.
+\Option{table-format}%\footnote{\Option{tabformat} in \TeXLive 2009}
+to centre the temperatures as the heading is wider than the numbers.
 
 \begin{table}[htbp]
   \centering
-\ifthenelse {\texlive < 2011} {%
-  \begin{tabular}{lS[tabformat = 4.2]S}
-    \toprule
-    Liquid & {Temp.} & {Viscosity \(\eta\)}\\
-    &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
-    \midrule
-    Blood     & 37 & 4.0 \\
-    Glycerine &  0 & 10000 \\
-    & 20 & 1410 \\
-    & 60 & 81 \\
-    Oil (SAE 10) & 30 & 200 \\
-    Water   &  0 & 1.8 \\
-    & 20 & 1.00 \\
-    & 60 & 0.65 \\
-    Air     & 20 & 0.018 \\
-    \bottomrule
-  \end{tabular}
-}{%
+% \ifthenelse {\texlive < 2011} {%
+%   \begin{tabular}{lS[tabformat = 4.2]S}
+%     \toprule
+%     Liquid & {Temp.} & {Viscosity \(\eta\)}\\
+%     &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
+%     \midrule
+%     Blood     & 37 & 4.0 \\
+%     Glycerine &  0 & 10000 \\
+%     & 20 & 1410 \\
+%     & 60 & 81 \\
+%     Oil (SAE 10) & 30 & 200 \\
+%     Water   &  0 & 1.8 \\
+%     & 20 & 1.00 \\
+%     & 60 & 0.65 \\
+%     Air     & 20 & 0.018 \\
+%     \bottomrule
+%   \end{tabular}
+% }{%
   \begin{tabular}{lS[table-format = 4.2]S}
     \toprule
     Liquid & {Temp.} & {Viscosity \(\eta\)}\\
@@ -138,28 +138,28 @@ centre the temperatures as the heading is wider than the numbers.
     Air     & 20 & 0.018 \\
     \bottomrule
   \end{tabular}
-}
+% }
   \quad
-\ifthenelse {\texlive < 2011} {%
-  \foreignlanguage{ngerman}{%
-  \begin{tabular}{lS[tabformat = 4.2]S}
-    \toprule
-    Flüssigkeit & {Temp.} & {Viskosität \(\eta\)}\\
-    &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
-    \midrule
-    Blut     & 37 & 4.0 \\
-    Glyzerin &  0 & 10000 \\
-    & 20 & 1410 \\
-    & 60 & 81 \\
-    Öl (SAE 10) & 30 & 200 \\
-    Wasser   &  0 & 1.8 \\
-    & 20 & 1.00 \\
-    & 60 & 0.65 \\
-    Luft     & 20 & 0.018 \\
-    \bottomrule
-  \end{tabular}
-  }
-}{%
+% \ifthenelse {\texlive < 2011} {%
+%   \foreignlanguage{ngerman}{%
+%   \begin{tabular}{lS[tabformat = 4.2]S}
+%     \toprule
+%     Flüssigkeit & {Temp.} & {Viskosität \(\eta\)}\\
+%     &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
+%     \midrule
+%     Blut     & 37 & 4.0 \\
+%     Glyzerin &  0 & 10000 \\
+%     & 20 & 1410 \\
+%     & 60 & 81 \\
+%     Öl (SAE 10) & 30 & 200 \\
+%     Wasser   &  0 & 1.8 \\
+%     & 20 & 1.00 \\
+%     & 60 & 0.65 \\
+%     Luft     & 20 & 0.018 \\
+%     \bottomrule
+%   \end{tabular}
+%   }
+% }{%
   \foreignlanguage{ngerman}{%
   \begin{tabular}{lS[table-format = 4.2]S}
     \toprule
@@ -178,7 +178,7 @@ centre the temperatures as the heading is wider than the numbers.
     \bottomrule
   \end{tabular}
   }
-}
+% }
   \caption{A table of viscosities in the default language and German.}%
   \label{tab:viscosity}
 \end{table}

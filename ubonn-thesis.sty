@@ -130,25 +130,68 @@
   \renewcommand*{\ThesisVersion}{\UBN@thesisversion}
 \fi
 
-% Only one font package at a time!
-\ifUBN@txfonts
-  \typeout{Package ubonn-thesis info: using txfonts fonts}
-  \UBN@newtxfalse
-  \UBN@palatinofalse
-\else
-  \ifUBN@palatino
-    \typeout{Package ubonn-thesis info: using Palatino fonts}
-    \UBN@txfontsfalse
+% Test if we are runnibng pdflatex or xelatex
+\RequirePackage{iftex}
+% Font control for PDFLaTeX. Only one font package at a time!
+\ifPDFTeX
+  \ifUBN@txfonts
+    \typeout{ubonn-thesis: using pdflatex and txfonts fonts}
     \UBN@newtxfalse
+    \UBN@palatinofalse
   \else
-    \ifUBN@newtx
-      \typeout{Package ubonn-thesis Info: Using newtx fonts}
+    \ifUBN@palatino
+      \typeout{ubonn-thesis: using pdflatex and Palatino fonts}
       \UBN@txfontsfalse
-      \UBN@palatinofalse
+      \UBN@newtxfalse
+    \else
+      \ifUBN@newtx
+        \typeout{ubonn-thesis: using pdflatex and newtx fonts}
+        \UBN@txfontsfalse
+        \UBN@palatinofalse
+      \fi
     \fi
   \fi
 \fi
-
+% Font control for XeLaTeX. Only one font package at a time!
+\ifXeTeX
+  \ifUBN@txfonts
+    \typeout{ubonn-thesis: using xelatex and TeX Gyre Termes fonts}
+    \UBN@newtxfalse
+    \UBN@palatinofalse
+  \else
+    \ifUBN@palatino
+      \typeout{ubonn-thesis: using xelatex and TeX Gyre Pagella fonts}
+      \UBN@txfontsfalse
+      \UBN@newtxfalse
+    \else
+      \ifUBN@newtx
+        \typeout{ubonn-thesis: using xelatex and TeX Gyre Termes fonts}
+        \UBN@txfontsfalse
+        \UBN@palatinofalse
+      \fi
+    \fi
+  \fi
+\fi
+% Font control for XeLaTeX. Only one font package at a time!
+\ifLuaTeX
+  \ifUBN@txfonts
+    \typeout{ubonn-thesis: using lualatex and TeX Gyre Termes fonts}
+    \UBN@newtxfalse
+    \UBN@palatinofalse
+  \else
+    \ifUBN@palatino
+      \typeout{ubonn-thesis: using lualatex and TeX Gyre Pagella fonts}
+      \UBN@txfontsfalse
+      \UBN@newtxfalse
+    \else
+      \ifUBN@newtx
+        \typeout{ubonn-thesis: using lualatex and TeX Gyre Termes fonts}
+        \UBN@txfontsfalse
+        \UBN@palatinofalse
+      \fi
+    \fi
+  \fi
+\fi
 % xtab and supertabular do not mix
 \ifUBN@supertabular
   \UBN@xtabfalse
@@ -249,43 +292,46 @@
 \RequirePackage{amsmath, amssymb}
 
 %-------------------------------------------------------------------------------
-% Input encoding, font and language
-\RequirePackage[utf8]{inputenc}
+% Fonts for PDFLaTeX
+\ifPDFTeX
+  % Input encoding, font and language
+  \RequirePackage[utf8]{inputenc}
 
-% New version of the txfonts times-roman font
-\ifUBN@newtx
-  \RequirePackage{newtxtext}
-  \RequirePackage{newtxmath}
+  % New version of the txfonts times-roman font
+  \ifUBN@newtx
+    \RequirePackage{newtxtext}
+    \RequirePackage{newtxmath}
+  \fi
+  % Times-roman font
+  \ifUBN@txfonts
+    \RequirePackage[varg]{txfonts} % Used in ATLAS papers
+    \RequirePackage[T1]{fontenc}
+  \fi
+  % Palatino font
+  \ifUBN@palatino
+    % Palatino for rm and math | Helvetica for ss | Courier for tt
+    \RequirePackage{mathpazo} % math & rm
+    \linespread{1.05}         % Palatino needs more leading (space between lines)
+    \RequirePackage[scaled]{helvet} % ss
+    \RequirePackage{courier}  % tt
+    \normalfont
+    \RequirePackage[T1]{fontenc}
+  \fi
+  % Other font collections one can consider
+  % \RequirePackage{lmodern}
+  % Variations with times
+  % \RequirePackage{mathptmx}      % Included as an option in ATLAS papers
+  % \RequirePackage{times}
+  % Math design
+  % \RequirePackage[utopia]{mathdesign}
+  % \RequirePackage[charter]{mathdesign}
+  % Palatino
+  % \RequirePackage{pxfonts}
+  % Collections with different fonts for numbers in text and math mode
+  % \RequirePackage{bookman}
+  % \RequirePackage{newcent}
+  % \RequirePackage{palatino}
 \fi
-% Times-roman font
-\ifUBN@txfonts
-  \RequirePackage[varg]{txfonts} % Used in ATLAS papers
-  \RequirePackage[T1]{fontenc}
-\fi
-% Palatino font
-\ifUBN@palatino
-  % Palatino for rm and math | Helvetica for ss | Courier for tt
-  \RequirePackage{mathpazo} % math & rm
-  \linespread{1.05}         % Palatino needs more leading (space between lines)
-  \RequirePackage[scaled]{helvet} % ss
-  \RequirePackage{courier}  % tt
-  \normalfont
-  \RequirePackage[T1]{fontenc}
-\fi
-% Other font collections one can consider
-% \RequirePackage{lmodern}
-% Variations with times
-% \RequirePackage{mathptmx}      % Included as an option in ATLAS papers
-% \RequirePackage{times}
-% Math design
-% \RequirePackage[utopia]{mathdesign}
-% \RequirePackage[charter]{mathdesign}
-% Palatino
-% \RequirePackage{pxfonts}
-% Collections with different fonts for numbers in text and math mode
-% \RequirePackage{bookman}
-% \RequirePackage{newcent}
-% \RequirePackage{palatino}
 
 %------------------------------------------------------------------------------
 % csquotes is recommended for quoting correctly for the language used
@@ -453,6 +499,46 @@
   \RequirePackage[version=4]{mhchem}
 \fi
 
+%------------------------------------------------------------------------------
+% Fonts with XeLaTeX of LuaLaTeX
+\ifXeTeX
+  % \RequirePackage[LetterSpace]{fontspec}
+  \RequirePackage{mathspec}
+  % undo the wrong changes made by mathspec
+  \let\RequirePackage\original@RequirePackage
+  \let\usepackage\RequirePackage
+  % \RequirePackage[math-style=ISO]{unicode-math}
+  \ifUBN@newtx
+    \setmainfont{TeX Gyre Termes}
+    \setmathsfont(Digits,Latin,Greek){TeX Gyre Termes Math}
+    % \setmathfont(Greek){TeX Gyre Pagella}
+    % \setmathfont[version=bold,FakeBold=4]{TeX Gyre Pagella}
+  \fi
+  \ifUBN@palatino
+    \setmainfont{TeX Gyre Pagella}
+    \setmathsfont(Digits){TeX Gyre Pagella}
+    \setmathsfont(Latin)[Lowercase=Italic]{TeX Gyre Pagella}
+    \setmathsfont(Greek){TeX Gyre Pagella}
+    % \setmathfont{TeX Gyre Pagella Math}
+    % \setmathfont[version=bold,FakeBold=4]{TeX Gyre Pagella Math}
+    % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
+  \fi
+\fi
+\ifLuaTeX
+  % \RequirePackage[LetterSpace]{fontspec}
+  % \RequirePackage[no-math]{fontspec}
+  \RequirePackage[TeX Gyre Pagella]{mathfont}
+  % \RequirePackage[math-style=ISO]{unicode-math}
+  \ifUBN@newtx
+    \setmainfont{TeX Gyre Termes}
+    \setmathsfont(Digits,Latin,Greek){TeX Gyre Termes Math}
+  \fi
+  % \ifUBN@palatino
+  %   \setmainfont{TeX Gyre Pagella}
+  %   \mathfont{TeX Gyre Pagella}
+  % \fi
+\fi
+
 \RequirePackage{microtype}
 \RequirePackage[svgnames]{xcolor}
 \RequirePackage{xspace}
@@ -588,7 +674,11 @@
     \newcommand*{\chapternumbersize}{\Huge}
     \renewcommand*{\chapterformat}{%
       \raggedleft
-      \textls{\MakeUppercase{\Large\chapapp}}\enskip\chapternumbersize\thechapter\\
+      \ifXeTeX
+        \MakeUppercase{\Large\chapapp}\enskip\chapternumbersize\thechapter\\
+      \else
+        \textls{\MakeUppercase{\Large\chapapp}}\enskip\chapternumbersize\thechapter\\
+      \fi
       %\MakeUppercase{\Large\chapapp}\enskip\chapternumbersize\thechapter\\
     \hrulefill\\[-.25ex]
     }

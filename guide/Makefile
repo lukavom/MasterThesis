@@ -24,9 +24,21 @@ AWKDIR=..
 
 guide: run_latexmk
 
+guidexe: run_xelatexmk
+
+guidelua: run_lualatexmk
+
 run_latexmk: *.tex
 	latexmk -e '$$pdflatex=q/pdflatex %O -shell-escape %S/' -pdf $(GUIDE)
 	# latexmk -pdf $(GUIDE)
+
+run_xelatexmk: *.tex
+	latexmk -e '$$xelatex=q/xelatex %O -shell-escape %S/' -xelatex $(GUIDE)
+	# latexmk -xelatex $(GUIDE)
+
+run_lualatexmk: *.tex
+	latexmk -e '$$lualatex=q/lualatex %O -shell-escape %S/' -lualatex $(GUIDE)
+	# latexmk -xelatex $(GUIDE)
 
 guide11:
 	pdflatex   $(EXTRACMD) $(GUIDE)
@@ -74,7 +86,7 @@ cleanguide:
 	-rm $(GUIDE).ind $(GUIDE).idx $(GUIDE).ilg
 	-rm $(GUIDE).acn $(GUIDE).acr $(GUIDE).alg
 	-rm $(GUIDE).glg $(GUIDE).glo $(GUIDE).gls
-	-rm $(GUIDE).ist $(GUIDE).fls
+	-rm $(GUIDE).ist $(GUIDE).fls $(GUIDE).xdv  $(GUIDE).listing
 	-rm $(GUIDE).tex.bak
 	-rm *.aux
 

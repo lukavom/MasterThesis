@@ -121,7 +121,7 @@ pyfeynhand: $(PYFEYNHANDFILES)
 
 cleanall: clean cleanpictpdf
 
-clean: cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpyfeynhand
+clean: cleanfeynmf cleanfeynmp cleantikz cleanpyfeynhand
 
 cleanfeynmf:
 	-rm *.mf *.tfm *.t1 *.600gf *.600pk *.log
@@ -137,17 +137,15 @@ cleanfeynmp:
 cleantikz:
 	-rm $(TIKZDIR)/*.log $(TIKZDIR)/*.aux
 
-cleanpyfeyn:
-	-rm $(PYFEYNDIR)/*.pdf
-
 cleanpyfeynhand:
-	-rm $(PYFEYNHANDDIR)/*.pdf $(PYFEYNHANDDIR)/*.aux $(PYFEYNHANDDIR)/*.log
+	-rm $(PYFEYNHANDDIR)/*.aux $(PYFEYNHANDDIR)/*.log
 
 cleanpictpdf:
 	-rm $(FEYNDIR)/*.pdf
 	-rm $(TIKZDIR)/*.pdf
 	-rm $(PYFEYNDIR)/*.pdf
 	-rm $(PYFEYNHANDDIR)/*.pdf
+	-rm $(PYFEYNHANDDIR)/*.tex
 
 help:
 	@echo "Possible commands:"
@@ -164,9 +162,8 @@ help:
 	@echo "pyfeynhand: run Python for all .py files in $(PYFEYNHANDDIR)"
 	@echo "cleanfeynmf: clean up feynmf output files"
 	@echo "cleanfeynmp: clean up feynmp output files"
-	@echo "cleantikz:   clean up tikz   output files"
-	@echo "cleanpyfeyn: clean up pyfeyn output files"
-	@echo "cleanpyfeynhand: clean up pyfeynhand output files"
+	@echo "cleantikz:   clean up tikz auxiliary output files"
+	@echo "cleanpyfeynhand: clean up pyfeynhand auxiliary output files"
 
 test:
 	@echo "Feynmf Feynman graphs dir: $(FEYNDIR)"

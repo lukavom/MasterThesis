@@ -1,4 +1,4 @@
-# Makefile to run pdflatex, lualtex or xelatex on a thesis
+# Makefile to run pdflatex, lualatex or xelatex on a thesis
 # Can also run feynmf/feynmp/tikz/pyfeyn/pyfeynhand on files in a directory
 
 THESIS = mythesis
@@ -113,18 +113,16 @@ cleanfeynmp:
 	-rm feynmf_all.* feynmf_files.inp
 
 cleantikz:
-	-rm $(TIKZDIR)/*.log $(TIKZDIR)/*.aux
-
-cleanpyfeyn:
-	-rm $(PYFEYNDIR)/*.pdf
+	-rm $(TIKZDIR)/*.aux $(TIKZDIR)/*.log
 
 cleanpyfeynhand:
-	-rm $(PYFEYNHANDDIR)/*.pdf
+	-rm $(PYFEYNHANDDIR)/*.tex $(PYFEYNHANDDIR)/*aux $(PYFEYNHANDDIR)/*.log
 
 cleanpictpdf:
 	-rm $(FEYNDIR)/*.pdf
 	-rm $(TIKZDIR)/*.pdf
-	-rm $(PYFEYNFDIR)/*.pdf
+	-rm $(PYFEYNDIR)/*.pdf
+	-rm $(PYFEYNHANDDIR)/*.pdf
 
 cleanblx:
 	-rm *-blx.bib
@@ -148,10 +146,11 @@ help:
 	@echo "thesis: Compile complete thesis (latexmk)"
 	@echo "run_latexmk: Compile complete thesis using latexmk"
 	@echo "thesis11: Compile complete thesis - texlive >=2011 + biber"
-	@echo "thesis09: Compile complete thesis - texlive 2009 + bibtex"
 	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIR)"
 	@echo "feynmp: Run feynmp for all .tex files in $(FEYNDIR)"
 	@echo "tikz:   Run tikz for all .tex files in $(TIKZDIR)"
+	@echo "pyfeyn: Run Python for all .py files in $(PYFEYNDIR)"
+	@echo "pyfeynhand: Run Python for all .py files in $(PYFEYNHANDDIR)"
 	@echo "clean:         Clean up most auxiliary files (leaves bbl and picture PDF files)"
 	@echo "cleanall:      Clean up all auxiliary files"
 	@echo "cleanthesis:   Clean up thesis LaTeX output files"
@@ -159,8 +158,8 @@ help:
 	@echo "cleanblx:      Clean up thesis biber files"
 	@echo "cleanfeynmf:   Clean up feynmf output files"
 	@echo "cleantikz:     Clean up tikz temparary files"
-	@echo "cleanpyfeyn:   Clean up pyfeyn PDF files"
-	@echo "cleanpictpdf:  Clean up picture output in $(FEYNDIR), $(TIKZDIR) and $(PYFEYNDIR)"
+	@echo "cleanpyfeynhand: Clean up pyfeynhand temporary files"
+	@echo "cleanpictpdf:  Clean up picture output in $(FEYNDIR), $(TIKZDIR), $(PYFEYNDIR) and $(PYFEYNHANDDIR)"
 	@echo "cleanglo:      Clean up glossary output files"
 	@echo "cleanlatexmk:  Clean up latexmk files"
 
@@ -172,3 +171,5 @@ test:
 	@echo "TikZ   Feynman graphs files: $(TIKZFILES)"
 	@echo "PyFeyn Feynman graphs dir: $(PYFEYNDIRNAME)"
 	@echo "PyFeyn Feynman graphs files: $(PYFEYNFILES)"
+	@echo "PyFeynHand Feynman graphs dir: $(PYFEYNHANDDIRNAME)"
+	@echo "PyFeynHand Feynman graphs files: $(PYFEYNHANDFILES)"

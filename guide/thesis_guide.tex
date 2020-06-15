@@ -35,7 +35,10 @@
 % }{%
 \usepackage{import}
 \usepackage{standalone}
-\usepackage{tikz-feynhand}
+% TikZ-FeynHand only as of TeX Live 2017
+\ifthenelse{\texlive > 2016}{%
+  \usepackage{tikz-feynhand}
+}{}
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
 \usepackage{pgfplots}

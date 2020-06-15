@@ -390,7 +390,8 @@ show a charged current process.
 There are (at least) two packages based on \TikZ that exist to draw Feynman graphs:
 \Package{TikZ-Feynman} and \Package{TikZ-FeynHand}.
 \Package{TikZ-Feynman} requires you to use Lua\LaTeX,
-so I will only give examples for \Package{TikZ-FeynHand} here.
+so I will only give examples for \Package{TikZ-FeynHand} here.\footnote{%
+Note that the \Package{TikZ-FeynHand} package was first included in \TeXLive 2017.}
 Note that it does not seem to be possible to adjust the amplitude and frequency
 of boson and gluon oscillations explicitly.
 This has to be done using the \Macro*{setlength\{\textbackslash feynhandlinesize\{1.0pt\}\}} command.
@@ -413,7 +414,11 @@ while the \TeX{} file was created using the Python wrapper.
   \centering
   \begin{subfigure}{0.5\figwidth}
     \centering
-    \input{../tikz/tdecay.tex}
+    \ifthenelse{\texlive > 2016}{%
+      \input{../tikz/tdecay.tex}
+    }{%
+      \missingfigure{TeX Live version does not include TikZ-FeynHand}
+    }
     \caption{\LaTeX\ file}%
     \label{fig:feyn:tdecay1}
   \end{subfigure}
@@ -496,8 +501,12 @@ In the \Package{TikZ-FeynHand} graph, I use lots of colours to illustrate how th
   }
   \subcaptionbox{TikZ-FeynHand\label{fig:feyn:feynhand}}
     [0.3\textwidth]{\fbox{%
-    \input{../tikz/moeller-feynhand.tex}}
-  }
+    \ifthenelse{\texlive > 2016}{%
+      \input{../tikz/moeller-feynhand.tex}
+    }{%
+      \missingfigure{TeX Live version does not include TikZ-FeynHand}
+    }
+  }}
   % \fbox{\begin{minipage}[b]{0.29\textwidth}
   %   \centering
   %   \input{../feynmf/moeller.tex}

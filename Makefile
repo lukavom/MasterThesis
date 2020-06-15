@@ -147,6 +147,7 @@ cleanpictpdf:
 	-rm $(FEYNDIR)/*.pdf
 	-rm $(TIKZDIR)/*.pdf
 	-rm $(PYFEYNDIR)/*.pdf
+	-rm $(PYFEYNHANDDIR)/*.pdf
 
 help:
 	@echo "Possible commands:"
@@ -160,10 +161,12 @@ help:
 	@echo "feynmp: run feynmp for all .tex files in $(FEYNDIR)"
 	@echo "tikz:   run tikz for all .tex files in $(TIKZDIR)"
 	@echo "pyfeyn: run Python for all .py files in $(PYFEYNDIR)"
+	@echo "pyfeynhand: run Python for all .py files in $(PYFEYNHANDDIR)"
 	@echo "cleanfeynmf: clean up feynmf output files"
 	@echo "cleanfeynmp: clean up feynmp output files"
 	@echo "cleantikz:   clean up tikz   output files"
 	@echo "cleanpyfeyn: clean up pyfeyn output files"
+	@echo "cleanpyfeynhand: clean up pyfeynhand output files"
 
 test:
 	@echo "Feynmf Feynman graphs dir: $(FEYNDIR)"
@@ -172,3 +175,5 @@ test:
 	@echo "TikZ   Feynman graphs files: $(TIKZFILES)"
 	@echo "PyFeyn Feynman graphs dir: $(PYFEYNDIR)"
 	@echo "PyFeyn Feynman graphs files: $(PYFEYNFILES)"
+	@echo "PyFeynHand Feynman graphs dir: $(PYFEYNHANDDIR)"
+	@echo "PyFeynHand Feynman graphs files: $(PYFEYNHANDFILES)"

@@ -8,16 +8,22 @@ FEYNDIR = ../feynmf
 FEYNFILES = $(wildcard $(FEYNDIR)/*.tex)
 TIKZDIR = ../tikz
 TIKZFILES = $(wildcard $(TIKZDIR)/*.tex)
+PYFEYNDIR = ../pyfeyn
+PYFEYNFILES = $(wildcard $(PYFEYNDIR)/*.py)
+PYFEYNHANDDIR = ../pyfeynhand
+PYFEYNHANDFILES = $(wildcard $(PYFEYNHANDDIR)/*.py)
 ifdef file
 FEYNFILES = $(FEYNDIR)/$(file).tex
 TIKZFILES = $(TIKZDIR)/$(file).tex
+PYFEYNFILES = $(PYFEYNDIR)/$(file).py
+PYFEYNHANDFILES = $(PYFEYNHANDDIR)/$(file).py
 endif
 AWKDIR=..
 
 .PHONY: guide09 guide11 phdsubmit \
-	feynmf feynmp tikz \
+	feynmf feynmp tikz pyfeyn pyfeynhand \
 	cleanguide \
-	cleanfeynmf cleanfeynmp  cleantikz cleanpictpdf \
+	cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpyfeynhand cleanpictpdf \
 	cleanblx cleanbbl \
 	cleanglo cleanphd \
 	help test
@@ -69,13 +75,19 @@ feynmp:
 tikz:
 	make -f ../Makefile TIKZDIR=$(TIKZDIR) TIKZFILES="$(TIKZFILES)" tikz
 
+pyfeyn:
+	make -f ../Makefile PYFEYNDIR=$(PYFEYNDIR) PYFEYNFILES="$(PYFEYNFILES)" pyfeyn
+
+pyfeynhand:
+	make -f ../Makefile PYFEYNHANDDIR=$(PYFEYNHANDDIR) PYFEYNHANDFILES="$(PYFEYNHANDFILES)" pyfeynhand
+
 phdsubmit:
 	pdflatex  PhD_submit
 	pdflatex  PhD_submit
 
 cleanall: clean cleanbbl cleanpictpdf
 
-clean: cleanguide cleanphd cleanfeynmf cleanfeynmp cleantikz cleanblx cleanglo
+clean: cleanguide cleanphd cleanfeynmf cleanfeynmp cleantikz cleanpyfeynhand cleanblx cleanglo
 
 cleanguide:
 	-rm $(GUIDE).log $(GUIDE).aux $(GUIDE).toc
@@ -95,14 +107,20 @@ cleanfeynmf:
 
 cleanfeynmp:
 	-rm *.1 *.mp
-
 	make -f ../Makefile cleanfeynmp FEYNDIR=$(FEYNDIR)
 
 cleantikz:
 	make -f ../Makefile cleantikz TIKZDIR=$(TIKZDIR)
 
+cleanpyfeyn:
+	make -f ../Makefile cleanpyfeyn PYFEYNDIR=$(PYFEYNDIR)
+
+cleanpyfeynhand:
+	make -f ../Makefile cleanpyfeynhand PYFEYNHANDDIR=$(PYFEYNHANDDIR)
+
 cleanpictpdf:
-	make -f ../Makefile cleanpictpdf FEYNDIR=$(FEYNDIR) TIKZDIR=$(TIKZDIR)
+	make -f ../Makefile cleanpictpdf FEYNDIR=$(FEYNDIR) TIKZDIR=$(TIKZDIR) \
+		PYFEYNHANDDIR=$(PYFEYNHANDDIR)
 
 cleanblx:
 	-rm *-blx.bib
@@ -133,9 +151,13 @@ help:
 	@echo "cleanfeynmf:  Clean up feynmf output files"
 	@echo "cleanfeynmp:  Clean up feynmp output files"
 	@echo "cleantikz:    Clean up tikz output files"
-	@echo "cleanpictpdf: Clean up tikz and feynmp output PDF files"
+	@echo "cleanpyfeyn:  Clean up pyfeyn output files"
+	@echo "cleanpyfeynhand: Clean up pyfeynhnad output files"
+	@echo "cleanpictpdf: Clean up tikz, feynmp and pyfeynhand output PDF files"
 
 test:
 	@echo "Guide $(GUIDE)"
 	@echo "Feynmf Feynman graphs dir: $(FEYNDIR)"
 	@echo "TikZ   Feynman graphs dir: $(TIKZDIR)"
+	@echo "PyFeyn Feynman graphs dir: $(PYFEYNDIR)"
+	@echo "PyFeynHand Feynman graphs dir: $(PYFEYNHANDDIR)"

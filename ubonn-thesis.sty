@@ -132,7 +132,7 @@
 
 % Test if we are runnibng pdflatex or xelatex
 \RequirePackage{iftex}
-% Font control for PDFLaTeX. Only one font package at a time!
+% Font control for pdfLaTeX. Only one font package at a time!
 \ifPDFTeX
   \ifUBN@txfonts
     \typeout{ubonn-thesis: using pdflatex and txfonts fonts}
@@ -291,7 +291,7 @@
 \RequirePackage{amsmath, amssymb}
 
 %-------------------------------------------------------------------------------
-% Fonts for PDFLaTeX
+% Fonts for pdfLaTeX
 \ifPDFTeX
   % Input encoding, font and language
   \RequirePackage[utf8]{inputenc}

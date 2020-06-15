@@ -201,7 +201,7 @@ theses) you can use the \Package{wrapfig} package.
 %------------------------------------------------------------------------------
 
 If you use plain \LaTeX, you are pretty much stuck with encapsulated
-postscript (EPS) as your figure format. If you use PDF\LaTeX, then you
+postscript (EPS) as your figure format. If you use pdf\LaTeX, then you
 have much more freedom, with the notable exception that you cannot
 include EPS files!\footnote{%
 This restriction has finally been lifted with \TeXLive 2011. It
@@ -314,7 +314,7 @@ without making any changes, into your thesis!
 It is in fact both a package and a document class. It is
 available from \TeXLive 2012 onward. It allows you to have a
 standalone document for a \Package{tikz} or \Package{feynmf} figure
-and also input this file into another document. If you run PDF\LaTeX\
+and also input this file into another document. If you run pdf\LaTeX\
 on the file it also automatically crops the resulting picture. This is
 one of those packages where you think
 \enquote{Why didn't someone create this years ago?}.
@@ -643,9 +643,9 @@ I think a better way to proceed is the following:
   Check
   \texttt{./feynmf/feynmf\_all.dvi} or
   \texttt{./feynmf/feynmf\_all.pdf} to see if the graphs are OK\@;
-\item run \LaTeX{} or PDF\LaTeX; % chktex 13
+\item run \LaTeX{} or pdf\LaTeX; % chktex 13
 \item run \texttt{bibtex} or \texttt{biber};
-\item run \LaTeX{} or PDF\LaTeX{} again, at least twice.
+\item run \LaTeX{} or pdf\LaTeX{} again, at least twice.
 \end{itemize}
 The last three steps are done with the command \texttt{make thesis},
 \texttt{make thesis11} or

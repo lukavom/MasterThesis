@@ -319,8 +319,7 @@ and gives a lot of information on the quality of your \LaTeX.
 \subsection{Kile}%
 \label{sec:app:kubuntu:kile}\index{kile}
 
-Many people use Kile as their environment for editing and compiling
-\LaTeX. 
+Many people use Kile as their environment for editing and compiling \LaTeX. 
 I have not used it for a number of years,
 so some of the instructions I give here may be out of date.
 
@@ -594,8 +593,8 @@ If you want to do it by hand, you should make a new directory
 copy the style files \texttt{ubonn-thesis.sty} and \texttt{ubonn-biblatex.sty} into the
 \texttt{mythesis} directory.
 
-To compile things, I ran the sequence PDF\LaTeX, Biber, PDF\LaTeX,
-PDF\LaTeX\ to get the output file for the skeleton thesis.
+To compile things, I ran the sequence pdf\LaTeX, Biber, pdf\LaTeX,
+pdf\LaTeX\ to get the output file for the skeleton thesis.
 You should make sure that the \BibTeX\ command in \TeXstudio or \TeXworks
 is set to \texttt{biber},
 unless for some reason you want to use traditional \BibTeX.
@@ -622,12 +621,12 @@ user command to execute \texttt{makeindex} and \texttt{makeglossaries}
 as discussed in \cref{sec:app:compile}. With the addition of
 these commands, you should also be able to compile this guide.
 
-If you run PDF\LaTeX\ with the option \texttt{-enable-write18} and
+If you run pdf\LaTeX\ with the option \texttt{-enable-write18} and
 include appropriate \texttt{mpost} commands in your \LaTeX\ file(s), %chktex 36
 as discussed in \cref{sec:fig:feynman:feynmp}, Feynman graphs made
 using \Package{feynmp} work well.
 With \TeXstudio, you can simply
-include this option in the PDF\LaTeX\ command: \textsf{Options} $\to$
+include this option in the pdf\LaTeX\ command: \textsf{Options} $\to$
 \textsf{Configure TeXstudio} $\to$ \textsf{Commands}.
 
 I have not invested any effort in trying to get \texttt{feynmf}
@@ -1051,7 +1050,7 @@ As an alternative you can use the \Macro{shrinkheight} command.
 This chapter was included to check that one gets bold mathematics in
 a chapter/section title, but not in the table of contents.
 
-When using PDF\LaTeX, no special handling of titles should be necessary.
+When using pdf\LaTeX, no special handling of titles should be necessary.
 This is because the following line was added:
 \begin{verbatim}
   \def\bfseries{\fontseries\bfdefault\selectfont\boldmath}

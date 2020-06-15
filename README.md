@@ -72,7 +72,7 @@ directory to your `~/.config/` directory.
 Support for TeX Live versions older than 2011 has been removed in version 7.0.
 
 As of version 7.0 I have started testing the thesis skeleton and the guide using
-LuaLaTeX and XeLaTeX, as well as the usual PDFLaTeX.
+LuaLaTeX and XeLaTeX, as well as the usual pdfLaTeX.
 You can use `make thesislua` or `make thesisxe` to compile with LuaLaTeX or XeLaTeX,
 respectively.
 

@@ -229,7 +229,6 @@
   \UBN@todonotestrue
 \fi
 
-
 % Check backend - if TeX Live is earlier than 2011 and backend is biber,
 % change it to something more appropriate
 % \ifthenelse{\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
@@ -331,6 +330,9 @@
   % \RequirePackage{bookman}
   % \RequirePackage{newcent}
   % \RequirePackage{palatino}
+  
+  % Turn on bold math when using \bfseries
+  \def\bfseries{\fontseries\bfdefault\selectfont\boldmath}
 \fi
 
 %------------------------------------------------------------------------------
@@ -500,44 +502,28 @@
 \fi
 
 %------------------------------------------------------------------------------
-% Fonts with XeLaTeX of LuaLaTeX
-\ifXeTeX
-  % \RequirePackage[LetterSpace]{fontspec}
-  \RequirePackage{mathspec}
+% Fonts with XeLaTeX or LuaLaTeX
+\ifthenelse{\boolean{XeTeX} \OR \boolean{LuaTeX}}{%
+  % Font package for XeLaTeX - also loads fontspec
+  % \RequirePackage{mathspec}
   % undo the wrong changes made by mathspec
-  \let\RequirePackage\original@RequirePackage
-  \let\usepackage\RequirePackage
-  % \RequirePackage[math-style=ISO]{unicode-math}
+  % \let\RequirePackage\original@RequirePackage
+  % \let\usepackage\RequirePackage
+  \RequirePackage[math-style=ISO, bold-style=ISO]{unicode-math}
+  \defaultfontfeatures{Scale = MatchUppercase}
   \ifUBN@newtx
     \setmainfont{TeX Gyre Termes}
-    \setmathsfont(Digits,Latin,Greek){TeX Gyre Termes Math}
-    % \setmathfont(Greek){TeX Gyre Pagella}
-    % \setmathfont[version=bold,FakeBold=4]{TeX Gyre Pagella}
+    \setmathfont{TeX Gyre Termes Math}
+    % \setmathrm{TeX Gyre Termes}
+    % \setmathfont[version=bold,FakeBold=4]{TeX Gyre Termes}
   \fi
   \ifUBN@palatino
     \setmainfont{TeX Gyre Pagella}
-    \setmathsfont(Digits){TeX Gyre Pagella}
-    \setmathsfont(Latin)[Lowercase=Italic]{TeX Gyre Pagella}
-    \setmathsfont(Greek){TeX Gyre Pagella}
-    % \setmathfont{TeX Gyre Pagella Math}
-    % \setmathfont[version=bold,FakeBold=4]{TeX Gyre Pagella Math}
+    \setmathfont{TeX Gyre Pagella Math}
+    % \setmathrm{TeX Gyre Pagella}
     % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
   \fi
-\fi
-\ifLuaTeX
-  % \RequirePackage[LetterSpace]{fontspec}
-  % \RequirePackage[no-math]{fontspec}
-  \RequirePackage[TeX Gyre Pagella]{mathfont}
-  % \RequirePackage[math-style=ISO]{unicode-math}
-  \ifUBN@newtx
-    \setmainfont{TeX Gyre Termes}
-    \setmathsfont(Digits,Latin,Greek){TeX Gyre Termes Math}
-  \fi
-  % \ifUBN@palatino
-  %   \setmainfont{TeX Gyre Pagella}
-  %   \mathfont{TeX Gyre Pagella}
-  % \fi
-\fi
+}{}
 
 \RequirePackage{microtype}
 \RequirePackage[svgnames]{xcolor}
@@ -636,9 +622,6 @@
 
 %-------------------------------------------------------------------------------
 % More options for KOMA script
-
-% Turn on bold math when using \bfseries
-\def\bfseries{\fontseries\bfdefault\selectfont\boldmath}
 
 % General font for title, section headings etc.
 % \setkomafont{disposition}{\rmfamily\bfseries\upshape}

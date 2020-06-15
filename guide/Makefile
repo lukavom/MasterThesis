@@ -32,12 +32,12 @@ run_latexmk: *.tex
 	latexmk -e '$$pdflatex=q/pdflatex %O -shell-escape %S/' -pdf $(GUIDE)
 	# latexmk -pdf $(GUIDE)
 
-run_xelatexmk: *.tex
-	latexmk -e '$$xelatex=q/xelatex %O -shell-escape %S/' -xelatex $(GUIDE)
-	# latexmk -xelatex $(GUIDE)
-
 run_lualatexmk: *.tex
 	latexmk -e '$$lualatex=q/lualatex %O -shell-escape %S/' -lualatex $(GUIDE)
+	# latexmk -lualatex $(GUIDE)
+
+run_xelatexmk: *.tex
+	latexmk -e '$$xelatex=q/xelatex %O -shell-escape %S/' -xelatex $(GUIDE)
 	# latexmk -xelatex $(GUIDE)
 
 guide11:

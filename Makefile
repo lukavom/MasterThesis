@@ -19,16 +19,23 @@ endif
 ifndef PYFEYNDIR
 PYFEYNDIR = pyfeyn
 endif
+ifndef PYFEYNHANDDIR
+PYFEYNHANDDIR = pyfeynhand
+endif
 ifndef TIKZFILES
 TIKZFILES = $(wildcard $(TIKZDIR)/*.tex)
 endif
 ifndef PYFEYNFILES
 PYFEYNFILES = $(wildcard $(PYFEYNDIR)/*.py)
 endif
+ifndef PYFEYNHANDFILES
+PYFEYNHANDFILES = $(wildcard $(PYFEYNHANDDIR)/*.py)
+endif
 ifdef file
 FEYNFILES = $(FEYNDIR)/$(file).tex
 TIKZFILES = $(TIKZDIR)/$(file).tex
 PYFEYNFILES = $(PYFEYNDIR)/$(file).py
+PYFEYNHANDFILES = $(PYFEYNHANDDIR)/$(file).py
 endif
 ifndef AWKDIR
 AWKDIR = .
@@ -40,7 +47,7 @@ LATEXMK = latexmk -pdf
 # LATEXMK = latexmk -e '$$pdflatex=q/pdflatex %O -shell-escape %S/' -pdf $(GUIDE)
 
 .PHONY: skelcopy \
-	feynmf feynmp tikz pyfeyn \
+	feynmf feynmp tikz pyfeyn pyfeynhand \
 	cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpictpdf \
 	help test
 
@@ -106,9 +113,15 @@ pyfeyn: $(PYFEYNFILES)
 	@echo "PyFeyn Feynman graph files: $^"
 	(cd $(PYFEYNDIR); $(foreach pyfeynfile, $^, ./$(notdir $(pyfeynfile));))
 
+# Make color and B&W PDF versions of TikZ-FeynHand graphs
+pyfeynhand: $(PYFEYNHANDFILES)
+	@echo "PyFeynHand Feynman graph files: $^"
+	(cd $(PYFEYNHANDDIR); $(foreach pyfeynhandfile, $^, ./$(notdir $(pyfeynhandfile)) --pdf;))
+	(cd $(PYFEYNHANDDIR); $(foreach pyfeynhandfile, $^, ./$(notdir $(pyfeynhandfile)) --pdf --BW;))
+
 cleanall: clean cleanpictpdf
 
-clean: cleanfeynmf cleanfeynmp cleantikz
+clean: cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpyfeynhand
 
 cleanfeynmf:
 	-rm *.mf *.tfm *.t1 *.600gf *.600pk *.log
@@ -126,6 +139,9 @@ cleantikz:
 
 cleanpyfeyn:
 	-rm $(PYFEYNDIR)/*.pdf
+
+cleanpyfeynhand:
+	-rm $(PYFEYNHANDDIR)/*.pdf $(PYFEYNHANDDIR)/*.aux $(PYFEYNHANDDIR)/*.log
 
 cleanpictpdf:
 	-rm $(FEYNDIR)/*.pdf

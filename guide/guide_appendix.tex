@@ -8,8 +8,8 @@
 
 \LaTeX\ file: \url{./guide_appendix.tex}\\[1ex]
 \noindent
-In this section I document briefly the major changes to this guide. I
-also indicate other topics for which I would like to add some more
+In this section I document briefly the major changes to this guide.
+I also indicate other topics for which I would like to add some more
 information.
 
 \begin{longtable}{llp{0.7\textwidth}}
@@ -18,9 +18,11 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
-  29 May 2020 & 7.0 & Remove support and documentation for \TeXLive versions older than 2011.
+  16 June 2020 & 7.0 & Remove support and documentation for \TeXLive versions older than 2011.
+    Thesis skeleton and guide can also be compiled using Lua\LaTeX and Xe\LaTeX.
     Add some documentation on making Feynman graphs using \Package{TikZ} packages.
-    Deprecate the usage of PyFeyn.\\
+    Deprecate the usage of PyFeyn.
+    Add usage of \Package{tcolorbox} to thesis guide for listings.\\
 
   05 Dec 2018 & 6.0 & \TeXLive 2016 is now the default.
     After a \Command{make new} the \File{mythesis} directory should now be standalone.
@@ -1030,10 +1032,15 @@ As an alternative you can use the \Macro{shrinkheight} command.
   \end{mpxtabular}
 \end{center}
 
-
+% The following chapter needs some tweaks for XeLaTeX
 %==============================================================================
+\ifXeTeX
+\chapter{A famous equation is $\symbfit{E = mc^{2}}$}%
+\label{sec:emc2}\index{math!bold}
+\else
 \chapter{A famous equation is $E = mc^{2}$}%
 \label{sec:emc2}\index{math!bold}
+\fi
 %==============================================================================
 
 \LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
@@ -1041,17 +1048,25 @@ As an alternative you can use the \Macro{shrinkheight} command.
 This chapter was included to check that one gets bold mathematics in
 a chapter/section title, but not in the table of contents.
 
-As of release of the \Package{ubonn-thesis} package, no special handling of
-titles should be necessary. This is because the following line was added:
+When using PDF\LaTeX, no special handling of titles should be necessary.
+This is because the following line was added:
 \begin{verbatim}
   \def\bfseries{\fontseries\bfdefault\selectfont\boldmath}
 \end{verbatim}
 %No optional title for a chapter is needed as the chapter title is typeset in bold
 %font also in the table of contents.
 
+This tweak does not work with Xe\LaTeX{} and Lua\LaTeX,
+so a short title may also be needed to cope with bold mathematics.
+
 %------------------------------------------------------------------------------
+\ifXeTeX
+\section{A slightly less famous equation $\symbfit{F = m a}$}%
+\label{sec:fma}
+\else
 \section{A slightly less famous equation $F = m a$}%
 \label{sec:fma}
+\fi
 %------------------------------------------------------------------------------
 
 The title here does not include \Macro{boldmath}, as the bold font series turns on bold math by default.
@@ -1061,14 +1076,19 @@ writing a book or report.
 
 
 %------------------------------------------------------------------------------
-% \section{The cross-section is given by \(\sigma = N / \mathcal{L}\)}%
+\ifthenelse{\boolean{XeTeX} \OR \boolean{LuaTeX}}{%
+\section[Cross-section given by $\symbf{sigma = N /}\symcal{L}$]%
+        {The cross-section is given by $\symbf{\sigma = N /}\symbfcal{L}$}%
+\label{sec:sig}
+}{%
 \section[Cross-section given by $\sigma = N / \mathcal{L}$]%
         {The cross-section is given by $\sigma = N / \mathcal{L}$}%
 \label{sec:sig}
+}
 %------------------------------------------------------------------------------
 
 This attempt includes a Greek and a calligraphic letter to make sure they work as well.
-It also include the section title as a short form and a regular form.
+It also includes the section title as a short form and a regular form.
 
 %==============================================================================
 \chapter{Old or obsolete information and instructions}%

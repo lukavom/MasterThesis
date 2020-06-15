@@ -1,5 +1,5 @@
-# Makefile to run latex, dvips, and pdflatex on a thesis
-# Can also run feynmf/feynmp/tikz on files in a directory
+# Makefile to run pdflatex, lualtex or xelatex on a thesis
+# Can also run feynmf/feynmp/tikz/pyfeyn/pyfeynhand on files in a directory
 
 THESIS = mythesis
 # EXTRACMD = --shell-escape
@@ -9,16 +9,20 @@ TIKZDIR = tikz
 TIKZFILES = $(wildcard $(TIKZDIR)/*.tex)
 PYFEYNDIR = pyfeyn
 PYFEYNFILES = $(wildcard $(PYFEYNDIR)/*.py)
+PYFEYNHANDDIR = pyfeynhand
+PYFEYNHANDFILES = $(wildcard $(PYFEYNHANDDIR)/*.py)
 ifdef file
 FEYNFILES = $(FEYNDIR)/$(file).tex
 TIKZFILES = $(TIKZDIR)/$(file).tex
 PYFEYNFILES = $(PYFEYNDIR)/$(file).py
+PYFEYNHANDFILES = $(PYFEYNHANDDIR)/$(file).py
 endif
+LATEXCMD = pdflatex
 BIBTEX = biber
 AWKDIR=..
 
 .PHONY: cover \
-	feynmf feynmp tikz pyfeyn \
+	feynmf feynmp tikz pyfeyn pyfeynhand \
 	cleanthesis cleancover \
 	cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpictpdf \
 	cleanblx cleanbbl \
@@ -27,29 +31,41 @@ AWKDIR=..
 
 thesis: run_latexmk
 
+thesislua: run_lualatexmk
+
+thesisxe: run_xelatexmk
+
 # Use latexmk to compile thesis
-run_latexmk:  $(THESIS).tex *.tex bib/*.bib
+run_latexmk: $(THESIS).tex *.tex bib/*.bib
 	latexmk -pdf $(THESIS)
 	# LATEXMK = latexmk -e '$$pdflatex=q/pdflatex %O -shell-escape %S/' -pdf $(THESIS)
 
+run_lualatexmk: $(THESIS).tex *.tex bib/*.bib
+	latexmk -lualatex $(THESIS)
+	# latexmk -e '$$lualatex=q/lualatex %O -shell-escape %S/' -lualatex $(THESIS)
+
+run_xelatexmk: $(THESIS).tex *.tex bib/*.bib
+	latexmk -xelatex $(THESIS)
+	# latexmk -e '$$xelatex=q/xelatex %O -shell-escape %S/' -xelatex $(THESIS)
+
 # - in front of bibtex means compilation continues even if there is an error
 thesis09: $(THESIS).tex *.tex bib/*.bib
-	pdflatex   $(EXTRACMD) $(THESIS)
+	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
 	-bibtex $(THESIS)
 	# makeglossaries $(THESIS)
-	pdflatex   $(EXTRACMD) $(THESIS)
-	pdflatex   $(EXTRACMD) $(THESIS)
+	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
+	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
 
 thesis11: $(THESIS).tex *.tex bib/*.bib
-	pdflatex   $(EXTRACMD) $(THESIS)
+	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
 	$(BIBTEX)  $(THESIS)
 	# makeglossaries $(THESIS)
-	pdflatex   $(EXTRACMD) $(THESIS)
-	pdflatex   $(EXTRACMD) $(THESIS)
+	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
+	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
 
 cover:
-	pdflatex   $(EXTRACMD) cover_only
-	pdflatex   $(EXTRACMD) cover_only
+	$(LATEXCMD)   $(EXTRACMD) cover_only
+	$(LATEXCMD)   $(EXTRACMD) cover_only
 
 feynmf:
 	make -f ../Makefile FEYNDIR=$(FEYNDIR) FEYNFILES="$(FEYNFILES)" \
@@ -65,19 +81,22 @@ tikz:
 pyfeyn:
 	make -f ../Makefile PYFEYNDIR=$(PYFEYNDIR) PYFEYNFILES="$(PYFEYNFILES)" pyfeyn
 
+pyfeynhand:
+	make -f ../Makefile PYFEYNHANDDIR=$(PYFEYNHANDDIR) PYFEYNHANDFILES="$(PYFEYNHANDFILES)" pyfeynhand
+
 thesis_feynmf:
 	feynmf $(THESIS)
 
 cleanall: clean cleanbbl cleanpictpdf
 
 clean: cleanthesis cleancover \
-	cleanfeynmf cleanfeynmp cleantikz \
+	cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpyfeynhand \
 	cleanblx cleanglo cleanlatexmk
 
 cleanthesis:
 	-rm $(THESIS).log $(THESIS).aux $(THESIS).toc
 	-rm $(THESIS).lof $(THESIS).lot $(THESIS).out
-	-rm $(THESIS).blg $(THESIS).bbl $(THESIS).pdf
+	-rm $(THESIS).blg $(THESIS).bbl $(THESIS).pdf $(THESIS).xdv
 	-rm $(THESIS).fdb_latexmk .$(THESIS).lb $(THESIS).synctex.gz
 	-rm *.aux
 
@@ -98,6 +117,9 @@ cleantikz:
 
 cleanpyfeyn:
 	-rm $(PYFEYNDIR)/*.pdf
+
+cleanpyfeynhand:
+	-rm $(PYFEYNHANDDIR)/*.pdf
 
 cleanpictpdf:
 	-rm $(FEYNDIR)/*.pdf

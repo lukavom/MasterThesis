@@ -440,12 +440,17 @@ It is not needed if you use the \Package{newtx} font package.}
 \item Use punctuation in equations and \enquote{\dif}, i.e.\ \Macro{dif} for
   derivatives,\index{derivative} e.g.
   \begin{equation*}
-    \int y\, \dif x\,.
+    \int y\,\dif x.
   \end{equation*}
   This is also one of the the very few places, where it makes sense
   to put some spacing in by hand --- normally you should leave this to \TeX.
   Note that the \Package{physics} package provides the command \verb|\dd{x}|,
   which does the spacing for you.
+\begin{tcblisting}{listing side text}
+\begin{equation*}
+  \int y \dd{x}\,.
+\end{equation*}      
+\end{tcblisting}
 
 \item Pay attention to the alignment of numbers in
   tables. \Package{siunitx} provides the \Option{S} column specifier to
@@ -454,8 +459,7 @@ It is not needed if you use the \Package{newtx} font package.}
 
 Not really a strict \enquote{Do}: I highly recommend that you use an
 integrated environment for editing and compiling your thesis.
-If you are on a Mac or under Windows you probably get TeXShop or
-TeXworks by default.
+If you are use macOS or Windows you probably get TeXShop or TeXworks by default.
 \TeXstudio is based on \TeXmaker and is available for Linux,
 Windows and macOS\@.
 It used to be my preferred \LaTeX\ environment under all systems!
@@ -949,7 +953,7 @@ These are the ones I remember coming across so far:
   One could argue that: \enquote{\emph{The interaction occurs with a high-energy hadron.}}
   is even better, as it makes clear that \enquote{high} is describing the energy of the hadron.
 \item \enquote{Energy is measured in the hadronic calorimeter.}
-  Correct: \enquote{Energy is measured in the hadron calorimeter.}
+  Correct: \enquote{\emph{Energy is measured in the hadron calorimeter.}}
   This is somewhat controversial.
   There are in fact ATLAS publications that use the term \enquote{hadronic calorimeter}.
 \item \enquote{We are not sensible to this effect.}

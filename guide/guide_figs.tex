@@ -92,7 +92,9 @@ The same units are also used for Feynman graphs made with the
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\figwidth]{gg_tt}
+  \includegraphics[height=3cm]{gg_ttbar_1-BW}\quad
+  \includegraphics[height=3cm]{gg_ttbar_2-BW}\quad
+  \includegraphics[height=3cm]{gg_ttbar_3-BW}
   \put(-130,14){(a)}
   \put(-80,14){(b)}
   \put(-35,14){(c)}
@@ -106,8 +108,11 @@ shown in \cref{fig:letters2}.
 
 \begin{figure}[htbp]
   \centering
-  \begin{tabular}{@{\hspace*{0.15\figwidth}}p{0.33\figwidth}p{0.33\figwidth}l}
-    \multicolumn{3}{c}{\includegraphics[width=\figwidth]{gg_tt}}\\
+  \begin{tabular}{ccc}%@{\hspace*{0.15\figwidth}}p{0.33\figwidth}p{0.33\figwidth}l}
+    % \multicolumn{3}{c}{\includegraphics[width=\figwidth]{gg_tt}}\\
+    \includegraphics[width=0.33\figwidth]{gg_ttbar_1-BW} &
+    \includegraphics[width=0.3\figwidth]{gg_ttbar_2-BW} &
+    \includegraphics[width=0.3\figwidth]{gg_ttbar_3-BW}\\
     (a) & (b) & (c)
   \end{tabular}
   \caption{Adding letters to figures with \Env{tabular}.}%
@@ -132,7 +137,7 @@ width equal to \Macro{figwidth} and then the offset to \texttt{-\Macro*{figwidth
 \begin{figure}[htbp]
   \centering
   \begin{captionbeside}{A small figure with a simple caption beside it.}[i][\figwidth][-\figwidth]
-    \includegraphics[width=0.3\textwidth]{qq_tt}
+    \includegraphics[width=0.3\textwidth]{qq_ttbar-BW}
   \end{captionbeside}%
   \label{fig:qqtt}
 \end{figure}
@@ -388,7 +393,7 @@ There are (at least) two packages based on \TikZ that exist to draw Feynman grap
 so I will only give examples for \Package{TikZ-FeynHand} here.
 Note that it does not seem to be possible to adjust the amplitude and frequency
 of boson and gluon oscillations explicitly.
-This has to be done using the \Macro*{setlength{\textbackslash feynhandlinesize}{1.0pt}} command.
+This has to be done using the \Macro*{setlength\{\textbackslash feynhandlinesize\{1.0pt\}\}} command.
 This also, as the name suggest, changes the line thickness.
 After a bit of playing around \num{1.0}{pt} seems to work well,
 with a Feynman graph size of about \SI[parse-numbers=false]{2 \times 2}{\cm^{2}}
@@ -399,27 +404,29 @@ You can find the wrapper and an example script in the \File{pyfeynhand} director
 The wrapper creates a \LaTeX{} file,
 which can either be compiled or included directly in your document,
 as it uses the \Package{standalone} package.
-\Cref{fig:feyn:tZq} shows two graphs from one of my favourite processes.
+
+\Cref{fig:feyn:tdecay} shows two graphs from one of my favourite processes.
+These graphs are made using \Package{TikZ-FeynHand} commands directly,
+while the \TeX{} file was created using the Python wrapper.
 
 \begin{figure}[htbp]
   \centering
   \begin{subfigure}{0.5\figwidth}
     \centering
-    \missingfigure{Still need to create the plot to be included here.}
-    % \input{../pyfreynhand/tZq1.tex}
+    \input{../tikz/tdecay.tex}
     \caption{\LaTeX\ file}%
-    \label{fig:feyn:tZq1}
+    \label{fig:feyn:tdecay1}
   \end{subfigure}
+  \qquad
   \begin{subfigure}{0.5\figwidth}
     \centering
-    \missingfigure{Still need to create the plot to be included here.}
-    % \includegraphics[width=0.3put{../pyfreynhand/tZq1.tex}
+    \includegraphics[width=0.5\figwidth]{../tikz/tdecay}
     \caption{PDF file}%
-    \label{fig:feyn:tZq2}
+    \label{fig:feyn:tdecay2}
   \end{subfigure}
   \caption{Feynman graphs made with the \Package{TikZ-FeynHand} package.
     This example uses the \Env{subfigure} environment from the \Package{subcaption} package.}%
-  \label{fig:feyn:tZq}
+  \label{fig:feyn:tdecay}
 \end{figure}
 
 If you want to draw Feynman graphs using \TikZ directly,

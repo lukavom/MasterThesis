@@ -367,7 +367,7 @@ as an option or move the note outside (after) the caption.
 
 
 %------------------------------------------------------------------------------
-\section{pdf\LaTeX, \LuaLaTeX and \XeLaTeX}%
+\section{pdf\LaTeX, Lua\LaTeX or Xe\LaTeX}%
 \label{sec:package:xelatex}\index{pdfLaTeX@pdf\LaTeX}\index{LuaLaTeX@\LuaLaTeX}\index{XeLaTeX@\XeLaTeX}
 %------------------------------------------------------------------------------
 
@@ -376,8 +376,11 @@ and that \LaTeX3 may at some point replace the current pdf\TeX\ engine.
 This has been the case for many years,
 but so far it does not seem to be clear
 which development, if any, will replace pdf\LaTeX.
-The big advantage of the new developments is that they can use the installed fonts on your machine directly.
+The two main directions are \LuaLaTeX and \XeLaTeX.
+The big advantage of these new developments is that they can use the installed fonts on your machine directly.
 \LuaLaTeX\ also integrates a scripting language, Lua.
+As a result, it also does not have some of the restrictions of \LaTeX\ or \XeLaTeX,
+e.g.\ the number of open files for writing.
 
 As of version 7.0 I have adapted the thesis style file able to be able to use both \LuaLaTeX\ and \XeLaTeX.
 The font specifications had to be changed.

@@ -9,18 +9,18 @@
 \newcommand{\dif}{\text{d}}
 
 % HEP units - assuming you are using siunitx
-\ifthenelse{\texlive < 2011} {%
-  \newunit[per=slash]{\MeVovercsq}{\MeV\per\clight\squared}
-  \newunit[per=slash]{\GeVovercsq}{\GeV\per\clight\squared}
-  \renewunit{\pb}{\pico\barn}
-  \newunit{\invpb}{\per\pico\barn}
-}{%
+% \ifthenelse{\texlive < 2011} {%
+%   \newunit[per=slash]{\MeVovercsq}{\MeV\per\clight\squared}
+%   \newunit[per=slash]{\GeVovercsq}{\GeV\per\clight\squared}
+%   \renewunit{\pb}{\pico\barn}
+%   \newunit{\invpb}{\per\pico\barn}
+% }{%
   \DeclareSIUnit\clight{\text{\ensuremath{c}}}
   \DeclareSIUnit[per-mode=symbol]\MeVovercsq{\MeV\per\clight\squared}
   \DeclareSIUnit[per-mode=symbol]\GeVovercsq{\GeV\per\clight\squared}
   \DeclareSIUnit\pb{\pico\barn}
   \DeclareSIUnit\invpb{\per\pico\barn}
-}
+% }
 
 % Particles - see also the hepnicenames/heppennames/hepparticles packages.
 \newcommand*{\KoS}{\ensuremath{K_{S}^{0}}\xspace}

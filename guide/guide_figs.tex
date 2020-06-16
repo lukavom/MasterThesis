@@ -712,16 +712,16 @@ starts with \verb+\begin{fmffile}{gluon}+.%
 \begin{figure}[htbp]
   \centering
   \fbox{\input{../feynmf/ep_nc.tex}}
-  \ifthenelse {\texlive < 2011} {%
-  }{
+  % \ifthenelse {\texlive < 2011} {%
+  % }{
     \write18{mpost ep_nc}
-  }
+  % }
   \qquad
   \fbox{\input{../feynmf/ep_cc.tex}}
-  \ifthenelse {\texlive < 2011} {%
-  }{
+  % \ifthenelse {\texlive < 2011} {%
+  % }{
     \write18{mpost ep_cc}
-  }
+  % }
   \caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
     code directly.}%
   \label{fig:nccc-feynmf}
@@ -814,14 +814,15 @@ illustrated in \cref{fig:tikz:flow}.
 
 \begin{figure}[htbp]
   \centering
-  \ifthenelse {\texlive < 2011} {%
-    \fbox{\parbox[c]{0.8\textwidth}{%
-        Error messages appear when trying to compile the guide with
-        \Package{tikz} and \TeXLive 2009, so the figure is not included.
-        See the file \texttt{../tikz/zeus\_reconstruction.tex}.}}
-  }{%
-    \input{../tikz/zeus_reconstruction.tex}
-  }
+  \input{../tikz/zeus_reconstruction.tex}
+  % \ifthenelse {\texlive < 2011} {%
+  %   \fbox{\parbox[c]{0.8\textwidth}{%
+  %       Error messages appear when trying to compile the guide with
+  %       \Package{tikz} and \TeXLive 2009, so the figure is not included.
+  %       See the file \texttt{../tikz/zeus\_reconstruction.tex}.}}
+  % }{%
+  %   \input{../tikz/zeus_reconstruction.tex}
+  % }
   \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}%
   \label{fig:tikz:flow}
 \end{figure}

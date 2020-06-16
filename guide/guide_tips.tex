@@ -342,11 +342,13 @@ It is not needed if you use the \Package{newtx} font package.}
   serif font.\\
   {\sffamily Compare: A common jet energy cut at the LHC is now
     \(p_{T}^{\text{jet}} > \SI{20}{\GeV}\), while at HERA we typically
-    \ifthenelse {\texlive < 2011} {%
-      used \(p_{T}^{\mathrm{jet}} > \SI[obeyfamily=false]{6}{\GeV}\).
-    }{%
-      used \(p_{T}^{\mathrm{jet}} > \SI[detect-family=false]{6}{\GeV}\).
-    }}
+    used \(p_{T}^{\mathrm{jet}} > \SI[detect-family=false]{6}{\GeV}\).
+    % \ifthenelse {\texlive < 2011} {%
+    %   used \(p_{T}^{\mathrm{jet}} > \SI[obeyfamily=false]{6}{\GeV}\).
+    % }{%
+    %   used \(p_{T}^{\mathrm{jet}} > \SI[detect-family=false]{6}{\GeV}\).
+    % }
+  }
   The \si{\GeV} in the first expression is in sans-serif. This is
   because the
   \Macro{sisetup}\texttt{\{detect-family=true\}} % \footnote{\Option{obeyall} in \TeXLive 2009.}

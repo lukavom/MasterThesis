@@ -900,14 +900,15 @@ this guide is compiled with \TeXLive 2011 or later.
 
 \begin{figure}[htbp]
   \centering
-  \ifthenelse {\texlive < 2011} {%
-    \fbox{\parbox[c]{0.8\textwidth}{%
-        Sorry, \Package{tikz} is too old in \TeXLive 2009 and
-        earlier to make this plot.
-        See the file \texttt{./tikz/zeus\_Ds\_systematics.tex}.}}
-  }{%
-    \input{../tikz/zeus_Ds_systematics.tex}
-  }
+  \input{../tikz/zeus_Ds_systematics.tex}
+  % \ifthenelse {\texlive < 2011} {%
+  %   \fbox{\parbox[c]{0.8\textwidth}{%
+  %       Sorry, \Package{tikz} is too old in \TeXLive 2009 and
+  %       earlier to make this plot.
+  %       See the file \texttt{./tikz/zeus\_Ds\_systematics.tex}.}}
+  % }{%
+  %   \input{../tikz/zeus_Ds_systematics.tex}
+  % }
   \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The
     results of strange excited charm meson fragmentation fraction and
     branching ratio with systematic variations.  The individual

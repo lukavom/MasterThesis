@@ -63,7 +63,7 @@ cd guide
 make guide
 ```
 
-If you have a version of TeX Live older than 2016, you should set 
+If you have a version of TeX Live older than 2017, you should set 
 `\texlive` appropriately `thesis_guide.tex`
 If you do not have the `newtx` fonts, either install them 
 or do not pass the `newtx` option to ubonn-thesis.

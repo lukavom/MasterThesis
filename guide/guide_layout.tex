@@ -266,12 +266,12 @@ See \cref{sec:tips:units} for some of the things you have to worry
 about if you use a font for which the text mode and math mode display
 numbers differently.
 
-I have tried to compile the guide using Xe\LaTeX\index{XeLaTeX} Lua\LaTeX\index{LuaLaTeX}.
-After a few tweaks it mostly works.
-However, Xe\LaTeX\ has problems with Greek letters in section titles, while
-Lua\LaTeX\ seems to have problems with some tables, as well as listings.
-You can use the command \Command{make guidexe} to try to compile using Xe\LaTeX.
-You can use the command \Command{make guidelua} to try to compile using Xe\LaTeX.
+I have tried to compile the guide using \XeLaTeX\index{XeLaTeX} and \LuaLaTeX\index{LuaLaTeX}.
+After a few tweaks both work.
+Older versions of \LuaLaTeX\ may have problems with some tables, as well as listings,
+but they seem to be OK now.
+You can use the command \Command{make guidexe} to try to compile using \XeLaTeX.
+You can use the command \Command{make guidelua} to try to compile using \LuaLaTeX.
 The TeX Gyre fonts Pagella or Termes are used, depending on whether you pass the
 \Option{palatino} option to the document class or not.
 The advantage of these tools is that you can use any font that you have installed on your computer.

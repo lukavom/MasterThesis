@@ -313,7 +313,7 @@ without making any changes, into your thesis!
 
 It is in fact both a package and a document class. It is
 available from \TeXLive 2012 onward. It allows you to have a
-standalone document for a \Package{tikz} or \Package{feynmf} figure
+standalone document for a \Package{\TikZ} or \Package{feynmf} figure
 and also input this file into another document. If you run pdf\LaTeX\
 on the file it also automatically crops the resulting picture. This is
 one of those packages where you think
@@ -354,14 +354,14 @@ Alternatives include \Package{axodraw} and the \Package{feynmf} or
 
 The use of \Package{feynmf} and \Package{feynmp} is
 described in \cref{sec:fig:feynman:feynmp}, while a few
-examples of usage of \Package{tikz} are given in
+examples of usage of \Package{\TikZ} are given in
 \cref{sec:fig:feynman:tikz}.
 Usage of \Package{TikZ-FeynHand} and my Python wrapper \Package{PyFeynhand}
 can also be found in \cref{sec:fig:feynman:tikz}.
 Examples of Feynman graphs made
 with \Package{feynmf} and \Package{feynmp} can be found in the \texttt{feynmf} directory;
 those made with \Package{TikZ-FeynHand} can be found in the \texttt{pyfeynhand} and \texttt{tikz} subdirectories;
-while those made with \Package{tikz} can be found in the \texttt{tikz} subdirectory.
+while those made with \Package{\TikZ} can be found in the \texttt{tikz} subdirectory.
 
 Instructions on how to use \Package{axodraw} may come at a later
 date --- contributions would be welcome! Several people have claimed
@@ -389,10 +389,11 @@ show a charged current process.
 
 There are (at least) two packages based on \TikZ that exist to draw Feynman graphs:
 \Package{TikZ-Feynman} and \Package{TikZ-FeynHand}.
-\Package{TikZ-Feynman} requires you to use \LuaLaTeX,
-so I will only give examples for \Package{TikZ-FeynHand} here.\footnote{%
+If you want to use the automatic placement features of \Package{TikZ-Feynman}
+you have to use \LuaLaTeX.
+Hence, I am inclined to use the \Package{TikZ-FeynHand} package.\footnote{%
 Note that the \Package{TikZ-FeynHand} package was first included in \TeXLive 2017.}
-Note that it does not seem to be possible to adjust the amplitude and frequency
+It does not seem to be possible to adjust the amplitude and frequency
 of boson and gluon oscillations explicitly.
 This has to be done using the \Macro*{setlength\{\textbackslash feynhandlinesize\{1.0pt\}\}} command.
 This also, as the name suggest, changes the line thickness.
@@ -432,6 +433,31 @@ while the \TeX{} file was created using the Python wrapper.
   \caption{Feynman graphs made with the \Package{TikZ-FeynHand} package.
     This example uses the \Env{subfigure} environment from the \Package{subcaption} package.}%
   \label{fig:feyn:tdecay}
+\end{figure}
+
+A diagram for \Pgm decay using the \Package{TikZ-Feynman} package
+is shown in \cref{fig:feyn:mudecay}.
+This uses the manual placement style so that I can compile the guide with an \TeX\ engine.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}{0.6\figwidth}
+    \centering
+    \input{../tikz/mudecay-feynman.tex}
+    \caption{\LaTeX\ file}%
+    \label{fig:feyn:mudecay1}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}{0.4\figwidth}
+    \centering
+    \includegraphics[width=0.4\figwidth]{../tikz/mudecay-feynman}
+    \caption{PDF file}%
+    \label{fig:feyn:mudecay2}
+  \end{subfigure}
+  \caption{Feynman graphs made with the \Package{TikZ-Feynman} package.
+    This example uses the \Env{subfigure} environment from the \Package{subcaption} package.
+    The example is taken from \url{https://www.overleaf.com/learn/latex/feynman_diagrams}.}%
+  \label{fig:feyn:mudecay}
 \end{figure}
 
 If you want to draw Feynman graphs using \TikZ directly,
@@ -525,7 +551,7 @@ In the \Package{TikZ-FeynHand} graph, I use lots of colours to illustrate how th
   %   \input{../tikz/moeller-feynhand.tex}
   %   \subcaption{TikZ-FeynHand}\label{fig:feyn:feynhand}
   % \end{minipage}}
-  \caption{Feynman graphs drawn with \Package{feynmp}, \Package{tikz} and \Package{tikz-feynhand}.
+  \caption{Feynman graphs drawn with \Package{feynmp}, \Package{\TikZ} and \Package{TikZ-FeynHand}.
     The frames around the boxes are for illustration only.
     As you can see the \Package{feynmp} box does not include the labels.
     This example uses the \Macro{subcaptionbox} macro from the \Package{subcaption} package.}%
@@ -758,7 +784,7 @@ then be looked at in \texttt{feynmf\_all.dvi} or\\
 \label{sec:fig:tikz}\index{TikZ@\TikZ}
 %------------------------------------------------------------------------------
 
-\Package{pgfplots} and \Package{tikz} are packages to help with
+\Package{pgfplots} and \Package{\TikZ} are packages to help with
 creating graphics \enquote{inline}.
 For 3D figures you also need \Package{tikz-3dplot}.
 PGF is the backend, while \TikZ is what the user interacts with directly.
@@ -809,8 +835,8 @@ system in your thesis. One way to do this is illustrated in
   \label{fig:tikz:coord}
 \end{figure}
 
-It is also possible to make flow charts with \TikZ. This is
-illustrated in \cref{fig:tikz:flow}.
+It is also possible to make flow charts with \TikZ.
+This is illustrated in \cref{fig:tikz:flow}.
 
 \begin{figure}[htbp]
   \centering
@@ -841,6 +867,6 @@ Feynman graphs with \TikZ is covered in \cref{sec:fig:feynman:tikz}.
 If you want to include an accelerator lattice in your thesis you can try
 \Package{tikz-palattice}\footnote{%
   \url{https://ctan.org/pkg/tikz-palattice}
-  written by Jan Schmidt, who gave me a number of useful tips for this guide.}
+written by Jan Schmidt, who gave me a number of useful tips for this guide.}
 He used the package to make lattices of particle accelerators for his PhD thesis.
 

@@ -222,7 +222,7 @@ The following options exist:\\
   \midrule}
 \tablelasttail{\bottomrule\\}
 \xentrystretch{-0.05}
-\begin{xtabular}{llp{11.0cm}}
+\begin{xtabular}{llp{10.0cm}}
   PhD & false & A PhD thesis.\\
   Master & false & A Master thesis.\\
   Diplom & false & A Diplom thesis.\\
@@ -235,6 +235,16 @@ The following options exist:\\
   thesisversion & Draft & Specify the stage of the thesis.\\
   texlive & 2016 & Specify the \TeXLive version.
     You can also use the older command \verb|\newcommand*{\texlive}{2016}|.\\
+  newtx & true & Use the \Package{newtx} font packages (newer version of \Package{txfonts}).\\
+  txfonts & false & Use a Times-Roman-like font.\\
+  palatino & false & Use a combination of Palatino, Courier and Helvetica fonts.\\
+  subcaption & true & A package for making sub-figures (and sub-tables) and captions for them.\\
+  subfig & false & A package for making sub-figures and captions for them.\\
+  subfigure & false & A package for making sub-figures and captions for them (deprecated).\\
+  xtab & true & A package for tables that are longer than one page.\\
+  longtable & false &  Another package for tables that are longer than one page.\\
+  supertabular & false &  Another package for tables that are longer than one page.\\
+  biblatex & true & Include \Package{biblatex}.\\
   siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
   eVkern & false & Apply a kern of -0.1em to \si{\eV} in order to move \enquote{e} and \enquote{V} closer together.
   This is not necessary if you use the \Package{newtx} font package.\\
@@ -244,39 +254,33 @@ The following options exist:\\
     This loads \Package{hepnicenames} and \Package{heppennames}.\\
   hepitalic & true & Use italics rather than upright letters for particles.\\
   mhchem & true & A nice package for chemical elements and processes.\\
+  bookmark & true & use \Package{bookmark} package to improve bookmarks in PDF file.\\
   feynmf & false & Include the \Package{feynmf} package for Feynman graphs.\\
   feynmp & false & Include the \Package{feynmp} package for Feynman graphs.\\
-  subcaption & true & A package for making sub-figures (and sub-tables) and captions for them.\\
-  subfig & false & A package for making sub-figures and captions for them.\\
-  subfigure & false & A package for making sub-figures and captions for them (deprecated).\\
-  xtab & true & A package for tables that are longer than one page.\\
-  longtable & false &  Another package for tables that are longer than one page.\\
-  supertabular & false &  Another package for tables that are longer than one page.\\
-  newtx & true & Use the \Package{newtx} font packages (newer version of \Package{txfonts}).\\
-  txfonts & false & Use a Times-Roman-like font.\\
-  palatino & false & Use a combination of Palatino, Courier and Helvetica fonts.\\
   titlesec & false & Use the \Package{titlesec} package for formatting chapter titles.\\
-  floatopt & true & Adjust settings that control the number and placement of floats.\\
-  biblatex & true & Include \Package{biblatex}.\\
   astrobib & false & Adjust \Package{biblatex} options to conform to the usual astronomy style.\\
+  floatopt & true & Adjust settings that control the number and placement of floats.\\
   todonotes & false & Turn on use of the \Package{todonotes} package and define \Macro{mynote}.\\
   shownotes & false & Show the ToDo notes (also turns on \Option{todonotes}).\\
   cleveref & false & Turn on use of the \Package{cleveref} package.\\
   clevercaps & true & Capitalise Fig., Table etc.\\
-  backend & biber & Specify the backend to use for \Package{biblatex}.
-    Possibilities are \Option{biber}, \Option{bibtex} or \Option{bibtex8}.\\
+  firstinits & false & Use \Option{firstinits} instead of \Option{giveninits} for \Package{biblatex}.\\
   backref & true & The bibliography lists where the reference is cited.
     This option is very useful when writing your thesis,
     but should probably be turned off for the final version.\\
+  backend & biber & Specify the backend to use for \Package{biblatex}.
+    Possibilities are \Option{biber}, \Option{bibtex} or \Option{bibtex8}.\\
   bibencoding & & Set the encoding for the bibliography (usually not needed).\\
   bibstyle & numeric-comp & Specify the style to use for the references.
     Standard values are \Option{numeric-comp} or \Option{alphabetic}.\\
-  firstinits & false & Use \Option{firstinits} instead of \Option{giveninits} for \Package{biblatex}.\\
 \end{xtabular}
 
 Some default option values are adjusted depending on the \TeXLive version.
 See the \texttt{ubonn-thesis} style file to find out what is changed.
 
+If you use \LuaLaTeX or \XeLaTeX,
+the \Option{newtx} and \Option{txfonts} options select the TeX Gyre Termes font,
+while the \Option{palatino} option selects the TeX Gyre Pagella font.
 Depending on the font you use, you may find that the \enquote{e} and \enquote{V} in \si{\eV}, \si{\MeV} etc.\
 are too far apart.
 You can pass the option \Option{eVkern} to \Package{ubonn-thesis} in order to move them 0.1em closer together.\footnote{%

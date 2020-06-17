@@ -182,6 +182,8 @@ Some other useful packages, some of which are included in
     to click on entries on table of contents etc.\\
     \Package{cleveref} & Provides \enquote{Fig.}, \enquote{Table} etc.\ when you use
       the \Macro{cref\{fig:plot\}} syntax.\\
+    \Package{bookmark} &  Fixes appendices displaying in PDF viewer index/outline under first appendix
+      instead of under Appendix heading.\\
     \Package{todonotes} & Nice package to add notes to your text.
       You can also use it to indicate missing figures.\\
     \Package{background} & Allows you to add things like DRAFT across the whole document page.\\
@@ -266,13 +268,13 @@ See \url{http://tex.stackexchange.com/questions/273970/conflict-refcheck-subcapt
 
 It is often useful to indicate whether your thesis is in the draft stage.\index{draft}
 The thesis skeleton uses the package \Package{background} for this.
-It is only available as of \TeXLive 2011.
-Hence \enquote{Draft} is instead put in the heading for older versions.
-As an alternative, you can try the package \Package{draftwatermark}.\footnote{%
-\Package{draftwatermark} needs \Macro{unitlength} to be set to \SI{1}{pt}.
-This is not the default setting in \Package{ubonn-thesis}.
-The 2009 thesis skeleton contains \Macro{setlength\{\Macro{unitlength\}\{1pt\}}} (commented out).
-Given that this is a global setting, neither it nor \Package{draftwatermark} are included by default.}
+% It is only available as of \TeXLive 2011.
+% Hence \enquote{Draft} is instead put in the heading for older versions.
+% As an alternative, you can try the package \Package{draftwatermark}.\footnote{%
+% \Package{draftwatermark} needs \Macro{unitlength} to be set to \SI{1}{pt}.
+% This is not the default setting in \Package{ubonn-thesis}.
+% The 2009 thesis skeleton contains \Macro{setlength\{\Macro{unitlength\}\{1pt\}}} (commented out).
+% Given that this is a global setting, neither it nor \Package{draftwatermark} are included by default.}
 
 A list of other packages that are commonly used is given in
 \cref{tab:package:other2}. They are not

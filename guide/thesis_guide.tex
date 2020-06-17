@@ -16,13 +16,15 @@
 \newcommand*{\texlive}{2017}
 
 % Adjustments to biblatex output are in ubonn-biblatex style file
-% Avoid problems associated with writing too many files
-\usepackage{scrwfile}
 % Thesis style file
-\usepackage[shownotes, cleveref, bibstyle=alphabetic, feynmp]{../ubonn-thesis}
+\usepackage[shownotes, cleveref, bibstyle=alphabetic, feynmp, txfonts]{../ubonn-thesis}
 % Thesis bibliography settings
 \usepackage{../ubonn-biblatex}
 
+% Avoid problems associated with writing too many files
+\ifthenelse{\boolean{PDFTeX} \OR \boolean{XeTeX}}{%
+  \usepackage{scrwfile}
+}{}
 \usepackage{import}
 \usepackage{standalone}
 % TikZ-FeynHand only as of TeX Live 2017

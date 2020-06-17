@@ -59,6 +59,7 @@
 \DeclareBoolOption[true]{hepparticles}
 \DeclareBoolOption[true]{hepitalic}
 \DeclareBoolOption[true]{mhchem}
+\DeclareBoolOption[true]{bookmark}
 \DeclareBoolOption[false]{feynmf}
 \DeclareBoolOption[false]{feynmp}
 \DeclareBoolOption[false]{titlesec}
@@ -511,18 +512,18 @@
   % \let\usepackage\RequirePackage
   \RequirePackage[math-style=ISO, bold-style=ISO]{unicode-math}
   \defaultfontfeatures{Scale = MatchUppercase}
-  \ifUBN@newtx
+  \ifthenelse{\boolean{UBN@newtx} \OR \boolean{UBN@txfonts}}{%
     \setmainfont{TeX Gyre Termes}
     \setmathfont{TeX Gyre Termes Math}
     % \setmathrm{TeX Gyre Termes}
     % \setmathfont[version=bold,FakeBold=4]{TeX Gyre Termes}
-  \fi
-  \ifUBN@palatino
+  }{}
+  \ifthenelse{\boolean{UBN@palatino}}{%
     \setmainfont{TeX Gyre Pagella}
     \setmathfont{TeX Gyre Pagella Math}
     % \setmathrm{TeX Gyre Pagella}
     % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
-  \fi
+  }{}
 }{}
 
 \RequirePackage{microtype}
@@ -530,6 +531,12 @@
 \RequirePackage{xspace}
 \RequirePackage{setspace}
 \RequirePackage{scrdate,scrtime}
+
+% Fixes appendices displaying in pdf viewer index/outline under first appendix
+% instead of under Appendix heading
+\ifUBN@bookmark
+  \RequirePackage{bookmark}
+\fi
 
 % Add a \mynote command
 \ifUBN@todonotes
@@ -603,11 +610,11 @@
 % them all to black when producing the printed thesis.
 % The hyperref package should come last
 \PassOptionsToPackage{hyphens}{url}
-% \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=green,
-% urlcolor=black,bookmarksopen]{hyperref}
-\RequirePackage[colorlinks=true,linkcolor=blue,citecolor=darkmagenta,
-  urlcolor=darkgreen,bookmarksopen]{hyperref}
-% \newcommand{\url}[1]{\texttt{#1}}
+\RequirePackage{hyperref}
+\hypersetup{colorlinks,breaklinks}
+\hypersetup{linkcolor=blue,citecolor=darkmagenta,urlcolor=darkgreen}
+\hypersetup{bookmarksnumbered=true, bookmarksopen=true, bookmarksopenlevel=0}
+\hypersetup{unicode,psdextra}
 
 %-------------------------------------------------------------------------------
 % cleveref has to be included late

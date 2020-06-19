@@ -1,4 +1,4 @@
-Version 7.0 16/06/2020
+Version 7.0 19/06/2020
 
 The original idea with this package was that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.
@@ -13,7 +13,7 @@ git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
 
 If you want a particular release use the command:
 ```
-git clone --branch v6.0 https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
+git clone --branch v7.0 https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
 ```
 
 The tar file includes the guide as a PDF file: `guide/thesis_guide.pdf`.

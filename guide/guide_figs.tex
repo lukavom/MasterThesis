@@ -402,7 +402,7 @@ with a Feynman graph size of about \SI[parse-numbers=false]{2 \times 2}{\cm^{2}}
 
 I like using a scripting language, e.g.\ Python, to draw my graphs.
 I have therefore written a Python wrapper for \Package{TikZ-FeynHand}.
-You can find the wrapper and an example script in the \File{pyfeynhand} directory.
+You can find the wrapper and a couple of example scripts in the \File{pyfeynhand} directory.
 The wrapper creates a \LaTeX{} file,
 which can either be compiled or included directly in your document,
 as it uses the \Package{standalone} package.
@@ -435,9 +435,30 @@ while the \TeX{} file was created using the Python wrapper.
   \label{fig:feyn:tdecay}
 \end{figure}
 
+\Cref{fig:pyfeynhand:ttbar,fig:pyfeynhand:tdecay} show a graph for \ttbar production,
+as well as one for top-quark decay that uses quite a lot of the bells and whistles available
+in \Package{TikZ-FeynHand} and \Package{PyFeynHand}.
+The resulting PDF files are included directly,
+while the graphs have been made using the command \Command{make pyfeynhand}.
+\begin{figure}[htbp]
+  \centering
+  \subcaptionbox{\ttbar production\label{fig:pyfeynhand:ttbar}}
+    [0.5\figwidth]{%
+      \includegraphics{gg_ttbar_2}
+  }
+  \qquad
+  \subcaptionbox{Top-quark decay\label{fig:pyfeynhand:tdecay}}
+    [0.5\figwidth]{%
+    \includegraphics{tdecay}
+  }
+  \caption{Feynman graphs made with the \Package{PyFeynHand} wrapper.
+    This example uses the \Env{subcaptionbox} macro from the \Package{subcaption} package.}%
+  \label{fig:pyfeynhand}
+\end{figure}
+
 A diagram for \Pgm decay using the \Package{TikZ-Feynman} package
 is shown in \cref{fig:feyn:mudecay}.
-This uses the manual placement style so that I can compile the guide with an \TeX\ engine.
+This uses the manual placement style so that I can compile the guide with \Command{pdflatex}.
 
 \begin{figure}[htbp]
   \centering

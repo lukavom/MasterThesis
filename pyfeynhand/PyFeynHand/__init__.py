@@ -20,16 +20,19 @@
 
 """Python wrapper for TikZ-FeynHand LaTeX package
 
-PyFeynhandis a Python package helping in the creation of Feynman graphs
+PyFeynhand is a Python package helping in the creation of Feynman graphs
 using the LaTeX package TikZ-FeynHand.
 """
 
-__version__ = "0.1"
+__version__ = "0.2"
 
 # Classes to make a FeynHand Feynamn graph
 from .FeynHandTeX import FeynHandTeX
 from .FeynHandVertex import Vertex
 from .FeynHandPropagator import Propagator
-from .FeynHandColor import colors
+from .FeynHandText import Text
+from .FeynHandDraw import Line, Draw
+from .FeynHandUtils import FeynHandArgs, FeynHandColors
 
-__all__ = ['FeynHandTeX', 'Vertex', 'Propagator', 'colors']
+# __all__ = ['FeynHandTeX', 'Vertex', 'Propagator', 'Text', 'Line', 'Draw']
+__all__ = ['FeynHandTeX', 'FeynHandArgs', 'FeynHandColors']

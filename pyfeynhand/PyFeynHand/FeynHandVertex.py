@@ -1,20 +1,21 @@
 class Vertex:
-    """Base class for all pointlike objects in Feynman diagrams."""
+    """Base class for all vertices (points) in Feynman diagrams
+    If you add an argument here it also has to be added to FeynHandTex.py"""
 
-    def __init__(self, x, y, vtype='particle', label='', vcolor=None, lcolor=None):
-        """Constructor."""
+    def __init__(self, x, y, vtype='particle', label='', vcolor=None, lcolor=None, lpos=None):
+        """Constructor"""
         self.setXY(x, y)
-        # self.setBlob(blob)
         self.vtype = vtype
         self.label = label
         self.vcolor = vcolor
         self.lcolor = lcolor
+        self.lpos = lpos
 
     def __str__(self):
         s = []
-        s.append(r'Vertex {} {} {} {} {}'.format(
-            self.vtype, self.getX(), vtx.getY(), self.label,
-            self.vcolor, self.lcolor))
+        s.append('Vertex {} ({}, {}), label: {}, colours: {} {}, position: {}'.format(
+            self.vtype, self.getX(), self.getY(), self.label,
+            self.vcolor, self.lcolor, self.lpos))
 
         return '\n'.join(s)
 
@@ -27,6 +28,11 @@ class Vertex:
     def setX(self, x):
         "Set the x-coordinate"
         self.xpos = x
+        return self
+
+    def setY(self, y):
+        "Set the y-coordinate"
+        self.ypos = y
         return self
 
     def setType(self, vtype):
@@ -49,9 +55,9 @@ class Vertex:
         self.lcolor = lcolor
         return self
 
-    def setY(self, y):
-        "Set the y-coordinate"
-        self.ypos = y
+    def setLabelPos(self, lpos):
+        "Set the label position"
+        self.lpos = lpos
         return self
 
     def getX(self):
@@ -82,3 +88,6 @@ class Vertex:
         "Return the label color"
         return self.lcolor
 
+    def getLabelPos(self):
+        "Return the label position"
+        return self.lpos

@@ -2,7 +2,7 @@ class Propagator:
     """Base class for all propagator objects in Feynman diagrams."""
 
     def __init__(self, ptype, vtx1, vtx2,
-        pcolor=None, label='', lcolor=None, reverse=False):
+        pcolor=None, label='', lcolor=None, reverse=False, labelRight=False):
         """Constructor."""
         self.ptype = ptype
         self.vtx = [vtx1, vtx2]
@@ -10,12 +10,13 @@ class Propagator:
         self.pcolor = pcolor
         self.lcolor = lcolor
         self.reverse = reverse
+        self.labelRight = labelRight
 
     def __str__(self):
         s = []
-        s.append(r'Propagator {} {} {} {} {}'.format(
-            self.ptype, prop.getVertex1(), prop.getVertex2(), self.label,
-            self.pcolor, self.lcolor))
+        s.append('Propagator {} {} {} {} {}, reverse={}, labelRight={}'.format(
+            self.ptype, self.vtx, self.label,
+            self.pcolor, self.lcolor, self.reverse, self.labelRight))
 
         return '\n'.join(s)
 
@@ -52,4 +53,8 @@ class Propagator:
     def getLabel(self):
         "Return the label of propagator"
         return self.label
+    
+    def getLabelRight(self):
+        "Return if the label of propagator should be on the right"
+        return self.labelRight
     

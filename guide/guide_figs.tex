@@ -144,11 +144,11 @@ width equal to \Macro{figwidth} and then the offset to \texttt{-\Macro*{figwidth
 
 If you want different (partial) captions for a figure then the
 \Package{subfig} package used to be the way to go. 
-An alternative, and successor, to \Package{subfig} is
-\Package{subcaption}. It works in much the same way as
-\Package{subfig}. A nice tutorial on its use can be found in
+An alternative, and successor, to \Package{subfig} is \Package{subcaption}.
+It works in much the same way as \Package{subfig}.
+A nice tutorial on its use can be found in
 \url{http://www.peteryu.ca/tutorials/publishing/latex_captions}.
-An example of its use can be seen in \cref{fig:nccc}.
+Examples of its use can be seen in \cref{fig:nccc,fig:pyfeynhand}.
 The \LaTeX\ file \texttt{guide\_figs.tex} contains examples for both \Package{subfig} and 
 \Package{subcaption}.
 % , as the way \Package{subcaption} should be used was different for \TeXLive 2011 and earlier.
@@ -176,6 +176,7 @@ option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
 % \end{figure}
 % }{%
 \begin{figure}[htbp]
+  \begin{tcblisting}{}
   \centering
   \begin{subfigure}[b]{0.5\figwidth}
     \includegraphics[width=0.5\figwidth]{ep_nc}
@@ -186,6 +187,7 @@ option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
     \includegraphics[width=0.5\figwidth]{ep_cc}
     \caption{CC scattering}\label{fig:nccc-cc}
   \end{subfigure}
+  \end{tcblisting}
   \caption{Processes in $ep$ scattering.}%
   \label{fig:nccc}
 \end{figure}
@@ -384,8 +386,8 @@ show a charged current process.
 
 
 %------------------------------------------------------------------------------
-\subsection{Feynman graphs with \TikZ}%
-\label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}
+\subsection{Feynman graphs with \TikZ (and Python)}%
+\label{sec:fig:feynman:tikz}\index{TikZ@\TikZ}\index{PyFeynHand}
 
 There are (at least) two packages based on \TikZ that exist to draw Feynman graphs:
 \Package{TikZ-Feynman} and \Package{TikZ-FeynHand}.
@@ -406,10 +408,11 @@ You can find the wrapper and a couple of example scripts in the \File{pyfeynhand
 The wrapper creates a \LaTeX{} file,
 which can either be compiled or included directly in your document,
 as it uses the \Package{standalone} package.
+Have a look at the \File{README.md} file in that directory for some more details.
 
 \Cref{fig:feyn:tdecay} shows two graphs from one of my favourite processes.
 These graphs are made using \Package{TikZ-FeynHand} commands directly,
-while the \TeX{} file was created using the Python wrapper.
+while the \TeX{} file was originally created using the Python wrapper.
 
 \begin{figure}[htbp]
   \centering
@@ -441,6 +444,7 @@ in \Package{TikZ-FeynHand} and \Package{PyFeynHand}.
 The resulting PDF files are included directly,
 while the graphs have been made using the command \Command{make pyfeynhand}.
 \begin{figure}[htbp]
+  \begin{tcblisting}{}
   \centering
   \subcaptionbox{\ttbar production\label{fig:pyfeynhand:ttbar}}
     [0.5\figwidth]{%
@@ -451,6 +455,7 @@ while the graphs have been made using the command \Command{make pyfeynhand}.
     [0.5\figwidth]{%
     \includegraphics{tdecay}
   }
+  \end{tcblisting}
   \caption{Feynman graphs made with the \Package{PyFeynHand} wrapper.
     This example uses the \Env{subcaptionbox} macro from the \Package{subcaption} package.}%
   \label{fig:pyfeynhand}
@@ -596,8 +601,8 @@ If you want your particles to be written with italics,
 you have to add this option to \File{\_\_init\_\_.py} in the \File{pyfeyn} directory.
 As of \TeXLive 2019 particles using the upright font do not seem to be printed properly,
 so you really have to write your particles with italics.
-This appears to be a bug in \Package{hepparticles} (which is the underlying package of \Package{hepnicenames}),
-but I do not have a fix for it.
+This is due to a bug in \Package{hepparticles} (which is the underlying package of \Package{hepnicenames}).
+I have a fix of the bug, but it has not yet been propagated into the official package.
 Hence, in \File{\_\_init\_\_.py} of the package you have replace
 \begin{bashlisting}
 pyx.text.default_runner.preamble(r"\usepackage{hepnicenames}")

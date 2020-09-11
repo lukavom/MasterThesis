@@ -1,22 +1,11 @@
 #! /usr/bin/env python3
 
-# from PyFeynHand import *
 from PyFeynHand import FeynHandTeX
-from PyFeynHand import Vertex
-from PyFeynHand import Propagator
-from PyFeynHand import colors
-import argparse
+from PyFeynHand import FeynHandArgs, FeynHandColors
 
-# B&W or colour?
-parser = argparse.ArgumentParser()
-parser.add_argument('-b', '--BW', dest='BW', action='store_true', help='B&W output')
-parser.add_argument('-c', '--color', dest='BW', action='store_false', help='Colour output')
-parser.add_argument('--colour', dest='BW', action='store_false', help='Colour output')
-parser.add_argument('--pdf', action='store_true', help='Run pdflatex')
-parser.set_defaults(BW=False)
-args = parser.parse_args()
+args = FeynHandArgs()
 
-iCOLOR, oCOLOR, pCOLOR, vCOLOR, dCOLOR = colors(args.BW)
+iCOLOR, oCOLOR, pCOLOR, vCOLOR, dCOLOR = FeynHandColors(args.BW)
 if args.BW:
     oextra = '-BW'
 else:

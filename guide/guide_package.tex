@@ -205,6 +205,7 @@ Some other useful packages, some of which are included in
       \Package{siunitx} offers similar and better functionality.\\
     \Package{refcheck} & Check whether labels are used, i.e.\ if figures and tables are actually referenced.\\
     \Package{tcolorbox} & Fancy coloured boxes. Also works very well for code listings.\\
+    \Package{pgfplotstable} & Read in tables from CSV files and format them (even as graphs)\\
     \bottomrule\\
   \end{tabular}
   \caption{Other useful packages.}%
@@ -253,6 +254,15 @@ I used \Package{listings} for quite a while,
 but \Package{tcolorbox} can be used for anything associated with boxes and
 has much more flexibility.
 This guide can has now been adjusted to use \Package{tcolorbox}.
+
+Although I have not actually tried it,
+the \Package{pgfplotstable} package has the ability to read in CSV files and
+then format them as tales, or even as graphs.
+There is a detailed description in the \TeX nische Komödie issue (2/2020)
+on how this can be done.
+This could be a really nice way of formatting data
+and avoids the need to write out such tables including \enquote{\&} and \enquote{\textbackslash\textbackslash}.
+Various sorting options are also possible.
 
 I do not recommend the \Package{subfiles} package by default as it is not
 included in \TeXLive by default. Have a look at

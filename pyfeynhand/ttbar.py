@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+# ttbar production
+
 from PyFeynHand import FeynHandTeX
 from PyFeynHand import FeynHandArgs, FeynHandColors
 
@@ -58,9 +60,6 @@ fd2.write('gg_ttbar_2' + oextra, compile=args.pdf)
 
 #------------------------------------------------------------------------------
 # u-channel gg->tt
-fd3 = FeynHandTeX(vcolor=vCOLOR)
-#l3 = Label(r'$\Pg{}\Pg \to \Pqt\Paqt', x=0, y=2)
-
 fd3 = FeynHandTeX(vcolor=vCOLOR, debug=args.debug)
 if args.title: fd3.Text(r'$\Pg{}\Pg \to \Pqt\Paqt', 0, 2)
 

@@ -18,6 +18,9 @@ information.
   \toprule
   Date & Version & Comment\\
   \midrule
+  30 October 2020 & 7.1 & Latest version of \Package{PyFeynHand} scripts.
+    Shuffle instructions on compiling guide.
+    Add some instructions for Fedora 33.\\
   19 June 2020 & 7.0 & Remove support and documentation for \TeXLive versions older than 2011.
     Thesis skeleton and guide can also be compiled using \LuaLaTeX and \XeLaTeX.
     Add some documentation on making Feynman graphs using \Package{TikZ} packages.
@@ -421,14 +424,27 @@ You may also have to install \texttt{texlive-xetex} even if you only plan to use
 % You also have to install \texttt{biblatex} rather than \texttt{texlive-bibtex-extra}.
 % I recommend using traditional \BibTeX rather than \Package{biber} with such an old version,so do not install \texttt{biber}.
 
+If your \LaTeX\ installation is old, you may want to bring it
+up-to-date.  For Ubuntu variants there is a simple solution. Just add
+\TeXLive backports to your list of sources (use the \texttt{sudo
+  apt-add-repository ppa:texlive-backports/ppa} command). You should
+then be able to give the command \texttt{sudo apt-get update; sudo
+  apt-get upgrade}. Note that this variant will overwrite your current
+\LaTeX\ installation. An alternative is the method discussed in the
+following paragraphs, which allows you to have two different installations in
+parallel.
+
+
 %------------------------------------------------------------------------------
 \section{Fedora}% chktex 36
 \label{sec:app:fedora}\index{Linux}\index{Fedora}
 %------------------------------------------------------------------------------
 
-For my tests with Fedora I used Fedora~33 which I download from
+For my tests with Fedora I used Fedora~33 which I downloaded from
 \url{https://getfedora.org},
 which includes \TeXLive 2019.
+Most \LaTeX\ packages come as separate Fedora packages,
+so the list of what you have to install is long.
 
 I installed the following packages using the command \Command{dnf install \dots}:
 \begin{bashlisting}
@@ -461,79 +477,25 @@ texlive-glossaries
 texlive-import
 texlive-bigfoot # needed for suffix
 \end{bashlisting}
+You will probably need at least some of these packages for your thesis.
+
+\LuaLaTeX\ and \XeLaTeX\ were either installed by default,
+or with one of the other packages.
+
+For the tests that I conducted with a new installation on 2002-10-21,
+I got an error when trying to use the \Package{newtx} fonts.
+After some searching, I was able to fix it using the commands:
+\Command{sudo updmap --sys --syncwithtrees} and \Command{sudo updmap --sys}.
+
   
 %------------------------------------------------------------------------------
-\section{(Making the guide}% chktex 36
-\label{sec:app:guide}
+\section{Installing (a newer version of) \TeXLive by hand}%
+\label{sec:app:texlive}
 %------------------------------------------------------------------------------
-
-Using these packages I was able to issue to following commands to
-produce the guide (assuming that you have \TeXLive 2017 or later):
-\begin{verbatim}
-git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
-cd ubonn-thesis
-\end{verbatim}
-Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
-Then the following worked:
-\begin{verbatim}
-cd guide
-make guide
-\end{verbatim}
-so all packages are there as well as at least the default font which I selected.
-If your version of \TeXLive is older than 2017, you should set \Macro{texlive} accordingly.
-If your version is older than 2013 you should not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
-% In addition, I had to download and install the package \Package{physics} from CTAN when
-% using \TeXLive 2011 and Scientific Linux 6.
-Some figures or tables may not appear with versions of \TeXLive earlier than 2017,
-as, for example, the \Package{TikZ-FeynHand} package was only introduced then.
-
-The default version of the guide uses \Option{biber} for the
-\Package{biblatex} package and includes\\
-\texttt{./guide/refs/example\_refs-utf8.bib} which contains some umlauts.\footnote{%
-The same references using normal ascii test (suitable for \texttt{bibtex}) can be found in
-\texttt{./guide/refs/example\_refs-ascii.bib}.}
-You give the command \texttt{make guide} to compile, which uses \texttt{biber}\index{biber} rather than
-\texttt{bibtex}\index{bibtex} to process the \texttt{.bib} files.
-
-% For a older version of \TeXLive (2009), in addition to changing
-% \Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}.
-% you have to compile using the command \texttt{make guide09}.
-% i.e.\ do the following:
-% \begin{verbatim}
-% make feynmf
-% make guide09
-% \end{verbatim}
-
-The default version of the guide also compiles on ATLAS Bonn desktop
-computers (Ubuntu 18.04 with \TeXLive 2017). % chktex 36
-If you want to use
-\Package{feynmf} instead of \Package{feynmp} to compile the guide, you
-have to pass the option \Option{feynmf} instead of \Option{feynmp} to \texttt{ubonn-thesis.sty} 
-and give the command \texttt{make feynmf} before \texttt{make guide}.
-
-If you want to switch from \texttt{biber}\index{biber} to
-\texttt{bibtex}\index{bibtex} or \texttt{bibtex8}\index{bibtex8} or vice versa, give the commands
-\texttt{make cleanguide cleanbbl cleanblx} before you try to compile
-the guide (or your thesis).
-
-In order to edit \LaTeX\ you need an editor such as \texttt{emacs} or
-use a program such as \texttt{kile} (and the associated
-\texttt{kile-doc}), \TeXstudio or \TeXmaker. These were discussed
-briefly in the previous section.
-
-If your \LaTeX\ installation is old, you may want to bring it
-up-to-date.  For Ubuntu variants there is a simple solution. Just add
-\TeXLive backports to your list of sources (use the \texttt{sudo
-  apt-add-repository ppa:texlive-backports/ppa} command). You should
-then be able to give the command \texttt{sudo apt-get update; sudo
-  apt-get upgrade}. Note that this variant will overwrite your current
-\LaTeX\ installation. An alternative is the method discussed in the
-following paragraphs, which allows you to have two different installations in
-parallel.
 
 A \TeX nische Komödie issue (3/2011) contained detailed instructions on
 how to install a newer version of \TeXLive in parallel to the
-default version in Kubuntu (Ubuntu works in almost exactly the same way). 
+default version.
 For a while, I did this as standard practice on my laptop and it worked very well.
 Another useful source of information on how to install \TeXLive can be found under
 \url{http://tug.org/texlive/quickinstall.html}.
@@ -542,7 +504,7 @@ A brief summary of how to do the installation by hand: you must have
 \texttt{perl-tk} installed.
 Go to a directory where you want the
 install script to be and then execute the following chain of commands:
-\begin{verbatim}
+\begin{bashlisting}
 wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar zxvf install-tl-unx.tar.gz
 cd install-tl-...
@@ -550,22 +512,27 @@ sudo ./install-tl -gui perltk
   Turn off some of the languages
   Make sure installation is in /usr/local/texlive
   Install
-\end{verbatim}
+\end{bashlisting}}
 I installed the scheme \Option{scheme-tetex} and added the
 collections: \Option{BibTeX additional styles}, \Option{Additional fonts} and
 \Option{LaTeX additional packages}.
 If you want to use the package \Package{TikZ-Feynman} you probably need to include \Option{LuaTeX packages}.
 If you want to use Xe\TeX{} include \Option{XeTeX and packages}.
 When the installation is complete (can easily take \numrange{1}{2} hours):
-\begin{verbatim}
+\begin{bashlisting}
 cd ..
 echo 'export PATH=/opt/texbin:${PATH}' > texlive.sh
 sudo cp texlive.sh /etc/profile.d/
-sudo ln -s /usr/local/texlive/2020/bin/x86\_64-linux /opt/texbin
-\end{verbatim}
+sudo ln -s /usr/local/texlive/2020/bin/x86_64-linux /opt/texbin
+\end{bashlisting}
 You probably have to login again to activate the new \texttt{PATH}.
-If you have a 32-bit installation replace \texttt{x86\_64-linux} with\texttt{i386-linux}.
-Note that the last 3 commands set things up so
+Check whether it is correct with
+\begin{bashlisting}
+  echo $PATH
+\end{bashlisting}
+  
+If you have a 32-bit installation replace \texttt{x86\_64-linux} with \texttt{i386-linux}.
+Note that the three commands set things up so
 that \texttt{/opt/texbin} is at the beginning of your \texttt{PATH}
 and that \LaTeX\ is then taken from there rather than the usual
 \texttt{/usr/bin}.
@@ -576,8 +543,8 @@ and that \LaTeX\ is then taken from there rather than the usual
 %   I found it a bit strange, but it seems to be needed.}
 
 For updating, additions of packages etc., it is useful to define an
-alias in your \texttt{.bashrc} or \texttt{.bash\_aliases}:
-\begin{verbatim}
+alias in your \File{.bashrc} or \File{.bash\_aliases}:
+\begin{bashlisting}
 function sutlmgr () {
     if [[ -z "$@" ]]; then
       sudo /opt/texbin/tlmgr -gui
@@ -585,7 +552,7 @@ function sutlmgr () {
       sudo /opt/texbin/tlmgr "$@"
     fi
 }
-\end{verbatim}
+\end{bashlisting}
 You then give the command \texttt{sutlmgr} to start the \TeXLive
 manager interface. You can use this interface to install new packages
 as well as to update the ones you have installed.
@@ -662,11 +629,6 @@ navigate to the correct directory and give the usual commands to create and comp
 make new
 make
 \end{verbatim}
-
-\TeXstudio knows about indexes and glossaries. You have to set up a
-user command to execute \texttt{makeindex} and \texttt{makeglossaries}
-as discussed in \cref{sec:app:compile}. With the addition of
-these commands, you should also be able to compile this guide.
 
 If you run pdf\LaTeX\ with the option \texttt{-enable-write18} and
 include appropriate \texttt{mpost} commands in your \LaTeX\ file(s), %chktex 36
@@ -747,7 +709,73 @@ You can either use \TeXworks as the front end or you can install
 \TeXstudio or \TeXmaker.
 
 
-% %==============================================================================
+%------------------------------------------------------------------------------
+\section{Making the guide}% chktex 36
+\label{sec:app:guide}\index{Guide}
+%------------------------------------------------------------------------------
+
+Using the installations described above I was able to issue to following commands to
+produce the guide (assuming that you have \TeXLive 2017 or later):
+\begin{verbatim}
+git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
+cd ubonn-thesis
+\end{verbatim}
+Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
+Then the following worked:
+\begin{verbatim}
+cd guide
+make guide
+\end{verbatim}
+so all packages are there as well as at least the default font which I selected.
+If your version of \TeXLive is older than 2017, you should set \Macro{texlive} accordingly.
+If your version is older than 2013 you should not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
+% In addition, I had to download and install the package \Package{physics} from CTAN when
+% using \TeXLive 2011 and Scientific Linux 6.
+Some figures or tables may not appear with versions of \TeXLive earlier than 2017,
+as, for example, the \Package{TikZ-FeynHand} package was only introduced then.
+
+The default version of the guide uses \Option{biber} for the
+\Package{biblatex} package and includes\\
+\texttt{./guide/refs/example\_refs-utf8.bib} which contains some umlauts.\footnote{%
+The same references using normal ascii test (suitable for \texttt{bibtex}) can be found in
+\texttt{./guide/refs/example\_refs-ascii.bib}.}
+You give the command \texttt{make guide} to compile, which uses \texttt{biber}\index{biber} rather than
+\texttt{bibtex}\index{bibtex} to process the \texttt{.bib} files.
+
+% For a older version of \TeXLive (2009), in addition to changing
+% \Macro{texlive} in \texttt{thesis\_guide.tex} to \texttt{2009}.
+% you have to compile using the command \texttt{make guide09}.
+% i.e.\ do the following:
+% \begin{verbatim}
+% make feynmf
+% make guide09
+% \end{verbatim}
+
+The default version of the guide also compiles on ATLAS Bonn desktop
+computers (Ubuntu 18.04 with \TeXLive 2017). % chktex 36
+If you want to use
+\Package{feynmf} instead of \Package{feynmp} to compile the guide, you
+have to pass the option \Option{feynmf} instead of \Option{feynmp} to \texttt{ubonn-thesis.sty} 
+and give the command \texttt{make feynmf} before \texttt{make guide}.
+
+If you want to switch from \texttt{biber}\index{biber} to
+\texttt{bibtex}\index{bibtex} or \texttt{bibtex8}\index{bibtex8} or vice versa, give the commands
+\texttt{make cleanguide cleanbbl cleanblx} before you try to compile
+the guide (or your thesis).
+
+In order to edit \LaTeX\ you need an editor such as
+\texttt{Visual Studio Code} or \texttt{emacs}, or
+a program such as , \TeXstudio or \TeXmaker or
+\texttt{kile} (and the associated \texttt{kile-doc}).
+These were discussed above.
+
+\TeXstudio knows about indexes and glossaries. You have to set up a
+user command to execute \Command{makeindex} and \Command{makeglossaries}
+as discussed in \cref{sec:app:compile}. With the addition of
+these commands, you should also be able to compile this guide.
+
+
+%==============================================================================
 % \chapter{Print shops}%
 % \label{app:printer}
 % %==============================================================================

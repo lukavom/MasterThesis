@@ -85,9 +85,9 @@ phdsubmit:
 	pdflatex  PhD_submit
 	pdflatex  PhD_submit
 
-cleanall: clean cleanbbl cleanpictpdf
+cleanall: clean cleanbbl
 
-clean: cleanguide cleanphd cleanfeynmf cleanfeynmp cleantikz cleanpyfeynhand cleanblx cleanglo
+clean: cleanguide cleanphd cleanfeynmf cleanfeynmp cleanblx cleanglo
 
 cleanguide:
 	-rm $(GUIDE).log $(GUIDE).aux $(GUIDE).toc

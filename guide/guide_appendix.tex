@@ -393,7 +393,7 @@ thesis in German, then also install German as a language, even if
 your system is in English.
 
 I explicitly installed the following packages in addition:
-\begin{verbatim}
+\begin{bashlisting}
 (k|x)ubuntu-restricted-extras
 git #Used to be subversion
 texlive
@@ -406,7 +406,7 @@ biber
 latexmk
 texlive-lang-german
 feynmf
-\end{verbatim}
+\end{bashlisting}
 I also had to install \texttt{texlive-metapost} in order to compile the guide.
 % The guide also needs \texttt{texlive-generic-extra}, at least for \TeXLive 2015.
 
@@ -421,7 +421,52 @@ You may also have to install \texttt{texlive-xetex} even if you only plan to use
 % You also have to install \texttt{biblatex} rather than \texttt{texlive-bibtex-extra}.
 % I recommend using traditional \BibTeX rather than \Package{biber} with such an old version,so do not install \texttt{biber}.
 
-\noindent
+%------------------------------------------------------------------------------
+\section{Fedora}% chktex 36
+\label{sec:app:fedora}\index{Linux}\index{Fedora}
+%------------------------------------------------------------------------------
+
+For my tests with Fedora I used Fedora~33 which I download from
+\url{https://getfedora.org},
+which includes \TeXLive 2019.
+
+I installed the following packages using the command \Command{dnf install \dots}:
+\begin{bashlisting}
+texlive
+latexmk
+texlive-newtx
+texlive-mweights
+texlive-siunitx
+texlive-xtab
+texlive-hep
+texlive-mhchem
+texlive-biblatex
+texlive-background
+texlive-cleveref
+texlive-babel-german
+texlive-hyphens-german
+\end{bashlisting}
+
+These are sufficient to compile the skeleton thesis.
+For the thesis guide I needed in addition:
+\begin{bashlisting}
+texlive-standalone
+texlive-physics
+texlive-tikz-feynhand
+texlive-tikz-feynman
+texlive-tikz-3dplot
+texlive-pgfplots
+texlive-pgfopts
+texlive-glossaries
+texlive-import
+texlive-bigfoot # needed for suffix
+\end{bashlisting}
+  
+%------------------------------------------------------------------------------
+\section{(Making the guide}% chktex 36
+\label{sec:app:guide}
+%------------------------------------------------------------------------------
+
 Using these packages I was able to issue to following commands to
 produce the guide (assuming that you have \TeXLive 2017 or later):
 \begin{verbatim}

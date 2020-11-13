@@ -4,7 +4,7 @@
 # Note that "make update" can overwrite this file
 
 THESIS  = mythesis
-TEXLIVE = 2016
+TEXLIVE = 2017
 # TEXOLD = 2009
 # EXTRACMD = --shell-escape
 ifndef FEYNDIR
@@ -54,11 +54,11 @@ LATEXMK = latexmk -pdf
 # New thesis
 new: skelcopy
 	#cp thesis_skel/thesis_skel.tex        $(THESIS)/$(THESIS).tex
-	sed 's/texlive=2016/texlive=$(TEXLIVE)/' thesis_skel/thesis_skel.tex > $(THESIS)/$(THESIS).tex
+	sed 's/texlive=2017/texlive=$(TEXLIVE)/' thesis_skel/thesis_skel.tex > $(THESIS)/$(THESIS).tex
 
 # New thesis with astrophysics style of references
 astro: skelcopy
-	sed 's/texlive=2016/texlive=$(TEXLIVE)/' thesis_skel/thesis_astro_skel.tex > $(THESIS)/$(THESIS).tex
+	sed 's/texlive=2017/texlive=$(TEXLIVE)/' thesis_skel/thesis_astro_skel.tex > $(THESIS)/$(THESIS).tex
 	cp thesis_skel/thesis_astro_intro.tex  $(THESIS)/thesis_intro.tex
 
 # New thesis with old version of TeX Live
@@ -151,7 +151,7 @@ help:
 	@echo "Possible commands:"
 	@echo "new   [THESIS=dirname] [TEXLIVE=YYYY]: create a new thesis skeleton"
 	@echo "astro [THESIS=dirname] [TEXLIVE=YYYY]: create a new astrophysics thesis skeleton"
-	@echo "  Default TeX Live version is 2016"
+	@echo "  Default TeX Live version is 2017"
 	# @echo "new09 [THESIS=dirname] [TEXOLD=YYYY]: create a new thesis skeleton"
 	# @echo "  Default old TeX Live version is 2009"
 	@echo "update [THESIS=dirname]: update to a newer version of ubonn-thesis"

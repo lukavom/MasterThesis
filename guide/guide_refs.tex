@@ -115,8 +115,8 @@ You also have to indicate where you want the bibliography to appear.
 At this point you also have to decide which interface to the contents
 of the \texttt{.bib} files you want to use. You have a choice of the
 original \BibTeX\index{BibTeX@\BibTeX} or the more modern
-\Package{biblatex}. If you use \Package{biblatex} you
-need something like:
+\Package{biblatex}.
+If you use \Package{biblatex} you need something like:
 \begin{tcblisting}{listing only}
 % Use biblatex for the bibliography
 \usepackage[backend=biber,
@@ -381,23 +381,23 @@ numeric style.
 My experience with \Package{biblatex} took off 
 when I started rewriting the ATLAS \LaTeX\ templates in 2014.
 The first official stable release of \Package{biblatex} was 19 Oct 2010.
-Active and rapid development is ongoing --- there were many updates in 2011.
+Active and rapid development is still ongoing.
 Some things I recommend below may work a bit differently depending on which version
 you have. See \cref{sec:app:tex} on how to install a newer
 version of \TeXLive if you want a more up-do-date version of \LaTeX.
 
 Looking for numeric styles you can either use the built-in
-\Option{numeric} or \Option{numeric-comp}.  The \Option{numeric-comp}
-style is used by default in the thesis skeleton. I made a few
-adjustments that are included in the file
-\texttt{ubonn-biblatex.sty}.\footnote{%
-  In the past (before version 3.0) these files were called
-  \texttt{./biblatex/biblatex-num-v2009.sty} and
-  \texttt{./biblatex/biblatex-num-v2011.sty}. Which file was used
-  by default was steered by the \Macro{texlive} macro which is set in the
-  main file.}
+\Option{numeric} or \Option{numeric-comp}.
+The \Option{numeric-comp} style is used by default in the thesis skeleton.
+I made a few adjustments that are included in the file
+\texttt{ubonn-biblatex.sty}.%\footnote{%
+  % In the past (before version 3.0) these files were called
+  % \texttt{./biblatex/biblatex-num-v2009.sty} and
+  % \texttt{./biblatex/biblatex-num-v2011.sty}. Which file was used
+  % by default was steered by the \Macro{texlive} macro which is set in the
+  % main file.}
 
-You can change some of the things in the style file by passing options to it.
+You can change some of the settings in the style file by passing options to it.
 The syntax \Option{articletitle} and \Option{articletitle=true} is equivalent.
 Use \Option{articletitle=false} to turn off an option.
 The following options exist:
@@ -406,17 +406,20 @@ The following options exist:
   \toprule
   Option & Default & Description \\
   \midrule
-  texlive & 2016 & Specify the \TeXLive version.
-  You can also use the older command \verb|\newcommand*{\texlive}{2016}|.\\
+  texlive & 2017 & Specify the \TeXLive version.
+  You can also use the older command \verb|\newcommand*{\texlive}{2017}|.\\
   block & ragged & Specify the justification of each reference;\\
+  backref & true & The bibliography lists where the reference is cited.
+  This option is very useful when writing your thesis,
+  but should probably be turned off for the final version;\\
   maxbibnames & 5 & Numbers of authors to list before switching to \enquote{et al.};\\
   articletitle & true & Show the titles of articles and reports;\\
-  titlequote & false & Enclose the title in quotes rather than using a slanted font.\\
-  boldvol & false & Show the volume in bold face.\\
-  showurl & true & Show the URL field.\\
-  showdoi & false & Show the DOI separately. Otherwise it is linked from the journal reference.\\
-  eprint & true & Show the arXiv entry.\\
-  address & false & Print the address, if given.\\
+  titlequote & false & Enclose the title in quotes rather than using a slanted font;\\
+  boldvol & false & Show the volume in bold face;\\
+  showurl & true & Show the URL field;\\
+  showdoi & false & Show the DOI separately. Otherwise it is linked from the journal reference;\\
+  eprint & true & Show the arXiv entry;\\
+  address & false & Print the address, if given;\\
   location & false & Print the location, if given.\\
   \bottomrule
 \end{tabular}
@@ -470,6 +473,8 @@ option that gives the references in the order that they were cited.
 
 If you want to find out where your references are actually cited, you
 can include the option \Option{backref=true}.
+This is set to \Option{true} by default.
+You should probably set it to false for the final version of your thesis.
 
 If you get an error such as:
 {\scriptsize

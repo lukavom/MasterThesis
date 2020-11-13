@@ -97,7 +97,7 @@ My original idea was that the style file should work for all recent
 \TeX\ installations.  However, some of the packages I recommend have
 been changing quite a lot over the past few years.
 You should therefore set the \TeXLive version you are using appropriately.
-The default setting is 2016.\footnote{%
+The default setting is 2017.\footnote{%
 Setting the \TeXLive version to one that is lower than your installation should not cause any problems.}
 This is also the setting to use for an up-to-date version of MikTeX (2.9).
 Things should compile without any changes if you use \TeXLive 2016 or later.
@@ -205,7 +205,7 @@ Set the default font to \Package{txfonts} for \TeXLive 2011.
 
 
 %------------------------------------------------------------------------------
-\section{Options that can be passed to \Option{ubonn-thesis}}%
+\section{Options that can be passed to \Package{ubonn-thesis}}%
 \label{sec:tips:options}\index{options}
 %------------------------------------------------------------------------------
 
@@ -233,8 +233,8 @@ The following options exist:\\
   PILibrary & false & Final version including an extra cover page for the PI library.\\
   thesistype & Unknown & Specify the thesis type.\\
   thesisversion & Draft & Specify the stage of the thesis.\\
-  texlive & 2016 & Specify the \TeXLive version.
-    You can also use the older command \verb|\newcommand*{\texlive}{2016}|.\\
+  texlive & 2017 & Specify the \TeXLive version.
+    You can also use the older command \verb|\newcommand*{\texlive}{2017}|.\\
   newtx & true & Use the \Package{newtx} font packages (newer version of \Package{txfonts}).\\
   txfonts & false & Use a Times-Roman-like font.\\
   palatino & false & Use a combination of Palatino, Courier and Helvetica fonts.\\
@@ -265,9 +265,6 @@ The following options exist:\\
   cleveref & false & Turn on use of the \Package{cleveref} package.\\
   clevercaps & true & Capitalise Fig., Table etc.\\
   firstinits & false & Use \Option{firstinits} instead of \Option{giveninits} for \Package{biblatex}.\\
-  backref & true & The bibliography lists where the reference is cited.
-    This option is very useful when writing your thesis,
-    but should probably be turned off for the final version.\\
   backend & biber & Specify the backend to use for \Package{biblatex}.
     Possibilities are \Option{biber}, \Option{bibtex} or \Option{bibtex8}.\\
   bibencoding & & Set the encoding for the bibliography (usually not needed).\\
@@ -277,6 +274,10 @@ The following options exist:\\
 
 Some default option values are adjusted depending on the \TeXLive version.
 See the \texttt{ubonn-thesis} style file to find out what is changed.
+
+You can tweak the bibliography by passing various options to the
+\Package{ubonn-biblatex} style file.
+These are detailed in \cref{sec:ref:bbx}.
 
 If you use \LuaLaTeX or \XeLaTeX,
 the \Option{newtx} and \Option{txfonts} options select the TeX Gyre Termes font,

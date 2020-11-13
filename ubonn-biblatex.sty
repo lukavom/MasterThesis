@@ -7,7 +7,7 @@
 % See ChangeLog or Git log for history of changes.
 % Responsible: Ian Brock (brock@physik.uni-bonn.de)
 %-------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-biblatex}[2020/06/19 Version 7.0 University of Bonn biblatex style]
+\ProvidesPackage{ubonn-biblatex}[2020/11/06 Version 7.1 University of Bonn biblatex style]
 \NeedsTeXFormat{LaTeX2e}
 
 % Use kvoptions package to set options
@@ -18,6 +18,7 @@
 }
 \DeclareStringOption[ragged]{block}
 \DeclareStringOption[5]{maxbibnames}
+\DeclareBoolOption[false]{backref}
 \DeclareBoolOption[true]{articletitle}
 \DeclareBoolOption[false]{titlequote}
 \DeclareBoolOption[false]{boldvol}
@@ -34,6 +35,21 @@
   \renewcommand*{\UBNB@texlive}{\texlive}
 \fi
 \typeout{Package ubonn-biblatex Info: UBNB@texlive is [\UBNB@texlive]}
+
+% Set block mode
+\typeout{ubonn-biblatex: block set to \UBNB@block}
+\ExecuteBibliographyOptions{block=\UBNB@block}
+% Set maxbibnames
+\typeout{ubonn-biblatex: maxbibnames set to \UBNB@maxbibnames}
+\ExecuteBibliographyOptions{maxbibnames=\UBNB@maxbibnames}
+% backref=true adds page numbers of citations to bibliography
+\ifUBNB@backref
+  \typeout{ubonn-biblatex: turning backref on}
+  \ExecuteBibliographyOptions{backref=true}
+\else
+  \typeout{ubonn-biblatex: backref is off}
+  \ExecuteBibliographyOptions{backref=false}
+\fi
 
 % Include the DOI as a hyperlink with the journal.
 \ifUBNB@showdoi

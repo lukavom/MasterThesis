@@ -14,11 +14,12 @@
 %------------------------------------------------------------------------------
 % Pass TeX Live version to the package
 % Use command pdflatex --version to find out which version you are running
-% Add option backref=false when your thesis is ready to turn off back-referencing
 % in your bibliography
-\usepackage[texlive=2016, astrobib]{ubonn-thesis}
+\usepackage[texlive=2017, astrobib]{ubonn-thesis}
 % Adjustments to standard biblatex style
-\usepackage{ubonn-biblatex}
+% Change option to backref=false when your thesis is ready to turn off back-referencing
+% Astronomy theses usually set block=none
+\usepackage[backref=true, block=none]{ubonn-biblatex}
 
 % Glossary package
 % \usepackage[acronym,toc,nosuper]{glossaries}

@@ -12,23 +12,16 @@ In this section I document briefly the major changes to this guide.
 I also indicate other topics for which I would like to add some more
 information.
 
+The list of changes to the style files and this guide are being moved to \File{ChangeLog.md},
+as they are quite long and this seems a more appropriate place to keep them.
+
 \begin{longtable}{llp{0.7\textwidth}}
-  \caption{Changes to the \Package{ubonn-thesis} and \Package{ubonn-biblatex} style files.}
+  \caption{Changes to the \Package{ubonn-thesis} and \Package{ubonn-biblatex} style files.
+  This table contains changes prior to version 7.0.}
   \endhead
   \toprule
   Date & Version & Comment\\
   \midrule
-  30 October 2020 & 7.1 & Latest version of \Package{PyFeynHand} scripts.
-    Shuffle instructions on compiling guide.
-    Add some instructions for Fedora 33.\\
-  19 June 2020 & 7.0 & Remove support and documentation for \TeXLive versions older than 2011.
-    Thesis skeleton and guide can also be compiled using \LuaLaTeX and \XeLaTeX.
-    Add some documentation on making Feynman graphs using \Package{TikZ} packages.
-    Deprecate the usage of \Package{PyFeyn}.
-    Add usage of \Package{tcolorbox} to thesis guide for listings.
-    Add \Package{bookmark} package to improve bookmarking of appendices in PDF files.
-    Tweak \Package{hyperref} settings a bit.\\
-
   05 Dec 2018 & 6.0 & \TeXLive 2016 is now the default.
     After a \Command{make new} the \File{mythesis} directory should now be standalone.
     This make it easier to use Git etc.

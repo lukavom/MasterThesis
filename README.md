@@ -13,7 +13,7 @@ git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
 
 If you want a particular release use the command:
 ```
-git clone --branch v7.0 https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
+git clone --branch 7.0 https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
 ```
 
 The tar file includes the guide as a PDF file: `guide/thesis_guide.pdf`.

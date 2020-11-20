@@ -11,6 +11,7 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 ### Added
 - Add some instructions for Fedora 33.
 ### Changed
+- Switched from `xtab` to `longtable` as default package for long tables, as `longtable` and `supertabular` seem to be more actively maintained.
 - Latest version of `PyFeynHand` scripts.
 - `backref`, `maxbibnames` and `block` options actually work and should be passed to `ubonn-biblatex.sty`.
 - Shuffle instructions on compiling guide.

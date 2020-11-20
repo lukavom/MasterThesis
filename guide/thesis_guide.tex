@@ -15,11 +15,16 @@
 \newcommand*{\guideversion}{7.1}
 \newcommand*{\texlive}{2017}
 
+% Directory with style files
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+
 % Adjustments to biblatex output are in ubonn-biblatex style file
 % Thesis style file
-\usepackage[shownotes, cleveref, bibstyle=alphabetic, feynmp]{../ubonn-thesis}
+\usepackage[shownotes, cleveref, bibstyle=alphabetic, feynmp, xtab]{ubonn-thesis}
 % Thesis bibliography settings
-\usepackage[backref=true]{../ubonn-biblatex}
+\usepackage[backref=true]{ubonn-biblatex}
 
 % Avoid problems associated with writing too many files
 \ifthenelse{\boolean{PDFTeX} \OR \boolean{XeTeX}}{%

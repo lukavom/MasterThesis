@@ -72,12 +72,7 @@ To compile\index{compiling} your thesis switch to your new directory
 make thesis
 \end{bashlisting}
 See \cref{sec:tips:options} for a list of the options that can be passed to the package.
-I no longer support versions of \TeXLive older than 2011,
-and can only test things for \TeXLive 2014 and later.
-% you should really update to a newer version!
-% If this is not possible, use the command \enquote{\texttt{make new09}}
-% followed by \enquote{\texttt{make thesis09}}
-% or \enquote{\texttt{make thesis BIBTEX=bibtex}}.
+I no longer support versions of \TeXLive older than 2013.
 
 As of version 6.0, \Command{make thesis} uses the \Command{latexmk}\index{latexmk} command for compilation.
 \Command{latexmk} looks at your logfile and decides how many times \Command{pdflatex} etc.
@@ -104,8 +99,6 @@ Things should compile without any changes if you use \TeXLive 2016 or later.
 Look in the style file to see what changes are made depending on the year you use.
 You can change the \TeXLive version when you make a new thesis
 by giving a command like \enquote{\texttt{make new TEXLIVE=2013}}. %\footnote{%
-% For even older versions of \TeXLive use the command \enquote{\texttt{make new09}}.
-% This turns off the use of \Package{biblatex}.}
 If you switch \TeXLive versions do a
 \enquote{\texttt{make clean cleanbbl cleanblx}} in between.
 
@@ -138,32 +131,6 @@ The following stages exist:
 \item[PILibrary] final version of your thesis with an extra cover page\index{cover}
   including an abstract for the PI library.
 \end{description}
-%
-%\noindent
-%In the main thesis file, \texttt{mythesis.tex}, you need to specify
-%which cover page should be used:\index{cover page}
-%\begin{description}
-%\item[\texttt{PhD\_Submit\_Title.tex} and \texttt{PhD\_Final\_Title.tex}:]
-%  the title pages for a PhD thesis;\index{PhD}\index{thesis!PhD}
-%\item[\texttt{Master\_Submit\_Title.tex} and \texttt{Master\_Final\_Title.tex}:]
-%  the title pages for an MSc thesis;\index{MSc}\index{thesis!Master}
-%\item[\texttt{Diplom\_Submit\_Title.tex} and \texttt{Diplom\_Final\_Title.tex}:]
-%  the title pages for a Diplom thesis;\index{Diplom}\index{thesis!Diplom}
-%\item[\texttt{Bachelor\_Title.tex}:]
-%  the title pages for a BSc thesis.\index{BSc}\index{thesis!Bachelor}
-%\end{description}
-%For the printed version for the department library you also need to
-%include the appropriate cover page (with an abstract):\index{cover}
-%\begin{description}
-%\item[\texttt{PhD\_Cover.tex}:]
-%  The cover page for a PhD thesis;
-%\item[\texttt{Diplom\_Cover.tex}:]
-%  The cover page for a Diplom thesis;
-%\item[\texttt{Master\_Cover.tex}:]
-%  The cover page for an MSc thesis.
-%\end{description}
-%This extra cover should not be included for the version of the PhD
-%thesis that is submitted to the university library (ULB).
 See \cref{sec:submit} for some more details about thesis submission.
 
 If you change the stage of your thesis from say \Option{Draft}\index{Draft} to \Option{Submit}\index{Submit}
@@ -195,13 +162,6 @@ some of the Feynman graphs in the directories
 Again this guide should compile without changes for
 \TeXLive 2016 or later. For earlier versions set \Macro{texlive} in
 \texttt{thesis\_guide.tex} to the appropriate value.
-Set the default font to \Package{txfonts} for \TeXLive 2011.
-% If you want to compile the guide with \TeXLive older than 2011,
-% it is probably easier to switch from \Package{biblatex} to traditional \BibTeX.
-% This is done via the \texttt{make new09} command.
-
-%The guide will not compile for \TeXLive versions lower than 2012,
-%as the \Package{subcaption} package and the way to load it was different earlier.
 
 
 %------------------------------------------------------------------------------
@@ -235,20 +195,24 @@ The following options exist:\\
   thesisversion & Draft & Specify the stage of the thesis.\\
   texlive & 2017 & Specify the \TeXLive version.
     You can also use the older command \verb|\newcommand*{\texlive}{2017}|.\\
+  twoside & true & Margins set for two-sided printing.\\
   newtx & true & Use the \Package{newtx} font packages (newer version of \Package{txfonts}).\\
-  txfonts & false & Use a Times-Roman-like font.\\
+    txfonts & false & Use a Times-Roman-like font.\\
   palatino & false & Use a combination of Palatino, Courier and Helvetica fonts.\\
   subcaption & true & A package for making sub-figures (and sub-tables) and captions for them.\\
   subfig & false & A package for making sub-figures and captions for them.\\
   subfigure & false & A package for making sub-figures and captions for them (deprecated).\\
-  xtab & true & A package for tables that are longer than one page.\\
-  longtable & false &  Another package for tables that are longer than one page.\\
+  tableheading & true & Table captions above the table.\\
+  xtab & false & A package for tables that are longer than one page.\\
+  longtable & true &  Another package for tables that are longer than one page.\\
   supertabular & false &  Another package for tables that are longer than one page.\\
   biblatex & true & Include \Package{biblatex}.\\
   siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
   eVkern & false & Apply a kern of -0.1em to \si{\eV} in order to move \enquote{e} and \enquote{V} closer together.
   This is not necessary if you use the \Package{newtx} font package.\\
-  dcolumn & true & A package for helping to align things in tables.\\
+  dcolumn & false & A package for helping to align things in tables.\\
+  derivative & false & A new package (released in 2021) with lot of useful commands for derivatives.\\
+  diffcoeff & false & A lot of useful commands for derivatives.\\ 
   physics & false & Useful mathematical constructions for physics.\\
   hepparticles & true & Standardised names and formatting for particle physics.
     This loads \Package{hepnicenames} and \Package{heppennames}.\\
@@ -262,7 +226,7 @@ The following options exist:\\
   floatopt & true & Adjust settings that control the number and placement of floats.\\
   todonotes & false & Turn on use of the \Package{todonotes} package and define \Macro{mynote}.\\
   shownotes & false & Show the ToDo notes (also turns on \Option{todonotes}).\\
-  cleveref & false & Turn on use of the \Package{cleveref} package.\\
+  cleveref & true & Turn on use of the \Package{cleveref} package.\\
   clevercaps & true & Capitalise Fig., Table etc.\\
   firstinits & false & Use \Option{firstinits} instead of \Option{giveninits} for \Package{biblatex}.\\
   backend & biber & Specify the backend to use for \Package{biblatex}.
@@ -279,14 +243,15 @@ You can tweak the bibliography by passing various options to the
 \Package{ubonn-biblatex} style file.
 These are detailed in \cref{sec:ref:bbx}.
 
+The option \Option{twoside} should probably be set to \texttt{false} for an online version of your thesis
+that is not going to be printed.
+
 If you use \LuaLaTeX or \XeLaTeX,
 the \Option{newtx} and \Option{txfonts} options select the TeX Gyre Termes font,
 while the \Option{palatino} option selects the TeX Gyre Pagella font.
 Depending on the font you use, you may find that the \enquote{e} and \enquote{V} in \si{\eV}, \si{\MeV} etc.\
 are too far apart.
 You can pass the option \Option{eVkern} to \Package{ubonn-thesis} in order to move them 0.1em closer together.\footnote{%
-This option has no effect for \TeX\ Live 2011 and older, as \Package{siunitx}
-adjusted the spacing internally using the parameter \Option{eVcorra}.
 It is not needed if you use the \Package{newtx} font package.}
 
 
@@ -348,18 +313,13 @@ It is not needed if you use the \Package{newtx} font package.}
   {\sffamily Compare: A common jet energy cut at the LHC is now
     \(p_{T}^{\text{jet}} > \SI{20}{\GeV}\), while at HERA we typically
     used \(p_{T}^{\mathrm{jet}} > \SI[detect-family=false]{6}{\GeV}\).
-    % \ifthenelse {\texlive < 2011} {%
-    %   used \(p_{T}^{\mathrm{jet}} > \SI[obeyfamily=false]{6}{\GeV}\).
-    % }{%
-    %   used \(p_{T}^{\mathrm{jet}} > \SI[detect-family=false]{6}{\GeV}\).
-    % }
   }
   The \si{\GeV} in the first expression is in sans-serif. This is
   because the
-  \Macro{sisetup}\texttt{\{detect-family=true\}} % \footnote{\Option{obeyall} in \TeXLive 2009.}
+  \Macro{sisetup}\texttt{\{detect-family=true\}}
   option is set in \texttt{ubonn-thesis.sty}
   (see \cref{sec:tips:siunitx}).  I used the option
-  \Option{detect-family=false} % \footnote{\Option{obeyfamily=false} in \TeXLive 2009.}
+  \Option{detect-family=false}
   for the \Macro{SI} command in the 2nd expression.
   In the first expression I use \Macro{text} for \enquote{jet}, while
   I use \Macro{mathrm} in the second expression.
@@ -444,24 +404,33 @@ It is not needed if you use the \Package{newtx} font package.}
   \num{2.47} in English and \foreignlanguage{ngerman}{\num{2.47}} in
   German. In the end such solutions will save you time!
 
-\item Use punctuation in equations and \enquote{\dif}, i.e.\ \Macro{dif} for
-  derivatives,\index{derivative} e.g.
+\item Use punctuation in equations and \enquote{\text{d}},
+  i.e.\ an upright \enquote{d} (if you are writing in British English)
+  for derivatives,\index{derivative} e.g.
   \begin{equation*}
-    \int y\,\dif x.
+    \int y\dl2x\,.
   \end{equation*}
   This is also one of the the very few places, where it makes sense
   to put some spacing in by hand --- normally you should leave this to \TeX.
-  Note that the \Package{physics} package provides the command \verb|\dd{x}|,
+  The \Package{derivative} package provides the command \verb|\odif{x}|,
+  while the \Package{diffcoeff} package provides the command \verb|\dl|,
+  and you can add space using a syntax such as \verb|\dl2x|.\footnote{%
+  The digit can be anything between 0 and 9 (negative values are also possible).
+  2 and 3 look to me to be sensible default values to use.}
+  The \Package{physics} package provides the command \verb|\dd{x}|,
   which does the spacing for you.
 \begin{tcblisting}{listing side text}
 \begin{equation*}
-  \int y \dd{x}\,.
+  \int y \dl2x\,.
 \end{equation*}      
 \end{tcblisting}
 
 \item Pay attention to the alignment of numbers in
   tables. \Package{siunitx} provides the \Option{S} column specifier to
-  help with this. Packages such as \Package{dcolumn} also provide assistance.
+  help with this.
+  Recent versions of \Package{siunitx} provide the command \Macro{tablenum},
+  which gives a lot of flexibility.
+  Packages such as \Package{dcolumn} also provide assistance.
 \end{itemize}
 
 Not really a strict \enquote{Do}: I highly recommend that you use an
@@ -609,21 +578,6 @@ Information on the other (older) packages has been relegated to
 
 This package is a more modern and complete package than either
 \Package{SIunits} or \Package{units}.
-% As the package is rather new it is also still developing.
-There were quite a few changes from version 1
-(\TeXLive 2009)\index{TeXLive@\TeXLive!2009} to version 2 (\TeXLive
-2011 or later)\index{TeXLive@\TeXLive!2011}.
-As of Version 7.0 of this guide, I only include version 2 examples.
-% , which means that several of the
-% examples I include here have somewhat different syntaxes depending on
-% which version of \TeXLive is being used to compile this guide.
-% If you use \TeXLive 2011 or later, but want to use units which were available in
-% \TeXLive 2009 or the older syntax you can include the option
-% \Option{version-1-compatibility}. Note that \TeXLive 2009 was the
-% default version for Ubuntu releases up to and including
-% 12.04\index{ubuntu!12.04}.
-% I will give the \Package{siunitx} version
-% 2 options in the text and the version 1 options as footnotes.
 
 One very attractive feature is that it allows you to format
 computer-generated numbers
@@ -682,7 +636,7 @@ Some examples are given below:
 \noindent
 The 1st example uses the default \Macro{per},
 while the 2nd example uses\\
-\Option{per-mode=fraction, fraction-function=\Macro{sfrac}}. % \footnote{\Option{per=fraction,fraction=nice} in \TeXLive 2009}
+\Option{per-mode=fraction, fraction-function=\Macro{sfrac}}.
 The 3rd example shows that it does not matter whether one is in math mode or not
 and uses \Option{per-mode=symbol}.
 You use \enquote{.} or \enquote{,} to make a space between the units,
@@ -704,7 +658,7 @@ If you also want to use \Package{siunitx} in slides, where one usually
 uses a sans serif font, you may at first be disappointed that
 \Package{siunitx} uses a serif font for the units! Do not despair!
 You can use the command
-\Macro{sisetup}\texttt{\{detect-family=true\}} % \footnote{\Option{obeyall} in \TeXLive 2009.}
+\Macro{sisetup}\texttt{\{detect-family=true\}}
 to ensure that the package uses the current font
 (in all its aspects) rather than its default.
 
@@ -726,10 +680,6 @@ systematic errors and asymmetric errors. From the author I got some
 suggestions on how to define such things. They are included in
 \texttt{guide\_defs.sty} at present and can be added to
 \texttt{thesis\_defs.sty}.
-% Two versions of a few of the commands are
-% defined depending on the value of \Macro{texlive}, as some of the
-% options changed when moving from version 1 to version 2 of
-% \Package{siunitx}.
 Several new macros have been defined there:
 \Macro{numerrt}, \Macro{numpmerr} and \Macro{numpmerrt} to write
 errors with a description, which are asymmetric and both, respectively.
@@ -764,6 +714,12 @@ definitions, e.g.
   \valuesep\si{\pico\barn}
 \end{equation*}    
 \end{tcblisting}
+
+Version 3 of \Package{siunitx} replaces \Macro{SI} with \Macro{qty}
+and \Macro{si} with \Macro{unit}.
+This version was released in June 2021,
+so it might take a while before you are affected by this change.
+The old macro names will continue to work.
 
 
 %------------------------------------------------------------------------------
@@ -1009,8 +965,8 @@ but sometimes a block of lines is not numbered --- see \cref{fig:lineno}a.
   \label{fig:lineno}
 \end{figure}
 
-Such problems are associated with text that is close to math mode
-environments. Some of the problems can be solved by using a new
+Such problems are associated with text that is close to math mode environments.
+Some of the problems can be solved by using a new
 version of the \Package{lineno} package.
 However, this only works for \enquote{standard} \LaTeX{}
 math environments: \Env{displaymath}, \Env{equation} and \Env{eqnarray}, while it does

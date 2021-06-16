@@ -186,8 +186,7 @@ As indicated above, the references in the guide include two versions of the file
 If you try to compile the guide with the wrong file using \BibTeX, you
 will get some errors as I have included some umlauts in the example
 references.
-The thesis skeletons use traditional \BibTeX\ with \TeXLive older than 2011
-and \Package{biblatex} with the \Option{biber} backend for newer versions.
+The thesis skeletons use by default the package \Package{biblatex} with the \Option{biber} backend.
 See the skeleton \texttt{thesis\_skel/thesis\_2009\_skel.tex} for the complete syntax
 if you want to use traditional \BibTeX.
 
@@ -311,20 +310,10 @@ files usable by others, it is probably best to do the formatting by
 hand.
 
 An example of a typical ATLAS paper as it comes from
-Inspire~\cite{Aad:2010ey-inspire} needs a bit of work.  With \TeXLive
-2011 the link to DOI and arXiv both work well~\cite{Aad:2010ey-final}.
+Inspire~\cite{Aad:2010ey-inspire} needs a bit of work.
+The link to DOI and arXiv both work well~\cite{Aad:2010ey-final}.
 Note that the LHC collaborations specify that the first author should not
 be included, i.e. \verb|author = "{ATLAS Collaboration}",|.
-
-%\textcolor{red}{Check if this is still true:
-%With \TeXLive 2009, it worked on my laptop, but did not work properly
-%on ATLAS machines (Ubuntu 10.04) that had version 0.8e of \Package{biblatex}.
-%It may be that one can get it to work with a bit of help, but I have
-%not tried all possible options.}
-
-% Depending on which\TeXLive 2009 version you actually have, you might
-% have to give a bit of help for the arXiv link to
-% work%~\cite{Aad:2010ey-tex2009}.
 
 
 %------------------------------------------------------------------------------
@@ -390,12 +379,7 @@ Looking for numeric styles you can either use the built-in
 \Option{numeric} or \Option{numeric-comp}.
 The \Option{numeric-comp} style is used by default in the thesis skeleton.
 I made a few adjustments that are included in the file
-\texttt{ubonn-biblatex.sty}.%\footnote{%
-  % In the past (before version 3.0) these files were called
-  % \texttt{./biblatex/biblatex-num-v2009.sty} and
-  % \texttt{./biblatex/biblatex-num-v2011.sty}. Which file was used
-  % by default was steered by the \Macro{texlive} macro which is set in the
-  % main file.}
+\texttt{ubonn-biblatex.sty}.
 
 You can change some of the settings in the style file by passing options to it.
 The syntax \Option{articletitle} and \Option{articletitle=true} is equivalent.
@@ -434,9 +418,9 @@ in the preamble or in the relevant style file given in the previous
 paragraph. It is not clear to me if you also need
 \verb+\AtEveryCitekey{\clearfield{url}}+.
 
-A fairly nice-looking style is \Option{ieee}. This is only be
-available in recent releases (\(\geq 2011\)) of \TeXLive. After playing around
-a bit with the \Option{ieee} style, I decided it is too new and has
+A fairly nice-looking style is \Option{ieee}.
+% This is only be available in recent releases (\(\geq 2011\)) of \TeXLive. 
+After playing around a bit with the \Option{ieee} style, I decided it is too new and has
 too many settings that depend on having a new version of
 \Package{biblatex} for now.
 
@@ -454,22 +438,14 @@ Version 3.0 contains a first version of this option.
 A few more tweaks may still be needed. You can use the command
 \verb|make astro| instead of \verb|make new| to make a thesis skeleton with the appropriate
 options set and the template introduction uses typical citation commands.
-The option \Option{astrobib} only works for \TeXLive 2011 and later, i.e.\ with \Package{biblatex}.
+Use the option \Option{astrobib} to format the bibliography in the style usually used in astrophysics theses.
 
 If it is available, \Option{biber} is the preferred backend over
 \Option{bibtex} or \Option{bibtex8}.
 However, the backend is mostly relevant for
 sorting, so it probably does not matter which you use if you use an
 option that gives the references in the order that they were cited.
-\Option{biber} seems to work well with \TeXLive 2012 and later and hence is the default.
-% For older versions of \TeXLive, a better solution is probably \texttt{make new09}
-% followed by \texttt{make thesis09} that then uses traditional \BibTeX.\footnote{%
-% You can still try to use \Package{biblatex} if you want to --- use \texttt{make new} to create a new skeleton ---
-% as \texttt{ubonn-thesis} switches to \Option{bibtex} automatically for \TeXLive
-% versions earlier than 2011.
-% Compile the thesis with \texttt{make thesis09} though.
-% If you want to set the backend yourself, use the option \Option{backend}.
-% Set the encoding with the option \Option{bibencoding} if necessary.}
+\Option{biber} is now rather mature and hence is the default.
 
 If you want to find out where your references are actually cited, you
 can include the option \Option{backref=true}.
@@ -589,11 +565,10 @@ calls sets.
 In \texttt{standard\_refs-biber.bib} and
 \texttt{standard\_refs-bibtex.bib} I have put in the three standard
 references for the Standard Model~\cite{gsw}. They are combined by
-using \Option{@Set}\index{biblatex!Set option@"@Set option} and the relevant
-keys. If you use a recent version of \texttt{biber} (\TeXLive 2012 and later)
-this is all you have to do.  If, however, you are using \TeXLive
-2011 or earlier with \Package{biblatex}, and therefore the \texttt{bibtex} or \texttt{bibtex8} backend, the
-\texttt{crossref} field must contain the same key as the first one in
+using \Option{@Set}\index{biblatex!Set option@"@Set option} and the relevant keys.
+If you use \texttt{biber} this is all you have to do.
+If, however, you are using the \texttt{bibtex} or \texttt{bibtex8} backend, 
+the \texttt{crossref} field must contain the same key as the first one in
 \texttt{entryset}.
 
 One thing you should always do is include all references in a single

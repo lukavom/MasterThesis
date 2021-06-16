@@ -88,23 +88,23 @@
 \ifthenelse{\equal{\UBN@texlive}{}}{}{%
   \renewcommand*{\texlive}{\UBN@texlive}
 }
-\typeout{Package ubonn-thesis info: texlive is [\texlive]}
+\typeout{ubonn-thesis: texlive is [\texlive]}
 
 % Thesis type specified as an option
 \ifthenelse{\boolean{UBN@PhD}}{%
-  \typeout{Package ubonn-thesis info: setting things up for a PhD thesis}
+  \typeout{ubonn-thesis: setting things up for a PhD thesis}
   \renewcommand*{\ThesisType}{PhD}
 }{%
   \ifthenelse{\boolean{UBN@Master}}{%
-    \typeout{Package ubonn-thesis info: setting things up for a Master thesis}
+    \typeout{ubonn-thesis: setting things up for a Master thesis}
     \renewcommand*{\ThesisType}{Master}
   }{%
     \ifthenelse{\boolean{UBN@Diplom}}{%
-      \typeout{Package ubonn-thesis info: setting things up for a Diplom thesis}
+      \typeout{ubonn-thesis: setting things up for a Diplom thesis}
       \renewcommand*{\ThesisType}{Diplom}
     }{%
       \ifthenelse{\boolean{UBN@Bachelor}}{%
-        \typeout{Package ubonn-thesis info: setting things up for a Bachelor thesis}
+        \typeout{ubonn-thesis: setting things up for a Bachelor thesis}
         \renewcommand*{\ThesisType}{Bachelor}
       }{}
     }
@@ -113,17 +113,17 @@
 
 % PI library thesis version - includes extra cover page
 \ifthenelse{\boolean{UBN@PILibrary}}{%
-  \typeout{Package ubonn-thesis info: creating version for PI library}
+  \typeout{ubonn-thesis: creating version for PI library}
   \renewcommand*{\ThesisVersion}{PILibrary}
 }{}
 % Submission version of thesis
 \ifthenelse{\boolean{UBN@Submit}}{%
-  \typeout{Package ubonn-thesis info: creating submission version of thesis}
+  \typeout{ubonn-thesis: creating submission version of thesis}
   \renewcommand*{\ThesisVersion}{Submit}
 }{}
 % Final print version of thesis
 \ifthenelse{\boolean{UBN@Final}}{%
-  \typeout{Package ubonn-thesis info: creating final version of thesis for print shop and ULB}
+  \typeout{ubonn-thesis: creating final version of thesis for print shop and ULB}
   \renewcommand*{\ThesisVersion}{Final}
 }{}
 

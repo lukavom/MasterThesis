@@ -3,11 +3,13 @@
 %
 % Note that "make update" can overwrite this file.
 %
-% See ChangeLog or Git log for history of changes.
-% Responsible: Ian Brock (brock@physik.uni-bonn.de)
+% See CHANGELOG.md or Git log for history of changes.
+% Responsible: Ian Brock (brock@physik.uni-bonn.de).
 %------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-thesis}[2020/11/06 Version 7.1 University of Bonn thesis package]
+\ProvidesPackage{ubonn-thesis}[2021/06/17 Version 8.0-alpha University of Bonn thesis package]
 \NeedsTeXFormat{LaTeX2e}
+% Needs 2013 TeX Live or later
+\NeedsTeXFormat{LaTeX2e}[2013/01/01]
 
 % Set TeX Live version
 \providecommand*{\texlive}{2017}
@@ -43,6 +45,7 @@
 \DeclareStringOption{thesistype}
 \DeclareStringOption{thesisversion}
 
+\DeclareBoolOption[true]{twoside}
 \DeclareBoolOption[true]{newtx}
 \DeclareBoolOption[false]{txfonts}
 \DeclareBoolOption[false]{palatino}
@@ -52,10 +55,13 @@
 \DeclareBoolOption[false]{xtab}
 \DeclareBoolOption[true]{longtable}
 \DeclareBoolOption[false]{supertabular}
+\DeclareBoolOption[true]{tableheading}
 \DeclareBoolOption[true]{biblatex}
 \DeclareBoolOption[true]{siunitx}
 \DeclareBoolOption[false]{eVkern}
-\DeclareBoolOption[true]{dcolumn}
+\DeclareBoolOption[false]{dcolumn}
+\DeclareBoolOption[false]{diffcoeff}
+\DeclareBoolOption[false]{derivative}
 \DeclareBoolOption[false]{physics}
 \DeclareBoolOption[true]{hepparticles}
 \DeclareBoolOption[true]{hepitalic}
@@ -68,7 +74,7 @@
 \DeclareBoolOption[true]{floatopt}
 \DeclareBoolOption[false]{todonotes}
 \DeclareBoolOption[false]{shownotes}
-\DeclareBoolOption[false]{cleveref}
+\DeclareBoolOption[true]{cleveref}
 \DeclareBoolOption[true]{clevercaps}
 \DeclareBoolOption[false]{firstinits}
 \DeclareStringOption{texlive}
@@ -79,173 +85,159 @@
 
 %-------------------------------------------------------------------------------
 % TeX Live version specified as an option
-\ifx\UBN@texlive\@empty
-  \relax
-\else
+\ifthenelse{\equal{\UBN@texlive}{}}{}{%
   \renewcommand*{\texlive}{\UBN@texlive}
-\fi
+}
 \typeout{Package ubonn-thesis info: texlive is [\texlive]}
 
 % Thesis type specified as an option
-\ifUBN@PhD
+\ifthenelse{\boolean{UBN@PhD}}{%
   \typeout{Package ubonn-thesis info: setting things up for a PhD thesis}
   \renewcommand*{\ThesisType}{PhD}
-\fi
-\ifUBN@Master
-  \typeout{Package ubonn-thesis info: setting things up for a Master thesis}
-  \renewcommand*{\ThesisType}{Master}
-\fi
-\ifUBN@Diplom
-  \typeout{Package ubonn-thesis info: setting things up for a Diplom thesis}
-  \renewcommand*{\ThesisType}{Diplom}
-\fi
-\ifUBN@Bachelor
-  \typeout{Package ubonn-thesis info: setting things up for a Bachelor thesis}
-  \renewcommand*{\ThesisType}{Bachelor}
-\fi
+}{%
+  \ifthenelse{\boolean{UBN@Master}}{%
+    \typeout{Package ubonn-thesis info: setting things up for a Master thesis}
+    \renewcommand*{\ThesisType}{Master}
+  }{%
+    \ifthenelse{\boolean{UBN@Diplom}}{%
+      \typeout{Package ubonn-thesis info: setting things up for a Diplom thesis}
+      \renewcommand*{\ThesisType}{Diplom}
+    }{%
+      \ifthenelse{\boolean{UBN@Bachelor}}{%
+        \typeout{Package ubonn-thesis info: setting things up for a Bachelor thesis}
+        \renewcommand*{\ThesisType}{Bachelor}
+      }{}
+    }
+  }
+}
 
 % PI library thesis version - includes extra cover page
-\ifUBN@PILibrary
+\ifthenelse{\boolean{UBN@PILibrary}}{%
   \typeout{Package ubonn-thesis info: creating version for PI library}
   \renewcommand*{\ThesisVersion}{PILibrary}
-\fi
+}{}
 % Submission version of thesis
-\ifUBN@Submit
+\ifthenelse{\boolean{UBN@Submit}}{%
   \typeout{Package ubonn-thesis info: creating submission version of thesis}
   \renewcommand*{\ThesisVersion}{Submit}
-\fi
+}{}
 % Final print version of thesis
-\ifUBN@Final
+\ifthenelse{\boolean{UBN@Final}}{%
   \typeout{Package ubonn-thesis info: creating final version of thesis for print shop and ULB}
   \renewcommand*{\ThesisVersion}{Final}
-\fi
-% Thesis type/version specified as a string
-\ifx\UBN@thesistype\@empty
-  \relax
-\else
-  \renewcommand*{\ThesisType}{\UBN@thesistype}
-\fi
-\ifx\UBN@thesisversion\@empty
-  \relax
-\else
-  \renewcommand*{\ThesisVersion}{\UBN@thesisversion}
-\fi
+}{}
 
-% Test if we are runnibng pdflatex or xelatex
+% Thesis type/version specified as a string
+\ifthenelse{\equal{\UBN@thesistype}{}}{}{%
+  \renewcommand*{\ThesisType}{\UBN@thesistype}
+}
+\ifthenelse{\equal{\UBN@thesisversion}{}}{}{%
+  \renewcommand*{\ThesisVersion}{\UBN@thesisversion}
+}
+
+% Test if we are runnibng pdflatex or xelatex.
 \RequirePackage{iftex}
+
+% Some hacks to get rid of KOMA-Script warnings.
+\RequirePackage{scrhack}
+
 % Font control for pdfLaTeX. Only one font package at a time!
-\ifPDFTeX
-  \ifUBN@txfonts
+\ifthenelse{\boolean{PDFTeX}}{%
+  \ifthenelse{\boolean{UBN@txfonts}}{%
     \typeout{ubonn-thesis: using pdflatex and txfonts fonts}
     \UBN@newtxfalse
     \UBN@palatinofalse
-  \else
-    \ifUBN@palatino
+  }{%
+    \ifthenelse{\boolean{UBN@palatino}}{%
       \typeout{ubonn-thesis: using pdflatex and Palatino fonts}
       \UBN@txfontsfalse
       \UBN@newtxfalse
-    \else
-      \ifUBN@newtx
+    }{%
+      \ifthenelse{\boolean{UBN@newtx}}{%
         \typeout{ubonn-thesis: using pdflatex and newtx fonts}
         \UBN@txfontsfalse
         \UBN@palatinofalse
-      \fi
-    \fi
-  \fi
-\fi
+      }{}
+    }
+  }
+}{}
+
 % Font control for XeLaTeX. Only one font package at a time!
-\ifXeTeX
-  \ifUBN@txfonts
+\ifthenelse{\boolean{XeTeX}}{%
+  \ifthenelse{\boolean{UBN@txfonts}}{%
     \typeout{ubonn-thesis: using xelatex and TeX Gyre Termes fonts}
     \UBN@newtxfalse
     \UBN@palatinofalse
-  \else
-    \ifUBN@palatino
+  }{%
+    \ifthenelse{\boolean{UBN@palatino}}{%
       \typeout{ubonn-thesis: using xelatex and TeX Gyre Pagella fonts}
       \UBN@txfontsfalse
       \UBN@newtxfalse
-    \else
-      \ifUBN@newtx
+    }{%
+      \ifthenelse{\boolean{UBN@newtx}}{%
         \typeout{ubonn-thesis: using xelatex and TeX Gyre Termes fonts}
         \UBN@txfontsfalse
         \UBN@palatinofalse
-      \fi
-    \fi
-  \fi
-\fi
+      }{}
+    }
+  }
+}{}
+
 % Font control for XeLaTeX. Only one font package at a time!
-\ifLuaTeX
-  \ifUBN@txfonts
+\ifthenelse{\boolean{LuaTeX}}{%
+  \ifthenelse{\boolean{UBN@txfonts}}{%
     \typeout{ubonn-thesis: using lualatex and TeX Gyre Termes fonts}
     \UBN@newtxfalse
     \UBN@palatinofalse
-  \else
-    \ifUBN@palatino
+  }{%
+    \ifthenelse{\boolean{UBN@palatino}}{%
       \typeout{ubonn-thesis: using lualatex and TeX Gyre Pagella fonts}
       \UBN@txfontsfalse
       \UBN@newtxfalse
-    \else
-      \ifUBN@newtx
+    }{%
+      \ifthenelse{\boolean{UBN@newtx}}{%
         \typeout{ubonn-thesis: using lualatex and TeX Gyre Termes fonts}
         \UBN@txfontsfalse
         \UBN@palatinofalse
-      \fi
-    \fi
-  \fi
-\fi
+      }{}
+    }
+  }
+}{}
+
 % xtab and supertabular do not mix
-\ifUBN@supertabular
+\ifthenelse{\boolean{UBN@supertabular}}{%
   \UBN@xtabfalse
-\else
-  \ifUBN@xtab
+}{%
+  \ifthenelse{\boolean{UBN@xtab}}{%
     \UBN@supertabularfalse
-  \fi
-\fi
+  }{}
+}
 
 % Only one subfigure package at a time!
-\ifUBN@subfigure
+\ifthenelse{\boolean{UBN@subfigure}}{%
   \UBN@subfigfalse
   \UBN@subcaptionfalse
-\else
-  \ifUBN@subfig
+}{%
+  \ifthenelse{\boolean{UBN@subfig}}{%
     \UBN@subfigurefalse
     \UBN@subcaptionfalse
-  \else
-    \ifUBN@subcaption
+  }{%
+    \ifthenelse{\boolean{UBN@subcaption}}{%
       \UBN@subfigurefalse
       \UBN@subfigfalse
-    \fi
-  \fi
-\fi
+    }{}
+  }
+}
 
 % Use firstinits or giveninits
-\ifUBN@firstinits
+\ifthenelse{\boolean{UBN@firstinits}}{%
   \newcommand*{\UBN@initials}{firstinits=true}
-\else
+}{%
   \newcommand*{\UBN@initials}{giveninits=true}
-\fi
+}
 
 % If asked to show notes also turn on todonotes
-\ifUBN@shownotes
-  \UBN@todonotestrue
-\fi
-
-% Check backend - if TeX Live is earlier than 2011 and backend is biber,
-% change it to something more appropriate
-% \ifthenelse{\texlive < 2011 \AND \equal{\UBN@backend}{biber}}{%
-%   \typeout{Package ubonn-thesis Warning: Setting backend to bibtex}
-%   \renewcommand*{\UBN@backend}{bibtex} %Used to be {bibtex8,bibencoding=latin1}
-% }{%
-% }
-
-% Switch from subcaption to subfig if TeX Live is earlier than 2012
-%\ifthenelse{\texlive < 2012 \AND \boolean{UBN@subcaption}}{%
-%  \typeout{Package ubonn-thesis Warning: Using subfig instead of subcaption}
-%    \UBN@subfigurefalse
-%    \UBN@subfigtrue
-%    \UBN@subcaptionfalse
-%}{%
-%}
+\ifthenelse{\boolean{UBN@shownotes}}{\UBN@todonotestrue}{}
 
 % Specify the language(s) in the documentclass and then use babel.
 \RequirePackage{babel}
@@ -260,10 +252,12 @@
   \typeout{ubonn-thesis: setting language to english}
   \newcommand*{\UBN@language}{english}
 }
+
 %------------------------------------------------------------------------------
 % General KOMA script options - other options affecting header/footer
 % section titles and captions are at the end of this file
-\KOMAoptions{fontsize=11pt, paper=a4, twoside}
+\KOMAoptions{fontsize=11pt, paper=a4}
+\ifthenelse{\boolean{UBN@twoside}}{\KOMAoptions{twoside=true}}{}
 % Add List of Figures/Tables to Table of Contents
 \KOMAoptions{listof=totoc}
 % Commands to add bibliography to the Table of Contents are in the main file
@@ -280,7 +274,8 @@
 % The DIV parameter tells it how many elements the page
 % should be split into.
 % \RequirePackage[scale=0.75]{geometry}
-\KOMAoptions{DIV=12, BCOR=5mm}
+\KOMAoptions{DIV=12}
+\ifthenelse{\boolean{UBN@twoside}}{\KOMAoptions{BCOR=5mm}}{}
 \KOMAoptions{headinclude=true, footinclude=false}
 % Header and footer - if scrlayer-scrpage is not available try scrpage2 instead.
 \RequirePackage[headsepline]{scrlayer-scrpage}
@@ -289,35 +284,37 @@
 %-------------------------------------------------------------------------------
 % Math packages that have to come early 
 % AMS math (for some font collections this has to come before their selection)
-\RequirePackage{amsmath, amssymb}
+% \RequirePackage{amsmath, amssymb}
 
 %-------------------------------------------------------------------------------
 % Fonts for pdfLaTeX
-\ifPDFTeX
+\ifthenelse{\boolean{PDFTeX}}{%
   \typeout{ubonn-thesis: setting fonts for pdflatex}
   % Input encoding, font and language
   \RequirePackage[utf8]{inputenc}
 
   % New version of the txfonts times-roman font
-  \ifUBN@newtx
+  \ifthenelse{\boolean{UBN@newtx}}{%
     \RequirePackage{newtxtext}
     \RequirePackage{newtxmath}
-  \fi
-  % Times-roman font
-  \ifUBN@txfonts
-    \RequirePackage[varg]{txfonts} % Used in ATLAS papers
-    \RequirePackage[T1]{fontenc}
-  \fi
-  % Palatino font
-  \ifUBN@palatino
-    % Palatino for rm and math | Helvetica for ss | Courier for tt
-    \RequirePackage{mathpazo} % math & rm
-    \linespread{1.05}         % Palatino needs more leading (space between lines)
-    \RequirePackage[scaled]{helvet} % ss
-    \RequirePackage{courier}  % tt
-    \normalfont
-    \RequirePackage[T1]{fontenc}
-  \fi
+  }{%
+    % Times-roman font
+    \ifthenelse{\boolean{UBN@txfonts}}{%
+      \RequirePackage[varg]{txfonts} % Used in ATLAS papers
+      \RequirePackage[T1]{fontenc}
+    }{%
+      % Palatino font
+      \ifthenelse{\boolean{UBN@palatino}}{%
+        % Palatino for rm and math | Helvetica for ss | Courier for tt
+        \RequirePackage{mathpazo} % math & rm
+        \linespread{1.05}         % Palatino needs more leading (space between lines)
+        \RequirePackage[scaled]{helvet} % ss
+        \RequirePackage{courier}  % tt
+        \normalfont
+        \RequirePackage[T1]{fontenc}
+      }{}
+    }
+  }
   % Other font collections one can consider
   % \RequirePackage{lmodern}
   % Variations with times
@@ -335,22 +332,15 @@
   
   % Turn on bold math when using \bfseries
   \def\bfseries{\fontseries\bfdefault\selectfont\boldmath}
-\fi
+}{}
 
 %------------------------------------------------------------------------------
 % csquotes is recommended for quoting correctly for the language used
 % The option autostyle=true continuously adapts the style to the language.
 % Use autostyle=once to fix it to the main language of the document.
 % \RequirePackage[german=guillemets,autostyle=true,style=mythesis]{csquotes}
-% \ifthenelse {\texlive < 2010} {%
-%   % Use babel=true for older versions (2009 and earlier) of csquotes
-%   \RequirePackage[babel=true]{csquotes}
-% }{%
-% Use autostyle=true for newer versions (2011 and later) of csquotes
-% Use American quotes `` xxx `yyy' '' instead of British default.
 \RequirePackage[autostyle=true]{csquotes}
 % \RequirePackage[german=guillemets,autostyle=true]{csquotes}
-% }
 
 % It seems common in British documents to use American-like quotes,
 % i.e. outer double quotes and inner single quotes
@@ -370,55 +360,33 @@
 % \setquotestyle{mythesis}
 
 %-------------------------------------------------------------------------------
-% Nicer fractions - load before siunitx for older versions of TeX Live
+% Extensions to amsmath.
+\RequirePackage{mathtools}
+
+%-------------------------------------------------------------------------------
+% Nicer fractions - load before siunitx for older versions of TeX Live.
 \RequirePackage{xfrac}
 
 %-------------------------------------------------------------------------------
-\ifUBN@siunitx 
-  \ifthenelse{\texlive < 2012}{
-    % \ifthenelse{\texlive < 2011} {%
-    %   \RequirePackage[noload=addn]{siunitx}
-    %   \sisetup{alsoload=hep}
-    %   \sisetup{seperr}
-    %   \sisetup{repeatunits=false}
-    %   \sisetup{obeyall}
-    %   \sisetup{sepfour}
-    %   \newunit{\barn}{b}
-    %   \newunit{\TeVc}{\tera\eVperc}
-    %   \newunit{\GeVc}{\giga\eVperc}
-    %   \newunit{\MeVc}{\mega\eVperc}
-    %   \newunit{\keVc}{\kilo\eVperc}
-    %   \newunit{\eVc}{\eVperc}
-    % }{%
-    \RequirePackage{siunitx}
-    \sisetup{load-configurations=abbreviations}
-    \sisetup{separate-uncertainty}
-    \sisetup{detect-all}
-    \sisetup{range-units=single, list-units=single}
-    \sisetup{group-digits=true, group-four-digits=true}
-    \ifUBN@eVkern
-      \typeout{ubonn-thesis: Applying kern to eV}
-      \DeclareSIUnit\electronvolt{\text{e\kern-.1em V}}
-    \fi
-    % }
-  }{%
-    \RequirePackage{siunitx}
-    \sisetup{separate-uncertainty}
-    \sisetup{range-units=single, list-units=single}
-    \sisetup{group-digits=integer, group-minimum-digits=4}
-    \sisetup{detect-all}
-    \ifUBN@eVkern
-      \typeout{ubonn-thesis: Applying kern to eV}
-      \DeclareSIUnit\electronvolt{\text{e\kern-.1em V}}
-    \fi
-  }
+\ifthenelse{\boolean{UBN@siunitx}}{%
+  \RequirePackage{siunitx}
+  \sisetup{separate-uncertainty}
+  \sisetup{range-units=single, list-units=single}
+  \sisetup{group-digits=integer, group-minimum-digits=4}
+  \sisetup{detect-all}
+  \ifthenelse{\boolean{UBN@eVkern}}{%
+    \typeout{ubonn-thesis: Applying kern to eV}
+    \DeclareSIUnit\electronvolt{\text{e\kern-.1em V}}
+  }{}
+  % Barn needed in some versions of siunitx.
+  \DeclareSIUnit\barn{b}
   % Units - for German thesis \num{4.3} will be printed as 4,3
   \addto\extrasngerman{\sisetup{locale = DE}}
   \addto\extrasamerican{\sisetup{locale = US}}
   \addto\extrasUSenglish{\sisetup{locale = US}}
   \addto\extrasbritish{\sisetup{locale = UK}}
   \addto\extrasUKenglish{\sisetup{locale = UK}}
-\fi
+}{}
 % \RequirePackage{units}
 % \RequirePackage{hepunits}
 % \RequirePackage[squaren]{SIunits}
@@ -426,33 +394,27 @@
 %-------------------------------------------------------------------------------
 % Figures and graphics
 \RequirePackage{graphicx}
-\ifUBN@feynmf
-  \RequirePackage{feynmf}
-\fi
-\ifUBN@feynmp
+\ifthenelse{\boolean{UBN@feynmf}}{\RequirePackage{feynmf}}{}
+\ifthenelse{\boolean{UBN@feynmp}}{%
   \RequirePackage{feynmp}
   \DeclareGraphicsRule{*}{mps}{*}{}
-\fi
+}{}
 
-\ifUBN@subcaption
-  \ifthenelse{\texlive < 2012}{%
-    \RequirePackage{caption}
-  }{%
-  }
+\ifthenelse{\boolean{UBN@subcaption}}{%
   \RequirePackage[labelformat=simple]{subcaption}
   \renewcommand\thesubfigure{(\alph{subfigure})}
   \renewcommand\thesubtable{(\alph{subtable})}
-\else
-  \ifUBN@subfig
+}{%
+  \ifthenelse{\boolean{UBN@subfig}}{%
     \RequirePackage[labelformat=simple,listofformat=subsimple,subrefformat=empty]{subfig}
     \renewcommand\thesubfigure{(\alph{subfigure})}
     \renewcommand\thesubtable{(\alph{subtable})}
-  \else
-    \ifUBN@subfigure
+  }{%
+    \ifthenelse{\boolean{UBN@subfigure}}{%
       \RequirePackage[TABBOTCAP]{subfigure}
-    \fi
-  \fi
-\fi
+    }{}
+  }
+}
 % \RequirePackage[lofdepth,lotdepth]{subfig}
 % Alternative to subfig, which is also newer
 % \RequirePackage{subcaption}
@@ -462,69 +424,63 @@
 \RequirePackage{rotating}
 \RequirePackage{array}
 \RequirePackage{booktabs}
-\ifUBN@dcolumn
-  \RequirePackage{dcolumn}
-\fi
-\ifUBN@xtab
-  \RequirePackage[pageshow]{xtab}
-\fi
-\ifUBN@longtable
-  \RequirePackage{longtable}
-\fi
-\ifUBN@supertabular
-  \RequirePackage{supertabular}
-\fi
+\ifthenelse{\boolean{UBN@dcolumn}}{\RequirePackage{dcolumn}}{}
+\ifthenelse{\boolean{UBN@xtab}}{\RequirePackage[pageshow]{xtab}}{}
+\ifthenelse{\boolean{UBN@longtable}}{\RequirePackage{longtable}}{}
+\ifthenelse{\boolean{UBN@supertabular}}{\RequirePackage{supertabular}}{}
 % Be careful trying to use ziffer and dcolumn together
 % \RequirePackage{ziffer}
 
-% Multiple references - does not seem to work together with hyperref
-% Also is not compatible with biblatex, which is the way to go
-% \RequirePackage{mcite}
+% Spacing for table captions above table.
+\ifthenelse{\boolean{UBN@tableheading}}{\KOMAoption{captions}{tableheading}}{}
 
-% Mathematical constructions that are useful in physics
-\ifUBN@physics
-  \RequirePackage{physics}
-\fi
+% diffcoeff and derivative are packages for derivatives.
+\ifthenelse{\boolean{UBN@diffcoeff}}{%
+  \RequirePackage[ISO]{diffcoeff}
+}{%
+  \ifthenelse{\boolean{UBN@derivative}}{%
+    \RequirePackage{derivative}
+  }{}
+}
+
+% physics is a (deprecated) package for mathematical constructions that are useful in physics.
+\ifthenelse{\boolean{UBN@physics}}{\RequirePackage{physics}}{}
 
 % Standardised particles names and format
 % hepnicenames also includes heppennames
-\ifUBN@hepparticles
-  \ifUBN@hepitalic
+\ifthenelse{\boolean{UBN@hepparticles}}{%
+  \ifthenelse{\boolean{UBN@hepitalic}}{%
     \RequirePackage[italic]{hepnicenames}
-  \else
+  }{%
     \RequirePackage{hepnicenames}
-  \fi
+  }
   % Adjust the kerning for bar over particles with narrow glyphs (from Andy Buckley)
   \def\@shiftlen@anti@gen@bar{0mu}
-\fi
+}
 
 % Chemical elements
-\ifUBN@mhchem
-  \RequirePackage[version=4]{mhchem}
-\fi
+\ifthenelse{\boolean{UBN@mhchem}}{\RequirePackage[version=4]{mhchem}}{}
 
 %------------------------------------------------------------------------------
 % Fonts with XeLaTeX or LuaLaTeX
 \ifthenelse{\boolean{XeTeX} \OR \boolean{LuaTeX}}{%
-  % Font package for XeLaTeX - also loads fontspec
-  % \RequirePackage{mathspec}
-  % undo the wrong changes made by mathspec
-  % \let\RequirePackage\original@RequirePackage
-  % \let\usepackage\RequirePackage
-  \RequirePackage[math-style=ISO, bold-style=ISO]{unicode-math}
-  \defaultfontfeatures{Scale = MatchUppercase}
+  \RequirePackage[math-style=ISO, bold-style=ISO,
+    warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
   \ifthenelse{\boolean{UBN@newtx} \OR \boolean{UBN@txfonts}}{%
     \setmainfont{TeX Gyre Termes}
     \setmathfont{TeX Gyre Termes Math}
+    \setmathfont[version=bold]{TeX Gyre Termes Math}
     % \setmathrm{TeX Gyre Termes}
-    % \setmathfont[version=bold,FakeBold=4]{TeX Gyre Termes}
-  }{}
-  \ifthenelse{\boolean{UBN@palatino}}{%
-    \setmainfont{TeX Gyre Pagella}
-    \setmathfont{TeX Gyre Pagella Math}
-    % \setmathrm{TeX Gyre Pagella}
-    % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
-  }{}
+  }{%
+    \ifthenelse{\boolean{UBN@palatino}}{%
+      \setmainfont{TeX Gyre Pagella}
+      \setmathfont{TeX Gyre Pagella Math}
+      \setmathfont[version=bold]{TeX Gyre Pagella Math}
+      % \setmathrm{TeX Gyre Pagella}
+      % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
+    }{}
+  }
 }{}
 
 \RequirePackage{microtype}
@@ -535,13 +491,11 @@
 
 % Fixes appendices displaying in pdf viewer index/outline under first appendix
 % instead of under Appendix heading
-\ifUBN@bookmark
-  \RequirePackage{bookmark}
-\fi
+\ifthenelse{\boolean{UBN@bookmark}}{\RequirePackage{bookmark}}{}
 
 % Add a \mynote command
-\ifUBN@todonotes
-  \ifUBN@shownotes
+\ifthenelse{\boolean{UBN@todonotes}}{%
+  \ifthenelse{\boolean{UBN@shownotes}}{%
     \typeout{ubonn-thesis: showing notes}
     % \KOMAoptions{BCOR=-1cm}
     % \addtolength{\marginparwidth}{1.5cm}
@@ -552,12 +506,12 @@
         {\textcolor{magenta}{#2}\todo[color=magenta!20, linecolor=magenta]{#3}\xspace}
         {\textcolor{magenta}{#2}\todo[color=magenta!20, linecolor=magenta, #1]{#3}\xspace}
     }
-  \else
+  }{%
     \typeout{ubonn-thesis: not showing notes}
     \RequirePackage[disable, \UBN@language, textsize=scriptsize]{todonotes}
     \newcommand{\mynote}[3][]{\todo[#1]{#2}\xspace}
-  \fi
-\fi
+  }
+}
 
 %-------------------------------------------------------------------------------
 % Use biblatex and biber for the bibliography
@@ -578,15 +532,9 @@
       style=authoryear, natbib=true, refsection=chapter,
       block=none, \UBN@initials]{biblatex}
   \else
-    % \ifthenelse {\texlive < 2010} {%
-    %   \RequirePackage[backend=\UBN@backend, hyperref=true, \UBN@biblatexencoding
-    %     style=\UBN@bibstyle, sorting=none,
-    %     firstinits=true]{biblatex}
-    % }{%
     \RequirePackage[backend=\UBN@backend, \UBN@biblatexencoding
       style=\UBN@bibstyle, sorting=none,
       \UBN@initials]{biblatex}
-    % }
   \fi
 \fi
 
@@ -613,16 +561,16 @@
 %-------------------------------------------------------------------------------
 % cleveref has to be included late
 % Decide whether to capitalise Fig., Table etc. or not.
-\ifUBN@cleveref
+\ifthenelse{\boolean{UBN@cleveref}}{%
   \typeout{ubonn-thesis: using cleveref}
-  \ifUBN@clevercaps
+  \ifthenelse{\boolean{UBN@clevercaps}}{%
     \RequirePackage[capitalise, \UBN@language]{cleveref}
-  \else
+  }{%
     \RequirePackage[\UBN@language]{cleveref}
-  \fi
-\else
+  }
+}{%
   \typeout{ubonn-thesis: not using cleveref}
-\fi
+}
 
 %-------------------------------------------------------------------------------
 % More options for KOMA script
@@ -642,7 +590,7 @@
 %-------------------------------------------------------------------------------
 % Only change chapter titles if this is not an article
 \@ifclassloaded{scrartcl}{}{%
-  \ifUBN@titlesec
+  \ifthenelse{\boolean{UBN@titlesec}}{%
   % Packages to change the chapter heading format
   % titlesec works, but gives a warning from KOMA-Script
     \RequirePackage{titlesec}
@@ -655,7 +603,7 @@
         \filright}
       [\vspace{1ex}%
       \titlerule]
-  \else
+  }{%
     % Code from http://www.komascript.de/chapterwithlines
     %\renewcommand*{\thechapter}{\Roman{chapter}}
     \newcommand*{\chapternumbersize}{\Huge}
@@ -667,14 +615,14 @@
         \textls{\MakeUppercase{\Large\chapapp}}\enskip\chapternumbersize\thechapter\\
       \fi
       %\MakeUppercase{\Large\chapapp}\enskip\chapternumbersize\thechapter\\
-    \hrulefill\\[-.25ex]
+      \hrulefill\\[-.25ex]
     }
     \renewcommand*{\chapterheadstartvskip}{\vskip 4\baselineskip}
     \renewcommand*{\chapterheadendvskip}{%
       \vspace{-\baselineskip}\noindent{\setlength{\parskip}{0pt}\Huge\hrulefill\par}
       \vspace{\baselineskip}
     }
-  \fi
+  }
 }
 
 % Alternative way of adjusting the \chapter heading
@@ -731,7 +679,7 @@
 
 % Adjust float settings to try to avoid problems.
 % These follow the UK FAQ - see also P.199-200 of the LaTeX Book
-\ifUBN@floatopt
+\ifthenelse{\boolean{UBN@floatopt}}{%
   \renewcommand{\topfraction}{0.85}
   \renewcommand{\bottomfraction}{0.70}
   \renewcommand{\textfraction}{0.15}
@@ -741,7 +689,7 @@
   \setcounter{topnumber}{9}
   \setcounter{bottomnumber}{9}
   \setcounter{totalnumber}{20}
-\fi
+}{}
 
 %-------------------------------------------------------------------------------
 % Set the header and footer

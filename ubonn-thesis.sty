@@ -8,8 +8,8 @@
 %------------------------------------------------------------------------------
 \ProvidesPackage{ubonn-thesis}[2021/06/17 Version 8.0-alpha University of Bonn thesis package]
 \NeedsTeXFormat{LaTeX2e}
-% Needs 2013 TeX Live or later
-\NeedsTeXFormat{LaTeX2e}[2013/01/01]
+% Needs 2013 TeX Live or later - this contains 2011/06/27 version of LaTeX.
+\NeedsTeXFormat{LaTeX2e}[2011/01/01]
 
 % Set TeX Live version
 \providecommand*{\texlive}{2017}
@@ -230,7 +230,7 @@
 }
 
 % Use firstinits or giveninits
-\ifthenelse{\UBN@texlive < 2016}{%
+\ifthenelse{\texlive < 2016}{%
   \newcommand*{\UBN@initials}{firstinits=true}
 }{%
   \newcommand*{\UBN@initials}{giveninits=true}

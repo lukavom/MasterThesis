@@ -1,7 +1,6 @@
-#
 # Makefile to run latex, dvips, and pdflatex on the thesis guide
 # Can also run feynmf/feynmp/tikz on files in a directory
-#
+
 GUIDE = thesis_guide
 EXTRACMD = -shell-escape
 FEYNDIR = ../feynmf
@@ -20,7 +19,7 @@ PYFEYNHANDFILES = $(PYFEYNHANDDIR)/$(file).py
 endif
 AWKDIR=..
 
-.PHONY: guide09 guide11 phdsubmit \
+.PHONY: guide11 phdsubmit \
 	feynmf feynmp tikz pyfeyn pyfeynhand \
 	cleanguide \
 	cleanfeynmf cleanfeynmp cleantikz cleanpyfeyn cleanpyfeynhand cleanpictpdf \

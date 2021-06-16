@@ -54,16 +54,6 @@ guide11:
 	pdflatex   $(EXTRACMD) $(GUIDE)
 	pdflatex   $(GUIDE)
 
-guide09:
-	pdflatex   $(EXTRACMD) $(GUIDE)
-	bibtex     $(GUIDE)
-	pdflatex   $(EXTRACMD) $(GUIDE)
-	bibtex     $(GUIDE)
-	makeindex  $(GUIDE)
-	makeglossaries $(GUIDE)
-	pdflatex   $(GUIDE)
-	pdflatex   $(GUIDE)
-
 feynmf:
 	make -f ../Makefile FEYNDIR=$(FEYNDIR) FEYNFILES="$(FEYNFILES)" \
 	 AWKDIR=$(AWKDIR) feynmf
@@ -141,9 +131,10 @@ cleanphd:
 
 help:
 	@echo "Possible commands:"
-	@echo "guide: Compile thesis guide (guide11)"
-	@echo "guide09: Compile thesis guide - texlive 2009 + bibtex"
-	@echo "guide11: Compile thesis guide - texlive >=2011 + biber"
+	@echo "guide: Compile thesis guide using latexmk"
+	@echo "guidexe: Compile thesis guide using xelatex and latexmk"
+	@echo "guidelua: Compile thesis guide using lualatex and latexmk"
+	@echo "guide11: Compile thesis guide using pdflatex and without using latexmk"
 	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIR)"
 	@echo "feynmp: Run feynmp for all .tex files in $(FEYNDIR)"
 	@echo "tikz:   Run tikz   for all .tex files in $(TIKZDIR)"

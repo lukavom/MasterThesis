@@ -62,10 +62,6 @@ astro: skelcopy
 	cp thesis_skel/thesis_astro_intro.tex  $(THESIS)/thesis_intro.tex
 
 # New thesis with old version of TeX Live
-# new09: skelcopy
-# 	#cp thesis_skel/thesis_2009_skel.tex  $(THESIS)/$(THESIS).tex
-# 	sed 's/texlive=2009/texlive=$(TEXOLD)/' thesis_skel/thesis_2009_skel.tex > $(THESIS)/$(THESIS).tex
-
 skelcopy:
 	mkdir $(THESIS)
 	mkdir $(THESIS)/bib

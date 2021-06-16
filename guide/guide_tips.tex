@@ -408,18 +408,18 @@ It is not needed if you use the \Package{newtx} font package.}
   i.e.\ an upright \enquote{d} (if you are writing in British English)
   for derivatives,\index{derivative} e.g.
   \begin{equation*}
-    \int y\dl2x\,.
+    \int y\,\mathrm{d}x\,.
   \end{equation*}
   This is also one of the the very few places, where it makes sense
   to put some spacing in by hand --- normally you should leave this to \TeX.
   The \Package{derivative} package provides the command \verb|\odif{x}|,
-  while the \Package{diffcoeff} package provides the command \verb|\dl|,
+  while the \Package{diffcoeff} package (as of version ) provides the command \verb|\dl|,
   and you can add space using a syntax such as \verb|\dl2x|.\footnote{%
   The digit can be anything between 0 and 9 (negative values are also possible).
   2 and 3 look to me to be sensible default values to use.}
   The \Package{physics} package provides the command \verb|\dd{x}|,
   which does the spacing for you.
-\begin{tcblisting}{listing side text}
+\begin{tcblisting}{listing only}
 \begin{equation*}
   \int y \dl2x\,.
 \end{equation*}      

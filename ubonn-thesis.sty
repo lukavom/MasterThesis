@@ -436,7 +436,12 @@
 
 % diffcoeff and derivative are packages for derivatives.
 \ifthenelse{\boolean{UBN@diffcoeff}}{%
-  \RequirePackage[ISO]{diffcoeff}
+  \ifthenelse{\texlive < 2017}{%
+    \RequirePackage{diffcoeff}
+    \diffset[roman = true]
+  }{%
+    \RequirePackage[ISO]{diffcoeff}
+  }
 }{%
   \ifthenelse{\boolean{UBN@derivative}}{%
     \RequirePackage{derivative}

@@ -4,10 +4,10 @@
 %
 % Note that "make update" can overwrite this file.
 %
-% See ChangeLog or Git log for history of changes.
+% See CHANGELOG.md or Git log for history of changes.
 % Responsible: Ian Brock (brock@physik.uni-bonn.de)
 %-------------------------------------------------------------------------------
-\ProvidesPackage{ubonn-biblatex}[2020/11/06 Version 7.1 University of Bonn biblatex style]
+\ProvidesPackage{ubonn-biblatex}[2020/06/17 Version 8.0-alpha University of Bonn biblatex style]
 \NeedsTeXFormat{LaTeX2e}
 
 % Use kvoptions package to set options
@@ -31,49 +31,45 @@
 \ProcessKeyvalOptions*
 
 % TeX Live version not specified as an option
-\ifx\UBNB@texlive\@empty
+\ifthenelse{\equal{\UBNB@texlive}{}}{%
   \renewcommand*{\UBNB@texlive}{\texlive}
-\fi
+}{}
 \typeout{Package ubonn-biblatex Info: UBNB@texlive is [\UBNB@texlive]}
 
 % Set block mode
 \typeout{ubonn-biblatex: block set to \UBNB@block}
 \ExecuteBibliographyOptions{block=\UBNB@block}
+
 % Set maxbibnames
 \typeout{ubonn-biblatex: maxbibnames set to \UBNB@maxbibnames}
 \ExecuteBibliographyOptions{maxbibnames=\UBNB@maxbibnames}
+
 % backref=true adds page numbers of citations to bibliography
-\ifUBNB@backref
+\ifthenelse{\boolean{UBNB@backref}}{%
   \typeout{ubonn-biblatex: turning backref on}
   \ExecuteBibliographyOptions{backref=true}
-\else
+}{%
   \typeout{ubonn-biblatex: backref is off}
   \ExecuteBibliographyOptions{backref=false}
-\fi
+}
 
 % Include the DOI as a hyperlink with the journal.
-\ifUBNB@showdoi
-  \relax
-\else
+\ifthenelse{\boolean{UBNB@showdoi}}{}{%
   \ExecuteBibliographyOptions{doi=false}
   \DeclareFieldFormat{string+doi}{%
     \iffieldundef{doi}{#1}{\href{http://dx.doi.org/\thefield{doi}}{#1}}}
   %\newbibmacro{string+doi}[1]{%
   %  \iffieldundef{doi}{#1}{\href{http://dx.doi.org/\thefield{doi}}{#1}}}
   %\DeclareFieldFormat{title}{\usebibmacro{string+doi}{\mkbibemph{#1}}}
-\fi
+}
 
 % Turn off printing of arXiv
-\ifUBNB@eprint
-  \relax
-\else
+\ifthenelse{\boolean{UBNB@eprint}}{}{%
   \ExecuteBibliographyOptions{eprint=false}
-\fi
+}
 
 % date=year option works for TeX Live 2014 or so onwards
-\ifthenelse{\UBNB@texlive < 2014}{%
-  \relax
-}{%
+\ifthenelse{\UBNB@texlive < 2014}{}{%
   \ExecuteBibliographyOptions{date=year}
 }
 
@@ -83,37 +79,35 @@
 }
 
 % Turn off title for articles and booklets (CONF/PUB notes)
-\ifUBNB@articletitle
+\ifthenelse{\boolean{UBNB@articletitle}}{%
   % Titles all in italics or in quotes
-  \ifUBNB@titlequote
+  \ifthenelse{\boolean{UBNB@titlequote}}{%
     \DeclareFieldFormat[article]{title}{\mkbibquote{#1}\isdot}
     \DeclareFieldFormat[booklet]{title}{\mkbibquote{#1}\isdot}
     \DeclareFieldFormat[report]{title}{\mkbibquote{#1}\isdot}
     \DeclareFieldFormat[thesis]{title}{\mkbibquote{#1}\isdot}
-  \else
+  }{%
     \DeclareFieldFormat[article]{title}{\emph{#1}\isdot}
     \DeclareFieldFormat[booklet]{title}{\emph{#1}\isdot}
     \DeclareFieldFormat[report]{title}{\emph{#1}\isdot}
     \DeclareFieldFormat[thesis]{title}{\emph{#1}\isdot}
-  \fi
-\else
+  }
+}{%
   \AtEveryBibitem{
     \ifentrytype{article}{\clearfield{title}}{}
     \ifentrytype{booklet}{\clearfield{title}}{}
     \ifentrytype{report}{\clearfield{title}}{}
   }
-\fi
+}
 
 % Journal in upright font
 \DeclareFieldFormat[article]{journaltitle}{#1\isdot}
 \DeclareFieldFormat[article]{journalsubtitle}{#1\isdot}
 
 % Volume in bold font
-\ifUBNB@boldvol
-  \relax
-\else
+\ifthenelse{\boolean{UBNB@boldvol}}{}{%
   \DeclareFieldFormat[article]{volume}{\textbf{#1}\isdot}
-\fi
+}
 
 % Suppress issue number
 \AtEveryBibitem{
@@ -121,22 +115,19 @@
 }
   
 % Do not print out the address
-\ifUBNB@address
-  \relax
-\else
-  \ifUBNB@location
-    \relax
-  \else
+\ifthenelse{\boolean{UBNB@address}}{}{%
+  \ifthenelse{\boolean{UBNB@location}}{}{%
     \AtEveryBibitem{%
-      \clearlist{location}
+      \ifentrytype{article}{\clearlist{location}}{}
+      \ifentrytype{booklet}{\clearlist{location}}{}
+      \ifentrytype{report}{\clearlist{location}}{}
+      % \clearlist{location}
     }
-  \fi
-\fi
+  }
+}
 
 % DOI as link with journal reference
-\ifUBNB@showdoi
-  \relax
-\else
+\ifthenelse{\boolean{UBNB@showdoi}}{}{%
   %\DeclareFieldFormat[article]{journaltitle}{\usebibmacro{string+doi}{#1\isdot}}
   %\DeclareFieldFormat[article]{journal+issuetitle}{\usebibmacro{string+doi}{#1}}
   % Adapted from /usr/local/texlive/2014/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
@@ -158,22 +149,19 @@
     \usebibmacro{issue}%
     \setunit{\bibpagespunct}%
     \printfield{pages}%
-    \newunit
+    \newunit%
     }%
   }
   \renewbibmacro*{note+pages}{%
     \printfield{note}%
     %\setunit{\bibpagespunct}%
     %\printfield{pages}%
-    \newunit}
-\fi
-
-  % Print only first page - only works for TeX Live 2012 onwards I think
-\ifthenelse{\UBNB@texlive < 2012}{%
-  \relax
-}{%
-  \DeclareFieldFormat{pages}{\mkfirstpage[{\mkpageprefix[bookpagination]}]{#1}}
+    \newunit%
+  }
 }
+
+  % Print only first page
+\DeclareFieldFormat{pages}{\mkfirstpage[{\mkpageprefix[bookpagination]}]{#1}}
 
 % Change punctuation to comma
 \renewcommand*{\newunitpunct}{\addcomma\space}
@@ -186,12 +174,10 @@
 
 % You can include the following line(s) if you want to shorten your
 % bibliography by not including url fields
-\ifUBNB@showurl
-  \relax
-\else
+\ifthenelse{\boolean{UBNB@showurl}}{}{%
   \AtEveryBibitem{\clearfield{url}}
   \AtEveryCitekey{\clearfield{url}}
-\fi
+}
 
 % Do not add "In:"
 \renewbibmacro{in:}{}
@@ -237,4 +223,5 @@
   \printlist{institution}%
   \setunit*{\addcomma\space}%
   \usebibmacro{date}%
-  \newunit}
+  \newunit%
+}

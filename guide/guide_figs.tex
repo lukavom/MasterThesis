@@ -16,17 +16,21 @@ which can be obtained from
 \url{http://www.ctan.org/tex-archive/info/l2picfaq/german}. It contains
 a lot of detailed information and tricks.
 
-The chapter also contains some suggestions as to how to create Feynman
+This chapter also contains some suggestions as to how to create Feynman
 graphs with a number of different packages.
+
 
 %------------------------------------------------------------------------------
 \section{Simple figures}%
 \label{sec:fig:simple}
 %------------------------------------------------------------------------------
 
-A simple figure and its associated caption is straightforward to
-include. For example, the layout of the LHC and its experiments is
+A simple figure and its associated caption is straightforward to include.
+For example, the layout of the LHC and its experiments is
 shown in \cref{fig:LHC}.
+
+Don't forget to use the package \Package{cleveref} and macros such as \Macro{cref}
+to reference the figures --- see \cref{sec:package:appearance} for a few more details.
 
 \begin{figure}[htbp]
   \centering
@@ -151,30 +155,12 @@ A nice tutorial on its use can be found in
 Examples of its use can be seen in \cref{fig:nccc,fig:pyfeynhand}.
 The \LaTeX\ file \texttt{guide\_figs.tex} contains examples for both \Package{subfig} and 
 \Package{subcaption}.
-% , as the way \Package{subcaption} should be used was different for \TeXLive 2011 and earlier.
 You can see how to reference
 the different parts of the figure in \cref{sec:fig:feynman}. If
 you want the captions of the sub-figures to also appear in the
 \enquote{List of Figures} you should include the package with the
 option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
 
-
-% \ifthenelse{\texlive < 2012}{%
-% \begin{figure}[htbp]
-%   \centering
-%   \subfloat[NC scattering]{%
-%     \includegraphics[width=0.5\figwidth]{ep_nc}%
-%     \label{fig:nccc-nc}
-%   }
-%   \qquad
-%   \subfloat[CC scattering]{%
-%     \includegraphics[width=0.5\figwidth]{ep_cc}%
-%     \label{fig:nccc-cc}
-%   }
-%   \caption{Processes in $ep$ scattering.}%
-%   \label{fig:nccc}
-% \end{figure}
-% }{%
 \begin{figure}[htbp]
   \begin{tcblisting}{}
   \centering
@@ -191,7 +177,6 @@ option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
   \caption{Processes in $ep$ scattering.}%
   \label{fig:nccc}
 \end{figure}
-% }
 
 If you run out of space (applies more often to proceedings than to
 theses) you can use the \Package{wrapfig} package.
@@ -206,8 +191,8 @@ If you use plain \LaTeX, you are pretty much stuck with encapsulated
 postscript (EPS) as your figure format. If you use pdf\LaTeX, then you
 have much more freedom, with the notable exception that you cannot
 include EPS files!\footnote{%
-This restriction has finally been lifted with \TeXLive 2011. It
-simply converts the EPS files to PDF inline.}
+This restriction has finally been lifted with \TeXLive 2011.
+It simply converts the EPS files to PDF inline.}
 I would still recommend that you always try to use
 a vector graphic format. What usually works well is to either create
 PDF directly or to create EPS and then convert from EPS to PDF\@.
@@ -303,7 +288,7 @@ think about it a bit more.
 However, it is hard to give a hard and fast rule here.
 As indicated above, the effect of these different ways of including a figure (and table) is the point in the text (reference point) that \LaTeX\ uses to start trying to place the figure.
 In general, you should only try to tweak the position of figures and tables when your text is final,
-as a change in the text way well move some of the floats.
+as a change in the text may well move some of the floats.
 
 %------------------------------------------------------------------------------
 \subsection{\Package{standalone} package and class}%
@@ -313,8 +298,9 @@ The \Package{standalone} package provides a great way of developing
 figures in small files and then inputting these files directly,
 without making any changes, into your thesis!
 
-It is in fact both a package and a document class. It is
-available from \TeXLive 2012 onward. It allows you to have a
+It is in fact both a package and a document class.
+% It is available from \TeXLive 2012 onward.
+It allows you to have a
 standalone document for a \Package{\TikZ} or \Package{feynmf} figure
 and also input this file into another document. If you run pdf\LaTeX\
 on the file it also automatically crops the resulting picture. This is
@@ -374,8 +360,8 @@ straightforward to use.
 
 This paragraph illustrates how to reference different parts of a
 figure that uses the environment \Env{subfigure} from the package \Package{subcaption}.
-If you compile the guide with \TeXLive 2011 or earlier the
-environment \Env{subcaption} from the package \Package{subfig} is used.
+% If you compile the guide with \TeXLive 2011 or earlier the
+% environment \Env{subcaption} from the package \Package{subfig} is used.
 The NC and CC graphs shown in
 \cref{fig:nccc}, or more accurately in \cref{fig:nccc-nc} and
 \cref{fig:nccc-cc} were made with \Package{feynmp}. Another way of
@@ -496,15 +482,6 @@ In addition it makes sense to
 define things like gluons, photons and incoming and outgoing particles
 once, as these are objects that are often needed.
 
-% Given the multitude of possibilities that exist to draw things with
-% \TikZ, it is not surprising that there are several ways of achieving the same end.
-% If you want to work with \TikZ directly, you could also consider \Package{feymp},
-% which has very similar capabilities and is dedicated to Feynman graphs.
-% If you use \TikZ for drawing other things, then it is
-% probably easier to use it also for Feynman graphs.
-% However, if you want things like gluons on an arc, this may well only be available, if
-% at all, with very recent versions of \Package{\TikZ}.
-
 We can directly compare a scattering graph made with
 \Package{feynmp}, \Package{\TikZ} and \Package{TikZ-FeynHand}.
 This is shown in \cref{fig:feyn:cf}.
@@ -512,38 +489,6 @@ As you can see the quality of the graphs is very similar.
 Further tweaking can probably make them almost identical.
 In the \Package{TikZ-FeynHand} graph, I use lots of colours to illustrate how they work.
 
-% \ifthenelse{\texlive < 2012}{%
-% \begin{figure}[htbp]
-%   \centering
-%   \begin{minipage}[b]{0.5\figwidth}
-%     \centering
-%     \subfloat[Feynmp]{%
-%       \input{../feynmf/moeller.tex}
-%       \ifthenelse {\texlive < 2011}{%
-%       }{
-%         \write18{mpost moeller}
-%       }
-%     }\label{fig:feyn:feynmp}
-%   \end{minipage}
-%   \qquad
-%   \begin{minipage}[b]{0.5\figwidth}
-%     \centering
-%     \subfloat[\TikZ]{%
-%       \ifthenelse {\texlive < 2011} {%
-%         \fbox{\parbox[b]{0.4\textwidth}{%
-%           Error messages appear when trying to
-%           compile the guide with \Package{tikz} and \TeXLive 2009,
-%           so the figure cannot be included.
-%           See the file \texttt{../tikz/moeller.tex}.}}
-%       }{%
-%         \input{../tikz/moeller.tex}
-%       }
-%     }\label{fig:feyn:tikz}
-%   \end{minipage}
-%   \caption{Feynman graphs drawn with \Package{feynmp} and \Package{tikz}.}%
-%   \label{fig:feyn:cf}
-% \end{figure}
-% }{%
 \begin{figure}[htbp]
   \centering
   \subcaptionbox{feynmp\label{fig:feyn:feynmp}}
@@ -563,31 +508,12 @@ In the \Package{TikZ-FeynHand} graph, I use lots of colours to illustrate how th
       \missingfigure{TeX Live version does not include TikZ-FeynHand}
     }
   }}
-  % \fbox{\begin{minipage}[b]{0.29\textwidth}
-  %   \centering
-  %   \input{../feynmf/moeller.tex}
-  %   \write18{mpost moeller}
-  %   \subcaption{feynmp}\label{fig:feyn:feynmp}
-  % \end{minipage}}
-  % \quad
-  % \fbox{\begin{minipage}[b]{0.29\textwidth}
-  %   \centering
-  %   \input{../tikz/moeller-tikz.tex}
-  %   \subcaption{\TikZ}\label{fig:feyn:tikz}
-  % \end{minipage}}
-  % \quad
-  % \fbox{\begin{minipage}[b]{0.29\textwidth}
-  %   \centering
-  %   \input{../tikz/moeller-feynhand.tex}
-  %   \subcaption{TikZ-FeynHand}\label{fig:feyn:feynhand}
-  % \end{minipage}}
   \caption{Feynman graphs drawn with \Package{feynmp}, \Package{\TikZ} and \Package{TikZ-FeynHand}.
     The frames around the boxes are for illustration only.
     As you can see the \Package{feynmp} box does not include the labels.
     This example uses the \Macro{subcaptionbox} macro from the \Package{subcaption} package.}%
   \label{fig:feyn:cf}
 \end{figure}
-% }
 
 
 %------------------------------------------------------------------------------
@@ -676,8 +602,8 @@ In order to use the \Package{feynmp} package, you have to put
 the commands to draw the graph in a \LaTeX{} file and then process
 this file with \LaTeX{} and either Metafont or
 Metapost.\footnote{\texttt{ubonn-thesis.sty} now includes \Package{feynmp}
-  by default for \TeXLive 2011 and later. If you want to use
-  \Package{feynmf} instead just change the name.} 
+  by default.
+  If you want to use \Package{feynmf} instead just change the name.} 
 You can either make
 a separate \LaTeX{} file containing the Feynman graph or include the
 commands inside your normal \LaTeX\ file.
@@ -687,10 +613,10 @@ You should be able to just run
 \texttt{pdflatex} again twice.
 Note that you have to run
 \texttt{mpost} on all the files whose names are defined at the
-beginning of the \Env{fmffile} environment.\footnote{%
-  While Metapost works well
-  as of \TeXLive 2011, I did not get it to work properly with \TeXLive
-  2009 for unknown reasons.}
+beginning of the \Env{fmffile} environment.%\footnote{%
+  % While Metapost works well
+  % as of \TeXLive 2011, I did not get it to work properly with \TeXLive
+  % 2009 for unknown reasons.}
 
 Metafont\index{metafont} is a bit trickier and details have been relegated to
 \cref{sec:app:fig:feynman:feynmf}. 
@@ -768,23 +694,18 @@ starts with \verb+\begin{fmffile}{gluon}+.%
 \begin{figure}[htbp]
   \centering
   \fbox{\input{../feynmf/ep_nc.tex}}
-  % \ifthenelse {\texlive < 2011} {%
-  % }{
     \write18{mpost ep_nc}
-  % }
   \qquad
   \fbox{\input{../feynmf/ep_cc.tex}}
-  % \ifthenelse {\texlive < 2011} {%
-  % }{
     \write18{mpost ep_cc}
-  % }
   \caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
     code directly.}%
   \label{fig:nccc-feynmf}
 \end{figure}
 
-With the \TeXLive 2011 and later setups I use to test this guide,
-this is all you need. If \texttt{mpost} does not run automatically,
+% With the \TeXLive 2011 and later setups I use to test this guide,
+% this is all you need.
+If \texttt{mpost} does not run automatically,
 you must execute the command
 \texttt{pdflatex --shell-escape mythesis} when you compile your thesis.
 This can be achieved by
@@ -897,6 +818,6 @@ Feynman graphs with \TikZ is covered in \cref{sec:fig:feynman:tikz}.
 If you want to include an accelerator lattice in your thesis you can try
 \Package{tikz-palattice}\footnote{%
   \url{https://ctan.org/pkg/tikz-palattice}
-written by Jan Schmidt, who gave me a number of useful tips for this guide.}
-He used the package to make lattices of particle accelerators for his PhD thesis.
+written by Jan Schmidt, who gave me a number of useful tips for this guide.}.
+Jan Schmidt used the package to make lattices of particle accelerators for his PhD thesis.
 

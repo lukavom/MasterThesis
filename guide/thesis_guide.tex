@@ -12,7 +12,7 @@
 
 %-------------------------------------------------------------------------------
 % Main thesis style file
-\newcommand*{\guideversion}{7.1}
+\newcommand*{\guideversion}{8.0-alpha}
 \newcommand*{\texlive}{2017}
 
 % Directory with style files
@@ -22,7 +22,8 @@
 
 % Adjustments to biblatex output are in ubonn-biblatex style file
 % Thesis style file
-\usepackage[shownotes, cleveref, bibstyle=alphabetic, feynmp, xtab]{ubonn-thesis}
+\usepackage[shownotes, cleveref, diffcoeff, dcolumn, feynmp, xtab,
+  bibstyle=alphabetic]{ubonn-thesis}
 % Thesis bibliography settings
 \usepackage[backref=true]{ubonn-biblatex}
 
@@ -45,9 +46,9 @@
 \usetikzlibrary{decorations.markings}
 
 % Other packages needed for the guide
-\usepackage{physics}
+% \usepackage{physics}
 \usepackage{makeidx}
-\usepackage[acronym, toc, nosuper]{glossaries} %docdef=restricted, 
+\usepackage[acronym, toc, nosuper]{glossaries} % docdef=restricted, 
 \usepackage{metalogo}
 \setlogokern{eX}{-0.1em}
 \setlogokern{Xe}{-0.1em}
@@ -61,7 +62,7 @@
 \g@addto@macro{\UrlBreaks}{\UrlOrds}
 \makeatother
 
-% In order to check if your labels are referenced try the refcheck package
+% In order to check if your labels are referenced try the refcheck package.
 % \usepackage{refcheck}
 
 %-------------------------------------------------------------------------------
@@ -78,13 +79,11 @@
 % For further changes copy the \RequirePackage here and include
 % ubonn-thesis with the option biblatex=false.
 % Specify the bibliography files here and not at the end!
-% \ifthenelse{\texlive > 2010} {%
 \addbibresource{guide_refs.bib}
 \addbibresource{./refs/zeus_2009.bib}
 \addbibresource{./refs/zeus_2010.bib}
 \addbibresource{../refs/standard_refs-biber.bib}
 \addbibresource{./refs/example_refs-utf8.bib}
-% }
 
 %-------------------------------------------------------------------------------
 % When writing your thesis it is often helpful to have the date and
@@ -229,10 +228,8 @@
 %\printbibliography[heading=subbibliography]
 
 %-------------------------------------------------------------------------------
-% \ifthenelse{\texlive > 2010} {%
 % Use biblatex for the bibliography and add bibliography to Table of Contents
 \printbibliography[heading=bibintoc]
-% }{% 
 %   % Use traditional BibTeX for the bibliography.
 %   {\raggedright
 %     \bibliographystyle{../refs/atlasBibStyleWithTitle.bst}

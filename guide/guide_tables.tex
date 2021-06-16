@@ -40,12 +40,28 @@ Tables usually go inside the \Env{table} environment so their position
 can \enquote{float}. In this chapter I use some tables inside \Env{table}
 and some inline.
 
+Don't forget to use the package \Package{cleveref} and macros such as \Macro{cref}
+to reference the tables --- see \cref{sec:package:appearance} for a few more details.
+
+There are good arguments for the table caption being above the table,
+while the figure caption should be below the figure.
+Include the \Macro{caption} command before the \Env{tabular},
+in order for the caption to be placed above.
+The spacing of the caption and the table is then optimal
+when the option \Option{captions=tableheading}
+is set in \KOMAScript.
+This can be achieved by setting the option \Option{tableheading} (as of version 8.0), which is set to \enquote{true} by default.
+If you use this option, you should use \Macro{centering} to centre the table
+and not the environment \Env{center}.
+You can get the same spacing, without the \Option{captions=tableheading} option,
+by using the macro \Macro{captionabove} macro instead of \Macro{caption}.
+
 Trying to include footnotes in tables can be tricky.
 See \cref{sec:layout:footnote} for some guidance on how this can be done.
 
 
 %------------------------------------------------------------------------------
-\section{Use of \Macro{phantom}}%
+\section{Use of \texorpdfstring{\Macro{phantom}}{phantom}}%
 \label{sec:table:phantom}
 %------------------------------------------------------------------------------
 
@@ -54,7 +70,7 @@ Although extra packages can help, a very useful command is
 of the argument. Compare the results in the following table with two
 numbers 0.76 and 83.1:
 
-\begin{center}
+\begin{tcblisting}{listing side text}
 \begin{tabular}{cc|rr} % chktex 44
   \multicolumn{2}{c|}{Centred} &
   \multicolumn{2}{c}{Right justified} \\
@@ -62,7 +78,8 @@ numbers 0.76 and 83.1:
   0.76 & \phantom{0}0.76 & 0.76 & 0.76\\
   83.1 & 83.1\phantom{0} & 83.1 & 83.1\phantom{0}
 \end{tabular}
-\qquad
+\end{tcblisting}
+\begin{tcblisting}{listing side text}
 {\setlength{\extrarowheight}{0.5ex}
 \begin{tabular}{cc|rr} % chktex 44
   \multicolumn{2}{c|}{Centred} &
@@ -72,12 +89,13 @@ numbers 0.76 and 83.1:
   83.1 & 83.1\phantom{0} & 83.1 & 83.1\phantom{0}
 \end{tabular}
 }
-\end{center}
+\end{tcblisting}
 \par\noindent
 The difference between the two tables is that the one on the right
-has the length \Macro{extrarowheight} set to 0.5ex.  The first two
-columns are centred, the last two are right justified.  This is
-clearly a bit clumsy, but it does work!
+has the length \Macro{extrarowheight} set to 0.5ex.
+The first two columns are centred, the last two are right justified.
+This is clearly a bit clumsy, but it does work!
+For illustration, you can also see the effect of adjusting \Macro{extrarowheight}.
 
 
 %------------------------------------------------------------------------------
@@ -89,39 +107,27 @@ The \Package{siunitx} package contains some nice tools that make the
 correct alignment of numbers simpler. The syntax of some of the
 options changed between version 1 (\(\leq 2009\)) and version 2 (\(\geq 2011\)). I
 discuss the version 2 options in the main text and give the equivalent
-version 1 options as a footnote. If you look at the \LaTeX\ code, the
-\TeXLive 2009 version is inside \Macro{ifthenelse\{\textbackslash
-texlive < 2011\}}, while the \TeXLive 2011 version is in the second
-block.
+version 1 options as a footnote.
 
 A first simple example is shown in \cref{tab:viscosity}.
 In fact I show the table twice, once
 with the language set to default and once with it set to German. The
 \Env{tabular} contents are identical, the second tabular is inside a
 \Macro{foreignlanguage}. Note the use of
-\Option{table-format}%\footnote{\Option{tabformat} in \TeXLive 2009}
+\Option{table-format}
 to centre the temperatures as the heading is wider than the numbers.
+Umlaute etc.\ kann normally be inserted directly,
+which is done in this example.
+That does not work in the \Env{tcblisting} environment if one uses pdf\LaTeX\ to compile the guide.
+Such characters can be included directly in listings that use the \Env{tcblisting} environment,
+if one uses  with Lua\LaTeX\ and Xe\LaTeX for compilation.
 
 \begin{table}[htbp]
+  \captionabove{A table of viscosities in the default language and German.
+    Typeset using the \Macro{captionabove} macro.}%
+  \label{tab:viscosity}
   \centering
-% \ifthenelse {\texlive < 2011} {%
-%   \begin{tabular}{lS[tabformat = 4.2]S}
-%     \toprule
-%     Liquid & {Temp.} & {Viscosity \(\eta\)}\\
-%     &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
-%     \midrule
-%     Blood     & 37 & 4.0 \\
-%     Glycerine &  0 & 10000 \\
-%     & 20 & 1410 \\
-%     & 60 & 81 \\
-%     Oil (SAE 10) & 30 & 200 \\
-%     Water   &  0 & 1.8 \\
-%     & 20 & 1.00 \\
-%     & 60 & 0.65 \\
-%     Air     & 20 & 0.018 \\
-%     \bottomrule
-%   \end{tabular}
-% }{%
+  \begin{tcblisting}{listing side text}
   \begin{tabular}{lS[table-format = 4.2]S}
     \toprule
     Liquid & {Temp.} & {Viscosity \(\eta\)}\\
@@ -138,39 +144,19 @@ to centre the temperatures as the heading is wider than the numbers.
     Air     & 20 & 0.018 \\
     \bottomrule
   \end{tabular}
-% }
-  \quad
-% \ifthenelse {\texlive < 2011} {%
-%   \foreignlanguage{ngerman}{%
-%   \begin{tabular}{lS[tabformat = 4.2]S}
-%     \toprule
-%     Flüssigkeit & {Temp.} & {Viskosität \(\eta\)}\\
-%     &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
-%     \midrule
-%     Blut     & 37 & 4.0 \\
-%     Glyzerin &  0 & 10000 \\
-%     & 20 & 1410 \\
-%     & 60 & 81 \\
-%     Öl (SAE 10) & 30 & 200 \\
-%     Wasser   &  0 & 1.8 \\
-%     & 20 & 1.00 \\
-%     & 60 & 0.65 \\
-%     Luft     & 20 & 0.018 \\
-%     \bottomrule
-%   \end{tabular}
-%   }
-% }{%
+  \end{tcblisting}
+  \begin{tcblisting}{listing side text}
   \foreignlanguage{ngerman}{%
   \begin{tabular}{lS[table-format = 4.2]S}
     \toprule
-    Flüssigkeit & {Temp.} & {Viskosität \(\eta\)}\\
+    Fl\"{u}ssigkeit & {Temp.} & {Viskosit\"{a}t \(\eta\)}\\
     &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
     \midrule
     Blut     & 37 & 4.0 \\
     Glyzerin &  0 & 10000 \\
     & 20 & 1410 \\
     & 60 & 81 \\
-    Öl (SAE 10) & 30 & 200 \\
+    \"{O}l (SAE 10) & 30 & 200 \\
     Wasser   &  0 & 1.8 \\
     & 20 & 1.00 \\
     & 60 & 0.65 \\
@@ -178,47 +164,29 @@ to centre the temperatures as the heading is wider than the numbers.
     \bottomrule
   \end{tabular}
   }
-% }
-  \caption{A table of viscosities in the default language and German.}%
-  \label{tab:viscosity}
+\end{tcblisting}
 \end{table}
 
 \Cref{tab:xsect0} shows a more complicated table set using the
 tools. You can either enclose all numbers in \Macro{num} or use the
 \Option{S} column descriptor. If you use \Option{S}, note that it
 usually centres the contents of the column. You can use the
-\Option{table-number-alignment}\footnote{\Option{tabnumalign} in
-  \TeXLive 2009} option to change this. \Option{S} and \Macro{num}
-cannot generally be mixed in a single column though.
+\Option{table-number-alignment} option to change this.
+\Option{S} and \Macro{num} cannot generally be mixed in a single column though.
 If you want to use \Macro{num} in an
 \Option{S} column you have to enclose it in braces. You also need to
 do this with regular text, such as column headings --- see
 \cref{tab:viscosity}.
 
+The spacing of the captions in \cref{tab:viscosity,tab:xsect0} is the same as
+the option \Option{captions=tableheading} is set in this guide.
+
 \begin{table}[htbp]
+  \caption{A selection of cross-section measurements!
+    Typeset using the \Macro{caption} macro.}%
+  \label{tab:xsect0}
   \centering
   \renewcommand{\arraystretch}{1.2}
-% \ifthenelse {\texlive < 2011} {%
-%   \begin{tabular}{%
-%       r@{\,:\,}S[tabnumalign=centredecimal]%
-%       r@{\,}c@{\,}l@{\,}l%
-%       S[tabformat=5.0]@{\,}l%
-%       l}
-%     \toprule
-%     \multicolumn{2}{c}{\etajet} & \multicolumn{4}{c}{\diffetab} & \multicolumn{2}{c}{\diffnloetab} & \Cbhad \\
-%     \multicolumn{2}{c}{} & \multicolumn{4}{c}{[\si{\pico\barn}]} &
-%     \multicolumn{2}{c}{[\si{\pico\barn\per\GeV}]} & \\
-%     \midrule
-%     \num{-1.6} & -1.1 & \num[dp=1]{57.4}  & \(\pm\) & \num[dp=1]{9.4}  & \(^{+13}_{ -3}\) &  72 & \(^{+22}_{-13}\) & \num[dp=2]{0.704} \\
-%     \num{-1.1} & -0.8 & \num[dp=0]{121.3} & \(\pm\) & \num[dp=0]{21.1} & \(^{+16}_{-16}\) & 182 & \(^{+50}_{-30}\) & \num[dp=2]{0.781} \\
-%     \num{-0.8} & -0.5 & \num[dp=0]{214.1} & \(\pm\) & \num[dp=0]{21.9} & \(^{+22}_{-12}\) & 255 & \(^{+69}_{-42}\) & \num[dp=2]{0.791} \\
-%     \num{-0.5} & -0.2 & \num[dp=0]{232.6} & \(\pm\) & \num[dp=0]{21.0} & \(^{+28}_{-21}\) & 307 & \(^{+83}_{-50}\) & \num[dp=2]{0.791} \\
-%     \num{-0.2} & +0.1 & \num[dp=0]{264.1} & \(\pm\) & \num[dp=0]{22.0} & \(^{+28}_{-23}\) & 342 & \(^{+91}_{-55}\) & \num[dp=2]{0.808} \\
-%     \num{+0.1} & +0.5 & \num[dp=0]{316.0} & \(\pm\) & \num[dp=0]{21.1} & \(^{+23}_{-17}\) & 346 & \(^{+96}_{-57}\) & \num[dp=2]{0.847} \\
-%     \num{+0.5} & +1.4 & \num[dp=0]{288.1} & \(\pm\) & \num[dp=0]{15.4} & \(^{+20}_{-30}\) & 265 & \(^{+82}_{-48}\) & \num[dp=2]{0.926} \\
-%     \bottomrule
-%   \end{tabular}
-% }{%
   \sisetup{round-mode = places}
   \begin{tabular}{%
       r@{\,:\,}S[table-number-alignment=center-decimal-marker]%
@@ -239,16 +207,12 @@ do this with regular text, such as column headings --- see
     \num{+0.5} & +1.4 & \num[round-precision=0]{288.1} & \(\pm\) & \num[round-precision=0]{15.4} & \(^{+20}_{-30}\) & 265 & \(^{+82}_{-48}\) & \num[round-precision=2]{0.926} \\
     \bottomrule
   \end{tabular}
-% }
-  \caption{A selection of cross-section measurements!}%
-  \label{tab:xsect0}
 \end{table}
 
 With \Macro{num} you can also specify the precision with which each
-number is shown separately. With \Option{S} you specify the format for
-the whole column. With \Package{siunitx} version 1 this is done using
-the \Option{dp} option and gives the number of decimal places for the
-rounding.  With \Package{siunitx} version 2 you should also make sure
+number is shown separately. 
+With \Option{S} you specify the format for the whole column.
+You should make sure
 that you specify the rounding mode in the preamble of the table (usually
 \Option{figures} or \Option{places} --- you can also choose \Option{off}).
 
@@ -271,60 +235,53 @@ never quote an error to 5 significant digits. You can go ahead and
 edit all the numbers by hand, but what do you do if you rerun your
 analysis and all the numbers change. Reformatting by hand is then an
 error prone and lengthy process. As discussed above, you can either
-use options such as \Option{round-precision}\footnote{\Option{dp} in
-  \TeXLive 2009} in the \Option{S} command or use the macro
+use options such as \Option{round-precision} in the \Option{S} command or use the macro
 \Macro{num} and \Option{dp}/\Option{round-precision} to do the
 rounding\index{rounding} for you.
 
 \Cref{tab:rounding} shows and compares two different approaches
 on how this can be done, even for asymmetric errors. While the form
 may appear to be a bit clumsy at first, it is easy enough to get your
-program to write out the lines. In \Package{siunitx} version 1 you
-should use option \Option{dp} for the rounding. In version 2 you
-should use the options \Option{round-mode} and
-\Option{round-precision}. In the first line of the left-hand part of
+program to write out the lines. 
+You should use the options \Option{round-mode} and
+\Option{round-precision} to specify how the rounding should be done.
+In the first line of the left-hand part of
 the table I show what to do if you need to change the precision of a
 single number.  As you can see this is rather trivial. However, then
 the alignment on the decimal point is no longer perfect. While this is
 probably OK for internal notes etc., theses or papers (should) have
-tougher requirements. Another way of achieving the same thing and
+tougher requirements.
+Another way of achieving the same thing and
 avoiding the use of \Option{round-mode} and
-\Option{round-precision}\footnote{\Option{dp} in \TeXLive 2009. The
-  \Option{round-mode} should be set in the preamble of the table and
-  not for every number.} is shown in the right half. Note the use of
-options for the \Option{S} command and the use of \Macro{num} enclosed
-in braces to format the row that requires a different precision.
+\Option{round-precision}\footnote{%
+  The \Option{round-mode} should be set in the preamble of the table and
+  not for every number.}
+is shown in the right half.
+Note the use of options for the \Option{S} command
+and the use of \Macro{num} enclosed in braces
+to format the row that requires a different precision.
+
+While the rounding works very nicely,
+it slows down the compilation of your document.
+You can turn off any rounding (and all other parsing of numbers)
+by using \Macro{sisetup} and the option \Option{parse-numbers=false}: 
+\Macro{sisetup\{parse-numbers=false\}}.
+If you set this option inside a table, it will only be applied to that table.
 
 It takes a while to learn what the different options mean and their
 consequences. I hope that these examples cover most problems and at
-least give ideas as to what is possible.  In particular the solution
+least give ideas as to what is possible.
+In particular the solution
 on the right-hand side of \cref{tab:rounding} is very nice, as
 all numbers except the one that requires an extra digit are written
 without any special formatting!
 
 \begin{table}[htbp]
+  \caption{Another selection of cross-section measurements! Note the
+    use of \Macro{sisetup} to keep the plus signs on the positive errors.}%
+  \label{tab:rounding}
   \centering
   \renewcommand{\arraystretch}{1.2}
-% \ifthenelse {\texlive < 2011} {%
-%   \sisetup{retainplus}
-%   \begin{tabular}{%
-%       S@{\,:\,}S
-%       r@{\,}@{\(\pm\)}@{\,}l@{\,}l
-%        }
-%     \toprule
-%     \multicolumn{2}{c}{\etajet} & \multicolumn{3}{c}{\diffetab} \\
-%     \multicolumn{2}{c}{} & \multicolumn{3}{c}{[\si{\pico\barn}]} \\
-%     \midrule
-%     {\num{-1.6}} & -1.1 & \num[dp=3]{0.574} & \num[dp=3]{0.094} & \(^{\num[dp=3]{+0.131}}_{\num[dp=3]{-0.031}}\) \\
-%     {\num{-1.1}} & -0.8 & \num[dp=2]{1.213} & \num[dp=2]{0.211} & \(^{\num[dp=2]{+0.162}}_{\num[dp=2]{-0.162}}\) \\
-%     {\num{-0.8}} & -0.5 & \num[dp=2]{2.141} & \num[dp=2]{0.219} & \(^{\num[dp=2]{+0.223}}_{\num[dp=2]{-0.123}}\) \\
-%     {\num{-0.5}} & -0.2 & \num[dp=2]{2.326} & \num[dp=2]{0.210} & \(^{\num[dp=2]{+0.284}}_{\num[dp=2]{-0.214}}\) \\
-%     {\num{-0.2}} & +0.1 & \num[dp=2]{2.641} & \num[dp=2]{0.220} & \(^{\num[dp=2]{+0.283}}_{\num[dp=2]{-0.233}}\) \\
-%     {\num{+0.1}} & +0.5 & \num[dp=2]{3.160} & \num[dp=2]{0.211} & \(^{\num[dp=2]{+0.232}}_{\num[dp=2]{-0.172}}\) \\
-%     {\num{+0.5}} & +1.4 & \num[dp=2]{2.881} & \num[dp=2]{0.154} & \(^{\num[dp=2]{+0.201}}_{\num[dp=2]{-0.301}}\) \\
-%     \bottomrule
-%   \end{tabular}
-% }{%
   \sisetup{retain-explicit-plus}
   \sisetup{round-mode = places}
   \begin{tabular}{%
@@ -344,33 +301,7 @@ without any special formatting!
     {\num{+0.5}} & +1.4 & \num[round-precision=2]{2.881} & \num[round-precision=2]{0.154} & \(^{\num[round-precision=2]{+0.201}}_{\num[round-precision=2]{-0.301}}\) \\
     \bottomrule
   \end{tabular}
-% }
   \quad
-% \ifthenelse {\texlive < 2011} {%
-%   \sisetup{dp = 2}
-%   \begin{tabular}{%
-%       S[tabformat=3.2, tabnumalign = right]@{\,:\,}S
-%       S[dp = 2,
-%       tabformat = 1.3, tabnumalign = right]
-%       @{\(\,\pm\,\)}
-%       S[dp = 2,
-%       tabformat = 1.3, tabnumalign = left]
-%       @{\,}l
-%        }
-%     \toprule
-%     \multicolumn{2}{c}{\etajet} & \multicolumn{3}{c}{\diffetab} \\
-%     \multicolumn{2}{c}{} & \multicolumn{3}{c}{[\si{\pico\barn}]} \\
-%     \midrule
-%     -1.6 & -1.1 & {\num[dp=3]{0.574}} & {\num[dp=3]{0.094}} & \(^{\num[dp=3]{+0.035}}_{\num[dp=3]{-0.031}}\) \\
-%     -1.1 & -0.8 & 1.213 & 0.211 & \(^{\num{+0.162}}_{\num{-0.162}}\) \\
-%     -0.8 & -0.5 & 2.141 & 0.219 & \(^{\num{+0.223}}_{\num{-0.123}}\) \\
-%     -0.5 & -0.2 & 2.326 & 0.210 & \(^{\num{+0.284}}_{\num{-0.214}}\) \\
-%     -0.2 & +0.1 & 2.641 & 0.220 & \(^{\num{+0.283}}_{\num{-0.233}}\) \\
-%     +0.1 & +0.5 & 3.160 & 0.211 & \(^{\num{+0.232}}_{\num{-0.172}}\) \\
-%     +0.5 & +1.4 & 2.881 & 0.154 & \(^{\num{+0.201}}_{\num{-0.301}}\) \\
-%     \bottomrule
-%   \end{tabular}
-% }{%
   \sisetup{round-mode = places, round-precision = 2}
   \begin{tabular}{%
       S[table-format=3.2, table-number-alignment = right]@{\,:\,}S
@@ -394,31 +325,11 @@ without any special formatting!
     +0.5 & +1.4 & 2.881 & 0.154 & \(^{\num{+0.201}}_{\num{-0.301}}\) \\
     \bottomrule
   \end{tabular}
-% }
-  \caption{Another selection of cross-section measurements! Note the
-    use of \Macro{sisetup} to keep the plus signs on the positive errors.}%
-  \label{tab:rounding}
 \end{table}
 
 Another example using \Package{siunitx} tools that contains a similar
 problem is:
 \begin{center}
-% \ifthenelse {\texlive < 2011} {%
-%   \begin{tabular}{%
-%     S[tabnumalign=centerdecimal]@{\(\,\pm\)}S[tabnumalign=centerdecimal]|%
-%     c%
-%     S[decimalsymbol=comma]@{\(\,\pm\!\!\)}S[decimalsymbol=comma]}
-%   \toprule
-%   \multicolumn{2}{c|}{English} &
-%   \multicolumn{1}{c}{German1} &
-%   \multicolumn{2}{c}{German2} \\
-%   {Value} & {Error} & {Wert} & \multicolumn{2}{c}{Messung}\\
-%   \midrule
-%   0.76 & 0.14 & \num[decimalsymbol=comma]{0.89(16)} & 0.89 & 0.16\\
-%   83.1 &  7.6 & \num[decimalsymbol=comma]{94.2(83)} & 94.2 & 8.3\\
-%   \bottomrule
-%   \end{tabular}
-% }{%
   \begin{tabular}{%
     S[table-number-alignment=center-decimal-marker]@{\(\,\pm\)}S[table-number-alignment=center-decimal-marker]|%
     c%
@@ -433,7 +344,6 @@ problem is:
   83.1 &  7.6 & \num[output-decimal-marker={,}]{94.2(83)} & 94.2 & 8.3\\
   \bottomrule
   \end{tabular}
-% }
 \end{center}
 
 As you can see, the \enquote{English} column formats things nicely using
@@ -481,7 +391,6 @@ The tables contain vertical lines that I would normally not include to illustrat
 \end{center}
 
 
-
 %------------------------------------------------------------------------------
 \section{Using \Package{dcolumn}}%
 \label{sec:tab:dcolumn}
@@ -513,6 +422,8 @@ set in 2 different ways. It is rotated by \SI{90}{\degree} to
 illustrate how that can be done.
 
 \begin{table}[htbp]
+  \caption{Cross-section measurements!}%
+  \label{tab:xsect1}
   \begin{sideways}
     \centering
     \begin{tabular}{r@{ : }l|c|c|c} % chktex 26 chktex 44
@@ -581,8 +492,6 @@ illustrate how that can be done.
        \bottomrule
     \end{array}\)
   \end{sideways}
-  \caption{Cross-section measurements!}%
-  \label{tab:xsect1}
 \end{table}
 
 The 2nd version (right) is certainly simpler to typeset and does not
@@ -602,6 +511,13 @@ the columns is given in \cref{tab:xsect2}. Note that this uses
 which also rotates the caption.
 
 \begin{sidewaystable}
+  \caption[Cross-sections using \Env{sidewaystable}, which also
+  rotates the caption.]{Cross-sections using \Env{sidewaystable},
+    which also rotates the caption. Just for fun the numbers
+    indicating the \(\eta\) range of the bins in the lower half have
+    been converted to German format! Note also the dirty trick used to
+    get the \Cbhad values nicely in the centre of the column.}%
+  \label{tab:xsect2}
   \centering
   \renewcommand{\arraystretch}{1.2}
   \begin{math}
@@ -643,13 +559,6 @@ which also rotates the caption.
       \bottomrule
     \end{array}
   \end{math}
-  \caption[Cross-sections using \Env{sidewaystable}, which also
-  rotates the caption.]{Cross-sections using \Env{sidewaystable},
-    which also rotates the caption. Just for fun the numbers
-    indicating the \(\eta\) range of the bins in the lower half have
-    been converted to German format! Note also the dirty trick used to
-    get the \Cbhad values nicely in the centre of the column.}%
-  \label{tab:xsect2}
 \end{sidewaystable}
 
 This version of the table also adds a few extra bells and whistles. It

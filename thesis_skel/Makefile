@@ -49,13 +49,6 @@ run_xelatexmk: $(THESIS).tex *.tex bib/*.bib
 	# latexmk -e '$$xelatex=q/xelatex %O -shell-escape %S/' -xelatex $(THESIS)
 
 # - in front of bibtex means compilation continues even if there is an error
-thesis09: $(THESIS).tex *.tex bib/*.bib
-	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
-	-bibtex $(THESIS)
-	# makeglossaries $(THESIS)
-	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
-	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
-
 thesis11: $(THESIS).tex *.tex bib/*.bib
 	$(LATEXCMD)   $(EXTRACMD) $(THESIS)
 	$(BIBTEX)  $(THESIS)
@@ -145,7 +138,7 @@ help:
 	@echo "new [THESIS=dirname]: Set up a new thesis"
 	@echo "thesis: Compile complete thesis (latexmk)"
 	@echo "run_latexmk: Compile complete thesis using latexmk"
-	@echo "thesis11: Compile complete thesis - texlive >=2011 + biber"
+	@echo "thesis11: Compile complete thesis (not using latexmk)"
 	@echo "feynmf: Run feynmf for all .tex files in $(FEYNDIR)"
 	@echo "feynmp: Run feynmp for all .tex files in $(FEYNDIR)"
 	@echo "tikz:   Run tikz for all .tex files in $(TIKZDIR)"

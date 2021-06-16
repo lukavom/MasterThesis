@@ -129,12 +129,7 @@
 % Draft version - add the word DRAFT on the cover pages
 \ifthenelse{\equal{\ThesisVersion}{Draft}}{%
   \usepackage{background}
-  \ifthenelse{\texlive < 2013}{%
-    \SetBgContents{DRAFT}
-    \SetBgColor{blue!30}
-  }{%
-    \backgroundsetup{contents=DRAFT, color=blue!30}
-  }
+  \backgroundsetup{contents=DRAFT, color=blue!30}
 }
 
 %------------------------------------------------------------------------------
@@ -187,11 +182,7 @@
 
 % Turn off DRAFT for the following pages
 \ifthenelse{\equal{\ThesisVersion}{Draft}}{%
-  \ifthenelse{\texlive < 2013}{%
-    \SetBgContents{}
-  }{%
-    \backgroundsetup{contents={}}
-  }
+ \backgroundsetup{contents={}}
 }{}
 
 %------------------------------------------------------------------------------

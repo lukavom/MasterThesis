@@ -56,6 +56,8 @@ which leaves some space for the binding.
 The packages are listed in \cref{tab:package:layout}.
 
 \begin{table}[htbp]
+  \caption{Useful packages for layout.}%
+  \label{tab:package:layout}
   \centering
   \begin{tabular}{lp{0.8\textwidth}}
     \toprule
@@ -79,8 +81,6 @@ The packages are listed in \cref{tab:package:layout}.
     \enquote{\texttt{\{\}}} after a macro.\\
     \bottomrule
   \end{tabular}
-  \caption{Useful packages for layout.}%
-  \label{tab:package:layout}
 \end{table}
 
 The package \Package{scrlayer-scrpage} has superseded \Package{scrpage2}.
@@ -114,32 +114,53 @@ Commonly used packages associated with fonts, tables and
 figures are listed in \cref{tab:package:appearance}.
 
 \begin{table}[htbp]
+  \caption{Useful packages for appearance.}%
+  \label{tab:package:appearance}
   \centering
   \begin{tabular}{lp{0.75\textwidth}}
     \toprule
     \Package{siunitx} & Typeset units properly with correct spacing.\\
     \Package{graphicx} & The package to use for including graphics.\\
+    \Package{biblatex} & The package to use for formatting the bibliography.\\
     \Package{rotating} & Package to use for rotating tables etc. The
       \Macro{includegraphics} command can rotate figures directly.\\
     \Package{array} & Adds extra column formatting capabilities.\\
     \Package{longtable} & Can produce tables that extend over more than one page.\\
     \Package{booktabs} & Help for producing nicer tables.\\
-    \Package{amsmath}, \Package{amssymb} & Extra math commands and symbols from AMS.\\
+    \Package{subcaption} & A newer alternative to \Package{subfig}.\\
+    \Package{cleveref} & Provides \enquote{Fig.}, \enquote{Table} etc.\ when you use
+      the \Macro{cref\{fig:plot\}} syntax.\\
+    \Package{mathtools} & An extension package for \Package{amsmath} that fixes some bugs and deficiencies there.\\
+    \Package{amsmath}, \Package{amssymb} & Included by \Package{mathtools}. 
+      Extra math commands and symbols from AMS.\\
     \Package{hepnicenames} & A somewhat restricted list of predefined elementary particles.\\
     \Package{heppennames} & A more complete list of predefined elementary particles.
       Note that \Package{hepnicenames} also loads \Package{heppennames}.
       The packages are based on \Package{hepparticles}, which you can use to define further particles.\\
     \Package{mhchem} & Nice package for typesetting chemical elements correctly.\\
+    \Package{bookmark} & Fixes appendices displaying in PDF viewer index/outline under first appendix
+      instead of under Appendix heading.\\
     \Package{xfrac} & Some more options for typesetting fractions.\\
     \Package{xcolor} & Add colour commands.\\
-    \Package{titlesec} & Change the appearance of chapter and section headings. 
-      See below for more information.\\
     \Package{microtype} & Small adjustments to word spacings.\\
+    \Package{ifthen} & Provides the \Macro{ifthenelse} command.\\
     \bottomrule
   \end{tabular}
-  \caption{Useful packages for appearance.}%
-  \label{tab:package:appearance}
 \end{table}
+
+The \Package{cleveref} package is a great package for specifying references to
+figures, tables, sections etc.
+You just give the command \Macro{cref\{fig:plot\}} and it will add \enquote{Fig.} or whatever
+you set to the figure number and an unbreakable space.
+You can correctly format a list of figures by including several comma-separated labels in the \Macro{cref} command.
+Note that you should not include any whitespace between the labels.
+If you want capitalised \enquote{Fig.} etc. pass the option \Option{clevercaps}
+to \Package{ubonn-thesis} (this is the default setting).
+Otherwise pass the option \Option{clevercaps=false}.
+Note that you should include \Package{cleveref} by passing \Option{cleveref} 
+as an option to \Package{ubonn-thesis}.
+If you just try the usual \Macro{usepackage\{cleveref\}} you may get things in the wrong language.
+This guide has been converted to use the \Package{cleveref} package everywhere.
 
 As alternatives to \Package{longtable}, one can also use
 \Package{supertabular} or \Package{xtab}. 
@@ -155,10 +176,6 @@ you can include footnotes in a table.
 See the \Package{xtab} documentation for more details.
 It is probably best to only use one of these three packages to avoid conflicts.
 
-Use of the \Package{titlesec} package gives a warning when using \KOMAScript{}; hence
-as of version 3.0 the chapter title formatting is done by hand in \Package{ubonn-thesis}.
-You can switch back to using \Package{titlesec} by giving the option \Option{titlesec}.
-
 The package \Package{microtype} declares itself to be responsible for
 \enquote{Subliminal refinements towards typographical perfection}.
 Need I say more?
@@ -173,10 +190,11 @@ Some other useful packages, some of which are included in
 \cref{tab:package:other1}.
 
 \begin{table}[htbp]
+  \caption{Other useful packages.}%
+  \label{tab:package:other1}
   \centering
   \begin{tabular}{lp{0.8\textwidth}}
     \toprule
-    \Package{ifthen} & Provides the \Macro{ifthenelse} command.\\
     \Package{IEEEtrantools} & Contains useful environments for multiline equations.\\
     \Package{feynmp} & Draw Feynman graphs with Metapost.\\
     \Package{axodraw} & Draw Feynman graphs.\\
@@ -185,18 +203,15 @@ Some other useful packages, some of which are included in
     directly compile for each figure and also input to another document.\\
     \Package{hyperref} & Adds \Macro{url} command as well as ability
     to click on entries on table of contents etc.\\
-    \Package{cleveref} & Provides \enquote{Fig.}, \enquote{Table} etc.\ when you use
-      the \Macro{cref\{fig:plot\}} syntax.\\
-    \Package{bookmark} &  Fixes appendices displaying in PDF viewer index/outline under first appendix
-      instead of under Appendix heading.\\
     \Package{todonotes} & Nice package to add notes to your text.
       You can also use it to indicate missing figures.\\
     \Package{background} & Allows you to add things like DRAFT across the whole document page.\\
     \Package{subfiles} & Provides a nice alternative to
     \Macro{include}.\\
-    \Package{subcaption} & A newer alternative to \Package{subfig}.\\
     \Package{tabularx} & Allows fixed table width with flexible column widths.\\
     \Package{floatrow} & Add ability to define own floats.\\
+    \Package{diffcoeff} & A lot of useful commands for derivatives.\\
+    \Package{derivative} & A new package (released in 2021) with lot of useful commands for derivatives.\\
     \Package{physics} & Some useful extra maths commands, especially for differentials.\\
     \Package{commath} & Some useful extra maths commands --- has not been updated for a while.\\
     \Package{skmath} & More maths commands that could be useful.\\
@@ -211,42 +226,44 @@ Some other useful packages, some of which are included in
     \Package{refcheck} & Check whether labels are used, i.e.\ if figures and tables are actually referenced.\\
     \Package{tcolorbox} & Fancy coloured boxes. Also works very well for code listings.\\
     \Package{pgfplotstable} & Read in tables from CSV files and format them (even as graphs).\\
+    \Package{titlesec} & Change the appearance of chapter and section headings. 
+      See below for more information.\\
     \bottomrule\\
   \end{tabular}
-  \caption{Other useful packages.}%
-  \label{tab:package:other1}
 \end{table}
 
-While the \Package{amsmath} package solves many problems that occur if
-you just use the normal \LaTeX{} math mode commands, there are some
-things that are not so nice with long and complicated multiline
-equations. 
-\Package{IEEEtrantools}, in particular the \Env{IEEEeqnarray} environment, can help here.
+While the \Package{mathtools} and \Package{amsmath} packages solve many problems that occur if
+you just use the normal \LaTeX{} math mode commands,
+there are some things that are not so nice with long and complicated multiline equations.
+\Package{mathtools} provides some extensions to \Package{amsmath} that solve some of the problems.
+An alternative is the package \Package{IEEEtrantools}, in particular the \Env{IEEEeqnarray} environment.
 See Ref.~\cite{lshort} or the package documentation for more details.
 
-The packages \Package{physics}, \Package{commath} and \Package{skmath} provide some additional maths commands.
+The packages \Package{physics}, \Package{commath}, \Package{skmath}, \Package{diffcoeff} and \Package{derivative} provide some additional maths commands.
 Differentials etc.\ are particularly useful.
-The \Package{physics} package contains a lot of nice and flexible definitions and also handles the spacing around things like \(\dd{x}\) well,
-if you use the \verb|\dd{x}| construction.
+Both the \Package{diffcoeff} and \Package{derivative} packages contain a lot of nice and flexible definitions associated with derivatives.
+They handle the spacing around things like \(\dl x\) well,
+if you use the \verb|\odif{x}| (\Package{derivative}) or \verb|\dl x| (\Package{diffcoeff}) construction.
+An alternative (but not updated for a long time) package is \Package{physics} package contains a lot of nice and flexible definitions.
+However, an interesting StackExchange article\footnote{%
+\url{https://tex.stackexchange.com/questions/471532/alternatives-to-the-physics-package}}
+suggests that the package has its drawbacks and it has not been updated since 2012.
 The \Package{commath} package has not been updated for a while.
 \Package{skmath} does quite a lot more then \Package{commath} and even modifies/enhances some standard commands.
+The \Package{diffcoeff} has been around since 2016,
+while \Package{derivative} package was released in 2021.
+Both look to be nice and well maintained.
+This guide use \Package{diffcoeff}, as \Package{derivative} is too new.
+By default, the option \Option{ISO} is passed to the \Package{diffcoeff} package,
+so that an upright \enquote{d} is used in derivatives, e.g.\ \(\diff f/x\).
 
 The \Package{todonotes} is a very nice package that enables you to add notes to your text.
 By default they will be put in the margin of your document.
 More details can be found in \cref{sec:package:todo}.
 
-The \Package{cleveref} package is a great package for specifying references to
-figures, tables, sections etc.
-You just give the command \Macro{cref\{fig:plot\}} and it will add \enquote{Fig.} or whatever
-you set to the figure number and an unbreakable space.
-Note that you should include \Package{cleveref} by passing \Option{cleveref} as an option
-to \Package{ubonn-thesis}.
-If you just try the usual \Macro{usepackage\{cleveref\}} you may get things in the wrong language.
-This guide has been converted to use the \Package{cleveref} package everywhere.
-
-\Package{standalone} is both a package and a document class. It is
-available from \TeXLive 2012 onwards. It allows you to have a
-standalone document for a \Package{tikz} or \Package{feynmf} figure
+\Package{standalone} is both a package and a document class.
+% It is available from \TeXLive 2012 onwards.
+It allows you to have a standalone document for a \Package{tikz} or \Package{feynmf} figure
 and also input this file into another document. If you run pdf\LaTeX\
 on the file it also automatically crops the resulting picture. This is
 one of those packages where you think \enquote{Why didn't someone
@@ -259,6 +276,10 @@ I used \Package{listings} for quite a while,
 but \Package{tcolorbox} can be used for anything associated with boxes and
 has much more flexibility.
 This guide can has now been adjusted to use \Package{tcolorbox}.
+
+Use of the \Package{titlesec} package gives a warning when using \KOMAScript{}; hence
+as of version 3.0 the chapter title formatting is done by hand in \Package{ubonn-thesis}.
+You can switch back to using \Package{titlesec} by giving the option \Option{titlesec}.
 
 Although I have not actually tried it,
 the \Package{pgfplotstable} package has the ability to read in CSV files and
@@ -283,13 +304,6 @@ See \url{http://tex.stackexchange.com/questions/273970/conflict-refcheck-subcapt
 
 It is often useful to indicate whether your thesis is in the draft stage.\index{draft}
 The thesis skeleton uses the package \Package{background} for this.
-% It is only available as of \TeXLive 2011.
-% Hence \enquote{Draft} is instead put in the heading for older versions.
-% As an alternative, you can try the package \Package{draftwatermark}.\footnote{%
-% \Package{draftwatermark} needs \Macro{unitlength} to be set to \SI{1}{pt}.
-% This is not the default setting in \Package{ubonn-thesis}.
-% The 2009 thesis skeleton contains \Macro{setlength\{\Macro{unitlength\}\{1pt\}}} (commented out).
-% Given that this is a global setting, neither it nor \Package{draftwatermark} are included by default.}
 
 A list of other packages that are commonly used is given in
 \cref{tab:package:other2}. They are not
@@ -297,6 +311,9 @@ included in the list above, because they are either not really needed
 or have been superseded by other packages.
 
 \begin{table}[htbp]
+  \caption{Other packages that are often used, but I have already
+    given alternatives.}%
+  \label{tab:package:other2}
   \centering
   \begin{tabular}{lp{0.8\textwidth}}
     \toprule
@@ -328,9 +345,6 @@ or have been superseded by other packages.
     chapter heading.\\
     \bottomrule
   \end{tabular}
-  \caption{Other packages that are often used, but I have already
-    given alternatives.}%
-  \label{tab:package:other2}
 \end{table}
 
 As indicated, the \Package{ziffer} package is advertised as providing
@@ -384,7 +398,7 @@ as an option or move the note outside (after) the caption.
 
 
 %------------------------------------------------------------------------------
-\section{pdf\LaTeX, Lua\LaTeX or Xe\LaTeX}%
+\section{pdf\LaTeX, Lua\LaTeX\ or Xe\LaTeX}%
 \label{sec:package:xelatex}\index{pdfLaTeX@pdf\LaTeX}\index{LuaLaTeX@\LuaLaTeX}\index{XeLaTeX@\XeLaTeX}
 %------------------------------------------------------------------------------
 

@@ -37,6 +37,7 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 ### Removed
 
 - Remove support and documentation for TeX Live versions older than 2013.
+- `firstinits` option removed, as steering is done by TeX Live version.
 - Remove definition of `\dif`, as it is better to use a package such as `diffcoeff` for derivatives.
 - Remove lots of commented out code for older TeX Live versions.
 - Remove `thesis-2009-skel.tex` file, as support has been dropped for such old versions.

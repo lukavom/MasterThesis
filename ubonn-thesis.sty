@@ -230,7 +230,7 @@
 }
 
 % Use firstinits or giveninits
-\ifthenelse{\boolean{UBN@firstinits}}{%
+\ifthenelse{\UBN@texlive < 2016}{%
   \newcommand*{\UBN@initials}{firstinits=true}
 }{%
   \newcommand*{\UBN@initials}{giveninits=true}

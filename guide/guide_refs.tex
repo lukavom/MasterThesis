@@ -121,8 +121,6 @@ If you use \Package{biblatex} you need something like:
 % Use biblatex for the bibliography
 \usepackage[backend=biber,
   style=numeric-comp, sorting=none, block=ragged, giveninits=true]{biblatex}
-% \usepackage[backend=bibtex, hyperref=true,
-%   style=numeric-comp, sorting=none, block=ragged, giveninits=true]{biblatex}
 
 % Adjustments to output are in this style file:
 \usepackage{ubonn-biblatex}
@@ -133,7 +131,8 @@ If you use \Package{biblatex} you need something like:
 in the document preamble and \Macro{printbibliography} where they
 should be printed.\footnote{%
 If you use an older version of \TeXLive you may have to replace
-\texttt{giveninits} by \texttt{firstinits}.}
+\texttt{giveninits} by \texttt{firstinits},
+although this should be done for you automatically if you set \Option{texlive} correctly.}
 Note that as of version 3.0 of the thesis package,
 the \Package{biblatex} command is included in \Package{ubonn-thesis} directly.
 To turn it off add the option \Option{biblatex=false}.
@@ -150,12 +149,11 @@ at the point where the references should be printed.
 Note that \LaTeX{} is sometimes picky about spaces in lists of files,
 so you either terminate each line in \Macro{bibliography} with a \% or include all files on one line.
 
-Which should you use? Traditional \BibTeX{} has been around for a long time and is
-therefore better known. However, it has many problems when it comes to
-sorting, handling more modern sources of information (e.g.\ the web),
-etc. 
-By now (written in 2015) \Package{biblatex} is rather stable,
-so future changes should be minor.
+Which should you use?
+Traditional \BibTeX{} has been around for a long time and is therefore better known.
+However, it has many problems when it comes to sorting,
+handling more modern sources of information (e.g.\ the web), etc. 
+By now \Package{biblatex} is rather stable, so future changes should be minor.
 It supports things like online references and enables you to click on references
 using the preprint number or DOI to look at a reference. It is also
 easier to change the way your references look. I therefore

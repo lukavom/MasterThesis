@@ -215,7 +215,6 @@ texlive-science
 texlive-bibtex-extra
 texlive-fonts-extra
 texlive-latex-extra
-texlive-math-extra
 biber
 latexmk
 texlive-lang-german
@@ -225,20 +224,22 @@ I also had to install \texttt{texlive-metapost} and \texttt{tracklang} in order 
 % The guide also needs \texttt{texlive-generic-extra}, at least for \TeXLive 2015.
 If you want to use the \Package{IEEEtrantools} you have to install \texttt{texlive-publishers},
 or the package \Package{IEEEtran}.
-
 If you want to use \LuaLaTeX\ you also have to install \texttt{texlive-luatex}
 and if you want to use \XeLaTeX\ you have to install \texttt{texlive-xetex}.
-You may also have to install \texttt{texlive-xetex} even if you only plan to use \XeLaTeX.
+You may also have to install \texttt{texlive-xetex} even if you only plan to use \LuaLaTeX.
+In older Ubuntu installations you may have to also install \texttt{texlive-math-extra}.
+In newer versions this package has been removed.
 
-If your \LaTeX\ installation is old, you may want to bring it
-up-to-date.  For Ubuntu variants there is a simple solution. Just add
-\TeXLive backports to your list of sources (use the \texttt{sudo
-  apt-add-repository ppa:texlive-backports/ppa} command). You should
-then be able to give the command \texttt{sudo apt-get update; sudo
-  apt-get upgrade}. Note that this variant will overwrite your current
-\LaTeX\ installation. An alternative is the method discussed in the
-following paragraphs, which allows you to have two different installations in
-parallel.
+If your \LaTeX\ installation is old, you may want to bring it up-to-date.
+For Ubuntu variants there is a simple solution.
+Just add \TeXLive backports to your list of sources
+(use the \texttt{sudo apt-add-repository ppa:texlive-backports/ppa} command).
+You should then be able to give the command
+\texttt{sudo apt-get update; sudo apt-get upgrade}.
+Note that this variant will overwrite your current
+\LaTeX\ installation.
+An alternative is the method discussed in the following paragraphs,
+which allows you to have two (or more) different installations in parallel.
 
 
 %------------------------------------------------------------------------------
@@ -342,6 +343,27 @@ Note that the three commands set things up so
 that \texttt{/opt/texbin} is at the beginning of your \texttt{PATH}
 and that \LaTeX\ is then taken from there rather than the usual
 \texttt{/usr/bin}.
+
+On my test Ubuntu installation, 
+I installed a very basic \TeXLive installation when setting up the system
+and then added several different \TeXLive installations using this method.
+This works very well, except that \XeLaTeX could not find the TeX Gyre fonts.
+After installing a more complete set of packages (see \cref{sec:app:kubuntu})
+the problem was fixed.
+If you see such problems,
+you can try to replace 
+\begin{tcblisting}{listing only}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont[version=bold]{TeX Gyre Termes Math}
+\end{tcblisting}
+\noindent with
+\begin{tcblisting}{listing only}
+\setmainfont{texgyretermes-regular.otf}
+\setmathfont{texgyretermes-regular.otf}
+\setmathfont[version=bold]{texgyretermes-regular.otf}
+\end{tcblisting}
+\noindent in \File{ubonn-thesis.sty}.
 
 % With Kubuntu 13.04, I had to install \texttt{texdoc} in addition in
 % order to be able to use it to access the documentation with
@@ -683,24 +705,19 @@ Use styles with a \texttt{long} rather than a \texttt{super} variant if you want
 
 If you have a glossary and want it to compile it using \Command{latexmk}\index{latexmk}
 you should add the following
-lines to \File{~/.latexmkrc} or to \File{~/.config/latexmk/latexmkrc}:\footnote{%
+lines to \File{\textasciitilde/.latexmkrc} or to \File{\textasciitilde/.config/latexmk/latexmkrc}:\footnote{%
 I got this information from \url{https://tex.stackexchange.com/questions/1226/how-to-make-latexmk-use-makeglossaries}}
 \begin{verbatim}
-  add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
-  add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');
-  
-  sub run_makeglossaries {
-    if ( $silent ) {
-      system "makeglossaries -q '$_[0]'";
-    }
-    else {
-      system "makeglossaries '$_[0]'";
-    };
-  }
-  
-  push @generated_exts, 'glo', 'gls', 'glg';
-  push @generated_exts, 'acn', 'acr', 'alg';
-  $clean_ext .= ' %R.ist %R.xdy';
+add_cus_dep( 'acn', 'acr', 0, 'makeglossaries' );
+add_cus_dep( 'glo', 'gls', 0, 'makeglossaries' );
+$clean_ext .= " acr acn alg glo gls glg";
+sub makeglossaries {
+  my ($base_name, $path) = fileparse( $_[0] );
+  pushd $path;
+  my $return = system "makeglossaries", $base_name;
+  popd;
+  return $return;
+}
 \end{verbatim}
 
 I illustrate the use with the standard description of the ZEUS

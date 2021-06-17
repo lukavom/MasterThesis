@@ -467,22 +467,40 @@
 \ifthenelse{\boolean{UBN@mhchem}}{\RequirePackage[version=4]{mhchem}}{}
 
 %------------------------------------------------------------------------------
-% Fonts with XeLaTeX or LuaLaTeX
+% Fonts with XeLaTeX or LuaLaTeX.
+% Preferred way (Will Robertson TUGboat, Volume 39 (2018), No. 2) is to use filename.
 \ifthenelse{\boolean{XeTeX} \OR \boolean{LuaTeX}}{%
   \RequirePackage[math-style=ISO, bold-style=ISO,
     warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \ifthenelse{\boolean{UBN@newtx} \OR \boolean{UBN@txfonts}}{%
-    \setmainfont{TeX Gyre Termes}
-    \setmathfont{TeX Gyre Termes Math}
-    \setmathfont[version=bold]{TeX Gyre Termes Math}
+    \setmainfont{texgyretermes}[
+      Extension = .otf ,
+      UprightFont = *-regular ,
+      ItalicFont = *-italic ,
+      BoldFont = *-bold ,
+      BoldItalicFont = *-bolditalic ,
+    ]
+    \setmathfont{texgyretermes-math.otf}
+    \setmathfont[version=bold]{texgyretermes-math.otf}
+    % \setmainfont{TeX Gyre Termes}
+    % \setmathfont{TeX Gyre Termes Math}
+    % \setmathfont[version=bold]{TeX Gyre Termes Math}
     % \setmathrm{TeX Gyre Termes}
   }{%
     \ifthenelse{\boolean{UBN@palatino}}{%
-      \setmainfont{TeX Gyre Pagella}
-      \setmathfont{TeX Gyre Pagella Math}
-      \setmathfont[version=bold]{TeX Gyre Pagella Math}
-      % \setmathrm{TeX Gyre Pagella}
+      \setmainfont{texgyrepagella}[
+        Extension = .otf ,
+        UprightFont = *-regular ,
+        ItalicFont = *-italic ,
+        BoldFont = *-bold ,
+        BoldItalicFont = *-bolditalic ,
+      ]
+      \setmathfont{texgyrepagella-math.otf}
+      \setmathfont[version=bold]{texgyretermes-math.otf}
+      % \setmainfont{TeX Gyre Pagella}
+      % \setmathfont{TeX Gyre Pagella Math}
+      % \setmathfont[version=bold]{TeX Gyre Pagella Math}
       % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
     }{}
   }

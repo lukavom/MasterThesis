@@ -104,10 +104,11 @@ For illustration, you can also see the effect of adjusting \Macro{extrarowheight
 %------------------------------------------------------------------------------
 
 The \Package{siunitx} package contains some nice tools that make the
-correct alignment of numbers simpler. The syntax of some of the
-options changed between version 1 (\(\leq 2009\)) and version 2 (\(\geq 2011\)). I
-discuss the version 2 options in the main text and give the equivalent
-version 1 options as a footnote.
+correct alignment of numbers simpler. 
+% The syntax of some of the
+% options changed between version 1 (\(\leq 2009\)) and version 2 (\(\geq 2011\)).
+% I discuss the version 2 options in the main text and give the equivalent
+% version 1 options as a footnote.
 
 A first simple example is shown in \cref{tab:viscosity}.
 In fact I show the table twice, once
@@ -116,11 +117,11 @@ with the language set to default and once with it set to German. The
 \Macro{foreignlanguage}. Note the use of
 \Option{table-format}
 to centre the temperatures as the heading is wider than the numbers.
-Umlaute etc.\ kann normally be inserted directly,
-which is done in this example.
-That does not work in the \Env{tcblisting} environment if one uses pdf\LaTeX\ to compile the guide.
+Umlaute etc.\ can normally be inserted directly.
 Such characters can be included directly in listings that use the \Env{tcblisting} environment,
 if one uses  with \LuaLaTeX\ and \XeLaTeX\ for compilation.
+However, that does not work in the \Env{tcblisting} environment if one uses pdf\LaTeX\ to compile the guide.
+Hence this example uses the old fashioned style \verb|\"{u}| etc.
 
 \begin{table}[htbp]
   \captionabove{A table of viscosities in the default language and German.
@@ -364,7 +365,7 @@ A good way of doing this is to insert some \Macro{hspace*} into the header.
 The table on the left is without \Macro{hspace}, while the one on the right is
 with an \Macro{hspace} of 2em.
 The tables contain vertical lines that I would normally not include to illustrate the alignment.
-\begin{center}
+\begin{tcblisting}{listing side text}
   \renewcommand{\arraystretch}{1.4}
   \sisetup{round-mode = places, retain-explicit-plus}
   \begin{tabular}{|S[table-format=5.0]@{\,}l|} % chktex 44
@@ -377,7 +378,9 @@ The tables contain vertical lines that I would normally not include to illustrat
      255 & \(^{+69}_{-42}\) \\
     \bottomrule
   \end{tabular}
-  \qquad
+\end{tcblisting}
+
+\begin{tcblisting}{listing side text}
   \begin{tabular}{|S[table-format=5.0]@{\,}l@{\hspace*{2em}}|} % chktex 44
     \toprule
     \multicolumn{2}{| c |}{\diffnloetab} \\
@@ -388,7 +391,7 @@ The tables contain vertical lines that I would normally not include to illustrat
      255 & \(^{+69}_{-42}\) \\
     \bottomrule
   \end{tabular}
-\end{center}
+\end{tcblisting}
 
 
 %------------------------------------------------------------------------------

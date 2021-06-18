@@ -511,6 +511,23 @@
       % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
     }{}
   }
+  % If TeX Gyre fonts used, also use them for sans serif and monospaced fonts.
+  \ifthenelse{\boolean{UBN@newtx} \OR \boolean{UBN@txfonts} \OR \boolean{UBN@palatino}}{%
+    \setsansfont{texgyreheros}[
+      Extension = .otf ,
+      UprightFont = *-regular ,
+      ItalicFont = *-italic ,
+      BoldFont = *-bold ,
+      BoldItalicFont = *-bolditalic ,
+    ]
+    \setmonofont{texgyrecursor}[
+      Extension = .otf ,
+      UprightFont = *-regular ,
+      ItalicFont = *-italic ,
+      BoldFont = *-bold ,
+      BoldItalicFont = *-bolditalic ,
+    ]
+  }{}
 }{}
 
 \RequirePackage{microtype}

@@ -24,7 +24,7 @@
 
 % diffcoeff package released in 2016 - define a simple form of \diff for earler.
 \ifthenelse{\texlive < 2016}{%
-  \newcommand*{\diffcoeff}{diffcoeff=true}
+  \newcommand*{\diffcoeff}{diffcoeff=false}
   \newcommand*{\diff}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
 }{%
   \newcommand*{\diffcoeff}{diffcoeff=true}
@@ -32,7 +32,7 @@
 
 % Thesis style file.
 \usepackage[twoside=false, todonotes=true, shownotes=true,
-  cleveref, diffcoeff, dcolumn, feynmp, xtab,
+  cleveref, \diffcoeff, dcolumn, feynmp, xtab,
   bibstyle=alphabetic]{ubonn-thesis}
 
 % Thesis bibliography settings.

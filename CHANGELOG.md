@@ -12,6 +12,7 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 
 ### Added
 
+- Add option `twoside` to be used for printed and PDF versions of theses.
 - Add options for the `diffcoeff` and `derivative` packages.
 - Add `scrhack` package to get rid of some KOMA-Script warnings.
 - Add some discussion on "fluff".
@@ -28,6 +29,8 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 - Latest version of `PyFeynHand` scripts.
 - `backref`, `maxbibnames` and `block` options actually work and should be passed to `ubonn-biblatex.sty`.
 - Shuffle instructions on compiling guide.
+- Several tweaks and improvements to usage of LuaLaTeX and XeLaTeX.
+- Use filenames instead of font names for LuaLasTeX and XeLaTeX fonts.
 - Use `\ifthenelse` instead of standard `if` in many places.
 
 ### Deprecated
@@ -41,6 +44,7 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 - Remove definition of `\dif`, as it is better to use a package such as `diffcoeff` for derivatives.
 - Remove lots of commented out code for older TeX Live versions.
 - Remove `thesis-2009-skel.tex` file, as support has been dropped for such old versions.
+- Remove old `biblatex` directory and the style files in there, as they are superseded by `ubonn-biblatex.sty`.
 
 ## [7.0.0] - 2020-06-19
 

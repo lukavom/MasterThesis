@@ -1,10 +1,10 @@
 \documentclass[Master, ngerman, UKenglish]{scrbook}
 %------------------------------------------------------------------------------
 % This file contains a skeleton thesis for
-% a Physics or Astronomy Institute in the University of Bonn
+% a Physics or Astronomy Institute in the University of Bonn.
 
-% Specify the thesis type as an option: PhD, Master, Diplom, Bachelor
-% Specify the thesis stage as an option: Draft (default), Submit, Final, PILibrary
+% Specify the thesis type as an option: PhD, Master, Diplom, Bachelor.
+% Specify the thesis stage as an option: Draft (default), Submit, Final, PILibrary.
 
 % Specify the language(s) in the class and then use babel.
 % If you need more than one language, give the default language last,
@@ -12,13 +12,14 @@
 % to be able to set the language to German for some part of it.
 
 %------------------------------------------------------------------------------
-% Pass TeX Live version to the package
-% Use command pdflatex --version to find out which version you are running
-% in your bibliography
-\usepackage[texlive=2017, astrobib]{ubonn-thesis}
-% Adjustments to standard biblatex style
-% Change option to backref=false when your thesis is ready to turn off back-referencing
-% Astronomy theses usually set block=none
+% Pass TeX Live version to the package.
+% Use command pdflatex --version to find out which version you are running.
+% twoside=true is suitable for printing, while twoside=false is probably better for PDF version.
+\usepackage[twoside=true, texlive=2017]{ubonn-thesis}
+% Adjustments to standard biblatex style.
+% Change option to backref=false when your thesis is ready to turn off back-referencing.
+% Pass the option showurl=false to shorten your bibliography by not including url fields.
+% Astronomy theses usually set block=none.
 \usepackage[backref=true, block=none]{ubonn-biblatex}
 
 % Glossary package
@@ -60,11 +61,6 @@
 \addbibresource{bib/thesis_refs.bib}
 \addbibresource{bib/standard_refs-biber.bib}
 
-% You can include the following lines if you want to shorten your
-% bibliography by not including url fields
-% \AtEveryBibitem{\clearfield{url}}
-% \AtEveryCitekey{\clearfield{url}}
-
 %------------------------------------------------------------------------------
 % The following definitions are used to produce the title pages
 % needed at various stages
@@ -81,14 +77,14 @@
 \newcommand*{\thesisrefereetwo}{Prof.\ Dr.\ Anne Jones}
 % Date when thesis was submitted (Master/Diplom)
 % Year or Month, Year when thesis was submitted (PhD)
-\newcommand*{\thesissubmit}{XX.YY.2020}
-% \newcommand*{\thesissubmit}{Month 2020}
+\newcommand*{\thesissubmit}{XX.YY.2021}
+% \newcommand*{\thesissubmit}{Month 2021}
 % Date of thesis examination (PhD)
-\newcommand*{\thesispromotion}{XX.YY.2020}
+\newcommand*{\thesispromotion}{XX.YY.2021}
 % Month and year of the final printed version of the thesis
 \newcommand*{\thesismonth}{MMM}
-\newcommand*{\thesisyear}{2020}
-\newcommand*{\thesisnumber}{BONN-IR-2020-XXX}
+\newcommand*{\thesisyear}{2021}
+\newcommand*{\thesisnumber}{BONN-IR-2021-XXX}
 
 %------------------------------------------------------------------------------
 % The abstract is only needed for the printed version and should be in
@@ -182,7 +178,7 @@
 
 % Turn off DRAFT for the following pages
 \ifthenelse{\equal{\ThesisVersion}{Draft}}{%
- \backgroundsetup{contents={}}
+  \backgroundsetup{contents={}}
 }{}
 
 %------------------------------------------------------------------------------
@@ -239,8 +235,3 @@
 % \input{thesis_cv}
 
 \end{document}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:

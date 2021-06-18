@@ -1,0 +1,134 @@
+% !TeX root = thesis_guide.tex
+% chktex-file 1 chktex-file 46
+
+%==============================================================================
+\chapter{Making a glossary or list of acronyms}%
+\label{sec:app:glossary}
+%==============================================================================
+
+\LaTeX{} file: \url{./guide_appendix_glossary.tex}\\[1ex]
+\noindent
+What is the difference between a glossary and a list of acronyms? They
+are in fact very similar. A list of acronyms is probably most
+appropriate for defining the abbreviations used for detector names,
+e.g.\ the electromagnetic calorimeter (EMC). A glossary is used for
+defining terms, e.g.\ \enquote{\textbf{transition radiation}: transition
+radiation can be emitted when a particle crosses the boundary between
+two media with different dielectric constants}. A list of acronyms is
+probably a good idea to include in any thesis; a glossary may be
+helpful as well.
+
+Several packages are available to help in the creation of a glossary:
+\begin{description}
+\item[\Package{glossaries}] A new glossary package that can do
+  everything! This is what I use here.
+\item[\Package{nomencl}] Another glossary package that I used in the book
+  \enquote{Physics at the Terascale}.
+\item[\Package{glosstex}] Rather an old package that looks to be quite
+  simple to use.
+\end{description}
+
+A short introduction to these packages can be found in the \TeX nische
+Komödie 4/2012.
+
+The \Package{nomencl} package is maybe the easiest to use for creating
+a simple list of acronyms. If you want to change the formatting or do
+anything other than create a simple list, it is probably worth
+investigating \Package{glossaries}.
+
+The nice thing about \Package{glossaries} is that it works with
+\Package{hyperref} so that you can even click on an acronym and find
+its definition. In this guide I included the package with the option
+\Option{acronym}, in order to get both a glossary and a list of
+acronyms. I also included the option \Option{toc}, so that the
+glossary and list of acronyms are included in the table of
+contents. You tell it to to make a glossary (and list of acronyms) by
+giving the command \Macro{makeglossaries} in the preamble and you
+print the glossary (usually at the end of the document) with the
+\Macro{printglossaries} command. I have not included these commands in
+the thesis skeleton, as the \Package{glossaries} package is rather new
+and may not be available in older \TeX\ installations. In order to
+process the glossary, you need to run the command
+\texttt{makeglossaries filename}. This is included in the
+\texttt{Makefile} for the commands \texttt{make guide}
+and should be added to \texttt{make thesis}
+and/or \texttt{make thesis09} if you want to make a glossary for your
+thesis.
+
+If you use the package \Package{xtab} for long tables,
+then you should include \Package{glossaries} with the option \Option{nosuper}
+to avoid it loading \Package{supertabular}.
+Use styles with a \texttt{long} rather than a \texttt{super} variant if you want such features.
+
+If you have a glossary and want it to compile it using \Command{latexmk}\index{latexmk}
+you should add the following
+lines to \File{\textasciitilde/.latexmkrc} or to \File{\textasciitilde/.config/latexmk/latexmkrc}:\footnote{%
+I got this information from \url{https://tex.stackexchange.com/questions/1226/how-to-make-latexmk-use-makeglossaries}}
+\begin{verbatim}
+add_cus_dep( 'acn', 'acr', 0, 'makeglossaries' );
+add_cus_dep( 'glo', 'gls', 0, 'makeglossaries' );
+$clean_ext .= " acr acn alg glo gls glg";
+sub makeglossaries {
+  my ($base_name, $path) = fileparse( $_[0] );
+  pushd $path;
+  my $return = system "makeglossaries", $base_name;
+  popd;
+  return $return;
+}
+\end{verbatim}
+
+I illustrate the use with the standard description of the ZEUS
+detector, which includes the abbreviations that are used in the rest
+of a ZEUS paper.  As a first step you define the terms for the
+glossary and the acronyms.  In this guide, the acronyms and the
+glossary entries are defined in the file
+\url{guide_glossary.tex}. These definitions must come before
+they are used. You can decide whether it is best to have them in a
+single file, or define them just before they are used. When they are
+printed at the end, they will be sorted alphabetically.
+
+Once an acronym is defined, the first time the acronym is used,
+\Macro{gls}\{acronym\}, the full text and the abbreviation is
+printed. Every time after that only the abbreviation is printed.
+
+\section{ZEUS detector description}%
+\label{sec:app:glossary:zeus}
+
+In the kinematic range of the analysis, charged particles were tracked
+in the \gls{CTD} and the
+\gls{MVD}. These components operated in a magnetic
+field of \SI{1.43}{\tesla} provided by a thin superconducting solenoid. The
+\gls{CTD} consisted of 72~cylindrical drift-chamber layers, organised in nine
+superlayers covering the polar-angle region
+$\ang{15} < \theta < \ang{164}$.
+%
+The \gls{MVD} consisted of a barrel (BMVD) and a forward (FMVD)
+section. The BMVD contained three layers and provided polar-angle
+coverage for tracks from \ang{30} to \ang{150}. The four-layer FMVD
+extended the polar-angle coverage in the forward region to
+\ang{7}. After alignment, the single-hit resolution of the MVD was
+\SI{24}{\micro\metre}. The \gls{DCA} of tracks to the nominal vertex in
+$X$--$Y$ was measured to have a resolution, averaged over the
+azimuthal angle, of $(46 \oplus 122 /
+  p_{T})\,\si{\micro\metre}$, with $p_{T}$ in \si{\GeV}.  For \gls{CTD}-\gls{MVD} tracks
+that pass through all nine \gls{CTD} superlayers, the momentum
+resolution was $\sigma(p_{T})/p_{T} = 0.0029 p_{T} \oplus 0.0081
+\oplus 0.0012/p_{T}$, with $p_{T}$ in \si{\GeV}.
+
+The high-resolution \gls{CAL} consisted of three parts: the forward
+(FCAL), the barrel (BCAL) and the rear (RCAL) calorimeters. Each part
+was subdivided transversely into towers and longitudinally into one
+electromagnetic section (EMC) and either one (in RCAL) or two (in BCAL
+and FCAL) hadronic sections (HAC). The smallest subdivision of the
+calorimeter was called a cell.  The \gls{CAL} energy resolutions, as
+measured under test-beam conditions, were $\sigma(E)/E=0.18/\sqrt{E}$
+for electrons and $\sigma(E)/E=0.35/\sqrt{E}$ for hadrons, with $E$ in
+\si{\GeV}.  \clearpage
+
+We start a new page so that you can see how the cross-referencing
+works.  ZEUS had quite a large assortment of tracking detectors. In the
+forward direction there was the \gls{FTD} and the \gls{TRD}. The
+\gls{TRD} was replaced by the \gls{STT} for the HERA~2 running
+period.  In the middle of the detector, the \gls{CTD} was always
+there, while the \gls{MVD} was also installed later.
+

@@ -1,0 +1,27 @@
+% !TeX root = thesis_guide.tex
+% chktex-file 1 chktex-file 46
+
+%==============================================================================
+\chapter{Plots with \Package{\TikZ}}%
+\label{sec:app:tikz}
+%==============================================================================
+
+\LaTeX\ file: \url{./guide_appendix_obsolete.tex}\\[1ex]
+\noindent
+\Cref{fig:tikz:syst} shows how you can produce a plot showing
+the contributions of many different systematic uncertainties to a
+result.
+% Note that this plot uses some modern features of
+% the \Package{tikz} and \Package{pgfplots} packages.
+% Hence it is only included if this guide is compiled with \TeXLive 2011 or later.
+
+\begin{figure}[htbp]
+  \centering
+  \input{../tikz/zeus_Ds_systematics.tex}
+  \caption[Strange $D^{**}$ systematics, fragmentation fractions]{The
+    results of strange excited charm meson fragmentation fraction and
+    branching ratio with systematic variations.  The individual
+    systematic variations are put into groups $\delta_1-\delta_5$.}%
+  \label{fig:tikz:syst}
+\end{figure}
+

@@ -1,0 +1,324 @@
+% !TeX root = thesis_guide.tex
+% chktex-file 1 chktex-file 46
+
+%==============================================================================
+\chapter{Long tables}%
+\label{sec:app:tables}
+%==============================================================================
+
+\LaTeX{} file: \url{./guide_appendix_longtable.tex}\\[1ex]
+\noindent
+Long and complicated tables, such as tables containing the breakdown
+of the systematic error for each data point are usually put into the
+appendices. Code or data cards can also be included here.
+Examples of complicated typesetting have been given already in \cref{sec:table}.
+In this appendix I give two examples of a table
+(\cref{tab:alphabet:xtab,tab:alphabet:longtable}) that goes over more than one page
+using the \Package{xtab} and \Package{longtable} packages.
+Some features of the \Package{longtable} package:
+\begin{itemize}\setlength{\parskip}{0pt}
+  \item A \Env{longtable} is a combination of \Env{tabular} and \Env{table} in one environment. 
+  \item While footnotes do not work properly in a normal \Env{tabular},
+    but they do work in \Env{longtable}.
+  \item You have to terminate the \Macro{caption} with \verb|\\|.
+  \item If you want the caption to be at the end of the table you should include 
+    it in the \Macro{endlastfoot} block.
+\end{itemize}
+
+Some features of the \Package{xtab} package:
+\begin{itemize}\setlength{\parskip}{0pt}
+  \item Use the \Env{mpxtabuar} environment to include footnotes in a table.
+  \item You should specify the table header and footer outside the table itself.
+  \item Do not include \Env{xtabular} inside a \Env{table} environment, as the table will
+    then be output on one page, which is not what you want!
+  \item A few things you can tweak to get the page breaks in the right place:
+    According to the \Package{xtab} documentation you should first try to play
+    around with the variable \Macro{xentrystretch}. The default value is \num{0.1}.
+    Decrease this to put more on a page and increase it to get less.
+    You can even set it to a negative value!
+    The value can be set per table.
+    As an alternative you can use the \Macro{shrinkheight} command.
+\end{itemize}
+
+As mentioned in \cref{sec:package}, an alternative
+is the \Package{supertabular} package.
+
+\clearpage
+The relevant parts of \cref{tab:alphabet:xtab} are:
+\begin{tcblisting}{listing only}
+\tablefirsthead{\toprule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+}
+\tablehead{\midrule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+}
+\tabletail{\midrule
+  \multicolumn{3}{r}{Continued on next page}\\
+  \midrule
+}
+\tablelasttail{\bottomrule}
+\bottomcaption{The alphabet set using the \Package{xtab} package.}%
+\label{tab:alphabet:xtab}
+\xentrystretch{-0.15}
+\begin{center}
+  \begin{mpxtabular}{rcl}
+   1 & a & The lowercase 1st letter in the alphabet\footnote{%
+    \enquote{a} deserves a footnote}\\
+    ...
+    26 & Z & The uppercase 26th letter in the alphabet\\
+  \end{mpxtabular}
+\end{center}
+\end{tcblisting}
+
+\clearpage
+The relevant parts of \cref{tab:alphabet:longtable} are:
+\begin{tcblisting}{listing only}
+  \caption{The alphabet set using the \Package{longtable} package.%
+  \label{tab:alphabet:longtable}}\\
+  \begin{longtable}{rcl}
+  \toprule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+\endfirsthead
+  \midrule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+\endhead
+  \midrule
+  \multicolumn{3}{r}{Continued on next page}\\
+  \midrule
+\endfoot
+  \bottomrule
+\endlastfoot
+    1 & a & The lowercase 1st letter in the alphabet\footnote{%
+    \enquote{a} deserves a footnote}\\
+    26 & Z & The uppercase 26th letter in the alphabet\\
+\end{longtable}
+\end{tcblisting}
+
+\clearpage
+\tablefirsthead{\toprule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+}
+\tablehead{\midrule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+}
+\tabletail{\midrule
+  \multicolumn{3}{r}{Continued on next page}\\
+  \midrule
+}
+\tablelasttail{\bottomrule}
+\bottomcaption{The alphabet set using the \Package{xtab} package.}%
+\label{tab:alphabet:xtab}
+\xentrystretch{-0.15}
+\begin{center}
+  \begin{mpxtabular}{rcl}
+   1 & a & The lowercase 1st letter in the alphabet\footnote{%
+    \enquote{a} deserves a footnote}\\
+   2 & b & The lowercase 2nd letter in the alphabet\\
+   3 & c & The lowercase 3rd letter in the alphabet\\
+   4 & d & The lowercase 4th letter in the alphabet\\
+   5 & e & The lowercase 5th letter in the alphabet\\
+   6 & f & The lowercase 6th letter in the alphabet\\
+   7 & g & The lowercase 7th letter in the alphabet\\
+   8 & h & The lowercase 8th letter in the alphabet\\
+   9 & i & The lowercase 9th letter in the alphabet\\
+  10 & j & The lowercase 10th letter in the alphabet\footnote{%
+    \enquote{j} deserves another footnote}\\
+  11 & k & The lowercase 11th letter in the alphabet\\
+  12 & l & The lowercase 12th letter in the alphabet\\
+  13 & m & The lowercase 13th letter in the alphabet\\
+  14 & n & The lowercase 14th letter in the alphabet\\
+  15 & o & The lowercase 15th letter in the alphabet\\
+  16 & p & The lowercase 16th letter in the alphabet\\
+  17 & q & The lowercase 17th letter in the alphabet\\
+  18 & r & The lowercase 18th letter in the alphabet\\
+  19 & s & The lowercase 19th letter in the alphabet\\
+  20 & t & The lowercase 20th letter in the alphabet\\
+  21 & u & The lowercase 21st letter in the alphabet\\
+  22 & v & The lowercase 22nd letter in the alphabet\\
+  23 & w & The lowercase 23rd letter in the alphabet\\
+  24 & x & The lowercase 24th letter in the alphabet\\
+  25 & y & The lowercase 25th letter in the alphabet\\
+  26 & z & The lowercase 26th letter in the alphabet\\
+   1 & A & The uppercase 1st letter in the alphabet\\
+   2 & B & The uppercase 2nd letter in the alphabet\\
+   3 & C & The uppercase 3rd letter in the alphabet\\
+   4 & D & The uppercase 4th letter in the alphabet\\
+   5 & E & The uppercase 5th letter in the alphabet\\
+   6 & F & The uppercase 6th letter in the alphabet\\
+   7 & G & The uppercase 7th letter in the alphabet\\
+   8 & H & The uppercase 8th letter in the alphabet\\
+   9 & I & The uppercase 9th letter in the alphabet\\
+  10 & J & The uppercase 10th letter in the alphabet\\
+  11 & K & The uppercase 11th letter in the alphabet\\
+  12 & L & The uppercase 12th letter in the alphabet\\
+  13 & M & The uppercase 13th letter in the alphabet\\
+  14 & N & The uppercase 14th letter in the alphabet\\
+  15 & O & The uppercase 15th letter in the alphabet\\
+  16 & P & The uppercase 16th letter in the alphabet\\
+  17 & Q & The uppercase 17th letter in the alphabet\\
+  18 & R & The uppercase 18th letter in the alphabet\\
+  19 & S & The uppercase 19th letter in the alphabet\\
+  20 & T & The uppercase 20th letter in the alphabet\\
+  21 & U & The uppercase 21st letter in the alphabet\\
+  22 & V & The uppercase 22nd letter in the alphabet\\
+  23 & W & The uppercase 23rd letter in the alphabet\\
+  24 & X & The uppercase 24th letter in the alphabet\\
+  25 & Y & The uppercase 25th letter in the alphabet\\
+  26 & Z & The uppercase 26th letter in the alphabet\\
+  \end{mpxtabular}
+\end{center}
+
+\clearpage
+\begin{longtable}{rcl}
+  \caption{The alphabet set using the \Package{longtable} package.
+  \label{tab:alphabet:longtable}}\\
+  \toprule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+\endfirsthead
+  \midrule
+  \multicolumn{1}{c}{Number} &
+  \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Explanation}\\
+  \midrule
+\endhead
+  \midrule
+  \multicolumn{3}{r}{Continued on next page}\\
+  \midrule
+\endfoot
+  \bottomrule
+  \caption{The alphabet set using the \Package{longtable} package.}
+\endlastfoot
+   1 & a & The lowercase 1st letter in the alphabet\footnote{%
+    \enquote{a} deserves a footnote}\\
+   2 & b & The lowercase 2nd letter in the alphabet\\
+   3 & c & The lowercase 3rd letter in the alphabet\\
+   4 & d & The lowercase 4th letter in the alphabet\\
+   5 & e & The lowercase 5th letter in the alphabet\\
+   6 & f & The lowercase 6th letter in the alphabet\\
+   7 & g & The lowercase 7th letter in the alphabet\\
+   8 & h & The lowercase 8th letter in the alphabet\\
+   9 & i & The lowercase 9th letter in the alphabet\\
+  10 & j & The lowercase 10th letter in the alphabet\footnote{%
+    \enquote{j} deserves another footnote}\\
+  11 & k & The lowercase 11th letter in the alphabet\\
+  12 & l & The lowercase 12th letter in the alphabet\\
+  13 & m & The lowercase 13th letter in the alphabet\\
+  14 & n & The lowercase 14th letter in the alphabet\\
+  15 & o & The lowercase 15th letter in the alphabet\\
+  16 & p & The lowercase 16th letter in the alphabet\\
+  17 & q & The lowercase 17th letter in the alphabet\\
+  18 & r & The lowercase 18th letter in the alphabet\\
+  19 & s & The lowercase 19th letter in the alphabet\\
+  20 & t & The lowercase 20th letter in the alphabet\\
+  21 & u & The lowercase 21st letter in the alphabet\\
+  22 & v & The lowercase 22nd letter in the alphabet\\
+  23 & w & The lowercase 23rd letter in the alphabet\\
+  24 & x & The lowercase 24th letter in the alphabet\\
+  25 & y & The lowercase 25th letter in the alphabet\\
+  26 & z & The lowercase 26th letter in the alphabet\\
+   1 & A & The uppercase 1st letter in the alphabet\\
+   2 & B & The uppercase 2nd letter in the alphabet\\
+   3 & C & The uppercase 3rd letter in the alphabet\\
+   4 & D & The uppercase 4th letter in the alphabet\\
+   5 & E & The uppercase 5th letter in the alphabet\\
+   6 & F & The uppercase 6th letter in the alphabet\\
+   7 & G & The uppercase 7th letter in the alphabet\\
+   8 & H & The uppercase 8th letter in the alphabet\\
+   9 & I & The uppercase 9th letter in the alphabet\\
+  10 & J & The uppercase 10th letter in the alphabet\\
+  11 & K & The uppercase 11th letter in the alphabet\\
+  12 & L & The uppercase 12th letter in the alphabet\\
+  13 & M & The uppercase 13th letter in the alphabet\\
+  14 & N & The uppercase 14th letter in the alphabet\\
+  15 & O & The uppercase 15th letter in the alphabet\\
+  16 & P & The uppercase 16th letter in the alphabet\\
+  17 & Q & The uppercase 17th letter in the alphabet\\
+  18 & R & The uppercase 18th letter in the alphabet\\
+  19 & S & The uppercase 19th letter in the alphabet\\
+  20 & T & The uppercase 20th letter in the alphabet\\
+  21 & U & The uppercase 21st letter in the alphabet\\
+  22 & V & The uppercase 22nd letter in the alphabet\\
+  23 & W & The uppercase 23rd letter in the alphabet\\
+  24 & X & The uppercase 24th letter in the alphabet\\
+  25 & Y & The uppercase 25th letter in the alphabet\\
+  26 & Z & The uppercase 26th letter in the alphabet\\
+\end{longtable}
+
+% The following chapter needs some tweaks for XeLaTeX
+%==============================================================================
+\ifXeTeX
+\chapter{A famous equation is \texorpdfstring{$\symbfit{E = mc^{2}}$}{E = mc^2}}%
+\label{sec:emc2}\index{math!bold}
+\else
+\chapter{A famous equation is \texorpdfstring{$E = mc^{2}$}{E = mc2}}%
+\label{sec:emc2}\index{math!bold}
+\fi
+%==============================================================================
+
+\LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
+\noindent
+This chapter was included to check that one gets bold mathematics in
+a chapter/section title, but not in the table of contents.
+
+When using pdf\LaTeX, no special handling of titles should be necessary.
+This is because the following line was added:
+\begin{verbatim}
+  \def\bfseries{\fontseries\bfdefault\selectfont\boldmath}
+\end{verbatim}
+%No optional title for a chapter is needed as the chapter title is typeset in bold
+%font also in the table of contents.
+
+This tweak does not work with \XeLaTeX{} and \LuaLaTeX,
+so a short title may also be needed to cope with bold mathematics.
+
+%------------------------------------------------------------------------------
+\ifXeTeX
+\section{A slightly less famous equation \texorpdfstring{$\symbfit{F = m a}$}{F = ma}}%
+\label{sec:fma}
+\else
+\section{A slightly less famous equation \texorpdfstring{$F = m a$}{F = ma}}%
+\label{sec:fma}
+\fi
+%------------------------------------------------------------------------------
+
+The title here does not include \Macro{boldmath}, as the bold font series turns on bold math by default.
+Note that the
+section in the table of contents is typeset in a normal font when
+writing a book or report.
+
+
+%------------------------------------------------------------------------------
+\ifthenelse{\boolean{XeTeX} \OR \boolean{LuaTeX}}{%
+\section[Cross-section given by \texorpdfstring{$\symbf{sigma = N /}\symcal{L}}{sigma = N / L}$]%
+        {The cross-section is given by \texorpdfstring{$\symbf{\sigma = N /}\symbfcal{L}$}{sigma = N / L}}%
+\label{sec:sig}
+}{%
+\section[Cross-section given by \texorpdfstring{$\sigma = N / \mathcal{L}$}{sigma = N / L}]%
+        {The cross-section is given by \texorpdfstring{$\sigma = N / \mathcal{L}$}{sigma = N / L}}%
+\label{sec:sig}
+}
+%------------------------------------------------------------------------------
+
+This attempt includes a Greek and a calligraphic letter to make sure they work as well.
+It also includes the section title as a short form and a regular form.

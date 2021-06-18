@@ -1,0 +1,576 @@
+% !TeX root = thesis_guide.tex
+% chktex-file 1 chktex-file 46
+
+%==============================================================================
+\chapter{\TeX{} setup and packages}%
+\label{sec:app:tex}
+%==============================================================================
+
+\LaTeX{} file: \url{./guide_appendix_texsetup.tex}\\[1ex]
+\noindent
+If you have an older \LaTeX{} installation (with a \KOMAScript{}
+version less than 3.0) you will probably have to make a few changes to
+the style file and your main thesis file.
+In particular the \Macro{KOMAoptions} macro does not exist. In this case, you
+have to put the options into the document class options. Also some of
+the names have changed. Consult the \KOMAScript{} manual for more
+information.
+
+Other packages that I recommend and that are subject to rapid
+development still are \Package{biblatex} and
+\Package{siunitx}. If you want to fully exploit their capabilities,
+you should make sure you \LaTeX{} installation is as recent as
+possible --- I recommend at least \TeXLive 2016 and preferably later.
+
+As I mentioned in the introduction, the institute is a member of Dante
+and I therefore receive a copy of the \TeX\ Collection DVD every year.
+You can also download the installation you need from the \TeX\
+Users (TUG) group web page: \url{http://www.tug.org/texcollection}.
+
+
+%------------------------------------------------------------------------------
+\section{Integrated environments}%
+\label{sec:app:compile}
+%------------------------------------------------------------------------------
+
+As already mentioned in \cref{sec:tips:do}, I highly recommend
+that you use an integrated environment for editing and compiling your
+thesis. All such tools allow you to define projects, which then know
+about which files should be included when compiling.
+
+\TeXstudio\index{TeXstudio} and
+\TeXmaker\index{TeXmaker} can be installed under Windows, macOS or
+Linux. I have tried \TeXstudio in all three systems and it works nicely. It
+can be downloaded from \url{http://texstudio.sourceforge.net/}. Others
+report good experience with \TeXmaker (under Ubuntu).
+It is available as an Ubuntu package or from
+\url{http://www.xm1math.net/texmaker}.
+\TeXmaker and \TeXstudio (\TeX makerX) split in 2009, so both packages
+contain a lot of similarities.
+Visual Studio Code\index{Visual Studio Code}\footnote{%
+\url{https://code.visualstudio.com}}
+has a very nice extension for \LaTeX\ documents.
+Kile\index{kile} is quite popular, especially if you use the KDE
+desktop environment. 
+
+I used to use \texttt{emacs}\index{emacs} and AUCTeX, as I can
+then use the same editor for everything. Note that the
+RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
+tools for finding and inserting cross-references and the names of
+citations easily.
+
+
+%------------------------------------------------------------------------------
+\subsection{\TeXstudio}%
+\label{sec:app:texstudio}\index{TeXStudio}
+
+I used \TeXstudio as my main tool for creating \LaTeX\ documents starting in 2013.
+One very nice feature is that it works under macOS, Windows and Linux.
+It is fairly easy to adapt to your preferences.
+Additional keyboard shortcuts can be added and the editor can be customised.
+I usually change the \texttt{TAB} behaviour so that spaces rather than TABs are inserted.
+
+If you use the integrated PDF viewer, it is very easy to switch between the PDF file and
+the \LaTeX\ source code, which is extremely helpful.
+You can also usually click on an error in the Message window and the cursor will jump to the right spot.
+This makes debugging and proofreading much easier.
+
+You can configure \TeXstudio to use \Command{latexmk}\index{latexmk} by default.
+It is easy to switch between \texttt{biber} and \texttt{bibtex} using the Build preferences.
+If you want to use \Command{latexmk} with \TeXstudio under Windows,
+you may have to install Perl from e.g.\ \url{https://strawberryperl.com/}.
+
+\TeXstudio should also know about your citations.
+If you do not get a list of citations when you type \verb+\cite+,
+you should first close the file and open 
+in \TeXstudio \Option{Options \(\rightarrow\) Configure TexStudio \(\rightarrow\) Completion} and check \File{biblatex.cwl}.
+
+You can also make a glossary from within \TeXstudio.
+In order to do this you have to define a user build command.
+You can find such commands under:
+\textsf{Options} $\to$ \textsf{Configure TeXstudio} $\to$ \textsf{Build}.
+I defined a new command which I called \enquote{BuildWithGlossary}.
+This executes \texttt{pdflatex, biber, makeindex, makeglossary, pdflatex, pdflatex}.
+
+
+%------------------------------------------------------------------------------
+\subsection{Visual Studio Code}%
+\label{sec:app:vscode}\index{Visual Studio Code}%
+\index{vscode|see{Visual Studio Code}}
+
+I currently use Visual Studio Code\index{Visual Studio Code} as my editor for both \LaTeX\ and other programs.
+It is available for Windows, macOS and Linux.
+The big advantage is that you have one editor for both documentation and code.
+It works quite well for writing \LaTeX,
+but assumes that you know the \LaTeX\ commands that you want to include.
+Rapid development is ongoing,
+also for the \LaTeX\ extension \textsf{\LaTeX\ Workshop}\index{LaTeX Workshop@\LaTeX\ Workshop} that you should certainly install.
+If you have \Command{chktex} installed you should also enable it,
+as it helps you to find errors 
+and gives a lot of information on the quality of your \LaTeX.
+
+
+%------------------------------------------------------------------------------
+\subsection{Kile}%
+\label{sec:app:kubuntu:kile}\index{kile}
+
+Many people use Kile as their environment for editing and compiling \LaTeX. 
+I have not used it for a number of years,
+so some of the instructions I give here may be out of date.
+
+If you use \texttt{bibtex} for your references then the default
+setup does not have to be changed. If you want to use the
+\Option{biber}\index{biber} backend then you should integrate the
+command into Kile.
+
+To do this you need to do the following:
+In Kile: \Option{Settings $\to$ Configure Kile $\to$ Tools $\to$ Build} and
+then insert a new tool (Biber) on the left-hand side. It is probably
+best to define the class of the tool as \BibTeX. Then on the
+right-hand side in the \Option{General} tab the command should be
+\texttt{biber} and the option \texttt{\%S}. In the \Option{Advanced}
+tab you should set the \Option{Source extension} to \texttt{aux} and
+the \Option{Target extension} to \texttt{bbl}.
+
+I would then recommend adding a new configuration to the
+\Option{QuickBuild} called \Option{PDFLaTeX+Biber+ViewPDF} that
+executes the commands: \texttt{PDFLaTeX, Biber, PDFLaTeX, PDFLaTeX,
+  ViewPDF}. This is also the series of commands that the
+\texttt{Makefile} executes.
+
+I have not yet investigated how to also make the glossary from within
+Kile, but it should be possible to do it in the same way as you add a
+\texttt{biber} command.
+
+
+%------------------------------------------------------------------------------
+\section{macOS}%
+\label{sec:app:mac}\index{macOS}
+%------------------------------------------------------------------------------
+
+For the past several years,
+I have been installing and running \LaTeX\ on a MacBook Pro.
+The standard package you start with is \TeX Shop. 
+Together with Basic\TeX\ this provides a basic environment. 
+However, if you want to do more (like write a thesis), you should install \TeXLive.
+There is a complete \TeXLive installation called Mac\TeX\ 
+that you can download from \url{http://www.tug.org/mactex/}.
+The Dante \TeX\ Collection DVD also includes Mac\TeX, which is what the \TeX Shop web page
+recommends as the best combination to install.
+You can also install Mac\TeX{} using Homebrew\index{Homebrew}.
+Install and run the \TeX\ Live Utility to keep your installation up to date.
+
+As discussed above, there are macOS versions of \TeXstudio and \TeXmaker which you can try.
+I used to use \TeXstudio.
+More recently I switched to using Visual Studio Code,
+which is a very nice editor with integrated \LaTeX\ and Git support.
+
+%------------------------------------------------------------------------------
+\section{(Ku|Xu|U)buntu}% chktex 36
+\label{sec:app:kubuntu}\index{Linux}\index{Ubuntu}\index{Kubuntu}\index{Xubuntu}
+%------------------------------------------------------------------------------
+
+For my tests with Ubuntu I use Xubuntu 20.04 and \TeXLive 2019.
+I also check that things work with older versions.
+The oldest version of \TeXLive that I have access to is 2013.
+
+% I also made the guide on a plain Xubuntu 12.04
+% installation, which used the default packages from the Xubuntu image. At
+% installation time I enabled the usage of 3rd party non-free
+% software. This is be needed for \texttt{acroread} among other
+% things.\footnote{Nowadays you have to download \texttt{acroread} from
+%   the Adobe web page.} 
+If you want to write your thesis in British (UK) English you should make sure
+that that language is fully installed. If you want to write your
+thesis in German, then also install German as a language, even if
+your system is in English.
+
+I explicitly installed the following packages in addition:
+\begin{bashlisting}
+(k|x)ubuntu-restricted-extras
+git #Used to be subversion
+texlive
+texlive-science
+texlive-bibtex-extra
+texlive-fonts-extra
+texlive-latex-extra
+biber
+latexmk
+texlive-lang-german
+feynmf
+\end{bashlisting}
+I also had to install \texttt{texlive-metapost} and \texttt{tracklang} in order to compile the guide.
+% The guide also needs \texttt{texlive-generic-extra}, at least for \TeXLive 2015.
+If you want to use the \Package{IEEEtrantools} you have to install \texttt{texlive-publishers},
+or the package \Package{IEEEtran}.
+If you want to use \LuaLaTeX\ you also have to install \texttt{texlive-luatex}
+and if you want to use \XeLaTeX\ you have to install \texttt{texlive-xetex}.
+You may also have to install \texttt{texlive-xetex} even if you only plan to use \LuaLaTeX.
+In older Ubuntu installations you may have to also install \texttt{texlive-math-extra}.
+In newer versions this package has been removed.
+
+If your \LaTeX\ installation is old, you may want to bring it up-to-date.
+For Ubuntu variants there is a simple solution.
+Just add \TeXLive backports to your list of sources
+(use the \texttt{sudo apt-add-repository ppa:texlive-backports/ppa} command).
+You should then be able to give the command
+\texttt{sudo apt-get update; sudo apt-get upgrade}.
+Note that this variant will overwrite your current
+\LaTeX\ installation.
+An alternative is the method discussed in the following paragraphs,
+which allows you to have two (or more) different installations in parallel.
+
+
+%------------------------------------------------------------------------------
+\section{Fedora}% chktex 36
+\label{sec:app:fedora}\index{Linux}\index{Fedora}
+%------------------------------------------------------------------------------
+
+For my tests with Fedora I used Fedora~33 which I downloaded from
+\url{https://getfedora.org},
+which includes \TeXLive 2019.
+Most \LaTeX\ packages come as separate Fedora packages,
+so the list of what you have to install is long.
+
+I installed the following packages using the command \Command{dnf install \dots}:
+\begin{bashlisting}
+texlive
+latexmk
+texlive-newtx
+texlive-mweights
+texlive-siunitx
+texlive-longtable
+texlive-hep
+texlive-mhchem
+texlive-biblatex
+texlive-background
+texlive-cleveref
+texlive-babel-german
+texlive-hyphens-german
+\end{bashlisting}
+
+These are sufficient to compile the skeleton thesis.
+For the thesis guide I needed in addition:
+\begin{bashlisting}
+texlive-standalone
+texlive-physics
+texlive-tikz-feynhand
+texlive-tikz-feynman
+texlive-tikz-3dplot
+texlive-pgfplots
+texlive-pgfopts
+texlive-glossaries
+texlive-import
+texlive-bigfoot # needed for suffix
+\end{bashlisting}
+You will probably need at least some of these packages for your thesis.
+
+\LuaLaTeX\ and \XeLaTeX\ were either installed by default,
+or with one of the other packages.
+
+For the tests that I conducted with a new installation on 2002-10-21,
+I got an error when trying to use the \Package{newtx} fonts.
+After some searching, I was able to fix it using the commands:
+\Command{sudo updmap --sys --syncwithtrees} and \Command{sudo updmap --sys}.
+
+  
+%------------------------------------------------------------------------------
+\section{Installing (a newer version of) \TeXLive by hand}%
+\label{sec:app:texlive:update}
+%------------------------------------------------------------------------------
+
+A \TeX nische Komödie issue (3/2011) contained detailed instructions on
+how to install a newer version of \TeXLive in parallel to the
+default version.
+For a while, I did this as standard practice on my laptop and it worked very well.
+Another useful source of information on how to install \TeXLive can be found under
+\url{http://tug.org/texlive/quickinstall.html}.
+
+A brief summary of how to do the installation by hand: you must have
+\texttt{perl-tk} installed.
+Go to a directory where you want the
+install script to be and then execute the following chain of commands:
+\begin{bashlisting}
+wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+tar zxvf install-tl-unx.tar.gz
+cd install-tl-...
+sudo ./install-tl -gui perltk
+  Turn off some of the languages
+  Make sure installation is in /usr/local/texlive
+  Install
+\end{bashlisting}
+I installed the scheme \Option{scheme-tetex} and added the
+collections: \Option{BibTeX additional styles}, \Option{Additional fonts} and
+\Option{LaTeX additional packages}.
+If you want to use the package \Package{TikZ-Feynman} you probably need to include \Option{LuaTeX packages}.
+If you want to use Xe\TeX{} include \Option{XeTeX and packages}.
+When the installation is complete (can easily take \numrange{1}{2} hours):
+\begin{bashlisting}
+cd ..
+echo 'export PATH=/opt/texbin:${PATH}' > texlive.sh
+sudo cp texlive.sh /etc/profile.d/
+sudo ln -s /usr/local/texlive/2020/bin/x86_64-linux /opt/texbin
+\end{bashlisting}
+You probably have to login again to activate the new \texttt{PATH}.
+Check whether it is correct with
+\begin{bashlisting}
+  echo $PATH
+\end{bashlisting}
+  
+If you have a 32-bit installation replace \texttt{x86\_64-linux} with \texttt{i386-linux}.
+Note that the three commands set things up so
+that \texttt{/opt/texbin} is at the beginning of your \texttt{PATH}
+and that \LaTeX\ is then taken from there rather than the usual
+\texttt{/usr/bin}.
+
+On my test Ubuntu installation, 
+I installed a very basic \TeXLive installation when setting up the system
+and then added several different \TeXLive installations using this method.
+This works very well, except that \XeLaTeX could not find the TeX Gyre fonts.
+After installing a more complete set of packages (see \cref{sec:app:kubuntu})
+the problem was fixed.
+If you see such problems,
+you can try to replace 
+\begin{tcblisting}{listing only}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont[version=bold]{TeX Gyre Termes Math}
+\end{tcblisting}
+\noindent with
+\begin{tcblisting}{listing only}
+\setmainfont{texgyretermes-regular.otf}
+\setmathfont{texgyretermes-regular.otf}
+\setmathfont[version=bold]{texgyretermes-regular.otf}
+\end{tcblisting}
+\noindent in \File{ubonn-thesis.sty}.
+
+% With Kubuntu 13.04, I had to install \texttt{texdoc} in addition in
+% order to be able to use it to access the documentation with
+% it.\footnote{This was not necessary for earlier (K)Ubuntu versions. % chktex 36
+%   I found it a bit strange, but it seems to be needed.}
+
+For updating, additions of packages etc., it is useful to define an
+alias in your \File{.bashrc} or \File{.bash\_aliases}:
+\begin{bashlisting}
+function sutlmgr () {
+    if [[ -z "$@" ]]; then
+      sudo /opt/texbin/tlmgr -gui
+    else
+      sudo /opt/texbin/tlmgr "$@"
+    fi
+}
+\end{bashlisting}
+You then give the command \texttt{sutlmgr} to start the \TeXLive
+manager interface. You can use this interface to install new packages
+as well as to update the ones you have installed.
+If you want to update things, you should first click on \enquote{Load default} to
+load a repository and then you can do things such as
+\enquote{Update all installed}.
+
+% If you are using Ubuntu 11.10, you may well get an error:
+% \enquote{\texttt{sh: gnome-open: not found}} when you try to give a
+% \texttt{texdoc} command. I fixed this by making a
+% link from \texttt{/usr/local/bin/gnome-open} to
+% \texttt{/usr/bin/xdg-open}.
+
+
+%------------------------------------------------------------------------------
+\section{Windows}%
+\label{sec:app:windows}\index{windows}
+%------------------------------------------------------------------------------
+
+I also tried to to make the guide and a skeleton thesis under Windows. 
+My tests have been done with Windows 10.
+I simply downloaded the MiK\TeX\ installer from \url{http://miktex.org}.
+This is discussed in \cref{sec:app:miktex}.
+You can also install \TeXLive for Windows. Some hints on how to do
+this are given below (\cref{sec:app:texlive}).\footnote{%
+I have had success with the 2010 \TeX{} Collection DVD from Dante to install
+pro\TeX t, which is based on MiK\TeX.
+Newer versions should also work without problems.
+What the user sees is \TeXworks
+which is deliberately supposed to look like the Mac's \TeX Shop.}
+
+Once you have a \TeX\ installation, you have to get the thesis style files and the guide.
+To do this I used \texttt{TortoiseGit} which is available from
+\url{https://tortoisegit.org} as the interface between Windows and
+\texttt{Git}.\index{tortoisegit}\index{Git}
+
+To checkout the files, simply start Windows Explorer and go to the
+top-level directory where you want to do the checkout, right-click on
+the mouse and enter\\
+\texttt{https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git}
+as the URL\@.
+If you do this you can stay at the cutting edge!
+If you want a particular version then specify the branch you want, e.g.\ \enquote{7.0}.
+You can of course simply download the appropriate tar file from the PI webpages.
+
+To set up your thesis, you have to do by hand what the
+\texttt{Makefile} does under Linux or install GNU Make.
+If you want to do it by hand, you should make a new directory
+\texttt{mythesis}, copy \texttt{thesis\_skel/thesis\_skel.tex} to
+\texttt{mythesis/mythesis.tex}, and copy the rest of the files you need from
+\texttt{thesis\_skel} into \texttt{mythesis}. In addition you should
+copy the style files \texttt{ubonn-thesis.sty} and \texttt{ubonn-biblatex.sty} into the
+\texttt{mythesis} directory.
+
+To compile things, I ran the sequence pdf\LaTeX, Biber, pdf\LaTeX,
+pdf\LaTeX\ to get the output file for the skeleton thesis.
+You should make sure that the \BibTeX\ command in \TeXstudio or \TeXworks
+is set to \texttt{biber},
+unless for some reason you want to use traditional \BibTeX.
+
+If you want to use \Command{latexmk} with \TeXstudio,
+you probably have to install Perl.
+I installed Perl from \url{https://strawberryperl.com},
+rebooted and \Command{latexmk} then worked.
+
+If you want to install GNU Make you can try the following:
+You should install the \enquote{Minimal Gnu for Windows} from \url{http://www.mingw.org}.
+I downloaded and ran \texttt{mingw-get-setup.exe}.
+Once you have installed it you can run the \enquote{MinGW Installer} to install the software you want.
+I think you should install \Package{msys-base} from \enquote{Basic Setup}.
+This installs \texttt{make} and quite a lot of other typical Unix commands.
+Finally you have to add \verb|C:\MinGW\msys\1.0\bin| to your \texttt{PATH}.
+One way to do this is with the command \verb|setx PATH %PATH%;C:\MinGW\msys\1.0\bin| using a Windows Command Prompt, 
+i.e.\ \texttt{cmd.exe}.
+You can also use the GUI in the System Administration to set environment variables.
+If you get \texttt{make} to work properly you start \texttt{cmd.exe},
+navigate to the correct directory and give the usual commands to create and compile your thesis:
+\begin{verbatim}
+make new
+make
+\end{verbatim}
+
+If you run pdf\LaTeX\ with the option \texttt{-enable-write18} and
+include appropriate \texttt{mpost} commands in your \LaTeX\ file(s), %chktex 36
+as discussed in \cref{sec:fig:feynman:feynmp}, Feynman graphs made
+using \Package{feynmp} work well.
+With \TeXstudio, you can simply
+include this option in the pdf\LaTeX\ command: \textsf{Options} $\to$
+\textsf{Configure TeXstudio} $\to$ \textsf{Commands}.
+
+I have not invested any effort in trying to get \texttt{feynmf}
+working under Windows. The output files are produced, but I have not
+tried to run Metafont on them.
+
+
+%------------------------------------------------------------------------------
+\subsection{MiK\TeX}%
+\label{sec:app:miktex}
+
+I usually install \TeX\ under Windows via a download from Internet.
+You should decide whether to install Mik\TeX{} for yourself or for all users.
+I think maintenance is easier if you just install it for yourself.
+Once the installation is finished, I also update all the
+packages using the MiK\TeX{} Maintenance (Admin) $\to$ Update (Admin) program.
+Be patient --- these updates always take a while!
+
+With the minimal version of MiK\TeX{} you are then asked whether to
+install the missing packages when first compiling a file that needs
+them. Note that such missing packages are installed in your local
+directory tree and not in the central directory tree.
+This means that if you want to update MiK\TeX{} in the future
+you should run the MiK\TeX{} Update both as Admin and as a normal user,
+if you installed Mik\TeX{} for all users.
+Be patient if the first compilation of a document appears to hang.
+This usually means that new packages are being installed.
+
+The last time I have installed \TeX\ under Windows using a DVD was
+from the \TeX{} Collection 2010 DVD. 
+To do this I logged in as an Administrator and then opened the DVD\@.
+It opened a \TeX\ Collection window and I then clicked on pro\TeX t Quick Install and installed
+MiK\TeX{} (minimal version),\index{MiKTeX}
+Ghostscript\index{ghostscript} and Ghostview\index{ghostview} for all users.
+
+Note that the Dante \TeX\ Collection 2011 DVD has dropped
+\TeXnicCenter within pro\TeX t and is using the \TeX makerX front-end instead.
+\TeX makerX has been superseded by \TeXstudio.
+My comments on \TeXnicCenter have been relegated to \cref{sec:app:old}.
+There is also the package \TeXmaker.
+
+
+%------------------------------------------------------------------------------
+\subsection{\TeXLive}%
+\label{sec:app:texlive}
+
+You can install \TeXLive instead of pro\TeX t. To do that you can
+either use the \TeX\ Collection DVD or download \TeXLive. If you
+download \TeXLive you should unzip the file that you get and go to the
+directory \texttt{install-tl/install-tl-YYYYMMDD}. In that directory you
+should run \texttt{install-tl-advanced.bat} as Administrator if you want to install
+\TeXLive in a system directory. I installed the \enquote{medium}
+scheme. The following extra collections were needed:
+\begin{itemize}
+\item \textsf{BibTeX additional styles}
+\item \textsf{Generic additional packages}
+\item \textsf{LaTeX additional packages} --- needed for \Package{csquotes}
+\item \textsf{Natural and computer sciences}
+\end{itemize}
+I also added the German documentation. Do not forget to toggle the
+option \Option{All users} if you want more than one user to be able to
+use \LaTeX\ on your machine. If you forget one of the above
+collections, you can install the missing packages later.
+
+While MiK\TeX\ can install missing packages on the fly, this does not
+seem to be the case for \TeXLive. To install extra packages you should
+start the \TeXLive manager and before doing anything else you should
+load the default repository.
+
+You can either use \TeXworks as the front end or you can install
+\TeXstudio or \TeXmaker.
+
+
+%------------------------------------------------------------------------------
+\section{Making the guide}% chktex 36
+\label{sec:app:guide}\index{Guide}
+%------------------------------------------------------------------------------
+
+Using the installations described above I was able to issue to following commands to
+produce the guide (assuming that you have \TeXLive 2017 or later):
+\begin{verbatim}
+git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
+cd ubonn-thesis
+\end{verbatim}
+Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
+Then the following worked:
+\begin{verbatim}
+cd guide
+make guide
+\end{verbatim}
+so all packages are there as well as at least the default font which I selected.
+If your version of \TeXLive is older than 2017, you should set \Macro{texlive} accordingly.
+If your version is older than 2013 you should not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
+Some figures or tables may not appear with versions of \TeXLive earlier than 2017,
+as, for example, the \Package{TikZ-FeynHand} package was only introduced then.
+
+The default version of the guide uses \Option{biber} for the
+\Package{biblatex} package and includes\\
+\texttt{./guide/refs/example\_refs-utf8.bib} which contains some umlauts.\footnote{%
+The same references using normal ascii test (suitable for \texttt{bibtex}) can be found in
+\texttt{./guide/refs/example\_refs-ascii.bib}.}
+You give the command \texttt{make guide} to compile, which uses \texttt{biber}\index{biber} rather than
+\texttt{bibtex}\index{bibtex} to process the \texttt{.bib} files.
+
+The default version of the guide also compiles on ATLAS Bonn desktop
+computers (Ubuntu 18.04 with \TeXLive 2017). % chktex 36
+If you want to use
+\Package{feynmf} instead of \Package{feynmp} to compile the guide, you
+have to pass the option \Option{feynmf} instead of \Option{feynmp} to \texttt{ubonn-thesis.sty} 
+and give the command \texttt{make feynmf} before \texttt{make guide}.
+
+If you want to switch from \texttt{biber}\index{biber} to
+\texttt{bibtex}\index{bibtex} or \texttt{bibtex8}\index{bibtex8} or vice versa, give the commands
+\texttt{make cleanguide cleanbbl cleanblx} before you try to compile
+the guide (or your thesis).
+
+In order to edit \LaTeX\ you need an editor such as
+\texttt{Visual Studio Code} or \texttt{emacs}, or
+a program such as , \TeXstudio or \TeXmaker or
+\texttt{kile} (and the associated \texttt{kile-doc}).
+These were discussed above.
+
+\TeXstudio knows about indexes and glossaries. You have to set up a
+user command to execute \Command{makeindex} and \Command{makeglossaries}
+as discussed in \cref{sec:app:compile}. With the addition of
+these commands, you should also be able to compile this guide.

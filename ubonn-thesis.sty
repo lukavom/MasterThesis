@@ -88,23 +88,23 @@
 \ifthenelse{\equal{\UBN@texlive}{}}{}{%
   \renewcommand*{\texlive}{\UBN@texlive}
 }
-\typeout{ubonn-thesis: texlive is [\texlive]}
+\typeout{ubonn-thesis: texlive is [\texlive].}
 
 % Thesis type specified as an option
 \ifthenelse{\boolean{UBN@PhD}}{%
-  \typeout{ubonn-thesis: setting things up for a PhD thesis}
+  \typeout{ubonn-thesis: setting things up for a PhD thesis.}
   \renewcommand*{\ThesisType}{PhD}
 }{%
   \ifthenelse{\boolean{UBN@Master}}{%
-    \typeout{ubonn-thesis: setting things up for a Master thesis}
+    \typeout{ubonn-thesis: setting things up for a Master thesis.}
     \renewcommand*{\ThesisType}{Master}
   }{%
     \ifthenelse{\boolean{UBN@Diplom}}{%
-      \typeout{ubonn-thesis: setting things up for a Diplom thesis}
+      \typeout{ubonn-thesis: setting things up for a Diplom thesis.}
       \renewcommand*{\ThesisType}{Diplom}
     }{%
       \ifthenelse{\boolean{UBN@Bachelor}}{%
-        \typeout{ubonn-thesis: setting things up for a Bachelor thesis}
+        \typeout{ubonn-thesis: setting things up for a Bachelor thesis.}
         \renewcommand*{\ThesisType}{Bachelor}
       }{}
     }
@@ -113,17 +113,17 @@
 
 % PI library thesis version - includes extra cover page
 \ifthenelse{\boolean{UBN@PILibrary}}{%
-  \typeout{ubonn-thesis: creating version for PI library}
+  \typeout{ubonn-thesis: creating version for PI library.}
   \renewcommand*{\ThesisVersion}{PILibrary}
 }{}
 % Submission version of thesis
 \ifthenelse{\boolean{UBN@Submit}}{%
-  \typeout{ubonn-thesis: creating submission version of thesis}
+  \typeout{ubonn-thesis: creating submission version of thesis.}
   \renewcommand*{\ThesisVersion}{Submit}
 }{}
 % Final print version of thesis
 \ifthenelse{\boolean{UBN@Final}}{%
-  \typeout{ubonn-thesis: creating final version of thesis for print shop and ULB}
+  \typeout{ubonn-thesis: creating final version of thesis for print shop and ULB.}
   \renewcommand*{\ThesisVersion}{Final}
 }{}
 
@@ -144,17 +144,17 @@
 % Font control for pdfLaTeX. Only one font package at a time!
 \ifthenelse{\boolean{PDFTeX}}{%
   \ifthenelse{\boolean{UBN@txfonts}}{%
-    \typeout{ubonn-thesis: using pdflatex and txfonts fonts}
+    \typeout{ubonn-thesis: using pdflatex and txfonts fonts.}
     \UBN@newtxfalse
     \UBN@palatinofalse
   }{%
     \ifthenelse{\boolean{UBN@palatino}}{%
-      \typeout{ubonn-thesis: using pdflatex and Palatino fonts}
+      \typeout{ubonn-thesis: using pdflatex and Palatino fonts.}
       \UBN@txfontsfalse
       \UBN@newtxfalse
     }{%
       \ifthenelse{\boolean{UBN@newtx}}{%
-        \typeout{ubonn-thesis: using pdflatex and newtx fonts}
+        \typeout{ubonn-thesis: using pdflatex and newtx fonts.}
         \UBN@txfontsfalse
         \UBN@palatinofalse
       }{}
@@ -165,17 +165,17 @@
 % Font control for XeLaTeX. Only one font package at a time!
 \ifthenelse{\boolean{XeTeX}}{%
   \ifthenelse{\boolean{UBN@txfonts}}{%
-    \typeout{ubonn-thesis: using xelatex and TeX Gyre Termes fonts}
+    \typeout{ubonn-thesis: using xelatex and TeX Gyre Termes fonts.}
     \UBN@newtxfalse
     \UBN@palatinofalse
   }{%
     \ifthenelse{\boolean{UBN@palatino}}{%
-      \typeout{ubonn-thesis: using xelatex and TeX Gyre Pagella fonts}
+      \typeout{ubonn-thesis: using xelatex and TeX Gyre Pagella fonts.}
       \UBN@txfontsfalse
       \UBN@newtxfalse
     }{%
       \ifthenelse{\boolean{UBN@newtx}}{%
-        \typeout{ubonn-thesis: using xelatex and TeX Gyre Termes fonts}
+        \typeout{ubonn-thesis: using xelatex and TeX Gyre Termes fonts.}
         \UBN@txfontsfalse
         \UBN@palatinofalse
       }{}
@@ -186,17 +186,17 @@
 % Font control for XeLaTeX. Only one font package at a time!
 \ifthenelse{\boolean{LuaTeX}}{%
   \ifthenelse{\boolean{UBN@txfonts}}{%
-    \typeout{ubonn-thesis: using lualatex and TeX Gyre Termes fonts}
+    \typeout{ubonn-thesis: using lualatex and TeX Gyre Termes fonts.}
     \UBN@newtxfalse
     \UBN@palatinofalse
   }{%
     \ifthenelse{\boolean{UBN@palatino}}{%
-      \typeout{ubonn-thesis: using lualatex and TeX Gyre Pagella fonts}
+      \typeout{ubonn-thesis: using lualatex and TeX Gyre Pagella fonts.}
       \UBN@txfontsfalse
       \UBN@newtxfalse
     }{%
       \ifthenelse{\boolean{UBN@newtx}}{%
-        \typeout{ubonn-thesis: using lualatex and TeX Gyre Termes fonts}
+        \typeout{ubonn-thesis: using lualatex and TeX Gyre Termes fonts.}
         \UBN@txfontsfalse
         \UBN@palatinofalse
       }{}
@@ -244,12 +244,12 @@
 
 % Define a variable with the language to pass to todonotes and cleveref
 \RequirePackage{iflang}
-\typeout{ubonn-thesis: current language is \languagename}
+\typeout{ubonn-thesis: current language is \languagename.}
 \IfLanguageName{ngerman}{%
-  \typeout{ubonn-thesis: setting language to ngerman}
+  \typeout{ubonn-thesis: setting language to ngerman.}
   \newcommand*{\UBN@language}{ngerman}
 }{%
-  \typeout{ubonn-thesis: setting language to english}
+  \typeout{ubonn-thesis: setting language to english.}
   \newcommand*{\UBN@language}{english}
 }
 
@@ -257,13 +257,8 @@
 % General KOMA script options - other options affecting header/footer
 % section titles and captions are at the end of this file
 \KOMAoptions{fontsize=11pt, paper=a4}
-\ifthenelse{\boolean{UBN@twoside}}{
-  \typeout{ubonn-thesis: set twoside option true}
-  \KOMAoptions{twoside=true}
-}{%
-  \typeout{ubonn-thesis: set twoside option false}
-  \KOMAoptions{twoside=false}
-}
+% Header and footer - if scrlayer-scrpage is not available try scrpage2 instead.
+\RequirePackage[headsepline]{scrlayer-scrpage}
 % Add List of Figures/Tables to Table of Contents
 \KOMAoptions{listof=totoc}
 % Commands to add bibliography to the Table of Contents are in the main file
@@ -280,14 +275,17 @@
 % The DIV parameter tells it how many elements the page
 % should be split into.
 % \RequirePackage[scale=0.75]{geometry}
-\KOMAoptions{DIV=12}
-\ifthenelse{\boolean{UBN@twoside}}{%
-  \typeout{ubonn_thesis: apply BCOR corrction of 5mm.}
-  \KOMAoptions{BCOR=15mm}
-}{}
 \KOMAoptions{headinclude=true, footinclude=false}
-% Header and footer - if scrlayer-scrpage is not available try scrpage2 instead.
-\RequirePackage[headsepline]{scrlayer-scrpage}
+\KOMAoptions{DIV=12}
+\ifthenelse{\boolean{UBN@twoside}}{
+  \typeout{ubonn-thesis: set twoside option true.}
+  \KOMAoptions{twoside=true}
+  \typeout{ubonn_thesis: apply BCOR correction of 5mm.}
+  \KOMAoptions{BCOR=5mm}
+}{%
+  \typeout{ubonn-thesis: set twoside option false.}
+  \KOMAoptions{twoside=false}
+}
 % \RequirePackage[headsepline]{scrpage2}
 
 %-------------------------------------------------------------------------------
@@ -298,7 +296,7 @@
 %-------------------------------------------------------------------------------
 % Fonts for pdfLaTeX
 \ifthenelse{\boolean{PDFTeX}}{%
-  \typeout{ubonn-thesis: setting fonts for pdflatex}
+  \typeout{ubonn-thesis: setting fonts for pdflatex.}
   % Input encoding, font and language
   \RequirePackage[utf8]{inputenc}
 
@@ -384,7 +382,7 @@
   \sisetup{group-digits=integer, group-minimum-digits=4}
   \sisetup{detect-all}
   \ifthenelse{\boolean{UBN@eVkern}}{%
-    \typeout{ubonn-thesis: Applying kern to eV}
+    \typeout{ubonn-thesis: Applying kern to eV.}
     \DeclareSIUnit\electronvolt{\text{e\kern-.1em V}}
   }{}
   % Barn needed in some versions of siunitx.
@@ -528,7 +526,7 @@
 % Add a \mynote command
 \ifthenelse{\boolean{UBN@todonotes}}{%
   \ifthenelse{\boolean{UBN@shownotes}}{%
-    \typeout{ubonn-thesis: showing notes}
+    \typeout{ubonn-thesis: showing notes.}
     % \KOMAoptions{BCOR=-1cm}
     % \addtolength{\marginparwidth}{1.5cm}
     % \addtolength{\textwidth}{-1.5cm}
@@ -539,7 +537,7 @@
         {\textcolor{magenta}{#2}\todo[color=magenta!20, linecolor=magenta, #1]{#3}\xspace}
     }
   }{%
-    \typeout{ubonn-thesis: not showing notes}
+    \typeout{ubonn-thesis: not showing notes.}
     \RequirePackage[disable, \UBN@language, textsize=scriptsize]{todonotes}
     \newcommand{\mynote}[3][]{\todo[#1]{#2}\xspace}
   }
@@ -594,14 +592,14 @@
 % cleveref has to be included late
 % Decide whether to capitalise Fig., Table etc. or not.
 \ifthenelse{\boolean{UBN@cleveref}}{%
-  \typeout{ubonn-thesis: using cleveref}
+  \typeout{ubonn-thesis: using cleveref.}
   \ifthenelse{\boolean{UBN@clevercaps}}{%
     \RequirePackage[capitalise, \UBN@language]{cleveref}
   }{%
     \RequirePackage[\UBN@language]{cleveref}
   }
 }{%
-  \typeout{ubonn-thesis: not using cleveref}
+  \typeout{ubonn-thesis: not using cleveref.}
 }
 
 %-------------------------------------------------------------------------------

@@ -20,6 +20,8 @@
 \def\input@path{{../}}
 \makeatother
 
+\usepackage{ifthen}
+
 % diffcoeff package released in 2016 - define a simple form of \diff for earler.
 \ifthenelse{\texlive < 2016}{%
   \newcommand*{\diffcoeff}{diffcoeff=true}

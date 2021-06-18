@@ -3,7 +3,7 @@
 \documentclass[ngerman, USenglish, UKenglish]{scrbook}
 %-------------------------------------------------------------------------------
 % This file contains the guide to writing theses for the
-% physics and astronomy institutes, Universität Bonn
+% physics and astronomy institutes, Universität Bonn.
 
 % Specify the language(s) in the class and then use babel.
 % If you need more than one language, give the default language last,
@@ -20,20 +20,21 @@
 \def\input@path{{../}}
 \makeatother
 
-% Adjustments to biblatex output are in ubonn-biblatex style file
-% Thesis style file
-\usepackage[shownotes, cleveref, diffcoeff, dcolumn, feynmp, xtab,
+% Thesis style file.
+\usepackage[todonotes=true, twoside=false,
+  cleveref, diffcoeff, dcolumn, feynmp, xtab,
   bibstyle=alphabetic]{ubonn-thesis}
-% Thesis bibliography settings
+
+% Thesis bibliography settings.
 \usepackage[backref=true]{ubonn-biblatex}
 
-% Avoid problems associated with writing too many files
+% Avoid problems associated with writing too many files.
 \ifthenelse{\boolean{PDFTeX} \OR \boolean{XeTeX}}{%
   \usepackage{scrwfile}
 }{}
 \usepackage{import}
 \usepackage{standalone}
-% TikZ-FeynHand only as of TeX Live 2017
+% TikZ-FeynHand only as of TeX Live 2017.
 \ifthenelse{\texlive > 2016}{%
   \usepackage{tikz-feynhand}
 }{}
@@ -45,7 +46,7 @@
 \usetikzlibrary{decorations.pathmorphing}
 \usetikzlibrary{decorations.markings}
 
-% Other packages needed for the guide
+% Other packages needed for the guide.
 % \usepackage{physics}
 \usepackage{makeidx}
 \usepackage[acronym, toc, nosuper]{glossaries} % docdef=restricted, 
@@ -57,7 +58,7 @@
 \usepackage{guide_defs}
 \usepackage{guide_listings}
 
-% Add many more possibilities to break URLs
+% Add many more possibilities to break URLs.
 \makeatletter
 \g@addto@macro{\UrlBreaks}{\UrlOrds}
 \makeatother
@@ -92,7 +93,7 @@
 
 %-------------------------------------------------------------------------------
 % The following definitions are used to produce the title pages
-% needed at various stages
+% needed at various stages.
 \newcommand{\thesistitle}{Users Guide to Writing a Thesis
   in a Physics/Astronomy Institute
   of the University of Bonn}
@@ -170,18 +171,18 @@
 }
 
 %-------------------------------------------------------------------------------
-% Make an index and a glossary
+% Make an index and a glossary.
 \makeindex
 \makeglossaries
 
-% Glossary entries
+% Glossary entries.
 \input{../guide/guide_glossary}
 
 %-------------------------------------------------------------------------------
 \begin{document}
 \frontmatter
 %-------------------------------------------------------------------------------
-% Title page
+% Title page.
 \input{../cover/Guide_Submit_Title}
 
 \pagestyle{scrplain}
@@ -228,7 +229,7 @@
 %\printbibliography[heading=subbibliography]
 
 %-------------------------------------------------------------------------------
-% Use biblatex for the bibliography and add bibliography to Table of Contents
+% Use biblatex for the bibliography and add bibliography to Table of Contents.
 \printbibliography[heading=bibintoc]
 %   % Use traditional BibTeX for the bibliography.
 %   {\raggedright
@@ -242,23 +243,23 @@
 % }
 
 %-------------------------------------------------------------------------------
-% Declare lists of figures and tables and acknowledgements as backmatter
-% Chapter/section numbers are turned off
+% Declare lists of figures and tables and acknowledgements as backmatter.
+% Chapter/section numbers are turned off.
 \backmatter
 
 \listoffigures
 \listoftables
 
 %-------------------------------------------------------------------------------
-% Print the glossary
+% Print the glossary.
 \printglossaries
 
 %-------------------------------------------------------------------------------
-% Print the index
+% Print the index.
 \printindex
 
 %-------------------------------------------------------------------------------
-% Acknowledgements
+% Acknowledgements.
 \include{guide_acknowledge2}
 
 \end{document}

@@ -257,7 +257,13 @@
 % General KOMA script options - other options affecting header/footer
 % section titles and captions are at the end of this file
 \KOMAoptions{fontsize=11pt, paper=a4}
-\ifthenelse{\boolean{UBN@twoside}}{\KOMAoptions{twoside=true}}{}
+\ifthenelse{\boolean{UBN@twoside}}{
+  \typeout{ubonn-thesis: set twoside option true}
+  \KOMAoptions{twoside=true}
+}{%
+  \typeout{ubonn-thesis: set twoside option false}
+  \KOMAoptions{twoside=false}
+}
 % Add List of Figures/Tables to Table of Contents
 \KOMAoptions{listof=totoc}
 % Commands to add bibliography to the Table of Contents are in the main file
@@ -275,7 +281,10 @@
 % should be split into.
 % \RequirePackage[scale=0.75]{geometry}
 \KOMAoptions{DIV=12}
-\ifthenelse{\boolean{UBN@twoside}}{\KOMAoptions{BCOR=5mm}}{}
+\ifthenelse{\boolean{UBN@twoside}}{%
+  \typeout{ubonn_thesis: apply BCOR corrction of 5mm.}
+  \KOMAoptions{BCOR=15mm}
+}{}
 \KOMAoptions{headinclude=true, footinclude=false}
 % Header and footer - if scrlayer-scrpage is not available try scrpage2 instead.
 \RequirePackage[headsepline]{scrlayer-scrpage}

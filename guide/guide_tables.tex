@@ -70,21 +70,24 @@ Although extra packages can help, a very useful command is
 of the argument. Compare the results in the following table with two
 numbers 0.76 and 83.1:
 
-\begin{tcblisting}{listing side text}
-\begin{tabular}{cc|rr} % chktex 44
+\begin{tcblisting}{textable}
+\centering
+\begin{tabular}{cc|rr}
   \multicolumn{2}{c|}{Centred} &
   \multicolumn{2}{c}{Right justified} \\
-  & Phantom & & Phantom\\\hline % chktex 44
+  & Phantom & & Phantom\\
+  \midrule
   0.76 & \phantom{0}0.76 & 0.76 & 0.76\\
   83.1 & 83.1\phantom{0} & 83.1 & 83.1\phantom{0}
 \end{tabular}
-\end{tcblisting}
-\begin{tcblisting}{listing side text}
+\qquad
 {\setlength{\extrarowheight}{0.5ex}
-\begin{tabular}{cc|rr} % chktex 44
+\centering
+\begin{tabular}{cc|rr}
   \multicolumn{2}{c|}{Centred} &
   \multicolumn{2}{c}{Right justified} \\
-  & Phantom & & Phantom\\\hline % chktex 44
+  & Phantom & & Phantom\\
+  \midrule
   0.76 & \phantom{0}0.76 & 0.76 & 0.76\\
   83.1 & 83.1\phantom{0} & 83.1 & 83.1\phantom{0}
 \end{tabular}
@@ -127,99 +130,114 @@ Hence this example uses the old fashioned style \verb|\"{u}| etc.
   \captionabove{A table of viscosities in the default language and German.
     Typeset using the \Macro{captionabove} macro.}%
   \label{tab:viscosity}
-  \centering
-  \begin{tcblisting}{listing side text}
-  \begin{tabular}{lS[table-format = 4.2]S}
-    \toprule
-    Liquid & {Temp.} & {Viscosity \(\eta\)}\\
-    &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
-    \midrule
-    Blood     & 37 & 4.0 \\
-    Glycerine &  0 & 10000 \\
-    & 20 & 1410 \\
-    & 60 & 81 \\
-    Oil (SAE 10) & 30 & 200 \\
-    Water   &  0 & 1.8 \\
-    & 20 & 1.00 \\
-    & 60 & 0.65 \\
-    Air     & 20 & 0.018 \\
-    \bottomrule
-  \end{tabular}
-  \end{tcblisting}
-  \begin{tcblisting}{listing side text}
-  \foreignlanguage{ngerman}{%
-  \begin{tabular}{lS[table-format = 4.2]S}
-    \toprule
-    Fl\"{u}ssigkeit & {Temp.} & {Viskosit\"{a}t \(\eta\)}\\
-    &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
-    \midrule
-    Blut     & 37 & 4.0 \\
-    Glyzerin &  0 & 10000 \\
-    & 20 & 1410 \\
-    & 60 & 81 \\
-    \"{O}l (SAE 10) & 30 & 200 \\
-    Wasser   &  0 & 1.8 \\
-    & 20 & 1.00 \\
-    & 60 & 0.65 \\
-    Luft     & 20 & 0.018 \\
-    \bottomrule
-  \end{tabular}
-  }
+\begin{tcblisting}{textable}
+\centering
+\begin{tabular}{lS[table-format=4.2]S}
+  \toprule
+  Liquid & {Temp.} & {Viscosity \(\eta\)}\\
+  &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
+  \midrule
+  Blood     & 37 & 4.0 \\
+  Glycerine &  0 & 10000 \\
+  & 20 & 1410 \\
+  Oil (SAE 10) & 30 & 200 \\
+  Water   &  0 & 1.8 \\
+  & 20 & 1.00 \\
+  Air     & 20 & 0.018 \\
+  \bottomrule
+\end{tabular}
+\qquad
+\foreignlanguage{ngerman}{%
+\begin{tabular}{lS[table-format=4.2]S}
+  \toprule
+  Fl\"{u}ssigkeit & {Temp.} & {Viskosit\"{a}t \(\eta\)}\\
+  &  {[\si{\celsius}]} & {(\si{\metre\pascal\second})} \\
+  \midrule
+  Blut     & 37 & 4.0 \\
+  Glyzerin &  0 & 10000 \\
+  & 20 & 1410 \\
+  \"{O}l (SAE 10) & 30 & 200 \\
+  Wasser   &  0 & 1.8 \\
+  & 20 & 1.00 \\
+  Luft     & 20 & 0.018 \\
+  \bottomrule
+\end{tabular}
+}
 \end{tcblisting}
 \end{table}
 
-\Cref{tab:xsect0} shows a more complicated table set using the
-tools. You can either enclose all numbers in \Macro{num} or use the
-\Option{S} column descriptor. If you use \Option{S}, note that it
-usually centres the contents of the column. You can use the
-\Option{table-number-alignment} option to change this.
-\Option{S} and \Macro{num} cannot generally be mixed in a single column though.
-If you want to use \Macro{num} in an
-\Option{S} column you have to enclose it in braces. You also need to
-do this with regular text, such as column headings --- see
-\cref{tab:viscosity}.
+\Cref{tab:xsect0} shows a more complicated table set using the tools.
+You can either enclose all numbers in \Macro{tablenum} (or \Macro{num}
+or use the \Option{S} column descriptor.
+If you use \Option{S}, it usually centres the contents of the column.
+You can use the \Option{table-number-alignment} option to change this.
+\Option{S} and \Macro{tablenum} cannot generally be mixed in a single column though.
+If you want to use \Macro{tablenum} in an
+\Option{S} column you have to enclose it in braces.
+You also need to do this with regular text,
+such as column headings --- see \cref{tab:viscosity}.
+Note the use of \Macro{sisetup\{table-format=4.0\}}
+to define a default format for numbers in an \enquote{S} column,
+or that are formatted using \Macro{numtable}.
 
-The spacing of the captions in \cref{tab:viscosity,tab:xsect0} is the same as
-the option \Option{captions=tableheading} is set in this guide.
+The spacing of the captions in \cref{tab:viscosity,tab:xsect0} is the same,
+as the option \Option{captions=tableheading} is set in this guide.
 
 \begin{table}[htbp]
   \caption{A selection of cross-section measurements!
     Typeset using the \Macro{caption} macro.}%
   \label{tab:xsect0}
-  \centering
-  \renewcommand{\arraystretch}{1.2}
-  \sisetup{round-mode = places}
-  \begin{tabular}{%
-      r@{\,:\,}S[table-number-alignment=center-decimal-marker]%
-      r@{\,}c@{\,}l@{\,}l%
-      S[table-format=5.0]@{\,}l%
-      l}
-    \toprule
-    \multicolumn{2}{c}{\etajet} & \multicolumn{4}{c}{\diffetab} & \multicolumn{2}{c}{\diffnloetab} & \Cbhad \\
-    \multicolumn{2}{c}{} & \multicolumn{4}{c}{[\si{\pico\barn}]} &
-    \multicolumn{2}{c}{[\si{\pico\barn\per\GeV}]} & \\
-    \midrule
-    \num{-1.6} & -1.1 & \num[round-precision=1]{57.4}  & \(\pm\) & \num[round-precision=1]{9.4}  & \(^{+13}_{-3}\)  &  72 & \(^{+22}_{-13}\) & \num[round-precision=2]{0.704} \\
-    \num{-1.1} & -0.8 & \num[round-precision=0]{121.3} & \(\pm\) & \num[round-precision=0]{21.1} & \(^{+16}_{-16}\) & 182 & \(^{+50}_{-30}\) & \num[round-precision=2]{0.781} \\
-    \num{-0.8} & -0.5 & \num[round-precision=0]{214.1} & \(\pm\) & \num[round-precision=0]{21.9} & \(^{+22}_{-12}\) & 255 & \(^{+69}_{-42}\) & \num[round-precision=2]{0.791} \\
-    \num{-0.5} & -0.2 & \num[round-precision=0]{232.6} & \(\pm\) & \num[round-precision=0]{21.0} & \(^{+28}_{-21}\) & 307 & \(^{+83}_{-50}\) & \num[round-precision=2]{0.791} \\
-    \num{-0.2} & +0.1 & \num[round-precision=0]{264.1} & \(\pm\) & \num[round-precision=0]{22.0} & \(^{+28}_{-23}\) & 342 & \(^{+91}_{-55}\) & \num[round-precision=2]{0.808} \\
-    \num{+0.1} & +0.5 & \num[round-precision=0]{316.0} & \(\pm\) & \num[round-precision=0]{21.1} & \(^{+23}_{-17}\) & 346 & \(^{+96}_{-57}\) & \num[round-precision=2]{0.847} \\
-    \num{+0.5} & +1.4 & \num[round-precision=0]{288.1} & \(\pm\) & \num[round-precision=0]{15.4} & \(^{+20}_{-30}\) & 265 & \(^{+82}_{-48}\) & \num[round-precision=2]{0.926} \\
-    \bottomrule
-  \end{tabular}
+\begin{tcblisting}{textable,
+  listing options={basicstyle=\ttfamily\footnotesize}}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\sisetup{round-mode = places}
+\sisetup{table-format=4.0}
+\begin{tabular}{
+    S[table-format=+1.2] @{\,:\,}
+    S[table-format=+1.2, table-number-alignment=center-decimal-marker]
+    r@{\,}c@{\,}l@{\,}l
+    S[table-format=5.0, round-precision=0]@{\,}l
+    S[table-format=1.2, round-precision=2]}
+  \toprule
+  \multicolumn{2}{c}{\etajet} & \multicolumn{4}{c}{\diffetab} 
+  & \multicolumn{2}{c}{\diffnloetab} & \Cbhad \\
+  \multicolumn{2}{c}{} & \multicolumn{4}{c}{[\si{\pico\barn}]} &
+  \multicolumn{2}{c}{[\si{\pico\barn\per\GeV}]} & \\
+  \midrule
+  -1.6 & -1.1 & \tablenum[table-format=2.1, round-precision=1]{57.4} &
+  \(\pm\) & \tablenum[table-format=1.1, round-precision=1]{9.4} &
+  \(^{+13}_{-3}\) &  72 & \(^{+22}_{-13}\) & 0.704 \\
+  -1.1 & -0.8 & \tablenum[round-precision=0]{121.3} &
+  \(\pm\) & \tablenum[table-format=2.0, round-precision=0]{21.1} &
+  \(^{+16}_{-16}\) & 182 & \(^{+50}_{-30}\) & 0.781 \\
+  \multicolumn{9}{l}{\ldots}\\
+  -0.2 & +0.1 & \tablenum[round-precision=0]{264.1} &
+  \(\pm\) & \tablenum[table-format=2.0, round-precision=0]{22.0} &
+  \(^{+28}_{-23}\) & 342 & \(^{+91}_{-55}\) & 0.808 \\
+  +0.1 & +0.5 & \tablenum[round-precision=0]{316.0} &
+  \(\pm\) & \tablenum[table-format=2.0, round-precision=0]{21.1} &
+  \(^{+23}_{-17}\) & 346 & \(^{+96}_{-57}\) & 0.847 \\
+  +0.5 & +1.4 & \tablenum[round-precision=0]{288.1} &
+  \(\pm\) & \tablenum[table-format=2.0, round-precision=0]{15.4} &
+  \(^{+20}_{-30}\) & 265 & \(^{+82}_{-48}\) & 0.926 \\
+  \bottomrule
+\end{tabular}
+\end{tcblisting}
 \end{table}
 
-With \Macro{num} you can also specify the precision with which each
-number is shown separately. 
+With \Macro{tablenum} you can also specify the precision and format of each
+number is shown separately.
+\Macro{tablenum} should be preferred over \Macro{num} in tables,
+as you can use alignment options with it.
 With \Option{S} you specify the format for the whole column.
 You should make sure
 that you specify the rounding mode in the preamble of the table (usually
 \Option{figures} or \Option{places} --- you can also choose \Option{off}).
 
 If you know that you are going to make such a table, it is very easy
-to use either of these options to write it out in this format using a
-program. Using \Macro{num} solves the very common problem of your
+to use either of these options to write it out in this format using a program. 
+Using \Macro{tabenumnum} or \Macro{num} solves the very common problem of your
 program writing out the results with too many significant digits and
 you have to correct them all by hand later (as well as every time they
 get updated)!  A slightly different approach that one could follow is
@@ -234,30 +252,33 @@ and paste this into a table and then a referee (or your supervisor)
 complains that you clearly don't understand statistics, as you should
 never quote an error to 5 significant digits. You can go ahead and
 edit all the numbers by hand, but what do you do if you rerun your
-analysis and all the numbers change. Reformatting by hand is then an
-error prone and lengthy process. As discussed above, you can either
-use options such as \Option{round-precision} in the \Option{S} command or use the macro
-\Macro{num} and \Option{dp}/\Option{round-precision} to do the
+analysis and all the numbers change.
+Reformatting by hand is then an error prone and lengthy process.
+As discussed above, you can either use options such as 
+\Option{round-precision} in the \Option{S} command or use the macro
+\Macro{tablenum} or \Macro{num} 
+and option \Option{dp}/\Option{round-precision} to do the
 rounding\index{rounding} for you.
 
-\Cref{tab:rounding} shows and compares two different approaches
-on how this can be done, even for asymmetric errors. While the form
+\Cref{tab:rounding1,tab:rounding2} shows and compares two different approaches
+on how this can be done, even for asymmetric errors.
+While the form
 may appear to be a bit clumsy at first, it is easy enough to get your
 program to write out the lines. 
 You should use the options \Option{round-mode} and
 \Option{round-precision} to specify how the rounding should be done.
-In the first line of the left-hand part of
-the table I show what to do if you need to change the precision of a
-single number.  As you can see this is rather trivial. However, then
-the alignment on the decimal point is no longer perfect. While this is
-probably OK for internal notes etc., theses or papers (should) have
-tougher requirements.
+In the first line of \cref{tab:rounding1}
+I show what to do if you need to change the precision of a single number.
+As you can see this is rather trivial.
+However, then the alignment on the decimal point is no longer perfect.
+While this is probably OK for internal notes etc.,
+theses or papers (should) have tougher requirements.
 Another way of achieving the same thing and
 avoiding the use of \Option{round-mode} and
 \Option{round-precision}\footnote{%
   The \Option{round-mode} should be set in the preamble of the table and
   not for every number.}
-is shown in the right half.
+is shown in \cref{tab:rounding2}.
 Note the use of options for the \Option{S} command
 and the use of \Macro{num} enclosed in braces
 to format the row that requires a different precision.
@@ -272,80 +293,108 @@ If you set this option inside a table, it will only be applied to that table.
 It takes a while to learn what the different options mean and their
 consequences. I hope that these examples cover most problems and at
 least give ideas as to what is possible.
-In particular the solution
-on the right-hand side of \cref{tab:rounding} is very nice, as
+In particular the \cref{tab:rounding2} solution is very nice, as
 all numbers except the one that requires an extra digit are written
 without any special formatting!
 
 \begin{table}[htbp]
   \caption{Another selection of cross-section measurements! Note the
+    use of \Macro{sisetup} to keep the plus signs on the positive errors.
+    This example uses \Macro{tablenum}.
+  }%
+  \label{tab:rounding1}
+\begin{tcblisting}{textable}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\sisetup{retain-explicit-plus}
+\sisetup{round-mode = places}
+\begin{tabular}{%
+    S@{\,:\,}S
+    r@{\,}@{\(\pm\)}@{\,}l@{\,}l
+      }
+  \toprule
+  \multicolumn{2}{c}{\etajet} & \multicolumn{3}{c}{\diffetab} \\
+  \multicolumn{2}{c}{} & \multicolumn{3}{c}{[\si{\pico\barn}]} \\
+  \midrule
+  {\num{-1.6}} & -1.1 & \num[round-precision=3]{0.574} &
+  \num[round-precision=3]{0.094} &
+  \(^{\num[round-precision=3]{+0.035}}_{\num[round-precision=3]{-0.031}}\) \\
+  {\num{-1.1}} & -0.8 & \num[round-precision=2]{1.213} &
+  \num[round-precision=2]{0.211} &
+  \(^{\num[round-precision=2]{+0.162}}_{\num[round-precision=2]{-0.162}}\) \\
+  \multicolumn{5}{l}{\ldots}\\
+  {\num{-0.2}} & +0.1 & \num[round-precision=2]{2.641} &
+  \num[round-precision=2]{0.220} &
+  \(^{\num[round-precision=2]{+0.283}}_{\num[round-precision=2]{-0.233}}\) \\
+  {\num{+0.1}} & +0.5 & \num[round-precision=2]{3.160} &
+  \num[round-precision=2]{0.211} &
+  \(^{\num[round-precision=2]{+0.232}}_{\num[round-precision=2]{-0.172}}\) \\
+  {\num{+0.5}} & +1.4 & \num[round-precision=2]{2.881} &
+  \num[round-precision=2]{0.154} &
+  \(^{\num[round-precision=2]{+0.201}}_{\num[round-precision=2]{-0.301}}\) \\
+  \bottomrule
+\end{tabular}
+\end{tcblisting}
+\end{table}
+
+\begin{table}[htbp]
+  \caption{Another selection of cross-section measurements! Note the
     use of \Macro{sisetup} to keep the plus signs on the positive errors.}%
-  \label{tab:rounding}
-  \centering
-  \renewcommand{\arraystretch}{1.2}
-  \sisetup{retain-explicit-plus}
-  \sisetup{round-mode = places}
-  \begin{tabular}{%
-      S@{\,:\,}S
-      r@{\,}@{\(\pm\)}@{\,}l@{\,}l
-       }
-    \toprule
-    \multicolumn{2}{c}{\etajet} & \multicolumn{3}{c}{\diffetab} \\
-    \multicolumn{2}{c}{} & \multicolumn{3}{c}{[\si{\pico\barn}]} \\
-    \midrule
-    {\num{-1.6}} & -1.1 & \num[round-precision=3]{0.574} & \num[round-precision=3]{0.094} & \(^{\num[round-precision=3]{+0.035}}_{\num[round-precision=3]{-0.031}}\) \\
-    {\num{-1.1}} & -0.8 & \num[round-precision=2]{1.213} & \num[round-precision=2]{0.211} & \(^{\num[round-precision=2]{+0.162}}_{\num[round-precision=2]{-0.162}}\) \\
-    {\num{-0.8}} & -0.5 & \num[round-precision=2]{2.141} & \num[round-precision=2]{0.219} & \(^{\num[round-precision=2]{+0.223}}_{\num[round-precision=2]{-0.123}}\) \\
-    {\num{-0.5}} & -0.2 & \num[round-precision=2]{2.326} & \num[round-precision=2]{0.210} & \(^{\num[round-precision=2]{+0.284}}_{\num[round-precision=2]{-0.214}}\) \\
-    {\num{-0.2}} & +0.1 & \num[round-precision=2]{2.641} & \num[round-precision=2]{0.220} & \(^{\num[round-precision=2]{+0.283}}_{\num[round-precision=2]{-0.233}}\) \\
-    {\num{+0.1}} & +0.5 & \num[round-precision=2]{3.160} & \num[round-precision=2]{0.211} & \(^{\num[round-precision=2]{+0.232}}_{\num[round-precision=2]{-0.172}}\) \\
-    {\num{+0.5}} & +1.4 & \num[round-precision=2]{2.881} & \num[round-precision=2]{0.154} & \(^{\num[round-precision=2]{+0.201}}_{\num[round-precision=2]{-0.301}}\) \\
-    \bottomrule
-  \end{tabular}
-  \quad
-  \sisetup{round-mode = places, round-precision = 2}
-  \begin{tabular}{%
-      S[table-format=3.2, table-number-alignment = right]@{\,:\,}S
-      S[round-mode = places, round-precision = 2,
-      table-format = 1.3, table-number-alignment = right]
-      @{\(\,\pm\,\)}
-      S[round-mode = places, round-precision = 2,
-      table-format = 1.3, table-number-alignment = left]
-      @{\,}l
-       }
-    \toprule
-    \multicolumn{2}{c}{\etajet} & \multicolumn{3}{c}{\diffetab} \\
-    \multicolumn{2}{c}{} & \multicolumn{3}{c}{[\si{\pico\barn}]} \\
-    \midrule
-    -1.6 & -1.1 & {\num[round-precision=3]{0.574}} & {\num[round-precision=3]{0.094}} & \(^{\num[round-precision=3]{+0.035}}_{\num[round-precision=3]{-0.031}}\) \\
-    -1.1 & -0.8 & 1.213 & 0.211 & \(^{\num{+0.162}}_{\num{-0.162}}\) \\
-    -0.8 & -0.5 & 2.141 & 0.219 & \(^{\num{+0.223}}_{\num{-0.123}}\) \\
-    -0.5 & -0.2 & 2.326 & 0.210 & \(^{\num{+0.284}}_{\num{-0.214}}\) \\
-    -0.2 & +0.1 & 2.641 & 0.220 & \(^{\num{+0.283}}_{\num{-0.233}}\) \\
-    +0.1 & +0.5 & 3.160 & 0.211 & \(^{\num{+0.232}}_{\num{-0.172}}\) \\
-    +0.5 & +1.4 & 2.881 & 0.154 & \(^{\num{+0.201}}_{\num{-0.301}}\) \\
-    \bottomrule
-  \end{tabular}
+    This example uses \enquote{S} columns.
+  \label{tab:rounding2}
+\begin{tcblisting}{textable}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\sisetup{retain-explicit-plus}
+\sisetup{round-mode = places, round-precision = 2}
+\begin{tabular}{%
+    S[table-format=3.2, table-number-alignment=right]@{\,:\,}S
+    S[round-mode = places, round-precision = 2,
+    table-format = 1.3, table-number-alignment=right]
+    @{\(\,\pm\,\)}
+    S[round-mode = places, round-precision = 2,
+    table-format = 1.3, table-number-alignment=left]
+    @{\,}l
+      }
+  \toprule
+  \multicolumn{2}{c}{\etajet} & \multicolumn{3}{c}{\diffetab} \\
+  \multicolumn{2}{c}{} & \multicolumn{3}{c}{[\si{\pico\barn}]} \\
+  \midrule
+  -1.6 & -1.1 & {\num[round-precision=3]{0.574}} &
+  {\num[round-precision=3]{0.094}} &
+  \(^{\num[round-precision=3]{+0.035}}_{\num[round-precision=3]{-0.031}}\) \\
+  -1.1 & -0.8 & 1.213 & 0.211 & \(^{\num{+0.162}}_{\num{-0.162}}\) \\
+  \multicolumn{5}{l}{\ldots}\\
+  -0.2 & +0.1 & 2.641 & 0.220 & \(^{\num{+0.283}}_{\num{-0.233}}\) \\
+  +0.1 & +0.5 & 3.160 & 0.211 & \(^{\num{+0.232}}_{\num{-0.172}}\) \\
+  +0.5 & +1.4 & 2.881 & 0.154 & \(^{\num{+0.201}}_{\num{-0.301}}\) \\
+  \bottomrule
+\end{tabular}  
+\end{tcblisting}
 \end{table}
 
 Another example using \Package{siunitx} tools that contains a similar
 problem is:
-\begin{center}
-  \begin{tabular}{%
-    S[table-number-alignment=center-decimal-marker]@{\(\,\pm\)}S[table-number-alignment=center-decimal-marker]|%
-    c%
-    S[output-decimal-marker={,}]@{\(\,\pm\!\!\)}S[output-decimal-marker={,}]}
-  \toprule
-  \multicolumn{2}{c|}{English} &
-  \multicolumn{1}{c}{German1} &
-  \multicolumn{2}{c}{German2} \\
-  {Value} & {Error} & {Wert} & \multicolumn{2}{c}{Messung}\\
-  \midrule
-  0.76 & 0.14 & \num[output-decimal-marker={,}]{0.89(16)} & 0.89 & 0.16\\
-  83.1 &  7.6 & \num[output-decimal-marker={,}]{94.2(83)} & 94.2 & 8.3\\
-  \bottomrule
-  \end{tabular}
-\end{center}
+\begin{tcblisting}{textable}
+\centering
+\begin{tabular}{
+  S[table-number-alignment=center-decimal-marker]@{\(\,\pm\)}
+  S[table-number-alignment=center-decimal-marker]|
+  c
+  S[output-decimal-marker={,}]@{\(\,\pm\!\!\)}
+  S[output-decimal-marker={,}]
+}
+\toprule
+\multicolumn{2}{c|}{English} &
+\multicolumn{1}{c}{German1} &
+\multicolumn{2}{c}{German2} \\
+{Value} & {Error} & {Wert} & \multicolumn{2}{c}{Messung}\\
+\midrule
+0.76 & 0.14 & \num[output-decimal-marker={,}]{0.89(16)} & 0.89 & 0.16\\
+83.1 &  7.6 & \num[output-decimal-marker={,}]{94.2(83)} & 94.2 & 8.3\\
+\bottomrule
+\end{tabular}
+\end{tcblisting}
 
 As you can see, the \enquote{English} column formats things nicely using
 the \Option{S} column descriptor. The \enquote{German1} column successfully
@@ -355,44 +404,49 @@ messed up. The \enquote{German2} column looks better. I had to do some dirty
 tricks with the formatting of the intercolumn separator
 \verb+@{\,\pm\!\!}+ to get the spacing nice! This confirms my
 statement above that the \Option{S} format is most useful for aligning
-simple numbers easily, while \Macro{num} is very nice for rounding to
+simple numbers easily, while \Macro{tablenum} is very nice for rounding to
 a given precision --- note that you can use either the \Option{dp} or
 \Option{sf} options to achieve what you want.
 
 If your header is wider than the content,
 you may also have to tweak a few things to get the correct alignment.
 A good way of doing this is to insert some \Macro{hspace*} into the header.
-The table on the left is without \Macro{hspace}, while the one on the right is
+The table on the left of \cref{tab:heading} is without \Macro{hspace}, while the one on the right is
 with an \Macro{hspace} of 2em.
 The tables contain vertical lines that I would normally not include to illustrate the alignment.
-\begin{tcblisting}{listing side text}
-  \renewcommand{\arraystretch}{1.4}
-  \sisetup{round-mode = places, retain-explicit-plus}
-  \begin{tabular}{|S[table-format=5.0]@{\,}l|} % chktex 44
-    \toprule
-    \multicolumn{2}{| c |}{\diffnloetab} \\
-    \multicolumn{2}{| c |}{[\si{\pico\barn\per\GeV}]} \\
-    \midrule
-      72 & \(^{+22}_{-13}\) \\
-     182 & \(^{+50}_{-30}\) \\
-     255 & \(^{+69}_{-42}\) \\
-    \bottomrule
-  \end{tabular}
-\end{tcblisting}
 
-\begin{tcblisting}{listing side text}
-  \begin{tabular}{|S[table-format=5.0]@{\,}l@{\hspace*{2em}}|} % chktex 44
-    \toprule
-    \multicolumn{2}{| c |}{\diffnloetab} \\
-    \multicolumn{2}{| c |}{[\si{\pico\barn\per\GeV}]} \\
-    \midrule
-      72 & \(^{+22}_{-13}\) \\
-     182 & \(^{+50}_{-30}\) \\
-     255 & \(^{+69}_{-42}\) \\
-    \bottomrule
-  \end{tabular}
+\begin{table}[htbp]
+  \caption{Table illustrating how to centre numbers
+    if the heading is wider than them.}
+  \label{tab:heading}
+\begin{tcblisting}{textable}
+\renewcommand{\arraystretch}{1.4}
+\sisetup{round-mode=places, retain-explicit-plus}
+\centering
+\begin{tabular}{|S[table-format=5.0, round-precision=0]@{\,} l|}
+  \toprule
+  \multicolumn{2}{| c |}{\diffnloetab} \\
+  \multicolumn{2}{| c |}{[\si{\pico\barn\per\GeV}]} \\
+  \midrule
+    72 & \(^{+22}_{-13}\) \\
+    182 & \(^{+50}_{-30}\) \\
+    255 & \(^{+69}_{-42}\) \\
+  \bottomrule
+\end{tabular}
+\qquad
+\begin{tabular}{|S[table-format=5.0, round-precision=0]@{\,}
+  l@{\hspace*{2em}}|}
+  \toprule
+  \multicolumn{2}{| c |}{\diffnloetab} \\
+  \multicolumn{2}{| c |}{[\si{\pico\barn\per\GeV}]} \\
+  \midrule
+    72 & \(^{+22}_{-13}\) \\
+    182 & \(^{+50}_{-30}\) \\
+    255 & \(^{+69}_{-42}\) \\
+  \bottomrule
+\end{tabular}
 \end{tcblisting}
-
+\end{table}
 
 %------------------------------------------------------------------------------
 \section{Using \Package{dcolumn}}%
@@ -403,13 +457,15 @@ An alternative is the \Package{dcolumn} package. You can also use this
 package to convert numbers written with \enquote{.} as the decimal point
 into German-style numbers with \enquote{,}.\footnote{See
   \cref{sec:layout:german} for hints on how to get
-  around problems with the \Package{ziffer} package} You can line up
-measurements and errors by putting each of them in its own column. If
+  around problems with the \Package{ziffer} package.}
+You can line up measurements and errors by putting each of them in its own column. If
 your errors are symmetric you can put \(\pm\) as the intercolumn
 separator:
 
-\begin{center}
-\begin{tabular}{cD{.}{.}{3}|cD{.}{,}{2}|rl|D{.}{.}{2}@{\(\,\pm\,\)}D{.}{.}{2}} % chktex 44
+\begin{tcblisting}{textable}
+\centering
+\begin{tabular}{cD{.}{.}{3} | cD{.}{,}{2} | rl |
+  D{.}{.}{2}@{\(\,\pm\,\)}D{.}{.}{2}}
   \multicolumn{2}{c|}{English} &
   \multicolumn{2}{c|}{German} &
   \multicolumn{2}{c|}{Val \(\pm\) Err} &
@@ -418,7 +474,7 @@ separator:
   0.76 & 0.76 & 0,76 & 0.76 & 0.76 & \(\pm\) 0.14 & 0.76 & 0.04\\
   83.1 & 83.1 & 83,1 & 83.1 & 83.1 & \(\pm\) 4.2  & 83.1 & 4.2
 \end{tabular}
-\end{center}
+\end{tcblisting}
 
 \Cref{tab:xsect1} shows quite a complicated table
 set in 2 different ways. It is rotated by \SI{90}{\degree} to
@@ -509,60 +565,81 @@ whether one wants to to write \(+0.5\) or just \(0.5\). The fact that both
 \pT as well as \(\eta\) cross-sections are in a single tabular, but the
 numerical values are so different makes it difficult to line things up
 perfectly. An alternative, which uses the headers to fix the width of
-the columns is given in \cref{tab:xsect2}. Note that this uses
+the columns is given in \cref{tab:xsect2a,tab:xsect2b}.
+Note that this uses
 \Env{sidewaystable} rather than \Env{sideways} inside \Env{table},
 which also rotates the caption.
 
 \begin{sidewaystable}
   \caption[Cross-sections using \Env{sidewaystable}, which also
   rotates the caption.]{Cross-sections using \Env{sidewaystable},
+    which also rotates the caption.
+    Note the dirty trick used to
+    get the \Cbhad values nicely in the centre of the column.}%
+  \label{tab:xsect2a}
+\begin{tcblisting}{textable}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{math}
+  \begin{array}{D{.}{.}{4.0}@{\,:}D{.}{.}{3.1} |
+    D{.}{.}{2}@{\,}r@{}D{.}{.}{2}@{\,}l |
+    D{.}{.}{2}@{\,}l|c}
+    \toprule
+    \multicolumn{2}{p{2.0cm}|}{\rule[-1.5ex]{0pt}{4.0ex}\centering\pTjet} &
+    \multicolumn{4}{p{3.0cm}|}{\centering\diffptb} &
+    \multicolumn{2}{p{2.2cm}|}{\centering\diffnloptb} &
+    \multicolumn{1}{p{1.5cm}}{\centering\Cbhad} \\
+    \multicolumn{2}{c|}{[\si{\GeV}]} &
+    \multicolumn{4}{c|}{[\si{\pico\barn\per\GeV}]} &
+    \multicolumn{2}{c|}{[\si{\pico\barn\per\GeV}]} & \\
+    \midrule
+      6 & 11 & 95.6 & \pm & 4.9  & ^{+9.8}_{-7.0}  &  109  & ^{+31}_{-19} & 0.83 \\
+    11 & 16 & 24.8 & \pm & 1.2  & ^{+1.8}_{-1.4}  & 29.1  & ^{+7.9}_{-4.7} & 0.89 \\
+    16 & 21 & 6.02 & \pm & 0.49 & ^{+0.6}_{-0.6}  &  7.1  & ^{+2.0}_{-1.2} & 0.92 \\
+    21 & 27 & 0.93 & \pm & 0.22 & ^{+0.31}_{-0.20} & 1.87 & ^{+0.54}_{-0.34} & 0.95 \\
+    27 & 35 & 0.30 & \pm & 0.12 & ^{+0.14}_{-0.12} & 0.46 & ^{+0.13}_{-0.08} & 1.05 \\
+    \bottomrule
+  \end{array}
+\end{math}
+\end{tcblisting}
+\end{sidewaystable}
+
+\begin{sidewaystable}
+  \caption[Cross-sections using \Env{sidewaystable}, which also
+    rotates the caption.]{Cross-sections using \Env{sidewaystable},
     which also rotates the caption. Just for fun the numbers
     indicating the \(\eta\) range of the bins in the lower half have
-    been converted to German format! Note also the dirty trick used to
+    been converted to German format!
+    Note also the dirty trick used to
     get the \Cbhad values nicely in the centre of the column.}%
-  \label{tab:xsect2}
-  \centering
-  \renewcommand{\arraystretch}{1.2}
-  \begin{math}
-    \begin{array}{D{.}{.}{4.0}@{\,:}D{.}{.}{3.1}|D{.}{.}{2}@{\,}r@{}D{.}{.}{2}@{\,}l|D{.}{.}{2}@{\,}l|c} % chktex 44
-      \toprule
-      \multicolumn{2}{p{2.0cm}|}{\rule[-1.5ex]{0pt}{4.0ex}\centering\pTjet} &
-      \multicolumn{4}{p{3.0cm}|}{\centering\diffptb} &
-      \multicolumn{2}{p{2.2cm}|}{\centering\diffnloptb} &
-      \multicolumn{1}{p{1.5cm}}{\centering\Cbhad} \\
-      \multicolumn{2}{c|}{[\si{\GeV}]} & \multicolumn{4}{c|}{[\si{\pico\barn\per\GeV}]} & \multicolumn{2}{c|}{[\si{\pico\barn\per\GeV}]} & \\
-      \midrule
-       6 & 11 & 95.6 & \pm & 4.9  & ^{+9.8}_{-7.0}  &  109  & ^{+31}_{-19} & 0.83 \\
-      11 & 16 & 24.8 & \pm & 1.2  & ^{+1.8}_{-1.4}  & 29.1  & ^{+7.9}_{-4.7} & 0.89 \\
-      16 & 21 & 6.02 & \pm & 0.49 & ^{+0.6}_{-0.6}  &  7.1  & ^{+2.0}_{-1.2} & 0.92 \\
-      21 & 27 & 0.93 & \pm & 0.22 & ^{+0.31}_{-0.20} & 1.87 & ^{+0.54}_{-0.34} & 0.95 \\
-      27 & 35 & 0.30 & \pm & 0.12 & ^{+0.14}_{-0.12} & 0.46 & ^{+0.13}_{-0.08} & 1.05 \\
-      \bottomrule
-    \end{array}
-  \end{math}
-
-  \vspace*{2ex}
-
-  \begin{math}
-    \begin{array}{D{.}{,}{1}@{\,:}D{.}{,}{1}|D{.}{,}{5.0}@{\,}r@{}D{.}{,}{0}@{\,}l|D{.}{,}{5.0}@{\,}l|D{.}{,}{4}} % chktex 44
-      \toprule
-      \multicolumn{2}{p{2.0cm}|}{\rule[-1.5ex]{0pt}{4.0ex}\centering\etajet} &
-      \multicolumn{4}{p{3.0cm}|}{\centering\diffetab} &
-      \multicolumn{2}{p{2.2cm}|}{\centering\diffnloetab} &
-      \multicolumn{1}{p{1.5cm}}{\centering\Cbhad} \\
-      \multicolumn{2}{c|}{} & \multicolumn{4}{c|}{[\si{\pico\barn}]} & \multicolumn{2}{c|}{[\si{\pico\barn}]} & \\
-      \midrule
-      -1.6 & -1.1 &  57 & \pm & 22 & ^{+13}_{-3}  &  72 & ^{+22}_{-13} & 0.70 \\
-      -1.1 & -0.8 & 121 & \pm & 21 & ^{+16}_{-16} & 182 & ^{+50}_{-30} & 0.78 \\
-      -0.8 & -0.5 & 214 & \pm & 22 & ^{+22}_{-12} & 255 & ^{+69}_{-42} & 0.79 \\
-      -0.5 & -0.2 & 233 & \pm & 21 & ^{+28}_{-21} & 307 & ^{+83}_{-50} & 0.79 \\
-      -0.2 &  0.1 & 264 & \pm & 22 & ^{+28}_{-23} & 342 & ^{+91}_{-55} & 0.81 \\
-       0.1 &  0.5 & 316 & \pm & 21 & ^{+23}_{-17} & 346 & ^{+96}_{-57} & 0.86 \\
-       0.5 &  1.4 & 288 & \pm & 15 & ^{+20}_{-30} & 265 & ^{+82}_{-48} & 0.93 \\
-      \bottomrule
-    \end{array}
-  \end{math}
-\end{sidewaystable}
+  \label{tab:xsect2b}
+\begin{tcblisting}{textable}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{math}
+  \begin{array}{D{.}{,}{1}@{\,:}D{.}{,}{1} |
+    D{.}{,}{5.0}@{\,}r@{}D{.}{,}{0}@{\,}l |
+    D{.}{,}{5.0}@{\,}l|D{.}{,}{4}}
+    \toprule
+    \multicolumn{2}{p{2.0cm}|}{\rule[-1.5ex]{0pt}{4.0ex}\centering\etajet} &
+    \multicolumn{4}{p{3.0cm}|}{\centering\diffetab} &
+    \multicolumn{2}{p{2.2cm}|}{\centering\diffnloetab} &
+    \multicolumn{1}{p{1.5cm}}{\centering\Cbhad} \\
+    \multicolumn{2}{c|}{} & \multicolumn{4}{c|}{[\si{\pico\barn}]} &
+    \multicolumn{2}{c|}{[\si{\pico\barn}]} & \\
+    \midrule
+    -1.6 & -1.1 &  57 & \pm & 22 & ^{+13}_{-3}  &  72 & ^{+22}_{-13} & 0.70 \\
+    -1.1 & -0.8 & 121 & \pm & 21 & ^{+16}_{-16} & 182 & ^{+50}_{-30} & 0.78 \\
+    -0.8 & -0.5 & 214 & \pm & 22 & ^{+22}_{-12} & 255 & ^{+69}_{-42} & 0.79 \\
+    -0.5 & -0.2 & 233 & \pm & 21 & ^{+28}_{-21} & 307 & ^{+83}_{-50} & 0.79 \\
+    -0.2 &  0.1 & 264 & \pm & 22 & ^{+28}_{-23} & 342 & ^{+91}_{-55} & 0.81 \\
+      0.1 &  0.5 & 316 & \pm & 21 & ^{+23}_{-17} & 346 & ^{+96}_{-57} & 0.86 \\
+      0.5 &  1.4 & 288 & \pm & 15 & ^{+20}_{-30} & 265 & ^{+82}_{-48} & 0.93 \\
+    \bottomrule
+  \end{array}
+\end{math}
+\end{tcblisting}
+\end{sidewaystable}  
 
 This version of the table also adds a few extra bells and whistles. It
 uses a \Macro{rule} of zero width to give a bit more space above and
@@ -575,3 +652,103 @@ table would not line up. Just for fun the bottom half of the table
 uses \enquote{,} instead of \enquote{.} for the decimal point!
 Admittedly the header is a bit complicated, but the numbers are nice
 and easy to write!
+
+%------------------------------------------------------------------------------
+\section{Hiding columns}
+\label{sec:tab:hide}
+%------------------------------------------------------------------------------
+
+Sometimes you write out a table with so many columns that it does not fit
+on a page, even if you rotate it.
+In sich cases you can of course reduce the number of columns by hand,
+but it would be much nicer to just \enquote{hide} some of the columns
+(as one often does in a spreadsheet).
+The \Package{array} package allows one to define new column types
+and you can use this feature to define a column that is not shown.
+
+Following the idea found in
+\url{https://texblog.org/2014/10/24/removinghiding-a-column-in-a-latex-table/}
+we define two new column types \enquote{H} and \enquote{E}:
+
+\newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
+\newcolumntype{E}{>{\setbox0=\hbox\bgroup\let\pm\relax}c<{\egroup}@{}}
+\begin{tcblisting}{listing only}
+\newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
+\newcolumntype{E}{>{\setbox0=\hbox\bgroup\let\pm\relax}c<{\egroup}@{}}
+\end{tcblisting}{listing only}
+
+The \enquote{E} variant is for columns that include \Macro{pm}.
+This idea can also be extended to other content if necessary.
+\Cref{tab:column1,tab:column2,tab:column3} show the original table
+with variants hiding different columns.
+
+\begin{table}[htbp]
+  \caption{Simple table with columns that we want to hide.}%
+  \label{tab:column1}
+\begin{tcblisting}{textable}
+\centering
+\begin{tabular}{SSS[table-format=1.1(1)]
+  S[table-format=3.1]@{\(\,\pm\,\)}
+  S[table-format=2.1, table-number-alignment=left]
+  S[table-format=3.1]@{\(\,\pm\!\!\)}S[table-format=1.1]}
+  \toprule
+  {Col.\ 1} & {Col.\ 2} & {Col.\ 3} &
+  \multicolumn{2}{c}{Col.\ 4 with err.} &
+  \multicolumn{2}{c}{Col.\ 5 with err.} \\
+  \midrule
+  1.1 & 2.1 & 3.1 \pm 0.2 & 4.1 & 0.1 & 5.1 & 0.3 \\
+  1.2 & 2.2 & 3.2 \pm 0.3 & 4.2 & 12.2 & 5.2 & 0.4 \\
+  1.3 & 2.3 & 3.3 \pm 0.4 & 4.3 & 0.3 & 5.3 & 0.5\\
+  \bottomrule
+\end{tabular}
+\end{tcblisting}
+\end{table}
+
+\begin{table}[htbp]
+  \caption{Simple table with columns 2 and 3 hidden.
+    Note the use of the \enquote{E} column when the number contains an uncertainty.}%
+  \label{tab:column2}
+\begin{tcblisting}{textable}
+\centering
+\begin{tabular}{SHE
+  S[table-format=3.1]@{\(\,\pm\,\)}
+  S[table-format=2.1, table-number-alignment=left]
+  S[table-format=3.1]@{\(\,\pm\!\!\)}S[table-format=1.1]}
+  \toprule
+  {Col.\ 1} & {Col.\ 2} & {Col.\ 3} &
+  \multicolumn{2}{c}{Col.\ 4 with err.} &
+  \multicolumn{2}{c}{Col.\ 5 with err.} \\
+  \midrule
+  1.1 & 2.1 & 3.1 \pm 0.2 & 4.1 & 0.1 & 5.1 & 0.3 \\
+  1.2 & 2.2 & 3.2 \pm 0.3 & 4.2 & 12.2 & 5.2 & 0.4 \\
+  1.3 & 2.3 & 3.3 \pm 0.4 & 4.3 & 0.3 & 5.3 & 0.5\\
+  \bottomrule
+\end{tabular}
+\end{tcblisting}
+\end{table}
+
+\begin{table}[htbp]
+  \caption{Simple table with column 4 (actually 4 and 5) hidden.
+  The column heading, which is defined using \Macro{multicolumn}, also needs to be typeset with column type \enquote{H}.}%
+  \label{tab:column3}
+\begin{tcblisting}{textable}
+\centering
+\begin{tabular}{SSS[table-format=1.1(1)]
+  H%S[table-format=3.1]@{\(\,\pm\,\)}
+  H%S[table-format=2.1, table-number-alignment=left]
+  S[table-format=3.1]@{\(\,\pm\!\!\)}S[table-format=1.1]}
+  \toprule
+  {Col.\ 1} & {Col.\ 2} & {Col.\ 3} &
+  \multicolumn{2}{H}{Col.\ 4 with err.} &
+  \multicolumn{2}{c}{Col.\ 5 with err.} \\
+  \midrule
+  1.1 & 2.1 & 3.1 \pm 0.2 & 4.1 & 0.1 & 5.1 & 0.3 \\
+  1.2 & 2.2 & 3.2 \pm 0.3 & 4.2 & 12.2 & 5.2 & 0.4 \\
+  1.3 & 2.3 & 3.3 \pm 0.4 & 4.3 & 0.3 & 5.3 & 0.5\\
+  \bottomrule
+\end{tabular}
+\end{tcblisting}
+\end{table}
+
+\Cref{tab:column1} also illustrates different ways of including numbers with errors.
+Column 4 is the one that looks best to me.

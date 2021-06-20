@@ -70,13 +70,13 @@
 \newcommand*\numpmerr[3][]{%
   \begingroup
   \sisetup{#1}%
-  \ensuremath{^{\num[explicit-sign = +]{#2}}_{\num[explicit-sign = -]{#3}}}%
+  \ensuremath{^{\num[retain-explicit-plus]{#2}}_{\num{#3}}}%
   \endgroup
 }
 \newcommand*\numpmerrt[4][]{%
   \begingroup
   \sisetup{#1}%
-  \ensuremath{^{\num[explicit-sign = +]{#2}}_{\num[explicit-sign = -]{#3}}%
+  \ensuremath{^{\num[retain-explicit-plus]{#2}}_{\num{#3}}%
     \valuesep\text{(#4)}}%
   \endgroup
 }

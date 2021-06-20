@@ -613,10 +613,7 @@ You should be able to just run
 \texttt{pdflatex} again twice.
 Note that you have to run
 \texttt{mpost} on all the files whose names are defined at the
-beginning of the \Env{fmffile} environment.%\footnote{%
-  % While Metapost works well
-  % as of \TeXLive 2011, I did not get it to work properly with \TeXLive
-  % 2009 for unknown reasons.}
+beginning of the \Env{fmffile} environment.
 
 Metafont\index{metafont} is a bit trickier and details have been relegated to
 \cref{sec:app:fig:feynman:feynmf}. 
@@ -703,8 +700,6 @@ starts with \verb+\begin{fmffile}{gluon}+.%
   \label{fig:nccc-feynmf}
 \end{figure}
 
-% With the \TeXLive 2011 and later setups I use to test this guide,
-% this is all you need.
 If \texttt{mpost} does not run automatically,
 you must execute the command
 \texttt{pdflatex --shell-escape mythesis} when you compile your thesis.
@@ -754,13 +749,6 @@ The examples included in this
 guide and a few more are collected in the \texttt{tikz} directory.
 If you want to get started with \TikZ you can copy this directory
 into your thesis directory, e.g.\ \File{mythesis}.
-% \footnote{%
-% Note that some of the examples only work with \TeXLive
-% 2011 and later. This is indicated in the file.
-% I also did not manage
-% to compile the guide without errors when including \Package{\TikZ} with
-% \TeXLive 2009, so some of the figures may be missing if you compile
-% your own version of the guide with \TeXLive 2009.}
 
 \TikZ is not included by default in a new skeleton thesis. See the
 commented out packages in a new thesis skeleton or
@@ -774,14 +762,6 @@ system in your thesis. One way to do this is illustrated in
 \begin{figure}[htbp]
   \centering
   \input{../tikz/zeus_coords.tex}
-    % \ifthenelse {\texlive < 2012} {%
-  %   \fbox{\parbox[c]{0.8\textwidth}{%
-  %   Sorry, \Package{tikz-3dplots} is not available in \TeXLive 2009 and
-  %   earlier. See the file \texttt{./tikz/zeus\_coords.tex}.}
-  %   This example also does not work with \TeXLive 2011.}
-  % }{%
-  %   \input{../tikz/zeus_coords.tex}
-  % }
   \caption{The ZEUS coordinate system.}%
   \label{fig:tikz:coord}
 \end{figure}
@@ -792,14 +772,6 @@ This is illustrated in \cref{fig:tikz:flow}.
 \begin{figure}[htbp]
   \centering
   \input{../tikz/zeus_reconstruction.tex}
-  % \ifthenelse {\texlive < 2011} {%
-  %   \fbox{\parbox[c]{0.8\textwidth}{%
-  %       Error messages appear when trying to compile the guide with
-  %       \Package{tikz} and \TeXLive 2009, so the figure is not included.
-  %       See the file \texttt{../tikz/zeus\_reconstruction.tex}.}}
-  % }{%
-  %   \input{../tikz/zeus_reconstruction.tex}
-  % }
   \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}%
   \label{fig:tikz:flow}
 \end{figure}

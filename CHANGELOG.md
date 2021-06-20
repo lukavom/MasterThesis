@@ -32,6 +32,7 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 - Several tweaks and improvements to usage of LuaLaTeX and XeLaTeX.
 - Use filenames instead of font names for LuaLasTeX and XeLaTeX fonts.
 - Use `\ifthenelse` instead of standard `if` in many places.
+- Behaviour of `\numpmerr` macros changed a bit - signs are expected on the errors.
 
 ### Deprecated
 

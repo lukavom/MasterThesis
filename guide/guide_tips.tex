@@ -23,16 +23,16 @@ especially those made by German speakers!
 
 My original idea with this document was that you also look at the \LaTeX{} that
 is used to create it, in order to find out how things are done.
-I have therefore usually not usually given the \LaTeX{} commands in the printed
-document, but assumed that you would have a look at the \LaTeX{} source.
+I therefore do not always give you the \LaTeX{} commands in the printed
+document, but assume that you would have a look at the \LaTeX{} source.
 To help you with this, each chapter contains a link to the relevant
 file at the top. This link should work if you have compiled the guide
 yourself and are in the \File{guide} subdirectory of the
 \File{ubonn-thesis} directory tree.
 As of version 7.0 of the guide,
-I have started using the \Package{showexpl} package that allows me to show
+I have started using the \Package{tcolorbox} package that allows me to show
 both the \LaTeX{} and the result automatically.
-Hence in some places you will find compiled \LaTeX{} and the source code side by side.
+Hence in more and more places you will find compiled \LaTeX{} and the source code side by side.
 The files that make up this document are available in a Git repository and as a \texttt{tar} file.
 To get the latest Git version give the command:
 
@@ -59,7 +59,7 @@ Once you have the files, you can then give the command:
 \begin{bashlisting}
 make new [THESIS=dirname] [TEXLIVE=YYYY]
 \end{bashlisting}
-to create a new directory with several files to help you get
+\noindent to create a new directory with several files to help you get
 started. By default the directory name will be \texttt{mythesis}.
 If you want to write a thesis that uses the astronomy style of references
 (\Option{authoryear} style and a bibliography at the end of each chapter)
@@ -94,11 +94,11 @@ been changing quite a lot over the past few years.
 You should therefore set the \TeXLive version you are using appropriately.
 The default setting is 2017.\footnote{%
 Setting the \TeXLive version to one that is lower than your installation should not cause any problems.}
-This is also the setting to use for an up-to-date version of MikTeX (2.9).
+For an an up-to-date version of MikTeX (2.9) you should probably use the current year.
 Things should compile without any changes if you use \TeXLive 2016 or later.
 Look in the style file to see what changes are made depending on the year you use.
 You can change the \TeXLive version when you make a new thesis
-by giving a command like \enquote{\texttt{make new TEXLIVE=2013}}. %\footnote{%
+by giving a command like \enquote{\texttt{make new TEXLIVE=2021}}. %\footnote{%
 If you switch \TeXLive versions do a
 \enquote{\texttt{make clean cleanbbl cleanblx}} in between.
 
@@ -108,8 +108,8 @@ Note that as of version 2.1, the main file for the thesis
 subdirectory. This means that if you update the \Package{ubonn-thesis}
 you can look for differences between the new style file and the one
 you have. It also implies that if you want the update to have an
-effect on your thesis you should copy the \texttt{Makefile} and
-\texttt{ubonn-thesis.sty} into the directory with your thesis.
+effect on your thesis you should copy the new versions of
+\File{ubonn-thesis.sty} and \File{ubonn-biblatex.sty} into the directory with your thesis.
 For more details see \cref{sec:tips:update}.
 
 As of version~4.0 of the package, you specify the type of thesis and the stage as options
@@ -159,9 +159,10 @@ The main file for this guide is \texttt{guide/thesis\_guide.tex} and
 it includes the \LaTeX{} files in the directory \texttt{./guide} and
 some of the Feynman graphs in the directories 
 \texttt{./feynmf}, \texttt{pyfeyn}, \texttt{pyfeynhand} and \texttt{./tikz}.
-Again this guide should compile without changes for
-\TeXLive 2016 or later. For earlier versions set \Macro{texlive} in
-\texttt{thesis\_guide.tex} to the appropriate value.
+This guide should compile without changes for \TeXLive 2017 or later.
+However, you can get rid of some \Package{diffcoeff} warnings
+by setting the year to 2018 or later.
+For earlier versions set \Macro{texlive} in \texttt{thesis\_guide.tex} to the appropriate value.
 
 
 %------------------------------------------------------------------------------
@@ -172,8 +173,10 @@ Again this guide should compile without changes for
 From version~3.0 onwards it is possible to change things
 in the style file by passing options to it.
 A few default packages also changed with this version.
-\Package{subfig} \(\to\) \Package{subcaption} and
-\Package{longtable} \(\to\) \Package{xtab}.
+\Package{subfig} \(\to\) \Package{subcaption}.
+I have oscillated between \Package{longtable} \(\to\) \Package{xtab}.
+\Package{longtable} seems to be more actively maintained
+and work a little bit better.
 The syntax \Option{siunitx} and \Option{siunitx=true} is equivalent.
 Use \Option{siunitx=false} to turn off an option.
 The following options exist:\\
@@ -202,15 +205,17 @@ The following options exist:\\
   subcaption & true & A package for making sub-figures (and sub-tables) and captions for them.\\
   subfig & false & A package for making sub-figures and captions for them.\\
   subfigure & false & A package for making sub-figures and captions for them (deprecated).\\
-  tableheading & true & Table captions above the table.\\
-  xtab & false & A package for tables that are longer than one page.\\
+  tableheading & true & Table caption spacing set correctly for captions above the table.\\
   longtable & true &  Another package for tables that are longer than one page.\\
   supertabular & false &  Another package for tables that are longer than one page.\\
+  xtab & false & A package for tables that are longer than one page.\\
   biblatex & true & Include \Package{biblatex}.\\
   siunitx & true & Use the \Package{siunitx} package for typesetting units.\\
   eVkern & false & Apply a kern of -0.1em to \si{\eV} in order to move \enquote{e} and \enquote{V} closer together.
   This is not necessary if you use the \Package{newtx} font package.\\
   dcolumn & false & A package for helping to align things in tables.\\
+  cleveref & true & Turn on use of the \Package{cleveref} package.\\
+  clevercaps & true & Capitalise Fig., Table etc.\\
   derivative & false & A new package (released in 2021) with lot of useful commands for derivatives.\\
   diffcoeff & false & A lot of useful commands for derivatives.\\ 
   physics & false & Useful mathematical constructions for physics.\\
@@ -226,8 +231,6 @@ The following options exist:\\
   floatopt & true & Adjust settings that control the number and placement of floats.\\
   todonotes & false & Turn on use of the \Package{todonotes} package and define \Macro{mynote}.\\
   shownotes & false & Show the ToDo notes (also turns on \Option{todonotes}).\\
-  cleveref & true & Turn on use of the \Package{cleveref} package.\\
-  clevercaps & true & Capitalise Fig., Table etc.\\
   % firstinits & false & Use \Option{firstinits} instead of \Option{giveninits} for \Package{biblatex}.\\
   backend & biber & Specify the backend to use for \Package{biblatex}.
     Possibilities are \Option{biber}, \Option{bibtex} or \Option{bibtex8}.\\
@@ -236,17 +239,16 @@ The following options exist:\\
     Standard values are \Option{numeric-comp} or \Option{alphabetic}.\\
 \end{xtabular}
 
-Some default option values are adjusted depending on the \TeXLive version.
+A few default option values are adjusted depending on the \TeXLive version.
 See the \texttt{ubonn-thesis} style file to find out what is changed.
+The option \Option{twoside} should probably be set to \texttt{false} for an online version of your thesis
+that is not going to be printed.
 
 You can tweak the bibliography by passing various options to the
 \Package{ubonn-biblatex} style file.
 These are detailed in \cref{sec:ref:bbx}.
 
-The option \Option{twoside} should probably be set to \texttt{false} for an online version of your thesis
-that is not going to be printed.
-
-If you use \LuaLaTeX or \XeLaTeX,
+If you use \LuaLaTeX\ or \XeLaTeX,
 the \Option{newtx} and \Option{txfonts} options select the TeX Gyre Termes font,
 while the \Option{palatino} option selects the TeX Gyre Pagella font.
 The TeX Gyre font Heros is used as the sans-serif and Cursor as the monospaced font.
@@ -415,7 +417,7 @@ It is not needed if you use the \Package{newtx} font package.}
   This is also one of the the very few places, where it makes sense
   to put some spacing in by hand --- normally you should leave this to \TeX.
   The \Package{derivative} package provides the command \verb|\odif{x}|,
-  while the \Package{diffcoeff} package (as of version ) provides the command \verb|\dl|,
+  while the \Package{diffcoeff} package (as of version 3.0) provides the command \verb|\dl|,
   and you can add space using a syntax such as \verb|\dl2x|.\footnote{%
   The digit can be anything between 0 and 9 (negative values are also possible).
   2 and 3 look to me to be sensible default values to use.}
@@ -444,7 +446,7 @@ It used to be my preferred \LaTeX\ environment under all systems!
 In the past couple of years,
 I have switched to the Visual Studio Code\index{Visual Studio Code} editor instead.
 The main reason for this is so that I can use the same program
-for editing scripts, e.g.\ a \File{Makefile} as I use for \LaTeX\ code.
+for editing scripts, e.g.\ a \File{Makefile}, as I use for \LaTeX\ code.
 The \textsf{LaTeX Workshop}\index{LaTeX Workshop@\LaTeX\ Workshop} extension is being actively developed
 and is very nice.
 The \Package{Spell Right} spelling checker works very well
@@ -542,9 +544,10 @@ in \cref{sec:app:tex}.
   You can read the font guide by giving the command \texttt{texdoc fntguide}.
 
 \item Do not try to end paragraphs with
-  \textbackslash\textbackslash. These should be used sparingly when
-  for some reason you really have to start a new line. Just leave an
-  empty line for a new paragraph.
+  \textbackslash\textbackslash. 
+  Outside tables, these should be used sparingly when
+  for some reason you really have to start a new line.
+  Just leave an empty line for a new paragraph.
 
 \item Do not draw conclusions or interpret figures in the caption. The
   caption should just describe what is in the figure. Interpretation
@@ -697,10 +700,10 @@ errors, you can use the macros \Macro{SIerrs} and
 \begin{tcblisting}{}
 \begin{align*}
   \sigma & = \SIerrs{3.42}{0.46}{0.32}{\pico\barn}\\
-  \sigma & = \SIpmerr{3.42}{0.46}{0.32}{\pico\barn}\\
-  \sigma & = \SIpmerrt{3.42}{0.46}{0.32}{\stat}{\pico\barn}\\
-  \sigma & = \SIpmerrs{3.42}{0.46}{0.32}{0.06}{0.04}{\pico\barn}\\
-  \sigma & = \SIpmerrtt{3.42}{0.46}{0.32}{\stat}{0.06}{0.04}{\sys}{\pico\barn}
+  \sigma & = \SIpmerr{3.42}{+0.46}{-0.32}{\pico\barn}\\
+  \sigma & = \SIpmerrt{3.42}{+0.46}{-0.32}{\stat}{\pico\barn}\\
+  \sigma & = \SIpmerrs{3.42}{+0.46}{-0.32}{+0.06}{-0.04}{\pico\barn}\\
+  \sigma & = \SIpmerrtt{3.42}{+0.46}{-0.32}{\stat}{+0.06}{-0.04}{\sys}{\pico\barn}
 \end{align*}
 \end{tcblisting}
 The last two examples use \Macro{SIpmerrs} and \Macro{SIpmerrtt} just
@@ -711,7 +714,7 @@ definitions, e.g.
 \begin{equation*}
   \sigma_{t\bar{t}} = (\num{164.6}%
   \valuesep\numerrt{8.7}{\stat}%
-  \valuesep\numpmerrt{6.4}{5.3}{\sys}%
+  \valuesep\numpmerrt{+6.4}{-5.3}{\sys}%
   \valuesep\numerrt{8.2}{lumi.})%
   \valuesep\si{\pico\barn}
 \end{equation*}    
@@ -741,11 +744,12 @@ This is of course very nice!
 You just have to get used to the conventions used there for particle names.
 Many particles are available in \Package{hepnicenames},
 while \Package{heppennames} is more complete.
-Note that there appears to be a bug in
-\Package{hepnicenames}, \Package{heppennames} and/or \Package{hepparticles} packages
+Note that there is a bug in the
+\Package{hepnicenames}, \Package{heppennames} and \Package{hepparticles} packages
 as of \TeXLive 2019.
 Upright particles are not printed.
-So far I have not found a way to get round the problem.
+I have a solution to the problem,
+but it has not yet made it to the official version.
 
 \noindent\textbf{Some examples from \Package{heppennames}:}\\
 \begin{tcblisting}{listing side text}
@@ -778,12 +782,12 @@ I would recommend one of the following definitions:
 which produce \ensuremath{Z}, \ensuremath{\text{Z}},
 \ensuremath{\bar{b}}, \ensuremath{\bar{\text{b}}}. Note that you are
 not allowed to include numbers in the names of commands, so
-\Macro{Z0} or \Macro{U1S} are not valid commands. For
-\(\overline{B}^{\pm}_{c}\) and other particles whose names are capital
+\Macro{Z0} or \Macro{U1S} are not valid commands.
+For \(\overline{B}^{\pm}_{c}\) and other particles whose names are capital
 letters, it can be debated whether it better to use
-\Macro{overline} than
-\Macro{bar}. Compare \(\overline{B}^{\pm}_{c}\) and
-\(\bar{B}^{\pm}_{c}\). If you use upright letters the choice is maybe
+\Macro{overline} than \Macro{bar}.
+Compare \(\overline{B}^{\pm}_{c}\) and \(\bar{B}^{\pm}_{c}\).
+If you use upright letters the choice is maybe
 easier: \(\overline{\text{B}}^{\pm}_{\text{c}}\) and
 \(\bar{\text{B}}^{\pm}_{\text{c}}\) or
 \(\overline{\text{K}}^{0}_{\text{S}}\) and

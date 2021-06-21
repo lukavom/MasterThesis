@@ -738,7 +738,7 @@ However, nowadays it seems to be much more common to use italics.
 This is also how the particles are written in the PDG\@.
 While ATLAS usually uses italics, CMS (and the CERN Courier) use upright letters.
 
-If you use the \Package{hepnicenames}, \Package{heppennames} and/or \Package{hepparticles} packages,
+If you use the \Package{hepnicenames}, \Package{heppennames} or \Package{hepparticles} packages,
 you can use the option \Option{italic} to switch from upright and italics.
 This is of course very nice!
 You just have to get used to the conventions used there for particle names.
@@ -751,7 +751,7 @@ Upright particles are not printed.
 I have a solution to the problem,
 but it has not yet made it to the official version.
 
-\noindent\textbf{Some examples from \Package{heppennames}:}\\
+\noindent\textbf{Some examples from \Package{heppennames}:}
 \begin{tcblisting}{listing side text}
 \Pe, \Pl, \Pqt, \Paqt\\
 \PZ, \PWpm\\
@@ -759,7 +759,7 @@ but it has not yet made it to the official version.
 \PBz{}\PBz, \PBz\PBz
 \end{tcblisting}
 
-\noindent\textbf{Some examples from \Package{hepnicenames}:}\\
+\noindent\textbf{Some examples from \Package{hepnicenames}:}
 \begin{tcblisting}{listing side text}
 \APelectron, \Plepton, \Ptop, \APtop\\
 \PZ, \PWpm\\
@@ -792,6 +792,7 @@ easier: \(\overline{\text{B}}^{\pm}_{\text{c}}\) and
 \(\bar{\text{B}}^{\pm}_{\text{c}}\) or
 \(\overline{\text{K}}^{0}_{\text{S}}\) and
 \(\bar{\text{K}}^{0}_{\text{L}}\).
+\Package{hepparticles} tries to tweak the size of the bar to make it look good.
 
 Another problem is that, depending on the font you use, the spacing between \enquote{e} and \enquote{V}
 on \si{\eV} and its derivatives, e.g.\ \si{\GeV}, can be larger than you would like.
@@ -815,7 +816,8 @@ commands, e.g.\ \verb+\Bo{}\Bobar+ produces \Bo{}\Bobar while
 
 How should you write \enquote{between \(10^{4}\) and \(10^{5}\)}?\index{range}
 If you use math mode it looks like \(10^{4} - 10^{5}\), which is not
-really what you want. Although it is rather clumsy, the best way to do
+really what you want.
+Although it is rather clumsy, the best way to do
 it is \verb+\(10^{4}\)--\(10^{5}\)+ which produces
 \enquote{\(10^{4}\)--\(10^{5}\)}.
 
@@ -879,6 +881,8 @@ An alternative solution is to add the command\\
 As of version 3.0 of \Package{ubonn-thesis} this command is included,
 so \Macro{boldmath} should no longer be needed.
 An illustration of how this works is given in \cref{sec:emc2}.
+Note that this fix does not work for \LuaLaTeX and \XeLaTeX and so is not applied.
+\Cref{sec:emc2} illustrates ways of getting around the problem there.
 
 For math mode the official \LaTeX\ macro is \verb|\(...\)|.
 \verb|$...$| is the \TeX\ primitive.
@@ -887,9 +891,6 @@ although it must be said that probably well over \SI{90}{\%} of people still use
 There still seem to be a few cases when \verb|\(...\)| leads to errors.
 This sometimes happened for \TeXLive version from 2013 or earlier
 when used in figure or table captions.
-A further example is the above method of writing
-\(p_{\text{T}}^{1^{\text{st}}\text{ jet}}\)
-when trying to use \Macro{textrm}.
 
 
 %------------------------------------------------------------------------------
@@ -938,7 +939,7 @@ These are the ones I remember coming across so far:
 
 A general comment (which also applies to theses in other languages) is that you should avoid \enquote{fluff}.
 A statement that is often attributed to Mark Twain\footnote{%
-See \url{https://quoteinvestigator.com/2012/08/29/substitute-damn/} for a discussion of the source.}
+See \url{https://quoteinvestigator.com/2012/08/29/substitute-damn/} for a discussion of the source.}:
 \begin{quote}
   Substitute \enquote{damn} every time you're inclined to write \enquote{very};
   your editor will delete it and the writing will be just as it should be.
@@ -972,8 +973,8 @@ For example, \enquote{\emph{ATLAS is an general-purpose detector;
   it is so called because it has means to detect and measure the broadest possible range of signals.}}
 
 One further important point: decide early on if you are going to write your thesis in American or British English.
-Typical American spellings include: \foreignlanguage{USenglish}{flavor, color, hadronize}.
-The British English spellings are: flavour, colour, hadronise.
+Typical American spellings include: \foreignlanguage{USenglish}{center, flavor, color, hadronize}.
+The British English spellings are: centre, flavour, colour, hadronise.
 Choose one or the other and do not mix them.
 Note that the conventions on punctuation and where it is placed relative to quotes
 are different in American and British English.
@@ -1033,7 +1034,6 @@ number of reconstructed heavy-quark jets in data, which was determined
 \end{tcblisting}
 \noindent
 Then the line numbering will be correct, see \cref{fig:lineno}b.
-
 The ATLAS \Package{atlasdoc} class contains a patch that gets round this problem.
 
 

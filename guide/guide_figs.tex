@@ -10,12 +10,10 @@
 \noindent
 This chapter discusses what you need to know to include graphics in
 your thesis. The basic command to use is \Macro{includegraphics}.
-
 I found a pretty complete guide (in German) called \texttt{l2piqfaq}
 which can be obtained from
 \url{http://www.ctan.org/tex-archive/info/l2picfaq/german}. It contains
 a lot of detailed information and tricks.
-
 This chapter also contains some suggestions as to how to create Feynman
 graphs with a number of different packages.
 
@@ -28,19 +26,20 @@ graphs with a number of different packages.
 A simple figure and its associated caption is straightforward to include.
 For example, the layout of the LHC and its experiments is
 shown in \cref{fig:LHC}.
-
 Don't forget to use the package \Package{cleveref} and macros such as \Macro{cref}
 to reference the figures --- see \cref{sec:package:appearance} for a few more details.
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\figwidth]{CERN_all-experiments}
-  \caption[Sketch of the LHC ring, the position of the experiments and
+\begin{tcblisting}{}
+\centering
+\includegraphics[width=\figwidth]{CERN_all-experiments}
+\caption[Sketch of the LHC ring, the position of the experiments and
   the surrounding countryside.]{Sketch of the LHC ring, the position
-    of the experiments and the surrounding countryside. The four big
-    LHC experiments are indicated. The location of the injection lines
-    and the SPS are also shown.}%
-  \label{fig:LHC}
+  of the experiments and the surrounding countryside. The four big
+  LHC experiments are indicated. The location of the injection lines
+  and the SPS are also shown.}%
+\label{fig:LHC}
+\end{tcblisting}
 \end{figure}
 
 Note the use of \Macro{centering} rather than the environment
@@ -60,11 +59,11 @@ to label the figure by changing the \Macro{figureformat} command. The
 captions in this document follow the standard \KOMAScript{}
 convention: if they are one line long they are centred; if they are
 longer they are left-adjusted. If you want them all to be
-left-adjusted set the \Option{KOMAoptions} \Option{caption=nooneline}
-in \texttt{ubonn-thesis.sty}. Some examples of the possibilities are
+left-adjusted set the \Option{KOMAoptions\{caption=nooneline\}}
+in \File{ubonn-thesis.sty}. Some examples of the possibilities are
 included in the style file.
 
-Another thing to consider is whether the text should be indented or
+Another thing to consider is whether the caption text should be indented or
 not. For short captions, indentation is OK\@. I do not think it looks
 good for long captions. Hence the style file sets
 \Macro{setcapindent}\texttt{\{0pt\}}.
@@ -95,15 +94,17 @@ The same units are also used for Feynman graphs made with the
 \cref{sec:fig:feynman:feynmp}.
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics[height=3cm]{gg_ttbar_1-BW}\quad
-  \includegraphics[height=3cm]{gg_ttbar_2-BW}\quad
-  \includegraphics[height=3cm]{gg_ttbar_3-BW}
-  \put(-130,14){(a)}
-  \put(-80,14){(b)}
-  \put(-35,14){(c)}
-  \caption{Adding letters to figures with \Macro{put}.}%
-  \label{fig:letters1}
+\begin{tcblisting}{}
+\centering
+\includegraphics[height=3cm]{gg_ttbar_1-BW}\quad
+\includegraphics[height=3cm]{gg_ttbar_2-BW}\quad
+\includegraphics[height=3cm]{gg_ttbar_3-BW}
+\put(-130,14){(a)}
+\put(-80,14){(b)}
+\put(-35,14){(c)}
+\caption{Adding letters to figures with \Macro{put}.}%
+\label{fig:letters1}
+\end{tcblisting}
 \end{figure}
 
 Another way of achieving the same thing, but this time with the letter
@@ -111,16 +112,17 @@ outside the figure is to use \Env{tabular}. An example of this is
 shown in \cref{fig:letters2}.
 
 \begin{figure}[htbp]
-  \centering
-  \begin{tabular}{ccc}%@{\hspace*{0.15\figwidth}}p{0.33\figwidth}p{0.33\figwidth}l}
-    % \multicolumn{3}{c}{\includegraphics[width=\figwidth]{gg_tt}}\\
-    \includegraphics[width=0.33\figwidth]{gg_ttbar_1-BW} &
-    \includegraphics[width=0.3\figwidth]{gg_ttbar_2-BW} &
-    \includegraphics[width=0.3\figwidth]{gg_ttbar_3-BW}\\
-    (a) & (b) & (c)
-  \end{tabular}
-  \caption{Adding letters to figures with \Env{tabular}.}%
-  \label{fig:letters2}
+\begin{tcblisting}{}
+\centering
+\begin{tabular}{ccc}
+\includegraphics[width=0.33\figwidth]{gg_ttbar_1-BW} &
+\includegraphics[width=0.3\figwidth]{gg_ttbar_2-BW} &
+\includegraphics[width=0.3\figwidth]{gg_ttbar_3-BW}\\
+(a) & (b) & (c)
+\end{tabular}
+\caption{Adding letters to figures with \Env{tabular}.}%
+\label{fig:letters2}
+\end{tcblisting}
 \end{figure}
 
 If you want to save space it is sometimes nice to put the caption next
@@ -139,11 +141,13 @@ seem to work exactly how it is advertised in the manual. I set the
 width equal to \Macro{figwidth} and then the offset to \texttt{-\Macro*{figwidth}}.
 
 \begin{figure}[htbp]
-  \centering
-  \begin{captionbeside}{A small figure with a simple caption beside it.}[i][\figwidth][-\figwidth]
-    \includegraphics[width=0.3\textwidth]{qq_ttbar-BW}
-  \end{captionbeside}%
-  \label{fig:qqtt}
+\begin{tcblisting}{}
+\centering
+\begin{captionbeside}{A small figure with a simple caption beside it.}[i][\figwidth][-\figwidth]
+  \includegraphics[width=0.3\textwidth]{qq_ttbar-BW}
+\end{captionbeside}%
+\label{fig:qqtt}
+\end{tcblisting}
 \end{figure}
 
 If you want different (partial) captions for a figure then the
@@ -152,34 +156,32 @@ An alternative, and successor, to \Package{subfig} is \Package{subcaption}.
 It works in much the same way as \Package{subfig}.
 A nice tutorial on its use can be found in
 \url{http://www.peteryu.ca/tutorials/publishing/latex_captions}.
-Examples of its use can be seen in \cref{fig:nccc,fig:pyfeynhand}.
-The \LaTeX\ file \texttt{guide\_figs.tex} contains examples for both \Package{subfig} and 
-\Package{subcaption}.
+Examples of the different \Package{subcaption} macros can be seen in \cref{fig:nccc,fig:pyfeynhand}.
 You can see how to reference
-the different parts of the figure in \cref{sec:fig:feynman}. If
-you want the captions of the sub-figures to also appear in the
+the different parts of the figure in \cref{sec:fig:feynman}.
+If you want the captions of the sub-figures to also appear in the
 \enquote{List of Figures} you should include the package with the
 option \Option{lofdepth}. For tables use the option \Option{lotdepth}.
 
 \begin{figure}[htbp]
-  \begin{tcblisting}{}
-  \centering
-  \begin{subfigure}[b]{0.5\figwidth}
-    \includegraphics[width=0.5\figwidth]{ep_nc}
-    \caption{NC scattering}\label{fig:nccc-nc}
-  \end{subfigure}
-  \qquad
-  \begin{subfigure}[b]{0.5\figwidth}
-    \includegraphics[width=0.5\figwidth]{ep_cc}
-    \caption{CC scattering}\label{fig:nccc-cc}
-  \end{subfigure}
-  \end{tcblisting}
-  \caption{Processes in $ep$ scattering.}%
-  \label{fig:nccc}
+\begin{tcblisting}{}
+\centering
+\begin{subfigure}[b]{0.5\figwidth}
+  \includegraphics[width=0.5\figwidth]{ep_nc}
+  \caption{NC scattering}\label{fig:nccc-nc}
+\end{subfigure}
+\qquad
+\begin{subfigure}[b]{0.5\figwidth}
+  \includegraphics[width=0.5\figwidth]{ep_cc}
+  \caption{CC scattering}\label{fig:nccc-cc}
+\end{subfigure}
+\caption{Processes in $ep$ scattering.}%
+\label{fig:nccc}
+\end{tcblisting}
 \end{figure}
 
-If you run out of space (applies more often to proceedings than to
-theses) you can use the \Package{wrapfig} package.
+If you run out of space (applies more often to proceedings than to theses)
+you can use the \Package{wrapfig} package.
 
 
 %------------------------------------------------------------------------------
@@ -358,17 +360,17 @@ you can download from \url{http://jaxodraw.sourceforge.net/}. It has
 a Graphical User Interface (GUI) to \Package{axodraw} and so is simple and
 straightforward to use.
 
+\begin{tcblisting}{}
 This paragraph illustrates how to reference different parts of a
-figure that uses the environment \Env{subfigure} from the package \Package{subcaption}.
-% If you compile the guide with \TeXLive 2011 or earlier the
-% environment \Env{subcaption} from the package \Package{subfig} is used.
-The NC and CC graphs shown in
-\cref{fig:nccc}, or more accurately in \cref{fig:nccc-nc} and
-\cref{fig:nccc-cc} were made with \Package{feynmp}. Another way of
-saying the same thing is that typical Feynman graphs for \(ep\)
-scattering are shown in \cref{fig:nccc}, where
-\subref{fig:nccc-nc} shows a neutral current and \subref{fig:nccc-cc}
+figure that uses the environment \Env{subfigure} from
+the package \Package{subcaption}.
+The NC and CC graphs shown in \cref{fig:nccc}, or more accurately
+in \cref{fig:nccc-nc} and \cref{fig:nccc-cc} were made with \Package{feynmp}.
+Another way of saying the same thing is that typical Feynman graphs
+for \(ep\) scattering are shown in \cref{fig:nccc},
+where \subref{fig:nccc-nc} shows a neutral current and \subref{fig:nccc-cc}
 show a charged current process.
+\end{tcblisting}
 
 
 %------------------------------------------------------------------------------
@@ -386,7 +388,7 @@ of boson and gluon oscillations explicitly.
 This has to be done using the \Macro*{setlength\{\textbackslash feynhandlinesize\{1.0pt\}\}} command.
 This also, as the name suggest, changes the line thickness.
 After a bit of playing around \num{1.0}{pt} seems to work well,
-with a Feynman graph size of about \SI[parse-numbers=false]{2 \times 2}{\cm^{2}}
+with a Feynman graph size of about \SI[parse-numbers=false]{2 \times 2}{\cm^{2}}.
 
 I like using a scripting language, e.g.\ Python, to draw my graphs.
 I have therefore written a Python wrapper for \Package{TikZ-FeynHand}.
@@ -397,35 +399,37 @@ as it uses the \Package{standalone} package.
 Have a look at the \File{README.md} file in that directory for some more details.
 
 Many more example graphs can be found in the Git repositories:\\
-\url{https://gitlab.cern.ch/atlasphys-top/singletop/PubUtils/FeynmanDiagrams/PyFeynHand} ATLAS\\
-\url{https://bitbucket.team.uni-bonn.de/users/unp00039/repos/pyfeynhand} Uni Bonn
+{\footnotesize\url{https://gitlab.cern.ch/atlasphys-top/singletop/PubUtils/FeynmanDiagrams/PyFeynHand}} ATLAS\\
+{\footnotesize\url{https://bitbucket.team.uni-bonn.de/users/unp00039/repos/pyfeynhand}} Uni Bonn
 
 \Cref{fig:feyn:tdecay} shows two graphs from one of my favourite processes.
 These graphs are made using \Package{TikZ-FeynHand} commands directly,
 while the \TeX{} file was originally created using the Python wrapper.
 
 \begin{figure}[htbp]
+\begin{tcblisting}{}
+\centering
+\begin{subfigure}{0.5\figwidth}
   \centering
-  \begin{subfigure}{0.5\figwidth}
-    \centering
-    \ifthenelse{\texlive > 2016}{%
-      \input{../tikz/tdecay.tex}
-    }{%
-      \missingfigure{TeX Live version does not include TikZ-FeynHand}
-    }
-    \caption{\LaTeX\ file}%
-    \label{fig:feyn:tdecay1}
-  \end{subfigure}
-  \qquad
-  \begin{subfigure}{0.5\figwidth}
-    \centering
-    \includegraphics[width=0.5\figwidth]{../tikz/tdecay}
-    \caption{PDF file}%
-    \label{fig:feyn:tdecay2}
-  \end{subfigure}
-  \caption{Feynman graphs made with the \Package{TikZ-FeynHand} package.
-    This example uses the \Env{subfigure} environment from the \Package{subcaption} package.}%
-  \label{fig:feyn:tdecay}
+  \ifthenelse{\texlive > 2016}{%
+    \input{../tikz/tdecay.tex}
+  }{%
+    \missingfigure{TeX Live version does not include TikZ-FeynHand}
+  }
+  \caption{\LaTeX\ file}%
+  \label{fig:feyn:tdecay1}
+\end{subfigure}
+\qquad
+\begin{subfigure}{0.5\figwidth}
+  \centering
+  \includegraphics[width=0.5\figwidth]{../tikz/tdecay}
+  \caption{PDF file}%
+  \label{fig:feyn:tdecay2}
+\end{subfigure}
+\caption{Feynman graphs made with the \Package{TikZ-FeynHand} package.
+  This example uses the \Env{subfigure} environment from the \Package{subcaption} package.}%
+\label{fig:feyn:tdecay}
+\end{tcblisting}
 \end{figure}
 
 \Cref{fig:pyfeynhand:ttbar,fig:pyfeynhand:tdecay} show a graph for \ttbar production,
@@ -434,21 +438,21 @@ in \Package{TikZ-FeynHand} and \Package{PyFeynHand}.
 The resulting PDF files are included directly,
 while the graphs have been made using the command \Command{make pyfeynhand}.
 \begin{figure}[htbp]
-  \begin{tcblisting}{}
-  \centering
-  \subcaptionbox{\ttbar production\label{fig:pyfeynhand:ttbar}}
-    [0.5\figwidth]{%
-      \includegraphics{gg_ttbar_2}
-  }
-  \qquad
-  \subcaptionbox{Top-quark decay\label{fig:pyfeynhand:tdecay}}
-    [0.5\figwidth]{%
-    \includegraphics{tdecay}
-  }
-  \end{tcblisting}
-  \caption{Feynman graphs made with the \Package{PyFeynHand} wrapper.
-    This example uses the \Env{subcaptionbox} macro from the \Package{subcaption} package.}%
-  \label{fig:pyfeynhand}
+\begin{tcblisting}{}
+\centering
+\subcaptionbox{\ttbar production\label{fig:pyfeynhand:ttbar}}
+  [0.5\figwidth]{%
+    \includegraphics{gg_ttbar_2}
+}
+\qquad
+\subcaptionbox{Top-quark decay\label{fig:pyfeynhand:tdecay}}
+  [0.5\figwidth]{%
+  \includegraphics{tdecay}
+}
+\caption{Feynman graphs made with the \Package{PyFeynHand} wrapper.
+  This example uses the \Env{subcaptionbox} macro from the \Package{subcaption} package.}%
+\label{fig:pyfeynhand}
+\end{tcblisting}
 \end{figure}
 
 A diagram for \Pgm decay using the \Package{TikZ-Feynman} package
@@ -456,24 +460,26 @@ is shown in \cref{fig:feyn:mudecay}.
 This uses the manual placement style so that I can compile the guide with \Command{pdflatex}.
 
 \begin{figure}[htbp]
+\begin{tcblisting}{}
+\centering
+\begin{subfigure}{0.6\figwidth}
   \centering
-  \begin{subfigure}{0.6\figwidth}
-    \centering
-    \input{../tikz/mudecay-feynman.tex}
-    \caption{\LaTeX\ file}%
-    \label{fig:feyn:mudecay1}
-  \end{subfigure}
-  \qquad
-  \begin{subfigure}{0.4\figwidth}
-    \centering
-    \includegraphics[width=0.4\figwidth]{../tikz/mudecay-feynman}
-    \caption{PDF file}%
-    \label{fig:feyn:mudecay2}
-  \end{subfigure}
-  \caption{Feynman graphs made with the \Package{TikZ-Feynman} package.
-    This example uses the \Env{subfigure} environment from the \Package{subcaption} package.
-    The example is taken from \url{https://www.overleaf.com/learn/latex/feynman_diagrams}.}%
-  \label{fig:feyn:mudecay}
+  \input{../tikz/mudecay-feynman.tex}
+  \caption{\LaTeX\ file}%
+  \label{fig:feyn:mudecay1}
+\end{subfigure}
+\qquad
+\begin{subfigure}{0.4\figwidth}
+  \centering
+  \includegraphics[width=0.4\figwidth]{../tikz/mudecay-feynman}
+  \caption{PDF file}%
+  \label{fig:feyn:mudecay2}
+\end{subfigure}
+\caption{Feynman graphs made with the \Package{TikZ-Feynman} package.
+  This example uses the \Env{subfigure} environment from the \Package{subcaption} package.
+  The example is taken from \url{https://www.overleaf.com/learn/latex/feynman_diagrams}.}%
+\label{fig:feyn:mudecay}
+\end{tcblisting}
 \end{figure}
 
 If you want to draw Feynman graphs using \TikZ directly,
@@ -490,29 +496,34 @@ Further tweaking can probably make them almost identical.
 In the \Package{TikZ-FeynHand} graph, I use lots of colours to illustrate how they work.
 
 \begin{figure}[htbp]
-  \centering
-  \subcaptionbox{feynmp\label{fig:feyn:feynmp}}
-    [0.3\textwidth]{\fbox{%
-      \input{../feynmf/moeller.tex}
-      \write18{mpost moeller}}
+\begin{tcblisting}{}
+\centering
+\subcaptionbox{feynmp\label{fig:feyn:feynmp}}
+  [0.325\textwidth]{\fbox{%
+    \input{../feynmf/moeller.tex}
+    \write18{mpost moeller}
   }
-  \subcaptionbox{\TikZ\label{fig:feyn:tikz}}
-    [0.3\textwidth]{\fbox{%
-    \input{../tikz/moeller-tikz.tex}}
+}
+\subcaptionbox{\TikZ\label{fig:feyn:tikz}}
+  [0.325\textwidth]{\fbox{%
+    \input{../tikz/moeller-tikz.tex}
   }
-  \subcaptionbox{TikZ-FeynHand\label{fig:feyn:feynhand}}
-    [0.3\textwidth]{\fbox{%
+}
+\subcaptionbox{TikZ-FeynHand\label{fig:feyn:feynhand}}
+  [0.325\textwidth]{\fbox{%
     \ifthenelse{\texlive > 2016}{%
       \input{../tikz/moeller-feynhand.tex}
     }{%
       \missingfigure{TeX Live version does not include TikZ-FeynHand}
     }
-  }}
-  \caption{Feynman graphs drawn with \Package{feynmp}, \Package{\TikZ} and \Package{TikZ-FeynHand}.
-    The frames around the boxes are for illustration only.
-    As you can see the \Package{feynmp} box does not include the labels.
-    This example uses the \Macro{subcaptionbox} macro from the \Package{subcaption} package.}%
-  \label{fig:feyn:cf}
+  }
+}
+\caption{Feynman graphs drawn with \Package{feynmp}, \Package{\TikZ} and \Package{TikZ-FeynHand}.
+  The frames around the boxes are for illustration only.
+  As you can see the \Package{feynmp} box does not include the labels.
+  This example uses the \Macro{subcaptionbox} macro from the \Package{subcaption} package.}%
+\label{fig:feyn:cf}
+\end{tcblisting}
 \end{figure}
 
 
@@ -549,7 +560,7 @@ In order to install the package using Homebrew Python (set up with \Package{pyen
 pip install pyx==0.14.1
 pip install pyfeyn
 \end{bashlisting}
-This installed the packages in \File{\textasciitilde/.pyenv/versions/3.8.2/lib/python3.8/site-packages/\ldots} etc.
+\noindent This installed the packages in \File{\textasciitilde/.pyenv/versions/3.8.2/lib/python3.8/site-packages/\ldots} etc.
 For older versions of \Package{PyX} you may have to patch \File{pyx/dvi/vffiles.py}
 to use the newtx fonts: \url{https://sourceforge.net/p/pyx/code/3678/}.
 For the most recent version of \Package{PyX} (0.15), you also have to patch \Package{PyFeyn} to make it work.
@@ -566,8 +577,8 @@ elif pyxversion >= Version("0.13.0"):
 else:
     pyx.text.defaulttexrunner.set(mode="latex")
 \end{bashlisting}
-
-Given these difficulties, I am moving to \Package{TikZ-FeynHand},
+%
+\noindent Given these difficulties, I have moved to \Package{TikZ-FeynHand},
 as discussed above.
 
 While functions exist to draw a number of lines, I added my own wrapper functions
@@ -580,17 +591,19 @@ If you want to get started with \Package{PyFeyn} you can copy this directory
 into your thesis directory, e.g.\ \File{mythesis}.
 
 \begin{figure}[htbp]
-  \centering
-  \raisebox{0ex}{%
-    \includegraphics[width=0.4\textwidth]{../pyfeyn/tZq_4FS_feyn}
-  }
-  \quad
-  \raisebox{2ex}{%
-    \includegraphics[width=0.4\textwidth]{../pyfeyn/tZq_5FS_feyn}
-  }
-  \caption{Example Feynman graphs for the associated production
-    of a top quark and a \PZ boson.}%
-  \label{fig:tZq-pyfeyn}
+\begin{tcblisting}{}
+\centering
+\raisebox{0ex}{%
+  \includegraphics[width=0.4\textwidth]{../pyfeyn/tZq_4FS_feyn}
+}
+\quad
+\raisebox{2ex}{%
+  \includegraphics[width=0.4\textwidth]{../pyfeyn/tZq_5FS_feyn}
+}
+\caption{Example Feynman graphs for the associated production
+  of a top quark and a \PZ boson.}%
+\label{fig:tZq-pyfeyn}
+\end{tcblisting}
 \end{figure}
 
 
@@ -636,8 +649,7 @@ I think a better way to proceed is the following:
 \item run \LaTeX{} or pdf\LaTeX{} again, at least twice.
 \end{itemize}
 The last three steps are done with the command \texttt{make thesis},
-\texttt{make thesis11} or
-\texttt{make thesis09}.
+\texttt{make thesis11}.
 The big advantage of this procedure is that the graphs are included
 \enquote{properly} in the thesis, their fonts should automatically
 match the fonts used in the thesis and you don't have to worry about
@@ -667,7 +679,7 @@ subdirectory.
 You can also use the package \Package{standalone} together with
 \Package{feynmp}. The files in the \texttt{feynmf} directory contain
 commented out code that shows how this can be done. I do not do this
-by default for the guide, as the package is very new and I also want
+by default for the guide, as I want
 to test making the Feynman graphs with \Package{feynmf}. Note that
 the name in the \Env{fmffile} environment (and the \Macro{write18}
 command) should be the same and different from the name of the \LaTeX\
@@ -689,15 +701,17 @@ starts with \verb+\begin{fmffile}{gluon}+.%
   e.g.\ \texttt{/usr/texbin/mpost}, as \TeXstudio does not parse your \texttt{PATH} properly.}
 
 \begin{figure}[htbp]
-  \centering
-  \fbox{\input{../feynmf/ep_nc.tex}}
-    \write18{mpost ep_nc}
-  \qquad
-  \fbox{\input{../feynmf/ep_cc.tex}}
-    \write18{mpost ep_cc}
-  \caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
-    code directly.}%
-  \label{fig:nccc-feynmf}
+\begin{tcblisting}{}
+\centering
+\fbox{\input{../feynmf/ep_nc.tex}}
+  \write18{mpost ep_nc}
+\qquad
+\fbox{\input{../feynmf/ep_cc.tex}}
+  \write18{mpost ep_cc}
+\caption{NC and CC graphs for $ep$ scattering using \Package{feynmf}
+  code directly.}%
+\label{fig:nccc-feynmf}
+\end{tcblisting}
 \end{figure}
 
 If \texttt{mpost} does not run automatically,
@@ -750,8 +764,8 @@ guide and a few more are collected in the \texttt{tikz} directory.
 If you want to get started with \TikZ you can copy this directory
 into your thesis directory, e.g.\ \File{mythesis}.
 
-\TikZ is not included by default in a new skeleton thesis. See the
-commented out packages in a new thesis skeleton or
+\TikZ is not included by default in a new skeleton thesis.
+See the commented out packages in a new thesis skeleton or
 \texttt{thesis\_guide.tex} for the packages and \TikZ libraries that
 you should include if you want to use it.
 
@@ -760,20 +774,24 @@ system in your thesis. One way to do this is illustrated in
 \cref{fig:tikz:coord}.
 
 \begin{figure}[htbp]
-  \centering
-  \input{../tikz/zeus_coords.tex}
-  \caption{The ZEUS coordinate system.}%
-  \label{fig:tikz:coord}
+\begin{tcblisting}{}
+\centering
+\input{../tikz/zeus_coords.tex}
+\caption{The ZEUS coordinate system.}%
+\label{fig:tikz:coord}
+\end{tcblisting}
 \end{figure}
 
 It is also possible to make flow charts with \TikZ.
 This is illustrated in \cref{fig:tikz:flow}.
 
 \begin{figure}[htbp]
-  \centering
-  \input{../tikz/zeus_reconstruction.tex}
-  \caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}%
-  \label{fig:tikz:flow}
+\begin{tcblisting}{}
+\centering
+\input{../tikz/zeus_reconstruction.tex}
+\caption[Event reconstruction and simulation in ZEUS]{Event reconstruction and simulation in ZEUS.}%
+\label{fig:tikz:flow}
+\end{tcblisting}
 \end{figure}
 
 There are many more possibilities,

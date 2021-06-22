@@ -69,9 +69,13 @@ The packages are listed in \cref{tab:package:layout}.
     this package explicitly if you use \KOMAScript.\\
     \Package{setspace} & Useful options to change spacing.\\
     \Package{fontenc} & The encoding used for fonts. Recommended is
-    \Option{T1}, which is given as an option.\\
+      \Option{T1}, which is given as an option.
+      This package is not used/needed by \LuaLaTeX\ and \XeLaTeX.\\
     \Package{inputenc} & Use either \Option{utf8} or \Option{latin1} so
-    that you can input German letters such as ä, ü and ß directly.\\
+      that you can input German letters such as ä, ü and ß directly.
+      This package is not used/needed by \LuaLaTeX\ and \XeLaTeX.\\
+    \Package{unicode-math} & Main package for font setting with \LuaLaTeX\ and \XeLaTeX.
+      It internally calls \Package{fontspec}.\\
     \Package{babel} & Language specific typesetting.\\
     \Package{csquotes} & Package for quoting things using the correct
     language-dependent quotation marks.\\
@@ -109,6 +113,8 @@ to get both text and math fonts in the same style.
 Some examples of other possible font packages are given in the style file.
 As mentioned above, certain fonts can be selected directly via options:
 \Option{txfonts}, \Option{newtx} or \Option{palatino}.
+The fonts used by \LuaLaTeX\ and \XeLaTeX can be steered in the same way
+and use the appropriate TeX Gyre fonts.
 
 Commonly used packages associated with fonts, tables and
 figures are listed in \cref{tab:package:appearance}.
@@ -127,7 +133,8 @@ figures are listed in \cref{tab:package:appearance}.
     \Package{array} & Adds extra column formatting capabilities.\\
     \Package{longtable} & Can produce tables that extend over more than one page.\\
     \Package{booktabs} & Help for producing nicer tables.\\
-    \Package{subcaption} & A newer alternative to \Package{subfig}.\\
+    \Package{subcaption} & As the name suggests make sub-figures (and sub-tables) and add
+      separate captions for them.\\
     \Package{cleveref} & Provides \enquote{Fig.}, \enquote{Table} etc.\ when you use
       the \Macro{cref\{fig:plot\}} syntax.\\
     \Package{mathtools} & An extension package for \Package{amsmath} that fixes some bugs and deficiencies there.\\
@@ -365,13 +372,12 @@ Hence, \Package{ziffer} is not really needed anymore.
 \label{sec:package:todo}
 %------------------------------------------------------------------------------
 
-If you include the option \Option{todonotes} with \Package{ubonn-thesis},
-the margin of the thesis will also be adjusted a bit to leave more space for such notes.
+% If you include the option \Option{todonotes} with \Package{ubonn-thesis},
+% the margin of the thesis will also be adjusted a bit to leave more space for such notes.
 As an example, the \Macro{mynote} command is defined.
-
 If you turn on the option \Option{todonotes}, the package will be loaded.
 With the option \Option{shownotes} they will also be 
-\mynote{displayed.}{The \Option{shownotes} also turns on \Option{todonotes}.}
+\mynote{displayed.}{The \Option{shownotes} option also turns on \Option{todonotes}.}
 
 Another nice feature of the \Package{todonotes} package is that you can use
 \Macro*{missingfigure\{text\}}\index{\textbackslash missingfigure}
@@ -440,6 +446,6 @@ You can compile the thesis guide using the commands \Command{make guide} for pdf
 \Command{make guidexe} for \XeLaTeX.
 
 The fonts are selected using filenames rather than font names.
-This follows the recommendation of Will Robertson in a TUGboat article~\cite{tugboat:robertson}
+This follows the recommendation of Will Robertson in a TUGboat article~\cite{tugboat:robertson}.
 Using filenames I am able to compile theses (and this guide) under both macOS and Linux.
 By default I use the TeX Gyre fonts --- see \cref{sec:layout:font}.

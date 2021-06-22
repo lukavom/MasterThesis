@@ -67,12 +67,11 @@ See \cref{sec:layout:footnote} for some guidance on how this can be done.
 
 Although extra packages can help, a very useful command is
 \Macro{phantom}. This inserts white space corresponding to the width
-of the argument. Compare the results in the following table with two
-numbers 0.76 and 83.1:
+of the argument. 
 
 \begin{tcblisting}{textable}
 \centering
-\begin{tabular}{cc|rr}
+\begin{tabular}{cc | rr}
   \multicolumn{2}{c|}{Centred} &
   \multicolumn{2}{c}{Right justified} \\
   & Phantom & & Phantom\\
@@ -98,7 +97,6 @@ The difference between the two tables is that the one on the right
 has the length \Macro{extrarowheight} set to 0.5ex.
 The first two columns are centred, the last two are right justified.
 This is clearly a bit clumsy, but it does work!
-For illustration, you can also see the effect of adjusting \Macro{extrarowheight}.
 
 
 %------------------------------------------------------------------------------
@@ -113,20 +111,21 @@ A first simple example is shown in \cref{tab:viscosity}.
 In fact I show the table twice, once
 with the language set to default and once with it set to German. The
 \Env{tabular} contents are identical, the second tabular is inside a
-\Macro{foreignlanguage}. Note the use of
-\Option{table-format}
-to centre the temperatures as the heading is wider than the numbers.
+\Macro{foreignlanguage}.\footnote{%
 Umlaute etc.\ can normally be inserted directly.
 Such characters can be included directly in listings that use the \Env{tcblisting} environment,
 if one uses  with \LuaLaTeX\ and \XeLaTeX\ for compilation.
 However, that does not work in the \Env{tcblisting} environment if one uses pdf\LaTeX\ to compile the guide.
-Hence this example uses the old fashioned style \verb|\"{u}| etc.
+Hence this example uses the old fashioned style 
+\texttt{\textbackslash"\{u\}} etc.}
+Note the use of \Option{table-format}
+to centre the temperatures as the heading is wider than the numbers.
 
 \begin{table}[htbp]
-  \captionabove{A table of viscosities in the default language and German.
-    Typeset using the \Macro{captionabove} macro.}%
-  \label{tab:viscosity}
 \begin{tcblisting}{textable}
+\captionabove{A table of viscosities in the default language and German.
+  Typeset using the \Macro{captionabove} macro.}%
+\label{tab:viscosity}
 \centering
 \begin{tabular}{lS[table-format=4.2]S}
   \toprule
@@ -163,7 +162,7 @@ Hence this example uses the old fashioned style \verb|\"{u}| etc.
 \end{table}
 
 \Cref{tab:xsect0} shows a more complicated table set using the tools.
-You can either enclose all numbers in \Macro{tablenum} (or \Macro{num}
+You can either enclose all numbers in \Macro{tablenum} (or \Macro{num})
 or use the \Option{S} column descriptor.
 If you use \Option{S}, it usually centres the contents of the column.
 You can use the \Option{table-number-alignment} option to change this.
@@ -174,17 +173,16 @@ You also need to do this with regular text,
 such as column headings --- see \cref{tab:viscosity}.
 Note the use of \Macro{sisetup\{table-format=4.0\}}
 to define a default format for numbers in an \enquote{S} column,
-or that are formatted using \Macro{numtable}.
+or that are formatted using \Macro{tablenum}.
 
 The spacing of the captions in \cref{tab:viscosity,tab:xsect0} is the same,
 as the option \Option{captions=tableheading} is set in this guide.
 
 \begin{table}[htbp]
-  \caption{A selection of cross-section measurements!
-    Typeset using the \Macro{caption} macro.}%
-  \label{tab:xsect0}
-\begin{tcblisting}{textable,
-  listing options={basicstyle=\ttfamily\footnotesize}}
+\begin{tcblisting}{stextable}
+\caption{A selection of cross-section measurements!
+  Typeset using the \Macro{caption} macro.}%
+\label{tab:xsect0}
 \centering
 \renewcommand{\arraystretch}{1.2}
 \sisetup{round-mode = places}
@@ -231,14 +229,15 @@ You should make sure
 that you specify the rounding mode in the preamble of the table (usually
 \Option{figures} or \Option{places} --- you can also choose \Option{off}).
 
-If you know that you are going to make such a table, it is very easy
+If you know that you are going to make such a table, it is easy
 to use either of these options to write it out in this format using a program. 
-Using \Macro{tabenumnum} or \Macro{num} solves the very common problem of your
+Using \Macro{tablenum} or \Macro{num} solves the very common problem of your
 program writing out the results with too many significant digits and
 you have to correct them all by hand later (as well as every time they
-get updated)!  A slightly different approach that one could follow is
-to use \Option{S} for simple numbers in tables and \Macro{num} for
-more complicated number typesetting.  For asymmetric errors you could
+get updated)!  
+It is possible to use to use \Option{S} for simple numbers in tables
+and \Macro{tablenum} for more complicated number typesetting. 
+For asymmetric errors you could
 consider defining something similar to \Macro{numpmerr}, which
 internally uses \Macro{num}.
 
@@ -294,12 +293,12 @@ all numbers except the one that requires an extra digit are written
 without any special formatting!
 
 \begin{table}[htbp]
-  \caption{Another selection of cross-section measurements! Note the
-    use of \Macro{sisetup} to keep the plus signs on the positive errors.
-    This example uses \Macro{tablenum}.
-  }%
-  \label{tab:rounding1}
-\begin{tcblisting}{textable}
+\begin{tcblisting}{stextable}
+\caption{Another selection of cross-section measurements! Note the
+  use of \Macro{sisetup} to keep the plus signs on the positive errors.
+  This example uses \Macro{tablenum}.
+}%
+\label{tab:rounding1}
 \centering
 \renewcommand{\arraystretch}{1.2}
 \sisetup{retain-explicit-plus}
@@ -312,20 +311,20 @@ without any special formatting!
   \multicolumn{2}{c}{\etajet} & \multicolumn{3}{c}{\diffetab} \\
   \multicolumn{2}{c}{} & \multicolumn{3}{c}{[\si{\pico\barn}]} \\
   \midrule
-  {\num{-1.6}} & -1.1 & \num[round-precision=3]{0.574} &
+  -1.6 & -1.1 & \num[round-precision=3]{0.574} &
   \num[round-precision=3]{0.094} &
   \(^{\num[round-precision=3]{+0.035}}_{\num[round-precision=3]{-0.031}}\) \\
-  {\num{-1.1}} & -0.8 & \num[round-precision=2]{1.213} &
+  -1.1 & -0.8 & \num[round-precision=2]{1.213} &
   \num[round-precision=2]{0.211} &
   \(^{\num[round-precision=2]{+0.162}}_{\num[round-precision=2]{-0.162}}\) \\
   \multicolumn{5}{l}{\ldots}\\
-  {\num{-0.2}} & +0.1 & \num[round-precision=2]{2.641} &
+  -0.2 & +0.1 & \num[round-precision=2]{2.641} &
   \num[round-precision=2]{0.220} &
   \(^{\num[round-precision=2]{+0.283}}_{\num[round-precision=2]{-0.233}}\) \\
-  {\num{+0.1}} & +0.5 & \num[round-precision=2]{3.160} &
+  +0.1 & +0.5 & \num[round-precision=2]{3.160} &
   \num[round-precision=2]{0.211} &
   \(^{\num[round-precision=2]{+0.232}}_{\num[round-precision=2]{-0.172}}\) \\
-  {\num{+0.5}} & +1.4 & \num[round-precision=2]{2.881} &
+  +0.5 & +1.4 & \num[round-precision=2]{2.881} &
   \num[round-precision=2]{0.154} &
   \(^{\num[round-precision=2]{+0.201}}_{\num[round-precision=2]{-0.301}}\) \\
   \bottomrule
@@ -334,11 +333,11 @@ without any special formatting!
 \end{table}
 
 \begin{table}[htbp]
-  \caption{Another selection of cross-section measurements! Note the
-    use of \Macro{sisetup} to keep the plus signs on the positive errors.}%
-    This example uses \enquote{S} columns.
-  \label{tab:rounding2}
-\begin{tcblisting}{textable}
+\begin{tcblisting}{stextable}
+\caption{Another selection of cross-section measurements! Note the
+  use of \Macro{sisetup} to keep the plus signs on the positive errors.
+  This example uses \enquote{S} columns.}%
+\label{tab:rounding2}
 \centering
 \renewcommand{\arraystretch}{1.2}
 \sisetup{retain-explicit-plus}
@@ -412,10 +411,10 @@ with an \Macro{hspace} of 2em.
 The tables contain vertical lines that I would normally not include to illustrate the alignment.
 
 \begin{table}[htbp]
-  \caption{Table illustrating how to centre numbers
-    if the heading is wider than them.}
-  \label{tab:heading}
 \begin{tcblisting}{textable}
+\caption{Table illustrating how to centre numbers
+  if the heading is wider than them.}%
+\label{tab:heading}
 \renewcommand{\arraystretch}{1.4}
 \sisetup{round-mode=places, retain-explicit-plus}
 \centering
@@ -443,6 +442,7 @@ The tables contain vertical lines that I would normally not include to illustrat
 \end{tabular}
 \end{tcblisting}
 \end{table}
+
 
 %------------------------------------------------------------------------------
 \section{Using \Package{dcolumn}}%
@@ -472,56 +472,98 @@ separator:
 \end{tabular}
 \end{tcblisting}
 
-\Cref{tab:xsect1} shows quite a complicated table
-set in 2 different ways. It is rotated by \SI{90}{\degree} to
-illustrate how that can be done.
+\Cref{tab:xsect1a,tab:xsect1b} show quite a complicated table
+typeset in two different ways.
+The box below illustrates the typesetting used in \cref{tab:xsect1a}.
+
+\begin{tcblisting}{stextable, listing only}
+\centering
+\begin{tabular}{r@{ : }l|c|c|c}
+  \toprule
+  \multicolumn{2}{c|}{\pTjet} & \diffptb & \diffnloptb & \Cbhad \\
+  \multicolumn{2}{c|}{(GeV)} & (pb/GeV) & (pb/GeV) & \\
+  \midrule
+  \(\phantom{1}\)6 & 11 &
+  \(95.6\phantom{2} \pm 4.9\phantom{4}^{+9.8\phantom{2}}_{-7.0\phantom{2}}\) &
+  \(109\phantom{.22}^{+31\phantom{.22}}_{-19\phantom{.22}}\) & 0.83 \\
+  \multicolumn{5}{l}{\ldots}
+\end{tabular}
+\end{tcblisting}
+
+\noindent The next box illustrates the typesetting used in \cref{tab:xsect1b}.
+Splitting values and uncertainties into separate columns makes the formatting and alignment easier.
+\Cref{tab:xsect1b} is rotated by \SI{90}{\degree} to illustrate how that can be done.
+
+\begin{tcblisting}{stextable, listing only}
+\begin{sideways}
+\(\begin{array}{r@{\,:\,}l |
+  D{.}{.}{2}@{\,}r@{}D{.}{.}{2}@{\,}l |
+  D{.}{.}{2}@{\,}l | c}
+  \toprule
+  \multicolumn{2}{c|}{\pTjet} & \multicolumn{4}{c|}{\diffptb} &
+  \multicolumn{2}{c|}{\diffnloptb} & \Cbhad \\
+  \multicolumn{2}{c|}{[\si{\GeV}]} &
+  \multicolumn{4}{c|}{[\si{\pico\barn\per\GeV}]} &
+  \multicolumn{2}{c|}{[\si{\pico\barn\per\GeV}]} & \\
+  \midrule
+    6 & 11 & 95.6 & \pm & 4.9  & ^{+9.8}_{-7.0}  & 
+    109  & ^{+31}_{-19} & 0.83 \\
+    \multicolumn{5}{l}{\ldots}
+\end{array}\)
+\end{sideways}
+\end{tcblisting}
+  
+\begin{table}[htbp]
+  \caption{Cross-section measurements using \Macro{phantom}
+    and normal column types!}%
+  \label{tab:xsect1a}
+  \centering
+  \begin{tabular}{r@{ : }l|c|c|c} % chktex 26 chktex 44
+    \toprule
+    \multicolumn{2}{c|}{\pTjet} & \diffptb & \diffnloptb & \Cbhad \\
+    \multicolumn{2}{c|}{(GeV)} & (pb/GeV) & (pb/GeV) & \\
+    \midrule
+    \(\phantom{1}\)6 & 11 & \(95.6\phantom{2}\pm 4.9\phantom{4}^{+9.8\phantom{2}}_{-7.0\phantom{2}}\) &
+    \(109\phantom{.22}^{+31\phantom{.22}}_{-19\phantom{.22}}\) & 0.83 \\
+    11 & 16 & \(24.8\phantom{2}\pm 1.2\phantom{4}^{+1.8\phantom{2}}_{-1.4\phantom{2}}\) &
+    \(\phantom{1}29.1\phantom{2}^{+\phantom{1}7.9\phantom{2}}_{-\phantom{1}4.7\phantom{2}}\) & 0.89 \\
+    16 & 21 & \(\phantom{2}6.02\pm 0.49^{+0.6\phantom{2}}_{-0.6\phantom{2}}\) &
+    \(\phantom{10}7.1\phantom{2}^{+\phantom{1}2.0\phantom{2}}_{-\phantom{1}1.2\phantom{2}}\) & 0.92 \\
+    21 & 27 & \(\phantom{2}0.93\pm 0.22^{+0.31}_{-0.20}\) &
+    \(\phantom{10}1.87^{+\phantom{1}0.54}_{-\phantom{1}0.34}\) & 0.95 \\
+    27 & 35 & \(\phantom{2}0.30\pm 0.12^{+0.14}_{-0.12}\) &
+    \(\phantom{10}0.46^{+\phantom{1}0.13}_{-\phantom{1}0.08}\) & 1.05 \\
+    \bottomrule
+    \multicolumn{5}{c}{}\\
+    \toprule
+    \multicolumn{2}{c|}{\etajet} & \diffetab & \diffnloetab & \Cbhad \\
+    \multicolumn{2}{c|}{} & (pb) & (pb) & \\
+    \midrule
+      \(-1.6\) & \(-1.1\) & \(\phantom{2}57\pm 22^{+13}_{-\phantom{1}3}\) &
+      \(\phantom{1}72^{+22}_{-13}\) & 0.70 \\
+      \(-1.1\) & \(-0.8\) & \(121\pm 21^{+16}_{-16}\) &
+      \(182^{+50}_{-30}\) & 0.78 \\
+      \(-0.8\) & \(-0.5\) & \(214\pm 22^{+22}_{-12}\) &
+      \(255^{+69}_{-42}\) & 0.79 \\
+      \(-0.5\) & \(-0.2\) & \(233\pm 21^{+28}_{-21}\) &
+      \(307^{+83}_{-50}\) & 0.79 \\
+      \(-0.2\) & \(\phantom{-}0.1\) & \(264\pm 22^{+28}_{-23}\) &
+      \(342^{+91}_{-55}\) & 0.81 \\
+      \(\phantom{-}0.1\) & \(\phantom{-}0.5\) & \(316\pm 21^{+23}_{-17}\) &
+      \(346^{+96}_{-57}\) & 0.86 \\
+      \(\phantom{-}0.5\) & \(\phantom{-}1.4\) & \(288\pm 15^{+20}_{-30}\) &
+      \(265^{+82}_{-48}\) & 0.93 \\
+      \bottomrule
+  \end{tabular}  
+\end{table}
 
 \begin{table}[htbp]
-  \caption{Cross-section measurements!}%
-  \label{tab:xsect1}
+  \caption{Cross-section measurements using \Package{dcolumn} and \Env{array}!}%
+  \label{tab:xsect1b}
   \begin{sideways}
-    \centering
-    \begin{tabular}{r@{ : }l|c|c|c} % chktex 26 chktex 44
-      \toprule
-      \multicolumn{2}{c|}{\pTjet} & \diffptb & \diffnloptb & \Cbhad \\
-      \multicolumn{2}{c|}{(GeV)} & (pb/GeV) & (pb/GeV) & \\
-      \midrule
-      \(\phantom{1}\)6 & 11 & \(95.6\phantom{2}\pm 4.9\phantom{4}^{+9.8\phantom{2}}_{-7.0\phantom{2}}\) &
-      \(109\phantom{.22}^{+31\phantom{.22}}_{-19\phantom{.22}}\) & 0.83 \\
-      11 & 16 & \(24.8\phantom{2}\pm 1.2\phantom{4}^{+1.8\phantom{2}}_{-1.4\phantom{2}}\) &
-      \(\phantom{1}29.1\phantom{2}^{+\phantom{1}7.9\phantom{2}}_{-\phantom{1}4.7\phantom{2}}\) & 0.89 \\
-      16 & 21 & \(\phantom{2}6.02\pm 0.49^{+0.6\phantom{2}}_{-0.6\phantom{2}}\) &
-      \(\phantom{10}7.1\phantom{2}^{+\phantom{1}2.0\phantom{2}}_{-\phantom{1}1.2\phantom{2}}\) & 0.92 \\
-      21 & 27 & \(\phantom{2}0.93\pm 0.22^{+0.31}_{-0.20}\) &
-      \(\phantom{10}1.87^{+\phantom{1}0.54}_{-\phantom{1}0.34}\) & 0.95 \\
-      27 & 35 & \(\phantom{2}0.30\pm 0.12^{+0.14}_{-0.12}\) &
-      \(\phantom{10}0.46^{+\phantom{1}0.13}_{-\phantom{1}0.08}\) & 1.05 \\
-      \bottomrule
-      \multicolumn{5}{c}{}\\
-      \toprule
-      \multicolumn{2}{c|}{\etajet} & \diffetab & \diffnloetab & \Cbhad \\
-      \multicolumn{2}{c|}{} & (pb) & (pb) & \\
-      \midrule
-       \(-1.6\) & \(-1.1\) & \(\phantom{2}57\pm 22^{+13}_{-\phantom{1}3}\) &
-       \(\phantom{1}72^{+22}_{-13}\) & 0.70 \\
-       \(-1.1\) & \(-0.8\) & \(121\pm 21^{+16}_{-16}\) &
-       \(182^{+50}_{-30}\) & 0.78 \\
-       \(-0.8\) & \(-0.5\) & \(214\pm 22^{+22}_{-12}\) &
-       \(255^{+69}_{-42}\) & 0.79 \\
-       \(-0.5\) & \(-0.2\) & \(233\pm 21^{+28}_{-21}\) &
-       \(307^{+83}_{-50}\) & 0.79 \\
-       \(-0.2\) & \(\phantom{-}0.1\) & \(264\pm 22^{+28}_{-23}\) &
-       \(342^{+91}_{-55}\) & 0.81 \\
-       \(\phantom{-}0.1\) & \(\phantom{-}0.5\) & \(316\pm 21^{+23}_{-17}\) &
-       \(346^{+96}_{-57}\) & 0.86 \\
-       \(\phantom{-}0.5\) & \(\phantom{-}1.4\) & \(288\pm 15^{+20}_{-30}\) &
-       \(265^{+82}_{-48}\) & 0.93 \\
-       \bottomrule
-    \end{tabular}
-
-    \qquad
-
-    \(\begin{array}{r@{\,:\,}l|D{.}{.}{2}@{\,}r@{}D{.}{.}{2}@{\,}l|D{.}{.}{2}@{\,}l|c} % chktex 44
+    \(\begin{array}{r@{\,:\,}l |
+      D{.}{.}{2}@{\,}r@{}D{.}{.}{2}@{\,}l |
+      D{.}{.}{2}@{\,}l | c}
       \toprule
       \multicolumn{2}{c|}{\pTjet} & \multicolumn{4}{c|}{\diffptb} & \multicolumn{2}{c|}{\diffnloptb} & \Cbhad \\
       \multicolumn{2}{c|}{[\si{\GeV}]} & \multicolumn{4}{c|}{[\si{\pico\barn\per\GeV}]} & \multicolumn{2}{c|}{[\si{\pico\barn\per\GeV}]} & \\
@@ -549,50 +591,53 @@ illustrate how that can be done.
   \end{sideways}
 \end{table}
 
-The 2nd version (right) is certainly simpler to typeset and does not
-really use any tricks to line things up. Note the use of \Env{array}
-rather than \Env{tabular} which means that the contents are typeset in
-math mode rather than text mode. For tables of numbers this is often
-preferred. You just have to enclose the array in
+\Cref{tab:xsect1b} is certainly simpler to typeset and does not
+really use any tricks to line things up.
+Note the use of \Env{array} rather than \Env{tabular},
+which means that the contents are typeset in math mode rather than text mode.
+For tables of numbers this is often preferred.
+You just have to enclose the array in
 \texttt{\textbackslash(\ldots\textbackslash)} or
-\BegEnv{math}\ldots\EndEnv{math}. Close inspection of the right-hand
-table shows that it is, however, not perfect. It is questionable
-whether one wants to to write \(+0.5\) or just \(0.5\). The fact that both
+\BegEnv{math}\ldots\EndEnv{math}.
+Close inspection of \cref{tab:xsect1b} table shows that it is, however, not perfect.
+It is questionable whether one wants to to write \(+0.5\) or just \(0.5\).
+The fact that both
 \pT as well as \(\eta\) cross-sections are in a single tabular, but the
-numerical values are so different makes it difficult to line things up
-perfectly. An alternative, which uses the headers to fix the width of
+numerical values are so different makes it difficult to line things up perfectly.
+An alternative, which uses the headers to fix the width of
 the columns is given in \cref{tab:xsect2a,tab:xsect2b}.
-Note that this uses
+Note that these use
 \Env{sidewaystable} rather than \Env{sideways} inside \Env{table},
 which also rotates the caption.
+It also removes the vertical lines following the recommendations
+in the package \Package{booktabs}.
 
 \begin{sidewaystable}
-  \caption[Cross-sections using \Env{sidewaystable}, which also
+\begin{tcblisting}{stextable}
+\caption[Cross-sections using \Env{sidewaystable}, which also
   rotates the caption.]{Cross-sections using \Env{sidewaystable},
-    which also rotates the caption.
-    Note the dirty trick used to
-    get the \Cbhad values nicely in the centre of the column.}%
-  \label{tab:xsect2a}
-\begin{tcblisting}{textable}
+  which also rotates the caption.
+  Note the dirty trick used to
+  get the \Cbhad values nicely in the centre of the column.}%
+\label{tab:xsect2a}
 \centering
 \renewcommand{\arraystretch}{1.2}
 \begin{math}
-  \begin{array}{D{.}{.}{4.0}@{\,:}D{.}{.}{3.1} |
-    D{.}{.}{2}@{\,}r@{}D{.}{.}{2}@{\,}l |
-    D{.}{.}{2}@{\,}l|c}
+  \begin{array}{D{.}{.}{4.0}@{\,:}D{.}{.}{3.1}
+    D{.}{.}{2}@{\,}r@{}D{.}{.}{2}@{\,}l
+    D{.}{.}{2}@{\,}l c}
     \toprule
-    \multicolumn{2}{p{2.0cm}|}{\rule[-1.5ex]{0pt}{4.0ex}\centering\pTjet} &
-    \multicolumn{4}{p{3.0cm}|}{\centering\diffptb} &
-    \multicolumn{2}{p{2.2cm}|}{\centering\diffnloptb} &
+    \multicolumn{2}{p{2.0cm}}{\rule[-1.5ex]{0pt}{4.0ex}\centering\pTjet} &
+    \multicolumn{4}{p{3.0cm}}{\centering\diffptb} &
+    \multicolumn{2}{p{2.2cm}}{\centering\diffnloptb} &
     \multicolumn{1}{p{1.5cm}}{\centering\Cbhad} \\
-    \multicolumn{2}{c|}{[\si{\GeV}]} &
-    \multicolumn{4}{c|}{[\si{\pico\barn\per\GeV}]} &
-    \multicolumn{2}{c|}{[\si{\pico\barn\per\GeV}]} & \\
+    \multicolumn{2}{c}{[\si{\GeV}]} &
+    \multicolumn{4}{c}{[\si{\pico\barn\per\GeV}]} &
+    \multicolumn{2}{c}{[\si{\pico\barn\per\GeV}]} & \\
     \midrule
       6 & 11 & 95.6 & \pm & 4.9  & ^{+9.8}_{-7.0}  &  109  & ^{+31}_{-19} & 0.83 \\
     11 & 16 & 24.8 & \pm & 1.2  & ^{+1.8}_{-1.4}  & 29.1  & ^{+7.9}_{-4.7} & 0.89 \\
-    16 & 21 & 6.02 & \pm & 0.49 & ^{+0.6}_{-0.6}  &  7.1  & ^{+2.0}_{-1.2} & 0.92 \\
-    21 & 27 & 0.93 & \pm & 0.22 & ^{+0.31}_{-0.20} & 1.87 & ^{+0.54}_{-0.34} & 0.95 \\
+    \multicolumn{9}{l}{\ldots}\\
     27 & 35 & 0.30 & \pm & 0.12 & ^{+0.14}_{-0.12} & 0.46 & ^{+0.13}_{-0.08} & 1.05 \\
     \bottomrule
   \end{array}
@@ -601,34 +646,32 @@ which also rotates the caption.
 \end{sidewaystable}
 
 \begin{sidewaystable}
-  \caption[Cross-sections using \Env{sidewaystable}, which also
-    rotates the caption.]{Cross-sections using \Env{sidewaystable},
-    which also rotates the caption. Just for fun the numbers
-    indicating the \(\eta\) range of the bins in the lower half have
-    been converted to German format!
-    Note also the dirty trick used to
-    get the \Cbhad values nicely in the centre of the column.}%
-  \label{tab:xsect2b}
-\begin{tcblisting}{textable}
+\begin{tcblisting}{stextable}
+\caption[Cross-sections using \Env{sidewaystable}, which also
+  rotates the caption.]{Cross-sections using \Env{sidewaystable},
+  which also rotates the caption. Just for fun the numbers
+  indicating the \(\eta\) range of the bins in the lower half have
+  been converted to German format!
+  Note also the dirty trick used to
+  get the \Cbhad values nicely in the centre of the column.}%
+\label{tab:xsect2b}
 \centering
 \renewcommand{\arraystretch}{1.2}
 \begin{math}
-  \begin{array}{D{.}{,}{1}@{\,:}D{.}{,}{1} |
-    D{.}{,}{5.0}@{\,}r@{}D{.}{,}{0}@{\,}l |
-    D{.}{,}{5.0}@{\,}l|D{.}{,}{4}}
+  \begin{array}{D{.}{,}{1}@{\,:}D{.}{,}{1}
+    D{.}{,}{5.0}@{\,}r@{}D{.}{,}{0}@{\,}l
+    D{.}{,}{5.0}@{\,}l D{.}{,}{4}}
     \toprule
-    \multicolumn{2}{p{2.0cm}|}{\rule[-1.5ex]{0pt}{4.0ex}\centering\etajet} &
-    \multicolumn{4}{p{3.0cm}|}{\centering\diffetab} &
-    \multicolumn{2}{p{2.2cm}|}{\centering\diffnloetab} &
+    \multicolumn{2}{p{2.0cm}}{\rule[-1.5ex]{0pt}{4.0ex}\centering\etajet} &
+    \multicolumn{4}{p{3.0cm}}{\centering\diffetab} &
+    \multicolumn{2}{p{2.2cm}}{\centering\diffnloetab} &
     \multicolumn{1}{p{1.5cm}}{\centering\Cbhad} \\
-    \multicolumn{2}{c|}{} & \multicolumn{4}{c|}{[\si{\pico\barn}]} &
-    \multicolumn{2}{c|}{[\si{\pico\barn}]} & \\
+    \multicolumn{2}{c}{} & \multicolumn{4}{c}{[\si{\pico\barn}]} &
+    \multicolumn{2}{c}{[\si{\pico\barn}]} & \\
     \midrule
     -1.6 & -1.1 &  57 & \pm & 22 & ^{+13}_{-3}  &  72 & ^{+22}_{-13} & 0.70 \\
     -1.1 & -0.8 & 121 & \pm & 21 & ^{+16}_{-16} & 182 & ^{+50}_{-30} & 0.78 \\
-    -0.8 & -0.5 & 214 & \pm & 22 & ^{+22}_{-12} & 255 & ^{+69}_{-42} & 0.79 \\
-    -0.5 & -0.2 & 233 & \pm & 21 & ^{+28}_{-21} & 307 & ^{+83}_{-50} & 0.79 \\
-    -0.2 &  0.1 & 264 & \pm & 22 & ^{+28}_{-23} & 342 & ^{+91}_{-55} & 0.81 \\
+    \multicolumn{9}{l}{\ldots}\\
       0.1 &  0.5 & 316 & \pm & 21 & ^{+23}_{-17} & 346 & ^{+96}_{-57} & 0.86 \\
       0.5 &  1.4 & 288 & \pm & 15 & ^{+20}_{-30} & 265 & ^{+82}_{-48} & 0.93 \\
     \bottomrule
@@ -656,10 +699,12 @@ and easy to write!
 
 Sometimes you write out a table with so many columns that it does not fit
 on a page, even if you rotate it.
-In sich cases you can of course reduce the number of columns by hand,
+In such cases you can of course reduce the number of columns by hand,
 but it would be much nicer to just \enquote{hide} some of the columns
 (as one often does in a spreadsheet).
-The \Package{array} package allows one to define new column types
+The \Package{array} package,
+which is included by default,
+allows one to define new column types
 and you can use this feature to define a column that is not shown.
 
 Following the idea found in

@@ -527,19 +527,19 @@ You can either use \TeXworks as the front end or you can install
 %------------------------------------------------------------------------------
 
 Using the installations described above I was able to issue to following commands to
-produce the guide (assuming that you have \TeXLive 2017 or later):
-\begin{verbatim}
+produce the guide (assuming that you have \TeXLive 2016 or later):
+\begin{bashlisting}
 git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
 cd ubonn-thesis
-\end{verbatim}
-Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
-Then the following worked:
-\begin{verbatim}
 cd guide
-make guide
-\end{verbatim}
+\end{bashlisting}
+\noindent Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
+\noindent Then the following worked:
+\begin{bashlisting}
+make guide|guidelua|guidexe
+\end{bashlisting}
 so all packages are there as well as at least the default font which I selected.
-If your version of \TeXLive is older than 2017, you should set \Macro{texlive} accordingly.
+If your version of \TeXLive is older than 2020, you should set \Macro{texlive} accordingly.
 If your version is older than 2013 you should not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
 Some figures or tables may not appear with versions of \TeXLive earlier than 2017,
 as, for example, the \Package{TikZ-FeynHand} package was only introduced then.

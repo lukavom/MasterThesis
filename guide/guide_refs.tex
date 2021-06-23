@@ -6,7 +6,7 @@
 \label{sec:ref}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide_refs.tex}\\[1ex]
+\LaTeX\ file: \href{run:./guide_refs.tex}{guide\_refs.tex}\\[1ex]
 \noindent
 Every thesis should also include a list of references, called the
 bibliography in \LaTeX{} terminology. You \enquote{cite} a reference using
@@ -29,7 +29,7 @@ do you format them? Sources of references are discussed in \cref{sec:ref:sources
 There are two options for the formatting. Either you do it by
 hand, formatting \Macro{bibitem} entries yourself or you use
 \BibTeX. 
-More precisely you should use the \Package{biblatex} package.
+More precisely you should use the \Package{biblatex} package,
 which is a replacement for traditional \BibTeX.
 While \Package{biblatex} and/or \BibTeX\ may appear to be the more complicated option
 at the beginning, I strongly recommend that you use it.
@@ -128,7 +128,7 @@ If you use \Package{biblatex} you need something like:
 \addbibresource{../mythesis/thesis_refs.bib}
 \addbibresource{../refs/standard_refs-biber.bib}
 \end{tcblisting}
-in the document preamble and \Macro{printbibliography} where they
+\noindent in the document preamble and \Macro{printbibliography} where they
 should be printed.\footnote{%
 If you use an older version of \TeXLive you may have to replace
 \texttt{giveninits} by \texttt{firstinits},
@@ -145,7 +145,7 @@ If you use traditional \BibTeX{} you need something like:
 \bibliography{../mythesis/thesis_refs,%
   ../refs/standard_refs-bibtex}
 \end{tcblisting}
-at the point where the references should be printed.
+\noindent at the point where the references should be printed.
 Note that \LaTeX{} is sometimes picky about spaces in lists of files,
 so you either terminate each line in \Macro{bibliography} with a \% or include all files on one line.
 
@@ -168,7 +168,8 @@ old syntax \verb+\"{a}+.\footnote{%
   As an aside, if you look at the \LaTeX\ source code for this footnote,
   it might seem natural to use \Macro{verb} for \texttt{author = \dots}.
   However, verbatim does not work in footnotes,
-  unless you include other packages such as \Package{fancyvrb}.}
+  unless you include other packages such as 
+  \Package{fancyvrb} or \Package{cprotect}.}
 This problem is completely solved if you use
 \Package{biblatex} and the \Option{biber} backend.\footnote{%
 If for some reason you want to use \Package{biblatex} with the \Option{bibtex8} backend
@@ -204,6 +205,22 @@ In this section I discuss how to format your \BibTeX\ databases,
 i.e.\ the \texttt{.bib} files. In the following section I talk about
 how you make your references look the way you want them to be in your
 thesis.
+
+I maintain a complete set of ATLAS and CMS publications in \BibTeX\ format,
+which is regularly updated.
+You should certainly use these rather than trying to make your own collection,
+as all the titles have been checked and should be formatted correctly.
+These can be accessed via the \Package{atlaslatex} package,
+which is either available from the ATLAS TWiki page:
+\url{https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComLaTeX}.
+They are also kept separately on the TWiki page:
+\url{https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComRefs}.
+Access to these pages is restricted to members of the ATLAS collaboration.
+ATLAS \LaTeX\ has also been released as open source.
+Hence, a copy of the package can be obtained from the same place as
+the University of Bonn thesis package:
+\url{https://www.pi.uni-bonn.de/lehre/uni-bonn-thesis},
+although this version may not be completely up to date.
 
 %------------------------------------------------------------------------------
 \subsection{Entry types}%
@@ -383,7 +400,7 @@ You can change some of the settings in the style file by passing options to it.
 The syntax \Option{articletitle} and \Option{articletitle=true} is equivalent.
 Use \Option{articletitle=false} to turn off an option.
 The following options exist:
-
+\begin{center}
 \begin{tabular}{llp{10.0cm}}
   \toprule
   Option & Default & Description \\
@@ -405,6 +422,7 @@ The following options exist:
   location & false & Print the location, if given.\\
   \bottomrule
 \end{tabular}
+\end{center}
 
 You can fine tune things even more by using hooks that are
 available. For example, the way I turn off the URL field is
@@ -412,15 +430,9 @@ to include the command:
 \begin{tcblisting}{listing only}
 \AtEveryBibitem{\clearfield{url}}
 \end{tcblisting}
-in the preamble or in the relevant style file given in the previous
+\noindent in the preamble or in the relevant style file given in the previous
 paragraph. It is not clear to me if you also need
 \verb+\AtEveryCitekey{\clearfield{url}}+.
-
-A fairly nice-looking style is \Option{ieee}.
-% This is only be available in recent releases (\(\geq 2011\)) of \TeXLive. 
-After playing around a bit with the \Option{ieee} style, I decided it is too new and has
-too many settings that depend on having a new version of
-\Package{biblatex} for now.
 
 There are slowly more and more \Package{biblatex} styles around,
 but not as many as traditional \BibTeX.
@@ -430,6 +442,10 @@ was for traditional \BibTeX, so you can probably start with a standard file and
 just make adjustments in your preamble.
 I have found a number of very useful hints on how to make changes in
 \url{http://tex.stackexchange.com/} --- just search for \Package{biblatex}.
+A fairly nice-looking style is \Option{ieee}.
+After playing around a bit with the \Option{ieee} style, I decided it is too new and has
+too many settings that depend on having a new version of
+\Package{biblatex} for now.
 
 If you include \Package{ubonn-thesis} with the option \Option{astrobib},
 the references will be formatted in the style usually used in astrophysics publications.\index{astronomy}\index{astrophysics}
@@ -437,7 +453,6 @@ Version 3.0 contains a first version of this option.
 A few more tweaks may still be needed. You can use the command
 \verb|make astro| instead of \verb|make new| to make a thesis skeleton with the appropriate
 options set and the template introduction uses typical citation commands.
-Use the option \Option{astrobib} to format the bibliography in the style usually used in astrophysics theses.
 
 If it is available, \Option{biber} is the preferred backend over
 \Option{bibtex} or \Option{bibtex8}.
@@ -472,7 +487,7 @@ If you are adventurous, the command \verb|rm -rf $(biber --cache)| will do it al
 
 What is the best way to include errata?\index{Errata}
 \Package{biblatex} offers a nice mechanism for this using the \texttt{related} field.
-For example, Ref~\cite{EXOT-2013-13} has an erratum.
+For example, Ref.~\cite{EXOT-2013-13} has an erratum.
 This is achieved using the following:
 \begin{tcblisting}{listing only}
 @Article{EXOT-2013-13,
@@ -502,8 +517,9 @@ This is achieved using the following:
 }
 \end{tcblisting}
 
-This mechanism is used in \texttt{ATLAS.bib} and will be extended to \texttt{CMS.bib} once
-I have a list of the CMS Errata.
+This mechanism is used in \texttt{ATLAS.bib} 
+and may at some point be extended to \texttt{CMS.bib}
+if I find a list of the CMS Errata.
 
 The mechanism only works if the \texttt{biber} backend is used.
 Using the standard files with the \texttt{bibtex} backend and/or traditional \BibTeX\ does not cause errors when compiling.
@@ -515,7 +531,7 @@ However, the Errata are simply ignored.
 \label{sec:ref:sources}
 %------------------------------------------------------------------------------
 
-ATLAS keeps a checked list of ATLAS and CMS publications in \BibTeX{} format. 
+As mentioned above, ATLAS keeps a checked list of ATLAS and CMS publications in \BibTeX{} format. 
 The ZEUS collaboration also kept a reasonably up-to-date list of ZEUS and
 H1 publications (as well as some others),
 and I assume that other collaborations keep similar lists.
@@ -535,12 +551,12 @@ command in Inspire:
 \begin{bashlisting}
 find exp zeus and date 2009
 \end{bashlisting}
-This does not really give you the references you expect though! It
+\noindent This does not really give you the references you expect though! It
 seems much more reliable to use an author name so I used:
 \begin{bashlisting}
 find a chekanov and date 2009
 \end{bashlisting}
-and then selecting \BibTeX{} format, saving the resulting page in a file
+\noindent and then selecting \BibTeX{} format, saving the resulting page in a file
 and removing the \texttt{<pre>} and \texttt{</pre>} entries between
 references. This worked better, even though I got a whole load of
 ATLAS papers as well.
@@ -603,7 +619,7 @@ This can been removed by uncommenting the lines:
 %   \renewcommand*{\nameyeardelim}{\addspace}
 % \fi
 \end{tcblisting}
-in \Package{ubonn-biblatex.sty}
+\noindent in \Package{ubonn-biblatex.sty}
 
 You are nearing the end of your thesis and have to properly format all
 the references that you have. However, they are spread over several
@@ -612,11 +628,16 @@ or want to correct. How best to proceed?\index{bibtool}
 \begin{bashlisting}
 bibtool -x mythesis.aux -o refs.bib
 \end{bashlisting}
-will extract the entries that you use and in future you can use and
+\noindent will extract the entries that you use and in future you can use and
 correct \texttt{refs.bib}, which only contains the references that you
 actually cite.\footnote{%
 I got this tip from
 \url{http://tex.stackexchange.com/questions/417/how-to-split-all-bibtex-referenced-entries-from-a-big-bibtex-database-to-a-copy}.
 Do not forget to change \texttt{mythesis.tex} to use
 \texttt{refs.bib} instead of the previous sources.}
+
+The \Command{biber --tool} command can be used to manipulate \File{.bib} files.
+In this way it is possible to format all entries in the same way.
+There was a lengthy article in the \TeX nische Komödie 2/2020 about this,
+but I have not actually tried it out.
 

@@ -6,7 +6,7 @@
 \label{sec:tips}\index{tips}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide_tips.tex}\\[1ex]
+\LaTeX\ file: \href{run:./guide_tips.tex}{guide\_tips.tex}\\[1ex]
 \noindent
 Over time I have collected quite a lengthy list of things you should
 \enquote{Do} and \enquote{Not Do} (at least in my head) that I think
@@ -156,7 +156,7 @@ collections. If you used the default \LaTeX{} font in your thesis,
 then choose \Package{lmodern}\index{font!lmodern} in the style file.
 
 The main file for this guide is \texttt{guide/thesis\_guide.tex} and
-it includes the \LaTeX{} files in the directory \texttt{./guide} and
+it includes the \LaTeX\ files in the directory \texttt{./guide} and
 some of the Feynman graphs in the directories 
 \texttt{./feynmf}, \texttt{pyfeyn}, \texttt{pyfeynhand} and \texttt{./tikz}.
 This guide should compile without changes for \TeXLive 2017 or later.
@@ -181,11 +181,21 @@ The syntax \Option{siunitx} and \Option{siunitx=true} is equivalent.
 Use \Option{siunitx=false} to turn off an option.
 The following options exist:\\
 
-\tablehead{Option & Default & Description \\
-  \midrule}
-\tablelasttail{\bottomrule\\}
-\xentrystretch{-0.05}
-\begin{xtabular}{llp{10.0cm}}
+\begin{longtable}{llp{10.0cm}}
+  \toprule
+  Option & Default & Description \\
+  \midrule
+\endfirsthead
+  \midrule
+  Option & Default & Description \\
+  \midrule
+\endhead
+  \midrule
+  \multicolumn{3}{r}{Continued on next page}\\
+  \midrule
+\endfoot
+  \bottomrule
+\endlastfoot
   PhD & false & A PhD thesis.\\
   Master & false & A Master thesis.\\
   Diplom & false & A Diplom thesis.\\
@@ -237,7 +247,7 @@ The following options exist:\\
   bibencoding & & Set the encoding for the bibliography (usually not needed).\\
   bibstyle & numeric-comp & Specify the style to use for the references.
     Standard values are \Option{numeric-comp} or \Option{alphabetic}.\\
-\end{xtabular}
+\end{longtable}
 
 A few default option values are adjusted depending on the \TeXLive version.
 See the \texttt{ubonn-thesis} style file to find out what is changed.

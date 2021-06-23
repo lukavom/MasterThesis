@@ -6,7 +6,7 @@
 \label{sec:layout}
 %==============================================================================
 
-\LaTeX\ file: \url{./guide_layout.tex}\\[1ex]
+\LaTeX\ file: \href{run:./guide_layout.tex}{guide\_layout.tex}\\[1ex]
 \noindent
 If you are not happy with the layout, fonts, etc.\ that are used in
 this guide or the thesis skeleton, this chapter includes some examples
@@ -19,6 +19,8 @@ on how you can change things.
 %------------------------------------------------------------------------------
 
 
+See the beginning of the \KOMAScript{} guide for a detailed
+introduction on how a page should be laid out.
 Page geometry can be changed using either the \Package{typearea} or
 the \Package{geometry} package. In this guide I use \Package{typearea}
 as it is closely tied into \KOMAScript. The basic command is to
@@ -27,7 +29,7 @@ specify how many pieces to divide the page into. This guide uses
 \Option{BCOR=5mm}.  You can then let \KOMAScript{} and
 \Package{typearea} sort out the rest. Note that \Package{typearea}
 will issue a warning that you have \enquote{Bad type area settings}
-when using \Option{DIV=14}. If you want to avoid this warning, you can
+when using \Option{DIV=12}. If you want to avoid this warning, you can
 set \Option{DIV} to 11 or smaller, but then the amount of text on each
 page is reduced by quite a bit and your thesis will cover more pages.
 
@@ -38,12 +40,15 @@ the layout, e.g.\ making single Feynman graphs with
 \Package{feynmf}. \Package{typearea} is probably to be preferred for
 documents on normal paper sizes.
 
-See the beginning of the \KOMAScript{} guide for a detailed
-introduction on how a page should be laid out.
-
 The \Package{setspace} package has a number of useful options to change
 spacing in a fairly easy way, if such options are not already
 available in \KOMAScript.
+
+You can use the default settings for the printed version of your thesis.
+These include the \KOMAScript options \Option{twoside=true, BCOR=5mm}.
+For a PDF version it is probably better to have the text centred on the page.
+As of version 8.0, you can pass the option \Option{twoside=false} to \File{ubonn-thesis}
+in order to achieve this.
 
 
 %------------------------------------------------------------------------------
@@ -59,11 +64,11 @@ The default setting of \KOMAScript{} is:
 \begin{tcblisting}{listing only}
 \deffootnote[1em]{1.5em}{1em}{\textsuperscript{\thefootnotemark}}
 \end{tcblisting}
-In this guide and in \texttt{ubonn-thesis.sty} I have changed this to:
+\noindent In this guide and in \texttt{ubonn-thesis.sty} I have changed this to:
 \begin{tcblisting}{listing only}
 \deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark}\ }
 \end{tcblisting}
-The differences are:
+\noindent The differences are:
 \begin{itemize}
 \item The optional argument is missing that sets the box width for the
   footnote mark (which is right-adjusted). In this case the width of
@@ -94,14 +99,16 @@ about what the footnote should look like.
 %   \label{foot:short}
 % }
 % \end{tcblisting}
-\noindent
-This example uses the default footnote settings.
+\noindent This example uses the default footnote settings.
 As you can see this is not really satisfactory. You have a spurious
 space between the colon and the footnote mark \(^{a}\). If may even
 be the case that the footnote mark appears on the next line! 
 To get the spacing
 correct and still have \enquote{nice} \LaTeX{} you have to add some
-judicious \texttt{\%} signs:
+judicious \texttt{\%} signs:\footnote{%
+  It may be that the exact appearance of the footnotes vary a bit
+  depending on your \TeXLive version.
+}
 \begin{tcblisting}{}
 We want to include a footnote%
 \footnote{\label{foot:one}
@@ -115,7 +122,8 @@ We want to include a footnote%
 about what the footnote should look like.
 The space between \enquote{\(^{a}\)} and \enquote{This} should not actually be there
 with the default footnote settings.
-If you look very carefully \enquote{This} is not properly aligned with \enquote{than}.
+If you look very carefully \enquote{This} is not properly left-aligned
+with the line below.
 \end{tcblisting}
 \deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark}\ }
 \begin{tcblisting}{}
@@ -140,7 +148,7 @@ The \Package{cleverref} package claims to also know about footnote label.
 However, if I use \Macro{cref\{foot:two\}} to refer to it, \cref{foot:two},
 it points to the section and not the footnote.
 Using the \Macro{footref} mechanism it is even
-possible to click on the reference if you use pdf\LaTeX.
+possible to click on the reference if you use \Package{hyperref}.
 
 When a footnote contains a complete sentence, people still often
 forget to add a full stop at the end of it --- try not to!
@@ -195,9 +203,9 @@ change full stops into commas --- see \cref{sec:table}.
 
 Another way to avoid this problem by using the \Package{ziffer} package. It is
 commented out in \texttt{ubonn-thesis.sty}. An alternative
-is to remove the comments on the \TeX{} code snippet at the top
-of the file \texttt{thesis\_defs.sty}:
-\begin{tcblisting}{}
+is to remove the comments on the \TeX\ code snippet at the top
+of the file \File{thesis\_defs.sty}:
+\begin{tcblisting}{listing only}
 \mathchardef\CommaOrdinary="013B
 \mathchardef\CommaPunct   ="613B
 \mathcode`,="8000   % , im Math-Mode aktiv ("8000) machen
@@ -267,8 +275,6 @@ numbers differently.
 
 I have tried to compile the guide using \XeLaTeX\index{XeLaTeX@\XeLaTeX} and \LuaLaTeX\index{LuaLaTeX@\LuaLaTeX}.
 After a few tweaks both work.
-Older versions of \LuaLaTeX\ may have problems with some tables, as well as listings,
-but they seem to be OK now.
 You can use the command \Command{make guidexe} to try to compile using \XeLaTeX.
 You can use the command \Command{make guidelua} to try to compile using \LuaLaTeX.
 The TeX Gyre fonts Pagella or Termes are used, depending on whether you pass the
@@ -285,7 +291,7 @@ However, the number of (free) fonts that also have all the math symbols is very 
 
 If you have a few words in the foreign language just use
 \Macro{foreignlanguage},\\
-e.g. \texttt{\textbackslash foreignlanguage\{ngerman\}\{Das
+e.g.\ \texttt{\textbackslash foreignlanguage\{ngerman\}\{Das
   Physikalische Institut der Universität Bonn\}}  to produce \foreignlanguage{ngerman}{Das
   Physikalische Institut der Universität Bonn}. You might ask why
 bother? Hyphenation, in particular, is not the same in different

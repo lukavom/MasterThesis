@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Changes are sorted into the following categories:
 Added, Changed, Deprecated, Removed, Fixed, Security.
 
-## [Unreleased] - 2021-06-15
+## [8.0] - 2021-06-23
 
 ### Added
 
@@ -16,6 +16,7 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 - Add options for the `diffcoeff` and `derivative` packages.
 - Add `scrhack` package to get rid of some KOMA-Script warnings.
 - Add some discussion on "fluff".
+- More information about LuaLaTeX and XeLaTeX added.
 - Add some instructions for Fedora 33.
 
 ### Changed

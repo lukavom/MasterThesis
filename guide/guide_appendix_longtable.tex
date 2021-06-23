@@ -6,14 +6,14 @@
 \label{sec:app:tables}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide_appendix_longtable.tex}\\[1ex]
+\LaTeX\ file: \href{run:./guide_appendix_longtable.tex}{guide\_appendix\_longtable.tex}\\[1ex]
 \noindent
 Long and complicated tables, such as tables containing the breakdown
 of the systematic error for each data point are usually put into the
 appendices. Code or data cards can also be included here.
 Examples of complicated typesetting have been given already in \cref{sec:table}.
 In this appendix I give two examples of a table
-(\cref{tab:alphabet:xtab,tab:alphabet:longtable}) that goes over more than one page
+(\cref{tab:alphabet:xtab2,tab:alphabet:longtable2}) that goes over more than one page
 using the \Package{xtab} and \Package{longtable} packages.
 Some features of the \Package{longtable} package:
 \begin{itemize}\setlength{\parskip}{0pt}
@@ -49,12 +49,14 @@ The relevant parts of \cref{tab:alphabet:xtab} are:
 \tablefirsthead{\toprule
   \multicolumn{1}{c}{Number} &
   \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Greek} &
   \multicolumn{1}{c}{Explanation}\\
   \midrule
 }
 \tablehead{\midrule
   \multicolumn{1}{c}{Number} &
   \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Greek} &
   \multicolumn{1}{c}{Explanation}\\
   \midrule
 }
@@ -67,11 +69,11 @@ The relevant parts of \cref{tab:alphabet:xtab} are:
 \label{tab:alphabet:xtab}
 \xentrystretch{-0.15}
 \begin{center}
-  \begin{mpxtabular}{rcl}
-   1 & a & The lowercase 1st letter in the alphabet\footnote{%
+  \begin{mpxtabular}{rccl}
+   1 & a & \(\alpha\)   & The lowercase 1st letter in the alphabet\footnote{%
     \enquote{a} deserves a footnote}\\
     ...
-    26 & Z & The uppercase 26th letter in the alphabet\\
+    26 & Z & \(\omega\) & The uppercase 26th letter in the alphabet\\
   \end{mpxtabular}
 \end{center}
 \end{tcblisting}
@@ -79,18 +81,20 @@ The relevant parts of \cref{tab:alphabet:xtab} are:
 \clearpage
 The relevant parts of \cref{tab:alphabet:longtable} are:
 \begin{tcblisting}{listing only}
+\begin{longtable}{rccl}
   \caption{The alphabet set using the \Package{longtable} package.%
   \label{tab:alphabet:longtable}}\\
-  \begin{longtable}{rcl}
   \toprule
   \multicolumn{1}{c}{Number} &
   \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Greek} &
   \multicolumn{1}{c}{Explanation}\\
   \midrule
 \endfirsthead
   \midrule
   \multicolumn{1}{c}{Number} &
   \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Greek} &
   \multicolumn{1}{c}{Explanation}\\
   \midrule
 \endhead
@@ -100,9 +104,9 @@ The relevant parts of \cref{tab:alphabet:longtable} are:
 \endfoot
   \bottomrule
 \endlastfoot
-    1 & a & The lowercase 1st letter in the alphabet\footnote{%
+    1 & a & & The lowercase 1st letter in the alphabet\footnote{%
     \enquote{a} deserves a footnote}\\
-    26 & Z & The uppercase 26th letter in the alphabet\\
+    26 & Z & & The uppercase 26th letter in the alphabet\\
 \end{longtable}
 \end{tcblisting}
 
@@ -110,12 +114,14 @@ The relevant parts of \cref{tab:alphabet:longtable} are:
 \tablefirsthead{\toprule
   \multicolumn{1}{c}{Number} &
   \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Greek} &
   \multicolumn{1}{c}{Explanation}\\
   \midrule
 }
 \tablehead{\midrule
   \multicolumn{1}{c}{Number} &
   \multicolumn{1}{c}{Letter} &
+  \multicolumn{1}{c}{Greek} &
   \multicolumn{1}{c}{Explanation}\\
   \midrule
 }
@@ -124,72 +130,74 @@ The relevant parts of \cref{tab:alphabet:longtable} are:
   \midrule
 }
 \tablelasttail{\bottomrule}
-\bottomcaption{The alphabet set using the \Package{xtab} package.}%
-\label{tab:alphabet:xtab}
+\topcaption{The alphabet set using the \Package{xtab} package.
+  Greek letters are included using math mode, 
+  e.g.\ \texttt{\textbackslash alpha}.}%
+\label{tab:alphabet:xtab2}
 \xentrystretch{-0.15}
 \begin{center}
-  \begin{mpxtabular}{rcl}
-   1 & a & The lowercase 1st letter in the alphabet\footnote{%
-    \enquote{a} deserves a footnote}\\
-   2 & b & The lowercase 2nd letter in the alphabet\\
-   3 & c & The lowercase 3rd letter in the alphabet\\
-   4 & d & The lowercase 4th letter in the alphabet\\
-   5 & e & The lowercase 5th letter in the alphabet\\
-   6 & f & The lowercase 6th letter in the alphabet\\
-   7 & g & The lowercase 7th letter in the alphabet\\
-   8 & h & The lowercase 8th letter in the alphabet\\
-   9 & i & The lowercase 9th letter in the alphabet\\
-  10 & j & The lowercase 10th letter in the alphabet\footnote{%
-    \enquote{j} deserves another footnote}\\
-  11 & k & The lowercase 11th letter in the alphabet\\
-  12 & l & The lowercase 12th letter in the alphabet\\
-  13 & m & The lowercase 13th letter in the alphabet\\
-  14 & n & The lowercase 14th letter in the alphabet\\
-  15 & o & The lowercase 15th letter in the alphabet\\
-  16 & p & The lowercase 16th letter in the alphabet\\
-  17 & q & The lowercase 17th letter in the alphabet\\
-  18 & r & The lowercase 18th letter in the alphabet\\
-  19 & s & The lowercase 19th letter in the alphabet\\
-  20 & t & The lowercase 20th letter in the alphabet\\
-  21 & u & The lowercase 21st letter in the alphabet\\
-  22 & v & The lowercase 22nd letter in the alphabet\\
-  23 & w & The lowercase 23rd letter in the alphabet\\
-  24 & x & The lowercase 24th letter in the alphabet\\
-  25 & y & The lowercase 25th letter in the alphabet\\
-  26 & z & The lowercase 26th letter in the alphabet\\
-   1 & A & The uppercase 1st letter in the alphabet\\
-   2 & B & The uppercase 2nd letter in the alphabet\\
-   3 & C & The uppercase 3rd letter in the alphabet\\
-   4 & D & The uppercase 4th letter in the alphabet\\
-   5 & E & The uppercase 5th letter in the alphabet\\
-   6 & F & The uppercase 6th letter in the alphabet\\
-   7 & G & The uppercase 7th letter in the alphabet\\
-   8 & H & The uppercase 8th letter in the alphabet\\
-   9 & I & The uppercase 9th letter in the alphabet\\
-  10 & J & The uppercase 10th letter in the alphabet\\
-  11 & K & The uppercase 11th letter in the alphabet\\
-  12 & L & The uppercase 12th letter in the alphabet\\
-  13 & M & The uppercase 13th letter in the alphabet\\
-  14 & N & The uppercase 14th letter in the alphabet\\
-  15 & O & The uppercase 15th letter in the alphabet\\
-  16 & P & The uppercase 16th letter in the alphabet\\
-  17 & Q & The uppercase 17th letter in the alphabet\\
-  18 & R & The uppercase 18th letter in the alphabet\\
-  19 & S & The uppercase 19th letter in the alphabet\\
-  20 & T & The uppercase 20th letter in the alphabet\\
-  21 & U & The uppercase 21st letter in the alphabet\\
-  22 & V & The uppercase 22nd letter in the alphabet\\
-  23 & W & The uppercase 23rd letter in the alphabet\\
-  24 & X & The uppercase 24th letter in the alphabet\\
-  25 & Y & The uppercase 25th letter in the alphabet\\
-  26 & Z & The uppercase 26th letter in the alphabet\\
+  \begin{mpxtabular}{rccl}
+   1 & a & \(\alpha\)   & The lowercase 1st letter in the alphabet\footnote{%
+                          \enquote{a} deserves a footnote}\\
+   2 & b & \(\beta\)    & The lowercase 2nd letter in the alphabet\\
+   3 & c & \(\gamma\)   & The lowercase 3rd letter in the alphabet\\
+   4 & d & \(\delta\)   & The lowercase 4th letter in the alphabet\\
+   5 & e & \(\epsilon\) & The lowercase 5th letter in the alphabet\\
+   6 & f & \(\zeta\)    & The lowercase 6th letter in the alphabet\\
+   7 & g & \(\eta\)     & The lowercase 7th letter in the alphabet\\
+   8 & h & \(\theta\)   & The lowercase 8th letter in the alphabet\\
+   9 & i & \(\iota\)    & The lowercase 9th letter in the alphabet\\
+  10 & j &              & The lowercase 10th letter in the alphabet\footnote{%
+                          \enquote{j} deserves another footnote}\\
+  11 & k & \(\kappa\)   & The lowercase 11th letter in the alphabet\\
+  12 & l & \(\lambda\)  & The lowercase 12th letter in the alphabet\\
+  13 & m & \(\mu\)      & The lowercase 13th letter in the alphabet\\
+  14 & n & \(\nu\)      & The lowercase 14th letter in the alphabet\\
+  15 & o & o            & The lowercase 15th letter in the alphabet\\
+  16 & p & \(\pi\)      & The lowercase 16th letter in the alphabet\\
+  17 & q &              & The lowercase 17th letter in the alphabet\\
+  18 & r & \(\rho\)     & The lowercase 18th letter in the alphabet\\
+  19 & s & \(\sigma\)   & The lowercase 19th letter in the alphabet\\
+  20 & t & \(\tau\)     & The lowercase 20th letter in the alphabet\\
+  21 & u & \(\upsilon\) & The lowercase 21st letter in the alphabet\\
+  22 & v & \(\phi\)     & The lowercase 22nd letter in the alphabet\\
+  23 & w & \(\xi\)      & The lowercase 23rd letter in the alphabet\\
+  24 & x & \(\chi\)     & The lowercase 24th letter in the alphabet\\
+  25 & y & \(\psi\)     & The lowercase 25th letter in the alphabet\\
+  26 & z & \(\omega\)   & The lowercase 26th letter in the alphabet\\
+   1 & A & A            & The uppercase 1st letter in the alphabet\\
+   2 & B & B            & The uppercase 2nd letter in the alphabet\\
+   3 & C & \(\Gamma\)   & The uppercase 3rd letter in the alphabet\\
+   4 & D & \(\Delta\)   & The uppercase 4th letter in the alphabet\\
+   5 & E & E            & The uppercase 5th letter in the alphabet\\
+   6 & F & Z            & The uppercase 6th letter in the alphabet\\
+   7 & G & H            & The uppercase 7th letter in the alphabet\\
+   8 & H & \(\Theta\)   & The uppercase 8th letter in the alphabet\\
+   9 & I & I            & The uppercase 9th letter in the alphabet\\
+  10 & J &              & The uppercase 10th letter in the alphabet\\
+  11 & K & K            & The uppercase 11th letter in the alphabet\\
+  12 & L & \(\Lambda\)  & The uppercase 12th letter in the alphabet\\
+  13 & M & M            & The uppercase 13th letter in the alphabet\\
+  14 & N & N            & The uppercase 14th letter in the alphabet\\
+  15 & O & O            & The uppercase 15th letter in the alphabet\\
+  16 & P & \(\Pi\)      & The uppercase 16th letter in the alphabet\\
+  17 & Q &              & The uppercase 17th letter in the alphabet\\
+  18 & R & P            & The uppercase 18th letter in the alphabet\\
+  19 & S & \(\Sigma\)   & The uppercase 19th letter in the alphabet\\
+  20 & T & T            & The uppercase 20th letter in the alphabet\\
+  21 & U & \(\Upsilon\) & The uppercase 21st letter in the alphabet\\
+  22 & V & \(\Phi\)     & The uppercase 22nd letter in the alphabet\\
+  23 & W & \(\Xi\)      & The uppercase 23rd letter in the alphabet\\
+  24 & X & X            & The uppercase 24th letter in the alphabet\\
+  25 & Y & \(\Psi\)     & The uppercase 25th letter in the alphabet\\
+  26 & Z & \(\Omega\)   & The uppercase 26th letter in the alphabet\\
   \end{mpxtabular}
 \end{center}
 
 \clearpage
-\begin{longtable}{rcl}
+\begin{longtable}{rccl}
   \caption{The alphabet set using the \Package{longtable} package.
-  \label{tab:alphabet:longtable}}\\
+  \label{tab:alphabet:longtable2}}\\
   \toprule
   \multicolumn{1}{c}{Number} &
   \multicolumn{1}{c}{Letter} &
@@ -209,8 +217,8 @@ The relevant parts of \cref{tab:alphabet:longtable} are:
   \bottomrule
   \caption{The alphabet set using the \Package{longtable} package.}
 \endlastfoot
-   1 & a & The lowercase 1st letter in the alphabet\footnote{%
-    \enquote{a} deserves a footnote}\\
+   1 & a &  The lowercase 1st letter in the alphabet\footnote{%
+               \enquote{a} deserves a footnote}\\
    2 & b & The lowercase 2nd letter in the alphabet\\
    3 & c & The lowercase 3rd letter in the alphabet\\
    4 & d & The lowercase 4th letter in the alphabet\\
@@ -220,7 +228,7 @@ The relevant parts of \cref{tab:alphabet:longtable} are:
    8 & h & The lowercase 8th letter in the alphabet\\
    9 & i & The lowercase 9th letter in the alphabet\\
   10 & j & The lowercase 10th letter in the alphabet\footnote{%
-    \enquote{j} deserves another footnote}\\
+               \enquote{j} deserves another footnote}\\
   11 & k & The lowercase 11th letter in the alphabet\\
   12 & l & The lowercase 12th letter in the alphabet\\
   13 & m & The lowercase 13th letter in the alphabet\\
@@ -264,61 +272,3 @@ The relevant parts of \cref{tab:alphabet:longtable} are:
   25 & Y & The uppercase 25th letter in the alphabet\\
   26 & Z & The uppercase 26th letter in the alphabet\\
 \end{longtable}
-
-% The following chapter needs some tweaks for XeLaTeX
-%==============================================================================
-\ifXeTeX
-\chapter{A famous equation is \texorpdfstring{$\symbfit{E = mc^{2}}$}{E = mc^2}}%
-\label{sec:emc2}\index{math!bold}
-\else
-\chapter{A famous equation is \texorpdfstring{$E = mc^{2}$}{E = mc2}}%
-\label{sec:emc2}\index{math!bold}
-\fi
-%==============================================================================
-
-\LaTeX{} file: \url{./guide_appendix.tex}\\[1ex]
-\noindent
-This chapter was included to check that one gets bold mathematics in
-a chapter/section title, but not in the table of contents.
-
-When using pdf\LaTeX, no special handling of titles should be necessary.
-This is because the following line was added:
-\begin{verbatim}
-  \def\bfseries{\fontseries\bfdefault\selectfont\boldmath}
-\end{verbatim}
-%No optional title for a chapter is needed as the chapter title is typeset in bold
-%font also in the table of contents.
-
-This tweak does not work with \XeLaTeX{} and \LuaLaTeX,
-so a short title may also be needed to cope with bold mathematics.
-
-%------------------------------------------------------------------------------
-\ifXeTeX
-\section{A slightly less famous equation \texorpdfstring{$\symbfit{F = m a}$}{F = ma}}%
-\label{sec:fma}
-\else
-\section{A slightly less famous equation \texorpdfstring{$F = m a$}{F = ma}}%
-\label{sec:fma}
-\fi
-%------------------------------------------------------------------------------
-
-The title here does not include \Macro{boldmath}, as the bold font series turns on bold math by default.
-Note that the
-section in the table of contents is typeset in a normal font when
-writing a book or report.
-
-
-%------------------------------------------------------------------------------
-\ifthenelse{\boolean{XeTeX} \OR \boolean{LuaTeX}}{%
-\section[Cross-section given by \texorpdfstring{$\symbf{sigma = N /}\symcal{L}}{sigma = N / L}$]%
-        {The cross-section is given by \texorpdfstring{$\symbf{\sigma = N /}\symbfcal{L}$}{sigma = N / L}}%
-\label{sec:sig}
-}{%
-\section[Cross-section given by \texorpdfstring{$\sigma = N / \mathcal{L}$}{sigma = N / L}]%
-        {The cross-section is given by \texorpdfstring{$\sigma = N / \mathcal{L}$}{sigma = N / L}}%
-\label{sec:sig}
-}
-%------------------------------------------------------------------------------
-
-This attempt includes a Greek and a calligraphic letter to make sure they work as well.
-It also includes the section title as a short form and a regular form.

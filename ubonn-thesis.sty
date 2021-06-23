@@ -142,13 +142,6 @@
 % Some hacks to get rid of KOMA-Script warnings.
 \RequirePackage{scrhack}
 
-% showframe package is useful to check positioning of things.
-% Set a non-zero \overfillrule at the same time.
-\ifthenelse{\boolean{UBN@showframe}}{
-  \usepackage{showframe}
-  \overfullrule=1mm
-}{}
-
 % Font control for pdfLaTeX. Only one font package at a time!
 \ifthenelse{\boolean{PDFTeX}}{%
   \ifthenelse{\boolean{UBN@txfonts}}{%
@@ -290,6 +283,8 @@
   \KOMAoptions{twoside=true}
   \typeout{ubonn_thesis: apply BCOR correction of 5mm.}
   \KOMAoptions{BCOR=5mm}
+  \typeout{ubonn-thesis: centre cover/title page.}
+  \KOMAoptions{titlepage=firstiscover}
 }{%
   \typeout{ubonn-thesis: set twoside option false.}
   \KOMAoptions{twoside=false}
@@ -567,6 +562,13 @@
     \newcommand{\mynote}[3][]{\todo[#1]{#2}\xspace}
   }
 }
+
+% showframe package is useful to check positioning of things.
+% Set a non-zero \overfillrule at the same time.
+\ifthenelse{\boolean{UBN@showframe}}{
+  \usepackage{showframe}
+  \overfullrule=1mm
+}{}
 
 %-------------------------------------------------------------------------------
 % Use biblatex and biber for the bibliography

@@ -13,11 +13,13 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 ### Added
 
 - Add option `twoside` to be used for printed and PDF versions of theses.
+- Set option `titlepage=firstiscover` to centre title page even if `twoside=true`.
 - Add options for the `diffcoeff` and `derivative` packages.
 - Add `scrhack` package to get rid of some KOMA-Script warnings.
 - Add some discussion on "fluff".
 - More information about LuaLaTeX and XeLaTeX added.
 - Add some instructions for Fedora 33.
+- Add option `showframe` for debugging layout issues.
 
 ### Changed
 

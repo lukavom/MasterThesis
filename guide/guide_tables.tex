@@ -716,7 +716,7 @@ we define two new column types \enquote{H} and \enquote{E}:
 \begin{tcblisting}{listing only}
 \newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
 \newcolumntype{E}{>{\setbox0=\hbox\bgroup\let\pm\relax}c<{\egroup}@{}}
-\end{tcblisting}{listing only}
+\end{tcblisting}
 
 The \enquote{E} variant is for columns that include \Macro{pm}.
 This idea can also be extended to other content if necessary.

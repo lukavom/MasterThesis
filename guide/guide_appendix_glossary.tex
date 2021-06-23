@@ -6,7 +6,7 @@
 \label{sec:app:glossary}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide_appendix_glossary.tex}\\[1ex]
+\LaTeX\ file: \url{run:./guide_appendix_glossary.tex}{guide\_appendix\_glossary.tex}\\[1ex]
 \noindent
 What is the difference between a glossary and a list of acronyms? They
 are in fact very similar. A list of acronyms is probably most
@@ -52,8 +52,7 @@ process the glossary, you need to run the command
 \texttt{makeglossaries filename}. This is included in the
 \texttt{Makefile} for the commands \texttt{make guide}
 and should be added to \texttt{make thesis}
-and/or \texttt{make thesis09} if you want to make a glossary for your
-thesis.
+if you want to make a glossary for your thesis.
 
 If you use the package \Package{xtab} for long tables,
 then you should include \Package{glossaries} with the option \Option{nosuper}
@@ -64,7 +63,7 @@ If you have a glossary and want it to compile it using \Command{latexmk}\index{l
 you should add the following
 lines to \File{\textasciitilde/.latexmkrc} or to \File{\textasciitilde/.config/latexmk/latexmkrc}:\footnote{%
 I got this information from \url{https://tex.stackexchange.com/questions/1226/how-to-make-latexmk-use-makeglossaries}}
-\begin{verbatim}
+\begin{bashlisting}
 add_cus_dep( 'acn', 'acr', 0, 'makeglossaries' );
 add_cus_dep( 'glo', 'gls', 0, 'makeglossaries' );
 $clean_ext .= " acr acn alg glo gls glg";
@@ -75,7 +74,8 @@ sub makeglossaries {
   popd;
   return $return;
 }
-\end{verbatim}
+\end{bashlisting}
+\noindent This code can be found in the file \File{latexmk/latexmkrc}.
 
 I illustrate the use with the standard description of the ZEUS
 detector, which includes the abbreviations that are used in the rest
@@ -94,12 +94,13 @@ printed. Every time after that only the abbreviation is printed.
 \section{ZEUS detector description}%
 \label{sec:app:glossary:zeus}
 
+\begin{tcblisting}{}
 In the kinematic range of the analysis, charged particles were tracked
-in the \gls{CTD} and the
-\gls{MVD}. These components operated in a magnetic
-field of \SI{1.43}{\tesla} provided by a thin superconducting solenoid. The
-\gls{CTD} consisted of 72~cylindrical drift-chamber layers, organised in nine
-superlayers covering the polar-angle region
+in the \gls{CTD} and the \gls{MVD}.
+These components operated in a magnetic field of \SI{1.43}{\tesla}
+provided by a thin superconducting solenoid.
+The \gls{CTD} consisted of 72~cylindrical drift-chamber layers,
+organised in nine superlayers covering the polar-angle region
 $\ang{15} < \theta < \ang{164}$.
 %
 The \gls{MVD} consisted of a barrel (BMVD) and a forward (FMVD)
@@ -109,12 +110,15 @@ extended the polar-angle coverage in the forward region to
 \ang{7}. After alignment, the single-hit resolution of the MVD was
 \SI{24}{\micro\metre}. The \gls{DCA} of tracks to the nominal vertex in
 $X$--$Y$ was measured to have a resolution, averaged over the
-azimuthal angle, of $(46 \oplus 122 /
-  p_{T})\,\si{\micro\metre}$, with $p_{T}$ in \si{\GeV}.  For \gls{CTD}-\gls{MVD} tracks
+azimuthal angle, of $(46 \oplus 122 / p_{T})\,\si{\micro\metre}$,
+with $p_{T}$ in \si{\GeV}.
+For \gls{CTD}-\gls{MVD} tracks
 that pass through all nine \gls{CTD} superlayers, the momentum
 resolution was $\sigma(p_{T})/p_{T} = 0.0029 p_{T} \oplus 0.0081
 \oplus 0.0012/p_{T}$, with $p_{T}$ in \si{\GeV}.
+\end{tcblisting}
 
+\begin{tcblisting}{}
 The high-resolution \gls{CAL} consisted of three parts: the forward
 (FCAL), the barrel (BCAL) and the rear (RCAL) calorimeters. Each part
 was subdivided transversely into towers and longitudinally into one
@@ -123,12 +127,11 @@ and FCAL) hadronic sections (HAC). The smallest subdivision of the
 calorimeter was called a cell.  The \gls{CAL} energy resolutions, as
 measured under test-beam conditions, were $\sigma(E)/E=0.18/\sqrt{E}$
 for electrons and $\sigma(E)/E=0.35/\sqrt{E}$ for hadrons, with $E$ in
-\si{\GeV}.  \clearpage
+\si{\GeV}. 
 
-We start a new page so that you can see how the cross-referencing
-works.  ZEUS had quite a large assortment of tracking detectors. In the
+ZEUS had quite a large assortment of tracking detectors. In the
 forward direction there was the \gls{FTD} and the \gls{TRD}. The
 \gls{TRD} was replaced by the \gls{STT} for the HERA~2 running
 period.  In the middle of the detector, the \gls{CTD} was always
 there, while the \gls{MVD} was also installed later.
-
+\end{tcblisting}

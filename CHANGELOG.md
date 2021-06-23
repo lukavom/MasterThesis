@@ -19,6 +19,7 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 - Add some discussion on "fluff".
 - More information about LuaLaTeX and XeLaTeX added.
 - Add some instructions for Fedora 33.
+- Add option `coveroffset` to change offset of library cover page.
 - Add option `showframe` for debugging layout issues.
 
 ### Changed

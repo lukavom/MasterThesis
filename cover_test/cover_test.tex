@@ -1,14 +1,17 @@
-\documentclass[a4paper,twoside,ngerman,UKenglish]{scrbook}
+\documentclass[Master, ngerman, UKenglish]{scrbook}
 %------------------------------------------------------------------------------
 % Wrapper for testing cover pages for theses for the
 % physics and astronomy institutes in the University of Bonn
+% Directory with style files
+%------------------------------------------------------------------------------
+
+\makeatletter
+\def\input@path{{../}}
+\makeatother
 
 %------------------------------------------------------------------------------
-% Set \texlive before \usepackage{ubonn-thesis}
-\newcommand*{\texlive}{2017}
-
-\usepackage[backref=false]{../ubonn-thesis}
-\usepackage{../ubonn-biblatex}
+\usepackage[twoside=true, backref=false, texlive=2017]{ubonn-thesis}
+\usepackage{ubonn-biblatex}
 \usepackage{../thesis_skel/thesis_defs}
 
 %------------------------------------------------------------------------------

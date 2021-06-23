@@ -1,5 +1,10 @@
 % chktex-file 1
 
+% Directory with style files
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+
 \documentclass[ngerman, USenglish, UKenglish]{scrbook}
 %-------------------------------------------------------------------------------
 % This file contains the guide to writing theses for the
@@ -9,16 +14,11 @@
 % If you need more than one language, give the default language last,
 % e.g. ngerman, UKenglish for a thesis in British (UK) English where you want
 % to be able to set the language to German for some part of it.
-
 %-------------------------------------------------------------------------------
+
 % Main thesis style file
 \newcommand*{\guideversion}{8.0}
 \newcommand*{\texlive}{2020}
-
-% Directory with style files
-\makeatletter
-\def\input@path{{../}}
-\makeatother
 
 \usepackage{ifthen}
 

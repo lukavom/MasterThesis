@@ -6,7 +6,7 @@
 \label{sec:app:old}
 %==============================================================================
 
-\LaTeX\ file: \url{./guide_appendix_obsolete.tex}\\[1ex]
+\LaTeX\ file: \href{run:./guide_appendix_obsolete.tex}{guide\_appendix\_obsolete.tex}\\[1ex]
 \noindent
 With time things change! Some of the instruction or packages that I
 recommended at an earlier time are superseded. Operating systems and
@@ -272,83 +272,83 @@ results! It is also not compatible with \Package{mcite}.
 A modified version \Package{mcite} is used by ZEUS in its LaTeX4ZEUS
 environment, which is why I include a short description here.
 
-%------------------------------------------------------------------------------
-\section{Windows}%
-\label{sec:app:old:windows}
-%------------------------------------------------------------------------------
+% %------------------------------------------------------------------------------
+% \section{Windows}%
+% \label{sec:app:old:windows}
+% %------------------------------------------------------------------------------
 
 %------------------------------------------------------------------------------
-\subsection{Windows XP}
+% \subsection{Windows XP}
 
-As I no longer have access to a Windows XP machine, and Windows XP is
-slowly disappearing, my experience with Windows XP stopped 2011.
+% As I no longer have access to a Windows XP machine, and Windows XP is
+% slowly disappearing, my experience with Windows XP stopped 2011.
 
-I started the \TeX{} Collection 2010 DVD\@. I started it as an
-Administrator, it opened a \TeX\ Collection window and I then clicked
-on proTeXt Quick Install and installed MiK\TeX{} (minimal
-version),\index{MiKTeX}\index{TeXnic Center} \TeXnicCenter,
-Ghostscript and Ghostview for all users. Once the installation was
-finished, I also updated all the packages using the MiK\TeX{}
-Maintenance (Admin) $\to$ Update (Admin) program. Be patient --- these
-updates always take a while!
+% I started the \TeX{} Collection 2010 DVD\@. I started it as an
+% Administrator, it opened a \TeX\ Collection window and I then clicked
+% on proTeXt Quick Install and installed MiK\TeX{} (minimal
+% version),\index{MiKTeX}\index{TeXnic Center} \TeXnicCenter,
+% Ghostscript and Ghostview for all users. Once the installation was
+% finished, I also updated all the packages using the MiK\TeX{}
+% Maintenance (Admin) $\to$ Update (Admin) program. Be patient --- these
+% updates always take a while!
 
-You should then be able to double-click on \texttt{mythesis.tex} and
-try to compile it! My first attempt at this failed. I had set
-MiK\TeX{} to install missing packages, but it was supposed to ask me
-first. This seems to work well if you are logged in as the same user
-(with Administration rights) as the one who installed MiK\TeX. The
-package updating does not seem to work properly (it only asks you for
-the first missing package I think) if you are a normal user. After
-going through the exercise once as an Administrator to compile the
-skeleton thesis, I could also compile both the thesis and the guide as
-a normal user.
+% You should then be able to double-click on \texttt{mythesis.tex} and
+% try to compile it! My first attempt at this failed. I had set
+% MiK\TeX{} to install missing packages, but it was supposed to ask me
+% first. This seems to work well if you are logged in as the same user
+% (with Administration rights) as the one who installed MiK\TeX. The
+% package updating does not seem to work properly (it only asks you for
+% the first missing package I think) if you are a normal user. After
+% going through the exercise once as an Administrator to compile the
+% skeleton thesis, I could also compile both the thesis and the guide as
+% a normal user.
 
-The second attempt was a complete MiK\TeX{} installation. I told it to
-install missing packages without asking. This also failed at the first
-attempt as it was missing the package \Package{logreq} and somehow did
-not install it automatically. I had to use the MiK\TeX{} Maintenance
-(Admin) $\to$ Package Manager (Admin) to install \Package{logreq}.
+% The second attempt was a complete MiK\TeX{} installation. I told it to
+% install missing packages without asking. This also failed at the first
+% attempt as it was missing the package \Package{logreq} and somehow did
+% not install it automatically. I had to use the MiK\TeX{} Maintenance
+% (Admin) $\to$ Package Manager (Admin) to install \Package{logreq}.
 
 
-%------------------------------------------------------------------------------
-\subsection{\TeXnicCenter}%
-\label{sec:app:texnic}\index{TeXnic Center}
+% %------------------------------------------------------------------------------
+% \subsection{\TeXnicCenter}%
+% \label{sec:app:texnic}\index{TeXnic Center}
 
-I tried out the \TeXnicCenter, which is also available. You first
-have to tell it where to find the \LaTeX\ executables. In my case
-this is \texttt{C:\textbackslash Program Files\textbackslash MiKTeX
-  2.8\textbackslash mktex\textbackslash bin}. You also have to tell
-the program where to find Acrobat (Reader) although it should find it
-automatically.
+% I tried out the \TeXnicCenter, which is also available. You first
+% have to tell it where to find the \LaTeX\ executables. In my case
+% this is \texttt{C:\textbackslash Program Files\textbackslash MiKTeX
+%   2.8\textbackslash mktex\textbackslash bin}. You also have to tell
+% the program where to find Acrobat (Reader) although it should find it
+% automatically.
 
-In the \TeXnicCenter I opened one of the main files, i.e.\
-\texttt{mythesis.tex} or \texttt{thesis\_guide.tex} and then in the
-\texttt{Project} menu I declared this file to be the main file for a
-new project. You should declare the file format to be Unix. You can
-then compile the project and look at the output by hitting
-\texttt{Ctrl + F5}. It is also possible to set some options such that
-you do not have to close the file in Acrobat Reader before compiling.
+% In the \TeXnicCenter I opened one of the main files, i.e.\
+% \texttt{mythesis.tex} or \texttt{thesis\_guide.tex} and then in the
+% \texttt{Project} menu I declared this file to be the main file for a
+% new project. You should declare the file format to be Unix. You can
+% then compile the project and look at the output by hitting
+% \texttt{Ctrl + F5}. It is also possible to set some options such that
+% you do not have to close the file in Acrobat Reader before compiling.
 
-There is a small problem and irritation with \TeXnicCenter and
-Acrobat Reader X. Under \texttt{Build} $\to$ \texttt{Define Output
-  Profiles} $\to$ \texttt{Viewer} you have to change \texttt{acroview} to
-\texttt{acroviewR10} in the three places where it is given. If you
-then try to compile Adobe Reader opens but you get an error
-message. Just view the output again \texttt{F5} and the PDF file will
-be shown. Via Google, I found some tricks that are supposed to fix
-this problem, but they did not work for me. You can also just start
-Adobe Reader first and then \TeXnicCenter.
+% There is a small problem and irritation with \TeXnicCenter and
+% Acrobat Reader X. Under \texttt{Build} $\to$ \texttt{Define Output
+%   Profiles} $\to$ \texttt{Viewer} you have to change \texttt{acroview} to
+% \texttt{acroviewR10} in the three places where it is given. If you
+% then try to compile Adobe Reader opens but you get an error
+% message. Just view the output again \texttt{F5} and the PDF file will
+% be shown. Via Google, I found some tricks that are supposed to fix
+% this problem, but they did not work for me. You can also just start
+% Adobe Reader first and then \TeXnicCenter.
 
-In general, I thought I liked the \TeXnicCenter somewhat more than
-\TeXworks, which is the direct MiK\TeX{} interface. It allows you to
-set up projects and you then have the ability to navigate easily
-through all your files via the Navigator. However, it has a serious
-problem in that it does not handle UTF-8 files properly. Although
-support for UTF-8 has been advertised for almost two years I do not
-see much signs of progress.
+% In general, I thought I liked the \TeXnicCenter somewhat more than
+% \TeXworks, which is the direct MiK\TeX{} interface. It allows you to
+% set up projects and you then have the ability to navigate easily
+% through all your files via the Navigator. However, it has a serious
+% problem in that it does not handle UTF-8 files properly. Although
+% support for UTF-8 has been advertised for almost two years I do not
+% see much signs of progress.
 
-As \TeXnicCenter has been dropped on the Dante \TeX\ Collection 2011
-DVD I have relegated this information to a subsection.
+% As \TeXnicCenter has been dropped on the Dante \TeX\ Collection 2011
+% DVD I have relegated this information to a subsection.
 
 
 %==============================================================================

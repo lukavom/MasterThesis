@@ -1,0 +1,97 @@
+
+% !TeX root = thesis_guide.tex
+% chktex-file 1 chktex-file 46
+
+%==============================================================================
+% Bold math in section headings etc. with pdfLaTeX, LuaLaTeX and XeLaTeX.
+%==============================================================================
+\ifthenelse{\boolean{LuaTeX} \OR \boolean{XeTeX}}{%
+  \chapter{A famous equation is \texorpdfstring{$\symbfit{E = mc^{2}}$}{E = mc^2}}%
+}{%
+  \chapter{A famous equation is \texorpdfstring{$E = mc^{2}$}{E = mc2}}%
+}
+\label{sec:emc2}\index{math!bold}
+%==============================================================================
+
+\LaTeX\ file: \href{run:./guide_appendix.tex}{guide\_appendix.tex}\\[1ex]
+\noindent
+This chapter was included to show how one can get bold mathematics in
+a chapter/section title, but not in the table of contents.
+The code used in this chapter heading when running \LuaLaTeX\ of \XeLaTeX\ is:
+\begin{tcblisting}{listing only}
+\chapter{A famous equation is \texorpdfstring{$\symbfit{E = mc^{2}}$}{E = mc^2}}%
+\end{tcblisting}
+The code used in this chapter heading when running pdf\LaTeX\ is:
+\begin{tcblisting}{listing only}
+\chapter{A famous equation is \texorpdfstring{$E = mc^{2}$}{E = mc2}}%
+\end{tcblisting}
+
+When using pdf\LaTeX, no special handling of titles should be necessary.
+This is because the following line is included in \File{ubonn-thesis.sty}:
+\begin{tcblisting}{listing only}
+\def\bfseries{\fontseries\bfdefault\selectfont\boldmath}
+\end{tcblisting}
+
+No optional title for a chapter is needed as the chapter title is typeset in bold
+face in the table of contents.
+
+The macro \Macro{texorpdfstring} is used to avoid \Package{hyperref} warnings of the type:
+\begin{tcblisting}{bashlist}
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 12.  
+\end{tcblisting}
+
+%------------------------------------------------------------------------------
+\ifthenelse{\boolean{LuaTeX} \OR \boolean{XeTeX}}{%
+  \section{A slightly less famous equation \texorpdfstring{$\symbfit{F = m a}$}{F = ma}}%
+}{%
+  \section{A slightly less famous equation \texorpdfstring{$F = m a$}{F = ma}}%
+}
+\label{sec:fma}
+%------------------------------------------------------------------------------
+
+The code used in this section heading when running \LuaLaTeX\ of \XeLaTeX\ is:
+\begin{tcblisting}{listing only}
+\section{A slightly less famous equation \texorpdfstring{$\symbfit{F = m a}$}{F = ma}}%
+\end{tcblisting}
+The code used in this section heading when running pdf\LaTeX\ is:
+\begin{tcblisting}{listing only}
+\section{A slightly less famous equation \texorpdfstring{$F = m a$}{F = ma}}%
+\end{tcblisting}
+
+The title here does not include \Macro{boldmath},
+as the bold font series turns on bold math by default for pdf\LaTeX.
+For \LuaLaTeX\ and \XeLaTeX \Macro{symbfit} is used to get bold face.
+However, a section title is typeset in a normal font when
+writing a book or report in the table of contents.
+This is handled correctly by pdf\LaTeX.
+When using \LuaLaTeX\ or \XeLaTeX\ the title is the table of contents is boldface,
+which is not what we want.
+
+
+%------------------------------------------------------------------------------
+\ifthenelse{\boolean{XeTeX} \OR \boolean{LuaTeX}}{%
+  \section[Cross-section given by \texorpdfstring{$\sigma = N / \symcal{L}}{sigma = N / L}$]%
+    {Cross-section is given by \texorpdfstring{$\symbf{\sigma = N /}\symbfcal{L}$}{sigma = N / L}}%
+\label{sec:sig}
+}{%
+  \section[Cross-section given by \texorpdfstring{$\sigma = N / \mathcal{L}$}{sigma = N / L}]%
+    {Cross-section is given by \texorpdfstring{$\sigma = N / \mathcal{L}$}{sigma = N / L}}%
+\label{sec:sig}
+}
+%------------------------------------------------------------------------------
+
+The code used in this section heading when running \LuaLaTeX\ of \XeLaTeX\ is:
+\begin{tcblisting}{listing only}
+\section[Cross-section given by \texorpdfstring{$\sigma = N / \symcal{L}}{sigma = N / L}$]%
+  {Cross-section is given by \texorpdfstring{$\symbf{\sigma = N /}\symbfcal{L}$}{sigma = N / L}}%
+\end{tcblisting}
+The code used in this section heading when running pdf\LaTeX\ is:
+\begin{tcblisting}{listing only}
+\section[Cross-section given by \texorpdfstring{$\sigma = N / \mathcal{L}$}{sigma = N / L}]%
+  {Cross-section is given by \texorpdfstring{$\sigma = N / \mathcal{L}$}{sigma = N / L}}%
+\end{tcblisting}
+
+\noindent This attempt includes a Greek and a calligraphic letter to make sure they work as well.
+It includes the section title as a short form and a regular form,
+as this is necessary when running \LuaLaTeX\ of \XeLaTeX.

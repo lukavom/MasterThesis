@@ -6,23 +6,18 @@
 \label{sec:app:tex}
 %==============================================================================
 
-\LaTeX{} file: \url{./guide_appendix_texsetup.tex}\\[1ex]
+\LaTeX\ file: \href{run:./guide_appendix_texsetup.tex}{guide\_appendix\_texsetup.tex}\\[1ex]
 \noindent
-If you have an older \LaTeX{} installation (with a \KOMAScript{}
-version less than 3.0) you will probably have to make a few changes to
-the style file and your main thesis file.
-In particular the \Macro{KOMAoptions} macro does not exist. In this case, you
-have to put the options into the document class options. Also some of
-the names have changed. Consult the \KOMAScript{} manual for more
-information.
-
-Other packages that I recommend and that are subject to rapid
-development still are \Package{biblatex} and
-\Package{siunitx}. If you want to fully exploit their capabilities,
+Some packages that I recommend,
+and that are still subject to active development,
+are \Package{biblatex} and \Package{siunitx}.
+\Package{TikZ-Feynhand}, \Package{diffcoef} and \Package{derivative}
+are new and very interesting packages.
+If you want to fully exploit their capabilities,
 you should make sure you \LaTeX{} installation is as recent as
-possible --- I recommend at least \TeXLive 2016 and preferably later.
+possible --- I recommend at least \TeXLive 2017 and preferably later.
 
-As I mentioned in the introduction, the institute is a member of Dante
+The institute is a member of Dante
 and I therefore receive a copy of the \TeX\ Collection DVD every year.
 You can also download the installation you need from the \TeX\
 Users (TUG) group web page: \url{http://www.tug.org/texcollection}.
@@ -33,7 +28,7 @@ Users (TUG) group web page: \url{http://www.tug.org/texcollection}.
 \label{sec:app:compile}
 %------------------------------------------------------------------------------
 
-As already mentioned in \cref{sec:tips:do}, I highly recommend
+As mentioned in \cref{sec:tips:do}, I highly recommend
 that you use an integrated environment for editing and compiling your
 thesis. All such tools allow you to define projects, which then know
 about which files should be included when compiling.
@@ -41,15 +36,16 @@ about which files should be included when compiling.
 \TeXstudio\index{TeXstudio} and
 \TeXmaker\index{TeXmaker} can be installed under Windows, macOS or
 Linux. I have tried \TeXstudio in all three systems and it works nicely. It
-can be downloaded from \url{http://texstudio.sourceforge.net/}. Others
-report good experience with \TeXmaker (under Ubuntu).
+can be downloaded from \url{http://texstudio.sourceforge.net/}.
+Others report good experience with \TeXmaker (under Ubuntu).
 It is available as an Ubuntu package or from
 \url{http://www.xm1math.net/texmaker}.
 \TeXmaker and \TeXstudio (\TeX makerX) split in 2009, so both packages
 contain a lot of similarities.
 Visual Studio Code\index{Visual Studio Code}\footnote{%
 \url{https://code.visualstudio.com}}
-has a very nice extension for \LaTeX\ documents.
+is a fast and powerful editor with a very nice extension for \LaTeX\ documents.
+It is also available for Windows, macOS and Linux.
 Kile\index{kile} is quite popular, especially if you use the KDE
 desktop environment. 
 
@@ -199,7 +195,7 @@ latexmk
 texlive-lang-german
 feynmf
 \end{bashlisting}
-I also had to install \texttt{texlive-metapost} and \texttt{tracklang} in order to compile the guide.
+\noindent I also had to install \texttt{texlive-metapost} and \texttt{tracklang} in order to compile the guide.
 % The guide also needs \texttt{texlive-generic-extra}, at least for \TeXLive 2015.
 If you want to use the \Package{IEEEtrantools} you have to install \texttt{texlive-publishers},
 or the package \Package{IEEEtran}.
@@ -249,7 +245,7 @@ texlive-babel-german
 texlive-hyphens-german
 \end{bashlisting}
 
-These are sufficient to compile the skeleton thesis.
+\noindent These are sufficient to compile the skeleton thesis.
 For the thesis guide I needed in addition:
 \begin{bashlisting}
 texlive-standalone
@@ -263,12 +259,12 @@ texlive-glossaries
 texlive-import
 texlive-bigfoot # needed for suffix
 \end{bashlisting}
-You will probably need at least some of these packages for your thesis.
+\noindent You will probably need at least some of these packages for your thesis.
 
 \LuaLaTeX\ and \XeLaTeX\ were either installed by default,
 or with one of the other packages.
 
-For the tests that I conducted with a new installation on 2002-10-21,
+For the tests that I conducted with a new installation on 2020-10-21,
 I got an error when trying to use the \Package{newtx} fonts.
 After some searching, I was able to fix it using the commands:
 \Command{sudo updmap --sys --syncwithtrees} and \Command{sudo updmap --sys}.
@@ -299,7 +295,7 @@ sudo ./install-tl -gui perltk
   Make sure installation is in /usr/local/texlive
   Install
 \end{bashlisting}
-I installed the scheme \Option{scheme-tetex} and added the
+\noindent I installed the scheme \Option{scheme-tetex} and added the
 collections: \Option{BibTeX additional styles}, \Option{Additional fonts} and
 \Option{LaTeX additional packages}.
 If you want to use the package \Package{TikZ-Feynman} you probably need to include \Option{LuaTeX packages}.
@@ -311,7 +307,7 @@ echo 'export PATH=/opt/texbin:${PATH}' > texlive.sh
 sudo cp texlive.sh /etc/profile.d/
 sudo ln -s /usr/local/texlive/2020/bin/x86_64-linux /opt/texbin
 \end{bashlisting}
-You probably have to login again to activate the new \texttt{PATH}.
+\noindent You probably have to login again to activate the new \texttt{PATH}.
 Check whether it is correct with
 \begin{bashlisting}
   echo $PATH
@@ -326,28 +322,7 @@ and that \LaTeX\ is then taken from there rather than the usual
 On my test Ubuntu installation, 
 I installed a very basic \TeXLive installation when setting up the system
 and then added several different \TeXLive installations using this method.
-This works very well, except that \XeLaTeX could not find the TeX Gyre fonts.
-After installing a more complete set of packages (see \cref{sec:app:kubuntu})
-the problem was fixed.
-If you see such problems,
-you can try to replace 
-\begin{tcblisting}{listing only}
-\setmainfont{TeX Gyre Termes}
-\setmathfont{TeX Gyre Termes Math}
-\setmathfont[version=bold]{TeX Gyre Termes Math}
-\end{tcblisting}
-\noindent with
-\begin{tcblisting}{listing only}
-\setmainfont{texgyretermes-regular.otf}
-\setmathfont{texgyretermes-regular.otf}
-\setmathfont[version=bold]{texgyretermes-regular.otf}
-\end{tcblisting}
-\noindent in \File{ubonn-thesis.sty}.
-
-% With Kubuntu 13.04, I had to install \texttt{texdoc} in addition in
-% order to be able to use it to access the documentation with
-% it.\footnote{This was not necessary for earlier (K)Ubuntu versions. % chktex 36
-%   I found it a bit strange, but it seems to be needed.}
+This works very well.
 
 For updating, additions of packages etc., it is useful to define an
 alias in your \File{.bashrc} or \File{.bash\_aliases}:
@@ -360,19 +335,12 @@ function sutlmgr () {
     fi
 }
 \end{bashlisting}
-You then give the command \texttt{sutlmgr} to start the \TeXLive
+\noindent You then give the command \texttt{sutlmgr} to start the \TeXLive
 manager interface. You can use this interface to install new packages
 as well as to update the ones you have installed.
 If you want to update things, you should first click on \enquote{Load default} to
 load a repository and then you can do things such as
 \enquote{Update all installed}.
-
-% If you are using Ubuntu 11.10, you may well get an error:
-% \enquote{\texttt{sh: gnome-open: not found}} when you try to give a
-% \texttt{texdoc} command. I fixed this by making a
-% link from \texttt{/usr/local/bin/gnome-open} to
-% \texttt{/usr/bin/xdg-open}.
-
 
 %------------------------------------------------------------------------------
 \section{Windows}%
@@ -402,7 +370,7 @@ the mouse and enter\\
 \texttt{https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git}
 as the URL\@.
 If you do this you can stay at the cutting edge!
-If you want a particular version then specify the branch you want, e.g.\ \enquote{7.0}.
+If you want a particular version then specify the branch you want, e.g.\ \enquote{8.0}.
 You can of course simply download the appropriate tar file from the PI webpages.
 
 To set up your thesis, you have to do by hand what the
@@ -531,16 +499,16 @@ produce the guide (assuming that you have \TeXLive 2016 or later):
 \begin{bashlisting}
 git clone https://bitbucket.team.uni-bonn.de/scm/uni/ubonn-thesis.git
 cd ubonn-thesis
-cd guide
 \end{bashlisting}
 \noindent Set the \Macro{texlive} variable appropriately in \texttt{guide/thesis\_guide.tex}.
 \noindent Then the following worked:
 \begin{bashlisting}
+cd guide
 make guide|guidelua|guidexe
 \end{bashlisting}
-so all packages are there as well as at least the default font which I selected.
+\noindent so all packages are there as well as at least the default font which I selected.
 If your version of \TeXLive is older than 2020, you should set \Macro{texlive} accordingly.
-If your version is older than 2013 you should not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
+% If your version is older than 2013 you should not pass the option \texttt{newtx} to \Package{ubonn-thesis}.
 Some figures or tables may not appear with versions of \TeXLive earlier than 2017,
 as, for example, the \Package{TikZ-FeynHand} package was only introduced then.
 
@@ -566,7 +534,7 @@ the guide (or your thesis).
 
 In order to edit \LaTeX\ you need an editor such as
 \texttt{Visual Studio Code} or \texttt{emacs}, or
-a program such as , \TeXstudio or \TeXmaker or
+a program such as \TeXstudio or \TeXmaker or
 \texttt{kile} (and the associated \texttt{kile-doc}).
 These were discussed above.
 

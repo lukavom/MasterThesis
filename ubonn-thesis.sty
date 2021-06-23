@@ -77,6 +77,7 @@
 \DeclareBoolOption[true]{cleveref}
 \DeclareBoolOption[true]{clevercaps}
 \DeclareBoolOption[false]{firstinits}
+\DeclareBoolOption[false]{showframe}
 \DeclareStringOption{texlive}
 \DeclareStringOption[biber]{backend}
 \DeclareStringOption{bibencoding}
@@ -140,6 +141,13 @@
 
 % Some hacks to get rid of KOMA-Script warnings.
 \RequirePackage{scrhack}
+
+% showframe package is useful to check positioning of things.
+% Set a non-zero \overfillrule at the same time.
+\ifthenelse{\boolean{UBN@showframe}}{
+  \usepackage{showframe}
+  \overfullrule=1mm
+}{}
 
 % Font control for pdfLaTeX. Only one font package at a time!
 \ifthenelse{\boolean{PDFTeX}}{%

@@ -12,6 +12,8 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 
 ### Added
 
+- New command `\makethesistitle` for cover and title pages.
+  This hides the complicated steering that was in the thesis main file.
 - `cover` directory also copied to `mythesis`. Useful if importing everything into Overleaf.
 - Added some information about setting things up with Overleaf.
 - Add font name and filename commands for LuaLaTeX and XeLaTeX.
@@ -27,6 +29,7 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 
 ### Fixed
 
+- `titlelowerback` for declaration and "Gutachter" works in `twoside=false` mode.
 - Fixed bold math font for Palatino.
 
 ### Security

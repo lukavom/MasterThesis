@@ -87,6 +87,8 @@
 \newcommand*{\thesismonth}{MMM}
 \newcommand*{\thesisyear}{2021}
 \newcommand*{\thesisnumber}{BONN-IR-2021-XXX}
+% Dedication
+\newcommand*{\thesisdedication}{}
 
 %------------------------------------------------------------------------------
 % The abstract is only needed for the printed version and should be in
@@ -133,38 +135,8 @@
 %------------------------------------------------------------------------------
 \begin{document}
 
-% Cover page of thesis - this is only needed for the printed final
-% version to be submitted to the department library
-% Do not use this page for thesis submission to the Prüfungsamt or Promotionsbüro!
-\ifthenelse{\equal{\ThesisVersion}{PILibrary}}{%
-  \typeout{Document \jobname, Info: PI library version of thesis}
-  \input{cover/\ThesisType_Cover}
-}{}
-
-% Start counting pages from the title page
-\frontmatter
-% Dedication has to come before \maketitle
-% \dedication{For ...}
-
-% Select the correct title page(s)
-\ifthenelse{\equal{\ThesisType}{Unknown}}{%
-  \typeout{Document \jobname, Error: Unknown thesis type - no title page printed}
-}{%
-  % Bachelor thesis only has one title page
-  \ifthenelse{\equal{\ThesisType}{Bachelor}}{%
-    \typeout{Document \jobname, Info: Bachelor thesis}
-    \input{cover/\ThesisType_Title}
-  }{%
-    \ifthenelse{\equal{\ThesisVersion}{Final} \OR \equal{\ThesisVersion}{PILibrary}}{%
-      % Final and PI library versions
-      \typeout{Document \jobname, Info: Final version of a \ThesisType  thesis}
-      \input{cover/\ThesisType_Final_Title}
-    }{% Submission and draft versions
-      \input{cover/\ThesisType_Submit_Title}
-      \typeout{Document \jobname, Info: Draft/submission version of a \ThesisType  thesis}
-    }
-  }
-}
+% Make cover and title pages
+\makethesistitle
 
 \pagestyle{scrplain}
 

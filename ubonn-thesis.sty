@@ -49,6 +49,7 @@
 \DeclareBoolOption[true]{newtx}
 \DeclareBoolOption[false]{txfonts}
 \DeclareBoolOption[false]{palatino}
+\DeclareBoolOption[false]{fontname}
 \DeclareBoolOption[true]{subcaption}
 \DeclareBoolOption[false]{subfig}
 \DeclareBoolOption[false]{subfigure}
@@ -310,24 +311,21 @@
   \ifthenelse{\boolean{UBN@newtx}}{%
     \RequirePackage{newtxtext}
     \RequirePackage{newtxmath}
-  }{%
-    % Times-roman font
-    \ifthenelse{\boolean{UBN@txfonts}}{%
-      \RequirePackage[varg]{txfonts} % Used in ATLAS papers
-      \RequirePackage[T1]{fontenc}
-    }{%
-      % Palatino font
-      \ifthenelse{\boolean{UBN@palatino}}{%
-        % Palatino for rm and math | Helvetica for ss | Courier for tt
-        \RequirePackage{mathpazo} % math & rm
-        \linespread{1.05}         % Palatino needs more leading (space between lines)
-        \RequirePackage[scaled]{helvet} % ss
-        \RequirePackage{courier}  % tt
-        \normalfont
-        \RequirePackage[T1]{fontenc}
-      }{}
-    }
-  }
+  }{}
+  % Times-roman font
+  \ifthenelse{\boolean{UBN@txfonts}}{%
+    \RequirePackage[varg]{txfonts} % Used in ATLAS papers
+    \RequirePackage[T1]{fontenc}
+  }{}
+  % Palatino for rm and math | Helvetica for ss | Courier for tt
+  \ifthenelse{\boolean{UBN@palatino}}{%
+    \RequirePackage{mathpazo} % math & rm
+    \linespread{1.05}         % Palatino needs more leading (space between lines)
+    \RequirePackage[scaled]{helvet} % ss
+    \RequirePackage{courier}  % tt
+    \normalfont
+    \RequirePackage[T1]{fontenc}
+  }{}
   % Other font collections one can consider
   % \RequirePackage{lmodern}
   % Variations with times
@@ -482,26 +480,43 @@
 %------------------------------------------------------------------------------
 % Fonts with XeLaTeX or LuaLaTeX.
 % Preferred way (Will Robertson TUGboat, Volume 39 (2018), No. 2) is to use filename.
+% Using fontname availabloe as an option.
 \ifthenelse{\boolean{XeTeX} \OR \boolean{LuaTeX}}{%
   \RequirePackage[math-style=ISO, bold-style=ISO,
     warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
+  % Times roman (TeX Gutre Termes)
   \ifthenelse{\boolean{UBN@newtx} \OR \boolean{UBN@txfonts}}{%
-    \setmainfont{texgyretermes}[
-      Extension = .otf ,
-      UprightFont = *-regular ,
-      ItalicFont = *-italic ,
-      BoldFont = *-bold ,
-      BoldItalicFont = *-bolditalic ,
-    ]
-    \setmathfont{texgyretermes-math.otf}
-    \setmathfont[version=bold]{texgyretermes-math.otf}
-    % \setmainfont{TeX Gyre Termes}
-    % \setmathfont{TeX Gyre Termes Math}
-    % \setmathfont[version=bold]{TeX Gyre Termes Math}
+    \ifthenelse{\boolean{UBN@fontname}}{%
+      \typeout{ubonn-thesis: using font name to select font.}
+      \setmainfont{TeX Gyre Termes}
+      \setmathfont{TeX Gyre Termes Math}
+      \setmathfont[version=bold]{TeX Gyre Termes Math}
+    }{%
+      \typeout{ubonn-thesis: using filename to select font.}
+      \setmainfont{texgyretermes}[
+        Extension = .otf ,
+        UprightFont = *-regular ,
+        ItalicFont = *-italic ,
+        BoldFont = *-bold ,
+        BoldItalicFont = *-bolditalic ,
+      ]
+      \setmathfont{texgyretermes-math.otf}
+      \setmathfont[version=bold]{texgyretermes-math.otf}
+    }
     % \setmathrm{TeX Gyre Termes}
-  }{%
-    \ifthenelse{\boolean{UBN@palatino}}{%
+  }{}
+
+  % Palatino (TeX Gyre Pagella)
+  \ifthenelse{\boolean{UBN@palatino}}{%
+    \ifthenelse{\boolean{UBN@fontname}}{%
+      \typeout{ubonn-thesis: using font name to select font.}
+      \setmainfont{TeX Gyre Pagella}
+      \setmathfont{TeX Gyre Pagella Math}
+      \setmathfont[version=bold]{TeX Gyre Pagella Math}
+      % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
+    }{%
+      \typeout{ubonn-thesis: using filename to select font.}
       \setmainfont{texgyrepagella}[
         Extension = .otf ,
         UprightFont = *-regular ,
@@ -511,28 +526,30 @@
       ]
       \setmathfont{texgyrepagella-math.otf}
       \setmathfont[version=bold]{texgyrepagella-math.otf}
-      % \setmainfont{TeX Gyre Pagella}
-      % \setmathfont{TeX Gyre Pagella Math}
-      % \setmathfont[version=bold]{TeX Gyre Pagella Math}
-      % \setmathfont(Greek)[Uppercase=regular, Lowercase=Regular]{TeX Gyre Pagella}
-    }{}
-  }
-  % If TeX Gyre fonts used, also use them for sans serif and monospaced fonts.
+    }
+  }{}
+
+% If TeX Gyre fonts used, also use them for sans serif and monospaced fonts.
   \ifthenelse{\boolean{UBN@newtx} \OR \boolean{UBN@txfonts} \OR \boolean{UBN@palatino}}{%
-    \setsansfont{texgyreheros}[
-      Extension = .otf ,
-      UprightFont = *-regular ,
-      ItalicFont = *-italic ,
-      BoldFont = *-bold ,
-      BoldItalicFont = *-bolditalic ,
-    ]
-    \setmonofont{texgyrecursor}[
-      Extension = .otf ,
-      UprightFont = *-regular ,
-      ItalicFont = *-italic ,
-      BoldFont = *-bold ,
-      BoldItalicFont = *-bolditalic ,
-    ]
+    \ifthenelse{\boolean{UBN@fontname}}{%
+      \setsansfont{TeX Gyre Heros}
+      \setsansfont{TeX Gyre Cursor}
+    }{%
+      \setsansfont{texgyreheros}[
+        Extension = .otf ,
+        UprightFont = *-regular ,
+        ItalicFont = *-italic ,
+        BoldFont = *-bold ,
+        BoldItalicFont = *-bolditalic ,
+      ]
+      \setmonofont{texgyrecursor}[
+        Extension = .otf ,
+        UprightFont = *-regular ,
+        ItalicFont = *-italic ,
+        BoldFont = *-bold ,
+        BoldItalicFont = *-bolditalic ,
+      ]
+    }
   }{}
 }{}
 

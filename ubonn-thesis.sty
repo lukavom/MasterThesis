@@ -295,6 +295,55 @@
   \setlength{\UBNcoveroffset}{0pt}
 }
 
+% Title page should include \lowertitleback etc., even with twoside=false.
+% Fix from https://tex.stackexchange.com/questions/113713/substituting-lowerbacktitle-in-one-sided-document
+\newcommand*{\forcetwosidetitle}[1][1]{%
+ \begingroup
+   \cleardoubleoddpage
+   % \KOMAoptions{titlepage=true}% useful e.g. for scrartcl
+   \csname @twosidetrue\endcsname
+   \maketitle[{#1}]
+ \endgroup
+}
+
+% Cover and title pages of thesis
+\newcommand{\makethesistitle}{%
+  % Only needed for the printed final version to be submitted to the department library
+  % Do not use this page for thesis submission to the Prüfungsamt or Promotionsbüro!
+  \ifthenelse{\equal{\ThesisVersion}{PILibrary}}{%
+    \typeout{Document \jobname, Info: PI library version of thesis}
+    \input{cover/\ThesisType_Cover}
+  }{}
+
+  % Start counting pages from the title page
+  \frontmatter
+
+  % Dedication has to come before \maketitle
+  \ifthenelse{\equal{\thesisdedication}{}}{}{%
+      \dedication{\thesisdedication}
+  }
+
+  % Select the correct title page(s)
+  \ifthenelse{\equal{\ThesisType}{Unknown}}{%
+    \typeout{Document \jobname, Error: Unknown thesis type - no title page printed}
+  }{%
+    % Bachelor thesis only has one title page
+    \ifthenelse{\equal{\ThesisType}{Bachelor}}{%
+      \typeout{Document \jobname, Info: Bachelor thesis}
+      \input{cover/\ThesisType_Title}
+    }{%
+      \ifthenelse{\equal{\ThesisVersion}{Final} \OR \equal{\ThesisVersion}{PILibrary}}{%
+        % Final and PI library versions
+        \typeout{Document \jobname, Info: Final version of a \ThesisType  thesis}
+        \input{cover/\ThesisType_Final_Title}
+      }{% Submission and draft versions
+        \input{cover/\ThesisType_Submit_Title}
+        \typeout{Document \jobname, Info: Draft/submission version of a \ThesisType  thesis}
+      }
+    }
+  }
+}
+
 %-------------------------------------------------------------------------------
 % Math packages that have to come early 
 % AMS math (for some font collections this has to come before their selection)

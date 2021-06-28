@@ -61,7 +61,7 @@ astro: skelcopy
 	sed 's/texlive=2017/texlive=$(TEXLIVE)/' thesis_skel/thesis_astro_skel.tex > $(THESIS)/$(THESIS).tex
 	cp thesis_skel/thesis_astro_intro.tex  $(THESIS)/thesis_intro.tex
 
-# New thesis with old version of TeX Live
+# New thesis
 skelcopy:
 	mkdir $(THESIS)
 	mkdir $(THESIS)/bib
@@ -77,6 +77,7 @@ skelcopy:
 	cp thesis_skel/Makefile               $(THESIS)/
 	cp thesis_skel/thesis_refs.bib        $(THESIS)/bib/
 	cp refs/standard_refs-biber.bib       $(THESIS)/bib/
+	cp -R cover                           $(THESIS)/
 	cp -R figs/cover                      $(THESIS)/figs/
 
 update:
@@ -84,6 +85,7 @@ update:
 	-cp -i ubonn-biblatex.sty              $(THESIS)/
 	-cp -i thesis_skel/Makefile            $(THESIS)/
 	-cp -i refs/standard_refs-biber.bib    $(THESIS)/bib/
+	-cp -i -R cover                        $(THESIS)/
 	-cp -i -R figs/cover                   $(THESIS)/
 
 feynmf: $(FEYNFILES)

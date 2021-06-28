@@ -138,7 +138,7 @@
 % Do not use this page for thesis submission to the Prüfungsamt or Promotionsbüro!
 \ifthenelse{\equal{\ThesisVersion}{PILibrary}}{%
   \typeout{Document \jobname, Info: PI library version of thesis}
-  \input{../cover/\ThesisType_Cover}
+  \input{cover/\ThesisType_Cover}
 }{}
 
 % Start counting pages from the title page
@@ -153,14 +153,14 @@
   % Bachelor thesis only has one title page
   \ifthenelse{\equal{\ThesisType}{Bachelor}}{%
     \typeout{Document \jobname, Info: Bachelor thesis}
-    \input{../cover/\ThesisType_Title}
+    \input{cover/\ThesisType_Title}
   }{%
     \ifthenelse{\equal{\ThesisVersion}{Final} \OR \equal{\ThesisVersion}{PILibrary}}{%
       % Final and PI library versions
       \typeout{Document \jobname, Info: Final version of a \ThesisType  thesis}
-      \input{../cover/\ThesisType_Final_Title}
+      \input{cover/\ThesisType_Final_Title}
     }{% Submission and draft versions
-      \input{../cover/\ThesisType_Submit_Title}
+      \input{cover/\ThesisType_Submit_Title}
       \typeout{Document \jobname, Info: Draft/submission version of a \ThesisType  thesis}
     }
   }

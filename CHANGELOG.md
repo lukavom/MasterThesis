@@ -13,6 +13,9 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 ### Added
 
 - `cover` directory also copied to `mythesis`. Useful if importing everything into Overleaf.
+- Added some information about setting things up with Overleaf.
+- Add font name and filename commands for LuaLaTeX and XeLaTeX.
+- `fontname` option added to use font name rather than filename with LuaLaTeX and XeLaTeX.
 
 ### Changed
 

@@ -467,6 +467,11 @@ was to use \texttt{emacs}\index{emacs} and AUCTeX.
 Note that the RefTeX\index{RefTeX} mode in \texttt{emacs} also provides powerful
 tools for finding cross-references and the names of citations easily.
 
+An increasingly popular alternative is Overleaf\index{Overleaf}.
+If you want to write your thesis using Overleaf,
+you first have to upload a zip file of a skeleton thesis as a project.
+See \cref{sec:app:overleaf} for details on how to set things up and get started.
+  
 One advantage of such environments is that it is usually
 possible to switch between a position in your output file
 and the relevant place in the source code and vice versa.
@@ -863,7 +868,15 @@ few examples (which I then forgot) where the font size was better
 using one or the other. Then I learnt about \Macro{text},
 converted all my predefined symbols to use \Macro{text} rather than
 \Macro{mathrm} or \Macro{textrm}, and don't have to worry any
-more. However, I can given an example for the definition
+more.
+Having played around with using a sans serif font in the main document I understand the differences better.
+\Macro{text} uses the standard text font,
+while \Macro{mathrm} and \Macro{textrm} use the math font.
+In documents like your thesis, these are usually the same,
+so you do not see any difference.
+If your text font is sans serif, as in University of Bonn letters,
+and you use a serif math font, then you will see a difference.
+I can given an example for the definition
 of the transverse energy of the highest energy jet:
 \begin{tcblisting}{}
 \(p_{\mathrm{T}}^{\mathrm{1^{\text{st}} jet}}\)\\
@@ -893,7 +906,7 @@ As of version 3.0 of \Package{ubonn-thesis} this command is included,
 so \Macro{boldmath} should no longer be needed.
 An illustration of how this works is given in \cref{sec:emc2}.
 Note that this fix does not work for \LuaLaTeX and \XeLaTeX and so is not applied.
-\Cref{sec:emc2} illustrates ways of getting around the problem there.
+\Cref{sec:emc2} illustrates ways of getting around the problem.
 
 For math mode the official \LaTeX\ macro is \verb|\(...\)|.
 \verb|$...$| is the \TeX\ primitive.

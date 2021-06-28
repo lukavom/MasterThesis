@@ -107,6 +107,26 @@ and gives a lot of information on the quality of your \LaTeX.
 
 
 %------------------------------------------------------------------------------
+\subsection{Overleaf}%
+\label{sec:app:overleaf}\index{Overleaf}
+
+If you want to write your thesis using Overleaf,
+you first have to upload it as a project there.
+The best way to do this is to create a new thesis skeleton as usual,
+specifying the version of \TeXLive being run by Overleaf, e.g.:
+\begin{bashlisting}
+make new TEXLIVE=2020 [THESIS=projectname]
+\end{bashlisting}
+\noindent Compress the directory into a zip file:
+\begin{bashlisting}
+  zip -r projectname projectname
+\end{bashlisting}
+\noindent and upload it as a new project.
+
+Overleaf should then be able to compile the skeleton thesis and you can start writing!
+
+
+%------------------------------------------------------------------------------
 \subsection{Kile}%
 \label{sec:app:kubuntu:kile}\index{kile}
 

@@ -12,13 +12,19 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 
 ### Added
 
+- `cover` directory also copied to `mythesis`. Useful if importing everything into Overleaf.
+
 ### Changed
 
 ### Deprecated
 
 ### Removed
 
+- Removed `cover_test` directory.
+
 ### Fixed
+
+- Fixed bold math font for Palatino.
 
 ### Security
 

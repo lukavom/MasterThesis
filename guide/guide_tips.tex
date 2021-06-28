@@ -210,8 +210,9 @@ The following options exist:\\
     You can also use the older command \verb|\newcommand*{\texlive}{2017}|.\\
   twoside & true & Margins set for two-sided printing.\\
   newtx & true & Use the \Package{newtx} font packages (newer version of \Package{txfonts}).\\
-    txfonts & false & Use a Times-Roman-like font.\\
-  palatino & false & Use a combination of Palatino, Courier and Helvetica fonts.\\
+  txfonts & false & Use a Times-Roman-like font.\\
+  palatino & false & Use a combination of Palatino, Helvetica and Courier fonts.\\
+  fontname & false & Use the font name rather than its filename for fonts with \LuaLaTeX\ and \XeLaTeX.\\
   subcaption & true & A package for making sub-figures (and sub-tables) and captions for them.\\
   subfig & false & A package for making sub-figures and captions for them.\\
   subfigure & false & A package for making sub-figures and captions for them (deprecated).\\
@@ -263,6 +264,9 @@ If you use \LuaLaTeX\ or \XeLaTeX,
 the \Option{newtx} and \Option{txfonts} options select the TeX Gyre Termes font,
 while the \Option{palatino} option selects the TeX Gyre Pagella font.
 The TeX Gyre font Heros is used as the sans-serif and Cursor as the monospaced font.
+Fonts are by default selected using the filename.
+If for some reason this does not work you can try the \Option{fontname=true} option,
+which uses the font name instead.
 
 Depending on the font you use, you may find that the \enquote{e} and \enquote{V} in \si{\eV}, \si{\MeV} etc.\
 are too far apart.

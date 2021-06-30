@@ -10,6 +10,11 @@ Added, Changed, Deprecated, Removed, Fixed, Security.
 
 ## [Unreleased] - 2021-07-XX
 
+The user interface for making the cover and title pages has been revamped.
+The user should just need to say `\makethesistitle`.
+The complicated steering that used to be in the main file has been moved to this macro.
+See `thesis_skel/thesis_skel.tex` to see how to implement the change.
+
 ### Added
 
 - New command `\makethesistitle` for cover and title pages.

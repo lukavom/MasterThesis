@@ -1,4 +1,4 @@
-# Version 8.0 23/06/2021
+# Version 9.0 30/06/2021
 
 The original idea with this package was that you also look at the LaTeX that
 is used to create it, in order to find out how things are done.

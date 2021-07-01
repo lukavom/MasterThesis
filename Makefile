@@ -60,6 +60,7 @@ new: skelcopy
 astro: skelcopy
 	sed 's/texlive=2017/texlive=$(TEXLIVE)/' thesis_skel/thesis_astro_skel.tex > $(THESIS)/$(THESIS).tex
 	cp thesis_skel/thesis_astro_intro.tex  $(THESIS)/thesis_intro.tex
+	cp thesis_skel/thesis_astro_appendix.tex  $(THESIS)/thesis_appendix.tex
 
 # New thesis
 skelcopy:

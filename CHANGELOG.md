@@ -8,34 +8,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Changes are sorted into the following categories:
 Added, Changed, Deprecated, Removed, Fixed, Security.
 
-## [Unreleased] - 2021-07-XX
+## [9.0.0] - 2021-07-01
 
 The user interface for making the cover and title pages has been revamped.
 The user should just need to say `\makethesistitle`.
 The complicated steering that used to be in the main file has been moved to this macro.
-See `thesis_skel/thesis_skel.tex` to see how to implement the change.
+See `thesis_skel/thesis_skel.tex` in order to implement the change in existing theses.
 
 ### Added
 
 - New command `\makethesistitle` for cover and title pages.
+- New macro `\thesisdedication` for dedication (if you want to include one).
   This hides the complicated steering that was in the thesis main file.
 - `cover` directory also copied to `mythesis`. Useful if importing everything into Overleaf.
-- Added some information about setting things up with Overleaf.
+- Add some information about setting things up with Overleaf.
 - Add font name and filename commands for LuaLaTeX and XeLaTeX.
 - `fontname` option added to use font name rather than filename with LuaLaTeX and XeLaTeX.
 
 ### Changed
 
+- Move bibliography after appendix.
+- Tweak handling of `astrobib` bibliographies so they work better.
+
 ### Deprecated
 
 ### Removed
 
-- Removed `cover_test` directory.
+- Remove `cover_test` directory.
 
 ### Fixed
 
 - `titlelowerback` for declaration and "Gutachter" works in `twoside=false` mode.
-- Fixed bold math font for Palatino.
+- Fix bold math font for Palatino.
 
 ### Security
 
@@ -58,7 +62,7 @@ See `thesis_skel/thesis_skel.tex` to see how to implement the change.
 - TeX Live 2017 is now the default.
 - Table captions moved to above the table by default - steer caption spacing with option `tableheading`.
 - Replace `amsmath` by `mathtools`.
-- Switched from `xtab` to `longtable` as default package for long tables, as `longtable` and `supertabular` seem to be more actively maintained.
+- Switch from `xtab` to `longtable` as default package for long tables, as `longtable` and `supertabular` seem to be more actively maintained.
 - Turn on use of `cleveref` package by default.
 - Turn off `dcolumn` by default, as there are (better) alternatives.
 - Latest version of `PyFeynHand` scripts.

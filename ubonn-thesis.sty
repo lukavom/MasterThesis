@@ -319,9 +319,18 @@
   \frontmatter
 
   % Dedication has to come before \maketitle
-  \ifthenelse{\equal{\thesisdedication}{}}{}{%
-      \dedication{\thesisdedication}
+  \@ifundefined{thesisdedication}{\typeout{ubonn-thesis: thesis dedication not defined}}{%
+    \ifthenelse{\equal{\thesisdedication}{}}{\typeout{ubonn-thesis: empty thesis dedication}}{%
+        \dedication{\thesisdedication}
+    }
   }
+  % \ifdef{\thesisdedication}{%
+  %   \ifthenelse{\equal{\thesisdedication}{}}{}{%
+  %     \dedication{\thesisdedication}
+  %   }{%
+  %     \typeout{ubonn-thesis: empty thesis dedication}
+  %   }
+  % }
 
   % Select the correct title page(s)
   \ifthenelse{\equal{\ThesisType}{Unknown}}{%
@@ -640,13 +649,13 @@
 }{}
 
 %-------------------------------------------------------------------------------
-% Use biblatex and biber for the bibliography
-% Style is numeric and comp option changes [1,2,3] into [1-3]
-% sorting=none    means the order is as they are cited
-% giveninits=true means initials are used for first names
+% Use biblatex and biber for the bibliography.
+% Style is numeric and comp option changes [1,2,3] into [1-3].
+% sorting=none    means the order is as they are cited.
+% giveninits=true means initials are used for first names.
 % Older versions of TeX Live use the option firstinits instead.
 % Some more tweaks should be made to the appearance,
-% see/include ubonn-biblatex.sty
+% see/include ubonn-biblatex.sty.
 \ifUBN@biblatex
   \ifx\UBN@bibencoding\@empty
     \newcommand*{\UBN@biblatexencoding}{}

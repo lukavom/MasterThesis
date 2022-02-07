@@ -19,66 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{kopka04}{book}{}
-      \name{author}{2}{}{%
-        {{hash=7ad513520366785f926861843001ed4e}{%
-           family={Kopka},
-           familyi={K\bibinitperiod},
-           given={Helmut},
-           giveni={H\bibinitperiod}}}%
-        {{hash=8d668f2ff08c48a82cff87c087cdf12e}{%
-           family={Daly},
-           familyi={D\bibinitperiod},
-           given={Patrick\bibnamedelima W.},
-           giveni={P\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Addison-Wesley}%
-      }
-      \strng{namehash}{787774515110f46e582c206f217ae671}
-      \strng{fullhash}{787774515110f46e582c206f217ae671}
-      \strng{bibnamehash}{787774515110f46e582c206f217ae671}
-      \strng{authorbibnamehash}{787774515110f46e582c206f217ae671}
-      \strng{authornamehash}{787774515110f46e582c206f217ae671}
-      \strng{authorfullhash}{787774515110f46e582c206f217ae671}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{4}
-      \field{title}{Guide to \LaTeX}
-      \field{year}{2004}
-    \endentry
-    \entry{goossens04}{book}{}
-      \name{author}{2}{}{%
-        {{hash=9355edd511e3f6fdd880ee98722a53fb}{%
-           family={Mittelbach},
-           familyi={M\bibinitperiod},
-           given={Frank},
-           giveni={F\bibinitperiod}}}%
-        {{hash=0743efb276e9219ee664a9b3dbd60619}{%
-           family={Goossens},
-           familyi={G\bibinitperiod},
-           given={Michel},
-           giveni={M\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Addison-Wesley}%
-      }
-      \strng{namehash}{588d1d6a8974db190596907e433f57be}
-      \strng{fullhash}{588d1d6a8974db190596907e433f57be}
-      \strng{bibnamehash}{588d1d6a8974db190596907e433f57be}
-      \strng{authorbibnamehash}{588d1d6a8974db190596907e433f57be}
-      \strng{authornamehash}{588d1d6a8974db190596907e433f57be}
-      \strng{authorfullhash}{588d1d6a8974db190596907e433f57be}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{2}
-      \field{title}{The \LaTeX{} Companion}
-      \field{year}{2004}
-    \endentry
     \entry{pdg2010}{article}{}
       \true{moreauthor}
       \true{morelabelname}
@@ -385,23 +325,10 @@
       \verb 0901.0512
       \endverb
     \endentry
-    \entry{latexwiki}{online}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{title}{\LaTeX}
-      \field{urlday}{1}
-      \field{urlmonth}{7}
-      \field{urlyear}{2021}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://en.wikibooks.org/wiki/LaTeX
-      \endverb
-      \verb{url}
-      \verb https://en.wikibooks.org/wiki/LaTeX
-      \endverb
-    \endentry
   \enddatalist
+  \missing{goossens04}
+  \missing{kopka04}
+  \missing{latexwiki}
 \endrefsection
 \endinput
 

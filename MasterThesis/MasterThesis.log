@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.4.9)  7 FEB 2022 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.4.9)  7 FEB 2022 15:20
 entering extended mode
 **./MasterThesis.tex
 (MasterThesis.tex
@@ -1970,13 +1970,34 @@ Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'MasterThesis.bbl' found.
- (MasterThesis.bbl)
+ (MasterThesis.bbl
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                goossens04
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                kopka04
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                latexwiki
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+)
 Package biblatex Info: Reference section=0 on input line 136.
 Package biblatex Info: Reference segment=0 on input line 136.
 LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input lin
 e 136.
-
-(C:\Users\Luka\AppData\Roaming\MiKTeX\2.9\tex/latex/newtx\ot1ntxtlf.fd
+ (C:\Users\Luka\AppData\Roaming\MiKTeX\2.9\tex/latex/newtx\ot1ntxtlf.fd
 File: ot1ntxtlf.fd 2015/01/17 v1.0 font definition file for OT1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
@@ -2171,13 +2192,13 @@ chapter A.
 chapter without number
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
 (Font)              scaled to size 10.95pt on input line 188.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 8.0pt on input line 188.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/sc' will be
 (Font)              scaled to size 10.95pt on input line 188.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/ntxtlf/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 8.0pt on input line 188.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
 (Font)              scaled to size 6.1pt on input line 188.
 [5] [6
@@ -2219,11 +2240,11 @@ Package logreq Info: Writing requests to 'MasterThesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 48251 strings out of 479287
- 935484 string characters out of 2869289
- 1920053 words of memory out of 3000000
- 64681 multiletter control sequences out of 15000+600000
- 569603 words of font info for 322 fonts, out of 8000000 for 9000
+ 48254 strings out of 479287
+ 935414 string characters out of 2869289
+ 1916985 words of memory out of 3000000
+ 64673 multiletter control sequences out of 15000+600000
+ 570330 words of font info for 330 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  111i,19n,147p,10609b,3840s stack positions out of 5000i,500n,10000p,200000b,80000s
 {C:/Users/Luka/AppData/Roaming/MiKTeX/2.9/fonts/enc/dvips/newtx/ntx-ec-tlf-pc
@@ -2242,9 +2263,9 @@ b><C:/Users/Luka/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/newtx/txmiaX.pfb
 C:/Users/Luka/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/newtx/ztmb.pfb><C:/
 Users/Luka/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/newtx/ztmr.pfb><C:/Use
 rs/Luka/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/newtx/ztmri.pfb>
-Output written on MasterThesis.pdf (15 pages, 272046 bytes).
+Output written on MasterThesis.pdf (15 pages, 273619 bytes).
 PDF statistics:
- 220 PDF objects out of 1000 (max. 8388607)
- 35 named destinations out of 1000 (max. 500000)
+ 210 PDF objects out of 1000 (max. 8388607)
+ 32 named destinations out of 1000 (max. 500000)
  111669 words of extra memory for PDF output out of 128383 (max. 10000000)
 
